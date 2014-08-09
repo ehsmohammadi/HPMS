@@ -29,6 +29,7 @@ TestResult.xml
 [Rr]eleasePS/
 dlldata.c
 
+*.exe
 *_i.c
 *_p.c
 *_i.h
@@ -172,3 +173,6 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
+
+MITD.PMS.Service.Host/web.config
+MITD.PMS.Service.Host/web.debug.config
