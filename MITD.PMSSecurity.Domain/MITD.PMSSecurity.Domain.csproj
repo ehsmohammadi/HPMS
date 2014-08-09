@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{58E04975-AC8A-42BB-9A49-D68B48F84E79}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MITD.PMSSecurity.Domain</RootNamespace>
+    <AssemblyName>MITD.PMSSecurity.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MITD.Core">
+      <HintPath>..\Dependency\MITD.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Domain.Model">
+      <HintPath>..\Dependency\MITD.Domain.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Domain.Repository">
+      <HintPath>..\Dependency\MITD.Domain.Repository.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Exceptions\PMSSecurityException.cs" />
+    <Compile Include="Model\AdminUser.cs" />
+    <Compile Include="Model\ActionTypeEnum.cs" />
+    <Compile Include="Model\Exception\PartyArgumentException.cs" />
+    <Compile Include="Model\Exception\PartyDuplicateException.cs" />
+    <Compile Include="Model\Exception\PartyDeleteException.cs" />
+    <Compile Include="Model\Exception\PartyException.cs" />
+    <Compile Include="Model\Exception\PartyModifyException.cs" />
+    <Compile Include="Model\Logs\ExceptionLog.cs" />
+    <Compile Include="Model\Logs\EventLog.cs" />
+    <Compile Include="Model\Logs\LogLevel.cs" />
+    <Compile Include="Model\Logs\Log.cs" />
+    <Compile Include="Model\Logs\LogId.cs" />
+    <Compile Include="Repository\ILogRepository.cs" />
+    <Compile Include="Model\Party.cs" />
+    <Compile Include="Model\Group.cs" />
+    <Compile Include="Model\PartyId.cs" />
+    <Compile Include="Model\EmployeeUser.cs" />
+    <Compile Include="Model\User.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\IUserRepository.cs" />
+    <Compile Include="Service\ExceptionHelper.cs" />
+    <Compile Include="Service\ISecurityCheckerService.cs" />
+    <Compile Include="Service\LoggerFactory\ILoggerServiceFactory.cs" />
+    <Compile Include="Service\LoggerFactory\LoggerServiceFactory.cs" />
+    <Compile Include="Service\LoggerService\ILoggerService.cs" />
+    <Compile Include="Service\LogManager\ILogManagerService.cs" />
+    <Compile Include="Service\LogManager\LogManagerService.cs" />
+    <Compile Include="Service\SecurityCheckerService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MITD.PMS.Common\MITD.PMS.Common.csproj">
+      <Project>{C1FFA45A-CC6C-47FD-940E-6EAADF41C60C}</Project>
+      <Name>MITD.PMS.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

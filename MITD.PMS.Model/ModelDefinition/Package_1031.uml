@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="7de09a24-95c1-4fed-a597-db27f83e6080"
+  name="MITD"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="4ee89a0f-65f9-4288-b0a9-8358273b3b8b"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DMITD"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="e73d07ed-7de7-4e3f-9791-bd8bfca09353"
+        LastKnownName="PMS"
+        LastKnownLocation="Package1_1031.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="b1de8629-aaa2-48df-ab8e-ac6376f4415b"
+        LastKnownName="Domain"
+        LastKnownLocation="Package2_1033.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="129bf172-4c29-40ed-b4f7-a809e6218e3f"
+        LastKnownName="Core"
+        LastKnownLocation="Package4_1033.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="73c6f2be-d374-4d1e-8c52-13cd39672556"
+        LastKnownName="PMSReport"
+        LastKnownLocation="Package2_1034.uml" />
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

@@ -1,0 +1,55 @@
+﻿using System.Globalization;
+using System.Threading;
+using Castle.MicroKernel.Registration;
+using Castle.Windsor;
+using MITD.PMS.Presentation.Logic;
+using Microsoft.Practices.ServiceLocation;
+using MITD.PMS.Presentation.Logic;
+using MITD.Presentation;
+using MITD.Presentation.Config;
+using MITD.Presentation.UI;
+using System;
+using System.Collections.Generic;
+
+namespace MITD.PMS.Presentation.UI
+{
+    public class BootStrapper:IBootStrapper
+    {
+        public void Execute()
+        {
+
+
+
+            ApplicationConfigHelperPMS.Configure<MainWindowVM, MainPage>(new Dictionary<string, List<Type>> 
+            {
+                {"MITD.PMS.Presentation.PeriodManagementApp.xap",new List<Type>{
+                                                                              typeof (IPeriodListView),
+                                                                              typeof (IPeriodView),
+                                                                              typeof (IPeriodController)
+                                                                           }
+                },
+                {"MITD.PMS.Presentation.BasicInfoApp.xap",new List<Type>{
+                                                                              typeof (IJobListView),
+                                                                              typeof (IJobView),
+                                                                              typeof (IBasicInfoController)
+                                                                           }
+                }
+            });
+
+<<<<<<< HEAD
+            //ApplicationConfigHelper.Configure<MainWindowVM, MainPage>(new Dictionary<string, List<Type>> 
+            //{
+            //    {"MITD.PMS.Presentation.BasicInfoApp.xap",new List<Type>{
+            //                                                               //   typeof (IJobListView),
+            //                                                                 // typeof (IJobView),
+            //                                                                  typeof (IBasicInfoController)
+            //                                                               }
+            //    }
+            //});
+=======
+            var x = ServiceLocator.Current.GetInstance<IMainAppLocalizedResources>();
+>>>>>>> 7ece2ea55ed3fe481ae5329ac252711651745f06
+
+        }
+    }
+}

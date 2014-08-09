@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{47AD61E6-E59A-4148-B7EE-4D35E3485442}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MITD.PMSAdmin.Persistence.NH</RootNamespace>
+    <AssemblyName>MITD.PMSAdmin.Persistence.NH</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NHibernate.Linq.InnerJoinFetch.1.0.1\lib\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependency\MITD.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Core.RuleEngine, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependency\MITD.Core.RuleEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.DataAccess.NH">
+      <HintPath>..\Dependency\MITD.DataAccess.NH.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Domain.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependency\MITD.Domain.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Domain.Repository">
+      <HintPath>..\Dependency\MITD.Domain.Repository.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NHibernate.Linq.InnerJoinFetch.1.0.1\lib\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Linq.InnerJoinFetch">
+      <HintPath>..\packages\NHibernate.Linq.InnerJoinFetch.1.0.1\lib\NHibernate.Linq.InnerJoinFetch.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Context\MappingClass\JobIndexMap.cs" />
+    <Compile Include="Context\MappingClass\PolicyMapClass.cs" />
+    <Compile Include="Context\MappingClass\JobPositionMapClass.cs" />
+    <Compile Include="Context\MappingClass\UnitMapClass.cs" />
+    <Compile Include="Context\MappingClass\CustomFieldMapClass.cs" />
+    <Compile Include="JobIndexRepository.cs" />
+    <Compile Include="PolicyRepository.cs" />
+    <Compile Include="JobPositionRepository.cs" />
+    <Compile Include="UnitRepository.cs" />
+    <Compile Include="JobRepository.cs" />
+    <Compile Include="CustomFieldRepository.cs" />
+    <Compile Include="Context\PMSAdminContext.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Context\MappingClass\JobMap.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MITD.PMS.Common\MITD.PMS.Common.csproj">
+      <Project>{C1FFA45A-CC6C-47FD-940E-6EAADF41C60C}</Project>
+      <Name>MITD.PMS.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMS.Domain.Model\MITD.PMS.Domain.csproj">
+      <Project>{1B85AC19-27DF-43BB-91B7-9A2AECDDB9D1}</Project>
+      <Name>MITD.PMS.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMSAdmin.Domain\MITD.PMSAdmin.Domain.csproj">
+      <Project>{4d0b3594-a787-4982-870d-3f079d2f4b86}</Project>
+      <Name>MITD.PMSAdmin.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

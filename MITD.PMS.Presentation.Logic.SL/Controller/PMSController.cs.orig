@@ -1,0 +1,90 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Ink;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Shapes;
+using MITD.PMS.Presentation.Contracts;
+using Microsoft.Practices.ServiceLocation;
+using MITD.Core;
+using MITD.Presentation;
+
+namespace MITD.PMS.Presentation.Logic
+{
+    public partial class PMSController : ApplicationController, IPMSController
+    {
+
+        public PMSController(IViewManager viewManager,
+                                     IEventPublisher eventPublisher,
+                                     IDeploymentManagement deploymentManagement)
+            : base(viewManager, eventPublisher, deploymentManagement)
+        {
+            PMSActions= new List<PMSAction>(){new PMSAction
+                {
+                    ActionCode = ActionEnum.ModifyPeriod,
+                    ActionName = "ویرایش دوره" 
+
+                }};
+
+            PMSActions.Add(new PMSAction
+                {
+                    ActionCode = ActionEnum.UpdateJob,
+                    ActionName = "ویرایش شغل" 
+                });
+
+                },
+                new PMSAction
+                {
+                    ActionCode = ActionEnum.DeletePeriod,
+                    ActionName = "حذف دوره" 
+
+
+                new PMSAction
+                {
+                    ActionCode = ActionEnum.ShowOrganizationChartInPeriodMgnt,
+                    ActionName = "مدیریت چارت سازمانی در دوره" 
+                }
+
+                  new PMSAction
+                {
+                    ActionCode = ActionEnum.ModifyJobInPeriod,
+                    ActionName = "ویرایش شغل دوره" 
+                },
+                new PMSAction
+                {
+                    ActionCode = ActionEnum.DeleteJobInPeriod,
+                    ActionName = "حذف شغل دوره" 
+                }
+                 
+
+            };
+  
+
+        public List<PMSAction> PMSActions
+        {
+            get; set; }
+
+        public UserStateDto LoggedInUserState { get; set; }
+
+        public void HandleException(Exception exp)
+        {
+            viewManager.ShowMessage(exp.Message);
+        }
+
+
+        public void GetRemoteInstance<T>(Action<T, Exception> action) where T : class
+        {
+            deploymentManagement.AddModule(typeof(T),
+                res =>
+                {
+                    action(ServiceLocator.Current.GetInstance(typeof(T)) as T, null);
+                },
+                exp => { action(null, exp); });
+        }
+    }
+}

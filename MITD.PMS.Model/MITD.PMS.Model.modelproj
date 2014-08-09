@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{f2b162c1-22d2-47c1-9076-1170dc6c3679}</ProjectGuid>
+    <ArchitectureToolsVersion>2.0.0.0</ArchitectureToolsVersion>
+    <Name>MITD.PMS.Model</Name>
+    <RootNamespace>MITD.PMS.Model</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(VSToolsPath)\ArchitectureTools\Microsoft.VisualStudio.TeamArchitect.ModelingProject.targets" Condition="'$(VSToolsPath)' != ''" />
+  <ItemGroup>
+    <Content Include="CalculationInitState_Run.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="CalculationInitState_Run.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>CalculationInitState_Run.sequencediagram</DependentUpon>
+    </Content>
+    <Content Include="CalculationService_RunCalculation.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="CalculationService_RunCalculation.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>CalculationService_RunCalculation.sequencediagram</DependentUpon>
+    </Content>
+    <Content Include="JobIndexPointCalculatorProvider_GetCalculator.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="JobIndexPointCalculatorProvider_GetCalculator.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>JobIndexPointCalculatorProvider_GetCalculator.sequencediagram</DependentUpon>
+    </Content>
+    <Content Include="JobIndexPointCalculator_Start.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="JobIndexPointCalculator_Start.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>JobIndexPointCalculator_Start.sequencediagram</DependentUpon>
+    </Content>
+    <Content Include="ModelDefinition\Package10_1033.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package11_1033.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package12_1033.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package13_1033.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package14_1033.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package15_1033.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package1_1031.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package1_1032.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package1_1033.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package1_1034.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package2_1031.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package2_1033.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package2_1034.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package3_1033.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package3_1034.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package4_1033.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package4_1034.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package5_1033.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package6_1033.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package7_1033.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package8_1033.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package9_1033.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1031.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1032.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1033.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1034.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="PMS.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="PMS.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>PMS.classdiagram</DependentUpon>
+    </Content>
+    <Content Include="PMS.Domain\UMLClassDiagram1.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="PMS.Domain\UMLClassDiagram1.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>PMS.Domain\UMLClassDiagram1.classdiagram</DependentUpon>
+    </Content>
+    <Content Include="Policy_CalculateFor.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Policy_CalculateFor.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Policy_CalculateFor.sequencediagram</DependentUpon>
+    </Content>
+    <Content Include="RuleBasedPolicyEngineService_CalculateFor.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="RuleBasedPolicyEngineService_CalculateFor.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>RuleBasedPolicyEngineService_CalculateFor.sequencediagram</DependentUpon>
+    </Content>
+    <Content Include="RuleBasedPolicyEngineService_SetupForCalculation.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="RuleBasedPolicyEngineService_SetupForCalculation.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>RuleBasedPolicyEngineService_SetupForCalculation.sequencediagram</DependentUpon>
+    </Content>
+    <Folder Include="ModelDefinition\" />
+    <Content Include="Calculation.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Calculation.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Calculation.sequencediagram</DependentUpon>
+    </Content>
+    <Content Include="ModelDefinition\MITD.PMS.Model.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Folder Include="PMS.Domain" />
+  </ItemGroup>
+</Project>

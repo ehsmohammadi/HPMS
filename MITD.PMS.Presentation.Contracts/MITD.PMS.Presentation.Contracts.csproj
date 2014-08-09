@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C2C01D60-617D-4A38-AF22-091A1C3AE365}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MITD.PMS.Presentation.Contracts</RootNamespace>
+    <AssemblyName>MITD.PMS.Presentation.Contracts</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MITD.Core">
+      <HintPath>..\Dependency\MITD.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Presentation">
+      <HintPath>..\Dependency\MITD.Presentation.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BasicInfoManagement\CustomField\CustomFieldValueDTO_Server.cs" />
+    <Compile Include="BasicInfoManagement\CustomField\CustomFieldValueDTO.cs" />
+    <Compile Include="BasicInfoManagement\CustomField\CustomFieldDTOWithActions.cs" />
+    <Compile Include="BasicInfoManagement\JobIndex\AbstractJobIndexDTOWithActions.cs" />
+    <Compile Include="BasicInfoManagement\JobIndex\JobIndexDTOWithActions.cs" />
+    <Compile Include="BasicInfoManagement\JobIndex\JobIndexCategoryDTOWithActions.cs" />
+    <Compile Include="BasicInfoManagement\JobIndex\JobIndexCategoryDTO.cs" />
+    <Compile Include="BasicInfoManagement\JobPosition\JobPositionDTOWithActions.cs" />
+    <Compile Include="BasicInfoManagement\CustomField\AbstractCustomFieldDescriptionDTO_Server.cs" />
+    <Compile Include="BasicInfoManagement\Job\JobDescriptionDTO_Server.cs" />
+    <Compile Include="BasicInfoManagement\Job\JobDescriptionDTO.cs" />
+    <Compile Include="BasicInfoManagement\CustomField\AbstractCustomFieldDescriptionDTO.cs" />
+    <Compile Include="BasicInfoManagement\Job\JobDTOWithActions.cs" />
+    <Compile Include="BasicInfoManagement\Log\EventLogDTOWithActions.cs" />
+    <Compile Include="BasicInfoManagement\Log\ExceptionLogDTOWithActions.cs" />
+    <Compile Include="BasicInfoManagement\Log\ExceptionLogDTO.cs" />
+    <Compile Include="BasicInfoManagement\Log\EventLogDTO.cs" />
+    <Compile Include="BasicInfoManagement\Log\LogDTO.cs" />
+    <Compile Include="BasicInfoManagement\Log\LogDTOWithActions.cs" />
+    <Compile Include="BasicInfoManagement\Log\LogDTO_Server.cs" />
+    <Compile Include="BasicInfoManagement\Policy\PolicyDescriptionDTO.cs" />
+    <Compile Include="BasicInfoManagement\Policy\PolicyDescriptionDTO_Server.cs" />
+    <Compile Include="BasicInfoManagement\Policy\PolicyDTO.cs" />
+    <Compile Include="BasicInfoManagement\Policy\PolicyDTOWithActions.cs" />
+    <Compile Include="BasicInfoManagement\Policy\PolicyDTO_Server.cs" />
+    <Compile Include="BasicInfoManagement\Rule\RuleTrailDTO_Server.cs" />
+    <Compile Include="BasicInfoManagement\Rule\RuleTrailDTO.cs" />
+    <Compile Include="BasicInfoManagement\Rule\RuleTrailDTOWithAction.cs" />
+    <Compile Include="BasicInfoManagement\Rule\RuleTrailDTOWithAction_Server.cs" />
+    <Compile Include="BasicInfoManagement\Rule\PolicyRules.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicInfoManagement\Rule\PolicyRules_Server.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicInfoManagement\Rule\RuleContentDTO.cs" />
+    <Compile Include="BasicInfoManagement\Rule\RuleContentDTO_Server.cs" />
+    <Compile Include="BasicInfoManagement\Rule\RuleDTOWithAction_Server.cs" />
+    <Compile Include="BasicInfoManagement\Rule\RuleDTOWithAction.cs" />
+    <Compile Include="BasicInfoManagement\Rule\RuleDTO_Server.cs" />
+    <Compile Include="BasicInfoManagement\Rule\RuleDTO.cs" />
+    <Compile Include="BasicInfoManagement\Rule\RuleExcuteTimeDTO.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicInfoManagement\Rule\RuleExcuteTimeDTO_Server.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicInfoManagement\Unit\UnitDTO.cs" />
+    <Compile Include="BasicInfoManagement\Unit\UnitDTOWithActions.cs" />
+    <Compile Include="BasicInfoManagement\Unit\UnitDTO_Server.cs" />
+    <Compile Include="BasicInfoManagement\User\ActionTypeDTO.cs" />
+    <Compile Include="BasicInfoManagement\User\ActionTypeDTO_Server.cs" />
+    <Compile Include="BasicInfoManagement\User\UserDescriptionDTO.cs" />
+    <Compile Include="BasicInfoManagement\User\UserDescriptionDTO_Server.cs" />
+    <Compile Include="BasicInfoManagement\User\UserGroupDescriptionDTO_Server.cs" />
+    <Compile Include="BasicInfoManagement\User\UserGroupDescriptionDTO.cs" />
+    <Compile Include="BasicInfoManagement\User\PartyDTO.cs" />
+    <Compile Include="BasicInfoManagement\User\PartyDTOWithActions.cs" />
+    <Compile Include="BasicInfoManagement\User\PartyDTO_Server.cs" />
+    <Compile Include="BasicInfoManagement\User\UserGroupDTO.cs" />
+    <Compile Include="BasicInfoManagement\User\UserGroupDTOWithActions.cs" />
+    <Compile Include="Calculation\CalculationDTOWithAction.cs" />
+    <Compile Include="Calculation\CalculationStateDTO.cs" />
+    <Compile Include="Calculation\CalculationStateDTO_Server.cs" />
+    <Compile Include="Calculation\CalculationExceptionBriefDTOWithAction.cs" />
+    <Compile Include="Calculation\CalculationExceptionBriefDTOWithAction_Server.cs" />
+    <Compile Include="Calculation\CalculationExceptionDTO.cs" />
+    <Compile Include="Calculation\CalculationExceptionDTO_Server.cs" />
+    <Compile Include="Calculation\PointValueDTO_Server.cs" />
+    <Compile Include="Calculation\PointValueDTO.cs" />
+    <Compile Include="Calculation\JobIndexResultValueDTO.cs" />
+    <Compile Include="Calculation\JobIndexResultValueDTO_Server.cs" />
+    <Compile Include="Calculation\JobPositionValueDTO_Server.cs" />
+    <Compile Include="Common\CustomFieldEntity.cs" />
+    <Compile Include="Common\QueryStringConditions.cs" />
+    <Compile Include="Calculation\JobPositionValueDTO.cs" />
+    <Compile Include="BasicInfoManagement\User\UserDTOWithActions.cs" />
+    <Compile Include="BasicInfoManagement\User\UserDTO.cs" />
+    <Compile Include="EmployeeManagment\EmployeeJobPositionsDTO_Server.cs" />
+    <Compile Include="EmployeeManagment\EmployeeJobPositionAssignmentDTO_Server.cs" />
+    <Compile Include="EmployeeManagment\EmployeeJobPositionAssignmentDTO.cs" />
+    <Compile Include="EmployeeManagment\EmployeeJobPositionsDTO.cs" />
+    <Compile Include="EmployeeManagment\EmployeeDTOWithActions.cs" />
+    <Compile Include="EmployeeManagment\EmployeeDTO_Server.cs" />
+    <Compile Include="Fasade\PMSAdmin\IRuleFacadeService.cs" />
+    <Compile Include="Fasade\PMS\IPeriodClaimServiceFasade.cs" />
+    <Compile Include="Fasade\PMS\IInquiryServiceFacade.cs" />
+    <Compile Include="Fasade\PMS\IJobIndexPointFacadeService.cs" />
+    <Compile Include="Fasade\PMS\IEmployeeServiceFacade.cs" />
+    <Compile Include="Fasade\PMS\IPeriodJodIndexServiceFasade.cs" />
+    <Compile Include="Fasade\PMS\IPeriodJobPositionServiceFasade.cs" />
+    <Compile Include="Fasade\PMS\IPeriodJodServiceFasade.cs" />
+    <Compile Include="Fasade\PMS\IPeriodUnitServiceFasade.cs" />
+    <Compile Include="Fasade\PMSAdmin\IFunctionFacadeService.cs" />
+    <Compile Include="Fasade\PMSAdmin\IPolicyFacadeService.cs" />
+    <Compile Include="Fasade\PMSAdmin\IJobIndexFacadeService.cs" />
+    <Compile Include="Fasade\PMSAdmin\IJobPositionFacadeService.cs" />
+    <Compile Include="Fasade\PMSAdmin\IUnitFacadeService.cs" />
+    <Compile Include="Fasade\PMSAdmin\ICustomFieldFacadeService.cs" />
+    <Compile Include="Fasade\PMS\ICalculationServiceFasade.cs" />
+    <Compile Include="Calculation\CalculationDTO_Server.cs" />
+    <Compile Include="Calculation\CalculationDTO.cs" />
+    <Compile Include="Calculation\CalculationStateWithRunSummaryDTO_Server.cs" />
+    <Compile Include="Calculation\CalculationBriefDTOWithAction.cs" />
+    <Compile Include="Calculation\CalculationBriefDTOWithAction_Server.cs" />
+    <Compile Include="Calculation\EmployeeFinalizeCalculationInPeriodDTO.cs" />
+    <Compile Include="Calculation\EmployeeFinalizeCalculationInPeriodDTO_Server.cs" />
+    <Compile Include="Calculation\EmployeeFinalizeCalculationHistoryDTO_Server.cs" />
+    <Compile Include="Calculation\EmployeeFinalizeCalculationHistoryDTO.cs" />
+    <Compile Include="Calculation\EmployeeCalculationResultDetailsDTO.cs" />
+    <Compile Include="Calculation\EmployeeCalculationResultDetailsDTO_Server.cs" />
+    <Compile Include="Calculation\EmployeeCalculationResultDTO.cs" />
+    <Compile Include="Calculation\EmployeeCalculationResultDTO_Server.cs" />
+    <Compile Include="Fasade\Security\ILogServiceFacade.cs" />
+    <Compile Include="Fasade\Security\IUserServiceFacade.cs" />
+    <Compile Include="PeriodManagement\Claim\ClaimDescriptionDTO.cs" />
+    <Compile Include="PeriodManagement\Claim\ClaimDescriptionDTO_Server.cs" />
+    <Compile Include="PeriodManagement\Claim\ClaimDTO.cs" />
+    <Compile Include="PeriodManagement\Claim\ClaimDTOWithAction.cs" />
+    <Compile Include="PeriodManagement\Claim\ClaimState\ClaimStateDTO_Server.cs" />
+    <Compile Include="PeriodManagement\Claim\ClaimState\ClaimStateDTO.cs" />
+    <Compile Include="PeriodManagement\Claim\ClaimTypeDTO.cs" />
+    <Compile Include="PeriodManagement\Claim\ClaimTypeDTO_Server.cs" />
+    <Compile Include="PeriodManagement\Inquiry\InquiryForm\InquirySubjectInquiryFormListDTO_Server.cs" />
+    <Compile Include="PeriodManagement\Inquiry\InquiryForm\InquiryFormInquirerDTO_Server.cs" />
+    <Compile Include="PeriodManagement\Inquiry\InquiryForm\InquiryFormInquirerDTO.cs" />
+    <Compile Include="PeriodManagement\Inquiry\InquiryForm\InquirySubjectInquiryFormListDTO.cs" />
+    <Compile Include="PeriodManagement\JobIndexPoint\JobIndexPointSummaryDTOWithAction.cs" />
+    <Compile Include="PeriodManagement\JobIndexPoint\JobIndexPointSummaryDTOWithAction_Server.cs" />
+    <Compile Include="Calculation\OrganChartEmployeesCalculationDTO.cs" />
+    <Compile Include="Calculation\OrganChartEmployeesCalculationDTO_Server.cs" />
+    <Compile Include="Calculation\AbstractOrganChartDTOWithActions.cs" />
+    <Compile Include="Calculation\AbstractOrganChartDTOWithActions_Server.cs" />
+    <Compile Include="Calculation\CalculationStateWithRunSummaryDTO.cs" />
+    <Compile Include="Fasade\PMSAdmin\IJobFacadeService.cs" />
+    <Compile Include="PeriodManagement\JobPositionInquiryConfiguration\InquirerDTO_Server.cs" />
+    <Compile Include="PeriodManagement\JobPositionInquiryConfiguration\InquirerDTO.cs" />
+    <Compile Include="PeriodManagement\Inquiry\JobIndexValueDTO.cs" />
+    <Compile Include="PeriodManagement\Inquiry\JobIndexValueDTO_Server.cs" />
+    <Compile Include="PeriodManagement\Inquiry\InquiryFormDTO_Server.cs" />
+    <Compile Include="PeriodManagement\Inquiry\InquiryFormDTO.cs" />
+    <Compile Include="PeriodManagement\Inquiry\InquirySubjectDTO.cs" />
+    <Compile Include="PeriodManagement\Inquiry\InquirySubjectDTO_Server.cs" />
+    <Compile Include="PeriodManagement\Inquiry\EmployeeInquirySubjectListDTO.cs" />
+    <Compile Include="PeriodManagement\Inquiry\EmployeeInquirySubjectListDTO_Server.cs" />
+    <Compile Include="PeriodManagement\JobPositionInquiryConfiguration\InquirySubjectWithInquirersDTO_Server.cs" />
+    <Compile Include="PeriodManagement\JobPositionInquiryConfiguration\InquirySubjectWithInquirersDTO.cs" />
+    <Compile Include="PeriodManagement\JobIndex\AbstractInPeriodDTOWithActions.cs" />
+    <Compile Include="PeriodManagement\JobIndex\AbstractIndexInPeriodDTO.cs" />
+    <Compile Include="PeriodManagement\JobIndex\AbstractIndexInPeriodDTO_Server.cs" />
+    <Compile Include="PeriodManagement\JobIndex\JobIndexGroupInPeriodDTOWithActions.cs" />
+    <Compile Include="PeriodManagement\JobIndex\JobIndexInPeriodDTOWithActions.cs" />
+    <Compile Include="PeriodManagement\JobIndex\JobIndexGroupInPeriodDTO.cs" />
+    <Compile Include="PeriodManagement\JobIndex\JobIndexInPeriodDTO.cs" />
+    <Compile Include="PeriodManagement\JobPosition\JobPositionInPeriodDTOWithActions.cs" />
+    <Compile Include="PeriodManagement\JobPosition\JobPositionInPeriodAssignmentDTO.cs" />
+    <Compile Include="PeriodManagement\JobPosition\JobPositionInPeriodDTO.cs" />
+    <Compile Include="PeriodManagement\JobPosition\JobPositionInPeriodDTOs_Server.cs" />
+    <Compile Include="PeriodManagement\JobPosition\JobPositionInPeriodAssignmentDTO_Server.cs" />
+    <Compile Include="PeriodManagement\Job\JobInPeriodAssignment.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PeriodManagement\Job\JobInPeriodAssignment_Server.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PeriodManagement\Job\JobInPeriodDTOWithActions.cs" />
+    <Compile Include="PeriodManagement\Job\JobInPeriodDTO.cs" />
+    <Compile Include="PeriodManagement\Job\JobInPeriodDTOWithActions_Server.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PeriodManagement\Job\JobInPeriodDTO_Server.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PeriodManagement\Job\JobInPrdField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PeriodManagement\Period\PeriodStateWithCopyingSummaryDTO.cs" />
+    <Compile Include="PeriodManagement\Period\PeriodStateWithCopyingSummaryDTO_Server.cs" />
+    <Compile Include="PeriodManagement\Period\PeriodStateWithIntializeInquirySummaryDTO_Server.cs" />
+    <Compile Include="PeriodManagement\Period\PeriodStateWithIntializeInquirySummaryDTO.cs" />
+    <Compile Include="PeriodManagement\Period\PeriodStateDTO.cs" />
+    <Compile Include="PeriodManagement\Period\PeriodStateDTO_Server.cs" />
+    <Compile Include="PeriodManagement\Period\PeriodDTOWithAction.cs" />
+    <Compile Include="PeriodManagement\Period\PeriodDescriptionDTO_Server.cs" />
+    <Compile Include="PeriodManagement\Period\PeriodDTO.cs" />
+    <Compile Include="BasicInfoManagement\Function\FunctionDTODescriptionWithActions_Server.cs" />
+    <Compile Include="BasicInfoManagement\Function\PolicyFunctions_Server.cs" />
+    <Compile Include="BasicInfoManagement\Function\FunctionDTODescriptionWithActions.cs" />
+    <Compile Include="BasicInfoManagement\Function\PolicyFunctions.cs" />
+    <Compile Include="Common\IActionDTO.cs" />
+    <Compile Include="Common\UserState_Server.cs" />
+    <Compile Include="Common\UserState.cs" />
+    <Compile Include="EmployeeManagment\EmployeeDTO.cs" />
+    <Compile Include="BasicInfoManagement\CustomField\CustomFieldDTO_Server.cs" />
+    <Compile Include="BasicInfoManagement\CustomField\CustomFieldDTO.cs" />
+    <Compile Include="BasicInfoManagement\JobIndex\JobIndexDTO.cs" />
+    <Compile Include="PeriodManagement\Job\PeriodJobsDTO_Server.cs" />
+    <Compile Include="PeriodManagement\Job\PeriodJobsDTO.cs" />
+    <Compile Include="BasicInfoManagement\Function\FunctionDTO_Server.cs" />
+    <Compile Include="BasicInfoManagement\Function\FunctionDTO.cs" />
+    <Compile Include="Common\EnumModel.cs" />
+    <Compile Include="Fasade\PMS\IPeriodFacadeService.cs" />
+    <Compile Include="BasicInfoManagement\Job\JobDTO_Server.cs" />
+    <Compile Include="BasicInfoManagement\Job\JobDTO.cs" />
+    <Compile Include="BasicInfoManagement\JobIndex\AbstractIndex.cs" />
+    <Compile Include="BasicInfoManagement\JobIndex\AbstractIndex_Server.cs" />
+    <Compile Include="BasicInfoManagement\JobPosition\JobPositionDTO.cs" />
+    <Compile Include="BasicInfoManagement\JobPosition\JobPositionDTO_Server.cs" />
+    <Compile Include="Common\PageResult.cs" />
+    <Compile Include="PeriodManagement\Period\PeriodDescriptionDTO.cs" />
+    <Compile Include="PeriodManagement\Unit\UnitInPeriodDTO_Server.cs" />
+    <Compile Include="PeriodManagement\Unit\UnitInPeriodDTO.cs" />
+    <Compile Include="PeriodManagement\Unit\UnitInPeriodAssignmentDTO_Server.cs" />
+    <Compile Include="PeriodManagement\Unit\UnitInPeriodAssignmentDTO.cs" />
+    <Compile Include="PeriodManagement\Unit\UnitInPeriodDTOWithActions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\ReportDTO_Server.cs" />
+    <Compile Include="Report\ReportDTO.cs" />
+    <Compile Include="UtilityClass\QueryConditionHelper.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

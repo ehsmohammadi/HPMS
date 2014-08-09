@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="530df732-878f-4933-867d-6d2177ae7f0c"
+  name="Policies"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="805a5db4-e301-4895-a276-dec128470679"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DMITD.PMS.Domain.Model.Policies"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="927173ca-a27a-44b7-a499-08c0cb95a036"
+        name="DllBasedPolicy"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="fa05d35a-38e2-4ea7-a405-fc8e529ff482"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FPrgs%2FGitHub%2FMITDEnterpriseApplication%2FMITD.PMS - Copy%2FMITD.PMS.Domain.Model%2Fbin%2FDebug%2FMITD.PMS.Domain.dll&quot; Namespace%3DMITD.PMS.Domain.Model.Policies Type%3DDllBasedPolicy"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="8411dab8-a724-4f55-9ff3-43d2ee86e746"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="8f21d98b-5b05-4fa5-9d6c-976b4aa769a0">
+                <propertyInstance
+                  Id="c1a8c67e-7d0a-4db6-81a2-4b139f1e0981"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="822cc170-b02d-4549-8a98-197f9998407d">
+                <propertyInstance
+                  Id="78c691db-3221-47ad-b037-690e309b78bc"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="0a3f5a6f-b630-40fa-bcd5-f19179dd99c6">
+                <propertyInstance
+                  Id="f9d099dd-7aa2-4055-b99b-bbeac54819b1"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="6b9ab6eb-f56c-41b4-a1d4-8fb56ca25c97">
+                <propertyInstance
+                  Id="b5f7a0e6-d016-49c1-9ddb-607e82576dec"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="a90daab8-cf2b-47bd-8c25-24e7985c43f6">
+                <propertyInstance
+                  Id="d6549125-91d4-4935-b6f7-17edfb2aee5a"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <generalsInternal>
+          <generalization
+            Id="ee216fb8-0168-4fef-a677-73cedba8c2c4"
+            isSubstitutable="false">
+            <classMoniker
+              Id="7e0b20b6-56fa-42fb-a226-347cece75396"
+              LastKnownName="Policy"
+              LastKnownLocation="Package5_1033.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="7e0b20b6-56fa-42fb-a226-347cece75396"
+        name="Policy"
+        isAbstract="true"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="09bde08b-1db2-4298-b158-1207930691d7"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FPrgs%2FGitHub%2FMITDEnterpriseApplication%2FMITD.PMS - Copy%2FMITD.PMS.Domain.Model%2Fbin%2FDebug%2FMITD.PMS.Domain.dll&quot; Namespace%3DMITD.PMS.Domain.Model.Policies Type%3DPolicy"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="516f8301-d1ee-4322-9e42-1ea902f9de51"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="1162c78d-7fa8-4254-8ad2-5f3b2c4336f8">
+                <propertyInstance
+                  Id="33e937d3-d1dc-426f-a6be-8c666e3cf433"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="ecd5f4c5-846a-4f66-8504-96cfc2d5c093">
+                <propertyInstance
+                  Id="5c791fb2-c9f8-469b-9f2e-647a72634439"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="d9373cc6-afb5-4f6f-8e84-8ab687ebdcf7">
+                <propertyInstance
+                  Id="b17923a3-e737-409c-b1c6-d35de97782ef"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="1e7e5f60-4f69-4f76-a851-7c4ccbda1d51">
+                <propertyInstance
+                  Id="558dbce3-3b88-4638-ad03-ac5d742d15e2"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="44b7669a-d2bb-4df6-b8a0-348bf5a6e128">
+                <propertyInstance
+                  Id="4023c375-cb04-4d1c-98ed-c64b60c75fcb"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="9264e95f-156b-4ffb-9d30-d391b1269297"
+        name="RuleEngineBasedPolicy"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="cd3b7bdd-d036-4dbb-9b89-08006491abd3"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FPrgs%2FGitHub%2FMITDEnterpriseApplication%2FMITD.PMS - Copy%2FMITD.PMS.Domain.Model%2Fbin%2FDebug%2FMITD.PMS.Domain.dll&quot; Namespace%3DMITD.PMS.Domain.Model.Policies Type%3DRuleEngineBasedPolicy"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="0f8a2b00-3a53-4ed3-8efd-f1e5989c369b"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="c2a64f96-3292-42ef-a1ce-b4a896308c8a">
+                <propertyInstance
+                  Id="e2678013-207d-4ba3-8c74-90df125860d3"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="8a8a1726-28fc-4fc5-b1c0-4646cf0cb321">
+                <propertyInstance
+                  Id="987b430d-2da0-4ccb-b9c1-60307a982d7b"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="f1288df2-9a4a-48ab-986c-1fec972419c8">
+                <propertyInstance
+                  Id="a6d3c913-c2f3-4767-a73c-157741477456"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="7da1ba9a-d9e8-4d56-a4be-e677523832e4">
+                <propertyInstance
+                  Id="bd442751-c4b2-46f0-9a2a-4b54a805bd10"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="67ce7c96-dd7d-4c65-829c-54a7543ab3b4">
+                <propertyInstance
+                  Id="1e4247c0-f0f6-49f1-bfdd-eed622e3c8bb"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <generalsInternal>
+          <generalization
+            Id="bb273289-17ee-4cb2-824a-dfe50be7fa7c"
+            isSubstitutable="false">
+            <classMoniker
+              Id="7e0b20b6-56fa-42fb-a226-347cece75396"
+              LastKnownName="Policy"
+              LastKnownLocation="Package5_1033.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="f3653c04-aab0-4449-8988-5935f208b90b"
+        name="PolicyId"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="3368b142-4f8c-4f1d-8914-0f56723fae81"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FPrgs%2FGitHub%2FMITDEnterpriseApplication%2FMITD.PMS - Copy%2FMITD.PMS.Domain.Model%2Fbin%2FDebug%2FMITD.PMS.Domain.dll&quot; Namespace%3DMITD.PMS.Domain.Model.Policies Type%3DPolicyId"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="980d4ecd-6045-4e49-a870-163fde090a5a"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="0f4e018c-3ffc-4027-a6ed-f9cc5f2c54a7">
+                <propertyInstance
+                  Id="577fa658-873d-4db2-b04f-3cf090ced290"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="84fe0b4f-e16e-4310-b02d-f9d05b83f6bf">
+                <propertyInstance
+                  Id="ea9568d6-3ea5-4d9d-8c32-f1ce1323d8ca"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="a81374a9-4ccf-4876-86dc-d0aec5a50444">
+                <propertyInstance
+                  Id="ae12e17a-15d9-4806-8782-3164a36d7ab7"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="7ee5d222-8e11-460b-8472-b6352b8dc56e">
+                <propertyInstance
+                  Id="df87c576-b4c9-42c0-96f8-cb1cd25ea0e3"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="f3f2e1a8-76bd-4ac7-a5ca-d20dde5a5016">
+                <propertyInstance
+                  Id="776089ab-c15e-4e6b-810f-78c75ba3e0b2"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

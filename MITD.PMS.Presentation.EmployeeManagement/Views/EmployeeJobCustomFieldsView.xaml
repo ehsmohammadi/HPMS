@@ -1,0 +1,100 @@
+﻿<pr:ViewBase  xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"  
+    x:Class="MITD.PMS.Presentation.EmployeeManagement.Views.EmployeeJobCustomFieldsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" FlowDirection="RightToLeft"
+    d:DesignHeight="300" d:DesignWidth="400" 
+    xmlns:dp="clr-namespace:MITD.Presentation.UI.DateTimePicker.Views;assembly=MITD.Presentation.UI.SL"
+    xmlns:pr="clr-namespace:MITD.Presentation.UI;assembly=MITD.Presentation.UI.SL"
+    d:DataContext="{StaticResource ejCustomFieldsViewModel}">
+    <ScrollViewer BorderThickness="0"  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <Grid Background="White" >
+            <Grid.RowDefinitions >
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <sdk:Label Grid.Row="0" Margin="5" 
+                     Content="{Binding Path=JobPositionAssignment.JobPositionName, Mode=TwoWay}"/>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition  Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <sdk:Label Grid.Row="0" Grid.Column="0" Content="نام پست :" />
+                <sdk:Label Grid.Row="0" Grid.Column="1" Margin="5"
+                     Content="{Binding Path=Employee.LastName, Mode=TwoWay,
+                     ValidatesOnDataErrors=true,
+                     NotifyOnValidationError=true}" Width="120"/>
+
+                <sdk:Label Grid.Row="1" Grid.Column="0" Content="تاریخ شروع:" />
+
+                <dp:PDatePicker Grid.Row="1" Grid.Column="1"   Width="150" Margin="5" Height="Auto" 
+                            SelectedDate="{Binding Path=JobPositionAssignment.FromDate, Mode=TwoWay,
+                     ValidatesOnDataErrors=true,
+                     NotifyOnValidationError=true}"/>
+
+                <sdk:Label Grid.Row="2" Grid.Column="0" Content="تاریخ پایان:" />
+                <dp:PDatePicker Grid.Row="2" Grid.Column="1"   Width="150" Margin="5" Height="Auto" 
+                            SelectedDate="{Binding Path=JobPositionAssignment.ToDate, Mode=TwoWay,
+                     ValidatesOnDataErrors=true,
+                     NotifyOnValidationError=true}"/>
+                
+                <sdk:Label Grid.Row="3" Grid.Column="0" Content="درصد زمان:"  />
+                <TextBox Grid.Row="3" Grid.Column="1" 
+                     Text="{Binding Path=JobPositionAssignment.WorkTimePercent, Mode=TwoWay,
+                     ValidatesOnDataErrors=true,
+                     NotifyOnValidationError=true}" />
+
+                <sdk:Label Grid.Row="4" Grid.Column="0" Content="وزن:"  />
+                <TextBox Grid.Row="4" Grid.Column="1" 
+                     Text="{Binding Path=JobPositionAssignment.JobPositionWeight, Mode=TwoWay,
+                     ValidatesOnDataErrors=true,
+                     NotifyOnValidationError=true}" />
+
+            </Grid>
+
+            <sdk:DataGrid Grid.Row="2" AutoGenerateColumns="False" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Stretch"
+                      ItemsSource="{Binding Path=CustomFieldValueList}" >
+                      
+                <sdk:DataGrid.Columns>
+                    
+                    <sdk:DataGridTextColumn Header="نام" CanUserReorder="True" IsReadOnly="True"
+                                            CanUserResize="True" CanUserSort="True" Width="Auto" Binding="{Binding Path=Name,Mode=TwoWay}" />
+                    
+                  <sdk:DataGridTemplateColumn Header="مقدار" IsReadOnly="False">
+                        <sdk:DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Width="40" Height="20"  HorizontalAlignment="Right" Text="{Binding Path=Value,Mode=TwoWay}"/>
+                            </DataTemplate>
+                        </sdk:DataGridTemplateColumn.CellTemplate>
+                    </sdk:DataGridTemplateColumn>
+
+                </sdk:DataGrid.Columns>
+            </sdk:DataGrid>
+
+            <StackPanel Grid.Row="3" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Style="{StaticResource CustomButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Content="{Binding Path=SaveCommand.DisplayName}" 
+                    Command="{Binding Path=SaveCommand.Command}"  />
+                <Button Style="{StaticResource CustomButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Content="{Binding Path=CancelCommand.DisplayName}" 
+                    Command="{Binding Path=CancelCommand.Command}" />
+            </StackPanel>
+
+        </Grid>
+    </ScrollViewer>
+</pr:ViewBase>

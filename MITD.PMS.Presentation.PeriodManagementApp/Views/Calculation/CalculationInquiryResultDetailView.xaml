@@ -1,0 +1,87 @@
+﻿<pr:ViewBase  
+    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"  
+    x:Class="MITD.PMS.Presentation.PeriodManagementApp.Views.CalculationInquiryResultDetailView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" FlowDirection="RightToLeft"
+    d:DesignHeight="300" d:DesignWidth="400" 
+    xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit"
+    xmlns:pr="clr-namespace:MITD.Presentation.UI;assembly=MITD.Presentation.UI.SL"
+    d:DataContext="{StaticResource calculationInquiryResultDetailViewModel}">
+    <pr:ViewBase.Resources>
+       
+    </pr:ViewBase.Resources>
+    <ScrollViewer BorderThickness="0"  VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
+        <Grid Name="LayoutRoot"  Background="Transparent"  >
+            <Grid.RowDefinitions >
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+
+            <sdk:Label  Grid.Row="0" Grid.Column="0" Content="نام فرد:"/>
+            <sdk:Label  Grid.Row="0" Grid.Column="1" />
+
+            <sdk:Label  Grid.Row="0" Grid.Column="2" Content="نام دوره:"/>
+            <sdk:Label  Grid.Row="0" Grid.Column="3" />
+
+            <sdk:Label  Grid.Row="0" Grid.Column="4" Content="روش محاسبه:"/>
+            <sdk:Label  Grid.Row="0" Grid.Column="5" />
+
+            <sdk:Label  Grid.Row="1" Grid.Column="0" Content="نام شاخص:"/>
+            <sdk:Label  Grid.Row="1" Grid.Column="1" />
+            
+            <sdk:Label  Grid.Row="1" Grid.Column="2" Content="نمره شاخص:"/>
+            <sdk:Label  Grid.Row="1" Grid.Column="3" />
+
+
+           <Grid   Background="Transparent"  Grid.Row="2" Grid.ColumnSpan="6">
+                <Grid.RowDefinitions >
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <sdk:DataGrid Grid.Row="0" Grid.ColumnSpan="2" Name="drgList" AutoGenerateColumns="False" HorizontalAlignment="Stretch" SelectionMode="Single" IsReadOnly="True"
+                      ItemsSource="{Binding Path=IndexScoreList}" >
+                    <sdk:DataGrid.Columns>
+
+                        <sdk:DataGridTextColumn Header="نام فرد" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto"
+                    Binding="{Binding Path=Title}"  />
+
+                        <sdk:DataGridTextColumn Header="نمره " CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto"
+                    Binding="{Binding Path=ScoreValue}"  />
+
+                    </sdk:DataGrid.Columns>
+                </sdk:DataGrid>
+
+               
+
+                <StackPanel Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Orientation="Horizontal">
+                    <pr:CustomDataPager Height="26" FontFamily="Tahoma" FontSize="11" PageSize="10" Width="200" 
+                                    Source="{Binding Path=IndexScoreList, Mode=TwoWay}" />
+                </StackPanel>
+
+               
+
+            </Grid>
+
+
+        </Grid>
+    </ScrollViewer>
+</pr:ViewBase>

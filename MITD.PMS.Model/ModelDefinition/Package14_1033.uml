@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="deece610-5aaf-4a99-adc8-60d9fed36c91"
+  name="RuleEngine"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="1d66144c-40e1-4b6e-9c83-aca3b400c913"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DMITD.Core.RuleEngine"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="9758d900-ae73-469b-852c-23cf04d26b71"
+        name="RuleEngineService"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="53c0e5d4-6b60-487f-a066-6595a81c2192"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FPrgs%2FGitHub%2FMITDEnterpriseApplication%2FMITD.PMS - Copy%2FMITD.Core.RuleEngine%2Fbin%2FDebug%2FMITD.Core.RuleEngine.dll&quot; Namespace%3DMITD.Core.RuleEngine Type%3DRuleEngineService"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="b10e9d8d-beff-4d43-849e-8e3381fdb352"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="64b42cd0-8f52-4536-9ef1-11d2747274d0">
+                <propertyInstance
+                  Id="15d4cd71-05f0-427d-8473-bbfe16a38720"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="d013402c-8a27-4fc9-8271-3c8bffb8cd2d">
+                <propertyInstance
+                  Id="8c8585dd-63f8-4d7a-9d73-4f47eb2b1d07"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="7c73c953-7620-4474-a246-e65f94296128">
+                <propertyInstance
+                  Id="1c578d27-f881-49c9-83bf-2471bcc322f8"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="aa86e4ec-4096-4d98-888d-93a3a8b5e412">
+                <propertyInstance
+                  Id="7ff9ac4d-8cbc-486d-b023-bbe7bf7937ff"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="82fa2934-104b-441d-bc2c-745e22e9dc1c">
+                <propertyInstance
+                  Id="6fd7c363-8a7b-41b4-ba02-b24827c6c11d"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="726c49f0-22b7-47a6-9861-e410f299c769"
+        LastKnownName="Model"
+        LastKnownLocation="Package15_1033.uml" />
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

@@ -1,0 +1,395 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E31D9461-636C-402E-8F5D-5E7AB32A8875}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MITD.PMS.Presentation.Contracts</RootNamespace>
+    <AssemblyName>MITD.PMS.Presentation.Contracts.SL</AssemblyName>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+  </PropertyGroup>
+  <!-- This property group is only here to support building this project using the 
+       MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
+       to set the TargetFrameworkVersion to v3.5 -->
+  <PropertyGroup Condition="'$(MSBuildToolsVersion)' == '3.5'">
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MITD.Presentation.SL">
+      <HintPath>..\Dependency\MITD.Presentation.SL.dll</HintPath>
+    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="System.ComponentModel.DataAnnotations, Version=5.0.5.0, Culture=neutral, PublicKeyToken=ddd0da4d3e678217, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core">
+      <HintPath>$(TargetFrameworkDirectory)System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Windows.Browser" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\BasicInfoManagement\CustomField\AbstractCustomFieldDescriptionDTO.cs">
+      <Link>BasicInfoManagement\CustomFiled\AbstractCustomFieldDescriptionDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\BasicInfoManagement\CustomField\AbstractCustomFieldDTO.cs">
+      <Link>BasicInfoManagement\CustomFiled\AbstractCustomFieldDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\BasicInfoManagement\CustomField\CustomFieldDTO.cs">
+      <Link>BasicInfoManagement\CustomFiled\CustomFieldDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\BasicInfoManagement\CustomField\CustomFieldDTOWithActions.cs">
+      <Link>BasicInfoManagement\CustomFiled\CustomFieldDTOWithActions.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\BasicInfoManagement\CustomField\CustomFieldValueDTO.cs">
+      <Link>BasicInfoManagement\CustomFiled\CustomFieldValueDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\BasicInfoManagement\Function\FunctionDTO.cs">
+      <Link>BasicInfoManagement\Function\FunctionDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\BasicInfoManagement\Function\FunctionDTODescriptionWithActions.cs">
+      <Link>BasicInfoManagement\Function\FunctionDTODescriptionWithActions.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\BasicInfoManagement\Function\PolicyFunctions.cs">
+      <Link>BasicInfoManagement\Function\PolicyFunctions.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\BasicInfoManagement\JobIndex\AbstractIndex.cs">
+      <Link>BasicInfoManagement\JobIndex\AbstractIndex.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\BasicInfoManagement\JobIndex\AbstractJobIndexDTOWithAction.cs">
+      <Link>BasicInfoManagement\JobIndex\AbstractJobIndexDTOWithAction.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\BasicInfoManagement\JobIndex\JobIndexCategoryDTO.cs">
+      <Link>BasicInfoManagement\JobIndex\JobIndexCategoryDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\BasicInfoManagement\JobIndex\JobIndexCategoryDTOWithActions.cs">
+      <Link>BasicInfoManagement\JobIndex\JobIndexCategoryDTOWithActions.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\BasicInfoManagement\JobIndex\JobIndexDTO.cs">
+      <Link>BasicInfoManagement\JobIndex\JobIndexDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\BasicInfoManagement\JobIndex\JobIndexDTOWithActions.cs">
+      <Link>BasicInfoManagement\JobIndex\JobIndexDTOWithActions.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\BasicInfoManagement\JobPosition\JobPositionDTO.cs">
+      <Link>BasicInfoManagement\JobPosition\JobPositionDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\BasicInfoManagement\JobPosition\JobPositionDTOWithActions.cs">
+      <Link>BasicInfoManagement\JobPosition\JobPositionDTOWithActions.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\BasicInfoManagement\Job\JobDescriptionDTO.cs">
+      <Link>BasicInfoManagement\Job\JobDescriptionDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\BasicInfoManagement\Job\JobDTO.cs">
+      <Link>BasicInfoManagement\Job\JobDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\BasicInfoManagement\Job\JobDTOWithActions.cs">
+      <Link>BasicInfoManagement\Job\JobDTOWithActions.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\BasicInfoManagement\Policy\PolicyDescriptionDTO.cs">
+      <Link>BasicInfoManagement\Policy\PolicyDescriptionDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\BasicInfoManagement\Policy\PolicyDTO.cs">
+      <Link>BasicInfoManagement\Policy\PolicyDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\BasicInfoManagement\Policy\PolicyDTOWithActions.cs">
+      <Link>BasicInfoManagement\Policy\PolicyDTOWithActions.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\BasicInfoManagement\Policy\PolicyRulesDTO.cs">
+      <Link>BasicInfoManagement\Policy\PolicyRulesDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\BasicInfoManagement\Rule\RuleDTODescription.cs">
+      <Link>BasicInfoManagement\Rule\RuleDTODescription.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\BasicInfoManagement\Rule\RuleDTODescriptionWithAction.cs">
+      <Link>BasicInfoManagement\Rule\RuleDTODescriptionWithAction.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\BasicInfoManagement\Rule\RuleExcuteTimeDTO.cs">
+      <Link>BasicInfoManagement\Rule\RuleExcuteTimeDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\BasicInfoManagement\Rule\RuleVersionDTO.cs">
+      <Link>BasicInfoManagement\Rule\RuleVersionDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\BasicInfoManagement\Unit\UnitDTO.cs">
+      <Link>BasicInfoManagement\Unit\UnitDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\BasicInfoManagement\Unit\UnitDTOWithActions.cs">
+      <Link>BasicInfoManagement\Unit\UnitDTOWithActions.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\Calculation\AbstractOrganChartDTOWithActions.cs">
+      <Link>Calculation\AbstractOrganChartDTOWithActions.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\Calculation\CalculationBriefDTOWithAction.cs">
+      <Link>Calculation\CalculationBriefDTOWithAction.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\Calculation\CalculationDTO.cs">
+      <Link>Calculation\CalculationDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\Calculation\CalculationDTOWithAction.cs">
+      <Link>Calculation\CalculationDTOWithAction.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\Calculation\CalculationStateChangingDTO.cs">
+      <Link>Calculation\CalculationStateChangingDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\Calculation\CalculationStatusDTO.cs">
+      <Link>Calculation\CalculationStatusDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\Calculation\EmployeeCalcTotalScorDTOWithAction.cs">
+      <Link>Calculation\EmployeeCalcTotalScorDTOWithAction.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\Calculation\EmployeeCalculationResultDetailsDTO.cs">
+      <Link>Calculation\EmployeeCalculationResultDetailsDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\Calculation\EmployeeCalculationResultDTO.cs">
+      <Link>Calculation\EmployeeCalculationResultDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\Calculation\EmployeeFinalizeCalculationHistoryDTO.cs">
+      <Link>Calculation\EmployeeFinalizeCalculationHistoryDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\Calculation\EmployeeFinalizeCalculationInPeriodDTO.cs">
+      <Link>Calculation\EmployeeFinalizeCalculationInPeriodDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\Calculation\OrganChartEmployeesCalculationDTO.cs">
+      <Link>Calculation\OrganChartEmployeesCalculationDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\Common\CustomFieldEntity.cs">
+      <Link>Common\CustomFieldEntity.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\Common\EnumModel.cs">
+      <Link>Common\EnumModel.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\Common\IActionDTO.cs">
+      <Link>Common\IActionDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\Common\PageResult.cs">
+      <Link>Common\PageResult.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\Common\PMSAction.cs">
+      <Link>Common\PMSAction.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\Common\UserState.cs">
+      <Link>Common\UserState.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\EmployeeManagment\Employee.cs">
+      <Link>EmployeeManagement\Employee.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\EmployeeManagment\EmployeeDTODescription.cs">
+      <Link>EmployeeManagement\EmployeeDTODescription.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\EmployeeManagment\EmployeeDTODescriptionWithActions.cs">
+      <Link>EmployeeManagement\EmployeeDTODescriptionWithActions.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\EmployeeManagment\EmployeeJobPositionsDTO.cs">
+      <Link>EmployeeManagement\EmployeeJobPositionsDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\EmployeeManagment\JobPositionDurationDTO.cs">
+      <Link>EmployeeManagement\JobPositionDurationDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\Inquiry\EmployeeInquirySubjectListDTO.cs">
+      <Link>PeriodManagement\Inquiry\EmployeeInquirySubjectListDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\Inquiry\InquiryFormDTO.cs">
+      <Link>PeriodManagement\Inquiry\InquiryFormDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\Inquiry\InquirySubjectDTO.cs">
+      <Link>PeriodManagement\Inquiry\InquirySubjectDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\Inquiry\InquirySubjectInquirersDTO.cs">
+      <Link>PeriodManagement\Inquiry\InquirySubjectInquirersDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\Inquiry\JobIndexValueDTO.cs">
+      <Link>PeriodManagement\Inquiry\JobIndexValueDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\Inquiry\JobPositionInquiriesDTO.cs">
+      <Link>PeriodManagement\Inquiry\JobPositionInquiriesDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\JobIndex\AbstractIndexInPeriodDTO.cs">
+      <Link>PeriodManagement\JobIndex\AbstractIndexInPeriodDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\JobIndex\AbstractInPeriodDTOWithActions.cs">
+      <Link>PeriodManagement\JobIndex\AbstractInPeriodDTOWithActions.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\JobIndex\JobIndexGroupInPeriodDTO.cs">
+      <Link>PeriodManagement\JobIndex\JobIndexGroupInPeriodDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\JobIndex\JobIndexGroupInPeriodDTOWithActions.cs">
+      <Link>PeriodManagement\JobIndex\JobIndexGroupInPeriodDTOWithActions.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\JobIndex\JobIndexInPeriodDTO.cs">
+      <Link>PeriodManagement\JobIndex\JobIndexInPeriodDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\JobIndex\JobIndexInPeriodDTOWithActions.cs">
+      <Link>PeriodManagement\JobIndex\JobIndexInPeriodDTOWithActions.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\JobIndex\PeriodAbstractIndexesDTO.cs">
+      <Link>PeriodManagement\JobIndex\PeriodAbstractIndexesDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\JobPosition\JobPositionInPeriodDTO.cs">
+      <Link>PeriodManagement\JobPosition\JobPositionInPeriodDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\JobPosition\JobPositionInPeriodDTOWithActions.cs">
+      <Link>PeriodManagement\JobPosition\JobPositionInPeriodDTOWithActions.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\JobPosition\PeriodJobPositionDTO.cs">
+      <Link>PeriodManagement\JobPosition\PeriodJobPositionDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\Job\JobInPeriodAssignment.cs">
+      <Link>PeriodManagement\Job\JobInPeriodAssignment.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\Job\JobInPeriodDTO.cs">
+      <Link>PeriodManagement\Job\JobInPeriodDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\Job\JobInPeriodDTOWithActions.cs">
+      <Link>PeriodManagement\Job\JobInPeriodDTOWithActions.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\Job\JobInPrdField.cs">
+      <Link>PeriodManagement\Job\JobInPrdField.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\Job\PeriodJobsDTO.cs">
+      <Link>PeriodManagement\Job\PeriodJobsDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\Period\PeriodDescriptionDTO.cs">
+      <Link>PeriodManagement\Period\PeriodDescriptionDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\Period\PeriodDTO.cs">
+      <Link>PeriodManagement\Period\PeriodDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\Period\PeriodDTOWithAction.cs">
+      <Link>PeriodManagement\Period\PeriodDTOWithAction.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\Unit\UnitInPeriodAssignmentDTO.cs">
+      <Link>PeriodManagement\Unit\UnitInPeriodAssignmentDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\Unit\UnitInPeriodDTO.cs">
+      <Link>PeriodManagement\Unit\UnitInPeriodDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\Unit\UnitInPeriodDTOWithActions.cs">
+      <Link>PeriodManagement\Unit\UnitInPeriodDTOWithActions.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\UtilityClass\QueryConditionHelper.cs">
+      <Link>QueryConditionHelper.cs</Link>
+    </Compile>
+    <Compile Include="BasicInfoManagement\CustomFiled\CustomFieldValueDTO_Client.cs" />
+    <Compile Include="BasicInfoManagement\CustomFiled\CustomFieldCriteria.cs" />
+    <Compile Include="BasicInfoManagement\JobIndex\AbstarctIndex_Client.cs" />
+    <Compile Include="BasicInfoManagement\JobIndex\IJobIndexCategory_Client.cs" />
+    <Compile Include="BasicInfoManagement\JobIndex\JobIndexCategoryDTOWithActions_Client.cs" />
+    <Compile Include="BasicInfoManagement\JobIndex\JobIndexCriteria.cs" />
+    <Compile Include="BasicInfoManagement\JobIndex\JobIndexCategoryDescription_Client.cs" />
+    <Compile Include="BasicInfoManagement\Job\JobDescriptionDTO_Client.cs" />
+    <Compile Include="BasicInfoManagement\CustomFiled\AbstractCustomFieldDescription_Client.cs" />
+    <Compile Include="BasicInfoManagement\CustomFiled\AbstractCustomField_Client.cs" />
+    <Compile Include="BasicInfoManagement\Policy\PolicyRulesDTO_Client.cs" />
+    <Compile Include="BasicInfoManagement\Policy\PolicyDescriptionDTO_Client.cs" />
+    <Compile Include="BasicInfoManagement\Policy\PolicyDTO_Client.cs" />
+    <Compile Include="BasicInfoManagement\Rule\RuleExcuteTimeDTO_Client.cs" />
+    <Compile Include="BasicInfoManagement\Rule\RuleVersionDTO_Client.cs" />
+    <Compile Include="BasicInfoManagement\Rule\RuleDTODescription_Client.cs" />
+    <Compile Include="BasicInfoManagement\Unit\UnitDTO_Client.cs" />
+    <Compile Include="Calculation\CalculationStateChangingDTO_Client.cs" />
+    <Compile Include="Common\CheckBoxListViewModel.cs" />
+    <Compile Include="Common\TreeCheckBoxViewModel.cs" />
+    <Compile Include="Common\ICheckBoxListViewModel.cs" />
+    <Compile Include="Common\IChildElement.cs" />
+    <Compile Include="BasicInfoManagement\Function\PolicyFunctions_Client.cs" />
+    <Compile Include="BasicInfoManagement\Function\FunctionDTO_Client.cs" />
+    <Compile Include="BasicInfoManagement\Function\FunctionDTODescriptionWithActions_Client.cs" />
+    <Compile Include="EmployeeManagement\JobPositionDurationDTO_Client.cs" />
+    <Compile Include="EmployeeManagement\EmployeeJobPositionsDTO_Client.cs" />
+    <Compile Include="EmployeeManagement\EmployeeDTODescription_Client.cs" />
+    <Compile Include="Calculation\AbstractOrganChartDTOWithActions_Client.cs" />
+    <Compile Include="Calculation\CalculationDTOWithAction_Client.cs" />
+    <Compile Include="Calculation\CalculationStatusDTO_Client.cs" />
+    <Compile Include="Calculation\CalculationDTO_Client.cs" />
+    <Compile Include="Calculation\CalculationBriefDTOWithAction_Client.cs" />
+    <Compile Include="Calculation\EmployeeFinalizeCalculationHistoryDTO_Client.cs" />
+    <Compile Include="Calculation\EmployeeFinalizeCalculationInPeriodDTO_Client.cs" />
+    <Compile Include="Calculation\EmployeeCalculationResultDetailsDTO_Client.cs" />
+    <Compile Include="Calculation\EmployeeCalcTotalScorDTOWithAction_Client.cs" />
+    <Compile Include="Calculation\EmployeeCalculationResultDTO_Client.cs" />
+    <Compile Include="Calculation\OrganChartEmployeesCalculationDTO_Client.cs" />
+    <Compile Include="PeriodManagement\Inquiry\JobIndexValueDTO_Client.cs" />
+    <Compile Include="PeriodManagement\Inquiry\InquiryFormDTO_Client.cs" />
+    <Compile Include="PeriodManagement\Inquiry\InquirySubjectDTO_Client.cs" />
+    <Compile Include="PeriodManagement\Inquiry\EmployeeInquirySubjectListDTO_Client.cs" />
+    <Compile Include="PeriodManagement\Inquiry\InquirySubjectInquirersDTO_Client.cs" />
+    <Compile Include="PeriodManagement\Inquiry\JobPositionInquiriesDTO_Client.cs" />
+    <Compile Include="PeriodManagement\JobIndex\AbstractInPeriodDTOWithActions_Client.cs" />
+    <Compile Include="PeriodManagement\JobIndex\AbstractIndexInPeriodDTO_Client.cs" />
+    <Compile Include="PeriodManagement\JobIndex\PeriodAbstractIndexesDTO_Client.cs" />
+    <Compile Include="PeriodManagement\JobPosition\PeriodJobPositionsDTO_Client.cs" />
+    <Compile Include="PeriodManagement\JobPosition\JobPositionInPeriodDTOWithActions_Client.cs" />
+    <Compile Include="PeriodManagement\JobPosition\JobPositionInPeriodDTO_Client.cs" />
+    <Compile Include="EmployeeManagement\Employee_Client.cs" />
+    <Compile Include="BasicInfoManagement\CustomFiled\CustomField_Client.cs" />
+    <Compile Include="Common\ITreeViewItemModel.cs" />
+    <Compile Include="Common\IActionService.cs" />
+    <Compile Include="Common\PMSAction_Client.cs" />
+    <Compile Include="Common\TreeElementViewModel.cs" />
+    <Compile Include="Common\UserState_Client.cs" />
+    <Compile Include="BasicInfoManagement\Job\JobDTO_Client.cs" />
+    <Compile Include="BasicInfoManagement\JobPosition\JobPosition_Client.cs" />
+<<<<<<< HEAD
+    <Compile Include="PeriodManagement\Job\JobInPeriodAssignment_Client.cs" />
+    <Compile Include="PeriodManagement\Job\PeriodJobsDTO_Client.cs" />
+    <Compile Include="PeriodManagement\Job\JobInPeriodDTOWithActions_Client.cs" />
+    <Compile Include="PeriodManagement\Job\JobInPeriodDTO_Client.cs" />
+    <Compile Include="PeriodManagement\Unit\UnitInPeriodDTODescription_Client.cs" />
+    <Compile Include="PeriodManagement\Unit\PeriodUnitsDTO_Client.cs" />
+=======
+    <Compile Include="PeriodManagement\Period\PeriodDescriptionDTO_Client.cs" />
+>>>>>>> 0d6a46752c36c5f403df04e93453325daf325bd1
+    <Compile Include="PeriodManagement\Unit\UnitInPeriodDTO_Client.cs" />
+    <Compile Include="PeriodManagement\Unit\UnitInPeriodAssignmentDTO_Client.cs" />
+    <Compile Include="PeriodManagement\Unit\UnitInPeriodDTOWithActions_Client.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

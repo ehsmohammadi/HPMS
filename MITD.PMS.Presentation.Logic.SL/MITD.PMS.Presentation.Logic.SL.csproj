@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{73C3010F-3DF1-45DC-B36C-76FA83E9ECB4}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MITD.PMS.Presentation.Logic</RootNamespace>
+    <AssemblyName>MITD.PMS.Presentation.Logic.SL</AssemblyName>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+  </PropertyGroup>
+  <!-- This property group is only here to support building this project using the 
+       MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
+       to set the TargetFrameworkVersion to v3.5 -->
+  <PropertyGroup Condition="'$(MSBuildToolsVersion)' == '3.5'">
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.3.2.1\lib\sl5\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\packages\Castle.Windsor.3.2.1\lib\sl5\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Core.SL">
+      <HintPath>..\Dependency\MITD.Core.SL.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Presentation.Config.Castle.SL">
+      <HintPath>..\Dependency\MITD.Presentation.Config.Castle.SL.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Presentation.SL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=16494395142279b8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependency\MITD.Presentation.SL.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Presentation.UI.SL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=16494395142279b8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependency\MITD.Presentation.UI.SL.dll</HintPath>
+    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\portable-net40+sl4+wp7+win8\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core">
+      <HintPath>$(TargetFrameworkDirectory)System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Controls, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Data, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Windows.Browser" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets\Resources\BasicInfoAppMenuString.Designer.cs">
+      <DependentUpon>BasicInfoAppMenuString.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Controller\IInquiryController.cs" />
+    <Compile Include="ReportCommandVM.cs" />
+    <Compile Include="ShowBusyIndicatorArgs.cs" />
+    <Compile Include="LoginVM.cs" />
+    <Compile Include="IUserProvider.cs" />
+    <Compile Include="MainWindowUpdateArgs.cs" />
+    <Compile Include="UIBusinessClasses\CommandHelper.cs" />
+    <Compile Include="Controller\IEmployeeController.cs" />
+    <Compile Include="Controller\IBasicInfoController.cs" />
+    <Compile Include="ApplicationConfigHelper.cs" />
+    <Compile Include="Controller\IPeriodController.cs" />
+    <Compile Include="IMainAppLocalizedResources.cs" />
+    <Compile Include="UIBusinessClasses\CheckBoxListViewHelper.cs" />
+    <Compile Include="UIBusinessClasses\ExceptionAdapter.cs" />
+    <Compile Include="UIBusinessClasses\IListView.cs" />
+    <Compile Include="UIBusinessClasses\PMSClientConfig.cs" />
+    <Compile Include="HideBusyIndicatorArgs.cs" />
+    <Compile Include="UserProvider.cs" />
+    <Compile Include="Views\ICalculationExceptionListView.cs" />
+    <Compile Include="Views\ICalculationExceptionView.cs" />
+    <Compile Include="Views\IRuleTrailView.cs" />
+    <Compile Include="Views\IRuleTrailListView.cs" />
+    <Compile Include="Views\IManageWorkListUsersView.cs" />
+    <Compile Include="Views\IPeriodBasicDataCopyStatusView.cs" />
+    <Compile Include="Views\IPeriodStatusView.cs" />
+    <Compile Include="Views\IPeriodBasicDataCopyView.cs" />
+    <Compile Include="Views\ILogListView.cs" />
+    <Compile Include="Views\ILogView.cs" />
+    <Compile Include="Views\IPartyCustomActionsView.cs" />
+    <Compile Include="Views\IUserView.cs" />
+    <Compile Include="Views\IUserGroupView.cs" />
+    <Compile Include="Views\IUserGroupListView.cs" />
+    <Compile Include="Views\IUserListView.cs" />
+    <Compile Include="Views\ILoginView.cs" />
+    <Compile Include="Views\Employee\IEmployeeJobCustomFieldsView.cs" />
+    <Compile Include="Views\IGridRuleListView.cs" />
+    <Compile Include="Views\IJobIndexTreeView.cs" />
+    <Compile Include="Views\BasicInfo\CustomField\ICustomFieldListView.cs" />
+    <Compile Include="Views\BasicInfo\CustomField\ICustomFieldView.cs" />
+    <Compile Include="Views\IJobIndexCategoryListView.cs" />
+    <Compile Include="Views\IJobIndexCategoryView.cs" />
+    <Compile Include="Views\IEmployeeView.cs" />
+    <Compile Include="Views\Employee\IEmployeeListView.cs" />
+    <Compile Include="Views\IIndexGroupInPeriodView.cs" />
+    <Compile Include="Views\IIndexInPrdFieldView.cs" />
+    <Compile Include="Views\IIndexInPeriodView.cs" />
+    <Compile Include="Views\IIndexInPeriodTreeView.cs" />
+    <Compile Include="Views\BasicInfo\Function\IFunctionView.cs" />
+    <Compile Include="Views\BasicInfo\Function\IFunctionListView.cs" />
+    <Compile Include="Views\IJobIndexListView.cs" />
+    <Compile Include="Views\IJobIndexView.cs" />
+    <Compile Include="Views\IJobInPeriodJobIndicesView.cs" />
+    <Compile Include="Views\IJobListView.cs" />
+    <Compile Include="Views\IJobPostListView.cs" />
+    <Compile Include="Views\IJobPostView.cs" />
+    <Compile Include="Views\IJobView.cs" />
+    <Compile Include="Views\BasicInfo\Rule\IRuleVersionView.cs" />
+    <Compile Include="Views\BasicInfo\Rule\IRuleListView.cs" />
+    <Compile Include="Views\BasicInfo\Rule\IRuleView.cs" />
+    <Compile Include="Views\BasicInfo\JobIndex\IJobIndexCustomFieldManageView.cs" />
+    <Compile Include="Views\BasicInfo\Unit\IUnitListView.cs" />
+    <Compile Include="Views\BasicInfo\Unit\IUnitView.cs" />
+    <Compile Include="Views\BasicInfo\Job\IJobCutomFieldManageView.cs" />
+    <Compile Include="Views\BasicInfo\Policy\IPolicyListView.cs" />
+    <Compile Include="Views\BasicInfo\Policy\IPolicyView.cs" />
+    <Compile Include="Views\PeriodManagement\JobIndex\IJobIndexGroupInPeriodView.cs" />
+    <Compile Include="Views\PeriodManagement\JobIndex\IJobIndexInPeriodTreeView.cs" />
+    <Compile Include="Views\PeriodManagement\JobIndex\IJobIndexInPeriodView.cs" />
+    <Compile Include="Views\PeriodManagement\JobPosition\IJobPositionInPeriodTreeView.cs" />
+    <Compile Include="Views\PeriodManagement\JobPosition\IJobPositionInPeriodView.cs" />
+    <Compile Include="Views\PeriodManagement\Unit\IUnitInPeriodTreeView.cs" />
+    <Compile Include="Views\PeriodManagement\Unit\IUnitInPeriodView.cs" />
+    <Compile Include="Wrapper\BasicInfoManagement\Log\ILogServiceWrapper.cs" />
+    <Compile Include="Wrapper\BasicInfoManagement\Log\LogServiceWrapper.cs" />
+    <Compile Include="Wrapper\BasicInfoManagement\CustomField\CustomFieldServiceWrapper.cs" />
+    <Compile Include="Wrapper\BasicInfoManagement\CustomField\ICustomFieldServiceWrapper.cs" />
+    <Compile Include="Wrapper\BasicInfoManagement\JobIndex\IJobIndexCategoryServiceWrapper.cs" />
+    <Compile Include="Wrapper\BasicInfoManagement\Policy\IPolicyServiceWrapper.cs" />
+    <Compile Include="Wrapper\BasicInfoManagement\Policy\PolicyServiceWrapper.cs" />
+    <Compile Include="Wrapper\BasicInfoManagement\Unit\IUnitServiceWrapper.cs" />
+    <Compile Include="Wrapper\BasicInfoManagement\Unit\UnitServiceWrapper.cs" />
+    <Compile Include="Wrapper\EmployeeManagement\IEmployeeServiceWrapper.cs" />
+    <Compile Include="Wrapper\EmployeeManagement\EmployeeServiceWrapper.cs" />
+    <Compile Include="Wrapper\BasicInfoManagement\Function\FunctionServiceWrapper.cs" />
+    <Compile Include="Wrapper\BasicInfoManagement\Function\IFunctionServiceWrapper.cs" />
+    <Compile Include="Wrapper\BasicInfoManagement\Rule\RuleServiceWrapper.cs" />
+    <Compile Include="Wrapper\BasicInfoManagement\JobPosition\JobPositionServiceWrapper.cs" />
+    <Compile Include="Wrapper\BasicInfoManagement\JobIndex\JobIndexServiceWrapper.cs" />
+    <Compile Include="Wrapper\BasicInfoManagement\JobIndex\IJobIndexServiceWrapper.cs" />
+    <Compile Include="MainWindowVM.cs" />
+    <Compile Include="ComboBoxTreeView\ITreeViewItemModel.cs" />
+    <Compile Include="ComboBoxTreeView\SilverLightTreeViewExtended.cs" />
+    <Compile Include="ComboBoxTreeView\SilverLightComboBoxTreeView.cs" />
+    <Compile Include="UIBusinessClasses\SilverLightTreeViewHelper.cs" />
+    <Compile Include="UIBusinessClasses\DataGridCommandViewModel.cs" />
+    <Compile Include="Views\IOrgElementJobPositionView.cs" />
+    <Compile Include="Views\IJobInPrdFieldView.cs" />
+    <Compile Include="Views\IJobPositionChartTreeView.cs" />
+    <Compile Include="Views\IUnitChartTreeView.cs" />
+    <Compile Include="Views\IOrgElementUnitView.cs" />
+    <Compile Include="Views\IJobInPeriodView.cs" />
+    <Compile Include="Views\IOrganizationChartTreeView.cs" />
+    <Compile Include="Views\IJobInPeriodListView.cs" />
+    <Compile Include="Wrapper\IReportServiceWrapper.cs" />
+    <Compile Include="Wrapper\ReportServiceWrapper.cs" />
+    <Compile Include="Wrapper\UserServiceWrapper.cs" />
+    <Compile Include="Wrapper\IUserServiceWrapper.cs" />
+    <Compile Include="Wrapper\PeriodManagement\Claim\ClaimServiceWrapper.cs" />
+    <Compile Include="Wrapper\PeriodManagement\Claim\IClaimServiceWrapper.cs" />
+    <Compile Include="Wrapper\PeriodManagement\Inquiry\IInquiryServiceWrapper.cs" />
+    <Compile Include="Wrapper\PeriodManagement\Calculation\ICalculationServiceWrapper.cs" />
+    <Compile Include="Wrapper\PeriodManagement\Calculation\CalculationServiceWrapper.cs" />
+    <Compile Include="Wrapper\PeriodManagement\Inquiry\InquiryServiceWrapper.cs" />
+    <Compile Include="Wrapper\PeriodManagement\JobIndex\IJobIndexInPeriodServiceWrapper.cs" />
+    <Compile Include="Wrapper\PeriodManagement\JobIndex\JobIndexInPeriodServiceWrapper.cs" />
+    <Compile Include="Wrapper\PeriodManagement\Job\IJobInPeriodServiceWrapper.cs" />
+    <Compile Include="Wrapper\PeriodManagement\JobPosition\IJobPositionInPeriodServiceWrapper.cs" />
+    <Compile Include="Wrapper\PeriodManagement\JobPosition\JobPositionInPeriodServiceWrapper.cs" />
+    <Compile Include="Wrapper\PeriodManagement\Job\JobInPeriodServiceWrapper.cs" />
+    <Compile Include="Wrapper\BasicInfoManagement\JobPosition\IJobPostServiceWrapper.cs" />
+    <Compile Include="Wrapper\BasicInfoManagement\Job\IJobServiceWrapper.cs" />
+    <Compile Include="Wrapper\PeriodManagement\MyWorkList\MyTasksServiceWrapper.cs" />
+    <Compile Include="Wrapper\PeriodManagement\MyWorkList\IMyTasksServiceWrapper.cs" />
+    <Compile Include="Wrapper\PeriodManagement\Period\IPeriodServiceWrapper.cs" />
+    <Compile Include="Controller\IPMSController.cs" />
+    <Compile Include="Controller\PMSController.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Wrapper\BasicInfoManagement\Rule\IRuleServiceWrapper.cs" />
+    <Compile Include="Views\IPeriodView.cs" />
+    <Compile Include="Views\IPeriodListView.cs" />
+    <Compile Include="Wrapper\BasicInfoManagement\Job\JobServiceWrapper.cs" />
+    <Compile Include="Wrapper\PeriodManagement\Period\PeriodServiceWrapper.cs" />
+    <Compile Include="Wrapper\PeriodManagement\Unit\IUnitInPeriodServiceWrapper.cs" />
+    <Compile Include="Wrapper\PeriodManagement\Unit\UnitInPeriodServiceWrapper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\BasicInfo\JobPosition\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MITD.PMS.Common.SL\MITD.PMS.Common.SL.csproj">
+      <Project>{f960edc9-07e4-4cb2-a427-6da7c74ad472}</Project>
+      <Name>MITD.PMS.Common.SL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMS.Presentation.Contracts.SL\MITD.PMS.Presentation.Contracts.SL.csproj">
+      <Project>{E31D9461-636C-402E-8F5D-5E7AB32A8875}</Project>
+      <Name>MITD.PMS.Presentation.Contracts.SL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Resources\BasicInfoAppMenuString.en-US.resx" />
+    <EmbeddedResource Include="Assets\Resources\BasicInfoAppMenuString.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>BasicInfoAppMenuString.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Resources\BasicInfoAppMenuString.fa-IR.resx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

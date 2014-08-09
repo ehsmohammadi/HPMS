@@ -1,0 +1,565 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{158FFBAE-66C6-471A-B87F-9BED8E6465B4}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MITD.PMS.Presentation.PeriodManagementApp</RootNamespace>
+    <AssemblyName>MITD.PMS.Presentation.PeriodManagementApp</AssemblyName>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>true</SilverlightApplication>
+    <SupportedCultures>
+      fa-IR;en-US
+    </SupportedCultures>
+    <XapOutputs>true</XapOutputs>
+    <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
+    <XapFilename>MITD.PMS.Presentation.PeriodManagementApp.xap</XapFilename>
+    <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
+    <SilverlightAppEntry>MITD.PMS.Presentation.PeriodManagementApp.App</SilverlightAppEntry>
+    <TestPageFileName>MITD.PM.Presentation.PeriodManagementAppTestPage.html</TestPageFileName>
+    <CreateTestPage>true</CreateTestPage>
+    <ValidateXaml>true</ValidateXaml>
+    <EnableOutOfBrowser>false</EnableOutOfBrowser>
+    <OutOfBrowserSettingsFile>Properties\OutOfBrowserSettings.xml</OutOfBrowserSettingsFile>
+    <UsePlatformExtensions>true</UsePlatformExtensions>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <LinkedServerProject>
+    </LinkedServerProject>
+  </PropertyGroup>
+  <!-- This property group is only here to support building this project using the 
+       MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
+       to set the TargetFrameworkVersion to v3.5 -->
+  <PropertyGroup Condition="'$(MSBuildToolsVersion)' == '3.5'">
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.3.2.1\lib\sl5\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\packages\Castle.Windsor.3.2.1\lib\sl5\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Core.SL">
+      <HintPath>..\Dependency\MITD.Core.SL.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Presentation.Config.Castle.SL">
+      <HintPath>..\Dependency\MITD.Presentation.Config.Castle.SL.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Presentation.SL">
+      <HintPath>..\Dependency\MITD.Presentation.SL.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Presentation.UI.SL">
+      <HintPath>..\Dependency\MITD.Presentation.UI.SL.dll</HintPath>
+    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\portable-net40+sl4+wp7+win8\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core">
+      <HintPath>$(TargetFrameworkDirectory)System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Windows.Controls, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Data, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Data.Input, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Data.Toolkit, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Windows.Controls.Input.Toolkit, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Windows.Controls.Layout.Toolkit, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Windows.Controls.Toolkit, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Data, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Interactivity, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Windows.Browser" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActionService\Calculation\AddPeriodCalculationExecService.cs" />
+    <Compile Include="ActionService\Calculation\ShowAllCalculationExceptionService.cs" />
+    <Compile Include="ActionService\Calculation\ShowCalculationExceptionService.cs" />
+    <Compile Include="ActionService\Calculation\UnsetDeterministicCalculationService.cs" />
+    <Compile Include="ActionService\Calculation\RunPeriodCalculationService.cs" />
+    <Compile Include="ActionService\Calculation\ShowPeriodCalculationStateService.cs" />
+    <Compile Include="ActionService\Calculation\ShowPeriodCalculationResultService.cs" />
+    <Compile Include="ActionService\Calculation\SetDeterministicCalculationService.cs" />
+    <Compile Include="ActionService\Calculation\DeletePeriodCalculationExecService.cs" />
+    <Compile Include="ActionService\Claim\CancelClaimService.cs" />
+    <Compile Include="ActionService\MyTasks\AddPermittedEmployeeToMyTasksService.cs" />
+    <Compile Include="ActionService\Claim\ShowClaimService.cs" />
+    <Compile Include="ActionService\MyTasks\RemovePermittedEmployeeFromMyTasksServiceService.cs" />
+    <Compile Include="ActionService\Claim\ModifyClaimService.cs" />
+    <Compile Include="ActionService\Inquiry\ManageInquiryFormService.cs" />
+    <Compile Include="ActionService\JobIndex\AddJobIndexInPeriodService.cs" />
+    <Compile Include="ActionService\JobIndex\AddJobIndexGroupInPeriodService.cs" />
+    <Compile Include="ActionService\Job\AddJobInPeriodService.cs" />
+    <Compile Include="ActionService\Job\DeleteJobInPeriodService.cs" />
+    <Compile Include="ActionService\Job\ModifyJobInPeriodService.cs" />
+    <Compile Include="ActionService\JobPosition\ManageJobPositionInPeriodInquiryService.cs" />
+    <Compile Include="ActionService\JobIndex\DeleteJobIndexGroupInPeriodService.cs" />
+    <Compile Include="ActionService\JobIndex\ModifyJobIndexInPeriodService.cs" />
+    <Compile Include="ActionService\JobIndex\DeleteJobIndexInPeriodService.cs" />
+    <Compile Include="ActionService\JobIndex\ModifyJobIndexGroupInPeriodService.cs" />
+    <Compile Include="ActionService\JobPosition\AddJobPositionInPeriodService.cs" />
+    <Compile Include="ActionService\JobPosition\DeleteJobPositionInPeriodService.cs" />
+    <Compile Include="ActionService\Claim\AddClaimService.cs" />
+    <Compile Include="ActionService\Claim\DeleteClaimService.cs" />
+    <Compile Include="ActionService\MyTasks\SettingPermittedEmployeeToMyTasksServiceService.cs" />
+    <Compile Include="ActionService\Period\AddPeriodService.cs" />
+    <Compile Include="ActionService\Period\ActivatePeriodService.cs" />
+    <Compile Include="ActionService\Period\CompleteInquiryService.cs" />
+    <Compile Include="ActionService\Period\ClosePeriodService.cs" />
+    <Compile Include="ActionService\Period\BasicDataCopyService.cs" />
+    <Compile Include="ActionService\Period\StartClaimingPeriodService.cs" />
+    <Compile Include="ActionService\Period\FinishClaimingPeriodService.cs" />
+    <Compile Include="ActionService\Period\RollBackPeriodService.cs" />
+    <Compile Include="ActionService\Period\GetPeriodInitializingInquiryStatusService.cs" />
+    <Compile Include="ActionService\Period\StartInquiaryService.cs" />
+    <Compile Include="ActionService\Period\InitializeForInquiryService.cs" />
+    <Compile Include="ActionService\Period\ManageEmployeeService.cs" />
+    <Compile Include="ActionService\Period\ManageJobInPeriodService.cs" />
+    <Compile Include="ActionService\Period\ManagePeriodCaculationsService.cs" />
+    <Compile Include="ActionService\Period\ManageJobIndexInPeriodService.cs" />
+    <Compile Include="ActionService\Period\ManageJobPositionInPeriodService.cs" />
+    <Compile Include="ActionService\Period\ManageUnitInPeriodService.cs" />
+    <Compile Include="ActionService\Period\DeletePeriodService.cs" />
+    <Compile Include="ActionService\Period\ModifyPeriodService.cs" />
+    <Compile Include="ActionService\Unit\AddUnitInPeriodService.cs" />
+    <Compile Include="ActionService\Unit\DeleteUnitInPeriodService.cs" />
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\LangResources\Resource.Designer.cs">
+      <DependentUpon>Resource.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="EventArgs\Calculation\UpdateCalculationExceptionListArgs.cs" />
+    <Compile Include="EventArgs\Calculation\UpdateCalculationResultListArgs.cs" />
+    <Compile Include="EventArgs\Calculation\UpdateCalculationResultArgs.cs" />
+    <Compile Include="EventArgs\Calculation\UpdateCalculationListArgs.cs" />
+    <Compile Include="EventArgs\MyTasks\UpdatePermittedEmployeeListArgs.cs" />
+    <Compile Include="EventArgs\Inquiry\UpdateEmployeesInquiryListArgs.cs" />
+    <Compile Include="EventArgs\JobIndex\UpdateJobIndexInPeriodTreeArgs.cs" />
+    <Compile Include="EventArgs\JobPosition\UpdateJobPositionInPeriodTreeArgs.cs" />
+    <Compile Include="EventArgs\Job\UpdateJobInPeriodJobIndexListArgs.cs" />
+    <Compile Include="EventArgs\Job\UpdateJobInPeriodCustomFieldListArgs.cs" />
+    <Compile Include="EventArgs\Claim\UpdateClaimListArgs.cs" />
+    <Compile Include="EventArgs\Unit\UpdateUnitInPeriodTreeArgs.cs" />
+    <Compile Include="PeriodMgtAppLocalizedResources.cs" />
+    <Compile Include="PeriodMgtWorkSpaceViewModel.cs" />
+    <Compile Include="BootStrapper.cs" />
+    <Compile Include="EventArgs\UpdateIndexGroupInPeriodArgs.cs" />
+    <Compile Include="EventArgs\UpdateIndexInPeriodArgs.cs" />
+    <Compile Include="EventArgs\UpdateIndexTreeArgs.cs" />
+    <Compile Include="EventArgs\Job\UpdateJobInPeriodArgs.cs" />
+    <Compile Include="EventArgs\UpdateJobPositionChartTreeArgs.cs" />
+    <Compile Include="EventArgs\UpdateUnitChartTreeArgs.cs" />
+    <Compile Include="EventArgs\Job\UpdateJobInPeriodListArgs.cs" />
+    <Compile Include="EventArgs\UpdateOrganizationChartTreeArgs.cs" />
+    <Compile Include="EventArgs\UpdatePeriodListArgs.cs" />
+    <Compile Include="IPeriodMgtAppLocalizedResources.cs" />
+    <Compile Include="PeriodController.cs" />
+    <Compile Include="ViewModels\Calculation\CalculationVM.cs" />
+    <Compile Include="ViewModels\Calculation\CalculationListVM.cs" />
+    <Compile Include="ViewModels\Calculation\CalculationResultListVM.cs" />
+    <Compile Include="ViewModels\Calculation\CalculationResultVM.cs" />
+    <Compile Include="ViewModels\Calculation\CalculationExceptionListVM.cs" />
+    <Compile Include="ViewModels\Calculation\CalculationExceptionVM.cs" />
+    <Compile Include="ViewModels\Calculation\EmployeeCalculationResultHistoryVM.cs" />
+    <Compile Include="ViewModels\Claim\ManagerClaimListVM.cs" />
+    <Compile Include="ViewModels\Claim\EmployeeClaimListVM.cs" />
+    <Compile Include="ViewModels\Claim\ClaimVM.cs" />
+    <Compile Include="ViewModels\Claim\ShowClaimVM.cs" />
+    <Compile Include="ViewModels\Inquiry\InquiryFormVM.cs" />
+    <Compile Include="ViewModels\Calculation\CalculationStatusVM.cs" />
+    <Compile Include="ViewModels\JobPosition\InquirySubjectInquirersVM.cs" />
+    <Compile Include="ViewModels\JobPosition\JobPositionInPeriodInquiryVM.cs" />
+    <Compile Include="ViewModels\Inquiry\InquirerInquirySubjectListVM.cs" />
+    <Compile Include="ViewModels\Inquiry\PrepareToExecInquiryVM.cs" />
+    <Compile Include="ViewModels\JobIndex\JobIndexInPeriodTreeVM.cs" />
+    <Compile Include="ViewModels\JobIndex\JobIndexInPeriodVM.cs" />
+    <Compile Include="ViewModels\JobIndex\JobIndexGroupInPeriodVM.cs" />
+    <Compile Include="ViewModels\Job\JobInPeriodJobIndicesVM.cs" />
+    <Compile Include="ViewModels\JobPosition\JobPositionInPeriodTreeVM.cs" />
+    <Compile Include="ViewModels\JobPosition\JobPositionInPeriodVM.cs" />
+    <Compile Include="ViewModels\Job\JobInPrdFieldVM.cs" />
+    <Compile Include="ViewModels\Job\JobInPeriodVM.cs" />
+    <Compile Include="ViewModels\Job\JobInPeriodListVM.cs" />
+    <Compile Include="ViewModels\Period\PeriodBasicDataCopyStatusVM.cs" />
+    <Compile Include="ViewModels\Period\PeriodInitializeInquiryStatusVM.cs" />
+    <Compile Include="ViewModels\Period\PeriodBasicDataCopyVM.cs" />
+    <Compile Include="ViewModels\Period\PeriodVM.cs" />
+    <Compile Include="ViewModels\Period\PeriodListVM.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\MyTasks\PermittedEmployeeListToMyTasksVM.cs" />
+    <Compile Include="ViewModels\MyTasks\PermittedEmployeeToMyTasksVM.cs" />
+    <Compile Include="ViewModels\Unit\UnitInPeriodTreeVM.cs" />
+    <Compile Include="ViewModels\Unit\UnitInPeriodVM.cs" />
+    <Compile Include="Views\Calculation\CalculationView.xaml.cs">
+      <DependentUpon>CalculationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Calculation\CalculationInquiryResultDetailView.xaml.cs">
+      <DependentUpon>CalculationInquiryResultDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Calculation\CalculationListView.xaml.cs">
+      <DependentUpon>CalculationListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Calculation\CalculationResultListView.xaml.cs">
+      <DependentUpon>CalculationResultListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Calculation\CalculationResultView.xaml.cs">
+      <DependentUpon>CalculationResultView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Calculation\CalculationStatusView.xaml.cs">
+      <DependentUpon>CalculationStatusView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Calculation\CalculationExceptionListView.xaml.cs">
+      <DependentUpon>CalculationExceptionListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Calculation\EmployeeCalculationResultHistoryView.xaml.cs">
+      <DependentUpon>EmployeeCalculationResultHistoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Calculation\CalculationExceptionView.xaml.cs">
+      <DependentUpon>CalculationExceptionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Claim\ManagerClaimListView.xaml.cs">
+      <DependentUpon>ManagerClaimListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Claim\EmployeeClaimListView.xaml.cs">
+      <DependentUpon>EmployeeClaimListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Claim\ShowClaimView.xaml.cs">
+      <DependentUpon>ShowClaimView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Contract\IManagerClaimListView.cs" />
+    <Compile Include="Views\Contract\IShowClaimView.cs" />
+    <Compile Include="Views\Contract\IPermittedEmployeeListToMyTasksView.cs" />
+    <Compile Include="Views\Contract\IPermittedEmployeeToMyTasksView.cs" />
+    <Compile Include="Views\Contract\IClaimView.cs" />
+    <Compile Include="Views\Contract\IEmployeeClaimListView.cs" />
+    <Compile Include="Views\Contract\IEmployeeCalculationResultHistoryView.cs" />
+    <Compile Include="Views\Contract\ICalculationInquiryResultDetailView.cs" />
+    <Compile Include="Views\Contract\ICalculationResultView.cs" />
+    <Compile Include="Views\Contract\ICalculationResultListView.cs" />
+    <Compile Include="Views\Contract\ICalculationExecView.cs" />
+    <Compile Include="Views\Contract\ICalculationListView.cs" />
+    <Compile Include="Views\Contract\ICalculationView.cs" />
+    <Compile Include="Views\Contract\IInquiryFormView.cs" />
+    <Compile Include="Views\Contract\IEmployeesInquiryListView.cs" />
+    <Compile Include="Views\Contract\IPrepareToExecInquiryView.cs" />
+    <Compile Include="Views\Contract\IJobPositionInPeriodInquiryView.cs" />
+    <Compile Include="Views\Claim\ClaimView.xaml.cs">
+      <DependentUpon>ClaimView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inquiry\EmployeesInquiryListView.xaml.cs">
+      <DependentUpon>EmployeesInquiryListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inquiry\InquiryFormView.xaml.cs">
+      <DependentUpon>InquiryFormView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\JobPosition\JobPositionInPeriodInquiryView.xaml.cs">
+      <DependentUpon>JobPositionInPeriodInquiryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inquiry\PrepareToExecInquiryView.xaml.cs">
+      <DependentUpon>PrepareToExecInquiryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\JobIndex\JobIndexInPeriodTreeView.xaml.cs">
+      <DependentUpon>JobIndexInPeriodTreeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\JobIndex\JobIndexInPeriodView.xaml.cs">
+      <DependentUpon>JobIndexInPeriodView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\JobIndex\JobIndexGroupInPeriodView.xaml.cs">
+      <DependentUpon>JobIndexGroupInPeriodView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Job\JobInPeriodJobIndicesView.xaml.cs">
+      <DependentUpon>JobInPeriodJobIndicesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\JobPosition\JobPositionInPeriodTreeView.xaml.cs">
+      <DependentUpon>JobPositionInPeriodTreeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\JobPosition\JobPositionInPeriodView.xaml.cs">
+      <DependentUpon>JobPositionInPeriodView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Job\JobInPrdFieldView.xaml.cs">
+      <DependentUpon>JobInPrdFieldView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Job\JobInPeriodView.xaml.cs">
+      <DependentUpon>JobInPeriodView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Job\JobInPeriodListView.xaml.cs">
+      <DependentUpon>JobInPeriodListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Period\PeriodBasicDataCopyStatusView.xaml.cs">
+      <DependentUpon>PeriodBasicDataCopyStatusView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Period\PeriodInitializeInquiryStatusView.xaml.cs">
+      <DependentUpon>PeriodInitializeInquiryStatusView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Period\PeriodBasicDataCopyView.xaml.cs">
+      <DependentUpon>PeriodBasicDataCopyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Period\PeriodView.xaml.cs">
+      <DependentUpon>PeriodView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Period\PeriodListView.xaml.cs">
+      <DependentUpon>PeriodListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MyTasks\PermittedEmployeeListToMyTasksView.xaml.cs">
+      <DependentUpon>PermittedEmployeeListToMyTasksView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MyTasks\PermittedEmployeeToMyTasksView.xaml.cs">
+      <DependentUpon>PermittedEmployeeToMyTasksView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Unit\UnitInPeriodTreeView.xaml.cs">
+      <DependentUpon>UnitInPeriodTreeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Unit\UnitInPeriodView.xaml.cs">
+      <DependentUpon>UnitInPeriodView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+    <Page Include="Assets\LocalResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Calculation\CalculationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Calculation\CalculationInquiryResultDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Calculation\CalculationListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Calculation\CalculationResultListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Calculation\CalculationResultView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Calculation\CalculationStatusView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Calculation\CalculationExceptionListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Calculation\EmployeeCalculationResultHistoryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Calculation\CalculationExceptionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Claim\ClaimView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Claim\ManagerClaimListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Claim\EmployeeClaimListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Claim\ShowClaimView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Inquiry\EmployeesInquiryListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Inquiry\InquiryFormView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\JobPosition\JobPositionInPeriodInquiryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Inquiry\PrepareToExecInquiryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\JobIndex\JobIndexInPeriodTreeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\JobIndex\JobIndexInPeriodView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\JobIndex\JobIndexGroupInPeriodView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Job\JobInPeriodJobIndicesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\JobPosition\JobPositionInPeriodTreeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\JobPosition\JobPositionInPeriodView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MyTasks\PermittedEmployeeListToMyTasksView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MyTasks\PermittedEmployeeToMyTasksView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Period\PeriodBasicDataCopyStatusView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Period\PeriodInitializeInquiryStatusView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Period\PeriodBasicDataCopyView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Unit\UnitInPeriodTreeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Unit\UnitInPeriodView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\Job\JobInPrdFieldView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Job\JobInPeriodView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Job\JobInPeriodListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Period\PeriodView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Period\PeriodListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Properties\AppManifest.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MITD.PMS.Presentation.Contracts.SL\MITD.PMS.Presentation.Contracts.SL.csproj">
+      <Project>{e31d9461-636c-402e-8f5d-5e7ab32a8875}</Project>
+      <Name>MITD.PMS.Presentation.Contracts.SL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMS.Presentation.Logic.SL\MITD.PMS.Presentation.Logic.SL.csproj">
+      <Project>{73c3010f-3df1-45dc-b36c-76fa83e9ecb4}</Project>
+      <Name>MITD.PMS.Presentation.Logic.SL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMS.Presentation.UI.Common\MITD.PMS.Presentation.UI.Common.csproj">
+      <Project>{6e39061d-c172-4114-80de-edd6cd5f0e78}</Project>
+      <Name>MITD.PMS.Presentation.UI.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\LangResources\Resource.en.US.resx" />
+    <EmbeddedResource Include="Assets\LangResources\Resource.fa.IR.resx" />
+    <EmbeddedResource Include="Assets\LangResources\Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Policy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\user_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\DownImage.png" />
+    <Resource Include="Assets\UpImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Info-icon.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

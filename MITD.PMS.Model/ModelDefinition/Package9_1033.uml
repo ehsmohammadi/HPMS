@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="dae63ddb-c333-441d-95e0-e88595f69779"
+  name="JobPositions"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="fe6f618e-52df-4ec3-85e2-8d26944c6b72"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DMITD.PMS.Domain.Model.JobPositions"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="24227c84-3726-4753-bba9-ce8cba78de32"
+        name="JobPosition"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="ee60a0e5-fc0b-4385-bf4c-292a9e55135e"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FPrgs%2FGitHub%2FMITDEnterpriseApplication%2FMITD.PMS - Copy%2FMITD.PMS.Domain.Model%2Fbin%2FDebug%2FMITD.PMS.Domain.dll&quot; Namespace%3DMITD.PMS.Domain.Model.JobPositions Type%3DJobPosition"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="9900accb-4f67-4231-8275-07dbfda85215"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="f9687cb7-2381-4010-bd80-ebfe1eef399f">
+                <propertyInstance
+                  Id="4800cf64-7ce6-4ae5-90c1-d5956ffe3dd5"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="f86bdb8d-83db-4f19-a0d9-107123c86cf4">
+                <propertyInstance
+                  Id="97824b3f-54d7-4d73-ba34-3014107a9a00"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="4c88f783-bfe3-4aae-92fe-4e4c7b0b6adf">
+                <propertyInstance
+                  Id="577eb3cd-4fd5-4c02-893d-2c27675f1b17"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="2e551bff-f8b7-4780-bd3d-ee5bc93086a7">
+                <propertyInstance
+                  Id="4ee60c3e-49ad-4b0b-ae76-171375b4b22a"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="c6ff3038-55b4-4ab5-b317-c43ce2926b15">
+                <propertyInstance
+                  Id="c762fa90-b6ec-458e-82a1-c7bc08fa7e8a"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="99faada0-cf65-40a6-8799-73bd3d0dc741"
+        name="SharedJobPosition"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="227bdc7a-6e31-4c71-adf2-9bed34405603"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FPrgs%2FGitHub%2FMITDEnterpriseApplication%2FMITD.PMS - Copy%2FMITD.PMS.Domain.Model%2Fbin%2FDebug%2FMITD.PMS.Domain.dll&quot; Namespace%3DMITD.PMS.Domain.Model.JobPositions Type%3DSharedJobPosition"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="9ae56805-9919-4019-8314-6f8b1ed68637"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="e36d3cd3-2eab-447e-a442-3b3661c6e53a">
+                <propertyInstance
+                  Id="ddb12570-93a8-4865-9291-6bdce8306972"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="1c75e7d0-3740-4a86-8d84-9f2a99d4e94c">
+                <propertyInstance
+                  Id="aedd0a76-7be5-425b-b9a1-d23d511cab0a"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="d381dc41-3bf0-4030-985d-05e20b8a1ce6">
+                <propertyInstance
+                  Id="c335fa96-deff-416a-b5a7-376fdfea196f"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="9ca5eec3-ab7c-454b-9277-68aed3ad2227">
+                <propertyInstance
+                  Id="f3212143-1d45-4749-b582-decccc489143"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="274e9ae2-da94-4d20-9158-665624cce654">
+                <propertyInstance
+                  Id="544f5f1a-a63e-41e5-a634-0441e77e6480"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="974cc9bb-42d9-41b2-a378-fd7d6ab325a7"
+        name="SharedJobPositionId"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="d57c71b1-1823-4404-9679-500fdb67829a"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FPrgs%2FGitHub%2FMITDEnterpriseApplication%2FMITD.PMS - Copy%2FMITD.PMS.Domain.Model%2Fbin%2FDebug%2FMITD.PMS.Domain.dll&quot; Namespace%3DMITD.PMS.Domain.Model.JobPositions Type%3DSharedJobPositionId"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="5031aa1e-dced-442c-9814-205481fc3f55"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="d335f4ef-f210-4403-802e-021770ea4e7e">
+                <propertyInstance
+                  Id="6f0149fa-bf52-4928-9a4b-b8aea80fa026"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="46963adf-37fa-4001-805a-7e1394a3ba4b">
+                <propertyInstance
+                  Id="d69b80a9-4ddf-4994-9615-f78b2e95ef2f"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="03852be4-deff-4acc-a581-65e47355ef24">
+                <propertyInstance
+                  Id="1bca5b98-0577-4a09-8b71-a31c364ed334"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="112ca3fc-313f-46e6-9c3c-39b0b446153a">
+                <propertyInstance
+                  Id="61efc088-aca3-48c0-97a6-8bcd6b043418"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="82f2c12c-6416-464f-820e-1d8c1b86bc9f">
+                <propertyInstance
+                  Id="8007cd69-f7e8-4f07-87c3-449a18dbcfc7"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

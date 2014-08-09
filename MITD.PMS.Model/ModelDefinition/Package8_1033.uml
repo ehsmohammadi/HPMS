@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="e2c16c2d-25a3-4666-b8c6-31b49d702758"
+  name="Employees"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="fccfdd4b-072f-4394-ae1c-d5582c2f996f"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DMITD.PMS.Domain.Model.Employees"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="d29bfd24-ea6f-47d4-949e-2aebe9aef854"
+        name="EmployeeId"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="da7395fd-7433-49c1-a31d-2ce86fbef399"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FPrgs%2FGitHub%2FMITDEnterpriseApplication%2FMITD.PMS - Copy%2FMITD.PMS.Domain.Model%2Fbin%2FDebug%2FMITD.PMS.Domain.dll&quot; Namespace%3DMITD.PMS.Domain.Model.Employees Type%3DEmployeeId"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="0262a674-0743-43ac-b99d-1aece6e154d9"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="ea9281ea-7415-486b-b834-2e3b9e239b53">
+                <propertyInstance
+                  Id="4c39a1cc-1978-477f-b397-1f44d1c5a1d5"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="ac3118f9-4984-410e-afa4-7f5076bcb0cc">
+                <propertyInstance
+                  Id="dca30839-4ee7-47d2-bbe6-ba7908f3162c"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="7978b7c8-b25e-4bbb-a2e7-c85fac4a53ba">
+                <propertyInstance
+                  Id="908fdbd0-344b-41ae-b294-f69cc3891c21"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="8319ad01-4d02-41c5-b92f-5b5a5c97e8fe">
+                <propertyInstance
+                  Id="59424977-0555-48c0-bf7d-e792d8dc7ac3"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="ff459fdb-35f7-4c4a-82e6-f986b432bd11">
+                <propertyInstance
+                  Id="b6dba501-1705-4d81-b0eb-0c8fe546c086"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="8f02780a-46b0-40f4-a8d6-e21c496f8e47"
+        name="SharedEmployeeCustomField"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="2ce5d07a-42bd-40e2-b11a-823b59d28108"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FPrgs%2FGitHub%2FMITDEnterpriseApplication%2FMITD.PMS - Copy%2FMITD.PMS.Domain.Model%2Fbin%2FDebug%2FMITD.PMS.Domain.dll&quot; Namespace%3DMITD.PMS.Domain.Model.Employees Type%3DSharedEmployeeCustomField"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="9d074cd3-717c-4ba4-a7d9-487fe83b4182"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="7e0fe9fb-d24a-445d-9f3b-161a5446cc04">
+                <propertyInstance
+                  Id="4f512d32-8b81-4fcc-9cc4-973aa526b340"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="81c721b5-2091-4999-9c93-7a4058ffd941">
+                <propertyInstance
+                  Id="73571e7f-2cc8-4196-a424-a1d90c475178"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="c27038e6-845d-43ad-a979-b8ccfe086407">
+                <propertyInstance
+                  Id="d60fe803-e3a1-40ae-b0da-1a467620eeae"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="85c181fe-b1d2-4afd-9ba1-9ffb9ebc49c6">
+                <propertyInstance
+                  Id="6c1207e5-a643-470b-b6a7-85ca3b48c509"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="1455a247-c00e-4df8-95c8-ca1fca2444e6">
+                <propertyInstance
+                  Id="c5090b56-72e1-4edb-8b29-7dbe7074ec5b"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="d7ef042b-5bce-4826-bd15-d9689cff6711"
+        name="SharedEmployeeCustomFieldId"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="dce6009f-40a0-4136-82b4-8c01da89e303"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FPrgs%2FGitHub%2FMITDEnterpriseApplication%2FMITD.PMS - Copy%2FMITD.PMS.Domain.Model%2Fbin%2FDebug%2FMITD.PMS.Domain.dll&quot; Namespace%3DMITD.PMS.Domain.Model.Employees Type%3DSharedEmployeeCustomFieldId"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="7ef02bc2-e898-4817-b58c-d88d4b8b9ffe"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="5856be9a-2bad-4a1f-93a9-d7cadcc5dd58">
+                <propertyInstance
+                  Id="be965b8d-f26d-4ab1-b825-57b0f3e31f4f"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="abcd59ba-46f0-404e-accb-6354ab801ca8">
+                <propertyInstance
+                  Id="c3c9c211-83cc-41e3-a29a-e4df241e2b47"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="e14628d3-3d89-416e-9036-053840958069">
+                <propertyInstance
+                  Id="8f4c19a5-d6c9-4420-a854-49346c9c3561"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="e8156f20-9c48-41e2-9618-34b79ecebbf3">
+                <propertyInstance
+                  Id="dc96624d-e766-47e5-927f-0f6bcac6e707"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="c5ab4f7b-e946-4cd2-9612-2a8406a6f348">
+                <propertyInstance
+                  Id="af84e11b-9c09-468f-9d75-55376422e5d5"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="3de97e8b-fb1c-4a99-89d2-3017bba3e5b4"
+        name="Employee"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="a81b22f1-eccc-4b8a-8acb-7eb25050ad1a"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FPrgs%2FGitHub%2FMITDEnterpriseApplication%2FMITD.PMS - Copy%2FMITD.PMS.Domain.Model%2Fbin%2FDebug%2FMITD.PMS.Domain.dll&quot; Namespace%3DMITD.PMS.Domain.Model.Employees Type%3DEmployee"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="6c5a0908-e3f8-475c-a302-db11c1b12b88"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="e1da7f20-5414-48ed-8f5c-1c705384fd92">
+                <propertyInstance
+                  Id="88f54748-5ee1-4d6e-9148-1baa72bd274d"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="83e50805-ce3c-4712-b8b8-dc17c4a4dd44">
+                <propertyInstance
+                  Id="6c5c4c89-51ca-4b65-b141-6f1c9fff9c24"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="edc8cd5a-0f8f-4513-a32f-f276cc8bd336">
+                <propertyInstance
+                  Id="ee047c81-3736-4231-821f-c63ef8edc61f"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="23003d59-b137-4a0b-9f33-45f22c8d46fe">
+                <propertyInstance
+                  Id="b8cf9a26-b601-4043-b8d3-c3cca156799b"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="02a826e2-f27c-470c-ac41-27e07dc9e8f4">
+                <propertyInstance
+                  Id="ea6d3e02-6e3c-4077-9c32-0c1ed74ff109"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

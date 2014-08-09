@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="6c5c6a57-d0c8-4074-a216-1c3d64bde81b"
+  name="JobIndices"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="39f2f446-3fcb-41be-84a6-a520f9dd9c0e"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DMITD.PMS.Domain.Model.JobIndices"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="ebe969dc-78a7-4d0b-baab-dbc77421cfb2"
+        name="SharedJobIndexCustomField"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="ff79de33-4cf5-4900-8650-1e41c5712a02"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FPrgs%2FGitHub%2FMITDEnterpriseApplication%2FMITD.PMS - Copy%2FMITD.PMS.Domain.Model%2Fbin%2FDebug%2FMITD.PMS.Domain.dll&quot; Namespace%3DMITD.PMS.Domain.Model.JobIndices Type%3DSharedJobIndexCustomField"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="1b3cbd42-1efe-4b5b-a7cd-fd82d5a752f8"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="d1ad316a-d7a8-418a-8911-e361e6dab281">
+                <propertyInstance
+                  Id="7c486d7a-c917-49b5-8414-daaee331b847"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="789b1a29-c42c-4b3a-9576-daeeb24375bb">
+                <propertyInstance
+                  Id="7e90712b-7ba9-4c7c-957a-318b6755335b"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="7ca9e5d9-d151-48f2-9d7a-ea3b7dd4d8fd">
+                <propertyInstance
+                  Id="887adcca-1d95-4788-8d5a-b02bb8a275a7"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="278adfe8-2767-41ee-910b-19ba4c20b8dc">
+                <propertyInstance
+                  Id="c068f16c-f694-44f5-9de2-79ef0a8c06eb"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="6c036663-464c-4c3d-bfa8-f8da4935f8d6">
+                <propertyInstance
+                  Id="d3ea9e7a-7a0a-4156-9d4b-b29ed5e11a5d"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="9afb726a-575f-45cd-9545-b138dad16a1d"
+        name="SharedJobIndexId"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="74df7e5d-41c6-4f97-909f-7fd5a4ad601e"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FPrgs%2FGitHub%2FMITDEnterpriseApplication%2FMITD.PMS - Copy%2FMITD.PMS.Domain.Model%2Fbin%2FDebug%2FMITD.PMS.Domain.dll&quot; Namespace%3DMITD.PMS.Domain.Model.JobIndices Type%3DSharedJobIndexId"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="302b0adf-b1a0-4704-b3cc-c2f60fa636c4"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="abd0642c-5672-4eed-98a5-6fa45d2b3fc9">
+                <propertyInstance
+                  Id="aaa869d6-b733-4be1-95b9-0c021ec41ecb"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="b5d864f5-6452-4599-afed-2c02f1cfa67e">
+                <propertyInstance
+                  Id="bb28f5d8-af79-43b0-b7f4-2b2b2868536a"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="0021e3c9-37b4-4946-8f75-8c9bc57ea4fb">
+                <propertyInstance
+                  Id="c01adbba-f122-467e-9c7e-5b39b1dc6b0a"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="214c7125-777e-499d-afe8-db236f18c39e">
+                <propertyInstance
+                  Id="0c85a3e7-af77-4e22-a22f-69e883b936d8"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="8f5c9b4a-4316-4687-8700-f809c69e60aa">
+                <propertyInstance
+                  Id="3498ed3a-4bce-4e01-95c7-6c0bd6e406d0"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="c69eb245-03f1-40e5-8c1e-c70bf8a9cff9"
+        name="SharedJobIndexCustomFieldId"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="3390848d-50ad-45a5-8d0c-48f191c7db98"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FPrgs%2FGitHub%2FMITDEnterpriseApplication%2FMITD.PMS - Copy%2FMITD.PMS.Domain.Model%2Fbin%2FDebug%2FMITD.PMS.Domain.dll&quot; Namespace%3DMITD.PMS.Domain.Model.JobIndices Type%3DSharedJobIndexCustomFieldId"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="74ab5f99-0e9a-4ae6-ba06-1217025bd6ef"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="fcc3790d-29c3-4e42-876a-eb67e559ab65">
+                <propertyInstance
+                  Id="c7e21266-59a4-4522-b502-9dad9d807ff0"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="f9b238aa-27e7-4bba-8e90-5eb33723dc9b">
+                <propertyInstance
+                  Id="ec48f1b4-7509-4ab6-891b-c7553894424b"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="f0d9f5d8-e4d5-463c-bb65-546722e97252">
+                <propertyInstance
+                  Id="e702477d-8c74-4ae4-88a3-f48928854250"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="2e1e50d9-1cc7-464a-8b6c-165764d79c8f">
+                <propertyInstance
+                  Id="cd55f8e0-ff00-4f46-a9e1-e66a9834b35b"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="4f11ad77-149f-4356-ac31-3610ead165a4">
+                <propertyInstance
+                  Id="6f038c43-ebaf-4410-b8ac-6d15f22b0ead"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="ac7e88e1-9054-4e1a-808c-646dc60239c0"
+        name="SharedJobIndex"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="ec65afb4-6cf9-4309-b1f9-b442733ed92e"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FPrgs%2FGitHub%2FMITDEnterpriseApplication%2FMITD.PMS - Copy%2FMITD.PMS.Domain.Model%2Fbin%2FDebug%2FMITD.PMS.Domain.dll&quot; Namespace%3DMITD.PMS.Domain.Model.JobIndices Type%3DSharedJobIndex"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="363d4e8a-bbd9-4196-95de-2a5b8096538a"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="ec1f6dab-19a2-4584-b511-3638ee66c28e">
+                <propertyInstance
+                  Id="416d6e56-08df-477c-abca-01f4fe5e7faa"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="856a4e91-896e-4af2-b94d-808198bf25c0">
+                <propertyInstance
+                  Id="0cb41705-1ebb-4fe2-851d-048983bc2d62"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="e7ed5b29-a522-4b8b-9b88-a52b269be956">
+                <propertyInstance
+                  Id="0f7bc8b5-fc38-4a74-b87a-438c9f16faa0"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="44f5a360-4cf4-485b-8cc6-ca46a99b3de0">
+                <propertyInstance
+                  Id="9d5c9d39-6cde-43c5-b5c3-a3b9e7c93998"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="4200ab8d-be89-40d6-93e1-d7e6d24d9c64">
+                <propertyInstance
+                  Id="b3762512-2975-4f30-8481-9b9836a34dbf"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

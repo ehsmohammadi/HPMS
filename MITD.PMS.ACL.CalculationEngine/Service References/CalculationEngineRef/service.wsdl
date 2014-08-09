@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CalculationEngineService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetNamedPipeBinding_ICalculationEngineService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256>
+                </sp:Basic256>
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict>
+                </sp:Strict>
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetNamedPipeBinding_IPeriodEngineService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256>
+                </sp:Basic256>
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict>
+                </sp:Strict>
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/MITD.Domain.Model" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/MITD.PMS.Calculation.Host" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/MITD.PMS.Domain.Model.Periods" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ICalculationEngineService_Run_InputMessage">
+    <wsdl:part name="parameters" element="tns:Run" />
+  </wsdl:message>
+  <wsdl:message name="ICalculationEngineService_Run_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RunResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICalculationEngineService_Run_ErrorDetailFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/MITD.Domain.Model" name="detail" element="q1:ErrorDetail" />
+  </wsdl:message>
+  <wsdl:message name="ICalculationEngineService_Stop_InputMessage">
+    <wsdl:part name="parameters" element="tns:Stop" />
+  </wsdl:message>
+  <wsdl:message name="ICalculationEngineService_Stop_OutputMessage">
+    <wsdl:part name="parameters" element="tns:StopResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICalculationEngineService_Stop_ErrorDetailFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/MITD.Domain.Model" name="detail" element="q2:ErrorDetail" />
+  </wsdl:message>
+  <wsdl:message name="ICalculationEngineService_Pause_InputMessage">
+    <wsdl:part name="parameters" element="tns:Pause" />
+  </wsdl:message>
+  <wsdl:message name="ICalculationEngineService_Pause_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PauseResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICalculationEngineService_Pause_ErrorDetailFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/MITD.Domain.Model" name="detail" element="q3:ErrorDetail" />
+  </wsdl:message>
+  <wsdl:message name="ICalculationEngineService_CheckStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckStatus" />
+  </wsdl:message>
+  <wsdl:message name="ICalculationEngineService_CheckStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICalculationEngineService_CheckStatus_ErrorDetailFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/MITD.Domain.Model" name="detail" element="q4:ErrorDetail" />
+  </wsdl:message>
+  <wsdl:message name="IPeriodEngineService_InitializeInquiry_InputMessage">
+    <wsdl:part name="parameters" element="tns:InitializeInquiry" />
+  </wsdl:message>
+  <wsdl:message name="IPeriodEngineService_InitializeInquiry_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InitializeInquiryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPeriodEngineService_InitializeInquiry_ErrorDetailFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/MITD.Domain.Model" name="detail" element="q5:ErrorDetail" />
+  </wsdl:message>
+  <wsdl:message name="IPeriodEngineService_GetIntializeInquiryState_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetIntializeInquiryState" />
+  </wsdl:message>
+  <wsdl:message name="IPeriodEngineService_GetIntializeInquiryState_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetIntializeInquiryStateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPeriodEngineService_GetIntializeInquiryState_ErrorDetailFault_FaultMessage">
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/MITD.Domain.Model" name="detail" element="q6:ErrorDetail" />
+  </wsdl:message>
+  <wsdl:message name="IPeriodEngineService_CopyBasicData_InputMessage">
+    <wsdl:part name="parameters" element="tns:CopyBasicData" />
+  </wsdl:message>
+  <wsdl:message name="IPeriodEngineService_CopyBasicData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CopyBasicDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPeriodEngineService_CopyBasicData_ErrorDetailFault_FaultMessage">
+    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/MITD.Domain.Model" name="detail" element="q7:ErrorDetail" />
+  </wsdl:message>
+  <wsdl:message name="IPeriodEngineService_GetPeriodCopyingStateProgress_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPeriodCopyingStateProgress" />
+  </wsdl:message>
+  <wsdl:message name="IPeriodEngineService_GetPeriodCopyingStateProgress_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPeriodCopyingStateProgressResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPeriodEngineService_GetPeriodCopyingStateProgress_ErrorDetailFault_FaultMessage">
+    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/MITD.Domain.Model" name="detail" element="q8:ErrorDetail" />
+  </wsdl:message>
+  <wsdl:portType name="ICalculationEngineService">
+    <wsdl:operation name="Run">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICalculationEngineService/Run" message="tns:ICalculationEngineService_Run_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICalculationEngineService/RunResponse" message="tns:ICalculationEngineService_Run_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICalculationEngineService/RunErrorDetailFault" name="ErrorDetailFault" message="tns:ICalculationEngineService_Run_ErrorDetailFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Stop">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICalculationEngineService/Stop" message="tns:ICalculationEngineService_Stop_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICalculationEngineService/StopResponse" message="tns:ICalculationEngineService_Stop_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICalculationEngineService/StopErrorDetailFault" name="ErrorDetailFault" message="tns:ICalculationEngineService_Stop_ErrorDetailFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Pause">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICalculationEngineService/Pause" message="tns:ICalculationEngineService_Pause_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICalculationEngineService/PauseResponse" message="tns:ICalculationEngineService_Pause_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICalculationEngineService/PauseErrorDetailFault" name="ErrorDetailFault" message="tns:ICalculationEngineService_Pause_ErrorDetailFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICalculationEngineService/CheckStatus" message="tns:ICalculationEngineService_CheckStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICalculationEngineService/CheckStatusResponse" message="tns:ICalculationEngineService_CheckStatus_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICalculationEngineService/CheckStatusErrorDetailFault" name="ErrorDetailFault" message="tns:ICalculationEngineService_CheckStatus_ErrorDetailFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IPeriodEngineService">
+    <wsdl:operation name="InitializeInquiry">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPeriodEngineService/InitializeInquiry" message="tns:IPeriodEngineService_InitializeInquiry_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPeriodEngineService/InitializeInquiryResponse" message="tns:IPeriodEngineService_InitializeInquiry_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IPeriodEngineService/InitializeInquiryErrorDetailFault" name="ErrorDetailFault" message="tns:IPeriodEngineService_InitializeInquiry_ErrorDetailFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIntializeInquiryState">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPeriodEngineService/GetIntializeInquiryState" message="tns:IPeriodEngineService_GetIntializeInquiryState_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPeriodEngineService/GetIntializeInquiryStateResponse" message="tns:IPeriodEngineService_GetIntializeInquiryState_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IPeriodEngineService/GetIntializeInquiryStateErrorDetailFault" name="ErrorDetailFault" message="tns:IPeriodEngineService_GetIntializeInquiryState_ErrorDetailFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CopyBasicData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPeriodEngineService/CopyBasicData" message="tns:IPeriodEngineService_CopyBasicData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPeriodEngineService/CopyBasicDataResponse" message="tns:IPeriodEngineService_CopyBasicData_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IPeriodEngineService/CopyBasicDataErrorDetailFault" name="ErrorDetailFault" message="tns:IPeriodEngineService_CopyBasicData_ErrorDetailFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPeriodCopyingStateProgress">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPeriodEngineService/GetPeriodCopyingStateProgress" message="tns:IPeriodEngineService_GetPeriodCopyingStateProgress_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPeriodEngineService/GetPeriodCopyingStateProgressResponse" message="tns:IPeriodEngineService_GetPeriodCopyingStateProgress_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IPeriodEngineService/GetPeriodCopyingStateProgressErrorDetailFault" name="ErrorDetailFault" message="tns:IPeriodEngineService_GetPeriodCopyingStateProgress_ErrorDetailFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetNamedPipeBinding_ICalculationEngineService" type="tns:ICalculationEngineService">
+    <wsp:PolicyReference URI="#NetNamedPipeBinding_ICalculationEngineService_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/named-pipe" />
+    <wsdl:operation name="Run">
+      <soap12:operation soapAction="http://tempuri.org/ICalculationEngineService/Run" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorDetailFault">
+        <soap12:fault use="literal" name="ErrorDetailFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Stop">
+      <soap12:operation soapAction="http://tempuri.org/ICalculationEngineService/Stop" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorDetailFault">
+        <soap12:fault use="literal" name="ErrorDetailFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Pause">
+      <soap12:operation soapAction="http://tempuri.org/ICalculationEngineService/Pause" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorDetailFault">
+        <soap12:fault use="literal" name="ErrorDetailFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CheckStatus">
+      <soap12:operation soapAction="http://tempuri.org/ICalculationEngineService/CheckStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorDetailFault">
+        <soap12:fault use="literal" name="ErrorDetailFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetNamedPipeBinding_IPeriodEngineService" type="tns:IPeriodEngineService">
+    <wsp:PolicyReference URI="#NetNamedPipeBinding_IPeriodEngineService_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/named-pipe" />
+    <wsdl:operation name="InitializeInquiry">
+      <soap12:operation soapAction="http://tempuri.org/IPeriodEngineService/InitializeInquiry" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorDetailFault">
+        <soap12:fault use="literal" name="ErrorDetailFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetIntializeInquiryState">
+      <soap12:operation soapAction="http://tempuri.org/IPeriodEngineService/GetIntializeInquiryState" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorDetailFault">
+        <soap12:fault use="literal" name="ErrorDetailFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CopyBasicData">
+      <soap12:operation soapAction="http://tempuri.org/IPeriodEngineService/CopyBasicData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorDetailFault">
+        <soap12:fault use="literal" name="ErrorDetailFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetPeriodCopyingStateProgress">
+      <soap12:operation soapAction="http://tempuri.org/IPeriodEngineService/GetPeriodCopyingStateProgress" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorDetailFault">
+        <soap12:fault use="literal" name="ErrorDetailFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CalculationEngineService">
+    <wsdl:port name="NetNamedPipeBinding_ICalculationEngineService" binding="tns:NetNamedPipeBinding_ICalculationEngineService">
+      <soap12:address location="net.pipe://localhost/pms/CalculationEngineService/" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.pipe://localhost/pms/CalculationEngineService/</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Dns>localhost</Dns>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetNamedPipeBinding_IPeriodEngineService" binding="tns:NetNamedPipeBinding_IPeriodEngineService">
+      <soap12:address location="net.pipe://localhost/pms/CalculationEngineService/" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.pipe://localhost/pms/CalculationEngineService/</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Dns>localhost</Dns>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

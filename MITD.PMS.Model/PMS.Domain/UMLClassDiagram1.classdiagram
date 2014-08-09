@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="f3f98c2b-2898-4ae2-b685-03807e21339b" name="UMLClassDiagram1" linkedPackageId="f419c56e-082d-4b0a-b7e9-908c3a4e296f" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="e9ad4451-6c2e-4525-865b-101e388aae38">
+      <profileInstance Id="91aeb883-c5d9-4a15-81b3-a44f48abef7c" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="39d447bd-98d2-45b2-9daa-4fa3ba2c6450">
+      <profileInstance Id="ba34b07e-2d6d-449a-b84f-98cd46e08edf" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="493b692b-8c48-4051-8d4d-fbc479543b28" name="Domain" visibility="Private">
+        <referencesInternal>
+          <reference Id="edd71e70-2aec-4c16-a40c-15db8620f83c" handle="viewcode://./CodeSchema_Namespace?Namespace%3DMITD.PMS.Domain" tag="ViewCode">
+            <elementDefinition Id="c5f70e97-eb2c-4af0-ab3a-0880b537a288" />
+          </reference>
+        </referencesInternal>
+        <elementDefinition Id="448e0efd-35e8-431d-8367-e773c047b94a" />
+        <packagedElements>
+          <packageHasNamedElement>
+            <package Id="dafa5dd9-b329-4f55-ae5f-9a644363dd4c" name="Model" visibility="Private">
+              <referencesInternal>
+                <reference Id="6bf611ca-c0e3-4b77-8568-8411546315b1" handle="viewcode://./CodeSchema_Namespace?Namespace%3DMITD.PMS.Domain.Model" tag="ViewCode">
+                  <elementDefinition Id="58e0464d-fbe6-4757-8bd0-dfc3992a43e8" />
+                </reference>
+              </referencesInternal>
+              <elementDefinition Id="a44c8887-ae8e-4ef8-8014-a165494e4c1e" />
+              <profileInstances>
+                <packageHasProfileInstances Id="2d660f42-709e-4595-a33f-7fac3cc746e5">
+                  <profileInstance Id="3c51789b-0a6f-4478-a774-f34734f86c05" name="CSharpProfile">
+                    <elementDefinition Id="751abe12-5e03-48c1-91f0-cb4faacd3cf9" />
+                  </profileInstance>
+                  <elementDefinition Id="95c8e36d-9979-40c4-b047-b5bedb0a6fd1" />
+                </packageHasProfileInstances>
+              </profileInstances>
+              <packagedElements>
+                <packageHasNamedElement>
+                  <package Id="d865db51-7cf0-4488-9f18-6a3a72d7ead6" name="Calculations" visibility="Private">
+                    <referencesInternal>
+                      <reference Id="64d0e843-e1f8-4f1d-96ab-e1a95cca7dd0" handle="viewcode://./CodeSchema_Namespace?Namespace%3DMITD.PMS.Domain.Model.Calculations" tag="ViewCode">
+                        <elementDefinition Id="0d6e8b40-2c5f-4096-a685-55ba127e4d58" />
+                      </reference>
+                    </referencesInternal>
+                    <elementDefinition Id="bc610771-f7a1-442f-b687-1831e04642ba" />
+                  </package>
+                </packageHasNamedElement>
+              </packagedElements>
+            </package>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <package Id="88e267ba-2422-4d04-a55a-59ea84992198" name="Service" visibility="Private">
+              <referencesInternal>
+                <reference Id="74f8cbd5-cae2-4cdf-b667-fc60dd1c48ea" handle="viewcode://./CodeSchema_Namespace?Namespace%3DMITD.PMS.Domain.Service" tag="ViewCode">
+                  <elementDefinition Id="d9aab768-8ad5-479d-b425-de98f44c475a" />
+                </reference>
+              </referencesInternal>
+              <elementDefinition Id="4a6d3e8d-5928-4f33-a352-f5a82d3283a0" />
+              <profileInstances>
+                <packageHasProfileInstances Id="3ba00db2-7000-47dc-9849-bb353b490825">
+                  <profileInstance Id="1da26f3b-ecea-48ca-8405-74f005bd8233" name="CSharpProfile">
+                    <elementDefinition Id="7c4ea294-eab0-4c4a-a5be-279cbd93eca0" />
+                  </profileInstance>
+                  <elementDefinition Id="5dac5a07-9b1b-482c-965b-b33e92f0cf3a" />
+                </packageHasProfileInstances>
+              </profileInstances>
+            </package>
+          </packageHasNamedElement>
+        </packagedElements>
+      </package>
+    </logicalClassDesignerModelHasPackages>
+  </packagedElements>
+  <package Id="f419c56e-082d-4b0a-b7e9-908c3a4e296f" name="MITD.PMS.Model">
+    <elementDefinition Id="f4f79cb8-ffe5-41ae-953e-1987e3f803fd" />
+  </package>
+</logicalClassDesignerModel>

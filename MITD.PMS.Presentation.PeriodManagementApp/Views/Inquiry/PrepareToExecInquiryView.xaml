@@ -1,0 +1,38 @@
+﻿<pr:ViewBase xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" 
+    x:Class="MITD.PMS.Presentation.PeriodManagementApp.Views.PrepareToExecInquiryView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pr="clr-namespace:MITD.Presentation.UI;assembly=MITD.Presentation.UI.SL"
+    xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Toolkit"
+             mc:Ignorable="d"
+    d:DesignHeight="300" d:DesignWidth="400"
+    d:DataContext="{Binding Source={StaticResource prepareToExecInquiryViewModel}}"
+    FlowDirection="RightToLeft">
+
+    <ScrollViewer BorderThickness="0"  VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
+        <Grid Background="White" >
+            <Grid.RowDefinitions >
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Background="AliceBlue"   Orientation="Horizontal" >
+                <CheckBox IsChecked="{Binding Path=IsIAgree,Mode=TwoWay}"></CheckBox>
+                <sdk:Label Content="با تعیین وضعیت دوره جهت اجرای نظر سنجی موافقم" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Background="AliceBlue" Height="30"   VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Content="{Binding Path=SaveCommand.DisplayName}" 
+                    Command="{Binding Path=SaveCommand.Command}"  />
+                <Button Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Content="{Binding Path=CancelCommand.DisplayName}" 
+                    Command="{Binding Path=CancelCommand.Command}" />
+            </StackPanel>
+
+        </Grid>
+    </ScrollViewer>
+</pr:ViewBase>

@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{93453913-D10E-46B3-ADFE-A50E9FB5226D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MITD.PMS.Interface</RootNamespace>
+    <AssemblyName>MITD.PMS.Interface</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.3.2.1\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\packages\Castle.Windsor.3.2.1\lib\net45\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Core">
+      <HintPath>..\Dependency\MITD.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Core.RuleEngine, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependency\MITD.Core.RuleEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Domain.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependency\MITD.Domain.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Domain.Repository, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependency\MITD.Domain.Repository.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Presentation">
+      <HintPath>..\Dependency\MITD.Presentation.dll</HintPath>
+    </Reference>
+    <Reference Include="Omu.ValueInjecter">
+      <HintPath>..\packages\ValueInjecter.2.3.3\lib\net35\Omu.ValueInjecter.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Interception.cs" />
+    <Compile Include="PMSAdmin\Mapper\Rule\RuleTrailDTOMapper.cs" />
+    <Compile Include="PMSAdmin\Mapper\Rule\RuleTrailDTOWithActionMapper.cs" />
+    <Compile Include="PMSAdmin\Mapper\Rule\RuleDTOWithPlicyMapper.cs" />
+    <Compile Include="PMSAdmin\Mapper\Rule\RuleDTOMapper.cs" />
+    <Compile Include="PMSAdmin\Mapper\Rule\RuleDTOWithActionMapper.cs" />
+    <Compile Include="PMSAdmin\RuleFacadeService.cs" />
+    <Compile Include="PMS\Mapper\Calculation\CalculationExceptionMapper.cs" />
+    <Compile Include="PMS\Mapper\Claim\ClaimStateMapper.cs" />
+    <Compile Include="PMS\Mapper\Claim\ClaimMapper.cs" />
+    <Compile Include="PMS\Mapper\Claim\ClaimTypeMapper.cs" />
+    <Compile Include="PMS\Mapper\Period\PeriodCopyingStateReportMapper.cs" />
+    <Compile Include="PMS\Mapper\Period\PeriodInitializeInquiryStateReportMapper.cs" />
+    <Compile Include="PMS\PeriodClaimServiceFasade.cs" />
+    <Compile Include="PMS\InquiryServiceFacade.cs" />
+    <Compile Include="PMS\JobIndexPointFacadeService.cs" />
+    <Compile Include="IMapper3Type.cs" />
+    <Compile Include="PMSAdmin\Mapper\Function\FunctionMapper.cs" />
+    <Compile Include="PMSAdmin\Mapper\Function\FunctionWithActionMapper.cs" />
+    <Compile Include="PMSAdmin\Mapper\Policy\PolicyMapper.cs" />
+    <Compile Include="PMSAdmin\Mapper\Policy\PolicyWithActionMapper.cs" />
+    <Compile Include="PMSAdmin\Mapper\CustomField\AbstractCustomFieldDescriptionMapper.cs" />
+    <Compile Include="PMSAdmin\Mapper\JobIndex\JobIndexWithActionsMapper.cs" />
+    <Compile Include="PMSAdmin\Mapper\JobIndex\JobIndexMapper.cs" />
+    <Compile Include="PMSAdmin\Mapper\Job\JobWithActionsMapper.cs" />
+    <Compile Include="PMSAdmin\Mapper\Job\JobMapper.cs" />
+    <Compile Include="PMSAdmin\Mapper\JobPosition\JobPositionWithActionMapper.cs" />
+    <Compile Include="PMSAdmin\Mapper\JobPosition\JobPositionMapper.cs" />
+    <Compile Include="PMSAdmin\Mapper\Unit\UnitWithActionMapper.cs" />
+    <Compile Include="PMSAdmin\Mapper\Unit\UnitMapper.cs" />
+    <Compile Include="PMSAdmin\Mapper\CustomField\CustomFieldMapper.cs" />
+    <Compile Include="PMSAdmin\Mapper\CustomField\CustomFieldWithActionMapper.cs" />
+    <Compile Include="PMSAdmin\FunctionFacadeService.cs" />
+    <Compile Include="PMSAdmin\PolicyFacadeService.cs" />
+    <Compile Include="PMSAdmin\JobIndexFacadeService.cs" />
+    <Compile Include="PMSAdmin\JobPositionFacadeService.cs" />
+    <Compile Include="PMSAdmin\UnitFacadeService.cs" />
+    <Compile Include="PMSAdmin\CustomFieldFacadeService.cs" />
+    <Compile Include="PMS\Mapper\Calculation\CalculationBriefMapper.cs" />
+    <Compile Include="PMS\EmployeeServiceFacade.cs" />
+    <Compile Include="PMS\Mapper\Calculation\CalculationStateReportMapper.cs" />
+    <Compile Include="PMS\Mapper\Inquiry\InquirySubjectDTOMapper.cs" />
+    <Compile Include="PMS\Mapper\Employee\EmployeeDTOWithActionsMapper.cs" />
+    <Compile Include="PMS\Mapper\Employee\EmployeeDTOMapper.cs" />
+    <Compile Include="PMS\Mapper\JobIndexPoint\JobIndexPointSummaryMapper.cs" />
+    <Compile Include="PMS\Mapper\JobIndex\JobIndexInPeriodMapper.cs" />
+    <Compile Include="PMS\Mapper\JobIndex\SharedJobIndexCustomFieldMapper.cs" />
+    <Compile Include="PMS\PeriodJobIndexFacadeService.cs" />
+    <Compile Include="PMS\Mapper\JobPosition\JobPositionAssignmentMapper.cs" />
+    <Compile Include="PMS\Mapper\JobPosition\JobPositionInPeriodDTOWithActionsMapper.cs" />
+    <Compile Include="PMS\Mapper\JobPosition\JobPositionInPeriodMapper.cs" />
+    <Compile Include="PMS\PeriodJobPositionServiceFasade.cs" />
+    <Compile Include="PMS\Mapper\Unit\UnitAssignmentMapper.cs" />
+    <Compile Include="PMS\Mapper\Unit\UnitInPeriodMapper.cs" />
+    <Compile Include="PMS\Mapper\Unit\UnitInPeriodDTOWithActionsMapper.cs" />
+    <Compile Include="PMS\Mapper\Job\SharedJobCustomFieldMapper.cs" />
+    <Compile Include="PMS\Mapper\Period\PeriodDescriptionMapper.cs" />
+    <Compile Include="PMS\Mapper\Period\PeriodMapper.cs" />
+    <Compile Include="PMS\Mapper\Period\PeriodWithActionMapper.cs" />
+    <Compile Include="PMS\PeriodServiceFasade.cs" />
+    <Compile Include="PMS\PeriodJobServiceFasade.cs" />
+    <Compile Include="PMS\Mapper\Calculation\CalculationMapper.cs" />
+    <Compile Include="PMSAdmin\JobFacadeService.cs" />
+    <Compile Include="PMS\CalculationServiceFacade.cs" />
+    <Compile Include="PMS\Mapper\Job\JobInPeriodMapper.cs" />
+    <Compile Include="PMS\PeriodUnitServiceFasade.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\Factory\SecurityServiceFacadeFactory.cs" />
+    <Compile Include="Security\Mapper\UserActionsMapper.cs" />
+    <Compile Include="Security\UserServiceFacade.cs" />
+    <Compile Include="Security\LogServiceFacade.cs" />
+    <Compile Include="Security\Mapper\ActionTypeMapper.cs" />
+    <Compile Include="Security\Mapper\LogMapper.cs" />
+    <Compile Include="Security\Mapper\UserGroupMapper.cs" />
+    <Compile Include="Security\Mapper\UserMapper.cs" />
+    <Compile Include="Security\Mapper\MethodMapper.cs" />
+    <Compile Include="Security\SecurityServiceFacade.cs" />
+    <Compile Include="Security\ISecurityServiceFacade.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MITD.PMS.Application.Contracts\MITD.PMS.Application.Contracts.csproj">
+      <Project>{946ec2e6-5998-4852-8c57-ad77f3bbdce6}</Project>
+      <Name>MITD.PMS.Application.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMS.Common\MITD.PMS.Common.csproj">
+      <Project>{C1FFA45A-CC6C-47FD-940E-6EAADF41C60C}</Project>
+      <Name>MITD.PMS.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMS.Domain.Model\MITD.PMS.Domain.csproj">
+      <Project>{1b85ac19-27df-43bb-91b7-9a2aecddb9d1}</Project>
+      <Name>MITD.PMS.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMS.Presentation.Contracts\MITD.PMS.Presentation.Contracts.csproj">
+      <Project>{c2c01d60-617d-4a38-af22-091a1c3ae365}</Project>
+      <Name>MITD.PMS.Presentation.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMSAdmin.Domain\MITD.PMSAdmin.Domain.csproj">
+      <Project>{4d0b3594-a787-4982-870d-3f079d2f4b86}</Project>
+      <Name>MITD.PMSAdmin.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMSSecurity.Domain\MITD.PMSSecurity.Domain.csproj">
+      <Project>{58e04975-ac8a-42bb-9a49-d68b48f84e79}</Project>
+      <Name>MITD.PMSSecurity.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

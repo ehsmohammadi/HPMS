@@ -1,0 +1,62 @@
+﻿<Application xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:MITD.PMS.Presentation.Logic"
+             x:Class="MITD.PMS.Presentation.BasicInfoApp.App"
+             >
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <vm:JobVM x:Key="jViewModel"/>
+            <vm:JobListVM x:Key="jlViewModel"/>
+
+            <vm:JobIndexTreeVM x:Key="jitViewModel"/>
+            <vm:JobIndexVM x:Key="jiViewModel"/>
+
+            
+            <vm:JobIndexCategoryVM x:Key="jicViewModel"/>
+
+            <vm:CustomFieldListVM x:Key="cflViewModel"/>
+            <vm:CustomFieldVM x:Key="cfViewModel"/>
+            
+            <vm:RuleListVM x:Key="rlViewModel"/>
+            <vm:RuleVM x:Key="rViewModel"/>
+            <vm:RuleTrailVM x:Key="rTrailViewModel"/>
+            <!--<vm:RuleVersionVM x:Key="rvViewModel"/>-->
+            <vm:GridRuleListVM x:Key="grlViewModel"/>
+            
+
+            <vm:JobPositionVM x:Key="jpViewModel"/>
+            <vm:JobPositionListVM x:Key="jplViewModel"/>
+            <vm:JobCustomFieldManageVM  x:Key="jcfmViewModel" /> 
+            <vm:JobIndexCustomFieldManageVM  x:Key="jicfmViewModel" />
+
+            <vm:PolicyVM x:Key="pViewModel"/>
+            <vm:PolicyListVM x:Key="plViewModel"/>
+
+            <vm:FunctionListVM x:Key="flViewModel"/>
+            <vm:FunctionVM x:Key="fViewModel"/>
+
+            <vm:UnitListVM x:Key="ulViewModel"/>
+            <vm:UnitVM x:Key="uViewModel"/>
+
+            <vm:UserListVM x:Key="userListViewModel"/>
+            <vm:UserVM x:Key="userViewModel"/>
+
+            <vm:UserGroupListVM x:Key="userGroupListViewModel"/>
+            <vm:UserGroupVM x:Key="userGroupViewModel"/>
+
+            <vm:LogListVM x:Key="logListViewModel"/>
+            <vm:LogVM x:Key="logViewModel"/>
+
+            <vm:PartyCustomActionsVM x:Key="partyCustomActionsViewModel"/>
+            <vm:ManageWorkListUsersVM x:Key="manageWorkListUsersViewModel"/>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Assets/LocalResource.xaml"/>
+                <ResourceDictionary Source="/MITD.PMS.Presentation.UI.Common;component/Assets/LocalResource.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+
+    </Application.Resources>
+</Application>

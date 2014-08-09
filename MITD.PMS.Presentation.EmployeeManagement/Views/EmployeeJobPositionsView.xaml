@@ -1,0 +1,115 @@
+﻿<pr:ViewBase  xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"  
+    x:Class="MITD.PMS.Presentation.EmployeeManagement.Views.EmployeeJobPositionsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" FlowDirection="RightToLeft"
+    d:DesignHeight="300" d:DesignWidth="400" 
+    xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit"
+    xmlns:pr="clr-namespace:MITD.Presentation.UI;assembly=MITD.Presentation.UI.SL"
+    xmlns:logic="clr-namespace:MITD.PMS.Presentation.Logic;assembly=MITD.PMS.Presentation.Logic.SL"
+    d:DataContext="{StaticResource ejpViewModel}">
+
+    <pr:ViewBase.Resources>
+        <sdk:HierarchicalDataTemplate x:Key="ChildTemplate" 
+                                      ItemsSource="{Binding Path=Childs}">
+            <TextBlock Text="{Binding Path=Data.Name}"/>
+        </sdk:HierarchicalDataTemplate>
+        <sdk:HierarchicalDataTemplate x:Key="TreeTemplate" 
+                      ItemsSource="{Binding Path=Childs}"
+                      ItemTemplate="{StaticResource ChildTemplate}"
+                                      >
+            <TextBlock Text="{Binding Path=Data.Name}"/>
+        </sdk:HierarchicalDataTemplate>
+    </pr:ViewBase.Resources>
+
+    <ScrollViewer BorderThickness="0"  VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Disabled">
+        <Grid Background="Transparent">
+            <Grid.RowDefinitions >
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Row="0" Grid.ColumnSpan="3">
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <sdk:Label Grid.Row="0" Grid.Column="0" FontWeight="SemiBold" Content="نام دوره:"></sdk:Label>
+                    <sdk:Label Grid.Row="0" Grid.Column="1" Content="{Binding Path=Period.Name }"></sdk:Label>
+
+                    <sdk:Label Grid.Row="1" Grid.Column="0" FontWeight="SemiBold" Content="نام کارمند:"></sdk:Label>
+                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                        <sdk:Label Content="{Binding Path=Employee.FirstName }"></sdk:Label>
+                        <sdk:Label Content="{Binding Path=Employee.LastName }"></sdk:Label>
+
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <sdk:Label Grid.Row="1" Grid.Column="0" FontWeight="Bold" Foreground="Black" Content="فهرست پست های سازمانی"></sdk:Label>
+
+            <Border Grid.Row="2" Grid.Column="0" >
+                <pr:SilverlightTreeView ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"  BorderThickness="0" HorizontalAlignment="Stretch"  
+                                        ItemsSource="{Binding Path=JobPositionTree }"  
+                                        ItemTemplate="{StaticResource TreeTemplate}" 
+                                        SelectedItem="{Binding Path=SelectedJobPosition,Mode=TwoWay}"
+                                        SelectedValuePath="Id" >
+
+                </pr:SilverlightTreeView>
+            </Border>
+
+            <StackPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Orientation="Vertical" VerticalAlignment="Center">
+                <Button Width="Auto" HorizontalAlignment="Center" Margin="5" VerticalAlignment="Center"
+                    Content="&gt;&gt;" 
+                    Command="{Binding Path=AddCommand.Command}"  />
+                <Button Width="Auto" HorizontalAlignment="Center" Margin="5" VerticalAlignment="Center"
+                    Content="&lt;&lt;" 
+                    Command="{Binding Path=RemoveCommand.Command}" />
+
+            </StackPanel>
+
+            <sdk:Label Grid.Row="1" Grid.Column="2" FontWeight="Bold" Foreground="Black" Content="پست های سازمانی تخصیص یافته به فرد"></sdk:Label>
+            <sdk:DataGrid Name="drgList" Grid.Row="2" Grid.Column="2" AutoGenerateColumns="False" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" SelectionMode="Single" IsReadOnly="True"
+                      ItemsSource="{Binding Path=EmployeeJobPositions.EmployeeJobPositionAssignmentList, Mode=TwoWay}"  MouseRightButtonDown="drgList_MouseRightButtonDown" 
+                      SelectedItem="{Binding Path=SelectedJobPositionDuration, Mode=TwoWay}"  >
+
+                <toolkit:ContextMenuService.ContextMenu >
+                    <toolkit:ContextMenu Name="cmCommands" FlowDirection="RightToLeft" />
+                </toolkit:ContextMenuService.ContextMenu >
+                <sdk:DataGrid.Columns>
+                    <sdk:DataGridTextColumn Header="نام پست سازمانی" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto"
+                    Binding="{Binding Path=JobPositionName}" />
+                    <sdk:DataGridTextColumn Header="از تاریخ" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto"
+                    Binding="{Binding Path=FromDate}" IsReadOnly="False"  />
+                    <sdk:DataGridTextColumn Header="تا تاریخ" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto"
+                    Binding="{Binding Path=ToDate}" IsReadOnly="False"  />
+                    <sdk:DataGridTextColumn Header="درصد زمان کار" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto"
+                    Binding="{Binding Path=WorkTimePercent}" IsReadOnly="False"  />
+                </sdk:DataGrid.Columns>
+            </sdk:DataGrid>
+
+            <StackPanel Grid.ColumnSpan="3" Grid.Row="3" HorizontalAlignment="Center" Orientation="Horizontal">
+                <Button Style="{StaticResource CustomButtonStyle}" HorizontalAlignment="Center" Margin="5" VerticalAlignment="Center"
+                    Content="{Binding Path=SaveCommand.DisplayName}" 
+                    Command="{Binding Path=SaveCommand.Command}"  />
+                <Button Style="{StaticResource CustomButtonStyle}" HorizontalAlignment="Center" Margin="5" VerticalAlignment="Center"
+                    Content="{Binding Path=CancelCommand.DisplayName}" 
+                    Command="{Binding Path=CancelCommand.Command}" />
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</pr:ViewBase>

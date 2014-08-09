@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/MITD.PMS.Calculation.Host" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/MITD.PMS.Domain.Model.Periods" />
+  <xs:element name="Run">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="calculationId" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RunResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Stop">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="calculationId" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="StopResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Pause">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="calculationId" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PauseResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckStatus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="calculationId" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckStatusResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/MITD.PMS.Calculation.Host" minOccurs="0" name="CheckStatusResult" nillable="true" type="q1:CalculationState" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InitializeInquiry">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="periodId" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InitializeInquiryResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetIntializeInquiryState">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="periodId" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetIntializeInquiryStateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/MITD.PMS.Domain.Model.Periods" minOccurs="0" name="GetIntializeInquiryStateResult" nillable="true" type="q2:PeriodEngineState" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CopyBasicData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sourcePeriodId" type="xs:long" />
+        <xs:element minOccurs="0" name="destionationPeriodId" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CopyBasicDataResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPeriodCopyingStateProgress">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="periodId" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPeriodCopyingStateProgressResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/MITD.PMS.Domain.Model.Periods" minOccurs="0" name="GetPeriodCopyingStateProgressResult" nillable="true" type="q3:PeriodEngineState" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

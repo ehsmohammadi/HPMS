@@ -1,0 +1,211 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Threading;
+using MITD.Presentation;
+using MITD.PMS.Presentation.Contracts;
+using System.Windows.Browser;
+using System.Windows.Media;
+
+
+namespace MITD.PMS.Presentation.Logic
+{
+
+    public class MainWindowVM : WorkspaceViewModel
+    {
+
+        #region Fields
+
+        private ReadOnlyObservableCollection<CommandViewModel> commands;
+        private readonly IPMSController controller;        
+        //private IJobServiceWrapper service;
+
+        #endregion // Fields
+
+        #region Properties
+
+        public IMainAppLocalizedResources LocalizedResources { get; set; }
+
+        public DateTime TimeToLogOut
+        {
+            get { return DateTime.Now; }
+        } 
+
+        #endregion
+
+        #region Constructor
+
+        public MainWindowVM()
+        {
+            DisplayName = "سامانه ارزشیابی عملکرد ";
+        }
+
+        public MainWindowVM(IPMSController controller, 
+                            IPeriodServiceWrapper service,
+                            IMainAppLocalizedResources localizedResources)
+        {
+            DisplayName = "سامانه ارزشیابی عملکرد ";
+            this.controller = controller;
+            LocalizedResources = localizedResources;
+        }
+
+        #endregion
+
+        #region Commands
+
+        public ReadOnlyObservableCollection<CommandViewModel> Commands
+        {
+            get
+            {
+                if (commands == null)
+                {
+                    commands = new ReadOnlyObservableCollection<CommandViewModel>(createCommands());
+                }
+                return commands;
+            }
+        }
+
+        ObservableCollection<CommandViewModel> createCommands()
+        {
+            var cmdList = new ObservableCollection<CommandViewModel>();
+            cmdList.Add(
+               new CommandViewModel("لیست دوره ها", new DelegateCommand(
+                   () =>
+                   {
+                       controller.ShowBusyIndicator("در حال بارگذاری ماجول...");
+                       controller.GetRemoteInstance<IPeriodController>(
+                           (res, exp) =>
+                           {
+                               controller.HideBusyIndicator();
+                               if (res != null)
+                               {
+                                   res.ShowPeriodList();
+                               }
+                               else if (exp != null)
+                               {
+                                   controller.HandleException(exp);
+                               }
+                           });
+                   }
+                   )));
+
+<<<<<<< HEAD
+            cmdList.Add(
+              new CommandViewModel("مدیریت شغل در دوره", new DelegateCommand(
+                  () =>
+                  {
+                      controller.ShowBusyIndicator("در حال بارگذاری ماجول...");
+                      controller.GetRemoteInstance<IPeriodController>(
+                          (res, exp) =>
+                          {
+                              controller.HideBusyIndicator();
+                              if (res != null)
+                              {
+                                  res.ShowJobInPeriodList();
+                              }
+                              else if (exp != null)
+                              {
+                                  controller.HandleException(exp);
+                              }
+                          });
+                  }
+                  )));
+
+            cmdList.Add(
+              new CommandViewModel("مدیریت شغل", new DelegateCommand(
+                  () =>
+                  {
+                      controller.ShowBusyIndicator("در حال بارگذاری ماجول...");
+                      controller.GetRemoteInstance<IBasicInfoController>(
+                          (res, exp) =>
+                          {
+                              controller.HideBusyIndicator();
+                              if (res != null)
+                              {
+                                  res.ShowJobList();
+                              }
+                              else if (exp != null)
+                              {
+                                  controller.HandleException(exp);
+                              }
+                          });
+                  }
+                  )));
+
+            cmdList.Add(
+              new CommandViewModel("مدیریت شاخص", new DelegateCommand(
+                  () =>
+                  {
+                      controller.ShowBusyIndicator("در حال بارگذاری ماجول...");
+                      controller.GetRemoteInstance<IBasicInfoController>(
+                          (res, exp) =>
+                          {
+                              controller.HideBusyIndicator();
+                              if (res != null)
+                              {
+                                  res.ShowJobIndexList();
+                              }
+                              else if (exp != null)
+                              {
+                                  controller.HandleException(exp);
+                              }
+                          });
+                  }
+                  )));
+
+            cmdList.Add(
+              new CommandViewModel("مدیریت پست سازمانی", new DelegateCommand(
+                  () =>
+                  {
+                      controller.ShowBusyIndicator("در حال بارگذاری ماجول...");
+                      controller.GetRemoteInstance<IBasicInfoController>(
+                          (res, exp) =>
+                          {
+                              controller.HideBusyIndicator();
+                              if (res != null)
+                              {
+                                  res.ShowJobPostList();
+                              }
+                              else if (exp != null)
+                              {
+                                  controller.HandleException(exp);
+                              }
+                          });
+                  }
+                  )));
+
+            cmdList.Add(
+              new CommandViewModel("مدیریت قوانین", new DelegateCommand(
+                  () =>
+                  {
+                      controller.ShowBusyIndicator("در حال بارگذاری ماجول...");
+                      controller.GetRemoteInstance<IBasicInfoController>(
+                          (res, exp) =>
+                          {
+                              controller.HideBusyIndicator();
+                              if (res != null)
+                              {
+                                  res.ShowRuleList();
+                              }
+                              else if (exp != null)
+                              {
+                                  controller.HandleException(exp);
+                              }
+                          });
+                  }
+                  )));            
+=======
+
+>>>>>>> 35cdb324961198748bd407c86d7bb0684fa5eefd
+            return cmdList;
+
+        }
+
+        #endregion
+
+        
+
+    }
+}
+
+

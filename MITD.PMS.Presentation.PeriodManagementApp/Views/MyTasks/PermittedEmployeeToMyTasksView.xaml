@@ -1,0 +1,72 @@
+﻿<pr:ViewBase xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" 
+    x:Class="MITD.PMS.Presentation.PeriodManagementApp.Views.PermittedUserToMyTasksView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pr="clr-namespace:MITD.Presentation.UI;assembly=MITD.Presentation.UI.SL"
+    mc:Ignorable="d" FlowDirection="RightToLeft"
+    d:DesignHeight="300" d:DesignWidth="600"
+    d:DataContext="{Binding Source={StaticResource permittedUserToMyTasksViewModel}}">
+    <ScrollViewer BorderThickness="0"  VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
+        <Grid Name="LayoutRoot"  Background="Transparent" HorizontalAlignment="Stretch" >
+            <Grid.RowDefinitions >
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+
+                <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center">
+                   
+                    <sdk:Label>نام:</sdk:Label>
+                    <TextBox Text="{Binding Path=FirstName}"/>
+                    <sdk:Label>نام خانوادگی:</sdk:Label>
+                    <TextBox Text="{Binding Path=LastName}"/>
+                    <sdk:Label>نام کاربری:</sdk:Label>
+                    <TextBox Text="{Binding Path=UserName}"/>
+                  
+                    <Button Width="Auto" Height="25" Margin="10,0,0,0"
+                    Command="{Binding Path=SearchCommand.Command}" >
+                        <Image Source="/MITD.PMS.Presentation.PeriodManagementApp;component/Assets/Search.png" ></Image>
+                    </Button>
+                </StackPanel>
+
+
+            </Grid>
+
+            <StackPanel Grid.Row="1">
+                <sdk:Label>نتایج جستجو</sdk:Label>
+            </StackPanel>
+
+            <sdk:DataGrid Grid.Row="2"   AutoGenerateColumns="False" HorizontalAlignment="Stretch" SelectionMode="Single"  IsReadOnly="True"
+                      ItemsSource="{Binding Path=Employees}" 
+                      SelectedItem="{Binding Path=SelectedEmployee, Mode=TwoWay}"
+                      >
+                <sdk:DataGrid.Columns>
+                    <sdk:DataGridCheckBoxColumn Header="انتخاب" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto" />
+                    <sdk:DataGridTextColumn Header="نام" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto"
+                    Binding="{Binding Path=FirstName}"  />
+                    <sdk:DataGridTextColumn Header="نام خانوادگی" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto"
+                    Binding="{Binding Path=LastName}"  />
+                    <sdk:DataGridTextColumn Header="نام کاربری" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto"
+                    Binding="{Binding Path=UserName}" />
+                </sdk:DataGrid.Columns>
+            </sdk:DataGrid>
+
+           
+            <StackPanel Grid.Row="3" Background="AliceBlue" Height="30"    VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center">
+               
+                <Button Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Content="{Binding Path=SaveCommand.DisplayName}" 
+                    Command="{Binding Path=SaveCommand.Command}"  />
+                <Button Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Content="{Binding Path=CancelCommand.DisplayName}" 
+                    Command="{Binding Path=CancelCommand.Command}" />
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</pr:ViewBase>
+

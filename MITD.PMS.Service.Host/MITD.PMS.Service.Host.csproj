@@ -1,0 +1,521 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C215BD55-0340-4B63-A5C5-DBA6B5D65043}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MITD.PMS.Service.Host</RootNamespace>
+    <AssemblyName>MITD.PMS.Service.Host</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SilverlightApplicationList>
+    </SilverlightApplicationList>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Castle.Core.3.2.1\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor, Version=3.2.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Castle.Windsor.3.2.1\lib\net45\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.0.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NHibernate.Linq.InnerJoinFetch.1.0.1\lib\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MITD.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependency\MITD.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Core.Config.Castle">
+      <HintPath>..\Dependency\MITD.Core.Config.Castle.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Core.RuleEngine, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependency\MITD.Core.RuleEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Core.RuleEngine.NH, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependency\MITD.Core.RuleEngine.NH.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Core.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependency\MITD.Core.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.DataAccess.NH, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependency\MITD.DataAccess.NH.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.DataAccess.NH.Config.Castle">
+      <HintPath>..\Dependency\MITD.DataAccess.NH.Config.Castle.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Domain.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependency\MITD.Domain.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Domain.Repository, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependency\MITD.Domain.Repository.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Domain.Repository.Web">
+      <HintPath>..\Dependency\MITD.Domain.Repository.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Presentation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependency\MITD.Presentation.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Presentation.Config.Castle, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependency\MITD.Presentation.Config.Castle.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Services">
+      <HintPath>..\Dependency\MITD.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq, Version=4.1.1309.1617, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Moq.4.1.1309.1617\lib\net40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NHibernate.Linq.InnerJoinFetch.1.0.1\lib\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Linq.InnerJoinFetch, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NHibernate.Linq.InnerJoinFetch.1.0.1\lib\NHibernate.Linq.InnerJoinFetch.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Services" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.1.0.0\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IdentityModel.Tokens.ValidatingIssuerNameRegistry">
+      <HintPath>..\packages\System.IdentityModel.Tokens.ValidatingIssuerNameRegistry.4.5.1\lib\net45\System.IdentityModel.Tokens.ValidatingIssuerNameRegistry.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.0.0\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.0.0\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.2\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Providers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Providers.Core.1.2\lib\net40\System.Web.Providers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="Thinktecture.IdentityModel, Version=3.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Thinktecture.IdentityModel.3.6.0\lib\net45\Thinktecture.IdentityModel.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\ClaimsTransformer.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="BootStrapper.cs" />
+    <Compile Include="Controllers\PMSAdmin\PolicyRuleTrailsController.cs" />
+    <Compile Include="Controllers\PMS\CalculationsExceptionsController.cs" />
+    <Compile Include="Controllers\PMS\PeriodSourceDestinationStateController.cs" />
+    <Compile Include="Controllers\PMS\PeriodStateController.cs" />
+    <Compile Include="Controllers\Security\ActionTypesController.cs" />
+    <Compile Include="Controllers\Security\UsersCurrentPermittedUserController.cs" />
+    <Compile Include="Controllers\Security\LogsController.cs" />
+    <Compile Include="FaultExceptionAdapter.cs" />
+    <Compile Include="ExceptionAdapter.cs" />
+    <Compile Include="Controllers\Security\UserGroupsController.cs" />
+    <Compile Include="TextPlainFormatter.cs" />
+    <Compile Include="Controllers\PMSAdmin\RuleCompilationsController.cs" />
+    <Compile Include="Controllers\PMSAdmin\PolicyRulesController.cs" />
+    <Compile Include="Controllers\PMSAdmin\RulesController.cs" />
+    <Compile Include="Controllers\PMSAdmin\JobIndexController.cs" />
+    <Compile Include="Controllers\PMSAdmin\PolicyFunctionsController.cs" />
+    <Compile Include="Controllers\PMSAdmin\FunctionsController.cs" />
+    <Compile Include="Controllers\PMSAdmin\PoliciesController.cs" />
+    <Compile Include="Controllers\PMSAdmin\JobPositionsController.cs" />
+    <Compile Include="Controllers\PMSAdmin\UnitsController.cs" />
+    <Compile Include="Controllers\PMSAdmin\EntityTypesController.cs" />
+    <Compile Include="Controllers\PMSAdmin\CustomFieldsController.cs" />
+    <Compile Include="Controllers\PMSAdmin\JobsController.cs" />
+    <Compile Include="Controllers\PMS\CalculationsController.cs" />
+    <Compile Include="Controllers\PMS\PeriodClaimTypesController.cs" />
+    <Compile Include="Controllers\PMS\PeriodClaimStatesController.cs" />
+    <Compile Include="Controllers\PMS\PeriodClaimsController.cs" />
+    <Compile Include="Controllers\PMS\JobPositionJobsController.cs" />
+    <Compile Include="Controllers\PMS\InquirySubjectJobPositionInquiryJobIndexPointsController.cs" />
+    <Compile Include="Controllers\PMS\InquirerInquirySubjectsController.cs" />
+    <Compile Include="Controllers\PMS\InquirySubjectInquirersController.cs" />
+    <Compile Include="Controllers\PMS\JobPositionInquirySubjectsController.cs" />
+    <Compile Include="Controllers\PMS\EmployeeJobPositionsController.cs" />
+    <Compile Include="Controllers\PMS\PeriodEmployeesController.cs" />
+    <Compile Include="Controllers\PMS\CalculationsStateController.cs" />
+    <Compile Include="Controllers\PMS\JobIndexPointsController.cs" />
+    <Compile Include="Controllers\PMS\PeriodJobIndexController.cs" />
+    <Compile Include="Controllers\PMS\PeriodJobPositionsController.cs" />
+    <Compile Include="Controllers\PMS\PeriodJobsController.cs" />
+    <Compile Include="Controllers\PMS\PeriodUnitsController.cs" />
+    <Compile Include="Controllers\PMS\PeriodsController.cs" />
+    <Compile Include="Controllers\Security\UsersController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="GlobalExceptionFilterAttribute .cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="clientaccesspolicy.xml">
+      <BrowseToURL>~/clientaccesspolicy.xml</BrowseToURL>
+    </Content>
+    <Content Include="clientaccesspolicy.Base.xml">
+      <DependentUpon>clientaccesspolicy.xml</DependentUpon>
+    </Content>
+    <Content Include="clientaccesspolicy.Debug.xml">
+      <DependentUpon>clientaccesspolicy.xml</DependentUpon>
+    </Content>
+    <Content Include="clientaccesspolicy.Release.xml">
+      <DependentUpon>clientaccesspolicy.xml</DependentUpon>
+    </Content>
+    <Content Include="Content\themes\base\images\animated-overlay.gif" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.menu.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.spinner.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\jquery.ui.tooltip.css" />
+    <Content Include="Content\themes\base\minified\images\animated-overlay.gif" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.menu.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.spinner.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <None Include="Properties\PublishProfiles\Hpms-ServiceHost.pubxml" />
+    <None Include="Properties\PublishProfiles\PMSServices-920809.pubxml" />
+    <None Include="Properties\PublishProfiles\ServicesDebugPublish.pubxml" />
+    <None Include="Scripts\jquery-2.0.3.intellisense.js" />
+    <Content Include="Scripts\jquery-2.0.3.js" />
+    <Content Include="Scripts\jquery-2.0.3.min.js" />
+    <Content Include="Scripts\jquery-2.0.3.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.6.4.js" />
+    <Content Include="Scripts\jquery-1.6.4.min.js" />
+    <Content Include="Scripts\jquery-ui-1.10.3.js" />
+    <Content Include="Scripts\jquery-ui-1.10.3.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\knockout-2.1.0.debug.js" />
+    <Content Include="Scripts\knockout-2.1.0.js" />
+    <Content Include="Scripts\knockout-2.2.1.debug.js" />
+    <Content Include="Scripts\knockout-2.2.1.js" />
+    <Content Include="Scripts\knockout-3.0.0.debug.js" />
+    <Content Include="Scripts\knockout-3.0.0.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Silverlight.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Content\Site.css" />
+    <Content Include="Images\accent.png" />
+    <Content Include="Images\bullet.png" />
+    <Content Include="Images\heroAccent.png" />
+    <Content Include="Images\orderedList0.png" />
+    <Content Include="Images\orderedList1.png" />
+    <Content Include="Images\orderedList2.png" />
+    <Content Include="Images\orderedList3.png" />
+    <Content Include="Images\orderedList4.png" />
+    <Content Include="Images\orderedList5.png" />
+    <Content Include="Images\orderedList6.png" />
+    <Content Include="Images\orderedList7.png" />
+    <Content Include="Images\orderedList8.png" />
+    <Content Include="Images\orderedList9.png" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="tracing.config" />
+    <None Include="Web.base.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MITD.PMS.ACL.CalculationEngine\MITD.PMS.ACL.CalculationEngine.csproj">
+      <Project>{40ae5444-56ff-472c-9d40-b20173f9bdba}</Project>
+      <Name>MITD.PMS.ACL.CalculationEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMS.ACL.PMSAdmin\MITD.PMS.ACL.PMSAdmin.csproj">
+      <Project>{7535a2ba-76b9-4a79-870a-4a533ee784db}</Project>
+      <Name>MITD.PMS.ACL.PMSAdmin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMS.ACL.PMSSecurity\MITD.PMS.ACL.PMSSecurity.csproj">
+      <Project>{b6eb3332-1e75-484c-8289-9d081af114bb}</Project>
+      <Name>MITD.PMS.ACL.PMSSecurity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMS.ACL.SSO\MITD.PMS.ACL.SSO.csproj">
+      <Project>{8598694a-a052-4bb0-ac90-7724c133ad5c}</Project>
+      <Name>MITD.PMS.ACL.SSO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMS.Application.Contracts\MITD.PMS.Application.Contracts.csproj">
+      <Project>{946ec2e6-5998-4852-8c57-ad77f3bbdce6}</Project>
+      <Name>MITD.PMS.Application.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMS.Application\MITD.PMS.Application.csproj">
+      <Project>{3f601ea5-4a47-4304-a111-a6ed5be4b4fd}</Project>
+      <Name>MITD.PMS.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMS.Common\MITD.PMS.Common.csproj">
+      <Project>{c1ffa45a-cc6c-47fd-940e-6eaadf41c60c}</Project>
+      <Name>MITD.PMS.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMS.Domain.Model\MITD.PMS.Domain.csproj">
+      <Project>{1b85ac19-27df-43bb-91b7-9a2aecddb9d1}</Project>
+      <Name>MITD.PMS.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMS.Interface\MITD.PMS.Interface.csproj">
+      <Project>{93453913-d10e-46b3-adfe-a50e9fb5226d}</Project>
+      <Name>MITD.PMS.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMS.Persistence.NH\MITD.PMS.Persistence.NH.csproj">
+      <Project>{C8135C09-08DF-47BC-BF31-18AC41AB1D95}</Project>
+      <Name>MITD.PMS.Persistence.NH</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMS.Presentation.Contracts\MITD.PMS.Presentation.Contracts.csproj">
+      <Project>{c2c01d60-617d-4a38-af22-091a1c3ae365}</Project>
+      <Name>MITD.PMS.Presentation.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMSAdmin.Domain\MITD.PMSAdmin.Domain.csproj">
+      <Project>{4D0B3594-A787-4982-870D-3F079D2F4B86}</Project>
+      <Name>MITD.PMSAdmin.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMSAdmin.Persistence.NH\MITD.PMSAdmin.Persistence.NH.csproj">
+      <Project>{47ad61e6-e59a-4148-b7ee-4d35e3485442}</Project>
+      <Name>MITD.PMSAdmin.Persistence.NH</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMSSecurity.Domain\MITD.PMSSecurity.Domain.csproj">
+      <Project>{58e04975-ac8a-42bb-9a49-d68b48f84e79}</Project>
+      <Name>MITD.PMSSecurity.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMSSecurity.Persistence.NH\MITD.PMSSecurity.Persistence.NH.csproj">
+      <Project>{27a2eeea-4e4b-4713-a8f5-d827b980efc8}</Project>
+      <Name>MITD.PMSSecurity.Persistence.NH</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v12.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>10653</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:10653/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v12.0\WebApplications\Microsoft.WebApplication.targets" />
+  <Target Name="BeforeBuild">
+    <TransformXml Source="Web.Base.config" Transform="Web.$(Configuration).config" Destination="Web.config" />
+    <TransformXml Source="clientaccesspolicy.Base.xml" Transform="clientaccesspolicy.$(Configuration).xml" Destination="clientaccesspolicy.xml" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

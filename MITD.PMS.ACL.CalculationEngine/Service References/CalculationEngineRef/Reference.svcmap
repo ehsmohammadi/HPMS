@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="db1957cb-9c09-470e-91e4-e86f5b45be96" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="net.pipe://localhost/pms/CalculationEngineService/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="8e3440ba-79ed-49dc-8ac8-2cc91eb767b9" SourceId="1" SourceUrl="net.pipe://localhost/pms/CalculationEngineService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="ae84ff9b-93f4-4df8-8d8a-e0fbbc4c8f2d" SourceId="1" SourceUrl="net.pipe://localhost/pms/CalculationEngineService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="71a96c3c-b858-4ece-ad49-7fa7bd81958b" SourceId="1" SourceUrl="net.pipe://localhost/pms/CalculationEngineService/mex" />
+    <MetadataFile FileName="MITD.Domain.Model.xsd" MetadataType="Schema" ID="cdb6ff8b-1468-41f9-be1c-a595b26d5a92" SourceId="1" SourceUrl="net.pipe://localhost/pms/CalculationEngineService/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="326d346f-ce1d-4c3c-ac9f-6cf5a28b2d93" SourceId="1" SourceUrl="net.pipe://localhost/pms/CalculationEngineService/mex" />
+    <MetadataFile FileName="MITD.PMS.Calculation.Host.xsd" MetadataType="Schema" ID="804d8a8f-2df1-46b4-bf29-15e49315085e" SourceId="1" SourceUrl="net.pipe://localhost/pms/CalculationEngineService/mex" />
+    <MetadataFile FileName="MITD.PMS.Domain.Model.Periods1.xsd" MetadataType="Schema" ID="22f04f88-c871-473f-bbc3-63a1f0e88683" SourceId="1" SourceUrl="net.pipe://localhost/pms/CalculationEngineService/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

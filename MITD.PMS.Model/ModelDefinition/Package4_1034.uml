@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="a4b18f15-dcaf-48ef-abea-708e017c5eb1"
+  name="Model"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="1ae327b3-0276-4e6d-baab-db546b62a0ef"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DMITD.PMSReport.Domain.Model"
+      tag="ViewCode" />
+  </referencesInternal>
+  <profileInstances>
+    <packageHasProfileInstances
+      Id="da1ca3ce-d23c-46dc-bc06-626e7067f0ef">
+      <profileInstance
+        Id="8faa4608-9107-4455-a529-04620d06d5c8"
+        name="CSharpProfile" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="9716e6e7-344e-47ee-ab97-0e0dc631f1cb"
+        name="CalculationWithPolicyAndPeriod"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="b90d5e6b-bd51-467a-8c51-6212ecb1dd07"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FPrgs%2FGitHub%2FMITDEnterpriseApplication%2FMITD.PMS - Copy%2FMITD.PMS.Domain.Model%2Fbin%2FDebug%2FMITD.PMS.Domain.dll&quot; Namespace%3DMITD.PMSReport.Domain.Model Type%3DCalculationWithPolicyAndPeriod"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="a93d7d15-2b0b-4636-ba3c-f20ea9fe07cc"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="ed2bb669-34de-41f6-997e-6887063e89c7">
+                <propertyInstance
+                  Id="a8202ed2-bf27-4ae5-aa04-0ea27bb9c191"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="f7ca3267-c46a-42f2-8b8f-21d9eb941332">
+                <propertyInstance
+                  Id="372b8ceb-60cc-4b8c-a6e7-5520b8f3f5a4"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="3437fb29-962a-4947-a53c-4fe9b71c7d36">
+                <propertyInstance
+                  Id="1f255dca-2e03-4588-8279-4ebf92b11b17"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="dbfe484b-358d-4d4e-8dab-4e067c495763">
+                <propertyInstance
+                  Id="095b944c-0e90-4f52-8d43-f736cfbde332"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="38972616-7ac7-41fa-87fb-5dfcab0672e3">
+                <propertyInstance
+                  Id="203f63a3-a180-496c-816f-4408f0f35329"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

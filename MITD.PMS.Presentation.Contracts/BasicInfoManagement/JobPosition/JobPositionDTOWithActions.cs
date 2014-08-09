@@ -1,0 +1,11 @@
+﻿using System.Collections.Generic;
+
+namespace MITD.PMS.Presentation.Contracts
+{
+    public partial class JobPositionDTOWithActions : JobPositionDTO , IActionDTO 
+    {
+        
+        public List<int> ActionCodes { get; set; }
+    }
+
+}

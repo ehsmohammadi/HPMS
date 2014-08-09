@@ -1,0 +1,2117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="f4f79cb8-ffe5-41ae-953e-1987e3f803fd"
+  name="MITD.PMS.Model" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <profileInstances>
+    <packageHasProfileInstances
+      Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b">
+      <profileInstance
+        Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791"
+        name="StandardProfileL2" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances
+      Id="29349502-908c-4fda-9054-c48619c59ed0">
+      <profileInstance
+        Id="532ea607-fb19-44b8-8502-3351b05452be"
+        name="StandardProfileL3" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <interaction
+        Id="c59f3e06-06a9-4d20-9fe7-cbb3684a9a24"
+        name="Calculation"
+        collapseFragmentsFlag="false"
+        isActiveClass="false"
+        isAbstract="false"
+        isLeaf="false"
+        isReentrant="false">
+        <fragments>
+          <behaviorExecutionSpecification
+            Id="8679bf7d-876b-4ee3-b6e2-a067fcfd71c0"
+            name="BehaviorExecutionSpecification2">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="aaa5f144-4635-4cff-9b16-8ed555a6f687"
+                LastKnownName="ApplicationService"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="5c11e20a-a520-4d01-a8f2-3ae3669edfac"
+                LastKnownName="ExecutionOccurrenceSpecification4"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="c8fe2ea6-bedd-4a4c-aa93-097bb8ac5509"
+                LastKnownName="ExecutionOccurrenceSpecification3"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="8e4cacb7-582d-43f6-8e9e-7fff21d6ad3c"
+                LastKnownName="MessageOccurrenceSpecification5"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="441b433f-f544-4ac1-a742-6d6075984e81"
+                LastKnownName="MessageOccurrenceSpecification6"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="24e1ee5b-2235-4a64-b197-db232cf4dc68"
+                LastKnownName="MessageOccurrenceSpecification9"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="4e34c036-6d0f-4429-b033-8dcbd05d08ee"
+                LastKnownName="MessageOccurrenceSpecification54"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="d99487ae-c3a4-4cda-a43f-d1cf1c8d6ab5"
+                LastKnownName="MessageOccurrenceSpecification57"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="c8fe2ea6-bedd-4a4c-aa93-097bb8ac5509"
+            name="ExecutionOccurrenceSpecification3">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="24ff6e89-b808-440d-8c07-6610c9e2fd05"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="MITD.PMS.Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="aaa5f144-4635-4cff-9b16-8ed555a6f687"
+                LastKnownName="ApplicationService"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <lostFoundTarget
+            Id="f1c51f9b-8219-4c74-ac14-29515e48862c"
+            name="LostFoundTarget1" />
+          <messageOccurrenceSpecification
+            Id="8e4cacb7-582d-43f6-8e9e-7fff21d6ad3c"
+            name="MessageOccurrenceSpecification5">
+            <covered>
+              <lifelineMoniker
+                Id="aaa5f144-4635-4cff-9b16-8ed555a6f687"
+                LastKnownName="ApplicationService"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="b5540b3f-6b9e-4318-b15d-77405e8e6ac2"
+            name="BehaviorExecutionSpecification3">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="c4ec437c-ba41-4dfc-bd98-089b5c152de3"
+                LastKnownName="CalculationFactory"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="e15968f7-f68b-436d-a001-c70168d5f237"
+                LastKnownName="ExecutionOccurrenceSpecification6"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="e5bbeb10-f886-4b87-abae-f437d395aad8"
+                LastKnownName="ExecutionOccurrenceSpecification5"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="eeb4b147-5a75-45b9-8b45-163e139979bd"
+                LastKnownName="MessageOccurrenceSpecification7"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="844e7d27-f1d0-4211-b708-ea6a917c4b09"
+                LastKnownName="MessageOccurrenceSpecification10"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="c258a7e7-9a8d-4379-81a1-e69986ff8637"
+                LastKnownName="MessageOccurrenceSpecification13"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="3a802bf5-483b-4f92-b865-eb3c149ba6fc"
+                LastKnownName="MessageOccurrenceSpecification26"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="4bdfa9bc-dc77-4fdb-902a-1ef1caefc8a3"
+                LastKnownName="MessageOccurrenceSpecification29"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="f7bddbe7-d4f6-4933-9b13-0dc32f422b94"
+                LastKnownName="MessageOccurrenceSpecification30"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="5cac7efb-91b1-4222-b5a4-311920ab0901"
+                LastKnownName="MessageOccurrenceSpecification33"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="7dd5dbca-5c61-4386-ad25-88e00291d541"
+                LastKnownName="MessageOccurrenceSpecification8"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="e5bbeb10-f886-4b87-abae-f437d395aad8"
+            name="ExecutionOccurrenceSpecification5">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="14d0bfba-9bb5-4bc2-baf8-808ccb63dbba"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="MITD.PMS.Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="c4ec437c-ba41-4dfc-bd98-089b5c152de3"
+                LastKnownName="CalculationFactory"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="441b433f-f544-4ac1-a742-6d6075984e81"
+            name="MessageOccurrenceSpecification6">
+            <covered>
+              <lifelineMoniker
+                Id="aaa5f144-4635-4cff-9b16-8ed555a6f687"
+                LastKnownName="ApplicationService"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="eeb4b147-5a75-45b9-8b45-163e139979bd"
+            name="MessageOccurrenceSpecification7">
+            <covered>
+              <lifelineMoniker
+                Id="c4ec437c-ba41-4dfc-bd98-089b5c152de3"
+                LastKnownName="CalculationFactory"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="8b933a78-79a2-44f8-99f9-89f364846f72"
+            name="BehaviorExecutionSpecification4">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="c327133d-6207-4de3-97ed-203c8abfe078"
+                LastKnownName="Policy"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="e6ead6c0-a3cc-4668-afe8-37a3d6364da0"
+                LastKnownName="ExecutionOccurrenceSpecification8"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="ed591a6b-a27b-4975-9aa3-785ea41afa98"
+                LastKnownName="ExecutionOccurrenceSpecification7"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="c82c903f-a6af-45b9-93f0-050b8c153fc2"
+                LastKnownName="MessageOccurrenceSpecification11"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="af351bfe-763a-459a-a9a3-d959a5e392ae"
+                LastKnownName="MessageOccurrenceSpecification12"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="ed591a6b-a27b-4975-9aa3-785ea41afa98"
+            name="ExecutionOccurrenceSpecification7">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="b9bea408-5fac-48b0-a35d-82773ca98175"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="MITD.PMS.Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="c327133d-6207-4de3-97ed-203c8abfe078"
+                LastKnownName="Policy"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="844e7d27-f1d0-4211-b708-ea6a917c4b09"
+            name="MessageOccurrenceSpecification10">
+            <covered>
+              <lifelineMoniker
+                Id="c4ec437c-ba41-4dfc-bd98-089b5c152de3"
+                LastKnownName="CalculationFactory"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="c82c903f-a6af-45b9-93f0-050b8c153fc2"
+            name="MessageOccurrenceSpecification11">
+            <covered>
+              <lifelineMoniker
+                Id="c327133d-6207-4de3-97ed-203c8abfe078"
+                LastKnownName="Policy"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="c258a7e7-9a8d-4379-81a1-e69986ff8637"
+            name="MessageOccurrenceSpecification13">
+            <covered>
+              <lifelineMoniker
+                Id="c4ec437c-ba41-4dfc-bd98-089b5c152de3"
+                LastKnownName="CalculationFactory"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="af351bfe-763a-459a-a9a3-d959a5e392ae"
+            name="MessageOccurrenceSpecification12">
+            <covered>
+              <lifelineMoniker
+                Id="c327133d-6207-4de3-97ed-203c8abfe078"
+                LastKnownName="Policy"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="e6ead6c0-a3cc-4668-afe8-37a3d6364da0"
+            name="ExecutionOccurrenceSpecification8">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="9ed674e7-4453-4e68-9d3b-3b5393bfaf78"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="MITD.PMS.Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="c327133d-6207-4de3-97ed-203c8abfe078"
+                LastKnownName="Policy"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="941bb08b-8b1a-4760-bcbd-b7fb1ab3836a"
+            name="BehaviorExecutionSpecification10">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="c327133d-6207-4de3-97ed-203c8abfe078"
+                LastKnownName="Policy"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="34b35f4d-4fcc-4b97-be61-0a8ab43a8b9e"
+                LastKnownName="ExecutionOccurrenceSpecification20"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="58c59db6-293e-4e87-98f5-52b8f4ca55af"
+                LastKnownName="ExecutionOccurrenceSpecification19"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="c7b780a8-4e31-43fd-8c1b-28a981f1cf9a"
+                LastKnownName="MessageOccurrenceSpecification27"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="23db4044-c284-4dc7-8816-52ba1af7c78b"
+                LastKnownName="MessageOccurrenceSpecification38"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="b9209ae5-2c8b-43c3-8578-d1bc15e9d3e0"
+                LastKnownName="MessageOccurrenceSpecification41"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="6312e43b-3dfb-4c03-8979-7acfffcccba4"
+                LastKnownName="MessageOccurrenceSpecification28"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="58c59db6-293e-4e87-98f5-52b8f4ca55af"
+            name="ExecutionOccurrenceSpecification19">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="a6ad8611-a32d-498d-8e66-ca9cbde56bc2"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="MITD.PMS.Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="c327133d-6207-4de3-97ed-203c8abfe078"
+                LastKnownName="Policy"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="c7b780a8-4e31-43fd-8c1b-28a981f1cf9a"
+            name="MessageOccurrenceSpecification27">
+            <covered>
+              <lifelineMoniker
+                Id="c327133d-6207-4de3-97ed-203c8abfe078"
+                LastKnownName="Policy"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="3a802bf5-483b-4f92-b865-eb3c149ba6fc"
+            name="MessageOccurrenceSpecification26">
+            <covered>
+              <lifelineMoniker
+                Id="c4ec437c-ba41-4dfc-bd98-089b5c152de3"
+                LastKnownName="CalculationFactory"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="b6eab96d-5d3a-4aaa-bcef-1c4cfc26f6f1"
+            name="BehaviorExecutionSpecification13">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="4f107a1e-50d6-44c5-89b5-e58c044c34fa"
+                LastKnownName="CalculationServiceProvider"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="332a6b3d-e910-401c-8f5e-2cd8eed53a03"
+                LastKnownName="ExecutionOccurrenceSpecification26"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="44f401de-c78f-4ec7-8da7-7a5a4eb3abc7"
+                LastKnownName="ExecutionOccurrenceSpecification25"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="fcea0bf2-0e44-4596-8877-18d99c156c98"
+                LastKnownName="MessageOccurrenceSpecification39"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="9037cc7b-2ed1-41b6-9f17-37c0c3bf561a"
+                LastKnownName="MessageOccurrenceSpecification42"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="f10ac7c3-5a79-4c24-9233-39f0a9dbd22c"
+                LastKnownName="MessageOccurrenceSpecification45"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="02549582-18fd-41aa-929a-135de2d2e2ea"
+                LastKnownName="MessageOccurrenceSpecification40"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="44f401de-c78f-4ec7-8da7-7a5a4eb3abc7"
+            name="ExecutionOccurrenceSpecification25">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="90d52166-29e8-4989-bc80-018f718d32b2"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="MITD.PMS.Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="4f107a1e-50d6-44c5-89b5-e58c044c34fa"
+                LastKnownName="CalculationServiceProvider"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="fcea0bf2-0e44-4596-8877-18d99c156c98"
+            name="MessageOccurrenceSpecification39">
+            <covered>
+              <lifelineMoniker
+                Id="4f107a1e-50d6-44c5-89b5-e58c044c34fa"
+                LastKnownName="CalculationServiceProvider"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="23db4044-c284-4dc7-8816-52ba1af7c78b"
+            name="MessageOccurrenceSpecification38">
+            <covered>
+              <lifelineMoniker
+                Id="c327133d-6207-4de3-97ed-203c8abfe078"
+                LastKnownName="Policy"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="364aa998-ec61-42f4-9f9e-e701c1f0c312"
+            name="BehaviorExecutionSpecification14">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="45bf66ea-e787-46ed-bfee-4a638ff16c8a"
+                LastKnownName="CalculationService"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="1614f39d-3dc5-411a-8dca-e6d2ae289e99"
+                LastKnownName="ExecutionOccurrenceSpecification28"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="b251cafa-e336-4483-ba2b-4787d9c2a66e"
+                LastKnownName="ExecutionOccurrenceSpecification27"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="c4a6c8d5-b21d-40a6-bc16-36fb8662280c"
+                LastKnownName="MessageOccurrenceSpecification43"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="e0c7fca1-eec0-4a6b-a4a4-f921a4d46c79"
+                LastKnownName="MessageOccurrenceSpecification44"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="b251cafa-e336-4483-ba2b-4787d9c2a66e"
+            name="ExecutionOccurrenceSpecification27">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="5e519d14-c157-4457-bb2a-0817d8517edd"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="MITD.PMS.Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="45bf66ea-e787-46ed-bfee-4a638ff16c8a"
+                LastKnownName="CalculationService"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="c4a6c8d5-b21d-40a6-bc16-36fb8662280c"
+            name="MessageOccurrenceSpecification43">
+            <covered>
+              <lifelineMoniker
+                Id="45bf66ea-e787-46ed-bfee-4a638ff16c8a"
+                LastKnownName="CalculationService"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="9037cc7b-2ed1-41b6-9f17-37c0c3bf561a"
+            name="MessageOccurrenceSpecification42">
+            <covered>
+              <lifelineMoniker
+                Id="4f107a1e-50d6-44c5-89b5-e58c044c34fa"
+                LastKnownName="CalculationServiceProvider"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="e0c7fca1-eec0-4a6b-a4a4-f921a4d46c79"
+            name="MessageOccurrenceSpecification44">
+            <covered>
+              <lifelineMoniker
+                Id="45bf66ea-e787-46ed-bfee-4a638ff16c8a"
+                LastKnownName="CalculationService"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="f10ac7c3-5a79-4c24-9233-39f0a9dbd22c"
+            name="MessageOccurrenceSpecification45">
+            <covered>
+              <lifelineMoniker
+                Id="4f107a1e-50d6-44c5-89b5-e58c044c34fa"
+                LastKnownName="CalculationServiceProvider"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="1614f39d-3dc5-411a-8dca-e6d2ae289e99"
+            name="ExecutionOccurrenceSpecification28">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="efe0bc9b-2a5a-416c-9b6c-7046bbaedd2c"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="MITD.PMS.Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="45bf66ea-e787-46ed-bfee-4a638ff16c8a"
+                LastKnownName="CalculationService"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="02549582-18fd-41aa-929a-135de2d2e2ea"
+            name="MessageOccurrenceSpecification40">
+            <covered>
+              <lifelineMoniker
+                Id="4f107a1e-50d6-44c5-89b5-e58c044c34fa"
+                LastKnownName="CalculationServiceProvider"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="b9209ae5-2c8b-43c3-8578-d1bc15e9d3e0"
+            name="MessageOccurrenceSpecification41">
+            <covered>
+              <lifelineMoniker
+                Id="c327133d-6207-4de3-97ed-203c8abfe078"
+                LastKnownName="Policy"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="332a6b3d-e910-401c-8f5e-2cd8eed53a03"
+            name="ExecutionOccurrenceSpecification26">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="7e9a132e-94cb-4daf-b74d-6dfa6cf5e863"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="MITD.PMS.Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="4f107a1e-50d6-44c5-89b5-e58c044c34fa"
+                LastKnownName="CalculationServiceProvider"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="6312e43b-3dfb-4c03-8979-7acfffcccba4"
+            name="MessageOccurrenceSpecification28">
+            <covered>
+              <lifelineMoniker
+                Id="c327133d-6207-4de3-97ed-203c8abfe078"
+                LastKnownName="Policy"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="4bdfa9bc-dc77-4fdb-902a-1ef1caefc8a3"
+            name="MessageOccurrenceSpecification29">
+            <covered>
+              <lifelineMoniker
+                Id="c4ec437c-ba41-4dfc-bd98-089b5c152de3"
+                LastKnownName="CalculationFactory"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="34b35f4d-4fcc-4b97-be61-0a8ab43a8b9e"
+            name="ExecutionOccurrenceSpecification20">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="536e23b0-eb35-4d89-9b57-d6d3b56827cb"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="MITD.PMS.Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="c327133d-6207-4de3-97ed-203c8abfe078"
+                LastKnownName="Policy"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="e9783b7c-3eaa-471e-81cb-1f740b62df42"
+            name="BehaviorExecutionSpecification11">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="f93504e5-68b9-4a16-8ce0-a1d1e024e55b"
+                LastKnownName="Calculation"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="14ca0e7e-13e2-4256-bddf-7118c36b9048"
+                LastKnownName="ExecutionOccurrenceSpecification22"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="88361faf-da25-405e-a22c-b132c1e9e6a5"
+                LastKnownName="ExecutionOccurrenceSpecification21"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="a7d9d735-50f0-4b1a-8ede-cabbc37658ce"
+                LastKnownName="MessageOccurrenceSpecification31"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="554c43f6-e9e0-4232-b1f0-6526c667a0fa"
+                LastKnownName="MessageOccurrenceSpecification32"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="88361faf-da25-405e-a22c-b132c1e9e6a5"
+            name="ExecutionOccurrenceSpecification21">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="a93ffe52-b0ec-4520-b7f6-435614d6fbbc"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="MITD.PMS.Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="f93504e5-68b9-4a16-8ce0-a1d1e024e55b"
+                LastKnownName="Calculation"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="a7d9d735-50f0-4b1a-8ede-cabbc37658ce"
+            name="MessageOccurrenceSpecification31">
+            <covered>
+              <lifelineMoniker
+                Id="f93504e5-68b9-4a16-8ce0-a1d1e024e55b"
+                LastKnownName="Calculation"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="f7bddbe7-d4f6-4933-9b13-0dc32f422b94"
+            name="MessageOccurrenceSpecification30">
+            <covered>
+              <lifelineMoniker
+                Id="c4ec437c-ba41-4dfc-bd98-089b5c152de3"
+                LastKnownName="CalculationFactory"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="5cac7efb-91b1-4222-b5a4-311920ab0901"
+            name="MessageOccurrenceSpecification33">
+            <covered>
+              <lifelineMoniker
+                Id="c4ec437c-ba41-4dfc-bd98-089b5c152de3"
+                LastKnownName="CalculationFactory"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="554c43f6-e9e0-4232-b1f0-6526c667a0fa"
+            name="MessageOccurrenceSpecification32">
+            <covered>
+              <lifelineMoniker
+                Id="f93504e5-68b9-4a16-8ce0-a1d1e024e55b"
+                LastKnownName="Calculation"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="14ca0e7e-13e2-4256-bddf-7118c36b9048"
+            name="ExecutionOccurrenceSpecification22">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="f5d13893-415f-4a5e-b3e7-e206e4cce65f"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="MITD.PMS.Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="f93504e5-68b9-4a16-8ce0-a1d1e024e55b"
+                LastKnownName="Calculation"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="24e1ee5b-2235-4a64-b197-db232cf4dc68"
+            name="MessageOccurrenceSpecification9">
+            <covered>
+              <lifelineMoniker
+                Id="aaa5f144-4635-4cff-9b16-8ed555a6f687"
+                LastKnownName="ApplicationService"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="7dd5dbca-5c61-4386-ad25-88e00291d541"
+            name="MessageOccurrenceSpecification8">
+            <covered>
+              <lifelineMoniker
+                Id="c4ec437c-ba41-4dfc-bd98-089b5c152de3"
+                LastKnownName="CalculationFactory"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="e15968f7-f68b-436d-a001-c70168d5f237"
+            name="ExecutionOccurrenceSpecification6">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="cd3c4b7a-37fd-4390-97d5-399b5e5e8327"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="MITD.PMS.Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="c4ec437c-ba41-4dfc-bd98-089b5c152de3"
+                LastKnownName="CalculationFactory"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="22887fe0-ca70-4f7b-929f-f4c542ba49cb"
+            name="BehaviorExecutionSpecification18">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="f93504e5-68b9-4a16-8ce0-a1d1e024e55b"
+                LastKnownName="Calculation"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="66a6932b-b8d0-4ff6-9db3-c606441d1424"
+                LastKnownName="ExecutionOccurrenceSpecification36"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="bbd91e20-cb0b-492d-aba7-40df2965a652"
+                LastKnownName="ExecutionOccurrenceSpecification35"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="0777978a-fa77-47d4-b398-93f5037b6c3c"
+                LastKnownName="MessageOccurrenceSpecification55"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="e69714d5-731b-438f-a6e5-41bc84de43f6"
+                LastKnownName="MessageOccurrenceSpecification58"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="3684a891-2441-4a9d-ac21-61a463aa333a"
+                LastKnownName="MessageOccurrenceSpecification61"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="f745ba70-bf96-4149-9d5d-e52c5014d9d1"
+                LastKnownName="MessageOccurrenceSpecification56"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="bbd91e20-cb0b-492d-aba7-40df2965a652"
+            name="ExecutionOccurrenceSpecification35">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="b6c6c92d-f9ca-4f63-bb56-830587ed2f31"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="MITD.PMS.Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="f93504e5-68b9-4a16-8ce0-a1d1e024e55b"
+                LastKnownName="Calculation"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="4e34c036-6d0f-4429-b033-8dcbd05d08ee"
+            name="MessageOccurrenceSpecification54">
+            <covered>
+              <lifelineMoniker
+                Id="aaa5f144-4635-4cff-9b16-8ed555a6f687"
+                LastKnownName="ApplicationService"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="0777978a-fa77-47d4-b398-93f5037b6c3c"
+            name="MessageOccurrenceSpecification55">
+            <covered>
+              <lifelineMoniker
+                Id="f93504e5-68b9-4a16-8ce0-a1d1e024e55b"
+                LastKnownName="Calculation"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="ab1f6a76-e8fd-40a3-95fe-cabaafc4efed"
+            name="BehaviorExecutionSpecification19">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="c327133d-6207-4de3-97ed-203c8abfe078"
+                LastKnownName="Policy"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="afdef337-4c6c-4755-8343-8b2066f7bc5b"
+                LastKnownName="ExecutionOccurrenceSpecification38"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="0dd56938-fc2e-497b-8e2c-7429b5c1e749"
+                LastKnownName="ExecutionOccurrenceSpecification37"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="fb2b45d2-d22e-45e7-8573-271084f98357"
+                LastKnownName="MessageOccurrenceSpecification59"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="0bdd2888-dda2-40c5-b24f-c71b5807edd0"
+                LastKnownName="MessageOccurrenceSpecification62"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="49383a09-9a14-4d18-8b64-a0b4905bfbde"
+                LastKnownName="MessageOccurrenceSpecification65"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="9a5b4e83-8a0e-4968-b1eb-3193e369253f"
+                LastKnownName="MessageOccurrenceSpecification60"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="0dd56938-fc2e-497b-8e2c-7429b5c1e749"
+            name="ExecutionOccurrenceSpecification37">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="053b1ee4-8f92-45d4-8210-b06341490325"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="MITD.PMS.Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="c327133d-6207-4de3-97ed-203c8abfe078"
+                LastKnownName="Policy"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="fb2b45d2-d22e-45e7-8573-271084f98357"
+            name="MessageOccurrenceSpecification59">
+            <covered>
+              <lifelineMoniker
+                Id="c327133d-6207-4de3-97ed-203c8abfe078"
+                LastKnownName="Policy"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="e69714d5-731b-438f-a6e5-41bc84de43f6"
+            name="MessageOccurrenceSpecification58">
+            <covered>
+              <lifelineMoniker
+                Id="f93504e5-68b9-4a16-8ce0-a1d1e024e55b"
+                LastKnownName="Calculation"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="0f2c7b4d-2445-44ed-a584-5efcf69fceb4"
+            name="BehaviorExecutionSpecification20">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="45bf66ea-e787-46ed-bfee-4a638ff16c8a"
+                LastKnownName="CalculationService"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="2a2d841a-bf09-40e7-b735-5d533955908d"
+                LastKnownName="ExecutionOccurrenceSpecification40"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="df5ee491-f30c-4d52-8a8b-9379bb4cafae"
+                LastKnownName="ExecutionOccurrenceSpecification39"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="d504f6f8-39f2-483d-8465-f533a85fc882"
+                LastKnownName="MessageOccurrenceSpecification63"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="86d015b7-ead4-4764-a6ee-caa69db51ac3"
+                LastKnownName="MessageOccurrenceSpecification66"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="c0cc4284-e27d-4804-8c5c-94e44203153f"
+                LastKnownName="MessageOccurrenceSpecification69"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="2aff1eb6-81fd-4c9b-a308-b64f279300c6"
+                LastKnownName="MessageOccurrenceSpecification70"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="abcf9671-a2c6-46bc-a1f1-d7905237dc1f"
+                LastKnownName="ExecutionOccurrenceSpecification43"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="0f5bd23b-f70c-4ca8-9e40-e04a9b5e6e78"
+                LastKnownName="ExecutionOccurrenceSpecification44"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="7861aac9-82a9-4ad1-b5fc-a9978e924d8e"
+                LastKnownName="MessageOccurrenceSpecification64"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="df5ee491-f30c-4d52-8a8b-9379bb4cafae"
+            name="ExecutionOccurrenceSpecification39">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="974c8e33-6655-42e2-a0be-bcc0ff68b137"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="MITD.PMS.Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="45bf66ea-e787-46ed-bfee-4a638ff16c8a"
+                LastKnownName="CalculationService"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="d504f6f8-39f2-483d-8465-f533a85fc882"
+            name="MessageOccurrenceSpecification63">
+            <covered>
+              <lifelineMoniker
+                Id="45bf66ea-e787-46ed-bfee-4a638ff16c8a"
+                LastKnownName="CalculationService"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="0bdd2888-dda2-40c5-b24f-c71b5807edd0"
+            name="MessageOccurrenceSpecification62">
+            <covered>
+              <lifelineMoniker
+                Id="c327133d-6207-4de3-97ed-203c8abfe078"
+                LastKnownName="Policy"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="4316a8f3-d06d-49f8-9f06-04d47a140a09"
+            name="BehaviorExecutionSpecification21">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="6d856798-b191-40dc-8ec0-62dd6231af77"
+                LastKnownName="CalculationDataProvider"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="75309926-3fa5-475f-ba26-f25054b99b8b"
+                LastKnownName="ExecutionOccurrenceSpecification42"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="22ca85f0-406e-4fc4-93d6-882124282c91"
+                LastKnownName="ExecutionOccurrenceSpecification41"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="49c2161e-8408-4c03-b396-cf90ccdc0a76"
+                LastKnownName="MessageOccurrenceSpecification67"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="0294546f-f5e4-419f-b514-540b9003459b"
+                LastKnownName="MessageOccurrenceSpecification68"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="22ca85f0-406e-4fc4-93d6-882124282c91"
+            name="ExecutionOccurrenceSpecification41">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="a3d466d4-a570-4a9b-8f61-e2de71972cb2"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="MITD.PMS.Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="6d856798-b191-40dc-8ec0-62dd6231af77"
+                LastKnownName="CalculationDataProvider"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="49c2161e-8408-4c03-b396-cf90ccdc0a76"
+            name="MessageOccurrenceSpecification67">
+            <covered>
+              <lifelineMoniker
+                Id="6d856798-b191-40dc-8ec0-62dd6231af77"
+                LastKnownName="CalculationDataProvider"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="86d015b7-ead4-4764-a6ee-caa69db51ac3"
+            name="MessageOccurrenceSpecification66">
+            <covered>
+              <lifelineMoniker
+                Id="45bf66ea-e787-46ed-bfee-4a638ff16c8a"
+                LastKnownName="CalculationService"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="c0cc4284-e27d-4804-8c5c-94e44203153f"
+            name="MessageOccurrenceSpecification69">
+            <covered>
+              <lifelineMoniker
+                Id="45bf66ea-e787-46ed-bfee-4a638ff16c8a"
+                LastKnownName="CalculationService"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="0294546f-f5e4-419f-b514-540b9003459b"
+            name="MessageOccurrenceSpecification68">
+            <covered>
+              <lifelineMoniker
+                Id="6d856798-b191-40dc-8ec0-62dd6231af77"
+                LastKnownName="CalculationDataProvider"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="75309926-3fa5-475f-ba26-f25054b99b8b"
+            name="ExecutionOccurrenceSpecification42">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="1a5551c7-013f-47f7-83d7-8a3d17887d48"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="MITD.PMS.Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="6d856798-b191-40dc-8ec0-62dd6231af77"
+                LastKnownName="CalculationDataProvider"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="2aff1eb6-81fd-4c9b-a308-b64f279300c6"
+            name="MessageOccurrenceSpecification70">
+            <covered>
+              <lifelineMoniker
+                Id="45bf66ea-e787-46ed-bfee-4a638ff16c8a"
+                LastKnownName="CalculationService"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="018f5938-9518-494c-ae13-f7a449091b91"
+            name="BehaviorExecutionSpecification22">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="45bf66ea-e787-46ed-bfee-4a638ff16c8a"
+                LastKnownName="CalculationService"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="0f5bd23b-f70c-4ca8-9e40-e04a9b5e6e78"
+                LastKnownName="ExecutionOccurrenceSpecification44"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="abcf9671-a2c6-46bc-a1f1-d7905237dc1f"
+                LastKnownName="ExecutionOccurrenceSpecification43"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="c6cdce89-9d87-4ff4-9857-b492717f78ff"
+                LastKnownName="MessageOccurrenceSpecification71"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="abcf9671-a2c6-46bc-a1f1-d7905237dc1f"
+            name="ExecutionOccurrenceSpecification43">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="00aaff78-4727-482d-8e52-3bb9946b8a93"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="MITD.PMS.Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="45bf66ea-e787-46ed-bfee-4a638ff16c8a"
+                LastKnownName="CalculationService"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="c6cdce89-9d87-4ff4-9857-b492717f78ff"
+            name="MessageOccurrenceSpecification71">
+            <covered>
+              <lifelineMoniker
+                Id="45bf66ea-e787-46ed-bfee-4a638ff16c8a"
+                LastKnownName="CalculationService"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="0f5bd23b-f70c-4ca8-9e40-e04a9b5e6e78"
+            name="ExecutionOccurrenceSpecification44">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="b014e270-684f-4267-90f6-0ebc93dccb79"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="MITD.PMS.Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="45bf66ea-e787-46ed-bfee-4a638ff16c8a"
+                LastKnownName="CalculationService"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="7861aac9-82a9-4ad1-b5fc-a9978e924d8e"
+            name="MessageOccurrenceSpecification64">
+            <covered>
+              <lifelineMoniker
+                Id="45bf66ea-e787-46ed-bfee-4a638ff16c8a"
+                LastKnownName="CalculationService"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="49383a09-9a14-4d18-8b64-a0b4905bfbde"
+            name="MessageOccurrenceSpecification65">
+            <covered>
+              <lifelineMoniker
+                Id="c327133d-6207-4de3-97ed-203c8abfe078"
+                LastKnownName="Policy"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="2a2d841a-bf09-40e7-b735-5d533955908d"
+            name="ExecutionOccurrenceSpecification40">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="b6e4f8e4-4409-43ce-9097-e28aa77b4ea0"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="MITD.PMS.Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="45bf66ea-e787-46ed-bfee-4a638ff16c8a"
+                LastKnownName="CalculationService"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="3684a891-2441-4a9d-ac21-61a463aa333a"
+            name="MessageOccurrenceSpecification61">
+            <covered>
+              <lifelineMoniker
+                Id="f93504e5-68b9-4a16-8ce0-a1d1e024e55b"
+                LastKnownName="Calculation"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="9a5b4e83-8a0e-4968-b1eb-3193e369253f"
+            name="MessageOccurrenceSpecification60">
+            <covered>
+              <lifelineMoniker
+                Id="c327133d-6207-4de3-97ed-203c8abfe078"
+                LastKnownName="Policy"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="afdef337-4c6c-4755-8343-8b2066f7bc5b"
+            name="ExecutionOccurrenceSpecification38">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="f9117356-ee42-4cec-a8b8-3009f75998d0"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="MITD.PMS.Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="c327133d-6207-4de3-97ed-203c8abfe078"
+                LastKnownName="Policy"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="f745ba70-bf96-4149-9d5d-e52c5014d9d1"
+            name="MessageOccurrenceSpecification56">
+            <covered>
+              <lifelineMoniker
+                Id="f93504e5-68b9-4a16-8ce0-a1d1e024e55b"
+                LastKnownName="Calculation"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="d99487ae-c3a4-4cda-a43f-d1cf1c8d6ab5"
+            name="MessageOccurrenceSpecification57">
+            <covered>
+              <lifelineMoniker
+                Id="aaa5f144-4635-4cff-9b16-8ed555a6f687"
+                LastKnownName="ApplicationService"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="66a6932b-b8d0-4ff6-9db3-c606441d1424"
+            name="ExecutionOccurrenceSpecification36">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="2e6ba0e4-2d1b-47a3-b4d7-ea5a8e400927"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="MITD.PMS.Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="f93504e5-68b9-4a16-8ce0-a1d1e024e55b"
+                LastKnownName="Calculation"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="5c11e20a-a520-4d01-a8f2-3ae3669edfac"
+            name="ExecutionOccurrenceSpecification4">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="4453c61f-25cf-45be-ab2a-98aea7642b7b"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="MITD.PMS.Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="aaa5f144-4635-4cff-9b16-8ed555a6f687"
+                LastKnownName="ApplicationService"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+        </fragments>
+        <lifelines>
+          <lifeline
+            Id="aaa5f144-4635-4cff-9b16-8ed555a6f687"
+            name="ApplicationService"
+            isActor="false"
+            lifelineDisplayName="ApplicationService">
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="c8fe2ea6-bedd-4a4c-aa93-097bb8ac5509"
+                LastKnownName="ExecutionOccurrenceSpecification3"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="5c11e20a-a520-4d01-a8f2-3ae3669edfac"
+                LastKnownName="ExecutionOccurrenceSpecification4"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="c4ec437c-ba41-4dfc-bd98-089b5c152de3"
+            name="CalculationFactory"
+            isActor="false"
+            lifelineDisplayName="CalculationFactory">
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="e5bbeb10-f886-4b87-abae-f437d395aad8"
+                LastKnownName="ExecutionOccurrenceSpecification5"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="e15968f7-f68b-436d-a001-c70168d5f237"
+                LastKnownName="ExecutionOccurrenceSpecification6"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="c327133d-6207-4de3-97ed-203c8abfe078"
+            name="Policy"
+            isActor="false"
+            lifelineDisplayName="Policy">
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="ed591a6b-a27b-4975-9aa3-785ea41afa98"
+                LastKnownName="ExecutionOccurrenceSpecification7"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="e6ead6c0-a3cc-4668-afe8-37a3d6364da0"
+                LastKnownName="ExecutionOccurrenceSpecification8"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="58c59db6-293e-4e87-98f5-52b8f4ca55af"
+                LastKnownName="ExecutionOccurrenceSpecification19"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="34b35f4d-4fcc-4b97-be61-0a8ab43a8b9e"
+                LastKnownName="ExecutionOccurrenceSpecification20"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="0dd56938-fc2e-497b-8e2c-7429b5c1e749"
+                LastKnownName="ExecutionOccurrenceSpecification37"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="afdef337-4c6c-4755-8343-8b2066f7bc5b"
+                LastKnownName="ExecutionOccurrenceSpecification38"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="4f107a1e-50d6-44c5-89b5-e58c044c34fa"
+            name="CalculationServiceProvider"
+            isActor="false"
+            lifelineDisplayName="CalculationServiceProvider">
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="44f401de-c78f-4ec7-8da7-7a5a4eb3abc7"
+                LastKnownName="ExecutionOccurrenceSpecification25"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="332a6b3d-e910-401c-8f5e-2cd8eed53a03"
+                LastKnownName="ExecutionOccurrenceSpecification26"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="45bf66ea-e787-46ed-bfee-4a638ff16c8a"
+            name="CalculationService"
+            isActor="false"
+            lifelineDisplayName="CalculationService">
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="b251cafa-e336-4483-ba2b-4787d9c2a66e"
+                LastKnownName="ExecutionOccurrenceSpecification27"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="1614f39d-3dc5-411a-8dca-e6d2ae289e99"
+                LastKnownName="ExecutionOccurrenceSpecification28"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="df5ee491-f30c-4d52-8a8b-9379bb4cafae"
+                LastKnownName="ExecutionOccurrenceSpecification39"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="2a2d841a-bf09-40e7-b735-5d533955908d"
+                LastKnownName="ExecutionOccurrenceSpecification40"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="f93504e5-68b9-4a16-8ce0-a1d1e024e55b"
+            name="Calculation"
+            isActor="false"
+            lifelineDisplayName="Calculation">
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="88361faf-da25-405e-a22c-b132c1e9e6a5"
+                LastKnownName="ExecutionOccurrenceSpecification21"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="14ca0e7e-13e2-4256-bddf-7118c36b9048"
+                LastKnownName="ExecutionOccurrenceSpecification22"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="bbd91e20-cb0b-492d-aba7-40df2965a652"
+                LastKnownName="ExecutionOccurrenceSpecification35"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="66a6932b-b8d0-4ff6-9db3-c606441d1424"
+                LastKnownName="ExecutionOccurrenceSpecification36"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="6d856798-b191-40dc-8ec0-62dd6231af77"
+            name="CalculationDataProvider"
+            isActor="false"
+            lifelineDisplayName="CalculationDataProvider">
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="22ca85f0-406e-4fc4-93d6-882124282c91"
+                LastKnownName="ExecutionOccurrenceSpecification41"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="75309926-3fa5-475f-ba26-f25054b99b8b"
+                LastKnownName="ExecutionOccurrenceSpecification42"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+        </lifelines>
+        <messages>
+          <message
+            Id="4ee7d117-98dc-40c7-88b8-c10831bb8547"
+            name="Calculate"
+            messageKind="Found"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <lostFoundTargetMoniker
+                Id="f1c51f9b-8219-4c74-ac14-29515e48862c"
+                LastKnownName="LostFoundTarget1"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="8e4cacb7-582d-43f6-8e9e-7fff21d6ad3c"
+                LastKnownName="MessageOccurrenceSpecification5"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="c9a1f01d-931a-4cec-b4c7-6014ed485a1e"
+            name="Create(periodId,ICalculationServiceProvider)"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="441b433f-f544-4ac1-a742-6d6075984e81"
+                LastKnownName="MessageOccurrenceSpecification6"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="eeb4b147-5a75-45b9-8b45-163e139979bd"
+                LastKnownName="MessageOccurrenceSpecification7"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="24fa8ce9-6af1-4cbe-a32c-c688c83ae173"
+            name="&lt;&lt;create&gt;&gt;"
+            messageKind="Complete"
+            messageSort="CreateMessage"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="844e7d27-f1d0-4211-b708-ea6a917c4b09"
+                LastKnownName="MessageOccurrenceSpecification10"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="c82c903f-a6af-45b9-93f0-050b8c153fc2"
+                LastKnownName="MessageOccurrenceSpecification11"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="95120aca-73de-4dcc-99d5-864783a104c1"
+            name="Policy"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="af351bfe-763a-459a-a9a3-d959a5e392ae"
+                LastKnownName="MessageOccurrenceSpecification12"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="c258a7e7-9a8d-4379-81a1-e69986ff8637"
+                LastKnownName="MessageOccurrenceSpecification13"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="8f197ca4-4617-4b91-91ea-42905ed2a8d0"
+            name="Setup(periodId,ICalculationServiceProvider)"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="3a802bf5-483b-4f92-b865-eb3c149ba6fc"
+                LastKnownName="MessageOccurrenceSpecification26"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="c7b780a8-4e31-43fd-8c1b-28a981f1cf9a"
+                LastKnownName="MessageOccurrenceSpecification27"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="c1d41743-2c97-4f1a-bb6f-b4b219222113"
+            name="Provide(periodId)"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="23db4044-c284-4dc7-8816-52ba1af7c78b"
+                LastKnownName="MessageOccurrenceSpecification38"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="fcea0bf2-0e44-4596-8877-18d99c156c98"
+                LastKnownName="MessageOccurrenceSpecification39"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="e960adb6-e2bb-4137-a290-9f7549b01fc6"
+            name="&lt;&lt;create&gt;&gt;"
+            messageKind="Complete"
+            messageSort="CreateMessage"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="9037cc7b-2ed1-41b6-9f17-37c0c3bf561a"
+                LastKnownName="MessageOccurrenceSpecification42"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="c4a6c8d5-b21d-40a6-bc16-36fb8662280c"
+                LastKnownName="MessageOccurrenceSpecification43"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="88850693-5791-46e7-baac-ca60963f2e6f"
+            name="CalculationService"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="e0c7fca1-eec0-4a6b-a4a4-f921a4d46c79"
+                LastKnownName="MessageOccurrenceSpecification44"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="f10ac7c3-5a79-4c24-9233-39f0a9dbd22c"
+                LastKnownName="MessageOccurrenceSpecification45"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="8744c77a-8238-4103-9d41-c44642e209c7"
+            name="CalculationService"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="02549582-18fd-41aa-929a-135de2d2e2ea"
+                LastKnownName="MessageOccurrenceSpecification40"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="b9209ae5-2c8b-43c3-8578-d1bc15e9d3e0"
+                LastKnownName="MessageOccurrenceSpecification41"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="f12cb102-043d-419b-83f2-f62883938db8"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="6312e43b-3dfb-4c03-8979-7acfffcccba4"
+                LastKnownName="MessageOccurrenceSpecification28"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="4bdfa9bc-dc77-4fdb-902a-1ef1caefc8a3"
+                LastKnownName="MessageOccurrenceSpecification29"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="e512cbcd-b186-4ac9-a229-25d85b86ad53"
+            name="Create(Policy)"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="f7bddbe7-d4f6-4933-9b13-0dc32f422b94"
+                LastKnownName="MessageOccurrenceSpecification30"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="a7d9d735-50f0-4b1a-8ede-cabbc37658ce"
+                LastKnownName="MessageOccurrenceSpecification31"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="55cd6bca-b748-4244-b417-f4fc32e8ae4a"
+            name="Calculation"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="554c43f6-e9e0-4232-b1f0-6526c667a0fa"
+                LastKnownName="MessageOccurrenceSpecification32"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="5cac7efb-91b1-4222-b5a4-311920ab0901"
+                LastKnownName="MessageOccurrenceSpecification33"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="a789e01c-5cad-4e62-b1c0-bf3b339b9493"
+            name="Calculation"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="7dd5dbca-5c61-4386-ad25-88e00291d541"
+                LastKnownName="MessageOccurrenceSpecification8"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="24e1ee5b-2235-4a64-b197-db232cf4dc68"
+                LastKnownName="MessageOccurrenceSpecification9"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="3eda08d7-1200-46f6-8ec4-d8ee743adf95"
+            name="Calculate(Employee,IcalculationServiceProvider)"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="4e34c036-6d0f-4429-b033-8dcbd05d08ee"
+                LastKnownName="MessageOccurrenceSpecification54"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="0777978a-fa77-47d4-b398-93f5037b6c3c"
+                LastKnownName="MessageOccurrenceSpecification55"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="c590fdda-d873-4aae-a6f1-4e08f55f1d9e"
+            name="Calculate(Employee,IcalculationServiceProvider)"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="e69714d5-731b-438f-a6e5-41bc84de43f6"
+                LastKnownName="MessageOccurrenceSpecification58"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="fb2b45d2-d22e-45e7-8573-271084f98357"
+                LastKnownName="MessageOccurrenceSpecification59"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="ef7f7144-5d8f-43b6-8f12-285c05d3b657"
+            name="Calculate(Employee,IcalculationServiceProvider)"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="0bdd2888-dda2-40c5-b24f-c71b5807edd0"
+                LastKnownName="MessageOccurrenceSpecification62"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="d504f6f8-39f2-483d-8465-f533a85fc882"
+                LastKnownName="MessageOccurrenceSpecification63"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="201afe6d-81b0-4b71-ac64-d3698119c71c"
+            name="Provide()"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="86d015b7-ead4-4764-a6ee-caa69db51ac3"
+                LastKnownName="MessageOccurrenceSpecification66"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="49c2161e-8408-4c03-b396-cf90ccdc0a76"
+                LastKnownName="MessageOccurrenceSpecification67"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="3b5aaa20-2a19-43c3-9acd-b3cb5ddc5501"
+            name="EmployyeCalculationData"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="0294546f-f5e4-419f-b514-540b9003459b"
+                LastKnownName="MessageOccurrenceSpecification68"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="c0cc4284-e27d-4804-8c5c-94e44203153f"
+                LastKnownName="MessageOccurrenceSpecification69"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="c6d11f90-62a8-423e-83a7-4cde625f00da"
+            name="Calculate()"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="true">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="2aff1eb6-81fd-4c9b-a308-b64f279300c6"
+                LastKnownName="MessageOccurrenceSpecification70"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="c6cdce89-9d87-4ff4-9857-b492717f78ff"
+                LastKnownName="MessageOccurrenceSpecification71"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="5468ed7b-77fb-447a-a99c-69e886c83cbe"
+            name="JobIndexPoints"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="7861aac9-82a9-4ad1-b5fc-a9978e924d8e"
+                LastKnownName="MessageOccurrenceSpecification64"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="49383a09-9a14-4d18-8b64-a0b4905bfbde"
+                LastKnownName="MessageOccurrenceSpecification65"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="2b174d09-f47f-4feb-a284-a4e0bdf9ea92"
+            name="JobIndexPoints"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="9a5b4e83-8a0e-4968-b1eb-3193e369253f"
+                LastKnownName="MessageOccurrenceSpecification60"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="3684a891-2441-4a9d-ac21-61a463aa333a"
+                LastKnownName="MessageOccurrenceSpecification61"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="ac9d71aa-87c7-4f6f-b300-82ca9f0ee557"
+            name="JobIndexPoints"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="f745ba70-bf96-4149-9d5d-e52c5014d9d1"
+                LastKnownName="MessageOccurrenceSpecification56"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="d99487ae-c3a4-4cda-a43f-d1cf1c8d6ab5"
+                LastKnownName="MessageOccurrenceSpecification57"
+                LastKnownLocation="MITD.PMS.Model.uml" />
+            </receiveEvent>
+          </message>
+        </messages>
+      </interaction>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="24ff6e89-b808-440d-8c07-6610c9e2fd05"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="4453c61f-25cf-45be-ab2a-98aea7642b7b"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="14d0bfba-9bb5-4bc2-baf8-808ccb63dbba"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="cd3c4b7a-37fd-4390-97d5-399b5e5e8327"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="b9bea408-5fac-48b0-a35d-82773ca98175"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="9ed674e7-4453-4e68-9d3b-3b5393bfaf78"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="a6ad8611-a32d-498d-8e66-ca9cbde56bc2"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="536e23b0-eb35-4d89-9b57-d6d3b56827cb"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="a93ffe52-b0ec-4520-b7f6-435614d6fbbc"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="f5d13893-415f-4a5e-b3e7-e206e4cce65f"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="90d52166-29e8-4989-bc80-018f718d32b2"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="7e9a132e-94cb-4daf-b74d-6dfa6cf5e863"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="5e519d14-c157-4457-bb2a-0817d8517edd"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="efe0bc9b-2a5a-416c-9b6c-7046bbaedd2c"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="b6c6c92d-f9ca-4f63-bb56-830587ed2f31"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="2e6ba0e4-2d1b-47a3-b4d7-ea5a8e400927"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="053b1ee4-8f92-45d4-8210-b06341490325"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="f9117356-ee42-4cec-a8b8-3009f75998d0"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="974c8e33-6655-42e2-a0be-bcc0ff68b137"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="b6e4f8e4-4409-43ce-9097-e28aa77b4ea0"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="a3d466d4-a570-4a9b-8f61-e2de71972cb2"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="1a5551c7-013f-47f7-83d7-8a3d17887d48"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="00aaff78-4727-482d-8e52-3bb9946b8a93"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="b014e270-684f-4267-90f6-0ebc93dccb79"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="a2b3287a-a7c2-49c3-83ec-fb3c58231914"
+        name="Policy"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="f5d7c166-b22c-4c99-bc8e-1e748f496982"
+        name="Calculation"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="17b2efbc-f8dd-4300-8442-599f043c14e0"
+        name="Period"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="190cadb5-a6d3-4e69-ab70-35aec0de31d8"
+        name="Employee"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="7de09a24-95c1-4fed-a597-db27f83e6080"
+        LastKnownName="MITD"
+        LastKnownLocation="Package_1031.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="4fb9e083-59cd-433d-a6f9-5bee0f3a11ff"
+        LastKnownName="System"
+        LastKnownLocation="Package1_1032.uml" />
+    </packageHasNamedElement>
+  </packagedElements>
+  <primitiveType
+    Id="220a3521-e091-4221-bae9-3ef9018e845c"
+    name="Integer"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
+    name="Boolean"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+    name="String"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="3ab42e7d-4969-445a-b209-471f5cb8209c"
+    name="UnlimitedNatural"
+    isAbstract="false"
+    isLeaf="false" />
+</modelStoreModel>

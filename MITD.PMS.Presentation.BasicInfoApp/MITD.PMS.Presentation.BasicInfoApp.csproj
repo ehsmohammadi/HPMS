@@ -1,0 +1,495 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E780491B-562F-47FC-BABF-29D66B3C17F1}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MITD.PMS.Presentation.BasicInfoApp</RootNamespace>
+    <AssemblyName>MITD.PMS.Presentation.BasicInfoApp</AssemblyName>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>true</SilverlightApplication>
+    <SupportedCultures>
+      fa-IR;en-US
+    </SupportedCultures>
+    <XapOutputs>true</XapOutputs>
+    <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
+    <XapFilename>MITD.PMS.Presentation.BasicInfoApp.xap</XapFilename>
+    <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
+    <SilverlightAppEntry>
+    </SilverlightAppEntry>
+    <TestPageFileName>MITD.PMS.Presentation.BasicInfoAppTestPage.html</TestPageFileName>
+    <CreateTestPage>true</CreateTestPage>
+    <ValidateXaml>true</ValidateXaml>
+    <EnableOutOfBrowser>false</EnableOutOfBrowser>
+    <OutOfBrowserSettingsFile>Properties\OutOfBrowserSettings.xml</OutOfBrowserSettingsFile>
+    <UsePlatformExtensions>true</UsePlatformExtensions>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <LinkedServerProject>
+    </LinkedServerProject>
+  </PropertyGroup>
+  <!-- This property group is only here to support building this project using the 
+       MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
+       to set the TargetFrameworkVersion to v3.5 -->
+  <PropertyGroup Condition="'$(MSBuildToolsVersion)' == '3.5'">
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.3.2.1\lib\sl5\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\packages\Castle.Windsor.3.2.1\lib\sl5\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Core.SL">
+      <HintPath>..\Dependency\MITD.Core.SL.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Presentation.Config.Castle.SL">
+      <HintPath>..\Dependency\MITD.Presentation.Config.Castle.SL.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Presentation.SL">
+      <HintPath>..\Dependency\MITD.Presentation.SL.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Presentation.UI.SL">
+      <HintPath>..\Dependency\MITD.Presentation.UI.SL.dll</HintPath>
+    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core">
+      <HintPath>$(TargetFrameworkDirectory)System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Windows.Controls, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Data, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Data.Input, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Data.Toolkit, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Input, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Input.Toolkit, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Layout.Toolkit, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Toolkit, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Data, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Interactivity, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependency\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Windows.Browser" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActionService\Log\DeleteLogService.cs" />
+    <Compile Include="ActionService\Log\ShowLogService.cs" />
+    <Compile Include="ActionService\Rule\ShowAllRuleTrailService.cs" />
+    <Compile Include="ActionService\Rule\ShowRuleTrailService.cs" />
+    <Compile Include="ActionService\User\AddUserService.cs" />
+    <Compile Include="ActionService\User\AddUserGroupService.cs" />
+    <Compile Include="ActionService\User\ManageWorkListUsersService.cs" />
+    <Compile Include="ActionService\User\ManageGroupCustomActionsService.cs" />
+    <Compile Include="ActionService\User\DeleteUserGroupService.cs" />
+    <Compile Include="ActionService\User\ManageUserCustomActionsService.cs" />
+    <Compile Include="ActionService\User\ModifyUserGroupService.cs" />
+    <Compile Include="ActionService\User\DeleteUserService.cs" />
+    <Compile Include="ActionService\User\ModifyUserService.cs" />
+    <Compile Include="ActionService\CustomField\AddCustomFieldService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ActionService\CustomField\DeleteCustomFieldService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ActionService\CustomField\ModifyCustomFieldService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ActionService\Function\AddFunctionService.cs" />
+    <Compile Include="ActionService\Function\DeleteFunctionService.cs" />
+    <Compile Include="ActionService\Function\ModifyFunctionService.cs" />
+    <Compile Include="ActionService\Policy\AddPolicyService.cs" />
+    <Compile Include="ActionService\Policy\ManageFunctionsService.cs" />
+    <Compile Include="ActionService\Policy\DeletePolicyService.cs" />
+    <Compile Include="ActionService\Policy\ManageRulesService.cs" />
+    <Compile Include="ActionService\Policy\ModifyPolicyService.cs" />
+    <Compile Include="ActionService\JobIndex\AddJobIndexService.cs" />
+    <Compile Include="ActionService\JobIndex\DeleteJobIndexCategoryService.cs" />
+    <Compile Include="ActionService\JobIndex\ManageJobIndexCustomFieldsService.cs" />
+    <Compile Include="ActionService\Job\AddJobService.cs" />
+    <Compile Include="ActionService\JobPosition\AddJobPositionService.cs" />
+    <Compile Include="ActionService\JobIndex\AddJobIndexCategoryService.cs" />
+    <Compile Include="ActionService\JobIndex\ModifyJobIndexCategoryService.cs" />
+    <Compile Include="ActionService\Job\ManageJobCustomFieldsService.cs" />
+    <Compile Include="ActionService\Rule\AddRuleService.cs" />
+    <Compile Include="ActionService\Rule\DeleteRuleService.cs" />
+    <Compile Include="ActionService\Rule\ModifyRuleService.cs" />
+    <Compile Include="ActionService\JobPosition\DeleteJobPositionService.cs" />
+    <Compile Include="ActionService\JobPosition\ModifyJobPositionService.cs" />
+    <Compile Include="ActionService\JobIndex\DeleteJobIndexService.cs" />
+    <Compile Include="ActionService\JobIndex\ModifyJobIndexService.cs" />
+    <Compile Include="ActionService\Job\DeleteJobService.cs" />
+    <Compile Include="ActionService\Job\ModifyJobService.cs" />
+    <Compile Include="ActionService\Unit\AddUnitService.cs" />
+    <Compile Include="ActionService\Unit\DeleteUnitService.cs" />
+    <Compile Include="ActionService\Unit\ModifyUnitService.cs" />
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\LangResources\Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="BasicInfoWorkSpaceViewModel.cs" />
+    <Compile Include="BasicInfoController.cs" />
+    <Compile Include="BootStrapper.cs" />
+    <Compile Include="BasicInfoAppLocalizedResources.cs" />
+    <Compile Include="DataGridColumnHelper.cs" />
+    <Compile Include="EventArgs\UpdateRuleTrailListArgs.cs" />
+    <Compile Include="EventArgs\UpdateWorkListUsersArgs.cs" />
+    <Compile Include="EventArgs\UpdateLogListArgs.cs" />
+    <Compile Include="EventArgs\UpdatePartyCustomActionsArgs.cs" />
+    <Compile Include="EventArgs\UpdateUserGroupListArgs.cs" />
+    <Compile Include="EventArgs\UpdateUserListArgs.cs" />
+    <Compile Include="EventArgs\UpdateFunctionListArgs.cs" />
+    <Compile Include="EventArgs\UpdateRuleVersionsArgs.cs" />
+    <Compile Include="EventArgs\Policy\UpdatePolicyRuleListArgs.cs" />
+    <Compile Include="EventArgs\Policy\UpdatePolicyListArgs.cs" />
+    <Compile Include="EventArgs\UpdateUnitListArgs.cs" />
+    <Compile Include="EventArgs\UpdateJobIndexCustomFieldListArgs.cs" />
+    <Compile Include="EventArgs\UpdateJobCustomFieldListArgs.cs" />
+    <Compile Include="EventArgs\UpdateJobIndexTreeArgs.cs" />
+    <Compile Include="EventArgs\UpdateCustomFieldListArgs.cs" />
+    <Compile Include="EventArgs\UpdateJobIndexCategoryListArgs.cs" />
+    <Compile Include="IBasicInfoAppLocalizedResources.cs" />
+    <Compile Include="EventArgs\UpdateRuleListArgs.cs" />
+    <Compile Include="EventArgs\UpdateJobPostListArgs.cs" />
+    <Compile Include="EventArgs\UpdateJobIndexListArgs.cs" />
+    <Compile Include="EventArgs\UpdateJobListArgs.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Log\LogListVM.cs" />
+    <Compile Include="ViewModels\Log\LogVM.cs" />
+    <Compile Include="ViewModels\Rule\RuleTrailVM.cs" />
+    <Compile Include="ViewModels\Rule\RuleTrailListVM.cs" />
+    <Compile Include="ViewModels\User\ManageWorkListUsersVM.cs" />
+    <Compile Include="ViewModels\User\PartyCustomActionsVM.cs" />
+    <Compile Include="ViewModels\User\UserGroupListVM.cs" />
+    <Compile Include="ViewModels\User\UserGroupVM.cs" />
+    <Compile Include="ViewModels\User\UserListVM.cs" />
+    <Compile Include="ViewModels\User\UserVM.cs" />
+    <Compile Include="ViewModels\Function\FunctionListVM.cs" />
+    <Compile Include="ViewModels\Function\FunctionVM.cs" />
+    <Compile Include="ViewModels\Policy\PolicyListVM.cs" />
+    <Compile Include="ViewModels\Policy\PolicyVM.cs" />
+    <Compile Include="ViewModels\CustomField\CustomFieldListVM.cs" />
+    <Compile Include="ViewModels\CustomField\CustomFieldVM.cs" />
+    <Compile Include="ViewModels\JobIndex\JobIndexCustomFieldManageVM.cs" />
+    <Compile Include="ViewModels\JobIndex\JobIndexTreeVM.cs" />
+    <Compile Include="ViewModels\JobIndex\JobIndexCategoryVM.cs" />
+    <Compile Include="ViewModels\JobIndex\JobIndexVM.cs" />
+    <Compile Include="ViewModels\Job\JobCustomFieldManageVM.cs" />
+    <Compile Include="ViewModels\Job\JobListVM.cs" />
+    <Compile Include="ViewModels\JobPosition\JobPositionListVM.cs" />
+    <Compile Include="ViewModels\JobPosition\JobPositionVM.cs" />
+    <Compile Include="ViewModels\Job\JobVM.cs" />
+    <Compile Include="ViewModels\Rule\RuleListVM.cs" />
+    <Compile Include="ViewModels\Rule\GridRuleListVM.cs" />
+    <Compile Include="ViewModels\Rule\RuleVM.cs" />
+    <Compile Include="ViewModels\Unit\UnitListVM.cs" />
+    <Compile Include="ViewModels\Unit\UnitVM.cs" />
+    <Compile Include="Views\Log\LogListView.xaml.cs">
+      <DependentUpon>LogListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Log\LogView.xaml.cs">
+      <DependentUpon>LogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Function\FunctionListView.xaml.cs">
+      <DependentUpon>FunctionListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Function\FunctionView.xaml.cs">
+      <DependentUpon>FunctionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Policy\PolicyListView.xaml.cs">
+      <DependentUpon>PolicyListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Policy\PolicyView.xaml.cs">
+      <DependentUpon>PolicyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CustomField\CustomFieldListView.xaml.cs">
+      <DependentUpon>CustomFieldListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CustomField\CustomFieldView.xaml.cs">
+      <DependentUpon>CustomFieldView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\JobIndex\JobIndexCustomFieldManageView.xaml.cs">
+      <DependentUpon>JobIndexCustomFieldManageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\JobIndex\JobIndexTreeView.xaml.cs">
+      <DependentUpon>JobIndexTreeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\JobIndex\JobIndexCategoryView.xaml.cs">
+      <DependentUpon>JobIndexCategoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\JobIndex\JobIndexView.xaml.cs">
+      <DependentUpon>JobIndexView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\JobPosition\JobPositionListView.xaml.cs">
+      <DependentUpon>JobPositionListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\JobPosition\JobPositionView.xaml.cs">
+      <DependentUpon>JobPositionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Job\JobCustomFieldManageView.xaml.cs">
+      <DependentUpon>JobCustomFieldManageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Job\JobListView.xaml.cs">
+      <DependentUpon>JobListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Job\JobView.xaml.cs">
+      <DependentUpon>JobView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Rule\RuleTrailView.xaml.cs">
+      <DependentUpon>RuleTrailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Rule\RuleTrailListView.xaml.cs">
+      <DependentUpon>RuleTrailListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Rule\GridRuleListView.xaml.cs">
+      <DependentUpon>GridRuleListView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Rule\RuleListView.xaml.cs">
+      <DependentUpon>RuleListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Rule\RuleView.xaml.cs">
+      <DependentUpon>RuleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Unit\UnitListView.xaml.cs">
+      <DependentUpon>UnitListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Unit\UnitView.xaml.cs">
+      <DependentUpon>UnitView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\User\ManageWorkListUsersView.xaml.cs">
+      <DependentUpon>ManageWorkListUsersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\User\PartyCustomActionsView.xaml.cs">
+      <DependentUpon>PartyCustomActionsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\User\UserGroupListView.xaml.cs">
+      <DependentUpon>UserGroupListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\User\UserGroupView.xaml.cs">
+      <DependentUpon>UserGroupView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\User\UserListView.xaml.cs">
+      <DependentUpon>UserListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\User\UserView.xaml.cs">
+      <DependentUpon>UserView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Properties\AppManifest.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Assets\LocalResource.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Log\LogListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Log\LogView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Function\FunctionListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Function\FunctionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Policy\PolicyListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Policy\PolicyView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CustomField\CustomFieldListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CustomField\CustomFieldView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\JobIndex\JobIndexCustomFieldManageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\JobIndex\JobIndexTreeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\JobIndex\JobIndexCategoryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\JobIndex\JobIndexView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\JobPosition\JobPositionListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\JobPosition\JobPositionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Job\JobCustomFieldManageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Job\JobListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Job\JobView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Rule\RuleTrailView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Rule\RuleTrailListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Rule\GridRuleListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Rule\RuleListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Rule\RuleView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Unit\UnitListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Unit\UnitView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\User\ManageWorkListUsersView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\User\PartyCustomActionsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\User\UserGroupListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\User\UserGroupView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\User\UserListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\User\UserView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MITD.PMS.Presentation.Contracts.SL\MITD.PMS.Presentation.Contracts.SL.csproj">
+      <Project>{e31d9461-636c-402e-8f5d-5e7ab32a8875}</Project>
+      <Name>MITD.PMS.Presentation.Contracts.SL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMS.Presentation.Logic.SL\MITD.PMS.Presentation.Logic.SL.csproj">
+      <Project>{73c3010f-3df1-45dc-b36c-76fa83e9ecb4}</Project>
+      <Name>MITD.PMS.Presentation.Logic.SL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMS.Presentation.UI.Common\MITD.PMS.Presentation.UI.Common.csproj">
+      <Project>{6e39061d-c172-4114-80de-edd6cd5f0e78}</Project>
+      <Name>MITD.PMS.Presentation.UI.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\LangResources\Resource.en.US.resx" />
+    <EmbeddedResource Include="Assets\LangResources\Resource.fa.IR.resx" />
+    <EmbeddedResource Include="Assets\LangResources\Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Policy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Info-icon.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

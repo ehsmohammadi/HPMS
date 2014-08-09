@@ -1,0 +1,51 @@
+﻿using MITD.Core;
+using MITD.PMS.Presentation.Contracts;
+using MITD.PMS.Presentation.Logic;
+using MITD.Presentation;
+using Microsoft.Practices.ServiceLocation;
+
+namespace MITD.PMS.Presentation.PeriodManagementApp
+{
+    public class PeriodController : IPeriodController
+    {
+        private IViewManager viewManager;
+        private IEventPublisher eventPublisher;
+        private IDeploymentManagement deploymentManagement;
+        public PeriodController(IViewManager viewManager,
+                                     IEventPublisher eventPublisher,
+                                     IDeploymentManagement deploymentManagement)
+        {
+            this.viewManager = viewManager;
+            this.eventPublisher = eventPublisher;
+            this.deploymentManagement = deploymentManagement;
+        }
+
+
+        public void ShowPeriod(PeriodDto periodDto,ActionEnum actionType)
+        {
+            var view = ServiceLocator.Current.GetInstance<IPeriodView>();
+            ((PeriodVM)view.ViewModel).Load(periodDto, actionType);
+            viewManager.ShowInDialog(view);
+
+        }
+
+        public void ShowPeriodList()
+        {
+            var view = viewManager.ShowInTabControl<IPeriodListView>();
+            ((PeriodListVM)view.ViewModel).Load();
+        }
+
+<<<<<<< HEAD
+        public void ShowOrganizationChartInPrdMgnt(PeriodDto periodDto)
+        {
+            var view = viewManager.ShowInTabControl<IOrganizationChartTreeView>();
+            ((OrganizationChartTreeVM)view.ViewModel).Load();
+=======
+        public void ShowJobInPeriodList()
+        {
+            var view = viewManager.ShowInTabControl<IJobInPeriodListView>();
+            ((JobInPeriodListVM)view.ViewModel).Load();
+>>>>>>> 7ece2ea55ed3fe481ae5329ac252711651745f06
+        }
+    }
+}

@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="129bf172-4c29-40ed-b4f7-a809e6218e3f"
+  name="Core"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="e7593b40-2fc6-495b-b3a1-49044070dec6"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DMITD.Core"
+      tag="ViewCode" />
+  </referencesInternal>
+  <profileInstances>
+    <packageHasProfileInstances
+      Id="ec3ced9f-892d-41a7-89d8-41edf3c40db9">
+      <profileInstance
+        Id="2cbcec58-cf11-42c8-bee9-0e6d92b011cd"
+        name="CSharpProfile" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <Interface
+        Id="dfd46546-5dfb-4b78-a6f9-d29c0a62b711"
+        name="IService"
+        isAbstract="false"
+        isLeaf="false">
+        <referencesInternal>
+          <reference
+            Id="fe34ce98-7652-4612-96d1-06b510c38c0b"
+            handle="viewcode://./CodeSchema_Interface?Assembly%3D&quot;file:%2F%2F%2FC:%2FPrgs%2FGitHub%2FMITDEnterpriseApplication%2FMITD.PMS - Copy%2FDependency%2FMITD.Core.dll&quot; Namespace%3DMITD.Core Type%3DIService"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="2b1e588b-acb9-44b0-8a98-2129227ccc07"
+            name="interface"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="0ec51825-5438-44a1-95ac-b25430fbf98b">
+                <propertyInstance
+                  Id="0c37f385-33bb-4146-b930-1fddc6d58002"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="12480368-62de-4fc8-858b-6f2c16639475">
+                <propertyInstance
+                  Id="b6872d68-3150-4ddd-8ae8-ac37cd28e65a"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="47aace88-14af-4364-914e-ab6476334095">
+                <propertyInstance
+                  Id="f4d1e194-8532-4d8c-992e-545cfef6cc58"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="1624d068-1a6a-4dac-8c8c-789d0e9a10b3">
+                <propertyInstance
+                  Id="6ad6ea6c-2419-4b5b-afc0-fca38bf82c4c"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="5635644b-6459-4d1d-b416-6f71f68a410e"
+        name="IServiceLocatorProvider"
+        isAbstract="false"
+        isLeaf="false">
+        <referencesInternal>
+          <reference
+            Id="105a0f74-fa28-463a-8aa0-24dace71eb91"
+            handle="viewcode://./CodeSchema_Interface?Assembly%3D&quot;file:%2F%2F%2FC:%2FPrgs%2FGitHub%2FMITDEnterpriseApplication%2FMITD.PMS - Copy%2FDependency%2FMITD.Core.dll&quot; Namespace%3DMITD.Core Type%3DIServiceLocatorProvider"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="afa38bc3-f591-4ebe-a52f-3cf063b51cc7"
+            name="interface"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="efa9d2f5-c188-405a-b916-8d4e30595355">
+                <propertyInstance
+                  Id="7bc2176b-ddd9-4031-9012-164987284ee0"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="5868bd0f-fa4e-4c49-a6f2-c0b1355940cc">
+                <propertyInstance
+                  Id="c1010393-09da-4c7d-9ce5-58ffac6326ae"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="53a772dc-69e3-42f8-b532-dd7759e1c7c4">
+                <propertyInstance
+                  Id="6e3c6e5c-8b9a-4de2-8dd0-713ecf24782f"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="5a144a3f-cf42-45d3-a570-a62c90602907">
+                <propertyInstance
+                  Id="c529348f-3beb-4211-903e-21e3266967da"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="cb0c35a9-2691-4a2f-8fbc-cd0f4a9d001f"
+        name="IEventPublisher"
+        isAbstract="false"
+        isLeaf="false">
+        <referencesInternal>
+          <reference
+            Id="1c667ef4-6421-4fc6-a60b-11a6e9b5dfd8"
+            handle="viewcode://./CodeSchema_Interface?Assembly%3D&quot;file:%2F%2F%2FC:%2FPrgs%2FGitHub%2FMITDEnterpriseApplication%2FMITD.PMS - Copy%2FDependency%2FMITD.Core.dll&quot; Namespace%3DMITD.Core Type%3DIEventPublisher"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="b7fe9912-12a2-4917-8ed2-f40d908848e2"
+            name="interface"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="ae6a0afa-3bd7-45eb-9527-514b1e34c57b">
+                <propertyInstance
+                  Id="dafc0aa2-8a42-4b4c-bb00-a12eab1acf9a"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="6c18d43e-ae11-4df8-a6dd-1af6fa2b6400">
+                <propertyInstance
+                  Id="f2226bda-3ed7-40f4-b63b-75649cccd3e0"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="56d92f59-b7bd-4bab-82be-6105ed5da991">
+                <propertyInstance
+                  Id="ca5deffa-5e69-4c5d-b5b3-0fd8a091a4e3"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="6ab421b0-a4f1-48c2-955f-324119e60de1">
+                <propertyInstance
+                  Id="4cc04e78-ae9b-4a5d-bf5f-a69d5c1b5f90"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="deece610-5aaf-4a99-adc8-60d9fed36c91"
+        LastKnownName="RuleEngine"
+        LastKnownLocation="Package14_1033.uml" />
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

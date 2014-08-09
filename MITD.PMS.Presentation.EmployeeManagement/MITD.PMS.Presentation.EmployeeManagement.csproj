@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{58C8B48D-2304-4E3D-A8BB-EDB7C1EA1810}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MITD.PMS.Presentation.EmployeeManagement</RootNamespace>
+    <AssemblyName>MITD.PMS.Presentation.EmployeeManagement</AssemblyName>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>true</SilverlightApplication>
+    <SupportedCultures>
+      fa-IR;en-US
+    </SupportedCultures>
+    <XapOutputs>true</XapOutputs>
+    <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
+    <XapFilename>MITD.PMS.Presentation.EmployeeManagement.xap</XapFilename>
+    <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
+    <SilverlightAppEntry>MITD.PMS.Presentation.EmployeeManagement.App</SilverlightAppEntry>
+    <TestPageFileName>MITD.PMS.Presentation.EmployeeManagementTestPage.html</TestPageFileName>
+    <CreateTestPage>true</CreateTestPage>
+    <ValidateXaml>true</ValidateXaml>
+    <EnableOutOfBrowser>false</EnableOutOfBrowser>
+    <OutOfBrowserSettingsFile>Properties\OutOfBrowserSettings.xml</OutOfBrowserSettingsFile>
+    <UsePlatformExtensions>false</UsePlatformExtensions>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <LinkedServerProject>
+    </LinkedServerProject>
+  </PropertyGroup>
+  <!-- This property group is only here to support building this project using the 
+       MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
+       to set the TargetFrameworkVersion to v3.5 -->
+  <PropertyGroup Condition="'$(MSBuildToolsVersion)' == '3.5'">
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.3.2.1\lib\sl5\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\packages\Castle.Windsor.3.2.1\lib\sl5\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Core.SL">
+      <HintPath>..\Dependency\MITD.Core.SL.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Presentation.Config.Castle.SL">
+      <HintPath>..\Dependency\MITD.Presentation.Config.Castle.SL.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Presentation.SL">
+      <HintPath>..\Dependency\MITD.Presentation.SL.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Presentation.UI.SL">
+      <HintPath>..\Dependency\MITD.Presentation.UI.SL.dll</HintPath>
+    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core">
+      <HintPath>$(TargetFrameworkDirectory)System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Windows.Controls, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Data, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Data.Input, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Data.Toolkit, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Input, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Input.Toolkit, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Layout.Toolkit, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Toolkit, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Data, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Windows.Browser" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActionServices\AddEmployeeSevice.cs" />
+    <Compile Include="ActionServices\ModifyEmployeeJobCustomFieldsService.cs" />
+    <Compile Include="ActionServices\ManageJobPostionSevice.cs" />
+    <Compile Include="ActionServices\DeleteEmployeeService.cs" />
+    <Compile Include="ActionServices\ModifyEmployeeService.cs" />
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Resources\EmployeeAppStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmployeeAppStrings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="BootStrapper.cs" />
+    <Compile Include="EventArgs\UpdateEmployeeJobPositionAssignment.cs" />
+    <Compile Include="EventArgs\UpdateEmployeeListArgs.cs" />
+    <Compile Include="EmployeeAppLocalizedResources.cs" />
+    <Compile Include="EmployeeController.cs" />
+    <Compile Include="IEmployeeAppLocalizedResources.cs" />
+    <Compile Include="EmployeeMgtWorkSpaceViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\EmployeeJobCustomFieldsVM.cs" />
+    <Compile Include="ViewModel\EmployeeJobPositionsVM.cs" />
+    <Compile Include="ViewModel\EmployeeListVM.cs" />
+    <Compile Include="ViewModel\EmployeeVM.cs" />
+    <Compile Include="Views\EmployeeJobCustomFieldsView.xaml.cs">
+      <DependentUpon>EmployeeJobCustomFieldsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EmployeeJobPositionsView.xaml.cs">
+      <DependentUpon>EmployeeJobPositionsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\IEmployeeJobPositionsView.cs" />
+    <Compile Include="Views\EmployeeListView.xaml.cs">
+      <DependentUpon>EmployeeListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EmployeeView.xaml.cs">
+      <DependentUpon>EmployeeView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Properties\AppManifest.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MITD.PMS.Presentation.Contracts.SL\MITD.PMS.Presentation.Contracts.SL.csproj">
+      <Project>{e31d9461-636c-402e-8f5d-5e7ab32a8875}</Project>
+      <Name>MITD.PMS.Presentation.Contracts.SL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMS.Presentation.Logic.SL\MITD.PMS.Presentation.Logic.SL.csproj">
+      <Project>{73C3010F-3DF1-45DC-B36C-76FA83E9ECB4}</Project>
+      <Name>MITD.PMS.Presentation.Logic.SL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMS.Presentation.UI.Common\MITD.PMS.Presentation.UI.Common.csproj">
+      <Project>{6e39061d-c172-4114-80de-edd6cd5f0e78}</Project>
+      <Name>MITD.PMS.Presentation.UI.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Resources\EmployeeAppStrings.en-US.resx" />
+    <EmbeddedResource Include="Assets\Resources\EmployeeAppStrings.fa-IR.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EmployeeAppStrings.fa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Resources\EmployeeAppStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EmployeeAppStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Assets\LocalResource.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\EmployeeJobCustomFieldsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\EmployeeJobPositionsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\EmployeeListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\EmployeeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Info-icon.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

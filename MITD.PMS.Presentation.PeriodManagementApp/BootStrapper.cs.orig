@@ -1,0 +1,34 @@
+﻿using System;
+using System.Collections.Generic;
+using Castle.MicroKernel.Registration;
+using Castle.Windsor;
+using MITD.PMS.Presentation.Contracts;
+using MITD.PMS.Presentation.Logic;
+using MITD.Presentation.Config;
+using MITD.Presentation;
+using Microsoft.Practices.ServiceLocation;
+
+namespace MITD.PMS.Presentation.PeriodManagementApp
+{
+    public class BootStrapper : IBootStrapper
+    {
+        public void Execute()
+        {
+            var resourceDic = App.GetResourceStream(new Uri("MITD.PMS.Presentation.PeriodManagementApp;component/Assets/LocalResource.xaml", UriKind.Relative));
+            ApplicationConfigHelper.ConfigureModule<IPeriodController, PeriodController>(resourceDic);
+            ModuleConfigHelper.ConfigureActionModule<IActionService>(new Dictionary<int, Type>
+                {
+                    {(int) ActionEnum.ModifyPeriod,typeof(ModifyPeriodService)},
+                    {(int) ActionEnum.DeletePeriod,typeof(DeletePeriodService)},
+                    {(int) ActionEnum.ShowOrganizationChartInPeriodMgnt,typeof(ShowOrganizationChartInPrdMgntService)},
+                    {(int) ActionEnum.AddUnitOrgElement,typeof(AddUnitOrgElementDtoService)},
+                    {(int) ActionEnum.ModifyUnitOrgElement,typeof(ModifyUnitOrgElementDtoService)},
+                    {(int) ActionEnum.ShowJobInPeriodMgnt,typeof(ShowJobInPrdMgntService)},
+                     {(int) ActionEnum.ModifyJobInPeriod,typeof(ModifyJobInPeriodService)}
+                    
+                });
+
+
+        }
+    }
+}

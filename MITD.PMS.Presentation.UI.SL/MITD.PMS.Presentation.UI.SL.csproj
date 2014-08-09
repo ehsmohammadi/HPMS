@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A0A36B6C-3EA5-4F65-A6B7-49C37E5EDEAC}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MITD.PMS.Presentation.UI.SL</RootNamespace>
+    <AssemblyName>MITD.PMS.Presentation.UI.SL</AssemblyName>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>true</SilverlightApplication>
+    <SupportedCultures>
+      fa-IR;en-US
+    </SupportedCultures>
+    <XapOutputs>true</XapOutputs>
+    <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
+    <XapFilename>MITD.PMS.Presentation.UI.SL.xap</XapFilename>
+    <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
+    <SilverlightAppEntry>MITD.PMS.Presentation.UI.SL.App</SilverlightAppEntry>
+    <TestPageFileName>MITD.PM.Presentation.UI.SLTestPage.html</TestPageFileName>
+    <CreateTestPage>true</CreateTestPage>
+    <ValidateXaml>true</ValidateXaml>
+    <EnableOutOfBrowser>false</EnableOutOfBrowser>
+    <OutOfBrowserSettingsFile>Properties\OutOfBrowserSettings.xml</OutOfBrowserSettingsFile>
+    <UsePlatformExtensions>true</UsePlatformExtensions>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <LinkedServerProject>
+    </LinkedServerProject>
+  </PropertyGroup>
+  <!-- This property group is only here to support building this project using the 
+       MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
+       to set the TargetFrameworkVersion to v3.5 -->
+  <PropertyGroup Condition="'$(MSBuildToolsVersion)' == '3.5'">
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.3.2.1\lib\sl5\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\packages\Castle.Windsor.3.2.1\lib\sl5\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Core.Config.Castle.SL">
+      <HintPath>..\Dependency\MITD.Core.Config.Castle.SL.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Core.SL">
+      <HintPath>..\Dependency\MITD.Core.SL.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Presentation.Config.Castle.SL">
+      <HintPath>..\Dependency\MITD.Presentation.Config.Castle.SL.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Presentation.SL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=16494395142279b8, processorArchitecture=MSIL">
+      <HintPath>..\Dependency\MITD.Presentation.SL.dll</HintPath>
+      <HintPath>..\Dependency\MITD.Presentation.SL.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Presentation.UI.SL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=16494395142279b8, processorArchitecture=MSIL">
+      <HintPath>..\Dependency\MITD.Presentation.UI.SL.dll</HintPath>
+      <HintPath>..\Dependency\MITD.Presentation.UI.SL.dll</HintPath>
+    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\portable-net40+sl4+wp7+win8\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations, Version=5.0.5.0, Culture=neutral, PublicKeyToken=ddd0da4d3e678217, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core">
+      <HintPath>$(TargetFrameworkDirectory)System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Windows.Controls, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Data, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows.Controls.Data.DataForm.Toolkit, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Data.Input, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows.Controls.Data.Toolkit, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.DataVisualization.Toolkit, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Input, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Input.Toolkit, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Layout.Toolkit, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Navigation, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Theming.Toolkit, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Theming.TwilightBlue, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Toolkit, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Toolkit.Internals, Version=4.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Data, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Windows.Browser" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Resources\MainAppStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MainAppStrings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="BootStrapper.cs" />
+    <Compile Include="ImageConverter.cs" />
+    <Compile Include="LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DialogView.xaml.cs">
+      <DependentUpon>DialogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainAppLocalizedResources.cs" />
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+    <Page Include="Assets\CustomTwilightBlue.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\New1Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\NewStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="LoginView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DialogView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Properties\AppManifest.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MITD.PMS.Common.SL\MITD.PMS.Common.SL.csproj">
+      <Project>{f960edc9-07e4-4cb2-a427-6da7c74ad472}</Project>
+      <Name>MITD.PMS.Common.SL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMS.Presentation.Contracts.SL\MITD.PMS.Presentation.Contracts.SL.csproj">
+      <Project>{e31d9461-636c-402e-8f5d-5e7ab32a8875}</Project>
+      <Name>MITD.PMS.Presentation.Contracts.SL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMS.Presentation.Logic.SL\MITD.PMS.Presentation.Logic.SL.csproj">
+      <Project>{73c3010f-3df1-45dc-b36c-76fa83e9ecb4}</Project>
+      <Name>MITD.PMS.Presentation.Logic.SL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMS.Presentation.UI.Common\MITD.PMS.Presentation.UI.Common.csproj">
+      <Project>{6e39061d-c172-4114-80de-edd6cd5f0e78}</Project>
+      <Name>MITD.PMS.Presentation.UI.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Resources\MainAppStrings.en-US.resx">
+      <LastGenOutput>MainAppStringsfa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Resources\MainAppStrings.fa-IR.resx">
+      <LastGenOutput>MainAppStringsfa-IR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Resources\MainAppStrings.resx">
+      <LastGenOutput>MainAppStrings.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\bullet.jpg" />
+    <Resource Include="Assets\Images\button.jpg" />
+    <Resource Include="Assets\Images\girid-header.jpg" />
+    <Resource Include="Assets\Images\menu-right-roll.jpg" />
+    <Resource Include="Assets\Images\menu-right.jpg" />
+    <Resource Include="Assets\Images\menu.jpg" />
+    <Resource Include="Assets\Images\up-left.jpg" />
+    <Resource Include="Assets\Images\up-right.jpg" />
+    <Resource Include="Assets\Images\up-tile.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\AcountIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\preferences-contact-list.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\PeriodMgnt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\BasicInfo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\Log-Out-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\Help.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\folder_32.gif" />
+    <Resource Include="Assets\Images\RB_document_32.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\folder_32.png" />
+    <Resource Include="Assets\Images\RB_document_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\folder_16.png" />
+    <Resource Include="Assets\Images\RB_document_16.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

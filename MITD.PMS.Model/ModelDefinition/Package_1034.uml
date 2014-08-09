@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="6d79eb70-6acf-4b47-8c97-a5a500673c9b"
+  name="Periods"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="caec8244-1f6d-4469-b159-a1f4345c8d9d"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DMITD.PMS.Domain.Model.Periods"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="3ea3662e-960d-493c-b6ba-18d188bbea87"
+        name="Period"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="42319bc2-112e-4945-a1b1-263d2d0b90e5"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FPrgs%2FGitHub%2FMITDEnterpriseApplication%2FMITD.PMS - Copy%2FMITD.PMS.Domain.Model%2Fbin%2FDebug%2FMITD.PMS.Domain.dll&quot; Namespace%3DMITD.PMS.Domain.Model.Periods Type%3DPeriod"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="c2248b9f-c885-4121-9d15-c550c0171e27"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="bc4aad99-425d-479c-a66e-75b6a8cfc15b">
+                <propertyInstance
+                  Id="2c5855d7-46a3-4db0-80fb-4bcee8b2e2bd"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="271b7b2a-dced-4373-9eb1-ea942118e828">
+                <propertyInstance
+                  Id="c26459c7-f20c-4b45-a000-583bbbccd303"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="a1c30e7f-4194-4705-a9a7-2e67a74d68ae">
+                <propertyInstance
+                  Id="d1e3ff90-7a24-4b37-a99c-aaa81f259dc3"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="c6a66be9-54ee-4fa5-a555-a5a2823f0259">
+                <propertyInstance
+                  Id="ac0b66ac-af99-4aa9-a553-9860b1e22542"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="57b9d02d-2c36-446d-9670-83288d759fb2">
+                <propertyInstance
+                  Id="a3104251-d767-4cc6-b66d-0468a4349dcd"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="9861c40b-bbb8-4a40-9d1b-43acf0a6b8ab"
+        name="PeriodId"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="ff0bfee4-59ac-423d-87f2-13ad0fb766b9"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FPrgs%2FGitHub%2FMITDEnterpriseApplication%2FMITD.PMS - Copy%2FMITD.PMS.Domain.Model%2Fbin%2FDebug%2FMITD.PMS.Domain.dll&quot; Namespace%3DMITD.PMS.Domain.Model.Periods Type%3DPeriodId"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="dc2a0447-544b-47eb-b055-a25c60471ef7"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="76fbbca0-0ff8-4663-bd06-132b28e403c5">
+                <propertyInstance
+                  Id="0f55bde6-3b74-485e-b411-c707cdd8cd43"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="ead581fd-019e-4cce-8910-a8910d76ea0f">
+                <propertyInstance
+                  Id="7424be1f-904f-4326-883a-929427d0e81e"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="b87365a4-5b70-49ff-8da4-2a4f64e8dcde">
+                <propertyInstance
+                  Id="aa1f5371-65fd-4092-972f-8ed092b60e01"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="b6afb090-a749-4f82-83c9-2d1217365758">
+                <propertyInstance
+                  Id="b7246068-19a7-49d9-86ed-fe00e404c3b9"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="f456202e-1482-4564-99ce-e40c460debc5">
+                <propertyInstance
+                  Id="fdb22347-0b47-462c-8d49-ad9bef2e29f2"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

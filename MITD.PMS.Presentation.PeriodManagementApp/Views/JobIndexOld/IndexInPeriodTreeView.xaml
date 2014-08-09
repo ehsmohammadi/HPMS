@@ -1,0 +1,55 @@
+﻿<pr:ViewBase  
+    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"  
+    x:Class="MITD.PMS.Presentation.PeriodManagementApp.Views.IndexInPeriodTreeView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" FlowDirection="RightToLeft"
+    d:DesignHeight="300" d:DesignWidth="400" 
+    xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit"
+    xmlns:pr="clr-namespace:MITD.Presentation.UI;assembly=MITD.Presentation.UI.SL"
+    xmlns:logic="clr-namespace:MITD.PMS.Presentation.Logic;assembly=MITD.PMS.Presentation.Logic.SL"
+    DataContext="{StaticResource iptViewModel}">
+    <pr:ViewBase.Resources>
+        <sdk:HierarchicalDataTemplate x:Key="ChildTemplate" 
+                                      ItemsSource="{Binding Path=ChildNodes}">
+            <TextBlock Text="{Binding Path=Title}"/>
+        </sdk:HierarchicalDataTemplate>
+        <sdk:HierarchicalDataTemplate x:Key="TreeTemplate" 
+                      ItemsSource="{Binding Path=ChildNodes}"
+                      ItemTemplate="{StaticResource ChildTemplate}"
+                                      >
+            <TextBlock Text="{Binding Path=Title}"/>
+        </sdk:HierarchicalDataTemplate>
+    </pr:ViewBase.Resources>
+    <ScrollViewer BorderThickness="0"  VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
+        <Grid Name="LayoutRoot"  Background="Transparent"  >
+            <Grid.RowDefinitions >
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+
+            <StackPanel Grid.Row="0" HorizontalAlignment="Stretch"  Orientation="Horizontal">
+                <pr:SilverlightTreeView Name="trIndexInPeriodTree" BorderThickness="0" HorizontalAlignment="Stretch"  
+                                        ItemsSource="{Binding Path=IndexInPeriodTree }"  
+                                        ItemTemplate="{StaticResource TreeTemplate}" 
+                                        SelectedItem="{Binding Path=SelectedIndexInPeriod,Mode=TwoWay}"
+                                        SelectedValuePath="Id" 
+                                        MouseRightButtonDown="trIndexInPeriodTree_MouseRightButtonDown">
+                    
+                    <toolkit:ContextMenuService.ContextMenu >
+                        <toolkit:ContextMenu Name="cmCommands" FlowDirection="RightToLeft" />
+                    </toolkit:ContextMenuService.ContextMenu >
+                </pr:SilverlightTreeView>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Height="30"   VerticalAlignment="Center">
+                <!--<Button Width="Auto" Height="30" 
+                    Content="{Binding Path=AddPeriodCommand.DisplayName}" 
+                    Command="{Binding Path=AddPeriodCommand.Command}" />-->
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</pr:ViewBase>

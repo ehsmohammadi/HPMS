@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner" dslVersion="1.0.0.0" Id="423b29ca-6d43-416d-a40e-66814085ef7b" name="PMS" linkedPackageId="c9285788-64d5-4e69-b689-87825e2f4e15" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="602fffa8-1557-4116-bfdc-04ffeee46172">
+      <profileInstance Id="9782b005-09b6-489e-8536-855d6248f4a2" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="ec7d641d-495d-432d-81dd-6623527bffc7">
+      <profileInstance Id="3a0007d1-0b53-4ae2-ace7-f4d3bfb2c1d6" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="bb1ac544-2148-4051-ada6-65917e96bbf7" name="Policy" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="a2b3287a-a7c2-49c3-83ec-fb3c58231914" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="44722924-98b1-4a77-9e33-ef058c8514e0" name="Calculation" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="f5d7c166-b22c-4c99-bc8e-1e748f496982" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="dbd2039d-a9f2-43df-ab58-69899fc2ef98" name="Period" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="17b2efbc-f8dd-4300-8442-599f043c14e0" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="b7f76ef0-16af-4faf-931a-367be1f4e380" name="Employee" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="190cadb5-a6d3-4e69-ab70-35aec0de31d8" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+  </packagedElements>
+  <package Id="c9285788-64d5-4e69-b689-87825e2f4e15" name="MITD.PMS.Model">
+    <elementDefinition Id="f4f79cb8-ffe5-41ae-953e-1987e3f803fd" />
+  </package>
+</logicalClassDesignerModel>

@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1B85AC19-27DF-43BB-91B7-9A2AECDDB9D1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MITD.PMS.Domain</RootNamespace>
+    <AssemblyName>MITD.PMS.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MITD.Core">
+      <HintPath>..\Dependency\MITD.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Core.RuleEngine, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependency\MITD.Core.RuleEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Domain.Model">
+      <HintPath>..\Dependency\MITD.Domain.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Domain.Repository">
+      <HintPath>..\Dependency\MITD.Domain.Repository.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Services">
+      <HintPath>..\Dependency\MITD.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Exceptions\IDataAccessExceptionAdaptor.cs" />
+    <Compile Include="Exceptions\PMSException.cs" />
+    <Compile Include="Model\CalculationException\EmployeeCalculationExceptionId.cs" />
+    <Compile Include="Model\CalculationException\Repository\ICalculationExceptionRepository.cs" />
+    <Compile Include="Model\Calculations\CalculationSession.cs" />
+    <Compile Include="Model\Calculations\CalculationEngineState.cs" />
+    <Compile Include="Model\Calculations\CalculationStateReport.cs" />
+    <Compile Include="Model\Calculations\CalculationState\CalculationNotCompletedState.cs" />
+    <Compile Include="Model\Calculations\CalculationForPathCompleted.cs" />
+    <Compile Include="Model\Calculations\CalculationExceptionReady.cs" />
+    <Compile Include="Model\Calculations\Exception\CalculationArgumentException.cs" />
+    <Compile Include="Model\Calculations\Exception\CalculationDeleteException.cs" />
+    <Compile Include="Model\Calculations\Exception\CalculationDuplicateException.cs" />
+    <Compile Include="Model\Calculations\Exception\CalculationException.cs" />
+    <Compile Include="Model\Calculations\Exception\CalculationInvalidStateOperationException.cs" />
+    <Compile Include="Model\Calculations\Exception\CalculationModifyException.cs" />
+    <Compile Include="Model\Calculations\PathPersisteCompleted.cs" />
+    <Compile Include="Model\Claims\Claim.cs" />
+    <Compile Include="Model\Claims\ClaimId.cs" />
+    <Compile Include="Model\Claims\ClaimTypeEnum.cs" />
+    <Compile Include="Model\Claims\ClaimState\ClaimAcceptedState.cs" />
+    <Compile Include="Model\Claims\ClaimState\ClaimCanceledState.cs" />
+    <Compile Include="Model\Claims\ClaimState\ClaimOpenedState.cs" />
+    <Compile Include="Model\Claims\ClaimState\ClaimRejectedState.cs" />
+    <Compile Include="Model\Claims\ClaimState\ClaimState.cs" />
+    <Compile Include="Model\Claims\ClaimState\IClaimState.cs" />
+    <Compile Include="Model\Claims\Exception\ClaimArgumentException.cs" />
+    <Compile Include="Model\Claims\Exception\ClaimDuplicateException.cs" />
+    <Compile Include="Model\Claims\Exception\ClaimeDeleteException.cs" />
+    <Compile Include="Model\Claims\Exception\ClaimException.cs" />
+    <Compile Include="Model\Claims\Exception\ClaimModifyException.cs" />
+    <Compile Include="Model\Claims\Exception\ClaimInvalidStateOperationException.cs" />
+    <Compile Include="Model\Claims\Repository\IClaimRepository.cs" />
+    <Compile Include="Model\Employees\EmployeeJobCutomFieldValue.cs" />
+    <Compile Include="Model\Employees\Exception\EmployeeArgumentException.cs" />
+    <Compile Include="Model\Employees\Exception\EmployeeDeleteException.cs" />
+    <Compile Include="Model\Employees\Exception\EmployeeDuplicateException.cs" />
+    <Compile Include="Model\Employees\Exception\EmployeeException.cs" />
+    <Compile Include="Model\Employees\Exception\EmployeeModifyException.cs" />
+    <Compile Include="Model\InquiryJobIndexPoints\Exception\InquiryJobIndexPointArgumentException.cs" />
+    <Compile Include="Model\InquiryJobIndexPoints\Exception\InquiryJobIndexPointDeleteException.cs" />
+    <Compile Include="Model\InquiryJobIndexPoints\Exception\InquiryJobIndexPointDuplicateException.cs" />
+    <Compile Include="Model\InquiryJobIndexPoints\Exception\InquiryJobIndexPointException.cs" />
+    <Compile Include="Model\InquiryJobIndexPoints\Exception\InquiryJobIndexPointModifyException.cs" />
+    <Compile Include="Model\JobIndexPoints\CalculationPoint.cs" />
+    <Compile Include="Model\JobIndexPoints\EmployeePointPersistanceHolder.cs" />
+    <Compile Include="Model\CalculationException\EmployeeCalculationException.cs" />
+    <Compile Include="Model\JobIndexPoints\Exception\JobIndexPointArgumentException.cs" />
+    <Compile Include="Model\JobIndexPoints\Exception\JobIndexPointDuplicateException.cs" />
+    <Compile Include="Model\JobIndexPoints\Exception\JobIndexPointException.cs" />
+    <Compile Include="Model\JobIndexPoints\Exception\JobIndexPointModifyException.cs" />
+    <Compile Include="Model\JobIndexPoints\Exception\JobIndexPointtDeleteException.cs" />
+    <Compile Include="Model\JobIndexPoints\SummaryCalculationPoint.cs" />
+    <Compile Include="Model\JobIndexPoints\SummaryJobPositionPoint.cs" />
+    <Compile Include="Model\JobIndexPoints\JobPositionPoint.cs" />
+    <Compile Include="Model\Calculations\CalculationCompleted.cs" />
+    <Compile Include="Model\Calculations\CalculationState\CalculationCompletedState.cs" />
+    <Compile Include="Model\Employees\EmployeeJobPosition.cs" />
+    <Compile Include="Model\Employees\SharedEmployeeCustomField.cs" />
+    <Compile Include="Model\Employees\SharedEmployeeCustomFieldId.cs" />
+    <Compile Include="Model\InquiryJobIndexPoints\Repository\IInquiryJobIndexPoint.cs" />
+    <Compile Include="Model\InquiryJobIndexPoints\InquiryJobIndexPoint.cs" />
+    <Compile Include="Model\InquiryJobIndexPoints\InquiryJobIndexPointId.cs" />
+    <Compile Include="Model\InquiryJobIndexPoints\InquiryJobIndexPointCreated.cs" />
+    <Compile Include="Model\JobIndices\Exception\JobIndexArgumentException.cs" />
+    <Compile Include="Model\JobIndices\Exception\JobIndexDeleteException.cs" />
+    <Compile Include="Model\JobIndices\Exception\JobIndexDuplicateException.cs" />
+    <Compile Include="Model\JobIndices\Exception\JobIndexException.cs" />
+    <Compile Include="Model\JobIndices\Exception\JobIndexModifyException.cs" />
+    <Compile Include="Model\JobIndices\Exception\JobIndexCompareException.cs" />
+    <Compile Include="Model\JobPositions\Exception\JobPositionCompareException.cs" />
+    <Compile Include="Model\JobPositions\Exception\JobPositionArgumentException.cs" />
+    <Compile Include="Model\JobPositions\Exception\JobPositionDeleteException.cs" />
+    <Compile Include="Model\JobPositions\Exception\JobPositionDuplicateException.cs" />
+    <Compile Include="Model\JobPositions\Exception\JobPositionException.cs" />
+    <Compile Include="Model\JobPositions\Exception\JobPositionModifyException.cs" />
+    <Compile Include="Model\JobPositions\JobPositionLevel.cs" />
+    <Compile Include="Model\JobPositions\JobPositionInquiryConfigurationItemId.cs" />
+    <Compile Include="Model\JobPositions\JobPositionEmployee.cs" />
+    <Compile Include="Model\JobPositions\JobPositionInquiryConfigurationItem.cs" />
+    <Compile Include="Model\JobIndexPoints\JobIndexPoint.cs" />
+    <Compile Include="Model\JobIndexPoints\SummaryEmployeePoint.cs" />
+    <Compile Include="Model\JobPositions\Repository\IJobPositionRepository.cs" />
+    <Compile Include="Model\JobPositions\SharedJobPosition.cs" />
+    <Compile Include="Model\JobPositions\SharedJobPositionId.cs" />
+    <Compile Include="Model\JobPositions\JobPosition.cs" />
+    <Compile Include="Model\JobPositions\JobPositionId.cs" />
+    <Compile Include="Model\JobIndices\AbstractJobIndex.cs" />
+    <Compile Include="Model\JobIndices\AbstractJobIndexId.cs" />
+    <Compile Include="Model\JobIndices\JobIndex.cs" />
+    <Compile Include="Model\JobIndices\JobIndexGroup.cs" />
+    <Compile Include="Model\JobIndices\Repository\IJobIndexRepository.cs" />
+    <Compile Include="Model\JobIndices\SharedJobIndex.cs" />
+    <Compile Include="Model\JobIndices\SharedJobIndexCustomField.cs" />
+    <Compile Include="Model\JobIndices\SharedJobIndexCustomFieldId.cs" />
+    <Compile Include="Model\JobIndices\SharedJobIndexId.cs" />
+    <Compile Include="Model\JobIndexPoints\Repository\IJobIndexPointRepository.cs" />
+    <Compile Include="Model\JobIndexPoints\CalculationPointId.cs" />
+    <Compile Include="Model\JobIndexPoints\JobIndexPointsReady.cs" />
+    <Compile Include="Model\Jobs\Exception\JobArgumentException.cs" />
+    <Compile Include="Model\Jobs\Exception\JobDeleteException.cs" />
+    <Compile Include="Model\Jobs\Exception\JobDuplicateException.cs" />
+    <Compile Include="Model\Jobs\Exception\JobException.cs" />
+    <Compile Include="Model\Jobs\Exception\JobModifyException.cs" />
+    <Compile Include="Model\Jobs\SharedJobCustomField.cs" />
+    <Compile Include="Model\Jobs\JobCustomField.cs" />
+    <Compile Include="Model\Jobs\JobCustomFieldId.cs" />
+    <Compile Include="Model\Jobs\SharedJobCustomFieldId.cs" />
+    <Compile Include="Model\Periods\Exception\PeriodInvalidStateOperationException.cs" />
+    <Compile Include="Model\Periods\Exception\PeriodArgumentException.cs" />
+    <Compile Include="Model\Periods\Exception\PeriodDeleteException.cs" />
+    <Compile Include="Model\Periods\Exception\PeriodDuplicateException.cs" />
+    <Compile Include="Model\Periods\Exception\PeriodException.cs" />
+    <Compile Include="Model\Periods\Exception\PeriodModifyException.cs" />
+    <Compile Include="Model\Periods\PeriodEngineState.cs" />
+    <Compile Include="Model\Periods\EventHandler.cs" />
+    <Compile Include="Model\Periods\PeriodState\PeriodStateEnum.cs" />
+    <Compile Include="Model\Periods\PeriodState\States\PeriodClaimingFinishedState.cs" />
+    <Compile Include="Model\Periods\PeriodState\States\PeriodClaimingStartedState.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\Periods\PeriodState\States\PeriodBasicDataCopying.cs" />
+    <Compile Include="Model\Periods\PeriodState\States\PeriodInitializeInquiryCompletedState.cs" />
+    <Compile Include="Model\Periods\PeriodState\States\PeriodInitializingForInquiryState.cs" />
+    <Compile Include="Model\Periods\PeriodState\States\PeriodClosedState.cs" />
+    <Compile Include="Model\Periods\PeriodState\States\PeriodInitState.cs" />
+    <Compile Include="Model\Periods\PeriodState\States\PeriodInquiryStartedState.cs" />
+    <Compile Include="Model\Periods\PeriodState\States\PeriodInquiryCompletedState.cs" />
+    <Compile Include="Model\Periods\PeriodState\PeriodState.cs" />
+    <Compile Include="Model\Periods\PeriodState\IPeriodState.cs" />
+    <Compile Include="Model\Periods\Repository\IPeriodRepository.cs" />
+    <Compile Include="Model\Policies\Exceptions\PolicyArgumentException.cs" />
+    <Compile Include="Model\Policies\Exceptions\PolicyDeleteException.cs" />
+    <Compile Include="Model\Policies\Exceptions\PolicyDuplicateException.cs" />
+    <Compile Include="Model\Policies\Exceptions\PolicyException.cs" />
+    <Compile Include="Model\Policies\Exceptions\PolicyModifyException.cs" />
+    <Compile Include="Model\Policies\Repository\IPolicyRepository.cs" />
+    <Compile Include="Model\Units\Exception\UnitArgumentException.cs" />
+    <Compile Include="Model\Units\Exception\UnitDeleteException.cs" />
+    <Compile Include="Model\Units\Exception\UnitDuplicateException.cs" />
+    <Compile Include="Model\Units\Exception\UnitException.cs" />
+    <Compile Include="Model\Units\Exception\UnitModifyException.cs" />
+    <Compile Include="ReportModel\CalculationWithPolicy.cs" />
+    <Compile Include="ReportModel\CalculationData.cs" />
+    <Compile Include="ReportModel\EmployeeIdWithJobPositionId.cs" />
+    <Compile Include="ReportModel\EmployeePointData.cs" />
+    <Compile Include="ReportModel\JobIndexPointWithEmployee.cs" />
+    <Compile Include="Model\Policies\RulesCompiled.cs" />
+    <Compile Include="ReportModel\InquirySubjectWithJobPosition.cs" />
+    <Compile Include="Service\Imp\CalculationMakeDeterministicService.cs" />
+    <Compile Include="Service\Imp\ClaimControlService.cs" />
+    <Compile Include="Service\Imp\InquiryJobIndexPointCreatorService.cs" />
+    <Compile Include="Service\Imp\JobPositionInquiryConfiguratorService.cs" />
+    <Compile Include="Service\Imp\PeriodActivatorService.cs" />
+    <Compile Include="Service\Imp\PeriodManagerService.cs" />
+    <Compile Include="Service\Interface\ICalculationEngineService.cs" />
+    <Compile Include="Service\Interface\IPeriodBasicDataCopierService.cs" />
+    <Compile Include="Service\Interface\IInquiryConfiguratorService.cs" />
+    <Compile Include="Service\Interface\IPeriodEngineService.cs" />
+    <Compile Include="Service\Interface\IPeriodManagerService.cs" />
+    <Compile Include="Service\Interface\IInquiryJobIndexPointCreatorService.cs" />
+    <Compile Include="Service\Interface\IJobPositionInquiryConfiguratorService.cs" />
+    <Compile Include="Service\Interface\IPMSAdminService.cs" />
+    <Compile Include="Model\Employees\Repository\IEmployeeRepository.cs" />
+    <Compile Include="Model\Calculations\Calculation.cs" />
+    <Compile Include="Model\Calculations\CalculationId.cs" />
+    <Compile Include="Model\Calculations\CalculationState\CalculationState.cs" />
+    <Compile Include="Model\Calculations\CalculationState\CalculationInitState.cs" />
+    <Compile Include="Model\Calculations\CalculationState\CalculationRunningState.cs" />
+    <Compile Include="Model\Calculations\CalculationState\CalculationPausedState.cs" />
+    <Compile Include="Model\Calculations\CalculationState\CalculationStoppedState.cs" />
+    <Compile Include="Model\Calculations\CalculationState\ICalculationState.cs" />
+    <Compile Include="Model\Jobs\Repository\IJobRepository.cs" />
+    <Compile Include="Model\Units\Repository\IUnitRepository.cs" />
+    <Compile Include="Model\Units\Unit.cs" />
+    <Compile Include="Model\Units\UnitId.cs" />
+    <Compile Include="Model\Units\SharedUnit.cs" />
+    <Compile Include="Model\Units\SharedUnitId.cs" />
+    <Compile Include="Model\Jobs\Job.cs" />
+    <Compile Include="Model\Jobs\SharedJob.cs" />
+    <Compile Include="Model\Jobs\JobId.cs" />
+    <Compile Include="Model\Jobs\SharedJobId.cs" />
+    <Compile Include="Service\Exceptions\PolicyEngineHasNotBeenSetupException.cs" />
+    <Compile Include="Service\Imp\RuleBasedPolicyEngineService.cs" />
+    <Compile Include="Service\Imp\PolicyConfigurator.cs" />
+    <Compile Include="Service\Interface\IPMSSecurityService.cs" />
+    <Compile Include="Service\Interface\IPolicyConfigurator.cs" />
+    <Compile Include="Service\Interface\ICalculationConfigurator.cs" />
+    <Compile Include="Service\Interface\IJobIndexPointCalculator.cs" />
+    <Compile Include="Model\Calculations\Repository\ICalculationRepository.cs" />
+    <Compile Include="Model\Employees\Employee.cs" />
+    <Compile Include="Model\Employees\EmployeeId.cs" />
+    <Compile Include="Model\Policies\DllBasedPolicy.cs" />
+    <Compile Include="Model\Policies\Exceptions\PoicyHasNotBeenSetUpException.cs" />
+    <Compile Include="Model\Policies\RuleEngineBasedPolicy.cs" />
+    <Compile Include="Service\Interface\ICalculationDataProvider.cs" />
+    <Compile Include="Service\Interface\IPolicyEngineService.cs" />
+    <Compile Include="Model\JobIndexPoints\EmployeePoint.cs" />
+    <Compile Include="Service\Interface\IDllPolicyEngineService.cs" />
+    <Compile Include="Service\Interface\IRuleEngineBasedPolicyService.cs" />
+    <Compile Include="Model\Periods\Period.cs" />
+    <Compile Include="Model\Periods\PeriodId.cs" />
+    <Compile Include="Model\Policies\Policy.cs" />
+    <Compile Include="Model\Policies\PolicyId.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MITD.PMS.Common\MITD.PMS.Common.csproj">
+      <Project>{c1ffa45a-cc6c-47fd-940e-6eaadf41c60c}</Project>
+      <Name>MITD.PMS.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMS.RuleContracts\MITD.PMS.RuleContracts.csproj">
+      <Project>{bdb2efd0-03e6-471a-afc5-41f5b1e9bb35}</Project>
+      <Name>MITD.PMS.RuleContracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="dummy\" />
+    <Folder Include="Model\MyTasks\" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

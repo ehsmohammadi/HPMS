@@ -1,0 +1,453 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BasicInfoManagement" xml:space="preserve">
+    <value>مدیریت اطلاعات پایه</value>
+  </data>
+  <data name="BasicInfoManagementShowCustomFieldsTitle" xml:space="preserve">
+    <value>مدیریت فیلد های دلخواه</value>
+  </data>
+  <data name="BasicInfoManagementShowJobIndexsTitle" xml:space="preserve">
+    <value>مدیریت شاخص ها</value>
+  </data>
+  <data name="BasicInfoManagementShowJobPositionsTitle" xml:space="preserve">
+    <value>مدیریت پست ها</value>
+  </data>
+  <data name="BasicInfoManagementShowJobsTitle" xml:space="preserve">
+    <value>مدیریت شغل ها</value>
+  </data>
+  <data name="BasicInfoManagementShowLogsTitle" xml:space="preserve">
+    <value>مدیریت خطاها</value>
+  </data>
+  <data name="BasicInfoManagementShowPliciesTitle" xml:space="preserve">
+    <value>مدیریت نظام های محاسبه عملکرد</value>
+  </data>
+  <data name="BasicInfoManagementShowUnitsTitle" xml:space="preserve">
+    <value>مدیریت واحد ها</value>
+  </data>
+  <data name="BasicInfoManagementShowUserGroupsTitle" xml:space="preserve">
+    <value>مدیریت گروهای کاربری</value>
+  </data>
+  <data name="BasicInfoManagementShowUsersTitle" xml:space="preserve">
+    <value>مدیریت کاربران</value>
+  </data>
+  <data name="Calculation" xml:space="preserve">
+    <value>محاسبه</value>
+  </data>
+  <data name="CalculationCompletedState" xml:space="preserve">
+    <value>کامل شده</value>
+  </data>
+  <data name="CalculationInitState" xml:space="preserve">
+    <value>جدید</value>
+  </data>
+  <data name="CalculationNotCompletedState" xml:space="preserve">
+    <value>کامل نشده</value>
+  </data>
+  <data name="CalculationPausedState" xml:space="preserve">
+    <value>متوقف شده</value>
+  </data>
+  <data name="CalculationRunningState" xml:space="preserve">
+    <value>در حال اجرا</value>
+  </data>
+  <data name="CalculationStoppedState" xml:space="preserve">
+    <value>انصراف داده شده</value>
+  </data>
+  <data name="ChangeActiveStatus" xml:space="preserve">
+    <value>تغییر وضعیت فعال</value>
+  </data>
+  <data name="CheckAddClaim" xml:space="preserve">
+    <value>ایجاد درخواست اعتراض</value>
+  </data>
+  <data name="CheckAssigningJob" xml:space="preserve">
+    <value>اختصاص شغل</value>
+  </data>
+  <data name="CheckAssigningJobIndex" xml:space="preserve">
+    <value>اختصاص شاخص شغل</value>
+  </data>
+  <data name="CheckAssigningJobPosition" xml:space="preserve">
+    <value>اختصاص پست</value>
+  </data>
+  <data name="CheckAssigningUnit" xml:space="preserve">
+    <value>اختصاص واحد</value>
+  </data>
+  <data name="CheckCancelClaim" xml:space="preserve">
+    <value>انصراف درخواست اعتراض</value>
+  </data>
+  <data name="CheckChangeCalculationDeterministicStatus" xml:space="preserve">
+    <value>تغییر وضعیت  قطعیت محاسبه</value>
+  </data>
+  <data name="CheckCreatingCalculation" xml:space="preserve">
+    <value>ایجاد محاسبه</value>
+  </data>
+  <data name="CheckCreatingEmployee" xml:space="preserve">
+    <value>ایجاد کارمند</value>
+  </data>
+  <data name="CheckModifingJobIndex" xml:space="preserve">
+    <value>ویرایش شاخص شغل</value>
+  </data>
+  <data name="CheckModifyingEmployeeCustomFieldsAndValues" xml:space="preserve">
+    <value>ویرایش مقدایر و فیلدهای دلخواه کارمند</value>
+  </data>
+  <data name="CheckModifyingEmployeeJobPositions" xml:space="preserve">
+    <value>ویرایش پست های کارمند</value>
+  </data>
+  <data name="CheckModifyingJobCustomFields" xml:space="preserve">
+    <value>ویرایش فیلدهای دلخواه شغل</value>
+  </data>
+  <data name="CheckModifyingJobIndices" xml:space="preserve">
+    <value>ویرایش شاخص های شغل</value>
+  </data>
+  <data name="CheckModifyingJobPositionInquirers" xml:space="preserve">
+    <value>ویرایش  نظر دهنده ها</value>
+  </data>
+  <data name="CheckRemovingUnit" xml:space="preserve">
+    <value>حذف واحد</value>
+  </data>
+  <data name="CheckReplyClaim" xml:space="preserve">
+    <value>پاسخ به درخواست اعتراض</value>
+  </data>
+  <data name="CheckSettingInquiryJobIndexPointValue" xml:space="preserve">
+    <value>ویرایش نمرات نظرسنجی</value>
+  </data>
+  <data name="CheckShowingInquirySubject" xml:space="preserve">
+    <value>نمایش افراد مورد نظرسنجی</value>
+  </data>
+  <data name="Claim" xml:space="preserve">
+    <value>اعتراض</value>
+  </data>
+  <data name="ClaimSubMenu" xml:space="preserve">
+    <value>اعتراضات</value>
+  </data>
+  <data name="ClaimType" xml:space="preserve">
+    <value>مورد اعتراض</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>بستن</value>
+  </data>
+  <data name="CompareException" xml:space="preserve">
+    <value>خطای {0} ، فیلد {2}  با فیلد  {3} در {1} مطابقت ندارد</value>
+  </data>
+  <data name="CompleteCopyingBasicData" xml:space="preserve">
+    <value>پایان کپی اظلاعات پایه</value>
+  </data>
+  <data name="CompleteInquiry" xml:space="preserve">
+    <value>پایان نظرسنجی</value>
+  </data>
+  <data name="CompleteIntializingForInquiry" xml:space="preserve">
+    <value>پایان آماده سازی نظرسنجی</value>
+  </data>
+  <data name="CopyingStateProgress" xml:space="preserve">
+    <value>نمایش پیشرفت کپی اطلاعات</value>
+  </data>
+  <data name="CopyPeriodBasicData" xml:space="preserve">
+    <value>کپی اطلاعات پایه</value>
+  </data>
+  <data name="CouldNotActivatePeriodWhileExistsAnotherActivePeriod" xml:space="preserve">
+    <value>دوره فعال دیگری وجود دارد، در هر زمان تنها یک دوره میتواند فعال باشد</value>
+  </data>
+  <data name="CouldNotClosePeriodWithOpenClaims" xml:space="preserve">
+    <value>برای بستن دوره باید هيچ درخواست اعتراض بازی وجود نداشته باشد</value>
+  </data>
+  <data name="CouldNotClosePeriodWithoutAnyDeterministicCalculation" xml:space="preserve">
+    <value>برای بستن دوره باید یک محاسبه قطعی وجود داشته باشد</value>
+  </data>
+  <data name="CouldNotCompleteInquiryWithNotFilledInquiryForms" xml:space="preserve">
+    <value>برای اتمام نظر سنجی می بایست تمام نظر دهنده ها نظرات خود را اعلام کنند</value>
+  </data>
+  <data name="CouldNotDeleteClaimByAnotherUser" xml:space="preserve">
+    <value>شما اجازه حذف این درخواست اعتراض را ندارید. تنها ایجاد کننده درخواست اجازه حذف آنرا دارد</value>
+  </data>
+  <data name="CouldNotDeleteDeterministicCalculation" xml:space="preserve">
+    <value>امکان حذف محاسبه قطعی وجود ندارد، ابتدا وضعیت محاسبه را به غیر قطعی تغيير داده و سپس آنرا حذف کنید</value>
+  </data>
+  <data name="CouldNotInitializeInquiryForInactivePeriod" xml:space="preserve">
+    <value>آماده سازی دوره برای نظر سنجی امکان پذیر نمی باشد برای آماده سازی باید دوره فعال شده باشد</value>
+  </data>
+  <data name="CouldNotModifyJobIndicesInInquiryStartedState" xml:space="preserve">
+    <value>ویرایش شاخص های شغل باعث تغییر در وضعیت نظر سنجی می شود</value>
+  </data>
+  <data name="CouldNotStartClaimingWithoutAnyDeterministicCalculation" xml:space="preserve">
+    <value>برای رفتن به وضعیت شروع ثبت  درخواست اعتراض باید یک محاسبه قطعی وجود داشته باشد</value>
+  </data>
+  <data name="CustomFieldType" xml:space="preserve">
+    <value>فیلد دلخواه</value>
+  </data>
+  <data name="DeleteException" xml:space="preserve">
+    <value>خطای {0} ، {1} با سایر اطلاعات سیستم در ارتباط بوده و در حال استفاده می باشد</value>
+  </data>
+  <data name="DictionaryName" xml:space="preserve">
+    <value>نام در لغت نامه</value>
+  </data>
+  <data name="DoesNotExistAnyActivePeriod" xml:space="preserve">
+    <value>هیچ دوره فعالی در سیستم موجود نمی باشد</value>
+  </data>
+  <data name="DoesNotExistAnyDeterministicCalculationInPeriod" xml:space="preserve">
+    <value>برای این دوره محاسبه قطعی وجود ندارد</value>
+  </data>
+  <data name="DoesNotExistEvaluationForEmployee" xml:space="preserve">
+    <value>ارزشابی برای کارمند موجود نمی باشد</value>
+  </data>
+  <data name="DuplicateException" xml:space="preserve">
+    <value>خطای {0} ، فیلد {2}  در {1} تکراری می باشد</value>
+  </data>
+  <data name="Employee" xml:space="preserve">
+    <value>کارمند</value>
+  </data>
+  <data name="EmployeeListSubMenu" xml:space="preserve">
+    <value>مدیریت کارمندان در دوره جاری</value>
+  </data>
+  <data name="EmployeeManagementMainMenu" xml:space="preserve">
+    <value>مدیریت کارمندان</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>تاریخ پایان</value>
+  </data>
+  <data name="ExceedViolationInDeterministicCalculationInPeriod" xml:space="preserve">
+    <value>محاسبه قعطی دیگری وجود دارد، در هر دوره تنها یک محاسبه میتواند قطعی باشد</value>
+  </data>
+  <data name="FinishClaiming" xml:space="preserve">
+    <value>پايان زمان ثبت اعتراض</value>
+  </data>
+  <data name="Function" xml:space="preserve">
+    <value>تابع</value>
+  </data>
+  <data name="InitializeInquiry" xml:space="preserve">
+    <value>آماده سازی برای نظرسنجی</value>
+  </data>
+  <data name="InitializeInquiryProgress" xml:space="preserve">
+    <value>نمایش پیشرفت آماده سازی نمایش</value>
+  </data>
+  <data name="InvalidArgumentException" xml:space="preserve">
+    <value>خطای {0} ،  آرگومان {2}  برای   {1} معتبر نمی باشد</value>
+  </data>
+  <data name="InvalidStateOperationException" xml:space="preserve">
+    <value>خطای {0} ،   {3}  در وضعیت {2}  برای  {1} امکانپذیر نمی باشد</value>
+  </data>
+  <data name="InvalidSumEmployeeWorkTimePercents" xml:space="preserve">
+    <value>جمع زمان های کاری برای کارمند مورد نظر صحیح نمی باشد</value>
+  </data>
+  <data name="InvalidUsernameOrPassword" xml:space="preserve">
+    <value>نام کاربری یا کلمه عبور صحیح نمی باشد</value>
+  </data>
+  <data name="JobIndexCategory" xml:space="preserve">
+    <value>دسته شاخص</value>
+  </data>
+  <data name="JobIndexGroup" xml:space="preserve">
+    <value>گروه شاخص</value>
+  </data>
+  <data name="JobPosition" xml:space="preserve">
+    <value>پست</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>نام خانوادگی</value>
+  </data>
+  <data name="ModifyForbiddenException" xml:space="preserve">
+    <value>خطای {0} ،  ویرایش فیلد {2}  در {1} امکانپذیر نمی باشد</value>
+  </data>
+  <data name="MyTasksAccessibilitySettingSubMenu" xml:space="preserve">
+    <value>مدیریت دسترسی به کارتابل</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>نام</value>
+  </data>
+  <data name="Period" xml:space="preserve">
+    <value>دوره</value>
+  </data>
+  <data name="PeriodBasicDataCopying" xml:space="preserve">
+    <value>در حال کپی</value>
+  </data>
+  <data name="PeriodClaimingFinishedState" xml:space="preserve">
+    <value>زمان اعتراضات پایان یافته</value>
+  </data>
+  <data name="PeriodClaimingStartedState" xml:space="preserve">
+    <value>زمان اعتراضات آغاز شده</value>
+  </data>
+  <data name="PeriodClosedState" xml:space="preserve">
+    <value>بسته</value>
+  </data>
+  <data name="PeriodInitializeInquiryCompletedState" xml:space="preserve">
+    <value>آماده سازی برای نظر سنجی پایان یافته</value>
+  </data>
+  <data name="PeriodInitializingForInquiryState" xml:space="preserve">
+    <value>در حال آماده سازی برای نظرسنجی</value>
+  </data>
+  <data name="PeriodInitState" xml:space="preserve">
+    <value>جدید</value>
+  </data>
+  <data name="PeriodInquiryCompletedState" xml:space="preserve">
+    <value>نظر سنجی پایان یافته</value>
+  </data>
+  <data name="PeriodInquiryStartedState" xml:space="preserve">
+    <value>نظر سنجی آغاز شده</value>
+  </data>
+  <data name="PeriodListSubMenu" xml:space="preserve">
+    <value>لیست دوره ها</value>
+  </data>
+  <data name="PeriodManagementMainMenu" xml:space="preserve">
+    <value>مدیریت دوره</value>
+  </data>
+  <data name="PMSTitle" xml:space="preserve">
+    <value>سیستم ارزیابی عملکرد کارکنان</value>
+  </data>
+  <data name="Policy" xml:space="preserve">
+    <value>نظام محاسبه عملکرد</value>
+  </data>
+  <data name="ReportsMainMenu" xml:space="preserve">
+    <value>گزارشات</value>
+  </data>
+  <data name="RollBack" xml:space="preserve">
+    <value>برگشت به مرحله قبل</value>
+  </data>
+  <data name="Rule" xml:space="preserve">
+    <value>قانون</value>
+  </data>
+  <data name="StartClaiming" xml:space="preserve">
+    <value>شروع زمان درخواست اعتراض</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>تاریخ شروع</value>
+  </data>
+  <data name="StartInquiry" xml:space="preserve">
+    <value>آغاز نظرسنجی</value>
+  </data>
+  <data name="UnauthorizedAccessToOperation" xml:space="preserve">
+    <value>مجوز دسترسی به بخش درخواستی برای شما وجود ندارد</value>
+  </data>
+  <data name="UnExpectedException" xml:space="preserve">
+    <value>خطای داخلی  در سیستم رخ داده است ، خطای رخ داده ممکن است به علت بروز رسانی سیستم باشد. در صورت تکرار خطا با مدیریت سایت تماس بگیرید</value>
+  </data>
+  <data name="Unit" xml:space="preserve">
+    <value>واحد</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>کاربر</value>
+  </data>
+  <data name="UserGroup" xml:space="preserve">
+    <value>گروه کاربری</value>
+  </data>
+  <data name="WorkListManagement" xml:space="preserve">
+    <value>کارتابل</value>
+  </data>
+  <data name="EmployeesMyInquiryResultSubMenu" xml:space="preserve">
+    <value>نتیجه عملکرد من</value>
+  </data>
+  <data name="EmployeesInquiryListSubMenu" xml:space="preserve">
+    <value>فهرست افراد نظرسنجی شونده</value>
+  </data>
+</root>

@@ -1,0 +1,58 @@
+﻿<Application xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:MITD.PMS.Presentation.Logic"
+             x:Class="MITD.PMS.Presentation.PeriodManagementApp.App"
+             >
+    <Application.Resources>
+        <ResourceDictionary>
+            <vm:PeriodListVM x:Key="plViewModel"/>
+            <vm:PeriodVM x:Key="pViewModel"/>
+            
+            <vm:UnitInPeriodVM x:Key="uipViewModel" />
+            <vm:UnitInPeriodTreeVM x:Key="uiptViewModel" />
+            
+            <vm:JobPositionInPeriodVM x:Key="jipViewModel" />
+            <vm:JobPositionInPeriodTreeVM x:Key="jiptViewModel" />
+            <vm:JobPositionInPeriodInquiryVM x:Key="jobPositionInPeriodInquiryViewModel" />
+            
+            <vm:PrepareToExecInquiryVM x:Key="prepareToExecInquiryViewModel" />
+            <vm:InquirerInquirySubjectListVM x:Key="employeesInquiryListViewModel" />
+            <vm:InquiryFormVM  x:Key="inquiryFormViewModel" />
+            
+            <vm:EmployeeClaimListVM  x:Key="EmployeeClaimListViewModel" />
+            <vm:ManagerClaimListVM  x:Key="ManagerClaimListViewModel" />
+            <vm:ClaimVM  x:Key="claimViewModel" />
+            <vm:ShowClaimVM  x:Key="showClaimViewModel" />
+
+            <vm:PermittedUserListToMyTasksVM  x:Key="permittedUserListToMyTasksViewModel" />
+            <vm:PermittedUserToMyTasksVM  x:Key="permittedUserToMyTasksViewModel" /> 
+
+            <vm:CalculationListVM x:Key="calculationListViewModel" />
+            <vm:CalculationResultListVM x:Key="calculationResultListViewModel" />
+            <vm:CalculationStatusVM x:Key="calculationStateViewModel"/>
+
+            <vm:CalculationResultVM x:Key="calculationResultViewModel" />
+
+            <vm:EmployeeCalculationResultHistoryVM x:Key="employeeCalculationResultHistoryViewModel" />
+            <vm:CalculationVM x:Key="calculationExecViewModel" />
+
+            <vm:JobIndexInPeriodTreeVM x:Key="jobIndexInPeriodTreeViewModel" />
+            <vm:JobIndexInPeriodVM x:Key="jobIndexInPeriodViewModel" />
+            <vm:JobIndexGroupInPeriodVM x:Key="jobIndexGroupInPeriodViewModel" />
+
+
+            <vm:JobInPeriodListVM x:Key="jplViewModel"/>
+            <vm:JobInPeriodVM x:Key="jpViewModel"/>
+            <vm:JobInPrdFieldsVM x:Key="jpfViewModel"/>
+            <vm:JobInPeriodJobIndicesVM x:Key="jpJobIndicesViewModel"/>
+
+
+
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Assets/LocalResource.xaml"/>
+                <ResourceDictionary Source="/MITD.PMS.Presentation.UI.Common;component/Assets/LocalResource.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

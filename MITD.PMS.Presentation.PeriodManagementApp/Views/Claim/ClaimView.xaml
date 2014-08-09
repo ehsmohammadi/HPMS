@@ -1,0 +1,76 @@
+﻿<pr:ViewBase xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" 
+    x:Class="MITD.PMS.Presentation.PeriodManagementApp.Views.ClaimView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pr="clr-namespace:MITD.Presentation.UI;assembly=MITD.Presentation.UI.SL"
+    mc:Ignorable="d"
+    d:DataContext="{Binding Source={StaticResource claimViewModel}}">
+    <ScrollViewer BorderThickness="0"  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <Grid Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                 </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <sdk:Label Grid.Row="0" Grid.Column="0"  Content="عنوان:"/>
+                <TextBox Grid.Row="0" Grid.Column="1"  HorizontalAlignment="Left"  IsReadOnly="{Binding Path=IsReplyMode}"
+                         Text="{Binding Path=Claim.Title, Mode=TwoWay}"  />
+
+
+                <sdk:Label Grid.Row="1" Grid.Column="0"  Content="موضوع اعتراض:"/>
+                <pr:ComboBoxEx Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" MinWidth="90" IsEnabled="{Binding Path=IsAddClaimMode}"               
+                             DisplayMemberPath="Name" 
+                             ItemsSource="{Binding Path=ClaimTypeList, Mode=TwoWay}" 
+                             SelectedValueProper="{Binding Mode=TwoWay, Path=Claim.ClaimTypeId}"
+                             SelectedValuePath="Id"
+                             >
+
+                </pr:ComboBoxEx>
+
+                <sdk:Label Grid.Row="2" Grid.Column="0"  Content="متن اعتراض"/>
+                <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap"  IsReadOnly="{Binding Path=IsReplyMode}"
+                         FlowDirection="RightToLeft" VerticalAlignment="Top" Height="150" Width="500"  MaxLength="512"
+                         Text="{Binding Path=Claim.Request, Mode=TwoWay}" AcceptsReturn="True"  />
+
+
+
+                <sdk:Label Grid.Row="3" Grid.Column="0"  Content="متن پاسخ" Visibility="{Binding Path=ReplyVisibilityMode}"/>
+                <TextBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap"  MaxLength="512" Visibility="{Binding Path=ReplyVisibilityMode}"
+                         FlowDirection="RightToLeft" VerticalAlignment="Top" Height="150" Width="500"
+                         Text="{Binding Path=Claim.Response, Mode=TwoWay}" AcceptsReturn="True"  />
+
+            </Grid>
+            <StackPanel Grid.Row="1"  VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center">
+
+                <Button Style="{StaticResource CustomButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"  Visibility="{Binding Path=AddClaimVisibilityMode}"
+                    Content="{Binding Path=SaveCommand.DisplayName}" 
+                    Command="{Binding Path=SaveCommand.Command}"  />
+
+                <Button Style="{StaticResource CustomButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=ReplyVisibilityMode}"
+                    Content="{Binding Path=RejectCommand.DisplayName}" 
+                    Command="{Binding Path=RejectCommand.Command}"  />
+
+                <Button Style="{StaticResource CustomButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=ReplyVisibilityMode}"
+                    Content="{Binding Path=AcceptCommand.DisplayName}" 
+                    Command="{Binding Path=AcceptCommand.Command}"  />
+
+                <Button Style="{StaticResource CustomButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Content="{Binding Path=CancelCommand.DisplayName}" 
+                    Command="{Binding Path=CancelCommand.Command}" />
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</pr:ViewBase>
+

@@ -1,0 +1,26 @@
+﻿using System;
+using System.Net;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Ink;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Shapes;
+using MITD.PMS.Presentation.Contracts;
+using MITD.Presentation;
+
+namespace MITD.PMS.Presentation.Logic
+{
+    public interface IPeriodController 
+    {
+        void ShowPeriod(PeriodDto periodDto,ActionEnum actionType);
+        void ShowPeriodList();
+<<<<<<< HEAD
+        void ShowOrganizationChartInPrdMgnt(PeriodDto periodDto);
+=======
+        void ShowJobInPeriodList();
+>>>>>>> 7ece2ea55ed3fe481ae5329ac252711651745f06
+    }
+}

@@ -1,0 +1,98 @@
+﻿<pr:ViewBase xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" 
+    x:Class="MITD.PMS.Presentation.BasicInfoApp.Views.RuleVersionView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pr="clr-namespace:MITD.Presentation.UI;assembly=MITD.Presentation.UI.SL"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    mc:Ignorable="d"
+    d:DataContext="{Binding Source={StaticResource rvViewModel}}">
+    <ScrollViewer BorderThickness="0"  VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
+        <Grid Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+               
+
+                <sdk:Label Grid.Row="0" Grid.Column="0"  Content="نام:"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=Rule.Name, Mode=TwoWay}" IsReadOnly="True"  MinWidth="200" HorizontalAlignment="Left"/>
+
+                <StackPanel Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <sdk:Label Content="از دوره:"/>
+                    <pr:ComboBoxEx Width="150" Margin="5"  IsEnabled="{Binding Path=ShowCompileCommand,Mode=TwoWay}"                   
+                             DisplayMemberPath="Name" 
+                             ItemsSource="{Binding Path=Periods, Mode=TwoWay}" 
+                             SelectedValueProper="{Binding Mode=TwoWay, Path=SelectedRuleVersion.PeriodId,
+                             ValidatesOnExceptions=true,
+                             ValidatesOnDataErrors=true,
+                             NotifyOnValidationError=true}"
+                             SelectedValuePath="Id">
+                        <pr:ComboBoxEx.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel/>
+                            </ItemsPanelTemplate>
+                        </pr:ComboBoxEx.ItemsPanel>
+                    </pr:ComboBoxEx>
+                    <sdk:Label Margin="5"  Content="ورژن:"/>
+                    <sdk:Label Margin="5" Content="{Binding Path=SelectedRuleVersion.VersionId,Mode=OneWay}" 
+                               Visibility="{Binding Path=ShowVersion,
+                                            Converter={StaticResource VisibilityConverter}}"/>
+                    <pr:ComboBoxEx MinWidth="150" Margin="5"  
+                             DisplayMemberPath="VersionId" 
+                             ItemsSource="{Binding Path=Versions, Mode=TwoWay}" 
+                             SelectedValueProper="{Binding Mode=TwoWay, Path=SelectedRuleVersion.VersionId,
+                             ValidatesOnExceptions=true,
+                             ValidatesOnDataErrors=true,
+                             NotifyOnValidationError=true}"
+                             Visibility="{Binding Path=ShowVersions,
+                                          Converter={StaticResource VisibilityConverter}}"
+                             SelectedValuePath="VersionId">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged" >
+                                <pr:ExtendedInvokeCommandAction Command="{Binding Path=SetSelectedRuleContentCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <pr:ComboBoxEx.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel/>
+                            </ItemsPanelTemplate>
+                        </pr:ComboBoxEx.ItemsPanel>
+                    </pr:ComboBoxEx>
+                </StackPanel>
+
+                <sdk:Label Grid.Row="3" Grid.Column="0"  Content="متن قانون"/>
+                <TextBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" 
+                         FlowDirection="LeftToRight" VerticalAlignment="Top" Height="300" Width="700"
+                         Text="{Binding Path=SelectedRuleVersion.Content, Mode=TwoWay}" />
+            </Grid>
+            <StackPanel Grid.Row="1" Background="AliceBlue" Height="30"    VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Content="{Binding Path=CompileCommand.DisplayName}" 
+                    Command="{Binding Path=CompileCommand.Command}" 
+                    Visibility="{Binding Path=ShowCompileCommand,
+                                 Converter={StaticResource VisibilityConverter}}"/>
+                <Button Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Content="{Binding Path=SaveCommand.DisplayName}" 
+                    Command="{Binding Path=SaveCommand.Command}"  
+                    Visibility="{Binding Path=ShowSaveCommand,
+                                 Converter={StaticResource VisibilityConverter}}"/>
+                <Button Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Content="{Binding Path=CancelCommand.DisplayName}" 
+                    Command="{Binding Path=CancelCommand.Command}" />
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</pr:ViewBase>

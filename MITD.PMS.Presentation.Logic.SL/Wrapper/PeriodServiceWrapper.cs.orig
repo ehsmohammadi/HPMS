@@ -1,0 +1,86 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Ink;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Shapes;
+using MITD.PMS.Presentation.Contracts;
+using MITD.Presentation;
+
+namespace MITD.PMS.Presentation.Logic.Wrapper
+{
+<<<<<<< HEAD
+    public class PeriodServiceWrapper :IPeriodServiceWrapper
+=======
+    public partial class PeriodServiceWrapper:IPeriodServiceWrapper
+>>>>>>> 35cdb324961198748bd407c86d7bb0684fa5eefd
+    {
+
+        private string baseAddress = String.Format("{0}://{1}:{2}/api/periods",
+            Application.Current.Host.Source.Scheme,
+            Application.Current.Host.Source.Host,
+            Application.Current.Host.Source.Port);
+
+        private List<PeriodDto> periodList = new List<PeriodDto>() { new PeriodDto() { Id = 1, Name = "دوره اول", StartDate = DateTime.Now, EndDate = DateTime.Now,ActionCodes = new List<int> { 1, 2, 3, 5, 20, 35 } } };
+
+        public void GetAllPeriods(Action<PageResultDto<PeriodDto>, Exception> action, int pageSize, int pageIndex)
+        {
+            action(new PageResultDto<PeriodDto>{CurrentPage = 0,PageSize = 10,Result = periodList,TotalCount = periodList.Count,TotalPages = 1}, null);
+            //var url = string.Format(baseAddress + "?PageSize=" + pageSize + "&PageIndex=" + pageIndex);
+            //WebClientHelper.Get<PageResultDto<PeriodDto>>(new Uri(url, UriKind.Absolute),
+            //    (res, exp) => action(res, exp),
+            //    WebClientHelper.MessageFormat.Json);
+        }
+
+        public void DeletePeriod(Action<bool, Exception> action, long id)
+        {
+            var periodForDelete = periodList.FirstOrDefault(p => p.Id == id);
+            periodList.Remove(periodForDelete);
+            action(true, null);
+        }
+
+        public void GetPeriod(Action<PeriodDto, Exception> action, long id)
+        {
+            action(periodList.FirstOrDefault(p=>p.Id==id),null);
+            //var url = string.Format(baseAddress + "?Id=" + id );
+            //WebClientHelper.Get(new Uri(url, UriKind.Absolute),action,
+            //    WebClientHelper.MessageFormat.Json);
+        }
+
+        public void AddPeriod(Action<PeriodDto, Exception> action, PeriodDto period)
+        {
+            long id = 1;
+            if (periodList.Count>0)
+            id = periodList.Max(p => p.Id) + 1;
+
+            period.Id = id;
+            period.ActionCodes = new List<int> {1, 2,3, 5,20,35};
+            periodList.Add(period);
+            action(period, null);
+            //var url = string.Format(baseAddress);
+            //WebClientHelper.Post<PeriodDto, PeriodDto>(new Uri(url, UriKind.Absolute),
+            //    (res, exp) => action(res, exp), period,
+            //    WebClientHelper.MessageFormat.Json);
+        }
+
+        public void UpdatePeriod(Action<PeriodDto, Exception> action, PeriodDto period)
+        {
+            var periodForDelete=periodList.FirstOrDefault(p => p.Id == period.Id);
+            periodList.Remove(periodForDelete);
+            periodList.Add(period);
+            action(period, null);
+            //var url = string.Format(baseAddress + "?Id=" + period.Id);
+            //WebClientHelper.Put<PeriodDto, PeriodDto>(new Uri(url, UriKind.Absolute),
+            //    (res, exp) => action(res, exp), period,
+            //    WebClientHelper.MessageFormat.Json);
+        }
+
+
+    }
+}

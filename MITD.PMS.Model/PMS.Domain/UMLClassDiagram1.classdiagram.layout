@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="UMLClassDiagram1">
+  <logicalClassDesignerModelMoniker Id="f3f98c2b-2898-4ae2-b685-03807e21339b" />
+  <nestedChildShapes>
+    <packageShape Id="b497abff-afce-4a42-8ba4-86449b354e2f" absoluteBounds="0.5, 0.5, 8.875, 4.625" customColor="255, 249, 230" hideQualifiedName="false">
+      <packageMoniker Id="493b692b-8c48-4051-8d4d-fbc479543b28" LastKnownName="Domain" />
+      <nestedChildShapes>
+        <packageShape Id="e558495d-718a-48d7-80f0-cd5cc4f14f79" absoluteBounds="0.875, 1.125, 3.5, 3.125" customColor="255, 249, 230" hideQualifiedName="false">
+          <packageMoniker Id="dafa5dd9-b329-4f55-ae5f-9a644363dd4c" LastKnownName="Model" />
+          <nestedChildShapes>
+            <packageShape Id="3325ee6c-67ee-4caa-aa20-659d81382654" absoluteBounds="1, 1.625, 1.875, 1" customColor="255, 249, 230" hideQualifiedName="false">
+              <packageMoniker Id="d865db51-7cf0-4488-9f18-6a3a72d7ead6" LastKnownName="Calculations" />
+            </packageShape>
+          </nestedChildShapes>
+        </packageShape>
+        <packageShape Id="24b9105d-bb0f-4747-8e84-a589d6366f84" absoluteBounds="4.875, 1.125, 4, 2.625" customColor="255, 249, 230" hideQualifiedName="false">
+          <packageMoniker Id="88e267ba-2422-4d04-a55a-59ea84992198" LastKnownName="Service" />
+        </packageShape>
+      </nestedChildShapes>
+    </packageShape>
+  </nestedChildShapes>
+</logicalClassDesignerDiagram>

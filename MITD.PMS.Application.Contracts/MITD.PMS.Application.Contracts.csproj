@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{946EC2E6-5998-4852-8C57-AD77F3BBDCE6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MITD.PMS.Application.Contracts</RootNamespace>
+    <AssemblyName>MITD.PMS.Application.Contracts</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MITD.Core">
+      <HintPath>..\Dependency\MITD.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Core.RuleEngine, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependency\MITD.Core.RuleEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Domain.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependency\MITD.Domain.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActionManager\IActionService.cs" />
+    <Compile Include="PMSAdmin\IPMSRuleService.cs" />
+    <Compile Include="PMSAdmin\IFunctionService.cs" />
+    <Compile Include="PMSAdmin\IPolicyService.cs" />
+    <Compile Include="PMSAdmin\IJobIndexService.cs" />
+    <Compile Include="PMSAdmin\IJobPositionService.cs" />
+    <Compile Include="PMSAdmin\IUnitService.cs" />
+    <Compile Include="PMSAdmin\IJobService.cs" />
+    <Compile Include="PMSAdmin\ICustomFieldService.cs" />
+    <Compile Include="PMS\ICalculationExceptionPersister.cs" />
+    <Compile Include="PMS\InquiryJobIndexPoinItem.cs" />
+    <Compile Include="PMS\InquirySubjectWithInquirers.cs" />
+    <Compile Include="PMS\IInquiryJobIndexPointService.cs" />
+    <Compile Include="PMS\IInquiryService.cs" />
+    <Compile Include="PMS\IClaimService.cs" />
+    <Compile Include="PMS\IUserManagementService.cs" />
+    <Compile Include="PMS\JobPositionDuration.cs" />
+    <Compile Include="PMS\IJobIndexPointPersister.cs" />
+    <Compile Include="PMS\IEmployeeService.cs" />
+    <Compile Include="PMS\IJobIndexService.cs" />
+    <Compile Include="PMS\IJobPositionService.cs" />
+    <Compile Include="PMS\IPeriodService.cs" />
+    <Compile Include="PMS\IJobService.cs" />
+    <Compile Include="PMS\IUnitService.cs" />
+    <Compile Include="PMS\IJobIndexPointCalculatorService.cs" />
+    <Compile Include="PMS\ICalculationService.cs" />
+    <Compile Include="PMS\IJobIndexPointCalculatorProvider.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\ILogService.cs" />
+    <Compile Include="Security\ISecurityService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MITD.PMS.Domain.Model\MITD.PMS.Domain.csproj">
+      <Project>{1b85ac19-27df-43bb-91b7-9a2aecddb9d1}</Project>
+      <Name>MITD.PMS.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMSAdmin.Domain\MITD.PMSAdmin.Domain.csproj">
+      <Project>{4d0b3594-a787-4982-870d-3f079d2f4b86}</Project>
+      <Name>MITD.PMSAdmin.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMSSecurity.Domain\MITD.PMSSecurity.Domain.csproj">
+      <Project>{58e04975-ac8a-42bb-9a49-d68b48f84e79}</Project>
+      <Name>MITD.PMSSecurity.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

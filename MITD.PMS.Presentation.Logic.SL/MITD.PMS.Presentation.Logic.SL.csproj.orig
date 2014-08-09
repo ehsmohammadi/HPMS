@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{73C3010F-3DF1-45DC-B36C-76FA83E9ECB4}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MITD.PMS.Presentation.Logic</RootNamespace>
+    <AssemblyName>MITD.PMS.Presentation.Logic.SL</AssemblyName>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+  </PropertyGroup>
+  <!-- This property group is only here to support building this project using the 
+       MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
+       to set the TargetFrameworkVersion to v3.5 -->
+  <PropertyGroup Condition="'$(MSBuildToolsVersion)' == '3.5'">
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.3.1.0\lib\sl4\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\packages\Castle.Windsor.3.1.0\lib\sl4\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\CommonServiceLocator.1.0\lib\SL30\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Core.SL">
+      <HintPath>..\Dependency\MITD.Core.SL.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Presentation.Config.Castle.SL">
+      <HintPath>..\Dependency\MITD.Presentation.Config.Castle.SL.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Presentation.SL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=16494395142279b8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependency\MITD.Presentation.SL.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Presentation.UI.SL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=16494395142279b8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependency\MITD.Presentation.UI.SL.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq.Silverlight">
+      <HintPath>..\packages\Moq.4.0.10827\lib\Silverlight4\Moq.Silverlight.dll</HintPath>
+    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core">
+      <HintPath>$(TargetFrameworkDirectory)System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Data, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Windows.Browser" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controller\IBasicInfoController.cs" />
+    <Compile Include="ApplicationConfigHelper.cs" />
+    <Compile Include="Controller\IPeriodController.cs" />
+    <Compile Include="Converters\PersianDateConverter.cs" />
+    <Compile Include="ILocalizedResources.cs" />
+    <Compile Include="IMainAppLocalizedResources.cs" />
+    <Compile Include="ChangedArgs\JobPostListChangedArg.cs" />
+    <Compile Include="ChangedArgs\RuleListChangedArg.cs" />
+    <Compile Include="Views\IJobIndexListView.cs" />
+    <Compile Include="Views\IJobIndexView.cs" />
+    <Compile Include="Views\IJobListView.cs" />
+    <Compile Include="Views\IJobPostListView.cs" />
+    <Compile Include="Views\IJobPostView.cs" />
+    <Compile Include="Views\IJobView.cs" />
+    <Compile Include="Views\IRuleListView.cs" />
+    <Compile Include="Views\IRuleView.cs" />
+    <Compile Include="Wrapper\RuleServiceWrapper.cs" />
+    <Compile Include="Wrapper\JobPostServiceWrapper.cs" />
+    <Compile Include="Wrapper\JobIndexServiceWrapper.cs" />
+    <Compile Include="Wrapper\IJobIndexServiceWrapper.cs" />
+    <Compile Include="MainWindowVM.cs" />
+    <Compile Include="UIBusinessClasses\DataGridCommandViewModel.cs" />
+    <Compile Include="Views\IOrgElementUnitView.cs" />
+    <Compile Include="Views\IJobInPeriodView.cs" />
+    <Compile Include="Views\IOrganizationChartTreeView.cs" />
+    <Compile Include="Views\IJobInPeriodListView.cs" />
+    <Compile Include="Wrapper\OrganizationChartWrapper.cs" />
+    <Compile Include="Wrapper\JobInPeriodServiceWrapper.cs" />
+<<<<<<< HEAD
+    <Compile Include="Wrapper\IJobInPeriodServiceWrapper.cs" />
+    <Compile Include="Wrapper\IJobPostServiceWrapper.cs" />
+    <Compile Include="Wrapper\IJobServiceWrapper.cs" />
+=======
+>>>>>>> 35cdb324961198748bd407c86d7bb0684fa5eefd
+    <Compile Include="Wrapper\IPeriodServiceWrapper.cs" />
+    <Compile Include="Controller\IPMSController.cs" />
+    <Compile Include="Controller\PMSController.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Wrapper\IRuleServiceWrapper.cs" />
+    <Compile Include="Views\IPeriodView.cs" />
+    <Compile Include="Views\IPeriodListView.cs" />
+    <Compile Include="Wrapper\JobServiceWrapper.cs" />
+    <Compile Include="Wrapper\PeriodServiceWrapper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ActionServices\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MITD.PMS.Presentation.Contracts.SL\MITD.PMS.Presentation.Contracts.SL.csproj">
+      <Project>{E31D9461-636C-402E-8F5D-5E7AB32A8875}</Project>
+      <Name>MITD.PMS.Presentation.Contracts.SL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
