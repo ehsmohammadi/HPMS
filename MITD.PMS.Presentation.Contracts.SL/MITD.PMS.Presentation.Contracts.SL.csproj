@@ -351,6 +351,9 @@
     <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\JobPosition\JobPositionInPeriodDTOWithActions.cs">
       <Link>PeriodManagement\JobPosition\JobPositionInPeriodDTOWithActions.cs</Link>
     </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\Job\JobIndex\JobInPeriodJobIndexDTO.cs">
+      <Link>PeriodManagement\Job\JobIndex\JobInPeriodJobIndexDTO.cs</Link>
+    </Compile>
     <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\Job\JobInPeriodAssignment.cs">
       <Link>PeriodManagement\Job\JobInPeriodAssignment.cs</Link>
     </Compile>
@@ -484,6 +487,7 @@
     <Compile Include="PeriodManagement\JobPosition\JobPositionInPeriodAssignmentDTO_Client.cs" />
     <Compile Include="PeriodManagement\JobPosition\JobPositionInPeriodDTO_Client.cs" />
     <Compile Include="PeriodManagement\JobPosition\JobPositionInPeriodDTOWithActions_Client.cs" />
+    <Compile Include="PeriodManagement\Job\JobIndex\JobInPeriodJobIndexDTO_Client.cs" />
     <Compile Include="PeriodManagement\Job\JobInPeriodAssignment_Client.cs" />
     <Compile Include="PeriodManagement\Job\PeriodJobsDTO_Client.cs" />
     <Compile Include="PeriodManagement\Job\JobInPeriodDTOWithActions_Client.cs" />

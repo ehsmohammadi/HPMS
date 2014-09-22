@@ -209,6 +209,8 @@
     <Compile Include="PeriodManagement\JobPosition\JobPositionInPeriodDTO.cs" />
     <Compile Include="PeriodManagement\JobPosition\JobPositionInPeriodDTOs_Server.cs" />
     <Compile Include="PeriodManagement\JobPosition\JobPositionInPeriodAssignmentDTO_Server.cs" />
+    <Compile Include="PeriodManagement\Job\JobIndex\JobInPeriodJobIndexDTO_Server.cs" />
+    <Compile Include="PeriodManagement\Job\JobIndex\JobInPeriodJobIndexDTO.cs" />
     <Compile Include="PeriodManagement\Job\JobInPeriodAssignment.cs">
       <SubType>Code</SubType>
     </Compile>

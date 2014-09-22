@@ -11,7 +11,7 @@
     d:DataContext="{Binding Source={StaticResource jpJobIndicesViewModel}}">
 
     <ScrollViewer BorderThickness="0"  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-        <Grid Background="White" Width="650" Height="500">
+        <Grid Background="White" Height="500">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -28,7 +28,34 @@
                 <sdk:Label  Margin="5" FontWeight="Bold" Content="اختصاص شاخص های مرتبط با شغل انتخابی برای این دوره"/>
             </StackPanel>
 
-            <ContentControl Grid.Row="2" Content="{Binding Path=JobIndexInPeriodList, Mode=TwoWay}"  >
+
+            <sdk:DataGrid Grid.Row="2" AutoGenerateColumns="False" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Stretch"
+                      ItemsSource="{Binding Path=JobIndexInPeriodList, Mode=TwoWay}" >
+
+                <sdk:DataGrid.Columns>
+
+                    <sdk:DataGridCheckBoxColumn Header="مربوط به شغل" Binding="{Binding IsChecked,Mode=TwoWay}"   />
+
+                    <sdk:DataGridTextColumn Header="نام" CanUserReorder="True" IsReadOnly="True"
+                                            CanUserResize="True" CanUserSort="True" Width="Auto" Binding="{Binding Path=Name,Mode=TwoWay}" />
+
+                    <sdk:DataGridTemplateColumn Header="نمایش در رده های مختلف" IsReadOnly="False" >
+                        <sdk:DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox Content="رده بالا" IsChecked="true" Margin="3" Visibility="{Binding IsInquireable,Converter={StaticResource VisibilityConverter}}"/>
+                                    <CheckBox Content="هم رده" IsChecked="true" Margin="3" Visibility="{Binding IsInquireable,Converter={StaticResource VisibilityConverter}}"/>
+                                    <CheckBox Content="رده پایین" IsChecked="true" Margin="3" Visibility="{Binding IsInquireable,Converter={StaticResource VisibilityConverter}}"/>
+                                      
+                                </StackPanel>
+                            </DataTemplate>
+                        </sdk:DataGridTemplateColumn.CellTemplate>
+                    </sdk:DataGridTemplateColumn>
+
+                </sdk:DataGrid.Columns>
+            </sdk:DataGrid>
+
+            <!--<ContentControl Grid.Row="2" Content="{Binding Path=JobIndexInPeriodList, Mode=TwoWay}"  >
                 <ContentControl.ContentTemplate >
                     <DataTemplate >
                         <ItemsControl IsTabStop="False" ItemsSource="{Binding}" Margin="6,2">
@@ -48,7 +75,7 @@
                         </ItemsControl>
                     </DataTemplate>
                 </ContentControl.ContentTemplate>
-            </ContentControl>
+            </ContentControl>-->
 
 
             <StackPanel Grid.Row="3"  VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -57,7 +84,8 @@
                     Command="{Binding Path=SaveCommand.Command}"  />
                 <Button Style="{StaticResource CustomButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"
                     Content="{Binding Path=CancelCommand.DisplayName}" 
-                    Command="{Binding Path=CancelCommand.Command}" />
+                    Command="{Binding Path=CancelCommand.Command}"
+                        />
             </StackPanel>
         </Grid>
     </ScrollViewer>

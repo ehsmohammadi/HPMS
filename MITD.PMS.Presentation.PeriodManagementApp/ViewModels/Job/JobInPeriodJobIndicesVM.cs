@@ -38,8 +38,8 @@ namespace MITD.PMS.Presentation.Logic
         }
 
 
-        private List<JobIndexInPeriodDTO> jobIndexInPeriodList = new List<JobIndexInPeriodDTO>();
-        public List<JobIndexInPeriodDTO> JobIndexInPeriodList
+        private ObservableCollection<JobIndexInPeriodDTO> jobIndexInPeriodList = new ObservableCollection<JobIndexInPeriodDTO>();
+        public ObservableCollection<JobIndexInPeriodDTO> JobIndexInPeriodList
         {
             get { return jobIndexInPeriodList; }
             set { this.SetField(vm => vm.JobIndexInPeriodList, ref jobIndexInPeriodList, value); }
@@ -117,7 +117,7 @@ namespace MITD.PMS.Presentation.Logic
                 HideBusyIndicator();
                 if (exp == null)
                 {
-                    JobIndexInPeriodList = res;
+                    JobIndexInPeriodList = new ObservableCollection<JobIndexInPeriodDTO>(res);
                     JobIndexInPeriodList.Where(allIndex => jobInPeriod.JobIndices.Select(f => f.Id).Contains(allIndex.Id))
                                    .ToList()
                                    .ForEach(field => field.IsChecked = true);
