@@ -453,7 +453,7 @@ namespace MITD.Core.RuleEngine
                 Utils.AddEmployeePoint(job, ""e3"", 9 * y3);
 
           }
-", RuleType.PerCalculation,1);
+", RuleType.PerCalculation, 1);
                 ruleRep.Add(rule1);
                 rules.Add(rule1);
 
@@ -742,7 +742,7 @@ namespace MITD.Core.RuleEngine
             }
             Utils.AddCalculationPoint(""MinPereiodicMaintenancePlaningTime"", calcPointMinCostControl);
             Utils.AddCalculationPoint(""MinTechnicalOffHireTime"", calcPointMinTechnicalOffHireTime);
-", RuleType.PerCalculation,2);
+", RuleType.PerCalculation, 2);
                 ruleRep.Add(rule2);
                 rules.Add(rule2);
 
@@ -813,7 +813,7 @@ namespace MITD.Core.RuleEngine
                 }
 
             }
-", RuleType.PerCalculation,3);
+", RuleType.PerCalculation, 3);
                 ruleRep.Add(rule3);
                 rules.Add(rule3);
 
@@ -947,7 +947,7 @@ namespace MITD.Core.RuleEngine
                 Utils.AddEmployeePoint(""final"", total / importanceWeight, true);
 
           
-", RuleType.PerCalculation,4);
+", RuleType.PerCalculation, 4);
                 ruleRep.Add(rule4);
                 rules.Add(rule4);
 
@@ -1427,7 +1427,7 @@ namespace MITD.Core.RuleEngine
                     JobIndex jobIndex;
                     if (sharedJobIndex.DictionaryName == "CostControl")
                         jobIndex = new PMS.Domain.Model.JobIndices.JobIndex(jobIndexRep.GetNextId(), period,
-                            sharedJobIndex, jobIndexGroupTechnical, itm.IsInquirable,2);
+                            sharedJobIndex, jobIndexGroupTechnical, itm.IsInquirable, 2);
                     else
                         jobIndex = new PMS.Domain.Model.JobIndices.JobIndex(jobIndexRep.GetNextId(), period,
                             sharedJobIndex, jobIndexGroupTechnical, itm.IsInquirable);
@@ -1475,16 +1475,16 @@ namespace MITD.Core.RuleEngine
 
                 foreach (var pmsAdminJob in jobList)
                 {
-                    var jobIndexForThisPeriod = jobIndexInPeriodList;
+                    var jobJobIndices = jobIndexInPeriodList.Select(jobIndex => new JobJobIndex(jobIndex.Id, true, true, true)).ToList();
                     if (pmsAdminJob.DictionaryName == "TechnicalManager")
-                        jobIndexForThisPeriod = new List<JobIndex>();
+                        jobJobIndices = new List<JobJobIndex>();
 
                     var job = new PMS.Domain.Model.Jobs.Job(period, new PMS.Domain.Model.Jobs.SharedJob(
                         new PMS.Domain.Model.Jobs.SharedJobId(pmsAdminJob.Id.Id), pmsAdminJob.Name, pmsAdminJob.DictionaryName), jobCftList
                         .Where(j => pmsAdminJob.CustomFieldTypeIdList.Select(i => i.Id)
                             .Contains(j.Id.Id)).Select(p =>
                                 new PMS.Domain.Model.Jobs.JobCustomField(new PMS.Domain.Model.Jobs.JobCustomFieldId(period.Id, new SharedJobCustomFieldId(p.Id.Id), new SharedJobId(pmsAdminJob.Id.Id))
-                                    , new SharedJobCustomField(new SharedJobCustomFieldId(p.Id.Id), p.Name, p.DictionaryName, p.MinValue, p.MaxValue, p.TypeId))).ToList(), jobIndexForThisPeriod);
+                                    , new SharedJobCustomField(new SharedJobCustomFieldId(p.Id.Id), p.Name, p.DictionaryName, p.MinValue, p.MaxValue, p.TypeId))).ToList(), jobJobIndices);
                     jobInPeriodList.Add(job);
                     jobRep.Add(job);
                 }
@@ -1547,7 +1547,7 @@ namespace MITD.Core.RuleEngine
                 var jobcustomFields1 = jobInPeriodList.Single(j => j.Id.Equals(jobPositionInPeriod1.JobId)).CustomFields;
                 if (jobcustomFields1 != null && jobcustomFields1.Count != 0)
                 {
-                    var employeeJobPosition = new Domain.Model.Employees.EmployeeJobPosition(employee1, jobPositionInPeriod1, period.StartDate, period.EndDate, 100,1,
+                    var employeeJobPosition = new Domain.Model.Employees.EmployeeJobPosition(employee1, jobPositionInPeriod1, period.StartDate, period.EndDate, 100, 1,
                     jobcustomFields1.Select(j => new EmployeeJobCustomFieldValue(j.Id, docSeedValues.Single(d => d.DicName == j.DictionaryName).Value1)).ToList()
                     );
                     employee1.AssignJobPositions(new List<Domain.Model.Employees.EmployeeJobPosition> { employeeJobPosition }, periodManagerService);
@@ -1568,7 +1568,7 @@ namespace MITD.Core.RuleEngine
                 var jobcustomFields2 = jobInPeriodList.Single(j => j.Id.Equals(jobPositionInPeriod2.JobId)).CustomFields;
                 if (jobcustomFields2 != null && jobcustomFields2.Count != 0)
                 {
-                    var employeeJobPosition = new Domain.Model.Employees.EmployeeJobPosition(employee2, jobPositionInPeriod2, period.StartDate, period.EndDate, 100,1,
+                    var employeeJobPosition = new Domain.Model.Employees.EmployeeJobPosition(employee2, jobPositionInPeriod2, period.StartDate, period.EndDate, 100, 1,
                     jobcustomFields2.Select(j => new EmployeeJobCustomFieldValue(j.Id, docSeedValues.Single(d => d.DicName == j.DictionaryName).Value2)).ToList()
                     );
                     employee2.AssignJobPositions(new List<Domain.Model.Employees.EmployeeJobPosition> { employeeJobPosition }, periodManagerService);
@@ -1589,7 +1589,7 @@ namespace MITD.Core.RuleEngine
                 var jobcustomFields3 = jobInPeriodList.Single(j => j.Id.Equals(jobPositionInPeriod3.JobId)).CustomFields;
                 if (jobcustomFields3 != null && jobcustomFields3.Count != 0)
                 {
-                    var employeeJobPosition = new Domain.Model.Employees.EmployeeJobPosition(employee3, jobPositionInPeriod3, period.StartDate, period.EndDate, 100,1,
+                    var employeeJobPosition = new Domain.Model.Employees.EmployeeJobPosition(employee3, jobPositionInPeriod3, period.StartDate, period.EndDate, 100, 1,
                     jobcustomFields3.Select(j => new EmployeeJobCustomFieldValue(j.Id, docSeedValues.Single(d => d.DicName == j.DictionaryName).Value3)).ToList()
                     );
                     employee3.AssignJobPositions(new List<Domain.Model.Employees.EmployeeJobPosition> { employeeJobPosition }, periodManagerService);
@@ -1610,7 +1610,7 @@ namespace MITD.Core.RuleEngine
                 var jobcustomFields4 = jobInPeriodList.Single(j => j.Id.Equals(jobPositionInPeriod4.JobId)).CustomFields;
                 if (jobcustomFields4 != null && jobcustomFields4.Count != 0)
                 {
-                    var employeeJobPosition = new Domain.Model.Employees.EmployeeJobPosition(employee4, jobPositionInPeriod4, period.StartDate, period.EndDate, 100,1,
+                    var employeeJobPosition = new Domain.Model.Employees.EmployeeJobPosition(employee4, jobPositionInPeriod4, period.StartDate, period.EndDate, 100, 1,
                     jobcustomFields4.Select(j => new EmployeeJobCustomFieldValue(j.Id, docSeedValues.Single(d => d.DicName == j.DictionaryName).Value4)).ToList()
                     );
                     employee4.AssignJobPositions(new List<Domain.Model.Employees.EmployeeJobPosition> { employeeJobPosition }, periodManagerService);
@@ -1631,7 +1631,7 @@ namespace MITD.Core.RuleEngine
                 var jobcustomFields5 = jobInPeriodList.Single(j => j.Id.Equals(jobPositionInPeriod5.JobId)).CustomFields;
                 if (jobcustomFields5 != null && jobcustomFields5.Count != 0)
                 {
-                    var employeeJobPosition = new Domain.Model.Employees.EmployeeJobPosition(employee5, jobPositionInPeriod5, period.StartDate, period.EndDate, 100,1,
+                    var employeeJobPosition = new Domain.Model.Employees.EmployeeJobPosition(employee5, jobPositionInPeriod5, period.StartDate, period.EndDate, 100, 1,
                     jobcustomFields5.Select(j => new EmployeeJobCustomFieldValue(j.Id, docSeedValues.Single(d => d.DicName == j.DictionaryName).Value5)).ToList()
                     );
                     employee5.AssignJobPositions(new List<Domain.Model.Employees.EmployeeJobPosition> { employeeJobPosition }, periodManagerService);
@@ -1647,7 +1647,7 @@ namespace MITD.Core.RuleEngine
                            "امور");
 
                 var jobPositionInPeriod0 = jobPositionInPeriodList[0];
-                var employeeJobPosition0 = new Domain.Model.Employees.EmployeeJobPosition(employee0, jobPositionInPeriod0, period.StartDate, period.EndDate, 100,1,
+                var employeeJobPosition0 = new Domain.Model.Employees.EmployeeJobPosition(employee0, jobPositionInPeriod0, period.StartDate, period.EndDate, 100, 1,
                 null
                 );
                 employee0.AssignJobPositions(new List<Domain.Model.Employees.EmployeeJobPosition> { employeeJobPosition0 }, periodManagerService);
@@ -1723,9 +1723,9 @@ namespace MITD.Core.RuleEngine
                     foreach (var itm in jobp.ConfigurationItemList)
                     {
                         var job = jobRep.GetById(itm.JobPosition.JobId);
-                        foreach (var jobIndexId in job.JobIndexIdList)
+                        foreach (var jobIndexId in job.JobIndexList)
                         {
-                            var jobIndex = jobIndexRep.GetById(jobIndexId);
+                            var jobIndex = jobIndexRep.GetById(jobIndexId.JobIndexId);
                             if ((jobIndex as JobIndex).IsInquireable)
                             {
                                 string value = string.Empty;

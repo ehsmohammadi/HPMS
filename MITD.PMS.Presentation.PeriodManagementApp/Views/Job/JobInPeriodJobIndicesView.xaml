@@ -43,9 +43,9 @@
                         <sdk:DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <CheckBox Content="رده بالا" IsChecked="true" Margin="3" Visibility="{Binding IsInquireable,Converter={StaticResource VisibilityConverter}}"/>
-                                    <CheckBox Content="هم رده" IsChecked="true" Margin="3" Visibility="{Binding IsInquireable,Converter={StaticResource VisibilityConverter}}"/>
-                                    <CheckBox Content="رده پایین" IsChecked="true" Margin="3" Visibility="{Binding IsInquireable,Converter={StaticResource VisibilityConverter}}"/>
+                                    <CheckBox Content="رده بالا" IsChecked="{Binding ShowforTopLevel,Mode=TwoWay}" Margin="3" Visibility="{Binding IsInquireable,Converter={StaticResource VisibilityConverter}}"/>
+                                    <CheckBox Content="هم رده" IsChecked="{Binding ShowforSameLevel,Mode=TwoWay}" Margin="3" Visibility="{Binding IsInquireable,Converter={StaticResource VisibilityConverter}}"/>
+                                    <CheckBox Content="رده پایین" IsChecked="{Binding ShowforLowLevel,Mode=TwoWay}" Margin="3" Visibility="{Binding IsInquireable,Converter={StaticResource VisibilityConverter}}"/>
                                       
                                 </StackPanel>
                             </DataTemplate>

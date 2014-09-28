@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MITD.Core;
-using MITD.PMS.Exceptions;
+﻿using MITD.Core;
 
 namespace MITD.PMS.Domain.Model.Jobs
 {

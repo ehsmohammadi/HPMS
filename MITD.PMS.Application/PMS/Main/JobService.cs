@@ -41,7 +41,7 @@ namespace MITD.PMS.Application
         }
 
 
-        public Job AssignJob(JobId jobId, List<SharedJobCustomFieldId> customFieldIdList, IList<AbstractJobIndexId> jobIndexIdList)
+        public Job AssignJob(JobId jobId, List<SharedJobCustomFieldId> customFieldIdList, IList<JobIndexForJob> jobIndexList)
         {
             using (var tr = new TransactionScope())
             {
@@ -57,11 +57,17 @@ namespace MITD.PMS.Application
                         sharedJobCustomField
                         ));
                 }
-                //job.UpdateCustomFields(jobCustomFields);
-                var jobIndices = jobIndexRep.FindJobIndices(j => jobIndexIdList.Contains(j.Id));
+                
+                var jobIndices = jobIndexRep.FindJobIndices(j => jobIndexList.Select(jj=>jj.JobIndexId).Contains(j.Id));
                 //job.UpdateJobIndices(jobIndices.ToList());
+                var jobJobInddices = new List<JobJobIndex>();
+                foreach (var jobIndex in jobIndices)
+                {
+                    var jobindexForJob = jobIndexList.Single(j => j.JobIndexId == jobIndex.Id);
+                    jobJobInddices.Add(new JobJobIndex(jobIndex.Id, jobindexForJob.ShowforTopLevel,jobindexForJob.ShowforSameLevel,jobindexForJob.ShowforLowLevel));
+                }
 
-                var job = new Job(period, sharedJob, jobCustomFields, jobIndices.ToList());
+                var job = new Job(period, sharedJob, jobCustomFields, jobJobInddices);
                 jobRep.Add(job);
                 tr.Complete();
                 return job;
@@ -89,7 +95,7 @@ namespace MITD.PMS.Application
             }
         }
 
-        public Job UpdateJob(JobId jobId, List<SharedJobCustomFieldId> customFieldIdList, IList<AbstractJobIndexId> jobIndexIdList)
+        public Job UpdateJob(JobId jobId, List<SharedJobCustomFieldId> customFieldIdList, IList<JobIndexForJob> jobIndexList)
         {
             using (var tr = new TransactionScope())
             {
@@ -105,8 +111,16 @@ namespace MITD.PMS.Application
                         ));
                 }
                 job.UpdateCustomFields(jobCustomFields, periodChecker);
-                var jobIndices = jobIndexRep.FindJobIndices(j => jobIndexIdList.Contains(j.Id));
-                job.UpdateJobIndices(jobIndices.ToList(), periodChecker);
+                var jobindexIdList = jobIndexList.Select(jj => jj.JobIndexId).ToList();
+                var jobIndices = jobIndexRep.FindJobIndices(j => jobindexIdList.Contains(j.Id));
+
+                var jobJobIndices = new List<JobJobIndex>();
+                foreach (var jobIndex in jobIndices)
+                {
+                    var jobindexForJob = jobIndexList.Single(j => j.JobIndexId == jobIndex.Id);
+                    jobJobIndices.Add(new JobJobIndex(jobIndex.Id, jobindexForJob.ShowforTopLevel, jobindexForJob.ShowforSameLevel, jobindexForJob.ShowforLowLevel));
+                }
+                job.UpdateJobIndices(jobJobIndices, periodChecker);
                 tr.Complete();
                 return job;
 

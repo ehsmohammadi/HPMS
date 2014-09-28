@@ -83,7 +83,7 @@ namespace MITD.PMS.Interface
 
             Job job = jobService.AssignJob(new JobId(new PeriodId(periodId), new SharedJobId(jobInPeriod.JobId)),
                 jobInPeriod.CustomFields.Select(c=> new SharedJobCustomFieldId(c.Id)).ToList(),
-                jobInPeriod.JobIndices.Select(c => new AbstractJobIndexId(c.Id)).ToList()
+                jobInPeriod.JobIndices.Select(c => new JobIndexForJob(new AbstractJobIndexId(c.Id),c.ShowforTopLevel,c.ShowforSameLevel,c.ShowforLowLevel)).ToList()
                 );
             return jobInPeriodDTOMapper.MapToModel(job,new string[]{});
         }
@@ -104,12 +104,27 @@ namespace MITD.PMS.Interface
 
         public JobInPeriodDTO GetJob(long periodId, long jobId, string selectedColumns)
         {
-            Job job = jobRep.GetById(new JobId(new PeriodId(periodId), new SharedJobId(jobId)));
+            var job = jobRep.GetById(new JobId(new PeriodId(periodId), new SharedJobId(jobId)));
             var jobDto = jobInPeriodDTOMapper.MapToModel(job, selectedColumns.Split(','));
             jobDto.CustomFields = job.CustomFields.Select(c => jobCustomFieldMapper.MapToModel(c)).ToList();
-            var jobIndices = jobIndexService.FindJobIndices(index => job.JobIndexIdList.Contains(index.Id));
-            jobDto.JobIndices = jobIndices.Select(index => jobIndexInPeriodMapper.MapToModel(index))
-                .Cast<JobIndexInPeriodDTO>().ToList();
+            var jobindexIdList = job.JobIndexList.Select(j => j.JobIndexId).ToList();
+            var jobIndices = jobIndexService.FindJobIndices(index => jobindexIdList.Contains(index.Id));
+            //todo change this mapping to valid mapping need som work !!!!!!
+            var jobInPeriodJobIndexDTOList = new List<JobInPeriodJobIndexDTO>();
+            foreach (var jobIndex in jobIndices)
+            {
+                var jobJobIndex = job.JobIndexList.Single(j => j.JobIndexId == jobIndex.Id);
+                jobInPeriodJobIndexDTOList.Add(new JobInPeriodJobIndexDTO
+                {
+                    Id = jobIndex.Id.Id,
+                    IsInquireable = jobIndex.IsInquireable,
+                    Name = jobIndex.Name,
+                    ShowforTopLevel = jobJobIndex.ShowforTopLevel,
+                    ShowforSameLevel = jobJobIndex.ShowforSameLevel,
+                    ShowforLowLevel = jobJobIndex.ShowforLowLevel
+                });
+            }
+            jobDto.JobIndices = jobInPeriodJobIndexDTOList;
             return jobDto;
         }
 
@@ -130,7 +145,7 @@ namespace MITD.PMS.Interface
             
             var job = jobService.UpdateJob(new JobId(new PeriodId(periodId),new SharedJobId(jobInPeriod.JobId)),
                 jobInPeriod.CustomFields.Select(c=>new SharedJobCustomFieldId(c.Id)).ToList(),
-                jobInPeriod.JobIndices.Select(c => new AbstractJobIndexId(c.Id)).ToList()
+                jobInPeriod.JobIndices.Select(c => new JobIndexForJob(new AbstractJobIndexId(c.Id), c.ShowforTopLevel, c.ShowforSameLevel, c.ShowforLowLevel)).ToList()
                 );
             return jobInPeriodDTOMapper.MapToModel(job, new string[] {});
         }

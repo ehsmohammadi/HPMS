@@ -39,10 +39,10 @@ namespace MITD.PMS.Domain.Model.Jobs
             get { return customFields.ToList().AsReadOnly(); }
         }
 
-        private readonly IList<AbstractJobIndexId> jobIndexIdList;
-        public virtual IReadOnlyList<AbstractJobIndexId> JobIndexIdList
+        private readonly IList<JobJobIndex> jobIndexList;
+        public virtual IReadOnlyList<JobJobIndex> JobIndexList
         {
-            get { return jobIndexIdList.ToList().AsReadOnly(); }
+            get { return jobIndexList.ToList().AsReadOnly(); }
         }
 
         #endregion
@@ -64,11 +64,11 @@ namespace MITD.PMS.Domain.Model.Jobs
 
             this.sharedJob = sharedJob;
             customFields = new List<JobCustomField>();
-            jobIndexIdList = new List<AbstractJobIndexId>();
+            jobIndexList = new List<JobJobIndex>();
         }
 
         public Job(Period period, SharedJob sharedJob, IList<JobCustomField> customFieldList,
-            IList<JobIndex> jobIndexList):this(period,sharedJob)
+            IList<JobJobIndex> jobIndexList):this(period,sharedJob)
         {
             assignCustomFields(customFieldList);
             assignJobIndices(jobIndexList);
@@ -80,6 +80,14 @@ namespace MITD.PMS.Domain.Model.Jobs
         #endregion
 
         #region Public Methods
+
+        private void assignJobIndices(IList<JobJobIndex> jobIndexList)
+        {
+            foreach (var itm in jobIndexList)
+            {
+                assignJobIndex(itm);
+            }
+        }
 
         private void assignCustomFields(IList<JobCustomField> customFieldList)
         {
@@ -119,33 +127,21 @@ namespace MITD.PMS.Domain.Model.Jobs
             customFields.Add(sharedJobCustomField);
         }
 
-        private void assignJobIndices(IList<JobIndex> jobIndexList)
-        {
-
-                foreach (var itm in jobIndexList)
-                {
-                        assignJobIndex(itm.Id);
-                }
-
-
-        }
-
-
-        public virtual void UpdateJobIndices(IList<JobIndex> jobIndexList, IPeriodManagerService periodChecker)
+        public virtual void UpdateJobIndices(IList<JobJobIndex> jobIndexList, IPeriodManagerService periodChecker)
         {
             if (isJobIndicesHaveChanged(jobIndexList))
             {
                 
                 foreach (var itm in jobIndexList)
                 {
-                    if (!this.JobIndexIdList.Contains(itm.Id))
-                        assignJobIndex(itm.Id);
+                    if (!this.JobIndexList.Contains(itm))
+                        assignJobIndex(itm);
                 }
 
-                IList<AbstractJobIndexId> copyOfJobIndexIdList = new List<AbstractJobIndexId>(jobIndexIdList);
+                IList<JobJobIndex> copyOfJobIndexIdList = new List<JobJobIndex>(this.jobIndexList);
                 foreach (var itm in copyOfJobIndexIdList)
                 {
-                    if (!jobIndexList.Select(index => index.Id).Contains(itm))
+                    if (!jobIndexList.Contains(itm))
                         removeJobIndex(itm);
                 }
                 periodChecker.CheckModifyingJobIndices(this);
@@ -153,21 +149,21 @@ namespace MITD.PMS.Domain.Model.Jobs
 
         }
 
-        private void removeJobIndex(AbstractJobIndexId jobIndexId)
+        private void removeJobIndex(JobJobIndex jobIndex)
         {
-            jobIndexIdList.Remove(jobIndexId);
+            jobIndexList.Remove(jobIndex);
         }
 
-        private void assignJobIndex(AbstractJobIndexId jobIndexId)
+        private void assignJobIndex(JobJobIndex jobIndex)
         {
-            jobIndexIdList.Add(jobIndexId);
+            jobIndexList.Add(jobIndex);
         }
 
-        private bool isJobIndicesHaveChanged(IList<JobIndex> jobIndexList)
+        private bool isJobIndicesHaveChanged(IList<JobJobIndex> jobIndexList)
         {
-            if (jobIndexIdList != null && jobIndexIdList.Count > 0 &&
-                (!jobIndexList.All(j => jobIndexIdList.Contains(j.Id)) ||
-                 !jobIndexIdList.All(j => jobIndexList.Select(ji => ji.Id).Contains(j))))
+            if (this.jobIndexList != null && this.jobIndexList.Count > 0 &&
+                (!jobIndexList.All(j => this.jobIndexList.Contains(j)) ||
+                 !this.jobIndexList.All(j => jobIndexList.Select(ji => ji).Contains(j))))
                 return true;
             return false;
         }

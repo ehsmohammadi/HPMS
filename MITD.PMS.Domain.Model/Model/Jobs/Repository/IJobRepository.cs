@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using MITD.Domain.Repository;
 using MITD.PMS.Domain.Model.Periods;
-using MITD.PMS.Domain.Model.Units;
 
 namespace MITD.PMS.Domain.Model.Jobs
 {

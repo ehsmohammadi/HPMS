@@ -82,9 +82,10 @@ namespace MITD.PMS.Application
         private void create(JobPositionInquiryConfigurationItem configurationItem)
         {
             var job = jobRep.GetById(configurationItem.JobPosition.JobId);
-            foreach (var jobIndexId in job.JobIndexIdList)
+            foreach (var jobIndexId in job.JobIndexList)
             {
-                var jobIndex = jobIndexRep.GetById(jobIndexId);
+                //todo check for no error
+                var jobIndex = jobIndexRep.GetById(jobIndexId.JobIndexId);
                 if ((jobIndex as JobIndex).IsInquireable)
                 {
                     inquiryJobIndexPointService.Add(configurationItem, jobIndex as JobIndex, string.Empty);

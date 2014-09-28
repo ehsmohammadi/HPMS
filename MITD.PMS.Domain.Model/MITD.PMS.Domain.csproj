@@ -163,6 +163,7 @@
     <Compile Include="Model\Jobs\SharedJobCustomField.cs" />
     <Compile Include="Model\Jobs\JobCustomField.cs" />
     <Compile Include="Model\Jobs\JobCustomFieldId.cs" />
+    <Compile Include="Model\Jobs\JobJobIndex.cs" />
     <Compile Include="Model\Jobs\SharedJobCustomFieldId.cs" />
     <Compile Include="Model\Periods\Exception\PeriodInvalidStateOperationException.cs" />
     <Compile Include="Model\Periods\Exception\PeriodArgumentException.cs" />

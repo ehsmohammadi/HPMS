@@ -212,11 +212,18 @@ namespace MITD.PMS.Application
             {
                 var jobService = srvManagerJob.GetService();
                 Job sourcejob = jobService.GetJobById(jobId);
-
-                List<AbstractJobIndexId> newJobIndexIds = getJobIndexIdsForCopy(currentPeriod, sourcejob.JobIndexIdList);
-
+                //todo : I changed this section check for error 
+                var newJobJobIndices = new List<JobIndexForJob>();
+                foreach (var jobJobIndex in sourcejob.JobIndexList)
+                {
+                    var newJobIndexId = getJobIndexIdForCopy(currentPeriod, jobJobIndex.JobIndexId);
+                    newJobJobIndices.Add(new JobIndexForJob(newJobIndexId, jobJobIndex.ShowforTopLevel, jobJobIndex.ShowforSameLevel, jobJobIndex.ShowforLowLevel));
+                    
+                }
+                //List<AbstractJobIndexId> newJobIndexIds = getJobIndexIdsForCopy(currentPeriod, sourcejob.JobIndexList);
+                
                 jobService.AssignJob(new JobId(currentPeriod.Id, sourcejob.SharedJob.Id),
-                    sourcejob.CustomFields.Select(c => c.SharedJobCustomField.Id).ToList(), newJobIndexIds);
+                    sourcejob.CustomFields.Select(c => c.SharedJobCustomField.Id).ToList(), newJobJobIndices);
 
             }
             finally
@@ -225,6 +232,8 @@ namespace MITD.PMS.Application
             }
 
         }
+
+
 
         private void copyJobs(Period sourcePeriod, Period currentPeriod)
         {
@@ -243,14 +252,30 @@ namespace MITD.PMS.Application
                 copyJob(currentPeriod, jobId);
         }
 
-        private List<AbstractJobIndexId> getJobIndexIdsForCopy(Period currentPeriod, IReadOnlyList<AbstractJobIndexId> jobIndexIdList)
+        //private List<AbstractJobIndexId> getJobIndexIdsForCopy(Period currentPeriod, IReadOnlyList<AbstractJobIndexId> jobIndexIdList)
+        //{
+        //    var srvManagerJobIndex = jobIndexServiceFactory.Create();
+        //    try
+        //    {
+        //        var jobIndexService = srvManagerJobIndex.GetService();
+        //        List<SharedJobIndexId> sharedJobIndexIds = jobIndexService.GetSharedJobIndexIdBy(jobIndexIdList.ToList());
+        //        List<AbstractJobIndexId> res = jobIndexService.GetJobIndexIdsBy(currentPeriod, sharedJobIndexIds);
+        //        return res;
+        //    }
+        //    finally
+        //    {
+        //        jobIndexServiceFactory.Release(srvManagerJobIndex);
+        //    }
+        //}
+
+        private AbstractJobIndexId getJobIndexIdForCopy(Period currentPeriod, AbstractJobIndexId jobIndexId)
         {
             var srvManagerJobIndex = jobIndexServiceFactory.Create();
             try
             {
                 var jobIndexService = srvManagerJobIndex.GetService();
-                List<SharedJobIndexId> sharedJobIndexIds = jobIndexService.GetSharedJobIndexIdBy(jobIndexIdList.ToList());
-                List<AbstractJobIndexId> res = jobIndexService.GetJobIndexIdsBy(currentPeriod, sharedJobIndexIds);
+                var sharedJobIndexId = jobIndexService.GetSharedJobIndexIdBy(jobIndexId);
+                AbstractJobIndexId res = jobIndexService.GetJobIndexIdBy(currentPeriod, sharedJobIndexId);
                 return res;
             }
             finally

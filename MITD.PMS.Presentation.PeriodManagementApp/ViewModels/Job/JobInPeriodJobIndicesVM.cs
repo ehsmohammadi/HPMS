@@ -38,8 +38,8 @@ namespace MITD.PMS.Presentation.Logic
         }
 
 
-        private ObservableCollection<JobIndexInPeriodDTO> jobIndexInPeriodList = new ObservableCollection<JobIndexInPeriodDTO>();
-        public ObservableCollection<JobIndexInPeriodDTO> JobIndexInPeriodList
+        private ObservableCollection<JobInPeriodJobIndexDTO> jobIndexInPeriodList = new ObservableCollection<JobInPeriodJobIndexDTO>();
+        public ObservableCollection<JobInPeriodJobIndexDTO> JobIndexInPeriodList
         {
             get { return jobIndexInPeriodList; }
             set { this.SetField(vm => vm.JobIndexInPeriodList, ref jobIndexInPeriodList, value); }
@@ -114,16 +114,38 @@ namespace MITD.PMS.Presentation.Logic
 
             jobIndexInPeriodService.GetAllPeriodJobIndexes((res, exp) =>  appController.BeginInvokeOnDispatcher(() =>
             {
-                HideBusyIndicator();
+
                 if (exp == null)
                 {
-                    JobIndexInPeriodList = new ObservableCollection<JobIndexInPeriodDTO>(res);
-                    JobIndexInPeriodList.Where(allIndex => jobInPeriod.JobIndices.Select(f => f.Id).Contains(allIndex.Id))
-                                   .ToList()
-                                   .ForEach(field => field.IsChecked = true);
+                    foreach (var jobIndex in res)
+                    {
+                        var jobInPeriodJobIndex = JobInPeriod.JobIndices.SingleOrDefault(j => j.Id == jobIndex.Id);
+                        if (jobInPeriodJobIndex != null)
+                        {
+                            jobInPeriodJobIndex.IsChecked = true;
+                            JobIndexInPeriodList.Add(jobInPeriodJobIndex);
+                        }                           
+                        else
+                        {
+                            JobIndexInPeriodList.Add(new JobInPeriodJobIndexDTO
+                            {
+                                Name = jobIndex.Name,
+                                IsInquireable = jobIndex.IsInquireable,
+                                ShowforLowLevel = true,
+                                ShowforSameLevel = true,
+                                ShowforTopLevel = true
+                            });
+                        }
+                    }
+                    HideBusyIndicator();
                 }
                 else
+                {
+                    HideBusyIndicator();
                     appController.HandleException(exp);
+                    
+                }
+                   
 
             }),periodId);
         }

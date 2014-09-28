@@ -223,21 +223,21 @@ namespace MITD.PMS.Application
             }
         }
 
-        public List<SharedJobIndexId> GetSharedJobIndexIdBy(List<AbstractJobIndexId> abstractJobIndexIds)
+        public SharedJobIndexId GetSharedJobIndexIdBy(AbstractJobIndexId abstractJobIndexId)
         {
             using (var tr = new TransactionScope())
             {
-                var res = jobIndexRep.GetSharedJobIndexIdBy(abstractJobIndexIds);
+                var res = jobIndexRep.GetSharedJobIndexIdBy(abstractJobIndexId);
                 tr.Complete();
                 return res;
             }
         }
 
-        public List<AbstractJobIndexId> GetJobIndexIdsBy(Period period, List<SharedJobIndexId> sharedJobIndexIds)
+        public AbstractJobIndexId GetJobIndexIdBy(Period period, SharedJobIndexId sharedJobIndexId)
         {
             using (var tr = new TransactionScope())
             {
-                var res = jobIndexRep.GetJobIndexIdsBy(period, sharedJobIndexIds);
+                var res = jobIndexRep.GetJobIndexIdBy(period, sharedJobIndexId);
                 tr.Complete();
                 return res;
             }

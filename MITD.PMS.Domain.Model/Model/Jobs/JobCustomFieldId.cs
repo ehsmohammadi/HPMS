@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MITD.Core.Builders;
+﻿using MITD.Core.Builders;
 using MITD.Domain.Model;
 using MITD.PMS.Domain.Model.Periods;
 

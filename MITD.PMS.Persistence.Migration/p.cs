@@ -1837,7 +1837,7 @@ namespace MITD.Core.RuleEngine
                     foreach (var itm in jobp.ConfigurationItemList)
                     {
                         var job = jobRep.GetById(itm.JobPosition.JobId);
-                        foreach (var jobIndexId in job.JobIndexIdList)
+                        foreach (var jobIndexId in job.JobIndexList)
                         {
                             var jobIndex = jobIndexRep.GetById(jobIndexId);
                             if ((jobIndex as JobIndex).IsInquireable)

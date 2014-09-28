@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using MITD.Domain.Model;
-using MITD.PMS.Domain.Model.Jobs;
 
 namespace MITD.PMS.Domain.Model.Jobs
 {

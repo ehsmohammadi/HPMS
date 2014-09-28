@@ -72,7 +72,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="p.cs" />
     <Compile Include="PeriodTest.cs" />
     <Compile Include="CreateSeedData.cs" />
     <Compile Include="MigrationVer1.cs" />

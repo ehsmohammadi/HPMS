@@ -33,9 +33,10 @@ namespace MITD.PMS.Domain.Service
             var jobPosition = jobPositionRep.GetBy(configurationItemId.InquirySubjectJobPositionId);
             var itm = jobPosition.ConfigurationItemList.Single(c => c.Id.Equals(configurationItemId));
             var job = jobRep.GetById(jobPosition.JobId);
-            foreach (var jobIndexId in job.JobIndexIdList)
+            foreach (var jobIndexId in job.JobIndexList)
             {
-                var jobIndex = jobIndexRep.GetById(jobIndexId);
+                //todo: check for configuration 
+                var jobIndex = jobIndexRep.GetById(jobIndexId.JobIndexId);
                 if ((jobIndex as JobIndex).IsInquireable)
                 {
                     var id = inquiryJobIndexPointRep.GetNextId();

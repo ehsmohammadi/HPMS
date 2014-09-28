@@ -332,7 +332,7 @@ namespace MITD.PMS.Presentation.Logic
             if (Period.Id != eventData.PeriodId || SelectedJobInPeriod.JobId != eventData.JobId)
                 return;
 
-            SelectedJobInPeriod.JobIndices = eventData.JobInPeriodJobIndicesList;
+            SelectedJobInPeriod.JobIndices = eventData.JobInPeriodJobIndices;
 
             //SelectedJobInPeriod.CustomFields = new List<CustomFieldDTO>();
             //var fieldIdList = eventData.JobInPeriodCustomFieldDescriptionList.Select(f => f.Id).ToList();

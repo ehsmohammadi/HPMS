@@ -94,7 +94,7 @@ namespace MITD.PMS.Persistence.NH
                 }, map => map.OneToMany());
 
 
-            IdBag(p => p.JobIndexIdList, m =>
+            IdBag(p => p.JobIndexList, m =>
             {
                 m.Table("Periods_Jobs_JobIndices");
                 m.Key(i => i.Column("PeriodJobId"));
@@ -108,11 +108,33 @@ namespace MITD.PMS.Persistence.NH
             x => x.Component(m =>
             {
                 m.Access(Accessor.Field);
-                m.Property(i => i.Id, ma =>
+                m.Component(i => i.JobIndexId, mc =>
                 {
-                    ma.Access(Accessor.Field);
-                    ma.Column("PeriodJobIndexId");
+                    mc.Access(Accessor.Field);
+                    mc.Property(i => i.Id, ma =>
+                    {
+                        ma.Access(Accessor.Field);
+                        ma.Column("PeriodJobIndexId");
+                    });
                 });
+                m.Property(i=>i.ShowforTopLevel, mp =>
+                {
+                    mp.Access(Accessor.Field);
+                    mp.Column("ShowforTopLevel");
+                });
+
+                m.Property(i => i.ShowforSameLevel, mp =>
+                {
+                    mp.Access(Accessor.Field);
+                    mp.Column("ShowforSameLevel");
+                });
+
+                m.Property(i => i.ShowforLowLevel, mp =>
+                {
+                    mp.Access(Accessor.Field);
+                    mp.Column("ShowforLowLevel");
+                });
+
             }));
 
 

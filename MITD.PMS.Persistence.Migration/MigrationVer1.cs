@@ -473,15 +473,21 @@ namespace MITD.PMS.Persistence
         private void createPeriodJob_JobIndices()
         {
             Create.Table("Periods_Jobs_JobIndices")
-                  .WithColumn("Id").AsInt64().PrimaryKey().Identity()
+                .WithColumn("Id").AsInt64().PrimaryKey().Identity()
 
-                  .WithColumn("RowVersion").AsCustom("rowversion")
+                .WithColumn("RowVersion").AsCustom("rowversion")
 
-                  .WithColumn("PeriodJobId").AsInt64().NotNullable()
-                  .ForeignKey("fk_Periods_Jobs_JobIndices_PeriodJobId", "Periods_Jobs", "Id")
+                .WithColumn("PeriodJobId").AsInt64().NotNullable()
+                .ForeignKey("fk_Periods_Jobs_JobIndices_PeriodJobId", "Periods_Jobs", "Id")
 
-                  .WithColumn("PeriodJobIndexId").AsInt64().NotNullable()
-                  .ForeignKey("fk_Periods_Jobs_JobIndices_PeriodJobIndexId", "Periods_JobIndices", "Id");
+                .WithColumn("PeriodJobIndexId").AsInt64().NotNullable()
+                .ForeignKey("fk_Periods_Jobs_JobIndices_PeriodJobIndexId", "Periods_JobIndices", "Id")
+                .WithColumn("ShowforTopLevel").AsBoolean()
+                .WithColumn("ShowforSameLevel").AsBoolean()
+                .WithColumn("ShowforLowLevel").AsBoolean();
+
+
+
         }
 
         private void createPeriods_JobPositionssTable()

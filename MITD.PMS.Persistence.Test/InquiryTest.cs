@@ -143,7 +143,7 @@ namespace MITD.PMS.Persistence.Test
             using (var session = PMSSession.GetSession())
             using (session.BeginTransaction())
             {
-                job = new Job(period, GetSharedJob(), null, jobIndexInperiodList);
+                job = new Job(period, GetSharedJob(), null, new List<JobJobIndex>());
                 session.Save(job);
                 session.Transaction.Commit();
             }
@@ -293,9 +293,9 @@ namespace MITD.PMS.Persistence.Test
                 foreach (var itm in employees)
                 {
                     var job=jobRep.GetById(itm.JobPosition.JobId);
-                    foreach (var jobIndexId in job.JobIndexIdList)
+                    foreach (var jobIndexId in job.JobIndexList)
                     {
-                        var jobIndex = jobIndexRep.GetById(jobIndexId);
+                        var jobIndex = jobIndexRep.GetById(jobIndexId.JobIndexId);
                         var id = inquiryRep.GetNextId();
                         var inquiryIndexPoint = new InquiryJobIndexPoint(new InquiryJobIndexPointId(id), itm, jobIndex as JobIndex,
                             Guid.NewGuid().ToString());

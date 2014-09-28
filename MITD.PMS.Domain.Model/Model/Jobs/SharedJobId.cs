@@ -1,6 +1,4 @@
-﻿
-using System;
-using MITD.Domain.Model;
+﻿using MITD.Domain.Model;
 
 namespace MITD.PMS.Domain.Model.Jobs
 {

@@ -1131,12 +1131,13 @@ public static decimal GetInquiryByJobPositionName( KeyValuePair<JobIndex, Dictio
 
                 foreach (var pmsAdminJob in jobList)
                 {
+                    var jobJobIndices = jobIndexInPeriodList.Select(jobIndex => new JobJobIndex(jobIndex.Id, true, true, true)).ToList();
                     var job = new PMS.Domain.Model.Jobs.Job(period, new PMS.Domain.Model.Jobs.SharedJob(
                         new PMS.Domain.Model.Jobs.SharedJobId(pmsAdminJob.Id.Id), pmsAdminJob.Name, pmsAdminJob.DictionaryName), jobCftList
                         .Where(j => pmsAdminJob.CustomFieldTypeIdList.Select(i => i.Id)
                             .Contains(j.Id.Id)).Select(p =>
                                 new PMS.Domain.Model.Jobs.JobCustomField(new PMS.Domain.Model.Jobs.JobCustomFieldId(period.Id, new SharedJobCustomFieldId(p.Id.Id), new SharedJobId(pmsAdminJob.Id.Id))
-                                    , new SharedJobCustomField(new SharedJobCustomFieldId(p.Id.Id), p.Name, p.DictionaryName, p.MinValue, p.MaxValue, p.TypeId))).ToList(), jobIndexInPeriodList);
+                                    , new SharedJobCustomField(new SharedJobCustomFieldId(p.Id.Id), p.Name, p.DictionaryName, p.MinValue, p.MaxValue, p.TypeId))).ToList(), jobJobIndices);
                     jobInPeriodList.Add(job);
                     jobRep.Add(job);
                 }
@@ -1348,7 +1349,7 @@ public static decimal GetInquiryByJobPositionName( KeyValuePair<JobIndex, Dictio
             //        foreach (var itm in jobp.ConfigurationItemList)
             //        {
             //            var job = jobRep.GetById(itm.JobPosition.JobId);
-            //            foreach (var jobIndexId in job.JobIndexIdList)
+            //            foreach (var jobIndexId in job.JobIndexList)
             //            {
             //                var jobIndex = jobIndexRep.GetById(jobIndexId);
             //                if ((jobIndex as JobIndex).IsInquireable)

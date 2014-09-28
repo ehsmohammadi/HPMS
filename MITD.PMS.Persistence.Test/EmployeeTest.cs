@@ -148,21 +148,21 @@ namespace MITD.PMS.Persistence.Test
                         firstLevel = calculation.CalculationResult.LastCalculatedPath.Value;
                 }
 
-                var dummy = employeeJobs.Select(empJob => empJob.jo).Fetch(j => j.JobIndexIdList).ToFuture();
+                var dummy = employeeJobs.Select(empJob => empJob.jo).Fetch(j => j.JobIndexList).ToFuture();
                 var employeeJobindexes = session.Query<Domain.Model.JobIndices.JobIndex>()
-                    .Where(j => employeeJobs.Select(empJob => empJob.jo).SelectMany(jo => jo.JobIndexIdList).Select(ji => ji.Id).Contains(j.Id.Id))
+                    .Where(j => employeeJobs.Select(empJob => empJob.jo).SelectMany(jo => jo.JobIndexList).Select(ji => ji.JobIndexId.Id).Contains(j.Id.Id))
                    .ToFuture();
 
                 var jobIndexLevels = employeeJobindexes.Where(ji=>ji.CalculationLevel>= firstLevel).Select(ji => ji.CalculationLevel).Distinct().ToList();
 
                 //var empJobInexIdsLevel1 = employeeJobindexes.Where(ji=>jei.CalculationLevel ==1).Select(ji => ji.Id).ToList();
-                //var empLevel1 = employeeJobs.Where(empj => empj.jo.JobIndexIdList.Any(i => empJobInexIdsLevel1.Contains(i))).Select(empj => empj.EmployeeId).ToList();
+                //var empLevel1 = employeeJobs.Where(empj => empj.jo.JobIndexList.Any(i => empJobInexIdsLevel1.Contains(i))).Select(empj => empj.EmployeeId).ToList();
 
                 
                 for (int level = firstLevel; level <= jobIndexLevels.Max(); level++)
                 {
                     var empJobInexIdsLevel = employeeJobindexes.Where(ji => ji.CalculationLevel == level).Select(ji => ji.Id).ToList();
-                    var empLevel = employeeJobs.Where(empj => empj.jo.JobIndexIdList.Any(i => empJobInexIdsLevel.Contains(i)))
+                    var empLevel = employeeJobs.Where(empj => empj.jo.JobIndexList.Select(j=>j.JobIndexId).Any(i => empJobInexIdsLevel.Contains(i)))
                                     .Select(empj => empj.EmployeeId).OrderBy(emp => emp.EmployeeNo).ToList();
 
                     if (level == firstLevel)

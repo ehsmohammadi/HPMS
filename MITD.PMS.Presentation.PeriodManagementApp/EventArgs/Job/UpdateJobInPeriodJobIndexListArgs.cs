@@ -15,13 +15,13 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
 {
     public class UpdateJobInPeriodJobIndexListArgs
     {
-        public UpdateJobInPeriodJobIndexListArgs(List<JobIndexInPeriodDTO> jobInPeriodJobIndicesList, long periodId, long jobId)
+        public UpdateJobInPeriodJobIndexListArgs(List<JobInPeriodJobIndexDTO> jobInPeriodJobIndices, long periodId, long jobId)
         {
-            JobInPeriodJobIndicesList = jobInPeriodJobIndicesList;
+            JobInPeriodJobIndices = jobInPeriodJobIndices;
             PeriodId = periodId;
             JobId = jobId;
         }
-        public List<JobIndexInPeriodDTO> JobInPeriodJobIndicesList
+        public List<JobInPeriodJobIndexDTO> JobInPeriodJobIndices
         {
             get; private set; 
         }

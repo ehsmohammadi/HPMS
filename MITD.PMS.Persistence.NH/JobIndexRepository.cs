@@ -111,16 +111,15 @@ namespace MITD.PMS.Persistence.NH
             return rep.Find<JobIndexGroup>(u => u.Parent == null && u.PeriodId == period.Id).ToList();
         }
 
-        public List<SharedJobIndexId> GetSharedJobIndexIdBy(List<AbstractJobIndexId> abstractJobIndexIds)
+        public SharedJobIndexId GetSharedJobIndexIdBy(AbstractJobIndexId abstractJobIndexId)
         {
-            return rep.Find<JobIndex>(i => abstractJobIndexIds.Contains(i.Id)).Select(i => i.SharedJobIndexId).ToList();
+            //return rep.Find<JobIndex>(i => abstractJobIndexIds.Contains(i.Id)).Select(i => i.SharedJobIndexId).ToList();
+            return rep.Single<JobIndex>(j => j.Id == abstractJobIndexId).SharedJobIndexId;
         }
 
-        public List<AbstractJobIndexId> GetJobIndexIdsBy(Period period, List<SharedJobIndexId> sharedJobIndexIds)
+        public AbstractJobIndexId GetJobIndexIdBy(Period period, SharedJobIndexId sharedJobIndexId)
         {
-            var ids = sharedJobIndexIds.Select(sj => sj.Id).ToList();
-            var res= rep.GetQuery<JobIndex>().Where(i => i.PeriodId == period.Id && ids.Contains(i.SharedJobIndex.Id.Id)).ToList();
-            return res.Select(i => i.Id).ToList();
+            return rep.Single<JobIndex>(j => j.PeriodId == period.Id && j.SharedJobIndexId.Id == sharedJobIndexId.Id).Id;
         }
 
         public Exception ConvertException(Exception exp)

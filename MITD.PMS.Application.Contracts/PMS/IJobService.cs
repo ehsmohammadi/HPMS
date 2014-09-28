@@ -10,9 +10,9 @@ namespace MITD.PMS.Application.Contracts
 {
     public interface IJobService : IService
     {
-        Job AssignJob(JobId jobId, List<SharedJobCustomFieldId> customFieldIdList, IList<AbstractJobIndexId> jobIndexIdList);
+        Job AssignJob(JobId jobId, List<SharedJobCustomFieldId> customFieldIdList, IList<JobIndexForJob> jobIndexList);
         void RemoveJob(JobId jobId);
-        Job UpdateJob(JobId jobId, List<SharedJobCustomFieldId> customFieldIdList, IList<AbstractJobIndexId> jobIndexIdList);
+        Job UpdateJob(JobId jobId, List<SharedJobCustomFieldId> customFieldIdList, IList<JobIndexForJob> jobIndexList);
         Job GetJobById(JobId jobId);
         List<JobId> GetAllJobIdList(PeriodId periodId);
         JobId GetJobIdBy(Period currentPeriod, SharedJobId sharedJobId);

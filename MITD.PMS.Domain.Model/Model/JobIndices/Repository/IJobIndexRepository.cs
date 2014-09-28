@@ -26,8 +26,8 @@ namespace MITD.PMS.Domain.Model.JobIndices
         IEnumerable<JobIndex> FindJobIndices(Expression<Func<JobIndex, bool>> where);
         List<AbstractJobIndex> GetAllAbstractJobIndexByParentId(AbstractJobIndexId id);
         List<JobIndexGroup> GetAllParentJobIndexGroup(Period period);
-        List<SharedJobIndexId> GetSharedJobIndexIdBy(List<AbstractJobIndexId> abstractJobIndexIds);
-        List<AbstractJobIndexId> GetJobIndexIdsBy(Period jobIndexIds, List<SharedJobIndexId> sharedJobIndexIds);
+        SharedJobIndexId GetSharedJobIndexIdBy(AbstractJobIndexId abstractJobIndexId);
+        AbstractJobIndexId GetJobIndexIdBy(Period jobIndexIds, SharedJobIndexId sharedJobIndexId);
 
         Exception ConvertException(Exception exp);
         Exception TryConvertException(Exception exp);

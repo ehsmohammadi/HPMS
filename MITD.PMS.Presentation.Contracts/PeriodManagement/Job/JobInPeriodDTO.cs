@@ -36,8 +36,8 @@ namespace MITD.PMS.Presentation.Contracts
             set { this.SetField(p => p.CustomFields, ref customFields, value); }
         }
 
-        private List<JobIndexInPeriodDTO> jobIndices = new List<JobIndexInPeriodDTO>();
-        public List<JobIndexInPeriodDTO> JobIndices
+        private List<JobInPeriodJobIndexDTO> jobIndices = new List<JobInPeriodJobIndexDTO>();
+        public List<JobInPeriodJobIndexDTO> JobIndices
         {
             get { return jobIndices; }
             set { this.SetField(p => p.JobIndices, ref jobIndices, value); }
