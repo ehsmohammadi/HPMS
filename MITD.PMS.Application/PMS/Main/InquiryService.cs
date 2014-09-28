@@ -82,13 +82,19 @@ namespace MITD.PMS.Application
         private void create(JobPositionInquiryConfigurationItem configurationItem)
         {
             var job = jobRep.GetById(configurationItem.JobPosition.JobId);
-            foreach (var jobIndexId in job.JobIndexList)
+            foreach (var jobJobIndex in job.JobIndexList)
             {
                 //todo check for no error
-                var jobIndex = jobIndexRep.GetById(jobIndexId.JobIndexId);
+                var jobIndex = jobIndexRep.GetById(jobJobIndex.JobIndexId);
                 if ((jobIndex as JobIndex).IsInquireable)
                 {
-                    inquiryJobIndexPointService.Add(configurationItem, jobIndex as JobIndex, string.Empty);
+                    if ((configurationItem.InquirerJobPositionLevel == JobPositionLevel.Childs &&
+                         jobJobIndex.ShowforLowLevel) ||
+                        (configurationItem.InquirerJobPositionLevel == JobPositionLevel.Parents &&
+                         jobJobIndex.ShowforTopLevel) ||
+                        (configurationItem.InquirerJobPositionLevel == JobPositionLevel.Siblings &&
+                         jobJobIndex.ShowforSameLevel) || configurationItem.InquirerJobPositionLevel == JobPositionLevel.None)
+                        inquiryJobIndexPointService.Add(configurationItem, jobIndex as JobIndex, string.Empty);
 
                 }
 
