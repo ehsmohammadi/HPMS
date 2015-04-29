@@ -251,7 +251,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Config\Web.Debug.config" />
-    <None Include="Properties\PublishProfiles\HPMs-calculation.pubxml" />
+    <None Include="Properties\PublishProfiles\hpms-Calculation-host.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

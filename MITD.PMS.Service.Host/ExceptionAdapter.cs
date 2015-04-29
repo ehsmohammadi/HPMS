@@ -6,11 +6,9 @@ using System.Web.Http.Filters;
 using MITD.Core;
 using MITD.Core.Exceptions;
 using MITD.PMS.Application;
-using MITD.PMS.Common;
 using MITD.PMS.Interface;
-using MITD.PMSSecurity.Domain;
+using MITD.PMSSecurity.Domain;  
 using MITD.PMSSecurity.Domain.Logs;
-using MITD.PMSSecurity.Exceptions;
 
 namespace MITD.PMS.Service.Host
 {
@@ -20,7 +18,7 @@ namespace MITD.PMS.Service.Host
         public static HttpResponseMessage ConverToHttpResponse(HttpActionExecutedContext context)
         {
 
-            var exception = context.Exception;
+            var exception = context.Exception; 
             var error = new HttpError();
             var dic=ExceptionConvertorService.Convert(exception);
             foreach (var item in dic)

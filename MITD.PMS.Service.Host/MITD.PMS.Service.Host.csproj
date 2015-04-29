@@ -351,7 +351,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <None Include="Properties\PublishProfiles\Hpms-ServiceHost.pubxml" />
+    <None Include="Properties\PublishProfiles\hpms-services.pubxml" />
     <None Include="Properties\PublishProfiles\PMSServices-920809.pubxml" />
     <None Include="Properties\PublishProfiles\ServicesDebugPublish.pubxml" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />

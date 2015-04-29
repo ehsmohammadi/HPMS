@@ -860,11 +860,14 @@ namespace MITD.Core.RuleEngine
                 else if (sumGeneral < 18) sumGeneral = Math.Max(sumGeneral - sumGeneral * Convert.ToDecimal("0.05"), 0);
                 
                 Utils.AddEmployeePoint(job, "final-job", sumGeneral);
-                total += sumGeneral * job.WorkTimePercent * job.Weight / 100;
+                total += sumGeneral;// * job.WorkTimePercent * job.Weight / 100;
                 importanceWeight+=job.WorkTimePercent*job.Weight/100;
             }
-            if (importanceWeight > 0)
-                Utils.AddEmployeePoint("final", total / importanceWeight, true);
+            Utils.AddEmployeePoint("final", total , true);
+            //if (importanceWeight > 0)
+            //    Utils.AddEmployeePoint("final", total / importanceWeight, true);
+            //else
+            //    Utils.AddEmployeePoint("final", total , true);
 
 
 
