@@ -12,7 +12,6 @@ namespace MITD.PMS.Presentation.Contracts
     {
         private string name;
         private long id;
-        private string dictionaryName;
         private string content;
         private long policyId;
 

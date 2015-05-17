@@ -19,10 +19,11 @@ namespace MITD.PMS.Presentation.Contracts
         }
 
         private long ruleId;
+        //todo: i change ref id to ruleId if any thing happen in this project , i must undo all my change in this file 
         public long RuleId
         {
             get { return id; }
-            set { this.SetField(p => p.RuleId, ref id, value); }
+            set { this.SetField(p => p.RuleId, ref ruleId, value); }
         }
 
 

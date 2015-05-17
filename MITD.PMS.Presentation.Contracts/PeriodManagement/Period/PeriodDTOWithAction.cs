@@ -11,6 +11,6 @@ namespace MITD.PMS.Presentation.Contracts
     public partial class PeriodDTOWithAction:PeriodDTO,IActionDTO 
     {
         public List<int> ActionCodes { get; set; }
-        public string ActiveStatus { get; set; } 
+        public new  string  ActiveStatus { get; set; } 
     }
 }
