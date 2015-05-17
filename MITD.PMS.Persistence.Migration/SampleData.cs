@@ -943,7 +943,7 @@ namespace MITD.Core.RuleEngine
                 total += sumGeneral * job.WorkTimePercent * job.Weight / 100;
                 importanceWeight+=job.WorkTimePercent*job.Weight/100;
             }
-            if (it > 0)
+            if (importanceWeight > 0)
                 Utils.AddEmployeePoint(""final"", total / importanceWeight, true);
 
           

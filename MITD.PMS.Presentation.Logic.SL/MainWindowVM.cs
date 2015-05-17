@@ -79,10 +79,11 @@ namespace MITD.PMS.Presentation.Logic
             set
             {
                 this.SetField(c => c.CurrentWorkListUser, ref currentWorkListUser, value);
-                if (currentWorkListUser != null)
-                {
-                    controller.ChangeCurrentWorkListUser(currentWorkListUser.PartyName);
-                }
+                //todo: what the faze ???
+                //if (currentWorkListUser != null)
+                //{
+                //    controller.ChangeCurrentWorkListUser(currentWorkListUser.PartyName);
+                //}
 
             }
         }
