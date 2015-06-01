@@ -107,6 +107,8 @@ namespace MITD.PMS.Calculation.Host
                         .LifestyleBoundTo<IService>(),
                     Component.For<ILogManagerService>().ImplementedBy<LogManagerService>()
                         .LifestyleBoundToNearest<IService>(),
+                        Component.For<ILogService>().ImplementedBy<LogService>()
+                        .LifestyleBoundToNearest<IService>(),
                     Component.For<ILoggerServiceFactory>().ImplementedBy<LoggerServiceFactory>()
                         .LifestyleBoundToNearest<IService>()
                 );

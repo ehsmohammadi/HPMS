@@ -26,6 +26,7 @@ namespace MITD.PMS.Domain.Model.Periods
         internal override void RollBack(Period period, IPeriodManagerService periodManagerService)
         {
             periodManagerService.DeleteBasicData(period);
+            period.State = new PeriodInitState();
         }
 
         internal override  void CheckAssigningUnit()

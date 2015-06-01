@@ -52,13 +52,14 @@ namespace MITD.PMS.Presentation.UI.SL
                 // For production applications this error handling should be replaced with something that will 
                 // report the error to the website and stop the application.
 
-                e.Handled = true;
+                
                 var controller = ServiceLocator.Current.GetInstance<IPMSController>();
                 if (controller != null)
                 {
                     controller.ShowMessage("خطای داخلی در سطح کاربری رخ داده است لطفا با راهبران سیستم تماس حاصل فرمایید ");
                 }
-                //Deployment.Current.Dispatcher.BeginInvoke(delegate { ReportErrorToDOM(e); });
+                e.Handled = true;
+                Deployment.Current.Dispatcher.BeginInvoke(delegate { ReportErrorToDOM(e); });
             }
             else
             {

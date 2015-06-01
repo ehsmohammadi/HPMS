@@ -8,6 +8,7 @@ namespace MITD.PMS.Presentation.Logic
     public class PMSClientConfig
     {
         public static string BaseApiAddress { get { return String.Format("{0}/api/", BaseApiSiteAddress); } }
+
         public static string BaseApiSiteAddress;
         public readonly static UriKind UriKind = UriKind.Absolute;
         public readonly static WebClientHelper.MessageFormat MsgFormat = WebClientHelper.MessageFormat.Json;
