@@ -182,3 +182,5 @@ MITD.PMS.Interface.Presentation.Host/web.debug.config
 
 MITD.PMS.Calculation.Host/web.config
 MITD.PMS.Calculation.Host/web.debug.config
+
+Migration.bat
