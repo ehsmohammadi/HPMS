@@ -1,0 +1,1 @@
+packages\FluentMigrator.1.1.1.0\tools\migrate -a MITD.PMS.Persistence.Migration\bin\Debug\MITD.PMS.Persistence.Migration.dll -connection "data source=.;initial catalog=PMSDB;integrated security=True;multipleactiveresultsets=True;" -db SqlServer2008   %1 %2 %3 %4
