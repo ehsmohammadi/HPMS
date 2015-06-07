@@ -103,7 +103,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MITD.PMS.Common", "MITD.PMS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MITD.PMS.Common.SL", "MITD.PMS.Common.SL\MITD.PMS.Common.SL.csproj", "{F960EDC9-07E4-4CB2-A427-6DA7C74AD472}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5090B79E-166D-4D32-AA9F-5C169FF4EFAA}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{8E412ADE-23B5-4EEB-BCE3-62801147D56E}"
 	ProjectSection(SolutionItems) = preProject
 		dummy.txt = dummy.txt
 	EndProjectSection
