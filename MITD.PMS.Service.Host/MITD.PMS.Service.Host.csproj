@@ -351,6 +351,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <None Include="Configuration\Web.Debug.config" />
     <None Include="Properties\PublishProfiles\hpms-services.pubxml" />
     <None Include="Properties\PublishProfiles\PMSServices-920809.pubxml" />
     <None Include="Properties\PublishProfiles\ServicesDebugPublish.pubxml" />

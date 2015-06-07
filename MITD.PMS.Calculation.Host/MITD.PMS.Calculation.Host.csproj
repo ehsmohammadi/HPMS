@@ -250,7 +250,7 @@
     <Content Include="Web.Base.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Config\Web.Debug.config" />
+    <None Include="Configuration\Web.Debug.config" />
     <None Include="Properties\PublishProfiles\hpms-Calculation-host.pubxml" />
   </ItemGroup>
   <PropertyGroup>

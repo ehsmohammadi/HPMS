@@ -176,3 +176,9 @@ FakesAssemblies/
 
 MITD.PMS.Service.Host/web.config
 MITD.PMS.Service.Host/web.debug.config
+
+MITD.PMS.Interface.Presentation.Host/web.config
+MITD.PMS.Interface.Presentation.Host/web.debug.config
+
+MITD.PMS.Calculation.Host/web.config
+MITD.PMS.Calculation.Host/web.debug.config
