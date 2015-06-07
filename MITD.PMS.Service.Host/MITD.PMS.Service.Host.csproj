@@ -275,18 +275,22 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="clientaccesspolicy.Base.xml">
+     
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="clientaccesspolicy.xml">
       <BrowseToURL>~/clientaccesspolicy.xml</BrowseToURL>
     </Content>
-    <Content Include="clientaccesspolicy.Base.xml">
-      <DependentUpon>clientaccesspolicy.xml</DependentUpon>
-    </Content>
+
     <Content Include="clientaccesspolicy.Debug.xml">
       <DependentUpon>clientaccesspolicy.xml</DependentUpon>
     </Content>
     <Content Include="clientaccesspolicy.Release.xml">
       <DependentUpon>clientaccesspolicy.xml</DependentUpon>
     </Content>
+    <Content Include="Configuration\clientaccesspolicy.Debug.xml" />
     <Content Include="Content\themes\base\images\animated-overlay.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />

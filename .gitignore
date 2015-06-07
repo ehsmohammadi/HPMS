@@ -174,8 +174,13 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 
+
+
 MITD.PMS.Service.Host/web.config
 MITD.PMS.Service.Host/web.debug.config
+
+MITD.PMS.Service.Host/clientaccesspolicy.xml
+MITD.PMS.Service.Host/clientaccesspolicy.Debug.xml
 
 MITD.PMS.Interface.Presentation.Host/web.config
 MITD.PMS.Interface.Presentation.Host/web.debug.config
