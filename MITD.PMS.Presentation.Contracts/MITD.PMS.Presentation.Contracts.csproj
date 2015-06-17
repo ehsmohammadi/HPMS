@@ -53,6 +53,11 @@
     <Compile Include="BasicInfoManagement\CustomField\CustomFieldValueDTO_Server.cs" />
     <Compile Include="BasicInfoManagement\CustomField\CustomFieldValueDTO.cs" />
     <Compile Include="BasicInfoManagement\CustomField\CustomFieldDTOWithActions.cs" />
+    <Compile Include="BasicInfoManagement\UnitIndex\AbstractUnitIndexDTOWithActions.cs" />
+    <Compile Include="BasicInfoManagement\UnitIndex\UnitIndexCategoryDTO.cs" />
+    <Compile Include="BasicInfoManagement\UnitIndex\UnitIndexCategoryDTOWithActions.cs" />
+    <Compile Include="BasicInfoManagement\UnitIndex\UnitIndexDTO.cs" />
+    <Compile Include="BasicInfoManagement\UnitIndex\UnitIndexDTOWithActions.cs" />
     <Compile Include="BasicInfoManagement\JobIndex\AbstractJobIndexDTOWithActions.cs" />
     <Compile Include="BasicInfoManagement\JobIndex\JobIndexDTOWithActions.cs" />
     <Compile Include="BasicInfoManagement\JobIndex\JobIndexCategoryDTOWithActions.cs" />
@@ -134,6 +139,7 @@
     <Compile Include="EmployeeManagment\EmployeeJobPositionsDTO.cs" />
     <Compile Include="EmployeeManagment\EmployeeDTOWithActions.cs" />
     <Compile Include="EmployeeManagment\EmployeeDTO_Server.cs" />
+    <Compile Include="Fasade\PMSAdmin\IUnitIndexFacadeService.cs" />
     <Compile Include="Fasade\PMSAdmin\IRuleFacadeService.cs" />
     <Compile Include="Fasade\PMS\IPeriodClaimServiceFasade.cs" />
     <Compile Include="Fasade\PMS\IInquiryServiceFacade.cs" />

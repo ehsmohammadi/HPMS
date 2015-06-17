@@ -324,5 +324,6 @@ namespace MITD.PMS.Presentation.Logic
             get;
         }
 
+        string BasicInfoManagementShowUnitIndexsTitle { get; }
     }
 }

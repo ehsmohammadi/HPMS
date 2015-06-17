@@ -76,6 +76,7 @@
     <Compile Include="CreateSeedData.cs" />
     <Compile Include="MigrationVer1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="IRISLSeedData.cs" />
     <Compile Include="SampleData.cs">
       <SubType>Code</SubType>
     </Compile>

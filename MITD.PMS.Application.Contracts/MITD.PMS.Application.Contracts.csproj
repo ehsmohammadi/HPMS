@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionManager\IActionService.cs" />
+    <Compile Include="PMSAdmin\IUnitIndexService.cs" />
     <Compile Include="PMSAdmin\IPMSRuleService.cs" />
     <Compile Include="PMSAdmin\IFunctionService.cs" />
     <Compile Include="PMSAdmin\IPolicyService.cs" />

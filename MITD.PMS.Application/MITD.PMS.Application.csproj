@@ -59,6 +59,7 @@
     <Compile Include="ApplicationExceptionHelper.cs" />
     <Compile Include="Factory\Factory.cs" />
     <Compile Include="Factory\IFactory.cs" />
+    <Compile Include="PMSAdmin\UnitIndexService.cs" />
     <Compile Include="PMSAdmin\PMSRuleService.cs" />
     <Compile Include="PMSAdmin\FunctionService.cs" />
     <Compile Include="PMSAdmin\PolicyService.cs" />

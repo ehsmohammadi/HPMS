@@ -67,6 +67,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interception.cs" />
+    <Compile Include="PMSAdmin\Mapper\UnitIndex\UnitIndexMapper.cs" />
+    <Compile Include="PMSAdmin\Mapper\UnitIndex\UnitIndexWithActionsMapper.cs" />
+    <Compile Include="PMSAdmin\UnitIndexFacadeService.cs" />
     <Compile Include="PMSAdmin\Mapper\Rule\RuleTrailDTOMapper.cs" />
     <Compile Include="PMSAdmin\Mapper\Rule\RuleTrailDTOWithActionMapper.cs" />
     <Compile Include="PMSAdmin\Mapper\Rule\RuleDTOWithPlicyMapper.cs" />

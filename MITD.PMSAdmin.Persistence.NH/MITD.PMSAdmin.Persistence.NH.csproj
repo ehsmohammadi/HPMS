@@ -68,11 +68,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Context\MappingClass\UnitIndexMap.cs" />
     <Compile Include="Context\MappingClass\JobIndexMap.cs" />
     <Compile Include="Context\MappingClass\PolicyMapClass.cs" />
     <Compile Include="Context\MappingClass\JobPositionMapClass.cs" />
     <Compile Include="Context\MappingClass\UnitMapClass.cs" />
     <Compile Include="Context\MappingClass\CustomFieldMapClass.cs" />
+    <Compile Include="UnitIndexRepository.cs" />
     <Compile Include="JobIndexRepository.cs" />
     <Compile Include="PolicyRepository.cs" />
     <Compile Include="JobPositionRepository.cs" />

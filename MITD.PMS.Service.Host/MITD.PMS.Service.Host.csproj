@@ -226,6 +226,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BootStrapper.cs" />
+    <Compile Include="Controllers\PMSAdmin\UnitIndexController.cs" />
     <Compile Include="Controllers\PMSAdmin\PolicyRuleTrailsController.cs" />
     <Compile Include="Controllers\PMS\CalculationsExceptionsController.cs" />
     <Compile Include="Controllers\PMS\PeriodSourceDestinationStateController.cs" />
@@ -276,14 +277,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="clientaccesspolicy.Base.xml">
-     
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="clientaccesspolicy.xml">
       <BrowseToURL>~/clientaccesspolicy.xml</BrowseToURL>
     </Content>
-
     <Content Include="clientaccesspolicy.Debug.xml">
       <DependentUpon>clientaccesspolicy.xml</DependentUpon>
     </Content>

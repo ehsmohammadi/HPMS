@@ -34,6 +34,8 @@ namespace MITD.PMS.Presentation.BasicInfoApp
 
         #endregion
 
+        #region JobIndex
+
         public void ShowJobIndexView(JobIndexDTO jobIndex, ActionType actionType)
         {
             var view = ServiceLocator.Current.GetInstance<IJobIndexView>();
@@ -46,6 +48,51 @@ namespace MITD.PMS.Presentation.BasicInfoApp
             var view = viewManager.ShowInTabControl<IJobIndexTreeView>(isShiftPressed);
             ((JobIndexTreeVM)view.ViewModel).Load();
         }
+
+        public void ShowJobIndexCategoryView(JobIndexCategoryDTO jobIndexCategory, ActionType action)
+        {
+            var view = ServiceLocator.Current.GetInstance<IJobIndexCategoryView>();
+            ((JobIndexCategoryVM)view.ViewModel).Load(jobIndexCategory, action);
+            viewManager.ShowInDialog(view);
+        }
+
+        public void ShowJobIndexCustomFieldManageView(JobIndexDTO jobIndex, ActionType action)
+        {
+            var view = ServiceLocator.Current.GetInstance<IJobIndexCustomFieldManageView>();
+            ((JobIndexCustomFieldManageVM)view.ViewModel).Load(jobIndex, action);
+            viewManager.ShowInDialog(view);
+        }
+        #endregion
+
+        #region UnitIndex
+
+        public void ShowUnitIndexView(UnitIndexDTO unitIndex, ActionType actionType)
+        {
+            var view = ServiceLocator.Current.GetInstance<IUnitIndexView>();
+            ((UnitIndexVM)view.ViewModel).Load(unitIndex, actionType);
+            viewManager.ShowInDialog(view);
+        }
+
+        public void ShowUnitIndexTreeView(bool isShiftPressed)
+        {
+            var view = viewManager.ShowInTabControl<IUnitIndexTreeView>(isShiftPressed);
+            ((UnitIndexTreeVM)view.ViewModel).Load();
+        }
+
+        public void ShowUnitIndexCategoryView(UnitIndexCategoryDTO unitIndexCategory, ActionType action)
+        {
+            var view = ServiceLocator.Current.GetInstance<IUnitIndexCategoryView>();
+            ((UnitIndexCategoryVM)view.ViewModel).Load(unitIndexCategory, action);
+            viewManager.ShowInDialog(view);
+        }
+
+        public void ShowUnitIndexCustomFieldManageView(UnitIndexDTO unitIndex, ActionType action)
+        {
+            var view = ServiceLocator.Current.GetInstance<IUnitIndexCustomFieldManageView>();
+            ((UnitIndexCustomFieldManageVM)view.ViewModel).Load(unitIndex, action);
+            viewManager.ShowInDialog(view);
+        }
+        #endregion
 
         public void ShowJobPositionView(JobPositionDTO jobPosition, ActionType actionType)
         {
@@ -88,12 +135,7 @@ namespace MITD.PMS.Presentation.BasicInfoApp
             viewManager.ShowInDialog(view);
         }
 
-        public void ShowJobIndexCategoryView(JobIndexCategoryDTO jobIndexCategory, ActionType action)
-        {
-            var view = ServiceLocator.Current.GetInstance<IJobIndexCategoryView>();
-            ((JobIndexCategoryVM)view.ViewModel).Load(jobIndexCategory,action);
-            viewManager.ShowInDialog(view);
-        }
+
 
         #region CustomField
 
@@ -117,12 +159,7 @@ namespace MITD.PMS.Presentation.BasicInfoApp
             viewManager.ShowInDialog(view);
         }
 
-        public void ShowJobIndexCustomFieldManageView(JobIndexDTO jobIndex, ActionType action)
-        {
-            var view = ServiceLocator.Current.GetInstance<IJobIndexCustomFieldManageView>();
-            ((JobIndexCustomFieldManageVM)view.ViewModel).Load(jobIndex, action);
-            viewManager.ShowInDialog(view);
-        }
+
 
         #endregion
 

@@ -214,5 +214,10 @@ namespace MITD.PMS.Presentation.BasicInfoApp
         {
             get { return "تاريخچه تغییرات واصلاحات قانون"; }
         }
+
+        public string UnitIndexCustomFieldManageViewTitle { get { return "مدیریت فیلد های شاخص"; } }
+
+        public string UnitIndexViewTitle { get { return "شاخص"; } }
+
     }
 }
