@@ -4,6 +4,8 @@ using MITD.Domain.Repository;
 using MITD.PMSAdmin.Domain.Model.Jobs;
 using MITD.PMSAdmin.Domain.Model.JobIndices;
 using MITD.PMSAdmin.Domain.Model.Units;
+using MITD.PMSAdmin.Domain.Model.UnitIndices;
+
 
 namespace MITD.PMSAdmin.Domain.Model.CustomFieldTypes
 {
@@ -24,5 +26,6 @@ namespace MITD.PMSAdmin.Domain.Model.CustomFieldTypes
 
         CustomFieldTypeException ConvertException(Exception exp);
         CustomFieldTypeException TryConvertException(Exception exp);
+        List<CustomFieldType> GetAllCustomField(AbstractUnitIndexId unitIndexId);
     }
 }

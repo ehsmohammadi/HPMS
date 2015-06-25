@@ -62,6 +62,16 @@
     <Compile Include="Model\CustomFieldTypes\Exception\CustomFieldTypeDuplicateException.cs" />
     <Compile Include="Model\CustomFieldTypes\Exception\CustomFieldTypeException.cs" />
     <Compile Include="Model\CustomFieldTypes\Exception\CustomFieldTypeModifyException.cs" />
+    <Compile Include="Model\UnitIndices\AbstractUnitIndex.cs" />
+    <Compile Include="Model\UnitIndices\AbstractUnitIndexId.cs" />
+    <Compile Include="Model\UnitIndices\Exception\UnitIndexArgumentException.cs" />
+    <Compile Include="Model\UnitIndices\Exception\UnitIndexDeleteException.cs" />
+    <Compile Include="Model\UnitIndices\Exception\UnitIndexDuplicateException.cs" />
+    <Compile Include="Model\UnitIndices\Exception\UnitIndexException.cs" />
+    <Compile Include="Model\UnitIndices\Exception\UnitModifyException.cs" />
+    <Compile Include="Model\UnitIndices\UnitIndex.cs" />
+    <Compile Include="Model\UnitIndices\UnitIndexCategory.cs" />
+    <Compile Include="Model\UnitIndices\Repository\IUnitIndexRepository.cs" />
     <Compile Include="Model\JobIndices\Exception\JobIndexArgumentException.cs" />
     <Compile Include="Model\JobIndices\Exception\JobIndexDeleteException.cs" />
     <Compile Include="Model\JobIndices\Exception\JobIndexDuplicateException.cs" />

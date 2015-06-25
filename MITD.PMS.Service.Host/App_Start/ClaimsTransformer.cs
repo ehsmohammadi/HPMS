@@ -21,7 +21,6 @@ namespace MITD.PMS.Service.Host.App_Start
                 var res = base.Authenticate(resourceName, incomingPrincipal);
                 return res;
             }
-            //throw new Exception("hkjljhlkjhlkjhlkj");
             return configureAuthorizationClaim(incomingPrincipal);
 
         }

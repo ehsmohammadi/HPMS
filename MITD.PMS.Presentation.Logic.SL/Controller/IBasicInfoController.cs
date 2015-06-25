@@ -4,11 +4,28 @@ namespace MITD.PMS.Presentation.Logic
 {
     public interface IBasicInfoController
     {
+        #region Job
         void ShowJobView(JobDTO job, ActionType actionEnum);
-        void ShowJobListView(bool isShiftPressed);
+        void ShowJobListView(bool isShiftPressed); 
+        #endregion
 
+        #region JobIndex
         void ShowJobIndexView(JobIndexDTO jobIndex, ActionType actionType);
         void ShowJobIndexTreeView(bool isShiftPressed);
+
+        void ShowJobIndexCategoryView(JobIndexCategoryDTO jobIndexCategory, ActionType addJobIndexCategory);
+
+        void ShowJobIndexCustomFieldManageView(JobIndexDTO jobIndex, ActionType action);
+        #endregion
+
+        #region UnitIndex
+        void ShowUnitIndexView(UnitIndexDTO unitIndex, ActionType actionType);
+        void ShowUnitIndexTreeView(bool isShiftPressed);
+
+        void ShowUnitIndexCategoryView(UnitIndexCategoryDTO unitIndexCategory, ActionType addUnitIndexCategory);
+
+        void ShowUnitIndexCustomFieldManageView(UnitIndexDTO unitIndex, ActionType action);
+        #endregion
 
         void ShowJobPositionView(JobPositionDTO jobPosition, ActionType actionType);
         void ShowJobPositionList(bool isShiftPressed);
@@ -19,14 +36,14 @@ namespace MITD.PMS.Presentation.Logic
         void ShowRuleTrailView(RuleTrailDTO res);
         //void ShowRuleVersionView(RuleDTO rule, ActionType action);
 
-        void ShowJobIndexCategoryView(JobIndexCategoryDTO jobIndexCategory, ActionType addJobIndexCategory);
+        
 
         void ShowCustomFieldView(CustomFieldDTO jobIndex, ActionType addCustomField);
         void ShowCustomFieldListView(bool isShiftPressed);
 
 
         void ShowJobCustomFieldManageView(JobDTO job, ActionType modifyJobFields);
-        void ShowJobIndexCustomFieldManageView(JobIndexDTO jobIndex, ActionType action);
+        
 
         void ShowUnitView(UnitDTO unit, ActionType actionType);
         void ShowUnitList(bool isShiftPressed);

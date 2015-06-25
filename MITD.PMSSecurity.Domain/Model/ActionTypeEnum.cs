@@ -71,10 +71,20 @@ namespace MITD.PMSSecurity.Domain
         public static readonly ActionType ManageJobIndexCustomFields = new ActionType("213", "ManageJobIndexCustomFields","مدیریت فیلدهای دلخواه شاخص");
         public static readonly ActionType AddJobIndexCustomFields = new ActionType("214", "AddJobIndexCustomFields","ایجاد فیلد دلخواه برای شاخص");
 
+        public static readonly ActionType AddUnitIndex = new ActionType("215", "AddUnitIndex", "ایجاد شاخص");
+        public static readonly ActionType ModifyUnitIndex = new ActionType("216", "ModifyUnitIndex", "ویرایش شاخص");
+        public static readonly ActionType DeleteUnitIndex = new ActionType("217", "DeleteUnitIndex", "حذف شاخص");
+        public static readonly ActionType ManageUnitIndexCustomFields = new ActionType("218", "ManageUnitIndexCustomFields", "مدیریت فیلدهای دلخواه شاخص");
+        public static readonly ActionType AddUnitIndexCustomFields = new ActionType("219", "AddUnitIndexCustomFields", "ایجاد فیلد دلخواه برای شاخص");
+
 
         public static readonly ActionType AddJobIndexCategory = new ActionType("220", "AddJobIndexCategory","ایجاد دسته شاخص");
         public static readonly ActionType DeleteJobIndexCategory = new ActionType("221", "DeleteJobIndexCategory","حذف دسته شاخص");
         public static readonly ActionType ModifyJobIndexCategory = new ActionType("222", "ModifyJobIndexCategory", "ویرایش دسته شاخص");
+
+        public static readonly ActionType AddUnitIndexCategory = new ActionType("223", "AddUnitIndexCategory", "ایجاد دسته شاخص");
+        public static readonly ActionType DeleteUnitIndexCategory = new ActionType("224", "DeleteUnitIndexCategory", "حذف دسته شاخص");
+        public static readonly ActionType ModifyUnitIndexCategory = new ActionType("225", "ModifyUnitIndexCategory", "ویرایش دسته شاخص");
 
         public static readonly ActionType AddJobPosition = new ActionType("230", "AddJobPosition","ایجاد پست سازمانی");
         public static readonly ActionType DeleteJobPosition = new ActionType("231", "DeleteJobPosition","حذف پست سازمانی");

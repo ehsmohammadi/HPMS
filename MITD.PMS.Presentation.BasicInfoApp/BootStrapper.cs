@@ -33,6 +33,15 @@ namespace MITD.PMS.Presentation.BasicInfoApp
                     {(int) ActionType.DeleteJobIndexCategory,typeof(DeleteJobIndexCategoryService)},
                     {(int) ActionType.AddJobIndexCategory,typeof(AddJobIndexCategoryService)},
 
+                    {(int) ActionType.ModifyUnitIndex,typeof(ModifyUnitIndexService)},
+                    {(int) ActionType.DeleteUnitIndex,typeof(DeleteUnitIndexService)},
+                    {(int) ActionType.AddUnitIndex,typeof(AddUnitIndexService)},
+                    {(int) ActionType.ManageUnitIndexCustomFields,typeof(ManageUnitIndexCustomFieldsService)},
+
+                    {(int) ActionType.ModifyUnitIndexCategory,typeof(ModifyUnitIndexCategoryService)},
+                    {(int) ActionType.DeleteUnitIndexCategory,typeof(DeleteUnitIndexCategoryService)},
+                    {(int) ActionType.AddUnitIndexCategory,typeof(AddUnitIndexCategoryService)},
+
                     {(int) ActionType.ModifyJobPosition,typeof(ModifyJobPositionService)},
                     {(int) ActionType.DeleteJobPosition,typeof(DeleteJobPositionService)},
                     {(int) ActionType.AddJobPosition,typeof(AddJobPositionService)},

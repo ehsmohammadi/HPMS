@@ -68,6 +68,8 @@ namespace MITD.PMS.Persistence
 
             createJobIndexTable();
 
+            createUnitIndexTable();
+
             createPeriod_JobIndex();
 
             createPeriodJob_JobIndices();
@@ -200,29 +202,46 @@ namespace MITD.PMS.Persistence
             Delete.Table("Employees_JobPositions");
             Delete.Table("Periods_Jobs_CustomFields");
 
-
-
-            Delete.Table("Jobs_CustomFields");
-
-            Delete.Table("JobIndices_CustomFields");
-            Delete.Table("JobIndices");
             Delete.Table("Periods_JobPositions");
             Delete.Table("Periods_Jobs");
             Delete.Table("Periods_Units");
+
+            Delete.Table("Employees_CustomFields");
+            Delete.Table("Employees");
+
+            Delete.Table("Periods");
+
+            Delete.Table("JobIndices_CustomFields");
+            Delete.Table("JobIndices");
             Delete.Table("JobIndexCategories");
             Delete.Table("AbstractJobIndices");
+
             Delete.Table("Employees_CustomFields");
             Delete.Table("CustomFieldTypes");
             
-         //   Delete.Table("Units_CustomFields");
+            Delete.Table("Units_CustomFields");
             
             Delete.Table("Units");
+
+
+            Delete.Table("UnitIndices_CustomFields");
+            Delete.Table("UnitIndices");
+            Delete.Table("UnitIndexCategories");
+            Delete.Table("AbstractUnitIndices");
+
+            Delete.Table("Jobs_CustomFields");
+
             Delete.Table("Jobs");
+
+            Delete.Table("Units");
+                     
             Delete.Table("Jobpositions");
+
             Delete.Table("Policies_RE");
             Delete.Table("Policies");
-            Delete.Table("Employees");
-            Delete.Table("Periods");
+            
+            Delete.Table("CustomFieldTypes");  
+            
 
             Delete.Table("ExceptionLogs");
             Delete.Table("EventLogs");
@@ -252,6 +271,7 @@ namespace MITD.PMS.Persistence
             Execute.Sql("Drop sequence [dbo].[EmployeeSeq]");
             Execute.Sql("Drop sequence [dbo].[CalculationSeq]");
             Execute.Sql("Drop sequence [dbo].[AbstractJobIndexSeq]");
+            Execute.Sql("Drop sequence [dbo].[AbstractUnitIndexSeq]");
             Execute.Sql("Drop sequence [dbo].[Periods_AbstractJobIndexSeq]");
             Execute.Sql("Drop sequence [dbo].[JobIndexPointSeq]");
             Execute.Sql("Drop sequence [dbo].[Inquiry_JobIndexPointsSeq]");
@@ -619,6 +639,39 @@ namespace MITD.PMS.Persistence
                   .ForeignKey("fk_JobIndices_CustomFields_CustomFieldTypeId", "CustomFieldTypes", "Id");
         }
 
+        private void createUnitIndexTable()
+        {
+            Create.Table("AbstractUnitIndices")
+                  .WithColumn("Id").AsInt64().PrimaryKey()
+                  .WithColumn("RowVersion").AsCustom("rowversion")
+                  .WithColumn("Name").AsString(256).NotNullable()
+                  .WithColumn("DictionaryName").AsString(256).NotNullable();
+
+            Create.Table("UnitIndexCategories")
+                  .WithColumn("Id").AsInt64().PrimaryKey()
+                  .ForeignKey("fk_AbstractUnitIndices_UnitIndexCategories_Id", "AbstractUnitIndices", "Id")
+
+                  .WithColumn("ParentId").AsInt64().Nullable()
+                  .ForeignKey("fk_UnitIndexCategories_UnitIndexCategories_ParentId", "UnitIndexCategories", "Id");
+
+            Create.Table("UnitIndices")
+                  .WithColumn("Id").AsInt64().PrimaryKey()
+                  .ForeignKey("fk_AbstractUnitIndices_UnitIndices_Id", "AbstractUnitIndices", "Id")
+
+                  .WithColumn("CategoryId").AsInt64().NotNullable()
+                  .ForeignKey("fk_UnitIndexCategories_UnitIndices_CategoryId", "UnitIndexCategories", "Id");
+
+            Create.Table("UnitIndices_CustomFields")
+                  .WithColumn("Id").AsInt64().PrimaryKey().Identity()
+                  .WithColumn("RowVersion").AsCustom("rowversion")
+
+                  .WithColumn("UnitIndexId").AsInt64().NotNullable()
+                  .ForeignKey("fk_UnitIndices_CustomFields_UnitIndexId", "UnitIndices", "Id")
+
+                  .WithColumn("CustomFieldTypeId").AsInt64().NotNullable()
+                  .ForeignKey("fk_UnitIndices_CustomFields_CustomFieldTypeId", "CustomFieldTypes", "Id");
+        }
+
         private void createEmployees()
         {
             Create.Table("Employees")
@@ -826,6 +879,15 @@ CREATE SEQUENCE [dbo].[AbstractJobIndexSeq]
  MAXVALUE 9223372036854775807
  CACHE ");
 
+            Execute.Sql(@"
+CREATE SEQUENCE [dbo].[AbstractUnitIndexSeq] 
+ AS [bigint]
+ START WITH 10
+ INCREMENT BY 1
+ MINVALUE -9223372036854775808
+ MAXVALUE 9223372036854775807
+ CACHE ");
+
 
             Execute.Sql(@"
 CREATE SEQUENCE [dbo].[Periods_AbstractJobIndexSeq] 
@@ -835,6 +897,8 @@ CREATE SEQUENCE [dbo].[Periods_AbstractJobIndexSeq]
  MINVALUE -9223372036854775808
  MAXVALUE 9223372036854775807
  CACHE ");
+
+
 
             Execute.Sql(@"
 CREATE SEQUENCE [dbo].[JobIndexPointSeq] 

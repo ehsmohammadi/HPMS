@@ -666,5 +666,7 @@ namespace MITD.PMS.Presentation.UI
         {
             get { return MainAppStrings.CheckChangeCalculationDeterministicStatus; }
         }
+
+        public string BasicInfoManagementShowUnitIndexsTitle { get { return "شاخص های سازمانی"; } }
     }
 }

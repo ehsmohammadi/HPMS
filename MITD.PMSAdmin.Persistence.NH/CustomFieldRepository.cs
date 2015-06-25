@@ -8,6 +8,8 @@ using MITD.PMSAdmin.Domain.Model.CustomFieldTypes;
 using MITD.PMSAdmin.Domain.Model.Jobs;
 using MITD.PMSAdmin.Domain.Model.JobIndices;
 using MITD.PMSAdmin.Domain.Model.Units;
+using MITD.PMSAdmin.Domain.Model.UnitIndices;
+
 using NHibernate.Linq;
 
 namespace MITD.PMSAdmin.Persistence.NH
@@ -72,6 +74,12 @@ namespace MITD.PMSAdmin.Persistence.NH
         {
             var jobIndex = Session.Query<JobIndex>().Single(j => j.Id == jobIndexId);
             return Session.Query<CustomFieldType>().Where(c => jobIndex.CustomFieldTypeIdList.Contains(c.Id)).ToList();
+        }
+
+        public List<CustomFieldType> GetAllCustomField(AbstractUnitIndexId unitIndexId)
+        {
+            var unitIndex = Session.Query<UnitIndex>().Single(j => j.Id == unitIndexId);
+            return Session.Query<CustomFieldType>().Where(c => unitIndex.CustomFieldTypeIdList.Contains(c.Id)).ToList();
         }
 
         public List<CustomFieldType> GetAllCustomField(JobId jobId)

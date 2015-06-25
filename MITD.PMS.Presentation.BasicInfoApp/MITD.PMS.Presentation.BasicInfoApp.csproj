@@ -125,6 +125,13 @@
     <Reference Include="System.Windows.Browser" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionService\UnitIndex\AddUnitIndexCategoryService.cs" />
+    <Compile Include="ActionService\UnitIndex\AddUnitIndexService.cs" />
+    <Compile Include="ActionService\UnitIndex\DeleteUnitIndexCategoryService.cs" />
+    <Compile Include="ActionService\UnitIndex\DeleteUnitIndexService.cs" />
+    <Compile Include="ActionService\UnitIndex\ManageUnitIndexCustomFieldsService.cs" />
+    <Compile Include="ActionService\UnitIndex\ModifyUnitIndexCategoryService.cs" />
+    <Compile Include="ActionService\UnitIndex\ModifyUnitIndexService.cs" />
     <Compile Include="ActionService\Log\DeleteLogService.cs" />
     <Compile Include="ActionService\Log\ShowLogService.cs" />
     <Compile Include="ActionService\Rule\ShowAllRuleTrailService.cs" />
@@ -190,6 +197,10 @@
     <Compile Include="BasicInfoAppLocalizedResources.cs" />
     <Compile Include="DataGridColumnHelper.cs" />
     <Compile Include="EventArgs\UpdateUnitCustomFieldListArgs.cs" />
+    <Compile Include="EventArgs\UnitIndex\UpdateUnitIndexCategoryListArgs.cs" />
+    <Compile Include="EventArgs\UnitIndex\UpdateUnitIndexCustomFieldListArgs.cs" />
+    <Compile Include="EventArgs\UnitIndex\UpdateUnitIndexListArgs.cs" />
+    <Compile Include="EventArgs\UnitIndex\UpdateUnitIndexTreeArgs.cs" />
     <Compile Include="EventArgs\UpdateRuleTrailListArgs.cs" />
     <Compile Include="EventArgs\UpdateWorkListUsersArgs.cs" />
     <Compile Include="EventArgs\UpdateLogListArgs.cs" />
@@ -201,17 +212,21 @@
     <Compile Include="EventArgs\Policy\UpdatePolicyRuleListArgs.cs" />
     <Compile Include="EventArgs\Policy\UpdatePolicyListArgs.cs" />
     <Compile Include="EventArgs\UpdateUnitListArgs.cs" />
-    <Compile Include="EventArgs\UpdateJobIndexCustomFieldListArgs.cs" />
+    <Compile Include="EventArgs\JobIndex\UpdateJobIndexCustomFieldListArgs.cs" />
     <Compile Include="EventArgs\UpdateJobCustomFieldListArgs.cs" />
-    <Compile Include="EventArgs\UpdateJobIndexTreeArgs.cs" />
+    <Compile Include="EventArgs\JobIndex\UpdateJobIndexTreeArgs.cs" />
     <Compile Include="EventArgs\UpdateCustomFieldListArgs.cs" />
-    <Compile Include="EventArgs\UpdateJobIndexCategoryListArgs.cs" />
+    <Compile Include="EventArgs\JobIndex\UpdateJobIndexCategoryListArgs.cs" />
     <Compile Include="IBasicInfoAppLocalizedResources.cs" />
     <Compile Include="EventArgs\UpdateRuleListArgs.cs" />
     <Compile Include="EventArgs\UpdateJobPostListArgs.cs" />
-    <Compile Include="EventArgs\UpdateJobIndexListArgs.cs" />
+    <Compile Include="EventArgs\JobIndex\UpdateJobIndexListArgs.cs" />
     <Compile Include="EventArgs\UpdateJobListArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\UnitIndex\UnitIndexCategoryVM.cs" />
+    <Compile Include="ViewModels\UnitIndex\UnitIndexCustomFieldManageVM.cs" />
+    <Compile Include="ViewModels\UnitIndex\UnitIndexTreeVM.cs" />
+    <Compile Include="ViewModels\UnitIndex\UnitIndexVM.cs" />
     <Compile Include="ViewModels\Log\LogListVM.cs" />
     <Compile Include="ViewModels\Log\LogVM.cs" />
     <Compile Include="ViewModels\Rule\RuleTrailVM.cs" />
@@ -243,6 +258,18 @@
     <Compile Include="ViewModels\Rule\RuleVM.cs" />
     <Compile Include="ViewModels\Unit\UnitListVM.cs" />
     <Compile Include="ViewModels\Unit\UnitVM.cs" />
+    <Compile Include="Views\UnitIndex\UnitIndexCategoryView.xaml.cs">
+      <DependentUpon>UnitIndexCategoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitIndex\UnitIndexCustomFieldManageView.xaml.cs">
+      <DependentUpon>UnitIndexCustomFieldManageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitIndex\UnitIndexTreeView.xaml.cs">
+      <DependentUpon>UnitIndexTreeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitIndex\UnitIndexView.xaml.cs">
+      <DependentUpon>UnitIndexView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Log\LogListView.xaml.cs">
       <DependentUpon>LogListView.xaml</DependentUpon>
     </Compile>
@@ -350,6 +377,22 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Assets\LocalResource.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UnitIndex\UnitIndexCategoryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UnitIndex\UnitIndexCustomFieldManageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UnitIndex\UnitIndexTreeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UnitIndex\UnitIndexView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
