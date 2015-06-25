@@ -96,7 +96,11 @@ namespace MITD.PMSSecurity.Domain
 
         public static readonly ActionType AddUnit = new ActionType("270", "AddUnit","ایجاد واحد سازمانی");
         public static readonly ActionType DeleteUnit = new ActionType("271", "DeleteUnit","حذف واحد سازمانی");
+        public static readonly ActionType ManageUnitCustomFields = new ActionType("273", "ManageUnitCustomFields", "مدیریت فیلدهای دلخواه واحد");
+        public static readonly ActionType AddUnitCustomFields = new ActionType("274", "AddUnitCustomFields", "ایجاد فیلد دلخواه برای واحد");
         public static readonly ActionType ModifyUnit = new ActionType("272", "ModifyUnit", "ویرایش واحد سازمانی");
+
+
 
         public static readonly ActionType AddPolicy = new ActionType("280", "AddPolicy","ایجاد نظام محاسبه عملکرد");
         public static readonly ActionType DeletePolicy = new ActionType("281", "DeletePolicy", "حذف نظام محاسبه عملکرد");

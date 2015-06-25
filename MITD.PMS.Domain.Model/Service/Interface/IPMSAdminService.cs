@@ -13,6 +13,8 @@ namespace MITD.PMS.Domain.Service
         SharedUnit GetSharedUnit(SharedUnitId sharedUnitId);
         SharedJob GetSharedJob(SharedJobId sharedJobId);
 
+        List<SharedUnitCustomField> GetSharedCutomFieldListForUnit(SharedUnitId sharedJobId,
+            List<SharedUnitCustomFieldId> customFieldIdList);
         List<SharedJobCustomField> GetSharedCutomFieldListForJob(SharedJobId sharedJobId, List<SharedJobCustomFieldId> customFieldIdList);
 
         List<SharedJobIndexCustomField> GetSharedCutomFieldListForJobIndex(SharedJobIndexId sharedJobIndexId,IList<SharedJobIndexCustomFieldId>

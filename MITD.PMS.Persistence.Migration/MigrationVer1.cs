@@ -56,8 +56,10 @@ namespace MITD.PMS.Persistence
 
             createPeriods_UnitsTable();
 
+            createUnits_CustomFieldsTable();
+            
             createJobs_CustomFieldsTable();
-
+            
             createPeriods_JobPositionssTable();
 
             createEmployees();
@@ -211,6 +213,9 @@ namespace MITD.PMS.Persistence
             Delete.Table("AbstractJobIndices");
             Delete.Table("Employees_CustomFields");
             Delete.Table("CustomFieldTypes");
+            
+         //   Delete.Table("Units_CustomFields");
+            
             Delete.Table("Units");
             Delete.Table("Jobs");
             Delete.Table("Jobpositions");
@@ -230,7 +235,7 @@ namespace MITD.PMS.Persistence
             Delete.Table("Groups");
             Delete.Table("Parties");
             Delete.Table("ActionTypes");
-
+        
 
 
             Execute.Sql("Drop Sequence [dbo].[PeriodSeq] ");
@@ -931,6 +936,25 @@ CREATE SEQUENCE [dbo].[Calculations_ExceptionsSeq]
                   .FromTable("Jobs_CustomFields").ForeignColumn("CustomFieldTypeId")
                   .ToTable("CustomFieldTypes").PrimaryColumn("Id");
         }
+
+        private void createUnits_CustomFieldsTable()
+        {
+            Create.Table("Units_CustomFields")
+                  .WithColumn("Id").AsInt64().PrimaryKey().Identity()
+                  .WithColumn("RowVersion").AsCustom("rowversion")
+
+                  .WithColumn("UnitId").AsInt64().NotNullable()
+                  .WithColumn("CustomFieldTypeId").AsInt64().NotNullable();
+
+            Create.ForeignKey("Units_CustomFields_UnitId")
+                  .FromTable("Units_CustomFields").ForeignColumn("UnitId")
+                  .ToTable("Units").PrimaryColumn("Id");
+
+            Create.ForeignKey("Units_CustomFields_CustomFieldId")
+                  .FromTable("Units_CustomFields").ForeignColumn("CustomFieldTypeId")
+                  .ToTable("CustomFieldTypes").PrimaryColumn("Id");
+        }
+
 
         private void createUnitTable()
         {

@@ -199,6 +199,8 @@
     <Compile Include="Model\Units\Exception\UnitDuplicateException.cs" />
     <Compile Include="Model\Units\Exception\UnitException.cs" />
     <Compile Include="Model\Units\Exception\UnitModifyException.cs" />
+    <Compile Include="Model\Units\SharedUnitCustomFieldId.cs" />
+    <Compile Include="Model\Units\SharedUnitCustomField.cs" />
     <Compile Include="ReportModel\CalculationWithPolicy.cs" />
     <Compile Include="ReportModel\CalculationData.cs" />
     <Compile Include="ReportModel\EmployeeIdWithJobPositionId.cs" />

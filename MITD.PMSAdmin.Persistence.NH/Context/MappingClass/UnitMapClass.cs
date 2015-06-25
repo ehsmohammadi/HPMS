@@ -38,6 +38,26 @@ namespace MITD.PMSAdmin.Persistence.NH
                 mapper.Length(256);
                 mapper.NotNullable(true);
             });
+            IdBag(p => p.CustomFieldTypeIdList, m =>
+            {
+                m.Table("Units_CustomFields");
+                m.Key(i => i.Column("UnitId"));
+                m.Access(Accessor.Field);
+                m.Id(i =>
+                {
+                    i.Column("Id");
+                    i.Generator(Generators.Identity);
+                });
+            },
+      x => x.Component(m =>
+      {
+          m.Access(Accessor.Field);
+          m.Property(i => i.Id, ma =>
+          {
+              ma.Access(Accessor.Field);
+              ma.Column("CustomFieldTypeId");
+          });
+      }));
         }
     }
 }

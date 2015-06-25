@@ -51,5 +51,6 @@ namespace MITD.PMS.Presentation.Logic
         string ManagePartyCustomActions { get;  }
         string LogListViewTitle { get; }
         string RuleTrailListViewTitle { get; }
+        string UnitCustomFieldManageViewTitle { get; }
     }
 }

@@ -9,6 +9,7 @@ namespace MITD.PMSAdmin.Domain.Model.CustomFieldTypes
         public static readonly EntityTypeEnum Job = new EntityTypeEnum("1", "Job");
         public static readonly EntityTypeEnum JobIndex = new EntityTypeEnum("2", "JobIndex");
         public static readonly EntityTypeEnum Employee = new EntityTypeEnum("3", "Employee");
+        public static readonly EntityTypeEnum Unit = new EntityTypeEnum("4", "Unit");
 
         public EntityTypeEnum(string value)
             : base(value)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using MITD.Domain.Repository;
 using MITD.PMSAdmin.Domain.Model.Jobs;
 using MITD.PMSAdmin.Domain.Model.JobIndices;
+using MITD.PMSAdmin.Domain.Model.Units;
 
 namespace MITD.PMSAdmin.Domain.Model.CustomFieldTypes
 {
@@ -14,6 +15,7 @@ namespace MITD.PMSAdmin.Domain.Model.CustomFieldTypes
         void UpdateCustomFieldType(CustomFieldType customFieldType);
         CustomFieldType GetById(CustomFieldTypeId customFieldTypeId);
         List<CustomFieldType> GetAllCustomField(JobId jobId);
+        List<CustomFieldType> GetAllCustomField(UnitId unitId);
         List<CustomFieldType> GetAllCustomField(AbstractJobIndexId jobIndexId);
         void GetAll(EntityTypeEnum entityTypeEnum, ListFetchStrategy<CustomFieldType> fs);
         List<CustomFieldType> GetAll(EntityTypeEnum entityTypeEnum);

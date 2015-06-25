@@ -104,7 +104,11 @@ namespace MITD.PMS.Presentation.BasicInfoApp
         {
             get { return "مدیریت فیلد های شغل"; }
         }
-
+        public string UnitCustomFieldManageViewTitle
+        {
+            get { return "مدیریت فیلد های واحد"; }
+        }
+        
         public string JobIndexCustomFieldManageViewTitle
         {
             get { return "مدیریت فیلد های شاخص"; }

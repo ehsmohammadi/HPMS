@@ -91,6 +91,24 @@ namespace MITD.PMS.ACL.PMSAdmin
         //           .ToList();
         //}
 
+
+        public List<SharedUnitCustomField> GetSharedCutomFieldListForUnit(SharedUnitId sharedUnitId, List<SharedUnitCustomFieldId> sharedUnitCustomFieldIds)
+        {
+            var isValid = unitService.IsValidCustomFieldIdList(new PMSAdminModel.Units.UnitId(sharedUnitId.Id),
+                                                               sharedUnitCustomFieldIds.Select(c => new CustomFieldTypeId(c.Id))
+                                                                                .ToList());
+            if (!isValid)
+                throw new ArgumentException("Invalid Unit customFieldIdList");
+
+            var res = customFieldService.GetBy(sharedUnitCustomFieldIds.Select(c => new CustomFieldTypeId(c.Id)).ToList());
+            return
+                res.Select(
+                    r => new SharedUnitCustomField(new SharedUnitCustomFieldId(r.Id.Id), r.Name, r.DictionaryName, r.MinValue, r.MaxValue, r.TypeId))
+                   .ToList();
+
+        }
+
+
         public List<SharedJobCustomField> GetSharedCutomFieldListForJob(SharedJobId sharedJobId, List<SharedJobCustomFieldId> customFieldIdList)
         {
            var isValid = jobService.IsValidCustomFieldIdList(new PMSAdminModel.Jobs.JobId(sharedJobId.Id),

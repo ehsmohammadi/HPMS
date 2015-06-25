@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     d:DesignHeight="300" d:DesignWidth="400"
     FlowDirection="RightToLeft"
-    d:DataContext="{StaticResource jpViewModel}">
+    >
 
     <ScrollViewer BorderThickness="0"  VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
         <Grid x:Name="LayoutRoot" Background="White">
@@ -35,6 +35,9 @@
             </Grid>
 
             <StackPanel Grid.Row="2"     VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Style="{StaticResource CustomButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Content="{Binding Path=ManageUnitFieldsCommand.DisplayName}" 
+                    Command="{Binding Path=ManageUnitFieldsCommand.Command}"  />
                 <Button Style="{StaticResource CustomButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"
                     Content="{Binding Path=SaveCommand.DisplayName}" 
                     Command="{Binding Path=SaveCommand.Command}"  />

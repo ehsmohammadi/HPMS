@@ -30,6 +30,8 @@ namespace MITD.PMS.Presentation.Logic
 
         void ShowUnitView(UnitDTO unit, ActionType actionType);
         void ShowUnitList(bool isShiftPressed);
+        void ShowUnitCustomFieldManageView(UnitDTO unitDto, ActionType action);
+
         void ShowPolicyView(PolicyDTO policy, ActionType actionType);
         void ShowPolicyListView(bool isShiftPressed);
         

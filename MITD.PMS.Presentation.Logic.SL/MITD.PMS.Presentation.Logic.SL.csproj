@@ -107,6 +107,7 @@
     <Compile Include="UIBusinessClasses\PMSClientConfig.cs" />
     <Compile Include="HideBusyIndicatorArgs.cs" />
     <Compile Include="UserProvider.cs" />
+    <Compile Include="Views\BasicInfo\Unit\IUnitCustomFieldManageView.cs" />
     <Compile Include="Views\ICalculationExceptionListView.cs" />
     <Compile Include="Views\ICalculationExceptionView.cs" />
     <Compile Include="Views\IRuleTrailView.cs" />

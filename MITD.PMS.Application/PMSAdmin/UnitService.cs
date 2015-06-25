@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using MITD.Domain.Repository;
 using MITD.PMSAdmin.Application.Contracts;
+using MITD.PMSAdmin.Domain.Model.CustomFieldTypes;
 using MITD.PMSAdmin.Domain.Model.Units;
 using System.Transactions;
 using MITD.PMSAdmin.Exceptions;
@@ -10,24 +13,27 @@ namespace MITD.PMSAdmin.Application
     public class UnitService : IUnitService
     {
         private readonly IUnitRepository unitRep;
-
-        public UnitService(IUnitRepository unitRep)
+        private readonly ICustomFieldRepository customFieldRep;
+        public UnitService(IUnitRepository unitRep, ICustomFieldRepository customFieldRep)
         {
             this.unitRep = unitRep;
+            this.customFieldRep = customFieldRep;
         }
 
-        public Unit AddUnit(string name, string dictionaryName)
+        public Unit AddUnit(string name, string dictionaryName, IList<CustomFieldTypeId> customFieldTypeIdList)
         {
-            try{
-            using (var scope = new TransactionScope())
+            try
             {
-                var id = unitRep.GetNextId();
-                var unit = new Unit(id, name, dictionaryName);
-                unitRep.Add(unit);
-                scope.Complete();
-                return unit;
+                using (var scope = new TransactionScope())
+                {
+                    var id = unitRep.GetNextId();
+                    var unit = new Unit(id, name, dictionaryName);
+                    assignJobCustomField(unit, customFieldTypeIdList);
+                    unitRep.Add(unit);
+                    scope.Complete();
+                    return unit;
 
-            }
+                }
             }
             catch (Exception exp)
             {
@@ -38,17 +44,22 @@ namespace MITD.PMSAdmin.Application
             }
         }
 
-        public Unit UppdateUnit(UnitId unitId, string name, string dictionaryName)
+        public Unit UppdateUnit(UnitId unitId, string name, string dictionaryName, IList<CustomFieldTypeId> customFieldTypeIdList)
         {
-            try{
-            using (var scope = new TransactionScope())
+            try
             {
-                var unit = unitRep.GetById(unitId);
-                unit.Update(name, dictionaryName);
-                scope.Complete();
-                return unit;
+                using (var scope = new TransactionScope())
+                {
+                    var unit = unitRep.GetById(unitId);
+                    var unitCustomFields = customFieldRep.GetAll(EntityTypeEnum.Unit)
+                             .Where(c => customFieldTypeIdList.Contains(c.Id)).ToList();
+                    unit.Update(name, dictionaryName, unitCustomFields);
+                    unitRep.UpdateUnit(unit);
+                    scope.Complete();
+                    return unit;
 
-            }
+                    
+                }
             }
             catch (Exception exp)
             {
@@ -61,13 +72,14 @@ namespace MITD.PMSAdmin.Application
 
         public void DeleteUnit(UnitId unitId)
         {
-            try{
-            using (var scope = new TransactionScope())
+            try
             {
-                var unit = unitRep.GetById(unitId);
-                unitRep.DeleteUnit(unit);
-                scope.Complete();
-            }
+                using (var scope = new TransactionScope())
+                {
+                    var unit = unitRep.GetById(unitId);
+                    unitRep.DeleteUnit(unit);
+                    scope.Complete();
+                }
             }
             catch (Exception exp)
             {
@@ -81,6 +93,21 @@ namespace MITD.PMSAdmin.Application
         public Unit GetBy(UnitId unitId)
         {
             return unitRep.GetById(unitId);
+        }
+        private void assignJobCustomField(Unit unit, IList<CustomFieldTypeId> customFieldTypeIdList)
+        {
+            foreach (var customFieldId in customFieldTypeIdList)
+            {
+                var customField = customFieldRep.GetById(customFieldId);
+                unit.AssignCustomField(customField);
+            }
+        }
+
+        public bool IsValidCustomFieldIdList(UnitId unitId, IList<CustomFieldTypeId> customFieldTypeIds)
+        {
+            var unit = unitRep.GetById(unitId);
+            var customFieldList = customFieldRep.Find(c => customFieldTypeIds.Contains(c.Id));
+            return unit.IsValidCustomFields(customFieldList);
         }
     }
 }
