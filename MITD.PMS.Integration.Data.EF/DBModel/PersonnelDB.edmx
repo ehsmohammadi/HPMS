@@ -1,0 +1,375 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PersonnelSoft2005Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="affiliateCompany">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="MapCode_PayRoll" Type="int" />
+          <Property Name="LogUserID" Type="int" />
+          <Property Name="LogActionType" Type="char" MaxLength="1" />
+          <Property Name="LogActionDate" Type="datetime" />
+          <Property Name="LogComputerName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="JOBSTitle">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="series_F" Type="int" />
+          <Property Name="PayRoll_MapCode" Type="int" />
+          <Property Name="LogUserID" Type="int" />
+          <Property Name="LogActionType" Type="char" MaxLength="1" />
+          <Property Name="LogActionDate" Type="datetime" />
+          <Property Name="LogComputerName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="OrganTreeNodeType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LogUserID" Type="int" />
+          <Property Name="LogActionType" Type="char" MaxLength="1" />
+          <Property Name="LogActionDate" Type="datetime" />
+          <Property Name="LogComputerName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Rasteh">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="LogUserID" Type="int" />
+          <Property Name="LogActionType" Type="char" MaxLength="1" />
+          <Property Name="LogActionDate" Type="datetime" />
+          <Property Name="LogComputerName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Reshteh">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="LogUserID" Type="int" />
+          <Property Name="LogActionType" Type="char" MaxLength="1" />
+          <Property Name="LogActionDate" Type="datetime" />
+          <Property Name="LogComputerName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PersonnelSoft2005.dbo.VW_OrganTree' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_OrganTree">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="PI" />
+            <PropertyRef Name="Ind" />
+            <PropertyRef Name="NodeName" />
+          </Key>
+          <Property Name="Name_JobTitle" Type="varchar" MaxLength="100" />
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="PI" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Ind" Type="int" Nullable="false" />
+          <Property Name="NodeName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ID_F" Type="int" />
+          <Property Name="NCODE_SERIES" Type="int" />
+          <Property Name="NCODE_TITLE" Type="int" />
+          <Property Name="FullPath" Type="varchar" MaxLength="1000" />
+          <Property Name="Rasteh" Type="int" />
+          <Property Name="Reshteh" Type="int" />
+          <Property Name="Name_Rasteh" Type="varchar" MaxLength="100" />
+          <Property Name="Name_Reshteh" Type="varchar" MaxLength="100" />
+          <Property Name="Company_F" Type="int" />
+          <Property Name="NodeType" Type="int" />
+          <Property Name="Name" Type="varchar" MaxLength="15" />
+          <Property Name="FamilyName" Type="varchar" MaxLength="30" />
+          <Property Name="PersonnelCode" Type="int" />
+          <Property Name="LogUserID" Type="int" />
+          <Property Name="LogActionType" Type="char" MaxLength="1" />
+          <Property Name="LogActionDate" Type="datetime" />
+          <Property Name="LogComputerName" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsAgent" Type="bit" />
+          <Property Name="PID" Type="int" />
+          <Property Name="FinalPath" Type="varchar" MaxLength="300" />
+          <Property Name="IsInFullPath" Type="bit" />
+          <Property Name="Radif" Type="nvarchar" MaxLength="10" />
+          <Property Name="IsManager" Type="bit" />
+        </EntityType>
+        <EntityContainer Name="PersonnelSoft2005ModelStoreContainer">
+          <EntitySet Name="affiliateCompany" EntityType="Self.affiliateCompany" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JOBSTitle" EntityType="Self.JOBSTitle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrganTreeNodeType" EntityType="Self.OrganTreeNodeType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rasteh" EntityType="Self.Rasteh" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reshteh" EntityType="Self.Reshteh" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VW_OrganTree" EntityType="Self.VW_OrganTree" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_OrganTree].[Name_JobTitle] AS [Name_JobTitle], 
+    [VW_OrganTree].[ID] AS [ID], 
+    [VW_OrganTree].[PI] AS [PI], 
+    [VW_OrganTree].[Ind] AS [Ind], 
+    [VW_OrganTree].[NodeName] AS [NodeName], 
+    [VW_OrganTree].[ID_F] AS [ID_F], 
+    [VW_OrganTree].[NCODE_SERIES] AS [NCODE_SERIES], 
+    [VW_OrganTree].[NCODE_TITLE] AS [NCODE_TITLE], 
+    [VW_OrganTree].[FullPath] AS [FullPath], 
+    [VW_OrganTree].[Rasteh] AS [Rasteh], 
+    [VW_OrganTree].[Reshteh] AS [Reshteh], 
+    [VW_OrganTree].[Name_Rasteh] AS [Name_Rasteh], 
+    [VW_OrganTree].[Name_Reshteh] AS [Name_Reshteh], 
+    [VW_OrganTree].[Company_F] AS [Company_F], 
+    [VW_OrganTree].[NodeType] AS [NodeType], 
+    [VW_OrganTree].[Name] AS [Name], 
+    [VW_OrganTree].[FamilyName] AS [FamilyName], 
+    [VW_OrganTree].[PersonnelCode] AS [PersonnelCode], 
+    [VW_OrganTree].[LogUserID] AS [LogUserID], 
+    [VW_OrganTree].[LogActionType] AS [LogActionType], 
+    [VW_OrganTree].[LogActionDate] AS [LogActionDate], 
+    [VW_OrganTree].[LogComputerName] AS [LogComputerName], 
+    [VW_OrganTree].[IsAgent] AS [IsAgent], 
+    [VW_OrganTree].[PID] AS [PID], 
+    [VW_OrganTree].[FinalPath] AS [FinalPath], 
+    [VW_OrganTree].[IsInFullPath] AS [IsInFullPath], 
+    [VW_OrganTree].[Radif] AS [Radif], 
+    [VW_OrganTree].[IsManager] AS [IsManager]
+    FROM [dbo].[VW_OrganTree] AS [VW_OrganTree]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PersonnelSoft2005Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="VW_OrganTree">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="PI" />
+            <PropertyRef Name="Ind" />
+            <PropertyRef Name="NodeName" />
+          </Key>
+          <Property Name="Name_JobTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="PI" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ind" Type="Int32" Nullable="false" />
+          <Property Name="NodeName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_F" Type="Int32" />
+          <Property Name="NCODE_SERIES" Type="Int32" />
+          <Property Name="NCODE_TITLE" Type="Int32" />
+          <Property Name="FullPath" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Rasteh" Type="Int32" />
+          <Property Name="Reshteh" Type="Int32" />
+          <Property Name="Name_Rasteh" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Name_Reshteh" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Company_F" Type="Int32" />
+          <Property Name="NodeType" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="FamilyName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PersonnelCode" Type="Int32" />
+          <Property Name="LogUserID" Type="Int32" />
+          <Property Name="LogActionType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="LogActionDate" Type="DateTime" Precision="3" />
+          <Property Name="LogComputerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsAgent" Type="Boolean" />
+          <Property Name="PID" Type="Int32" />
+          <Property Name="FinalPath" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="IsInFullPath" Type="Boolean" />
+          <Property Name="Radif" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="IsManager" Type="Boolean" />
+        </EntityType>
+        <EntityContainer Name="PersonnelSoft2005Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="VW_OrganTree" EntityType="Self.VW_OrganTree" />
+          <EntitySet Name="affiliateCompanies" EntityType="PersonnelSoft2005Model.affiliateCompany" />
+          <EntitySet Name="JOBSTitles" EntityType="PersonnelSoft2005Model.JOBSTitle" />
+          <EntitySet Name="OrganTreeNodeTypes" EntityType="PersonnelSoft2005Model.OrganTreeNodeType" />
+          <EntitySet Name="Rastehs" EntityType="PersonnelSoft2005Model.Rasteh" />
+          <EntitySet Name="Reshtehs" EntityType="PersonnelSoft2005Model.Reshteh" />
+        </EntityContainer>
+        <EntityType Name="affiliateCompany">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MapCode_PayRoll" Type="Int32" />
+          <Property Name="LogUserID" Type="Int32" />
+          <Property Name="LogActionType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="LogActionDate" Type="DateTime" Precision="3" />
+          <Property Name="LogComputerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="JOBSTitle">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="series_F" Type="Int32" />
+          <Property Name="PayRoll_MapCode" Type="Int32" />
+          <Property Name="LogUserID" Type="Int32" />
+          <Property Name="LogActionType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="LogActionDate" Type="DateTime" Precision="3" />
+          <Property Name="LogComputerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="OrganTreeNodeType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LogUserID" Type="Int32" />
+          <Property Name="LogActionType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="LogActionDate" Type="DateTime" Precision="3" />
+          <Property Name="LogComputerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Rasteh">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LogUserID" Type="Int32" />
+          <Property Name="LogActionType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="LogActionDate" Type="DateTime" Precision="3" />
+          <Property Name="LogComputerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Reshteh">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LogUserID" Type="Int32" />
+          <Property Name="LogActionType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="LogActionDate" Type="DateTime" Precision="3" />
+          <Property Name="LogComputerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PersonnelSoft2005ModelStoreContainer" CdmEntityContainer="PersonnelSoft2005Entities">
+          <EntitySetMapping Name="VW_OrganTree">
+            <EntityTypeMapping TypeName="PersonnelSoft2005Model.VW_OrganTree">
+              <MappingFragment StoreEntitySet="VW_OrganTree">
+                <ScalarProperty Name="Name_JobTitle" ColumnName="Name_JobTitle" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PI" ColumnName="PI" />
+                <ScalarProperty Name="Ind" ColumnName="Ind" />
+                <ScalarProperty Name="NodeName" ColumnName="NodeName" />
+                <ScalarProperty Name="ID_F" ColumnName="ID_F" />
+                <ScalarProperty Name="NCODE_SERIES" ColumnName="NCODE_SERIES" />
+                <ScalarProperty Name="NCODE_TITLE" ColumnName="NCODE_TITLE" />
+                <ScalarProperty Name="FullPath" ColumnName="FullPath" />
+                <ScalarProperty Name="Rasteh" ColumnName="Rasteh" />
+                <ScalarProperty Name="Reshteh" ColumnName="Reshteh" />
+                <ScalarProperty Name="Name_Rasteh" ColumnName="Name_Rasteh" />
+                <ScalarProperty Name="Name_Reshteh" ColumnName="Name_Reshteh" />
+                <ScalarProperty Name="Company_F" ColumnName="Company_F" />
+                <ScalarProperty Name="NodeType" ColumnName="NodeType" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FamilyName" ColumnName="FamilyName" />
+                <ScalarProperty Name="PersonnelCode" ColumnName="PersonnelCode" />
+                <ScalarProperty Name="LogUserID" ColumnName="LogUserID" />
+                <ScalarProperty Name="LogActionType" ColumnName="LogActionType" />
+                <ScalarProperty Name="LogActionDate" ColumnName="LogActionDate" />
+                <ScalarProperty Name="LogComputerName" ColumnName="LogComputerName" />
+                <ScalarProperty Name="IsAgent" ColumnName="IsAgent" />
+                <ScalarProperty Name="PID" ColumnName="PID" />
+                <ScalarProperty Name="FinalPath" ColumnName="FinalPath" />
+                <ScalarProperty Name="IsInFullPath" ColumnName="IsInFullPath" />
+                <ScalarProperty Name="Radif" ColumnName="Radif" />
+                <ScalarProperty Name="IsManager" ColumnName="IsManager" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="affiliateCompanies">
+            <EntityTypeMapping TypeName="PersonnelSoft2005Model.affiliateCompany">
+              <MappingFragment StoreEntitySet="affiliateCompany">
+                <ScalarProperty Name="LogComputerName" ColumnName="LogComputerName" />
+                <ScalarProperty Name="LogActionDate" ColumnName="LogActionDate" />
+                <ScalarProperty Name="LogActionType" ColumnName="LogActionType" />
+                <ScalarProperty Name="LogUserID" ColumnName="LogUserID" />
+                <ScalarProperty Name="MapCode_PayRoll" ColumnName="MapCode_PayRoll" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JOBSTitles">
+            <EntityTypeMapping TypeName="PersonnelSoft2005Model.JOBSTitle">
+              <MappingFragment StoreEntitySet="JOBSTitle">
+                <ScalarProperty Name="LogComputerName" ColumnName="LogComputerName" />
+                <ScalarProperty Name="LogActionDate" ColumnName="LogActionDate" />
+                <ScalarProperty Name="LogActionType" ColumnName="LogActionType" />
+                <ScalarProperty Name="LogUserID" ColumnName="LogUserID" />
+                <ScalarProperty Name="PayRoll_MapCode" ColumnName="PayRoll_MapCode" />
+                <ScalarProperty Name="series_F" ColumnName="series_F" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrganTreeNodeTypes">
+            <EntityTypeMapping TypeName="PersonnelSoft2005Model.OrganTreeNodeType">
+              <MappingFragment StoreEntitySet="OrganTreeNodeType">
+                <ScalarProperty Name="LogComputerName" ColumnName="LogComputerName" />
+                <ScalarProperty Name="LogActionDate" ColumnName="LogActionDate" />
+                <ScalarProperty Name="LogActionType" ColumnName="LogActionType" />
+                <ScalarProperty Name="LogUserID" ColumnName="LogUserID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rastehs">
+            <EntityTypeMapping TypeName="PersonnelSoft2005Model.Rasteh">
+              <MappingFragment StoreEntitySet="Rasteh">
+                <ScalarProperty Name="LogComputerName" ColumnName="LogComputerName" />
+                <ScalarProperty Name="LogActionDate" ColumnName="LogActionDate" />
+                <ScalarProperty Name="LogActionType" ColumnName="LogActionType" />
+                <ScalarProperty Name="LogUserID" ColumnName="LogUserID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reshtehs">
+            <EntityTypeMapping TypeName="PersonnelSoft2005Model.Reshteh">
+              <MappingFragment StoreEntitySet="Reshteh">
+                <ScalarProperty Name="LogComputerName" ColumnName="LogComputerName" />
+                <ScalarProperty Name="LogActionDate" ColumnName="LogActionDate" />
+                <ScalarProperty Name="LogActionType" ColumnName="LogActionType" />
+                <ScalarProperty Name="LogUserID" ColumnName="LogUserID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
