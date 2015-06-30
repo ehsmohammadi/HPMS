@@ -12,6 +12,7 @@ namespace MITD.PMSAdmin.Domain.Model.CustomFieldTypes
         public static readonly EntityTypeEnum Unit = new EntityTypeEnum("4", "Unit");
         public static readonly EntityTypeEnum UnitIndex = new EntityTypeEnum("5", "UnitIndex");
 
+
         public EntityTypeEnum(string value)
             : base(value)
         {

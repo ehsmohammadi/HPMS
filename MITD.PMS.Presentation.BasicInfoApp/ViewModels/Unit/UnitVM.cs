@@ -11,13 +11,14 @@ using Castle.Core.Internal;
 
 namespace MITD.PMS.Presentation.Logic
 {
-    public class UnitVM : BasicInfoWorkSpaceViewModel
+    public class UnitVM : BasicInfoWorkSpaceViewModel, IEventHandler<UpdateUnitCustomFieldListArgs>
     {
         #region Fields
 
         private readonly IPMSController appController;
         private readonly IUnitServiceWrapper unitService;
         private ActionType actionType;
+        private readonly ICustomFieldServiceWrapper customFieldService;
 
         #endregion
 
@@ -29,6 +30,21 @@ namespace MITD.PMS.Presentation.Logic
             get { return unit; }
             set { this.SetField(vm => vm.Unit, ref unit, value); }
         }
+
+
+        private CommandViewModel manageUnitFieldsCommand;
+        public CommandViewModel ManageUnitFieldsCommand
+        {
+            get
+            {
+                if (manageUnitFieldsCommand == null)
+                {
+                    manageUnitFieldsCommand = CommandHelper.GetControlCommands(this, appController, (int)ActionType.ManageUnitCustomFields);
+                }
+                return manageUnitFieldsCommand;
+            }
+        }
+
 
         private CommandViewModel saveCommand;
         public CommandViewModel SaveCommand
@@ -64,10 +80,11 @@ namespace MITD.PMS.Presentation.Logic
         {
             Unit = new UnitDTO { Name = "پست سازمانی یک", DictionaryName="Unit1" };
         }
-        public UnitVM(IPMSController appController, IUnitServiceWrapper unitService)
+        public UnitVM(IPMSController appController, IUnitServiceWrapper unitService,ICustomFieldServiceWrapper customFieldService)
         {
             this.appController = appController;
             this.unitService = unitService;
+            this.customFieldService = customFieldService;
             Unit = new UnitDTO();
             DisplayName = "واحد سازمانی ";
         } 
@@ -138,6 +155,21 @@ namespace MITD.PMS.Presentation.Logic
 
         #endregion
 
+
+        public void Handle(UpdateUnitCustomFieldListArgs eventData)
+        {
+            Unit.CustomFields = new ObservableCollection<CustomFieldDTO>();
+            var fieldIdList = eventData.UnitCustomFieldDescriptionList.Select(f => f.Id).ToList();
+
+            customFieldService.GetAllCustomFields((res, exp) => appController.BeginInvokeOnDispatcher(() =>
+            {
+                if (exp == null)
+
+                    Unit.CustomFields = new ObservableCollection<CustomFieldDTO>(res.Where(f => fieldIdList.Contains(f.Id)));
+                else
+                    appController.HandleException(exp);
+            }), "Unit");
+        }
     }
 }
 

@@ -70,7 +70,8 @@ namespace MITD.PMS.Presentation.BasicInfoApp
                     {(int) ActionType.AddUnit,typeof(AddUnitService)},
                     {(int) ActionType.ModifyUnit,typeof(ModifyUnitService)},
                     {(int) ActionType.DeleteUnit,typeof(DeleteUnitService)},
-                    
+                    {(int) ActionType.ManageUnitCustomFields,typeof(ManageUnitCustomFieldsService)},
+                    //{(int) ActionType.AddUnitCustomFields,typeof(ManageUnitCustomFieldsService)},
 
                     {(int) ActionType.AddUser,typeof(AddUserService)},
                     {(int) ActionType.ModifyUser,typeof(ModifyUserService)},

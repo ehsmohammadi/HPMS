@@ -91,6 +91,7 @@ namespace MITD.PMSSecurity.Domain
                     ActionType.AddUnit,
                     ActionType.DeleteUnit,
                     ActionType.ModifyUnit,
+                    ActionType.ManageUnitCustomFields,
 
                     ActionType.AddPolicy,
                     ActionType.DeletePolicy,

@@ -53,7 +53,7 @@ namespace MITD.PMS.Test
                     {
                         con.Open();
                         var pmsAdminService = new PMS.ACL.PMSAdmin.PMSAdminService(
-                            new PMSAdmin.Application.UnitService(new PMSAdmin.Persistence.NH.UnitRepository(uows)),
+                            new PMSAdmin.Application.UnitService(new PMSAdmin.Persistence.NH.UnitRepository(uows), new PMSAdmin.Persistence.NH.CustomFieldRepository(uows)),
                             new PMSAdmin.Application.JobService(new PMSAdmin.Persistence.NH.JobRepository(uows),
                                 new PMSAdmin.Persistence.NH.CustomFieldRepository(uows)),
                             new PMSAdmin.Application.CustomFieldService(new PMSAdmin.Persistence.NH.CustomFieldRepository(uows)),
@@ -131,7 +131,7 @@ namespace MITD.PMS.Test
 			using (var uow2 = uows.CurrentUnitOfWork)
 			{
 				var pmsAdminService = new PMS.ACL.PMSAdmin.PMSAdminService(
-					new PMSAdmin.Application.UnitService(new PMSAdmin.Persistence.NH.UnitRepository(uows)),
+                    new PMSAdmin.Application.UnitService(new PMSAdmin.Persistence.NH.UnitRepository(uows), new PMSAdmin.Persistence.NH.CustomFieldRepository(uows)),
 					new PMSAdmin.Application.JobService(new PMSAdmin.Persistence.NH.JobRepository(uows),
 						new PMSAdmin.Persistence.NH.CustomFieldRepository(uows)),
 					new PMSAdmin.Application.CustomFieldService(new PMSAdmin.Persistence.NH.CustomFieldRepository(uows)),

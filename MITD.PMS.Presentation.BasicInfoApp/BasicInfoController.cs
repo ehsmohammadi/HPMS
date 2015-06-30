@@ -179,6 +179,13 @@ namespace MITD.PMS.Presentation.BasicInfoApp
             ((UnitListVM)view.ViewModel).Load();
         }
 
+        public void ShowUnitCustomFieldManageView(UnitDTO unitDto, ActionType action)
+        {
+            var view = ServiceLocator.Current.GetInstance<IUnitCustomFieldManageView>();
+            ((UnitCustomFieldManageVM)view.ViewModel).Load(unitDto, action);
+            viewManager.ShowInDialog(view);
+        }
+
         public void ShowPolicyView(PolicyDTO policy, ActionType actionType)
         {
             var view = ServiceLocator.Current.GetInstance<IPolicyView>();

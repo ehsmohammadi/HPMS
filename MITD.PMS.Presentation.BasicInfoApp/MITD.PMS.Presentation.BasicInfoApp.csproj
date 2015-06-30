@@ -136,6 +136,7 @@
     <Compile Include="ActionService\Log\ShowLogService.cs" />
     <Compile Include="ActionService\Rule\ShowAllRuleTrailService.cs" />
     <Compile Include="ActionService\Rule\ShowRuleTrailService.cs" />
+    <Compile Include="ActionService\Unit\ManageUnitCustomFieldsService.cs" />
     <Compile Include="ActionService\User\AddUserService.cs" />
     <Compile Include="ActionService\User\AddUserGroupService.cs" />
     <Compile Include="ActionService\User\ManageWorkListUsersService.cs" />
@@ -195,6 +196,7 @@
     <Compile Include="BootStrapper.cs" />
     <Compile Include="BasicInfoAppLocalizedResources.cs" />
     <Compile Include="DataGridColumnHelper.cs" />
+    <Compile Include="EventArgs\UpdateUnitCustomFieldListArgs.cs" />
     <Compile Include="EventArgs\UnitIndex\UpdateUnitIndexCategoryListArgs.cs" />
     <Compile Include="EventArgs\UnitIndex\UpdateUnitIndexCustomFieldListArgs.cs" />
     <Compile Include="EventArgs\UnitIndex\UpdateUnitIndexListArgs.cs" />
@@ -229,6 +231,7 @@
     <Compile Include="ViewModels\Log\LogVM.cs" />
     <Compile Include="ViewModels\Rule\RuleTrailVM.cs" />
     <Compile Include="ViewModels\Rule\RuleTrailListVM.cs" />
+    <Compile Include="ViewModels\Unit\UnitCustomFieldManageVM.cs" />
     <Compile Include="ViewModels\User\ManageWorkListUsersVM.cs" />
     <Compile Include="ViewModels\User\PartyCustomActionsVM.cs" />
     <Compile Include="ViewModels\User\UserGroupListVM.cs" />
@@ -333,6 +336,9 @@
     </Compile>
     <Compile Include="Views\Rule\RuleView.xaml.cs">
       <DependentUpon>RuleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Unit\UnitCustomFieldManageView.xaml.cs">
+      <DependentUpon>UnitCustomFieldManageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Unit\UnitListView.xaml.cs">
       <DependentUpon>UnitListView.xaml</DependentUpon>
@@ -475,6 +481,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Rule\RuleView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Unit\UnitCustomFieldManageView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
