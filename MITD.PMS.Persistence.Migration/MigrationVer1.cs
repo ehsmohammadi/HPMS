@@ -215,13 +215,8 @@ namespace MITD.PMS.Persistence
             Delete.Table("JobIndices");
             Delete.Table("JobIndexCategories");
             Delete.Table("AbstractJobIndices");
-
-            Delete.Table("Employees_CustomFields");
-            Delete.Table("CustomFieldTypes");
             
             Delete.Table("Units_CustomFields");
-            
-            Delete.Table("Units");
 
 
             Delete.Table("UnitIndices_CustomFields");
