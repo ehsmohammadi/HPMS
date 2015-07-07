@@ -19,6 +19,7 @@ namespace MITD.PMS.Interface
                 ActionCodes = new List<int>
                 {
                     (int) ActionType.AddUnitInPeriod,
+                    (int)ActionType.ModifyUnitInPeriod,
                     (int) ActionType.DeleteUnitInPeriod
                 }
             };

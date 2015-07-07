@@ -40,7 +40,9 @@ namespace MITD.PMS.Domain.Model.Periods
         internal override  void CheckAssigningJobIndex()
         {
         }
-
+        internal override void CheckAssigningUnitIndex()
+        {
+        }
         internal override  void CheckAssigningJob()
         {
         }

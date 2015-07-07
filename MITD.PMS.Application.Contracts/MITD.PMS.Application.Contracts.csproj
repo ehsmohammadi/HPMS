@@ -61,12 +61,14 @@
     <Compile Include="PMSAdmin\IJobService.cs" />
     <Compile Include="PMSAdmin\ICustomFieldService.cs" />
     <Compile Include="PMS\ICalculationExceptionPersister.cs" />
+    <Compile Include="PMS\IUnitIndexService.cs" />
     <Compile Include="PMS\InquiryJobIndexPoinItem.cs" />
     <Compile Include="PMS\InquirySubjectWithInquirers.cs" />
     <Compile Include="PMS\IInquiryJobIndexPointService.cs" />
     <Compile Include="PMS\IInquiryService.cs" />
     <Compile Include="PMS\IClaimService.cs" />
     <Compile Include="PMS\IUserManagementService.cs" />
+    <Compile Include="PMS\UnitIndexForUnit.cs" />
     <Compile Include="PMS\JobIndexForJob.cs" />
     <Compile Include="PMS\JobPositionDuration.cs" />
     <Compile Include="PMS\IJobIndexPointPersister.cs" />

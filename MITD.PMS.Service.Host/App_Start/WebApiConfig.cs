@@ -122,6 +122,12 @@ namespace MITD.PMS.Service.Host
                defaults: new { Controller = "PeriodJobIndex", id = RouteParameter.Optional });
 
             config.Routes.MapHttpRoute(
+              name: "PeriodUnitIndex",
+              routeTemplate: "api/Periods/{PeriodId}/UnitIndices/{id}",
+              defaults: new { Controller = "PeriodUnitIndex", id = RouteParameter.Optional });
+
+
+            config.Routes.MapHttpRoute(
               name: "PeriodJobs",
               routeTemplate: "api/Periods/{PeriodId}/Jobs/{id}",
               defaults: new { Controller = "PeriodJobs", id = RouteParameter.Optional });

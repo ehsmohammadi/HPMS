@@ -5,6 +5,7 @@ using MITD.PMS.Domain.Model.Jobs;
 using MITD.PMS.Domain.Model.JobIndices;
 using MITD.PMS.Domain.Model.JobPositions;
 using MITD.PMS.Domain.Model.Periods;
+using MITD.PMS.Domain.Model.UnitIndices;
 using MITD.PMS.Domain.Model.Units;
 using MITD.Core;
 
@@ -21,6 +22,10 @@ namespace MITD.PMS.Domain.Service
         InquiryInitializingProgress GetCompletedInitializeInquiryProgress(Period period);
         Period GetCurrentPeriod();
 
+        void CheckModifyingUnitCustomFields(Unit unit);
+        void CheckModifyingUnitIndices(Unit unit);
+
+        void CheckUpdatingUnitIndex(UnitIndex unitIndex);
         void CheckUpdatingJobIndex(JobIndex jobIndex);
         void CheckModifyingJobCustomFields(Job job);
         void CheckModifyingJobIndices(Job job);

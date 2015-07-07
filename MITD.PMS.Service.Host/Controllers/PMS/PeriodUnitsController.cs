@@ -7,35 +7,55 @@ namespace MITD.PMS.Service.Host.Controllers
     [Authorize]
     public class PeriodUnitsController : ApiController
     {
-        private readonly IPeriodUnitServiceFacade periodUnitService;
+        private const string unitInPeriodWithActionsClassType = "UnitInPeriodDTOWithActions";
+        private const string unitInPeriodClassType = "UnitInPeriodDTO";
+
+        private IPeriodUnitServiceFacade periodUnitService;
 
         public PeriodUnitsController(IPeriodUnitServiceFacade periodUnitService)
         {
             this.periodUnitService = periodUnitService;
         }
 
-        public UnitInPeriodAssignmentDTO PostUnit(long periodId, UnitInPeriodAssignmentDTO unitInPeriod)
+       
+        public PageResultDTO<UnitInPeriodDTOWithActions> GetAllUnites(long periodId, int pageSize, int pageIndex,
+                                                             string filter = "", string sortBy = "", string selectedColumns ="")
+        {
+            var queryStringCondition = new QueryStringConditions { SortBy = sortBy, Filter = filter };
+            return periodUnitService.GetAllUnits(periodId,pageSize, pageIndex, queryStringCondition, selectedColumns);
+        }
+
+        public UnitInPeriodDTO PutUnit(long periodId, UnitInPeriodDTO unitInPeriod)
+        {
+            //update customFields
+            return periodUnitService.UpdateUnit(periodId, unitInPeriod);
+        }
+
+        public UnitInPeriodDTO PostUnit(long periodId, UnitInPeriodDTO unitInPeriod)
         {
             return periodUnitService.AssignUnit(periodId, unitInPeriod);
         }
 
-        public string DeleteUnit(long periodId, long unitId)
+        public void DeleteUnit(long periodId, long unitId)
         {
-            return periodUnitService.RemoveUnit(periodId, unitId);
+            periodUnitService.RemoveUnit(periodId, unitId);
         }
 
-        public UnitInPeriodDTO GetUnit(long periodId, long unitId)
+        public UnitInPeriodDTO GetUnit(long periodId, long unitId, string Type)
         {
-            return periodUnitService.GetUnit(periodId, unitId);
+            if (Type.ToLower() == unitInPeriodWithActionsClassType.ToLower())
+                return periodUnitService.GetUnit(periodId, unitId, "");
+            return periodUnitService.GetUnit(periodId, unitId, "");
         }
 
-        public IEnumerable<UnitInPeriodDTO> GetAllUnitInPeriods(long periodId, string type)
+        public IEnumerable<UnitInPeriodDTO> GetAllUnitInPeriods(long periodId, string Type)
         {
-            if (string.Equals(type, "UnitInPeriodDTOWithActions"))
-            {
+            if (Type.ToLower() == unitInPeriodWithActionsClassType.ToLower())
                 return periodUnitService.GetUnitsWithActions(periodId);
-            }
             return periodUnitService.GetUnits(periodId);
         }
+
+       
+
     }
 }

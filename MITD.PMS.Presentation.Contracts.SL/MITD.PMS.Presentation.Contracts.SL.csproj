@@ -402,6 +402,27 @@
     <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\Period\PeriodStateWithIntializeInquirySummaryDTO.cs">
       <Link>PeriodManagement\Period\PeriodStateWithIntializeInquirySummaryDTO.cs</Link>
     </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\UnitIndex\AbstractUnitIndexInPeriodDTO.cs">
+      <Link>PeriodManagement\UnitIndex\AbstractUnitIndexInPeriodDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\UnitIndex\AbstractUnitIndexInPeriodDTOWithActions.cs">
+      <Link>PeriodManagement\UnitIndex\AbstractUnitIndexInPeriodDTOWithActions.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\UnitIndex\UnitIndexGroupInPeriodDTO.cs">
+      <Link>PeriodManagement\UnitIndex\UnitIndexGroupInPeriodDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\UnitIndex\UnitIndexGroupInPeriodDTOWithActions.cs">
+      <Link>PeriodManagement\UnitIndex\UnitIndexGroupInPeriodDTOWithActions.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\UnitIndex\UnitIndexInPeriodDTO.cs">
+      <Link>PeriodManagement\UnitIndex\UnitIndexInPeriodDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\UnitIndex\UnitIndexInPeriodDTOWithActions.cs">
+      <Link>PeriodManagement\UnitIndex\UnitIndexInPeriodDTOWithActions.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\Unit\UnitIndex\UnitInPeriodUnitIndexDTO.cs">
+      <Link>PeriodManagement\Unit\UnitIndex\UnitInPeriodUnitIndexDTO.cs</Link>
+    </Compile>
     <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\Unit\UnitInPeriodAssignmentDTO.cs">
       <Link>PeriodManagement\Unit\UnitInPeriodAssignmentDTO.cs</Link>
     </Compile>
@@ -515,6 +536,10 @@
     <Compile Include="PeriodManagement\Period\PeriodStateWithIntializeInquirySummaryDTO_Client.cs" />
     <Compile Include="PeriodManagement\Period\PeriodStateDTO_Client.cs" />
     <Compile Include="PeriodManagement\Period\PeriodDescriptionDTO_Client.cs" />
+    <Compile Include="PeriodManagement\UnitIndex\AbstractUnitIndexInPeriodDTOWithActions_Client.cs" />
+    <Compile Include="PeriodManagement\UnitIndex\AbstractUnitIndexInPeriodDTO_Client.cs" />
+    <Compile Include="PeriodManagement\UnitIndex\UnitIndexInPeriodDTO_Client.cs" />
+    <Compile Include="PeriodManagement\Unit\UnitIndex\UnitInPeriodUnitIndexDTO_Client.cs" />
     <Compile Include="PeriodManagement\Unit\UnitInPeriodDTO_Client.cs" />
     <Compile Include="PeriodManagement\Unit\UnitInPeriodAssignmentDTO_Client.cs" />
     <Compile Include="PeriodManagement\Unit\UnitInPeriodDTOWithActions_Client.cs" />

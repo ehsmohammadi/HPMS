@@ -1,6 +1,7 @@
 ﻿using MITD.Core;
 using MITD.PMS.Presentation.Contracts;
 using MITD.PMS.Presentation.Logic;
+using MITD.PMS.Presentation.Logic.Views;
 using MITD.Presentation;
 
 namespace MITD.PMS.Presentation.PeriodManagementApp
@@ -43,10 +44,15 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
         #endregion
 
         #region Unit
+
         public void ShowUnitInPeriodView(UnitInPeriodAssignmentDTO unitInPeriod, ActionType action)
         {
+            throw new System.NotImplementedException();
+        }
+        public void ShowUnitInPeriodView(long periodId, long? unitId, ActionType actionType)
+        {
             var view = ServiceLocator.Current.GetInstance<IUnitInPeriodView>();
-            ((UnitInPeriodVM)view.ViewModel).Load(unitInPeriod, action);
+            ((UnitInPeriodVM)view.ViewModel).Load(periodId, unitId,actionType);
             viewManager.ShowInDialog(view);
         }
 
@@ -54,7 +60,23 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
         {
             var view = viewManager.ShowInTabControl<IUnitInPeriodTreeView>(showInNewTab);
             ((UnitInPeriodTreeVM)view.ViewModel).Load(period);
-        } 
+        }
+
+        public void ShowUnitInPeriodCustomFieldManageView(long periodId, UnitInPeriodDTO unitInPeriodDto, ActionType modifyUnitInPrdField)
+        {
+            var view = ServiceLocator.Current.GetInstance<IUnitInPrdFieldView>();
+            ((UnitInPrdFieldsVM)view.ViewModel).Load(periodId, unitInPeriodDto, modifyUnitInPrdField);
+            viewManager.ShowInDialog(view);
+        }
+
+        public void ShowUnitInPeriodUnitIndicesManageView(long periodId, UnitInPeriodDTO unitInPeriodDto, ActionType modifyUnitInPrdField)
+        {
+            var view = ServiceLocator.Current.GetInstance<IUnitInPeriodUnitIndicesView>();
+            ((UnitInPeriodUnitIndicesVM)view.ViewModel).Load(periodId, unitInPeriodDto, modifyUnitInPrdField);
+            viewManager.ShowInDialog(view);
+        }
+
+
         #endregion
 
         #region JobPosition
@@ -268,6 +290,12 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
             ((EmployeeCalculationResultHistoryVM)view.ViewModel).Load(employeeId);
         }
 
-        
+
+
+
+
+
+
+      
     }
 }

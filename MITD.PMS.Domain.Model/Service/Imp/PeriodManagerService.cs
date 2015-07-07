@@ -12,6 +12,8 @@ using MITD.PMS.Domain.Model.JobIndices;
 using MITD.PMS.Domain.Model.JobPositions;
 using MITD.PMS.Domain.Model.Jobs;
 using MITD.PMS.Domain.Model.Periods;
+using MITD.PMS.Domain.Model.UnitIndices;
+using MITD.PMS.Domain.Model.Units;
 using MITD.PMS.Exceptions;
 
 
@@ -29,10 +31,10 @@ namespace MITD.PMS.Domain.Service
         private readonly IInquiryJobIndexPointRepository inquiryJobIndexPointRep;
         private readonly IClaimRepository claimRep;
 
-        public PeriodManagerService(IPeriodRepository periodRep,IInquiryConfiguratorService inquiryConfiguratorService,
+        public PeriodManagerService(IPeriodRepository periodRep, IInquiryConfiguratorService inquiryConfiguratorService,
             IPeriodBasicDataCopierService periodCopierService, IEventPublisher publisher
-            , ICalculationRepository calcRep, IJobIndexPointRepository jobIndexPointRep, IJobPositionRepository jobPositionRep,IInquiryJobIndexPointRepository inquiryJobIndexPointRep
-            ,IClaimRepository claimRep
+            , ICalculationRepository calcRep, IJobIndexPointRepository jobIndexPointRep, IJobPositionRepository jobPositionRep, IInquiryJobIndexPointRepository inquiryJobIndexPointRep
+            , IClaimRepository claimRep
             )
         {
             this.periodRep = periodRep;
@@ -54,7 +56,7 @@ namespace MITD.PMS.Domain.Service
 
         public void InitializeInquiry(Period period)
         {
-            inquiryConfiguratorService.Configure(period,publisher);
+            inquiryConfiguratorService.Configure(period, publisher);
 
         }
 
@@ -62,7 +64,7 @@ namespace MITD.PMS.Domain.Service
         {
             if (inquiryConfiguratorService.IsRunning)
                 return inquiryConfiguratorService.InquiryInitializingProgress;
-            inquiryConfiguratorService.Configure(period,publisher);
+            inquiryConfiguratorService.Configure(period, publisher);
             return inquiryConfiguratorService.InquiryInitializingProgress;
         }
 
@@ -118,9 +120,9 @@ namespace MITD.PMS.Domain.Service
         public Period GetCurrentPeriod()
         {
             var res = periodRep.GetBy(c => c.Active);
-             if (res == null)
-                 throw new PeriodException((int)ApiExceptionCode.DoesNotExistAnyActivePeriod, ApiExceptionCode.DoesNotExistAnyActivePeriod.DisplayName); 
-             return res;
+            if (res == null)
+                throw new PeriodException((int)ApiExceptionCode.DoesNotExistAnyActivePeriod, ApiExceptionCode.DoesNotExistAnyActivePeriod.DisplayName);
+            return res;
         }
 
         public bool CanCompleteInquiry(Period period)
@@ -184,7 +186,7 @@ namespace MITD.PMS.Domain.Service
             period.CheckSettingInquiryJobIndexPointValueValue();
         }
 
-       
+
 
         public bool AllowRollBackToInquiryCompletedState(Period period)
         {
@@ -228,6 +230,28 @@ namespace MITD.PMS.Domain.Service
         public bool HasOpenClaim(Period period)
         {
             return claimRep.HasOpenClaim(period);
+        }
+
+
+        public void CheckUpdatingUnitIndex(UnitIndex unitIndex)
+        {
+
+            var period = periodRep.GetById(unitIndex.PeriodId);
+            period.CheckModifingJobIndex();
+
+        }
+
+
+        public void CheckModifyingUnitCustomFields(Unit unit)
+        {
+            var period = periodRep.GetById(unit.Id.PeriodId);
+            period.CheckModifyingUnitCustomFields();
+        }
+
+        public void CheckModifyingUnitIndices(Unit unit)
+        {
+            var period = periodRep.GetById(unit.Id.PeriodId);
+            period.CheckModifyingUnitIndices(unit);
         }
     }
 }

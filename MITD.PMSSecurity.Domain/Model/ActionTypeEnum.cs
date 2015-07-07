@@ -44,6 +44,7 @@ namespace MITD.PMSSecurity.Domain
         //public static readonly ActionType ManageJobInPeriodCustomFields = new ActionType("123", "ManageJobInPeriodCustomFields","مدیریت فیلدهای دلخواه شغل در دوره");
 
         public static readonly ActionType AddUnitInPeriod = new ActionType("130", "AddUnitInPeriod","تخصیص واحد در دوره");
+        public static readonly ActionType ModifyUnitInPeriod = new ActionType("132", "ModifyUnitInPeriod", "ویرایش واحد در دوره");
         public static readonly ActionType DeleteUnitInPeriod = new ActionType("131", "DeleteUnitInPeriod","حذف واحد از دوره");
 
         public static readonly ActionType AddJobPositionInPeriod = new ActionType("140", "AddJobPositionInPeriod","تخصیص پست در دوره");
@@ -85,6 +86,8 @@ namespace MITD.PMSSecurity.Domain
         public static readonly ActionType AddUnitIndexCategory = new ActionType("223", "AddUnitIndexCategory", "ایجاد دسته شاخص");
         public static readonly ActionType DeleteUnitIndexCategory = new ActionType("224", "DeleteUnitIndexCategory", "حذف دسته شاخص");
         public static readonly ActionType ModifyUnitIndexCategory = new ActionType("225", "ModifyUnitIndexCategory", "ویرایش دسته شاخص");
+
+      
 
         public static readonly ActionType AddJobPosition = new ActionType("230", "AddJobPosition","ایجاد پست سازمانی");
         public static readonly ActionType DeleteJobPosition = new ActionType("231", "DeleteJobPosition","حذف پست سازمانی");
@@ -167,6 +170,15 @@ namespace MITD.PMSSecurity.Domain
 
         public static readonly ActionType ShowLog = new ActionType("1711", "ShowLog", "نمایش لاگ");
         public static readonly ActionType DeleteLog = new ActionType("1712", "DeleteLog", "حذف لاگ");
+
+        public static readonly ActionType AddUnitIndexInPeriod = new ActionType("1811", "AddUnitIndexInPeriod", "تخصیص شاخص در دوره");
+        public static readonly ActionType ModifyUnitIndexInPeriod = new ActionType("1812", "ModifyUnitIndexInPeriod", "ویرایش شاخص در دوره");
+        public static readonly ActionType DeleteUnitIndexInPeriod = new ActionType("1813", "DeleteUnitIndexInPeriod", "حذف شاخص از دوره");
+        public static readonly ActionType AddUnitIndexGroupInPeriod = new ActionType("1814", "AddUnitIndexGroupInPeriod", "ایجاد گروه شاخص در دوره");
+        public static readonly ActionType ModifyUnitIndexGroupInPeriod = new ActionType("1815", "ModifyUnitIndexGroupInPeriod", "ویرایش گروه شاخص در دروه");
+        public static readonly ActionType DeleteUnitIndexGroupInPeriod = new ActionType("1816", "DeleteUnitIndexGroupInPeriod", "حذف گروه شاخص از دوره");
+
+
 
 
         private readonly string description;

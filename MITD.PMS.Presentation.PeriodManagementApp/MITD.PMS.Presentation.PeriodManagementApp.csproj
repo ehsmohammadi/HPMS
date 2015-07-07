@@ -165,6 +165,7 @@
     <Compile Include="ActionService\Period\ModifyPeriodService.cs" />
     <Compile Include="ActionService\Unit\AddUnitInPeriodService.cs" />
     <Compile Include="ActionService\Unit\DeleteUnitInPeriodService.cs" />
+    <Compile Include="ActionService\Unit\ModifyUnitInPeriodService.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -184,6 +185,9 @@
     <Compile Include="EventArgs\Job\UpdateJobInPeriodJobIndexListArgs.cs" />
     <Compile Include="EventArgs\Job\UpdateJobInPeriodCustomFieldListArgs.cs" />
     <Compile Include="EventArgs\Claim\UpdateClaimListArgs.cs" />
+    <Compile Include="EventArgs\Unit\UpdateUnitInPeriodCustomFieldListArgs.cs" />
+    <Compile Include="EventArgs\Unit\UpdateUnitInPeriodListArgs.cs" />
+    <Compile Include="EventArgs\Unit\UpdateUnitInPeriodUnitIndexListArgs.cs" />
     <Compile Include="EventArgs\Unit\UpdateUnitInPeriodTreeArgs.cs" />
     <Compile Include="PeriodMgtAppLocalizedResources.cs" />
     <Compile Include="PeriodMgtWorkSpaceViewModel.cs" />
@@ -233,8 +237,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\MyTasks\PermittedEmployeeListToMyTasksVM.cs" />
     <Compile Include="ViewModels\MyTasks\PermittedEmployeeToMyTasksVM.cs" />
-    <Compile Include="ViewModels\Unit\UnitInPeriodTreeVM.cs" />
+    <Compile Include="ViewModels\Unit\UnitInPeriodUnitIndicesVM.cs" />
+    <Compile Include="ViewModels\Unit\UnitInPrdFieldsVM.cs" />
     <Compile Include="ViewModels\Unit\UnitInPeriodVM.cs" />
+    <Compile Include="ViewModels\Unit\UnitInPeriodTreeVM.cs" />
     <Compile Include="Views\Calculation\CalculationView.xaml.cs">
       <DependentUpon>CalculationView.xaml</DependentUpon>
     </Compile>
@@ -351,11 +357,17 @@
     <Compile Include="Views\MyTasks\PermittedEmployeeToMyTasksView.xaml.cs">
       <DependentUpon>PermittedEmployeeToMyTasksView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Unit\UnitInPeriodTreeView.xaml.cs">
-      <DependentUpon>UnitInPeriodTreeView.xaml</DependentUpon>
+    <Compile Include="Views\Unit\UnitInPeriodUnitIndicesView.xaml.cs">
+      <DependentUpon>UnitInPeriodUnitIndicesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Unit\UnitInPrdFieldView.xaml.cs">
+      <DependentUpon>UnitInPrdFieldView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Unit\UnitInPeriodView.xaml.cs">
       <DependentUpon>UnitInPeriodView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Unit\UnitInPeriodTreeView.xaml.cs">
+      <DependentUpon>UnitInPeriodTreeView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -479,11 +491,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Unit\UnitInPeriodTreeView.xaml">
+    <Page Include="Views\Unit\UnitInPeriodUnitIndicesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Unit\UnitInPrdFieldView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Unit\UnitInPeriodView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Unit\UnitInPeriodTreeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

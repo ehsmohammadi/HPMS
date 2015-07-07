@@ -1,6 +1,6 @@
 ﻿using MITD.Domain.Model;
 
-namespace MITD.PMS.Domain.Model.Jobs
+namespace MITD.PMS.Domain.Model.Units
 {
     public class SharedUnitCustomFieldId : IValueObject<SharedUnitCustomFieldId>
     {

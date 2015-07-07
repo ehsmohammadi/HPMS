@@ -5,11 +5,15 @@ namespace MITD.PMS.Presentation.Contracts
 {
     public interface IPeriodUnitServiceFacade : IFacadeService
     {
-        UnitInPeriodAssignmentDTO AssignUnit(long periodId, UnitInPeriodAssignmentDTO unitInPeriod);
+        PageResultDTO<UnitInPeriodDTOWithActions> GetAllUnits(long periodId, int pageSize, int pageIndex,
+                                                            QueryStringConditions queryStringConditions, string selectedColumns);
+        UnitInPeriodDTO UpdateUnit(long periodId, UnitInPeriodDTO unitInPeriod);
+
+        UnitInPeriodDTO AssignUnit(long periodId, UnitInPeriodDTO unitInPeriod);
         string RemoveUnit(long periodId, long unitId);
         IEnumerable<UnitInPeriodDTOWithActions> GetUnitsWithActions(long periodId);
         IEnumerable<UnitInPeriodDTO> GetUnits(long periodId);
 
-        UnitInPeriodDTO GetUnit(long periodId, long unitId);
+        UnitInPeriodDTO GetUnit(long periodId, long unitId, string selectedColumns);
     }
 }

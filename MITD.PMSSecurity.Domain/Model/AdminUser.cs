@@ -36,6 +36,7 @@ namespace MITD.PMSSecurity.Domain
                    // ActionType.ManageJobInPeriodCustomFields,
 
                     ActionType.AddUnitInPeriod,
+                    ActionType.ModifyUnitInPeriod,
                     ActionType.DeleteUnitInPeriod,
 
                     ActionType.AddJobPositionInPeriod,
@@ -148,6 +149,14 @@ namespace MITD.PMSSecurity.Domain
 
                     ActionType.ShowLog,
                     ActionType.DeleteLog,
+                    ActionType.AddUnitCustomFields,
+                    ActionType.AddUnitIndex,
+                    ActionType.AddUnitIndexCategory,
+                    ActionType.AddUnitIndexCustomFields,
+                    ActionType.ModifyUnitIndex,
+                    ActionType.ModifyUnitIndexCategory,
+                  
+               
                 };
             }
         }

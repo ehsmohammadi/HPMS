@@ -33,14 +33,14 @@ using System.Configuration;
 
 namespace MITD.PMS.Test
 {
-	[TestClass]
-	public class CalculationsTest
-	{
-		EventPublisher publisher = new EventPublisher();
+    [TestClass]
+    public class CalculationsTest
+    {
+        EventPublisher publisher = new EventPublisher();
 
-		[TestMethod]
-		public void RuleTest()
-		{
+        [TestMethod]
+        public void RuleTest()
+        {
             using (var scope = new TransactionScope())
             {
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["PMSDBConnection"].ConnectionString))
@@ -53,20 +53,23 @@ namespace MITD.PMS.Test
                     {
                         con.Open();
                         var pmsAdminService = new PMS.ACL.PMSAdmin.PMSAdminService(
-                            new PMSAdmin.Application.UnitService(new PMSAdmin.Persistence.NH.UnitRepository(uows), new PMSAdmin.Persistence.NH.CustomFieldRepository(uows)),
+                            new PMSAdmin.Application.UnitService(new PMSAdmin.Persistence.NH.UnitRepository(uows),
+                            new PMSAdmin.Persistence.NH.CustomFieldRepository(uows)),
                             new PMSAdmin.Application.JobService(new PMSAdmin.Persistence.NH.JobRepository(uows),
-                                new PMSAdmin.Persistence.NH.CustomFieldRepository(uows)),
+                            new PMSAdmin.Persistence.NH.CustomFieldRepository(uows)),
                             new PMSAdmin.Application.CustomFieldService(new PMSAdmin.Persistence.NH.CustomFieldRepository(uows)),
                             new PMSAdmin.Application.JobPositionService(new PMSAdmin.Persistence.NH.JobPositionRepository(uows)),
                             new PMSAdmin.Application.JobIndexService(new PMSAdmin.Persistence.NH.JobIndexRepository(uows),
-                                new PMSAdmin.Persistence.NH.CustomFieldRepository(uows))
+                            new PMSAdmin.Persistence.NH.CustomFieldRepository(uows)),
+                            new PMSAdmin.Application.UnitIndexService(new PMSAdmin.Persistence.NH.UnitIndexRepository(uows),
+                            new PMSAdmin.Persistence.NH.CustomFieldRepository(uows))
                             );
                         EventPublisher publisher = new EventPublisher();
                         var rep = new PMS.Persistence.NH.EmployeeRepository(uow);
                         var periodRep = new PMS.Persistence.NH.PeriodRepository(uow);
                         var calcRep = new PMS.Persistence.NH.CalculationRepository(uow);
                         var policyRep = new MITD.PMS.Persistence.NH.PolicyRepository(uow, new PolicyConfigurator(
-                            new RuleBasedPolicyEngineService(new LocatorProvider("PMSDbConnection"),publisher)));
+                            new RuleBasedPolicyEngineService(new LocatorProvider("PMSDbConnection"), publisher)));
                         var provider = new PMS.Application.CalculationDataProvider(rep, pmsAdminService,
                             new PMS.Persistence.NH.JobIndexPointRepository(uow));
                         var policy = policyRep.GetById(new PolicyId(10));
@@ -118,71 +121,74 @@ namespace MITD.PMS.Test
                 }
             }
 
-		}
+        }
 
 
-		[TestMethod]
-		public void EmployeeProvideDataTest()
-		{
-			var uows = new MITD.Domain.Repository.UnitOfWorkScope(
-			  new Data.NH.NHUnitOfWorkFactory(() => PMSAdmin.Persistence.NH.PMSAdminSession.GetSession()));
+        [TestMethod]
+        public void EmployeeProvideDataTest()
+        {
+            var uows = new MITD.Domain.Repository.UnitOfWorkScope(
+              new Data.NH.NHUnitOfWorkFactory(() => PMSAdmin.Persistence.NH.PMSAdminSession.GetSession()));
 
-			using (var uow = new NHUnitOfWork(PMSSession.GetSession()))
-			using (var uow2 = uows.CurrentUnitOfWork)
-			{
-				var pmsAdminService = new PMS.ACL.PMSAdmin.PMSAdminService(
+            using (var uow = new NHUnitOfWork(PMSSession.GetSession()))
+            using (var uow2 = uows.CurrentUnitOfWork)
+            {
+                var pmsAdminService = new PMS.ACL.PMSAdmin.PMSAdminService(
                     new PMSAdmin.Application.UnitService(new PMSAdmin.Persistence.NH.UnitRepository(uows), new PMSAdmin.Persistence.NH.CustomFieldRepository(uows)),
-					new PMSAdmin.Application.JobService(new PMSAdmin.Persistence.NH.JobRepository(uows),
-						new PMSAdmin.Persistence.NH.CustomFieldRepository(uows)),
-					new PMSAdmin.Application.CustomFieldService(new PMSAdmin.Persistence.NH.CustomFieldRepository(uows)),
-					new PMSAdmin.Application.JobPositionService(new PMSAdmin.Persistence.NH.JobPositionRepository(uows)),
-					new PMSAdmin.Application.JobIndexService(new PMSAdmin.Persistence.NH.JobIndexRepository(uows),
-						new PMSAdmin.Persistence.NH.CustomFieldRepository(uows))
-					);
-				var rep = new PMS.Persistence.NH.EmployeeRepository(uow);
-				var provider = new PMS.Application.CalculationDataProvider(rep, pmsAdminService,
-					new PMS.Persistence.NH.JobIndexPointRepository(uow));
-				var emp = rep.First();
-				MITD.PMSReport.Domain.Model.CalculationData empData;
-				//var data = provider.Provide(emp, out empData);
-			}
-		}
+                    new PMSAdmin.Application.JobService(new PMSAdmin.Persistence.NH.JobRepository(uows),
+                        new PMSAdmin.Persistence.NH.CustomFieldRepository(uows)),
+                    new PMSAdmin.Application.CustomFieldService(new PMSAdmin.Persistence.NH.CustomFieldRepository(uows)),
+                    new PMSAdmin.Application.JobPositionService(new PMSAdmin.Persistence.NH.JobPositionRepository(uows)),
+                    new PMSAdmin.Application.JobIndexService(new PMSAdmin.Persistence.NH.JobIndexRepository(uows),
+                        new PMSAdmin.Persistence.NH.CustomFieldRepository(uows))
+                      ,
+                            new PMSAdmin.Application.UnitIndexService(new PMSAdmin.Persistence.NH.UnitIndexRepository(uows),
+                            new PMSAdmin.Persistence.NH.CustomFieldRepository(uows)
+                    ));
+                var rep = new PMS.Persistence.NH.EmployeeRepository(uow);
+                var provider = new PMS.Application.CalculationDataProvider(rep, pmsAdminService,
+                    new PMS.Persistence.NH.JobIndexPointRepository(uow));
+                var emp = rep.First();
+                MITD.PMSReport.Domain.Model.CalculationData empData;
+                //var data = provider.Provide(emp, out empData);
+            }
+        }
 
-		[TestMethod]
-		public void EmployeeDataTest()
-		{
-			List<PMSAdmin.Domain.Model.CustomFieldTypes.CustomFieldType> employeeCftList = new List<CustomFieldType>();
-			List<PMSAdmin.Domain.Model.CustomFieldTypes.CustomFieldType> jobIndexCftList = new List<CustomFieldType>();
-			List<PMSAdmin.Domain.Model.CustomFieldTypes.CustomFieldType> jobCftList = new List<CustomFieldType>();
-			List<PMSAdmin.Domain.Model.Jobs.Job> jobList = new List<PMSAdmin.Domain.Model.Jobs.Job>();
-			List<PMSAdmin.Domain.Model.JobIndices.JobIndex> jobIndexList = new List<PMSAdmin.Domain.Model.JobIndices.JobIndex>();
-			List<PMSAdmin.Domain.Model.JobPositions.JobPosition> jobPositionList = new List<PMSAdmin.Domain.Model.JobPositions.JobPosition>();
-			List<PMSAdmin.Domain.Model.Units.Unit> unitList = new List<PMSAdmin.Domain.Model.Units.Unit>();
-			PMSAdmin.Domain.Model.Policies.RuleEngineBasedPolicy policy;
-			Core.RuleEngine.Model.Rule rule;
-			Core.RuleEngine.Model.RuleFunction rf;
-			Period period;
+        [TestMethod]
+        public void EmployeeDataTest()
+        {
+            List<PMSAdmin.Domain.Model.CustomFieldTypes.CustomFieldType> employeeCftList = new List<CustomFieldType>();
+            List<PMSAdmin.Domain.Model.CustomFieldTypes.CustomFieldType> jobIndexCftList = new List<CustomFieldType>();
+            List<PMSAdmin.Domain.Model.CustomFieldTypes.CustomFieldType> jobCftList = new List<CustomFieldType>();
+            List<PMSAdmin.Domain.Model.Jobs.Job> jobList = new List<PMSAdmin.Domain.Model.Jobs.Job>();
+            List<PMSAdmin.Domain.Model.JobIndices.JobIndex> jobIndexList = new List<PMSAdmin.Domain.Model.JobIndices.JobIndex>();
+            List<PMSAdmin.Domain.Model.JobPositions.JobPosition> jobPositionList = new List<PMSAdmin.Domain.Model.JobPositions.JobPosition>();
+            List<PMSAdmin.Domain.Model.Units.Unit> unitList = new List<PMSAdmin.Domain.Model.Units.Unit>();
+            PMSAdmin.Domain.Model.Policies.RuleEngineBasedPolicy policy;
+            Core.RuleEngine.Model.Rule rule;
+            Core.RuleEngine.Model.RuleFunction rf;
+            Period period;
 
 
-			List<PMS.Domain.Model.Jobs.Job> jobInPeriodList = new List<PMS.Domain.Model.Jobs.Job>();
-			List<PMS.Domain.Model.JobIndices.JobIndex> jobIndexInPeriodList = new List<PMS.Domain.Model.JobIndices.JobIndex>();
-			List<PMS.Domain.Model.JobPositions.JobPosition> jobPositionInPeriodList = new List<PMS.Domain.Model.JobPositions.JobPosition>();
-			List<PMS.Domain.Model.Units.Unit> unitInPeriodList = new List<PMS.Domain.Model.Units.Unit>();
-			List<PMS.Domain.Model.Employees.Employee> empList = new List<PMS.Domain.Model.Employees.Employee>();
+            List<PMS.Domain.Model.Jobs.Job> jobInPeriodList = new List<PMS.Domain.Model.Jobs.Job>();
+            List<PMS.Domain.Model.JobIndices.JobIndex> jobIndexInPeriodList = new List<PMS.Domain.Model.JobIndices.JobIndex>();
+            List<PMS.Domain.Model.JobPositions.JobPosition> jobPositionInPeriodList = new List<PMS.Domain.Model.JobPositions.JobPosition>();
+            List<PMS.Domain.Model.Units.Unit> unitInPeriodList = new List<PMS.Domain.Model.Units.Unit>();
+            List<PMS.Domain.Model.Employees.Employee> empList = new List<PMS.Domain.Model.Employees.Employee>();
 
-			#region rule Engine
-			var uows = new MITD.Domain.Repository.UnitOfWorkScope(
-				new Data.NH.NHUnitOfWorkFactory(() =>
-				{
-					RuleEngineSession.sessionName = "PMSDBConnection";
-					return Core.RuleEngine.NH.RuleEngineSession.GetSession();
-				}));
+            #region rule Engine
+            var uows = new MITD.Domain.Repository.UnitOfWorkScope(
+                new Data.NH.NHUnitOfWorkFactory(() =>
+                {
+                    RuleEngineSession.sessionName = "PMSDBConnection";
+                    return Core.RuleEngine.NH.RuleEngineSession.GetSession();
+                }));
 
-			using (var uow = uows.CurrentUnitOfWork as NHUnitOfWork)
-			{
-				var recRep = new Core.RuleEngine.NH.REConfigeRepository(uow);
-				var rec = new Core.RuleEngine.Model.RuleEngineConfigurationItem(
-					new Core.RuleEngine.Model.RuleEngineConfigurationItemId("RuleTextTemplate"),
+            using (var uow = uows.CurrentUnitOfWork as NHUnitOfWork)
+            {
+                var recRep = new Core.RuleEngine.NH.REConfigeRepository(uow);
+                var rec = new Core.RuleEngine.Model.RuleEngineConfigurationItem(
+                    new Core.RuleEngine.Model.RuleEngineConfigurationItemId("RuleTextTemplate"),
 @"
 public class <#classname#> : IRule<CalculationData>
 {
@@ -191,13 +197,13 @@ public class <#classname#> : IRule<CalculationData>
 		<#ruletext#>
 	}
 }");
-				recRep.Add(rec);
-				rec = new Core.RuleEngine.Model.RuleEngineConfigurationItem(
-					new Core.RuleEngine.Model.RuleEngineConfigurationItemId("ReferencedAssemblies"),
-										@"System.Core.dll;MITD.Core.RuleEngine.dll;MITD.PMS.RuleContracts.dll");
-				recRep.Add(rec);
-				rec = new Core.RuleEngine.Model.RuleEngineConfigurationItem(
-					new Core.RuleEngine.Model.RuleEngineConfigurationItemId("LibraryTextTemplate"),
+                recRep.Add(rec);
+                rec = new Core.RuleEngine.Model.RuleEngineConfigurationItem(
+                    new Core.RuleEngine.Model.RuleEngineConfigurationItemId("ReferencedAssemblies"),
+                                        @"System.Core.dll;MITD.Core.RuleEngine.dll;MITD.PMS.RuleContracts.dll");
+                recRep.Add(rec);
+                rec = new Core.RuleEngine.Model.RuleEngineConfigurationItem(
+                    new Core.RuleEngine.Model.RuleEngineConfigurationItemId("LibraryTextTemplate"),
 @"
 using System;
 using System.Collections.Generic;
@@ -230,10 +236,10 @@ namespace MITD.Core.RuleEngine
 
 	<#rules#>
 }");
-				recRep.Add(rec);
+                recRep.Add(rec);
 
-				var rfRep = new Core.RuleEngine.NH.RuleFunctionRepository(uow);
-				rf = new RuleFunction(rfRep.GetNextId(), "توابع خطکش پورتر",
+                var rfRep = new Core.RuleEngine.NH.RuleFunctionRepository(uow);
+                rf = new RuleFunction(rfRep.GetNextId(), "توابع خطکش پورتر",
 @"
 public static int IndexCount(JobPosition job, string indexCFName, string indexCFValue, string group)
 {
@@ -282,10 +288,10 @@ public static RulePoint GetPoint(JobPosition job, KeyValuePair<JobIndex, Diction
 	return Utils.Res.JobResults[job.DictionaryName].IndexResults[index.Key.DictionaryName].Single(j=>j.Name==name);
 }
 "
-				);
-				rfRep.Add(rf);
-				var ruleRep = new RuleRepository(uow);
-				rule = new Rule(new RuleId(ruleRep.GetNextId()), "محاسبه امتیاز شاخص ها",
+                );
+                rfRep.Add(rf);
+                var ruleRep = new RuleRepository(uow);
+                rule = new Rule(new RuleId(ruleRep.GetNextId()), "محاسبه امتیاز شاخص ها",
 @"
 //محاسبه تعداد شاخص ها با اهمیت های مختلف
 decimal total = 0;
@@ -442,524 +448,529 @@ foreach(var job in data.JobPositions)
 }
 if (it > 0)
 	Utils.AddPoint(""final"", total / it, true);
-", RuleType.PerCalculation,1);
-				ruleRep.Add(rule);
+", RuleType.PerCalculation, 1);
+                ruleRep.Add(rule);
 
-				uow.Commit();
-			}
-			#endregion
+                uow.Commit();
+            }
+            #endregion
 
-			#region  PMS Admin
+            #region  PMS Admin
 
-			uows = new MITD.Domain.Repository.UnitOfWorkScope(
-			   new Data.NH.NHUnitOfWorkFactory(() =>
-			   {
-				   return PMSAdmin.Persistence.NH.PMSAdminSession.GetSession();
-			   }));
+            uows = new MITD.Domain.Repository.UnitOfWorkScope(
+               new Data.NH.NHUnitOfWorkFactory(() =>
+               {
+                   return PMSAdmin.Persistence.NH.PMSAdminSession.GetSession();
+               }));
 
-			using (var uow = uows.CurrentUnitOfWork as NHUnitOfWork)
-			{
-				var cftRep = new PMSAdmin.Persistence.NH.CustomFieldRepository(uow);
+            using (var uow = uows.CurrentUnitOfWork as NHUnitOfWork)
+            {
+                var cftRep = new PMSAdmin.Persistence.NH.CustomFieldRepository(uow);
 
-				#region Employee CustomFields
+                #region Employee CustomFields
 
-				for (int i = 0; i < 10; i++)
-				{
-					var cft = new PMSAdmin.Domain.Model.CustomFieldTypes.CustomFieldType(cftRep.GetNextId(),
-						"فبلد دلخواه کارمند" + i, "EmployeeCft" + i, 0, 100, EntityTypeEnum.Employee, "string");
-					cftRep.Add(cft);
-					employeeCftList.Add(cft);
-				}
+                for (int i = 0; i < 10; i++)
+                {
+                    var cft = new PMSAdmin.Domain.Model.CustomFieldTypes.CustomFieldType(cftRep.GetNextId(),
+                        "فبلد دلخواه کارمند" + i, "EmployeeCft" + i, 0, 100, EntityTypeEnum.Employee, "string");
+                    cftRep.Add(cft);
+                    employeeCftList.Add(cft);
+                }
 
-				#endregion
+                #endregion
 
-				#region JobIndex CustomFields Creation
+                #region JobIndex CustomFields Creation
 
-				for (int i = 0; i < 9; i++)
-				{
-					var cft = new PMSAdmin.Domain.Model.CustomFieldTypes.CustomFieldType(cftRep.GetNextId(),
-						"فبلد دلخواه شاخص شغل" + i, "JobIndexCft" + i, 0, 100, EntityTypeEnum.JobIndex, "string");
-					cftRep.Add(cft);
-					jobIndexCftList.Add(cft);
-				}
-				var imp = new PMSAdmin.Domain.Model.CustomFieldTypes.CustomFieldType(cftRep.GetNextId(),
-					"اهمیت", "Importance", 0, 100, EntityTypeEnum.JobIndex, "string");
-				cftRep.Add(imp);
-				jobIndexCftList.Add(imp);
+                for (int i = 0; i < 9; i++)
+                {
+                    var cft = new PMSAdmin.Domain.Model.CustomFieldTypes.CustomFieldType(cftRep.GetNextId(),
+                        "فبلد دلخواه شاخص شغل" + i, "JobIndexCft" + i, 0, 100, EntityTypeEnum.JobIndex, "string");
+                    cftRep.Add(cft);
+                    jobIndexCftList.Add(cft);
+                }
+                var imp = new PMSAdmin.Domain.Model.CustomFieldTypes.CustomFieldType(cftRep.GetNextId(),
+                    "اهمیت", "Importance", 0, 100, EntityTypeEnum.JobIndex, "string");
+                cftRep.Add(imp);
+                jobIndexCftList.Add(imp);
 
-				#endregion
+                #endregion
 
-				#region Job CustomFields Creation
+                #region Job CustomFields Creation
 
-				for (int i = 0; i < 10; i++)
-				{
-					var cft = new PMSAdmin.Domain.Model.CustomFieldTypes.CustomFieldType(cftRep.GetNextId(),
-						"فبلد دلخواه شغل" + i, "JobCft" + i, 0, 100, EntityTypeEnum.Job, "string");
-					cftRep.Add(cft);
-					jobCftList.Add(cft);
-				}
+                for (int i = 0; i < 10; i++)
+                {
+                    var cft = new PMSAdmin.Domain.Model.CustomFieldTypes.CustomFieldType(cftRep.GetNextId(),
+                        "فبلد دلخواه شغل" + i, "JobCft" + i, 0, 100, EntityTypeEnum.Job, "string");
+                    cftRep.Add(cft);
+                    jobCftList.Add(cft);
+                }
 
-				#endregion
+                #endregion
 
-				var jobRep = new PMSAdmin.Persistence.NH.JobRepository(uow);
+                var jobRep = new PMSAdmin.Persistence.NH.JobRepository(uow);
 
-				#region Jobs Creation
+                #region Jobs Creation
 
-				for (int i = 0; i < 5; i++)
-				{
-					var job = new PMSAdmin.Domain.Model.Jobs.Job(jobRep.GetNextId(),
-						" شغل" + i, "Job" + i);
-					job.AssignCustomFields(jobCftList.Skip(i * 2).Take(2).ToList());
-					jobRep.AddJob(job);
-					jobList.Add(job);
-				}
+                for (int i = 0; i < 5; i++)
+                {
+                    var job = new PMSAdmin.Domain.Model.Jobs.Job(jobRep.GetNextId(),
+                        " شغل" + i, "Job" + i);
+                    job.AssignCustomFields(jobCftList.Skip(i * 2).Take(2).ToList());
+                    jobRep.AddJob(job);
+                    jobList.Add(job);
+                }
 
-				#endregion
+                #endregion
 
-				var jobPositionRep = new PMSAdmin.Persistence.NH.JobPositionRepository(uow);
+                var jobPositionRep = new PMSAdmin.Persistence.NH.JobPositionRepository(uow);
 
-				#region JobPositions Creation
+                #region JobPositions Creation
 
-				for (int i = 0; i < 5; i++)
-				{
-					var jobPosition = new PMSAdmin.Domain.Model.JobPositions.JobPosition(jobPositionRep.GetNextId(),
-						" پست" + i, "JobPosition" + i);
-					jobPositionRep.Add(jobPosition);
-					jobPositionList.Add(jobPosition);
-				}
+                for (int i = 0; i < 5; i++)
+                {
+                    var jobPosition = new PMSAdmin.Domain.Model.JobPositions.JobPosition(jobPositionRep.GetNextId(),
+                        " پست" + i, "JobPosition" + i);
+                    jobPositionRep.Add(jobPosition);
+                    jobPositionList.Add(jobPosition);
+                }
 
-				#endregion
+                #endregion
 
-				var unitRep = new PMSAdmin.Persistence.NH.UnitRepository(uow);
+                var unitRep = new PMSAdmin.Persistence.NH.UnitRepository(uow);
 
-				#region Unit Creation
+                #region Unit Creation
 
-				for (int i = 0; i < 5; i++)
-				{
-					var unit = new PMSAdmin.Domain.Model.Units.Unit(unitRep.GetNextId(),
-						" واحد" + i, "Unit" + i);
-					unitRep.Add(unit);
-					unitList.Add(unit);
-				}
+                for (int i = 0; i < 5; i++)
+                {
+                    var unit = new PMSAdmin.Domain.Model.Units.Unit(unitRep.GetNextId(),
+                        " واحد" + i, "Unit" + i);
+                    unitRep.Add(unit);
+                    unitList.Add(unit);
+                }
 
-				#endregion
+                #endregion
 
 
-				var jobIndexRep = new PMSAdmin.Persistence.NH.JobIndexRepository(uow);
+                var jobIndexRep = new PMSAdmin.Persistence.NH.JobIndexRepository(uow);
 
-				#region JobIndexes Creation
+                #region JobIndexes Creation
 
-				var jobIndexCategory = new PMSAdmin.Domain.Model.JobIndices.JobIndexCategory(jobIndexRep.GetNextId(), null, "دسته شاخص", "JobIndexCategory");
-				jobIndexRep.Add(jobIndexCategory);
+                var jobIndexCategory = new PMSAdmin.Domain.Model.JobIndices.JobIndexCategory(jobIndexRep.GetNextId(), null, "دسته شاخص", "JobIndexCategory");
+                jobIndexRep.Add(jobIndexCategory);
 
-				for (int i = 0; i < 5; i++)
-				{
-					var jobIndex = new PMSAdmin.Domain.Model.JobIndices.JobIndex(jobIndexRep.GetNextId(), jobIndexCategory,
-						" شاخص شغل" + i, "JobIndex" + i);
-					var jobIndexCustomFields = jobIndexCftList.Skip(i * 2).Take(2).ToList();
-					jobIndexCustomFields.Add(jobIndexCftList.Single(j => j.DictionaryName == "Importance"));
-					jobIndex.AssignCustomFields(jobIndexCustomFields);
-					jobIndexRep.Add(jobIndex);
-					jobIndexList.Add(jobIndex);
-				}
+                for (int i = 0; i < 5; i++)
+                {
+                    var jobIndex = new PMSAdmin.Domain.Model.JobIndices.JobIndex(jobIndexRep.GetNextId(), jobIndexCategory,
+                        " شاخص شغل" + i, "JobIndex" + i);
+                    var jobIndexCustomFields = jobIndexCftList.Skip(i * 2).Take(2).ToList();
+                    jobIndexCustomFields.Add(jobIndexCftList.Single(j => j.DictionaryName == "Importance"));
+                    jobIndex.AssignCustomFields(jobIndexCustomFields);
+                    jobIndexRep.Add(jobIndex);
+                    jobIndexList.Add(jobIndex);
+                }
 
-				#endregion
+                #endregion
 
-				var policyRep = new PMSAdmin.Persistence.NH.PolicyRepository(uow);
+                var policyRep = new PMSAdmin.Persistence.NH.PolicyRepository(uow);
 
-				#region Policy Creation
-				policy = new PMSAdmin.Domain.Model.Policies.RuleEngineBasedPolicy(policyRep.GetNextId(),
-						" خظ کش پرتر", "PorterRulerPolicy");
-				policyRep.Add(policy);
+                #region Policy Creation
+                policy = new PMSAdmin.Domain.Model.Policies.RuleEngineBasedPolicy(policyRep.GetNextId(),
+                        " خظ کش پرتر", "PorterRulerPolicy");
+                policyRep.Add(policy);
 
-				policy.AssignRule(rule);
-				policy.AssignRuleFunction(rf);
+                policy.AssignRule(rule);
+                policy.AssignRuleFunction(rf);
 
-				#endregion
+                #endregion
 
-				uow.Commit();
-			}
+                uow.Commit();
+            }
 
-			#endregion
+            #endregion
 
-			uows = new MITD.Domain.Repository.UnitOfWorkScope(
-			  new Data.NH.NHUnitOfWorkFactory(() => PMS.Persistence.NH.PMSSession.GetSession()));
+            uows = new MITD.Domain.Repository.UnitOfWorkScope(
+              new Data.NH.NHUnitOfWorkFactory(() => PMS.Persistence.NH.PMSSession.GetSession()));
 
-			using (var uow = uows.CurrentUnitOfWork as NHUnitOfWork)
-			{
-				var periodRep = new PeriodRepository(uow);
-				var periodManagerService = new PeriodManagerService(periodRep, null, null, null, null, null, null, null, null);
-				#region Period creation
+            using (var uow = uows.CurrentUnitOfWork as NHUnitOfWork)
+            {
+                var periodRep = new PeriodRepository(uow);
+                var periodManagerService = new PeriodManagerService(periodRep, null, null, null, null, null, null, null, null);
+                #region Period creation
 
-				period = new Period(new PeriodId(periodRep.GetNextId()), Guid.NewGuid().ToString(), DateTime.Now, DateTime.Now);
-				period.ChangeActiveStatus(periodManagerService, true);
-				periodRep.Add(period);
-				#endregion
+                period = new Period(new PeriodId(periodRep.GetNextId()), Guid.NewGuid().ToString(), DateTime.Now, DateTime.Now);
+                period.ChangeActiveStatus(periodManagerService, true);
+                periodRep.Add(period);
+                #endregion
 
-				var jobIndexRep = new PMS.Persistence.NH.JobIndexRepository(uow);
+                var jobIndexRep = new PMS.Persistence.NH.JobIndexRepository(uow);
 
-				#region JobIndex Creation
+                #region JobIndex Creation
 
-				var jobIndexGroupGenaral = new PMS.Domain.Model.JobIndices.JobIndexGroup(jobIndexRep.GetNextId(), period, null,
-					"گروه شاخص های عمومی", "General");
-				jobIndexRep.Add(jobIndexGroupGenaral);
-				var jobIndexGroupTechnical = new PMS.Domain.Model.JobIndices.JobIndexGroup(jobIndexRep.GetNextId(), period, null,
-				   "گروه شاخص های تخصصی", "Technical");
-				jobIndexRep.Add(jobIndexGroupTechnical);
+                var jobIndexGroupGenaral = new PMS.Domain.Model.JobIndices.JobIndexGroup(jobIndexRep.GetNextId(), period, null,
+                    "گروه شاخص های عمومی", "General");
+                jobIndexRep.Add(jobIndexGroupGenaral);
+                var jobIndexGroupTechnical = new PMS.Domain.Model.JobIndices.JobIndexGroup(jobIndexRep.GetNextId(), period, null,
+                   "گروه شاخص های تخصصی", "Technical");
+                jobIndexRep.Add(jobIndexGroupTechnical);
 
-				var countjil = jobIndexList.Count();
-				var index = 0;
-				foreach (var itm in jobIndexList.Take(countjil / 2))
-				{
+                var countjil = jobIndexList.Count();
+                var index = 0;
+                foreach (var itm in jobIndexList.Take(countjil / 2))
+                {
 
-					var sharedJobIndex =
-						new PMS.Domain.Model.JobIndices.SharedJobIndex(
-							new PMS.Domain.Model.JobIndices.SharedJobIndexId(itm.Id.Id), itm.Name,
-							itm.DictionaryName);
-					var jobIndex = new PMS.Domain.Model.JobIndices.JobIndex(jobIndexRep.GetNextId(), period,
-						sharedJobIndex, jobIndexGroupGenaral, index % 2 == 0);
+                    var sharedJobIndex =
+                        new PMS.Domain.Model.JobIndices.SharedJobIndex(
+                            new PMS.Domain.Model.JobIndices.SharedJobIndexId(itm.Id.Id), itm.Name,
+                            itm.DictionaryName);
+                    var jobIndex = new PMS.Domain.Model.JobIndices.JobIndex(jobIndexRep.GetNextId(), period,
+                        sharedJobIndex, jobIndexGroupGenaral, index % 2 == 0);
 
-					var dicSharedCutomField = jobIndexCftList
-						.Where(j => itm.CustomFieldTypeIdList.Select(i => i.Id).Contains(j.Id.Id)).Select(p =>
-							new PMS.Domain.Model.JobIndices.SharedJobIndexCustomField(
-								new PMS.Domain.Model.JobIndices.SharedJobIndexCustomFieldId(p.Id.Id), p.Name,
-								p.DictionaryName,
-								p.MinValue, p.MaxValue)).ToDictionary(s => s, s => s.DictionaryName == "Importance" ? (((index + 1) * 2) - 1).ToString() : string.Empty);
+                    var dicSharedCutomField = jobIndexCftList
+                        .Where(j => itm.CustomFieldTypeIdList.Select(i => i.Id).Contains(j.Id.Id)).Select(p =>
+                            new PMS.Domain.Model.JobIndices.SharedJobIndexCustomField(
+                                new PMS.Domain.Model.JobIndices.SharedJobIndexCustomFieldId(p.Id.Id), p.Name,
+                                p.DictionaryName,
+                                p.MinValue, p.MaxValue)).ToDictionary(s => s, s => s.DictionaryName == "Importance" ? (((index + 1) * 2) - 1).ToString() : string.Empty);
 
-					jobIndex.UpdateCustomFields(dicSharedCutomField);
-					jobIndexInPeriodList.Add(jobIndex);
-					jobIndexRep.Add(jobIndex);
-					index++;
+                    jobIndex.UpdateCustomFields(dicSharedCutomField);
+                    jobIndexInPeriodList.Add(jobIndex);
+                    jobIndexRep.Add(jobIndex);
+                    index++;
 
-				}
-				index = 0;
-				foreach (var itm in jobIndexList.Skip(countjil / 2))
-				{
-					var sharedJobIndex =
-						new PMS.Domain.Model.JobIndices.SharedJobIndex(
-							new PMS.Domain.Model.JobIndices.SharedJobIndexId(itm.Id.Id), itm.Name,
-							itm.DictionaryName);
-					var jobIndex = new PMS.Domain.Model.JobIndices.JobIndex(jobIndexRep.GetNextId(), period,
-						sharedJobIndex, jobIndexGroupTechnical, index % 2 == 0);
-					var dicSharedCutomField = jobIndexCftList
-						.Where(j => itm.CustomFieldTypeIdList.Select(i => i.Id).Contains(j.Id.Id)).Select(p =>
-							new PMS.Domain.Model.JobIndices.SharedJobIndexCustomField(
-								new PMS.Domain.Model.JobIndices.SharedJobIndexCustomFieldId(p.Id.Id), p.Name,
-								p.DictionaryName,
-								p.MinValue, p.MaxValue)).ToDictionary(s => s, s => s.DictionaryName == "Importance" ? (((index + 1) * 2) - 1).ToString() : string.Empty);
+                }
+                index = 0;
+                foreach (var itm in jobIndexList.Skip(countjil / 2))
+                {
+                    var sharedJobIndex =
+                        new PMS.Domain.Model.JobIndices.SharedJobIndex(
+                            new PMS.Domain.Model.JobIndices.SharedJobIndexId(itm.Id.Id), itm.Name,
+                            itm.DictionaryName);
+                    var jobIndex = new PMS.Domain.Model.JobIndices.JobIndex(jobIndexRep.GetNextId(), period,
+                        sharedJobIndex, jobIndexGroupTechnical, index % 2 == 0);
+                    var dicSharedCutomField = jobIndexCftList
+                        .Where(j => itm.CustomFieldTypeIdList.Select(i => i.Id).Contains(j.Id.Id)).Select(p =>
+                            new PMS.Domain.Model.JobIndices.SharedJobIndexCustomField(
+                                new PMS.Domain.Model.JobIndices.SharedJobIndexCustomFieldId(p.Id.Id), p.Name,
+                                p.DictionaryName,
+                                p.MinValue, p.MaxValue)).ToDictionary(s => s, s => s.DictionaryName == "Importance" ? (((index + 1) * 2) - 1).ToString() : string.Empty);
 
-					jobIndex.UpdateCustomFields(dicSharedCutomField);
+                    jobIndex.UpdateCustomFields(dicSharedCutomField);
 
-					jobIndexInPeriodList.Add(jobIndex);
-					jobIndexRep.Add(jobIndex);
-					index++;
+                    jobIndexInPeriodList.Add(jobIndex);
+                    jobIndexRep.Add(jobIndex);
+                    index++;
 
-				}
-				#endregion
+                }
+                #endregion
 
-				var jobRep = new PMS.Persistence.NH.JobRepository(uow);
+                var jobRep = new PMS.Persistence.NH.JobRepository(uow);
 
-				#region Job creation
+                #region Job creation
 
-				foreach (var pmsAdminJob in jobList)
-				{
+                foreach (var pmsAdminJob in jobList)
+                {
                     var jobJobIndices = jobIndexInPeriodList.Select(jobIndex => new JobJobIndex(jobIndex.Id, true, true, true)).ToList();
-					var job = new PMS.Domain.Model.Jobs.Job(period, new PMS.Domain.Model.Jobs.SharedJob(
-						new PMS.Domain.Model.Jobs.SharedJobId(pmsAdminJob.Id.Id), pmsAdminJob.Name, pmsAdminJob.DictionaryName), jobCftList
-						.Where(j => pmsAdminJob.CustomFieldTypeIdList.Select(i => i.Id)
-							.Contains(j.Id.Id)).Select(p =>
-								new PMS.Domain.Model.Jobs.JobCustomField(new PMS.Domain.Model.Jobs.JobCustomFieldId(period.Id, new SharedJobCustomFieldId(p.Id.Id), new SharedJobId(pmsAdminJob.Id.Id))
+                    var job = new PMS.Domain.Model.Jobs.Job(period, new PMS.Domain.Model.Jobs.SharedJob(
+                        new PMS.Domain.Model.Jobs.SharedJobId(pmsAdminJob.Id.Id), pmsAdminJob.Name, pmsAdminJob.DictionaryName), jobCftList
+                        .Where(j => pmsAdminJob.CustomFieldTypeIdList.Select(i => i.Id)
+                            .Contains(j.Id.Id)).Select(p =>
+                                new PMS.Domain.Model.Jobs.JobCustomField(new PMS.Domain.Model.Jobs.JobCustomFieldId(period.Id, new SharedJobCustomFieldId(p.Id.Id), new SharedJobId(pmsAdminJob.Id.Id))
                                     , new SharedJobCustomField(new SharedJobCustomFieldId(p.Id.Id), p.Name, p.DictionaryName, p.MinValue, p.MaxValue, p.TypeId))).ToList(), jobJobIndices);
-					jobInPeriodList.Add(job);
-					jobRep.Add(job);
-				}
-				#endregion
+                    jobInPeriodList.Add(job);
+                    jobRep.Add(job);
+                }
+                #endregion
 
-				var unitRep = new PMS.Persistence.NH.UnitRepository(uow);
+                var unitRep = new PMS.Persistence.NH.UnitRepository(uow);
 
-				#region Unit Creation
+                #region Unit Creation
 
-				foreach (var pmsAdminUnit in unitList)
-				{
-					var unit = new PMS.Domain.Model.Units.Unit(period, new PMS.Domain.Model.Units.SharedUnit(
-						new PMS.Domain.Model.Units.SharedUnitId(pmsAdminUnit.Id.Id), pmsAdminUnit.Name, pmsAdminUnit.DictionaryName), null);
-					unitInPeriodList.Add(unit);
-					unitRep.Add(unit);
-				}
-				#endregion
+                foreach (var pmsAdminUnit in unitList)
+                {
+                    var unit = new PMS.Domain.Model.Units.Unit(period, new PMS.Domain.Model.Units.SharedUnit(
+                        new PMS.Domain.Model.Units.SharedUnitId(pmsAdminUnit.Id.Id), pmsAdminUnit.Name, pmsAdminUnit.DictionaryName), null);
+                    unitInPeriodList.Add(unit);
+                    unitRep.Add(unit);
+                }
+                #endregion
 
-				var jobPositionRep = new PMS.Persistence.NH.JobPositionRepository(uow);
+                var jobPositionRep = new PMS.Persistence.NH.JobPositionRepository(uow);
 
-				#region JobPosition Creation
+                #region JobPosition Creation
 
-				var jpIndex = 0;
-				PMS.Domain.Model.JobPositions.JobPosition jobPositionParent = null;
-				foreach (var pmsAdminJobPosition in jobPositionList)
-				{
-					var jobPosition = new PMS.Domain.Model.JobPositions.JobPosition(period,
-						new Domain.Model.JobPositions.SharedJobPosition(new Domain.Model.JobPositions.SharedJobPositionId(pmsAdminJobPosition.Id.Id), pmsAdminJobPosition.Name, pmsAdminJobPosition.DictionaryName)
-						, jobPositionParent,
-						jobInPeriodList[jpIndex],
-						unitInPeriodList[jpIndex]
-						);
+                var jpIndex = 0;
+                PMS.Domain.Model.JobPositions.JobPosition jobPositionParent = null;
+                foreach (var pmsAdminJobPosition in jobPositionList)
+                {
+                    var jobPosition = new PMS.Domain.Model.JobPositions.JobPosition(period,
+                        new Domain.Model.JobPositions.SharedJobPosition(new Domain.Model.JobPositions.SharedJobPositionId(pmsAdminJobPosition.Id.Id), pmsAdminJobPosition.Name, pmsAdminJobPosition.DictionaryName)
+                        , jobPositionParent,
+                        jobInPeriodList[jpIndex],
+                        unitInPeriodList[jpIndex]
+                        );
 
-					if (jpIndex != 1 && jpIndex != 2)
-						jobPositionParent = jobPosition;
+                    if (jpIndex != 1 && jpIndex != 2)
+                        jobPositionParent = jobPosition;
 
-					jobPositionInPeriodList.Add(jobPosition);
-					jobPositionRep.Add(jobPosition);
-					jpIndex++;
-				}
-				#endregion
+                    jobPositionInPeriodList.Add(jobPosition);
+                    jobPositionRep.Add(jobPosition);
+                    jpIndex++;
+                }
+                #endregion
 
-				var employeeRep = new PMS.Persistence.NH.EmployeeRepository(uow);
+                var employeeRep = new PMS.Persistence.NH.EmployeeRepository(uow);
 
-				#region Employee Creation
+                #region Employee Creation
 
-				for (var i = 0; i < 10; i++)
-				{
-					var employeeCustomFields =
-						employeeCftList.ToList()
-							.ToDictionary(
-								e =>
-									new Domain.Model.Employees.SharedEmployeeCustomField(
-										new Domain.Model.Employees.SharedEmployeeCustomFieldId(e.Id.Id), e.Name,
-										e.DictionaryName, e.MinValue, e.MaxValue), e => e.Id.Id.ToString());
-					var employee =
-						new PMS.Domain.Model.Employees.Employee(
-							((i + 1) * 2000).ToString(), period, "کارمند" + i,
-							"کارمندیان" + i, employeeCustomFields);
+                for (var i = 0; i < 10; i++)
+                {
+                    var employeeCustomFields =
+                        employeeCftList.ToList()
+                            .ToDictionary(
+                                e =>
+                                    new Domain.Model.Employees.SharedEmployeeCustomField(
+                                        new Domain.Model.Employees.SharedEmployeeCustomFieldId(e.Id.Id), e.Name,
+                                        e.DictionaryName, e.MinValue, e.MaxValue), e => e.Id.Id.ToString());
+                    var employee =
+                        new PMS.Domain.Model.Employees.Employee(
+                            ((i + 1) * 2000).ToString(), period, "کارمند" + i,
+                            "کارمندیان" + i, employeeCustomFields);
 
 
 
-					var jobPositionInPeriod = jobPositionInPeriodList.Skip(i / 2).Take(1).Single();
+                    var jobPositionInPeriod = jobPositionInPeriodList.Skip(i / 2).Take(1).Single();
 
-					var jobcustomFields = jobInPeriodList.Single(j => j.Id.Equals(jobPositionInPeriod.JobId)).CustomFields;
-					if (jobcustomFields != null && jobcustomFields.Count != 0)
-					{
-						var employeeJobPosition = new Domain.Model.Employees.EmployeeJobPosition(employee, jobPositionInPeriod, period.StartDate, period.EndDate, 100,1,
-						jobcustomFields.Select(j => new EmployeeJobCustomFieldValue(j.Id, "10")).ToList()
-						);
-						employee.AssignJobPositions(new List<Domain.Model.Employees.EmployeeJobPosition> { employeeJobPosition }, periodManagerService);
+                    var jobcustomFields = jobInPeriodList.Single(j => j.Id.Equals(jobPositionInPeriod.JobId)).CustomFields;
+                    if (jobcustomFields != null && jobcustomFields.Count != 0)
+                    {
+                        var employeeJobPosition = new Domain.Model.Employees.EmployeeJobPosition(employee, jobPositionInPeriod, period.StartDate, period.EndDate, 100, 1,
+                        jobcustomFields.Select(j => new EmployeeJobCustomFieldValue(j.Id, "10")).ToList()
+                        );
+                        employee.AssignJobPositions(new List<Domain.Model.Employees.EmployeeJobPosition> { employeeJobPosition }, periodManagerService);
 
-					}
+                    }
 
-					empList.Add(employee);
-					employeeRep.Add(employee);
+                    empList.Add(employee);
+                    employeeRep.Add(employee);
 
-				}
-				#endregion
+                }
+                #endregion
 
-				uow.Commit();
-			}
+                uow.Commit();
+            }
 
-			using (var uow = uows.CurrentUnitOfWork as NHUnitOfWork)
-			{
-				var jobPositionRep = new PMS.Persistence.NH.JobPositionRepository(uow);
-				var jobRep = new PMS.Persistence.NH.JobRepository(uow);
-				var jobIndexRep = new PMS.Persistence.NH.JobIndexRepository(uow);
-				var inquiryRep = new InquiryJobIndexPointRepository(uow);
-				var inquiryConfiguratorService = new JobPositionInquiryConfiguratorService(jobPositionRep);
+            using (var uow = uows.CurrentUnitOfWork as NHUnitOfWork)
+            {
+                var jobPositionRep = new PMS.Persistence.NH.JobPositionRepository(uow);
+                var jobRep = new PMS.Persistence.NH.JobRepository(uow);
+                var jobIndexRep = new PMS.Persistence.NH.JobIndexRepository(uow);
+                var inquiryRep = new InquiryJobIndexPointRepository(uow);
+                var inquiryConfiguratorService = new JobPositionInquiryConfiguratorService(jobPositionRep);
 
-				foreach (var jobPosition in jobPositionInPeriodList)
-				{
-					var jobp = jobPositionRep.GetBy(jobPosition.Id);
-					jobp.ConfigeInquirer(inquiryConfiguratorService, false);
-				}
-				uow.Commit();
-			}
+                foreach (var jobPosition in jobPositionInPeriodList)
+                {
+                    var jobp = jobPositionRep.GetBy(jobPosition.Id);
+                    jobp.ConfigeInquirer(inquiryConfiguratorService, false);
+                }
+                uow.Commit();
+            }
 
-			using (var uow = uows.CurrentUnitOfWork as NHUnitOfWork)
-			{
-				var jobPositionRep = new PMS.Persistence.NH.JobPositionRepository(uow);
-				var jobRep = new PMS.Persistence.NH.JobRepository(uow);
-				var jobIndexRep = new PMS.Persistence.NH.JobIndexRepository(uow);
-				var inquiryRep = new InquiryJobIndexPointRepository(uow);
-				var inquiryConfiguratorService = new JobPositionInquiryConfiguratorService(jobPositionRep);
+            using (var uow = uows.CurrentUnitOfWork as NHUnitOfWork)
+            {
+                var jobPositionRep = new PMS.Persistence.NH.JobPositionRepository(uow);
+                var jobRep = new PMS.Persistence.NH.JobRepository(uow);
+                var jobIndexRep = new PMS.Persistence.NH.JobIndexRepository(uow);
+                var inquiryRep = new InquiryJobIndexPointRepository(uow);
+                var inquiryConfiguratorService = new JobPositionInquiryConfiguratorService(jobPositionRep);
 
-				foreach (var jobPosition in jobPositionInPeriodList)
-				{
-					var jobp = jobPositionRep.GetBy(jobPosition.Id);
-					foreach (var itm in jobp.ConfigurationItemList)
-					{
-						var job = jobRep.GetById(itm.JobPosition.JobId);
-						foreach (var jobIndexId in job.JobIndexList)
-						{
-							var jobIndex = jobIndexRep.GetById(jobIndexId.JobIndexId);
-							if ((jobIndex as JobIndex).IsInquireable)
-							{
-								var id = inquiryRep.GetNextId();
-								var inquiryIndexPoint = new Domain.Model.InquiryJobIndexPoints.InquiryJobIndexPoint(
-									new Domain.Model.InquiryJobIndexPoints.InquiryJobIndexPointId(id),
-									itm, jobIndex as Domain.Model.JobIndices.JobIndex, "5");
-								inquiryRep.Add(inquiryIndexPoint);
-							}
+                foreach (var jobPosition in jobPositionInPeriodList)
+                {
+                    var jobp = jobPositionRep.GetBy(jobPosition.Id);
+                    foreach (var itm in jobp.ConfigurationItemList)
+                    {
+                        var job = jobRep.GetById(itm.JobPosition.JobId);
+                        foreach (var jobIndexId in job.JobIndexList)
+                        {
+                            var jobIndex = jobIndexRep.GetById(jobIndexId.JobIndexId);
+                            if ((jobIndex as JobIndex).IsInquireable)
+                            {
+                                var id = inquiryRep.GetNextId();
+                                var inquiryIndexPoint = new Domain.Model.InquiryJobIndexPoints.InquiryJobIndexPoint(
+                                    new Domain.Model.InquiryJobIndexPoints.InquiryJobIndexPointId(id),
+                                    itm, jobIndex as Domain.Model.JobIndices.JobIndex, "5");
+                                inquiryRep.Add(inquiryIndexPoint);
+                            }
 
-						}
-					}
-				}
-				uow.Commit();
-			}
+                        }
+                    }
+                }
+                uow.Commit();
+            }
 
-			using (var uow = uows.CurrentUnitOfWork as NHUnitOfWork)
-			{
-				EventPublisher publisher = new EventPublisher();
-				var rebps = new RuleBasedPolicyEngineService(new LocatorProvider("PMSDb"), publisher);
-				var policyRep = new MITD.PMS.Persistence.NH.PolicyRepository(uow,
-					new PolicyConfigurator(rebps));
-				var pmsPolicy = policyRep.GetById(new PolicyId(policy.Id.Id));
+            using (var uow = uows.CurrentUnitOfWork as NHUnitOfWork)
+            {
+                EventPublisher publisher = new EventPublisher();
+                var rebps = new RuleBasedPolicyEngineService(new LocatorProvider("PMSDb"), publisher);
+                var policyRep = new MITD.PMS.Persistence.NH.PolicyRepository(uow,
+                    new PolicyConfigurator(rebps));
+                var pmsPolicy = policyRep.GetById(new PolicyId(policy.Id.Id));
 
-				var calcRep = new CalculationRepository(uow);
-				var calc = new Calculation(calcRep.GetNextId(), period, pmsPolicy,
-					"محاسبه آزمایشی", DateTime.Now, empList[0].Id.EmployeeNo + ";" + empList[1].Id.EmployeeNo);
-				calcRep.Add(calc);
-				uow.Commit();
-			}
-		}
+                var calcRep = new CalculationRepository(uow);
+                var calc = new Calculation(calcRep.GetNextId(), period, pmsPolicy,
+                    "محاسبه آزمایشی", DateTime.Now, empList[0].Id.EmployeeNo + ";" + empList[1].Id.EmployeeNo);
+                calcRep.Add(calc);
+                uow.Commit();
+            }
+        }
 
-		[TestMethod]
-		public void CalculationTest()
-		{
+        [TestMethod]
+        public void CalculationTest()
+        {
 
-			MITD.PMSAdmin.Domain.Model.Policies.PolicyId policyId;
-			var empLst = string.Empty;
-			PMSAdmin.Domain.Model.JobIndices.JobIndex sharedji;
+            MITD.PMSAdmin.Domain.Model.Policies.PolicyId policyId;
+            var empLst = string.Empty;
+            PMSAdmin.Domain.Model.JobIndices.JobIndex sharedji;
 
-			using (var transaction = new TransactionScope())
-			using (var puow = new NHUnitOfWork(PMSAdminSession.GetSession()))
-			using (var reuow = new NHUnitOfWork(RuleEngineSession.GetSession()))
-			{
-				var ruleRep = new RuleRepository(reuow);
-				var rfRep = new RuleFunctionRepository(reuow);
-				var reConfigRep = new REConfigeRepository(reuow);
-				var rebps = new RuleBasedPolicyEngineService(new LocatorProvider("PMSDb"), publisher);
-				var policyRep = new MITD.PMSAdmin.Persistence.NH.PolicyRepository(puow);
+            using (var transaction = new TransactionScope())
+            using (var puow = new NHUnitOfWork(PMSAdminSession.GetSession()))
+            using (var reuow = new NHUnitOfWork(RuleEngineSession.GetSession()))
+            {
+                var ruleRep = new RuleRepository(reuow);
+                var rfRep = new RuleFunctionRepository(reuow);
+                var reConfigRep = new REConfigeRepository(reuow);
+                var rebps = new RuleBasedPolicyEngineService(new LocatorProvider("PMSDb"), publisher);
+                var policyRep = new MITD.PMSAdmin.Persistence.NH.PolicyRepository(puow);
 
-				var rule = new Rule(new RuleId(ruleRep.GetNextId()), Guid.NewGuid().ToString(),
+                var rule = new Rule(new RuleId(ruleRep.GetNextId()), Guid.NewGuid().ToString(),
 @"
 	RuleExecutionUtil.Res.Add( new RuleResult{Value = data.Data});                            
-", RuleType.PerCalculation,1);
-				ruleRep.Add(rule);
+", RuleType.PerCalculation, 1);
+                ruleRep.Add(rule);
 
-				var policy = new MITD.PMSAdmin.Domain.Model.Policies.RuleEngineBasedPolicy(
-					policyRep.GetNextId(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString());
-				policyId = policy.Id;
-				policyRep.Add(policy);
-				policy.AssignRule(rule);
+                var policy = new MITD.PMSAdmin.Domain.Model.Policies.RuleEngineBasedPolicy(
+                    policyRep.GetNextId(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString());
+                policyId = policy.Id;
+                policyRep.Add(policy);
+                policy.AssignRule(rule);
 
-				var jirep = new PMSAdmin.Persistence.NH.JobIndexRepository(puow);
-				var ai = new PMSAdmin.Domain.Model.JobIndices.JobIndexCategory(
-					jirep.GetNextId(), null,
-					Guid.NewGuid().ToString(), Guid.NewGuid().ToString());
-				jirep.Add(ai);
+                var jirep = new PMSAdmin.Persistence.NH.JobIndexRepository(puow);
+                var ai = new PMSAdmin.Domain.Model.JobIndices.JobIndexCategory(
+                    jirep.GetNextId(), null,
+                    Guid.NewGuid().ToString(), Guid.NewGuid().ToString());
+                jirep.Add(ai);
 
-				sharedji = new PMSAdmin.Domain.Model.JobIndices.JobIndex(
-					jirep.GetNextId(), ai,
-					Guid.NewGuid().ToString(), Guid.NewGuid().ToString());
-				jirep.Add(sharedji);
+                sharedji = new PMSAdmin.Domain.Model.JobIndices.JobIndex(
+                    jirep.GetNextId(), ai,
+                    Guid.NewGuid().ToString(), Guid.NewGuid().ToString());
+                jirep.Add(sharedji);
 
-				reuow.Commit();
-				puow.Commit();
-				transaction.Complete();
-			}
+                reuow.Commit();
+                puow.Commit();
+                transaction.Complete();
+            }
 
-			Calculation calc;
-			var puows = new UnitOfWorkScope(new NHUnitOfWorkFactory(() => PMSAdminSession.GetSession()));
-			var uows = new UnitOfWorkScope(new NHUnitOfWorkFactory(() =>
-				{
-					var res = PMSSession.GetSession();
-					res.SetBatchSize(100);
-					return res;
-				}));
+            Calculation calc;
+            var puows = new UnitOfWorkScope(new NHUnitOfWorkFactory(() => PMSAdminSession.GetSession()));
+            var uows = new UnitOfWorkScope(new NHUnitOfWorkFactory(() =>
+                {
+                    var res = PMSSession.GetSession();
+                    res.SetBatchSize(100);
+                    return res;
+                }));
 
-			Period period;
-			using (var transaction = new TransactionScope())
-			using (var puow = puows.CurrentUnitOfWork as NHUnitOfWork)
-			using (var uow = uows.CurrentUnitOfWork as NHUnitOfWork)
-			{
-				var periodRep = new PeriodRepository(uow);
-				period = new Period(new PeriodId(periodRep.GetNextId()), Guid.NewGuid().ToString(), DateTime.Now, DateTime.Now);
-				periodRep.Add(period);
+            Period period;
+            using (var transaction = new TransactionScope())
+            using (var puow = puows.CurrentUnitOfWork as NHUnitOfWork)
+            using (var uow = uows.CurrentUnitOfWork as NHUnitOfWork)
+            {
+                var periodRep = new PeriodRepository(uow);
+                period = new Period(new PeriodId(periodRep.GetNextId()), Guid.NewGuid().ToString(), DateTime.Now, DateTime.Now);
+                periodRep.Add(period);
 
 
-				var sjiService = new PMS.ACL.PMSAdmin.PMSAdminService(null, null, null, null,
-					new PMSAdmin.Application.JobIndexService(new PMSAdmin.Persistence.NH.JobIndexRepository(puow),
-						new PMSAdmin.Persistence.NH.CustomFieldRepository(puow)));
-				var sji = sjiService.GetSharedJobIndex(new PMS.Domain.Model.JobIndices.SharedJobIndexId(sharedji.Id.Id));
+                var sjiService = new PMS.ACL.PMSAdmin.PMSAdminService(null, null, null, null,
+                    new PMSAdmin.Application.JobIndexService(new PMSAdmin.Persistence.NH.JobIndexRepository(puow),
+                        new PMSAdmin.Persistence.NH.CustomFieldRepository(puow))
+                         ,
+                            new PMSAdmin.Application.UnitIndexService(new PMSAdmin.Persistence.NH.UnitIndexRepository(uows),
+                            new PMSAdmin.Persistence.NH.CustomFieldRepository(uows)
+                    )
+                        );
+                var sji = sjiService.GetSharedJobIndex(new PMS.Domain.Model.JobIndices.SharedJobIndexId(sharedji.Id.Id));
 
-				var jiRep = new PMS.Persistence.NH.JobIndexRepository(uow);
-				var jic = new PMS.Domain.Model.JobIndices.JobIndexGroup(
-					jiRep.GetNextId(), period, null, Guid.NewGuid().ToString(), Guid.NewGuid().ToString());
-				jiRep.Add(jic);
+                var jiRep = new PMS.Persistence.NH.JobIndexRepository(uow);
+                var jic = new PMS.Domain.Model.JobIndices.JobIndexGroup(
+                    jiRep.GetNextId(), period, null, Guid.NewGuid().ToString(), Guid.NewGuid().ToString());
+                jiRep.Add(jic);
 
-				var ji = new PMS.Domain.Model.JobIndices.JobIndex(
-					jiRep.GetNextId(), period, sji, jic, true);
-				jiRep.Add(ji);
-				uow.Commit();
-				transaction.Complete();
-			}
+                var ji = new PMS.Domain.Model.JobIndices.JobIndex(
+                    jiRep.GetNextId(), period, sji, jic, true);
+                jiRep.Add(ji);
+                uow.Commit();
+                transaction.Complete();
+            }
 
-			for (int j = 0; j < 10; j++)
-			{
-				using (var transaction = new TransactionScope())
-				using (var uow = uows.CurrentUnitOfWork as NHUnitOfWork)
-				{
-					var empRep = new EmployeeRepository(uow);
+            for (int j = 0; j < 10; j++)
+            {
+                using (var transaction = new TransactionScope())
+                using (var uow = uows.CurrentUnitOfWork as NHUnitOfWork)
+                {
+                    var empRep = new EmployeeRepository(uow);
 
-					for (int i = 0; i < 500; i++)
-					{
-						var emp = new Employee(Guid.NewGuid().ToString(), period, Guid.NewGuid().ToString(), Guid.NewGuid().ToString());
-						empLst += emp.Id.EmployeeNo + ";";
-						empRep.Add(emp);
-					}
-					empLst = empLst.Remove(empLst.Length - 1);
-					uow.Commit();
-					transaction.Complete();
-				}
-			}
+                    for (int i = 0; i < 500; i++)
+                    {
+                        var emp = new Employee(Guid.NewGuid().ToString(), period, Guid.NewGuid().ToString(), Guid.NewGuid().ToString());
+                        empLst += emp.Id.EmployeeNo + ";";
+                        empRep.Add(emp);
+                    }
+                    empLst = empLst.Remove(empLst.Length - 1);
+                    uow.Commit();
+                    transaction.Complete();
+                }
+            }
 
-			using (var transaction = new TransactionScope())
-			using (var uow = uows.CurrentUnitOfWork as NHUnitOfWork)
-			{
-				var rebps = new RuleBasedPolicyEngineService(new LocatorProvider("PMSDb"), publisher);
-				var calcRep = new CalculationRepository(uow);
-				var policyRep = new MITD.PMS.Persistence.NH.PolicyRepository(uow,
-					new PolicyConfigurator(rebps));
-				var policy = policyRep.GetById(new PolicyId(policyId.Id));
-				calc = new Calculation(calcRep.GetNextId(), period, policy,
-					Guid.NewGuid().ToString(), DateTime.Now, empLst);
-				calcRep.Add(calc);
-				uow.Commit();
-				transaction.Complete();
-			}
+            using (var transaction = new TransactionScope())
+            using (var uow = uows.CurrentUnitOfWork as NHUnitOfWork)
+            {
+                var rebps = new RuleBasedPolicyEngineService(new LocatorProvider("PMSDb"), publisher);
+                var calcRep = new CalculationRepository(uow);
+                var policyRep = new MITD.PMS.Persistence.NH.PolicyRepository(uow,
+                    new PolicyConfigurator(rebps));
+                var policy = policyRep.GetById(new PolicyId(policyId.Id));
+                calc = new Calculation(calcRep.GetNextId(), period, policy,
+                    Guid.NewGuid().ToString(), DateTime.Now, empLst);
+                calcRep.Add(calc);
+                uow.Commit();
+                transaction.Complete();
+            }
 
-			//var calculator = new JobIndexPointCalculator(publisher);
+            //var calculator = new JobIndexPointCalculator(publisher);
 
-			//using (var transaction = new TransactionScope())
-			//using (var uow = new NHUnitOfWork(PMSSession.GetSession()))
-			//{
-			//    var calcRep = new CalculationRepository(uow);
-			//    calc = calcRep.GetById(calc.Id);
-			//    calc.Run(calculator);
-			//    uow.Commit();
-			//    transaction.Complete();
-			//}
+            //using (var transaction = new TransactionScope())
+            //using (var uow = new NHUnitOfWork(PMSSession.GetSession()))
+            //{
+            //    var calcRep = new CalculationRepository(uow);
+            //    calc = calcRep.GetById(calc.Id);
+            //    calc.Run(calculator);
+            //    uow.Commit();
+            //    transaction.Complete();
+            //}
 
-			//var t = Task.Factory.StartNew(() =>
-			//    {
-			//        Thread.Sleep(1000);
-			//        using (var transaction = new TransactionScope())
-			//        using (var uow = new NHUnitOfWork(PMSSession.GetSession()))
-			//        {
-			//            var calcRep = new CalculationRepository(uow);
-			//            calc = calcRep.GetById(calc.Id);
-			//            calc.Stop(calculator);
-			//            uow.Commit();
-			//            transaction.Complete();
-			//        }
-			//    });
-			//t.Wait();
-		}
+            //var t = Task.Factory.StartNew(() =>
+            //    {
+            //        Thread.Sleep(1000);
+            //        using (var transaction = new TransactionScope())
+            //        using (var uow = new NHUnitOfWork(PMSSession.GetSession()))
+            //        {
+            //            var calcRep = new CalculationRepository(uow);
+            //            calc = calcRep.GetById(calc.Id);
+            //            calc.Stop(calculator);
+            //            uow.Commit();
+            //            transaction.Complete();
+            //        }
+            //    });
+            //t.Wait();
+        }
 
-	}
+    }
 }

@@ -42,10 +42,16 @@ namespace MITD.PMS.Domain.Model.Periods
         internal override void CheckRemovingUnit()
         {
         }
+        internal override void CheckAssigningUnitIndex()
+        {
+        }
         internal override void CheckAssigningJobIndex()
         {
         }
         internal override void CheckModifingJobIndex()
+        {
+        }
+        internal override void CheckModifingUnitIndex()
         {
         }
         internal override void CheckAssigningJob()

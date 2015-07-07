@@ -49,6 +49,9 @@ namespace MITD.PMS.Domain.Model.Periods
         internal override void CheckModifingJobIndex()
         {
         }
+        internal override void CheckModifingUnitIndex()
+        {
+        }
         internal override void CheckAssigningJob()
         {
         }

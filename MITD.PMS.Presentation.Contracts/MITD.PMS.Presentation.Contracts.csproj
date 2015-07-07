@@ -145,6 +145,7 @@
     <Compile Include="Fasade\PMS\IInquiryServiceFacade.cs" />
     <Compile Include="Fasade\PMS\IJobIndexPointFacadeService.cs" />
     <Compile Include="Fasade\PMS\IEmployeeServiceFacade.cs" />
+    <Compile Include="Fasade\PMS\IPeriodUnitIndexServiceFasade.cs" />
     <Compile Include="Fasade\PMS\IPeriodJodIndexServiceFasade.cs" />
     <Compile Include="Fasade\PMS\IPeriodJobPositionServiceFasade.cs" />
     <Compile Include="Fasade\PMS\IPeriodJodServiceFasade.cs" />
@@ -268,6 +269,15 @@
     <Compile Include="BasicInfoManagement\JobPosition\JobPositionDTO_Server.cs" />
     <Compile Include="Common\PageResult.cs" />
     <Compile Include="PeriodManagement\Period\PeriodDescriptionDTO.cs" />
+    <Compile Include="PeriodManagement\UnitIndex\AbstractUnitIndexInPeriodDTOWithActions.cs" />
+    <Compile Include="PeriodManagement\UnitIndex\AbstractUnitIndexInPeriodDTO.cs" />
+    <Compile Include="PeriodManagement\UnitIndex\AbstractUnitIndexInPeriodDTO_Server.cs" />
+    <Compile Include="PeriodManagement\UnitIndex\UnitIndexGroupInPeriodDTOWithActions.cs" />
+    <Compile Include="PeriodManagement\UnitIndex\UnitIndexGroupInPeriodDTO.cs" />
+    <Compile Include="PeriodManagement\UnitIndex\UnitIndexInPeriodDTOWithActions.cs" />
+    <Compile Include="PeriodManagement\UnitIndex\UnitIndexInPeriodDTO.cs" />
+    <Compile Include="PeriodManagement\Unit\UnitIndex\UnitInPeriodUnitIndexDTO.cs" />
+    <Compile Include="PeriodManagement\Unit\UnitIndex\UnitInPeriodUnitIndexDTO_Server.cs" />
     <Compile Include="PeriodManagement\Unit\UnitInPeriodDTO_Server.cs" />
     <Compile Include="PeriodManagement\Unit\UnitInPeriodDTO.cs" />
     <Compile Include="PeriodManagement\Unit\UnitInPeriodAssignmentDTO_Server.cs" />

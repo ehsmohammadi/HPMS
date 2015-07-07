@@ -230,6 +230,7 @@
     <Compile Include="Controllers\PMSAdmin\UnitIndexController.cs" />
     <Compile Include="Controllers\PMSAdmin\PolicyRuleTrailsController.cs" />
     <Compile Include="Controllers\PMS\CalculationsExceptionsController.cs" />
+    <Compile Include="Controllers\PMS\PeriodUnitIndexController.cs" />
     <Compile Include="Controllers\PMS\PeriodSourceDestinationStateController.cs" />
     <Compile Include="Controllers\PMS\PeriodStateController.cs" />
     <Compile Include="Controllers\Security\ActionTypesController.cs" />

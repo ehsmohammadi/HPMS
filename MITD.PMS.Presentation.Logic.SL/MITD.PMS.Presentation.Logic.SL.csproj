@@ -125,6 +125,8 @@
     <Compile Include="Views\ILogListView.cs" />
     <Compile Include="Views\ILogView.cs" />
     <Compile Include="Views\IPartyCustomActionsView.cs" />
+    <Compile Include="Views\IUnitInPeriodUnitIndicesView.cs" />
+    <Compile Include="Views\IUnitInPrdFieldView.cs" />
     <Compile Include="Views\IUserView.cs" />
     <Compile Include="Views\IUserGroupView.cs" />
     <Compile Include="Views\IUserGroupListView.cs" />
@@ -203,6 +205,8 @@
     <Compile Include="Views\IOrganizationChartTreeView.cs" />
     <Compile Include="Views\IJobInPeriodListView.cs" />
     <Compile Include="Wrapper\IReportServiceWrapper.cs" />
+    <Compile Include="Wrapper\PeriodManagement\UnitIndex\IUnitIndexInPeriodServiceWrapper.cs" />
+    <Compile Include="Wrapper\PeriodManagement\UnitIndex\UnitIndexInPeriodServiceWrapper.cs" />
     <Compile Include="Wrapper\ReportServiceWrapper.cs" />
     <Compile Include="Wrapper\UserServiceWrapper.cs" />
     <Compile Include="Wrapper\IUserServiceWrapper.cs" />

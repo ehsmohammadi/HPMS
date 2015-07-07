@@ -84,6 +84,7 @@
     <Compile Include="PMS\Domain\JobIndexPointCalculatorProvider.cs" />
     <Compile Include="PMS\Domain\JobIndexPointPersister.cs" />
     <Compile Include="PMS\Main\EmployeeService.cs" />
+    <Compile Include="PMS\Main\UnitIndexService.cs" />
     <Compile Include="PMS\Main\JobIndexService.cs" />
     <Compile Include="PMS\Main\JobPositionService.cs" />
     <Compile Include="PMS\Main\PeriodService.cs" />

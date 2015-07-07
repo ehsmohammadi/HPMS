@@ -45,5 +45,51 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
             WebClientHelper.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 
+
+        public void GetUnitInPeriod(Action<UnitInPeriodDTO, Exception> action, long periodId, long unitId)
+        {
+            GetUnitInPeriod(action, periodId, unitId, "");
+        }
+
+
+
+        public void GetUnitInPeriod(Action<UnitInPeriodDTO, Exception> action, long periodId, long unitId, string columnNames)
+        {
+
+            var url = string.Format(baseAddress + makeApiAdress(periodId) + "?unitId=" + unitId);
+            url += !string.IsNullOrWhiteSpace(columnNames) ? "&SelectedColumns=" + columnNames : "";
+            WebClientHelper.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+
+        }
+
+        public void GetAllUnitInPeriod(Action<IList<UnitInPeriodDTO>, Exception> action, long periodId, string columnNames)
+        {
+            var url = string.Format(baseAddress + makeApiAdress(periodId) + "?Typeof=unitInPeriodDTO");
+            url += !string.IsNullOrWhiteSpace(columnNames) ? "&SelectedColumns=" + columnNames : "";
+            WebClientHelper.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+
+        }
+
+        public void GetAllUnitInPeriod(Action<IList<UnitInPeriodDTO>, Exception> action, long periodId)
+        {
+            GetAllUnitInPeriod(action, periodId, "");
+        }
+
+
+        public void AddUnitInPeriod(Action<JobInPeriodDTO, Exception> action, long periodId, UnitInPeriodDTO unitInPeriodDto)
+        {
+            var url = string.Format(baseAddress + makeApiAdress(periodId));
+            WebClientHelper.Post(new Uri(url, PMSClientConfig.UriKind), action, unitInPeriodDto, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+
+        }
+
+        public void UpdateUnitInPeriod(Action<UnitInPeriodDTO, Exception> action, long periodId, UnitInPeriodDTO unitInPeriodDto)
+        {
+
+            var url = string.Format(baseAddress + makeApiAdress(periodId));
+            WebClientHelper.Put(new Uri(url, PMSClientConfig.UriKind), action, unitInPeriodDto, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+
+        }
+     
     }
 }

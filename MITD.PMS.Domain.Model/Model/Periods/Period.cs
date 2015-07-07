@@ -2,6 +2,7 @@
 using System.Xml.Serialization;
 using MITD.Domain.Model;
 using MITD.PMS.Domain.Model.Jobs;
+using MITD.PMS.Domain.Model.Units;
 using MITD.PMS.Domain.Service;
 using MITD.PMS.Exceptions;
 
@@ -188,6 +189,18 @@ namespace MITD.PMS.Domain.Model.Periods
         }
         #endregion
 
+
+        public virtual void CheckAssigningUnitIndex()
+        {
+            State.CheckAssigningUnitIndex();
+        }
+
+        public virtual void CheckModifingUnitIndex()
+        {
+            State.CheckModifingUnitIndex();
+        }
+
+        
         public virtual void CheckAssigningJobIndex()
         {
             State.CheckAssigningJobIndex();
@@ -206,6 +219,16 @@ namespace MITD.PMS.Domain.Model.Periods
         public virtual void CheckModifyingJobCustomFields()
         {
             State.CheckModifyingJobCustomFields();
+        }
+
+        public virtual void CheckModifyingUnitCustomFields()
+        {
+            State.CheckModifyingJobCustomFields();
+        }
+
+        public virtual void CheckModifyingUnitIndices(Unit unit)
+        {
+            State.CheckModifyingUnitIndices(unit);
         }
 
         public virtual void CheckModifyingJobIndices(Job job)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using MITD.Presentation;
 using Newtonsoft.Json;
@@ -32,7 +33,20 @@ namespace MITD.PMS.Presentation.Contracts
             get { return parentId; }
             set { this.SetField(p => p.ParentId, ref parentId, value); }
         }
-        
+
+        private List<CustomFieldDTO> customFields = new List<CustomFieldDTO>();
+        public List<CustomFieldDTO> CustomFields
+        {
+            get { return customFields; }
+            set { this.SetField(p => p.CustomFields, ref customFields, value); }
+        }
+
+        private List<UnitInPeriodUnitIndexDTO> _unitIndices = new List<UnitInPeriodUnitIndexDTO>();
+        public List<UnitInPeriodUnitIndexDTO> UnitIndices
+        {
+            get { return _unitIndices; }
+            set { this.SetField(p => p.UnitIndices, ref _unitIndices, value); }
+        } 
     }
 
     public class UnitInPeriodDTOConverter:JsonCreationConverter<UnitInPeriodDTO>

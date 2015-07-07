@@ -82,6 +82,9 @@
     <Compile Include="PMS\Mapper\Claim\ClaimTypeMapper.cs" />
     <Compile Include="PMS\Mapper\Period\PeriodCopyingStateReportMapper.cs" />
     <Compile Include="PMS\Mapper\Period\PeriodInitializeInquiryStateReportMapper.cs" />
+    <Compile Include="PMS\Mapper\UnitIndex\SharedUnitIndexCustomFieldMapper.cs" />
+    <Compile Include="PMS\Mapper\UnitIndex\UnitIndexInPeriodMapper.cs" />
+    <Compile Include="PMS\Mapper\Unit\SharedJobCustomFieldMapper.cs" />
     <Compile Include="PMS\PeriodClaimServiceFasade.cs" />
     <Compile Include="PMS\InquiryServiceFacade.cs" />
     <Compile Include="PMS\JobIndexPointFacadeService.cs" />
@@ -116,6 +119,7 @@
     <Compile Include="PMS\Mapper\JobIndexPoint\JobIndexPointSummaryMapper.cs" />
     <Compile Include="PMS\Mapper\JobIndex\JobIndexInPeriodMapper.cs" />
     <Compile Include="PMS\Mapper\JobIndex\SharedJobIndexCustomFieldMapper.cs" />
+    <Compile Include="PMS\PeriodUnitIndexFacadeService.cs" />
     <Compile Include="PMS\PeriodJobIndexFacadeService.cs" />
     <Compile Include="PMS\Mapper\JobPosition\JobPositionAssignmentMapper.cs" />
     <Compile Include="PMS\Mapper\JobPosition\JobPositionInPeriodDTOWithActionsMapper.cs" />

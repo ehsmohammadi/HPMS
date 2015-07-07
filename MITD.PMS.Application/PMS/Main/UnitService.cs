@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using MITD.Domain.Repository;
 using MITD.PMS.Application.Contracts;
 using MITD.PMS.Domain.Model.Periods;
+using MITD.PMS.Domain.Model.UnitIndices;
 using MITD.PMS.Domain.Model.Units;
 using MITD.PMS.Domain.Service;
 using System.Transactions;
@@ -16,18 +18,90 @@ namespace MITD.PMS.Application
         private readonly IPeriodRepository periodRep;
         private readonly IPMSAdminService ipmsAdminService;
         private readonly IUnitRepository unitRep;
-
+        private readonly IUnitIndexRepository unitIndexRep;
+        private readonly IPeriodManagerService periodChecker;
         public UnitService(
                            IUnitRepository unitRep,
-                           IPeriodRepository periodRep
-            //)
-                           ,IPMSAdminService ipmsAdminService)
+                           IPeriodRepository periodRep,
+                           IUnitIndexRepository unitIndexRep
+                           ,IPMSAdminService ipmsAdminService,
+                            IPeriodManagerService periodChecker)
         {
             this.periodRep = periodRep;
             this.ipmsAdminService = ipmsAdminService;
             this.unitRep = unitRep;
+            this.unitIndexRep = unitIndexRep;
+            this.periodChecker = periodChecker;
         }
 
+
+        public Unit UpdateUnit(UnitId unitId, List<SharedUnitCustomFieldId> customFieldIdList, IList<UnitIndexForUnit> unitIndexList)
+        {
+            using (var tr = new TransactionScope())
+            {
+
+                var unit = unitRep.GetBy(unitId);
+                var sharedUnitCustomFields = ipmsAdminService.GetSharedCutomFieldListForUnit(unitId.SharedUnitId, customFieldIdList);
+
+                var unitCustomFields = new List<UnitCustomField>();
+                foreach (var sharedUnitCustomField in sharedUnitCustomFields)
+                {
+                    unitCustomFields.Add(new UnitCustomField(new UnitCustomFieldId(unitId.PeriodId, sharedUnitCustomField.Id, unitId.SharedUnitId),
+                        sharedUnitCustomField
+                        ));
+                }
+                unit.UpdateCustomFields(unitCustomFields, periodChecker);
+                var unitindexIdList = unitIndexList.Select(jj => jj.UnitIndexId).ToList();
+                var unitIndices = unitIndexRep.FindUnitIndices(j => unitindexIdList.Contains(j.Id));
+
+                var unitUnitIndices = new List<UnitUnitIndex>();
+                foreach (var unitIndex in unitIndices)
+                {
+                    var unitindexForUnit = unitIndexList.Single(j => j.UnitIndexId == unitIndex.Id);
+                    unitUnitIndices.Add(new UnitUnitIndex(unitIndex.Id, unitindexForUnit.ShowforTopLevel, unitindexForUnit.ShowforSameLevel, unitindexForUnit.ShowforLowLevel));
+                }
+                unit.UpdateUnitIndices(unitUnitIndices, periodChecker);
+                tr.Complete();
+                return unit;
+
+            }
+        }
+
+        public Unit AssignUnit(UnitId unitId, List<SharedUnitCustomFieldId> customFieldIdList, IList<UnitIndexForUnit> unitIndexList)
+        {
+            using (var tr = new TransactionScope())
+            {
+                var period = periodRep.GetById(unitId.PeriodId);
+                var sharedUnit = ipmsAdminService.GetSharedUnit(unitId.SharedUnitId);
+
+                var sharedUnitCustomFields = ipmsAdminService.GetSharedCutomFieldListForUnit(unitId.SharedUnitId, customFieldIdList);
+
+                var unitCustomFields = new List<UnitCustomField>();
+                foreach (var sharedUnitCustomField in sharedUnitCustomFields)
+                {
+                    unitCustomFields.Add(new UnitCustomField(new UnitCustomFieldId(period.Id, sharedUnitCustomField.Id, unitId.SharedUnitId),
+                        sharedUnitCustomField
+                        ));
+                }
+
+                var unitIndices = unitIndexRep.FindUnitIndices(j => unitIndexList.Select(jj => jj.UnitIndexId).Contains(j.Id));
+                //unit.UpdateUnitIndices(unitIndices.ToList());
+                var unitUnitInddices = new List<UnitUnitIndex>();
+                foreach (var unitIndex in unitIndices)
+                {
+                    var unitindexForUnit = unitIndexList.Single(j => j.UnitIndexId == unitIndex.Id);
+                    unitUnitInddices.Add(new UnitUnitIndex(unitIndex.Id, unitindexForUnit.ShowforTopLevel, unitindexForUnit.ShowforSameLevel, unitindexForUnit.ShowforLowLevel));
+                }
+              
+                  var  parent = unitRep.GetBy(unitId);
+                
+                var unit = new Unit(period, sharedUnit, unitCustomFields, unitUnitInddices,parent);
+                unitRep.Add(unit);
+                tr.Complete();
+                return unit;
+
+            }
+        }
 
         public Unit AssignUnit(PeriodId periodId, SharedUnitId sharedUnitId, SharedUnitId parentSharedUnitId)
         {

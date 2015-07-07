@@ -13,16 +13,27 @@ using MITD.Presentation;
 
 namespace MITD.PMS.Presentation.Logic
 {
-    public interface IPeriodController 
+    public interface IPeriodController
     {
         void ShowPeriodView(PeriodDTO period, ActionType actionType);
         void ShowPeriodList(bool showInNewTab);
 
         void ShowJobInPeriodListView(PeriodDTO period, bool showInNewTab = false);
-        void ShowJobInPeriodView(long periodId,long? jobId, ActionType actionType);
+        void ShowJobInPeriodView(long periodId, long? jobId, ActionType actionType);
 
         void ShowUnitInPeriodView(UnitInPeriodAssignmentDTO unitInPeriod, ActionType action);
-        void ShowUnitInPeriodTreeView(PeriodDTOWithAction period, bool showInNewTab = false);      
+        void ShowUnitInPeriodView(long periodId, long? unitId, ActionType actionType);
+
+
+        void ShowUnitInPeriodTreeView(PeriodDTOWithAction period, bool showInNewTab = false);
+
+        void ShowUnitInPeriodCustomFieldManageView(long periodId, UnitInPeriodDTO unitInPeriodDto, ActionType modifyUnitInPrdField);
+        void ShowUnitInPeriodUnitIndicesManageView(long periodId, UnitInPeriodDTO unitInPeriodDto, ActionType modifyUnitInPrdField);
+
+      
+
+
+
 
         void ShowJobPositionInPeriodView(JobPositionInPeriodAssignmentDTO jobPositionInPeriod, ActionType action);
         void ShowJobPositionInPeriodTreeView(PeriodDTOWithAction period, bool showInNewTab = false);
@@ -32,7 +43,7 @@ namespace MITD.PMS.Presentation.Logic
         void ShowJobIndexInPeriodView(JobIndexInPeriodDTO jobIndexInPeriod, ActionType action);
         void ShowJobIndexInPeriodTreeView(PeriodDTOWithAction period, bool showInNewTab = false);
         void ShowJobIndexGroupInPeriodView(JobIndexGroupInPeriodDTO jobIndexGroupInPeriod, ActionType action);
-        void ShowJobPositionInPeriodInquiryView(PeriodDTO period,JobPositionInPeriodDTO jobPositionInPeriod, ActionType action);
+        void ShowJobPositionInPeriodInquiryView(PeriodDTO period, JobPositionInPeriodDTO jobPositionInPeriod, ActionType action);
 
         void ShowPrepareToExcuteInquiryView(long id);
         void ShowEmployeesInquiryListView(string employeeNo, long id, bool showInNewTab = false);
@@ -44,10 +55,10 @@ namespace MITD.PMS.Presentation.Logic
 
         void ShowPeriodCalculationResultView(PeriodDTO currentPeriod, string employeeNo, bool isShiftPressed);
 
-        void ShowPeriodCalculationExecView(CalculationDTO calculation,ActionType action);
+        void ShowPeriodCalculationExecView(CalculationDTO calculation, ActionType action);
         void ShowPeriodCalculationStateView(long calculationId);
         void ShowEmployeeCalculationResultHistoryView(long employeeId, bool showInNewTab = false);
-        void ShowJobInPeriodCustomFieldManageView(long periodId,JobInPeriodDTO jobInPeriod, ActionType modifyJobInPrdField);
+        void ShowJobInPeriodCustomFieldManageView(long periodId, JobInPeriodDTO jobInPeriod, ActionType modifyJobInPrdField);
         void ShowJobInPeriodJobIndicesManageView(long periodId, JobInPeriodDTO jobInPeriod, ActionType modifyJobInPrdField);
 
         void ShowEmployeeClaimListView(PeriodDTO period, string employeeNo, bool showInNewTab = false);

@@ -1,14 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using MITD.Core;
 using MITD.PMS.Domain.Model.Units;
 using MITD.PMS.Presentation.Contracts;
+using MITD.PMSSecurity.Domain;
 
 namespace MITD.PMS.Interface
 {
-    public class UnitInPeriodMapper : BaseMapper<Unit, UnitInPeriodDTO>, IMapper<Unit, UnitInPeriodDTO>
+    public class UnitInPeriodMapper : BaseFilterMapper<Unit, UnitInPeriodDTO>, IFilterMapper<Unit, UnitInPeriodDTO>
     {
 
-        public override UnitInPeriodDTO MapToModel(Unit entity)
+        protected override UnitInPeriodDTO MapToModel(Unit entity)
         {
             var res = new UnitInPeriodDTO
                 {
@@ -21,14 +23,26 @@ namespace MITD.PMS.Interface
                 res.ParentId = entity.Parent.Id.SharedUnitId.Id;
             return res;
 
-        }
-
-        public override Unit MapToEntity(UnitInPeriodDTO model)
-        {
-            throw new InvalidOperationException();
-
-        }
-
+        }    
+       
     }
+
+    public class UnitInPeriodWithActionsMapper : BaseFilterMapper<Unit, UnitInPeriodDTOWithActions>, IFilterMapper<Unit, UnitInPeriodDTOWithActions>
+    {
+        protected override UnitInPeriodDTOWithActions MapToModel(Unit entity)
+        {
+            var res = new UnitInPeriodDTOWithActions()
+            {
+                UnitId = entity.Id.SharedUnitId.Id,
+                Name = entity.Name,
+               
+                ActionCodes = new List<int> { (int)ActionType.AddUnitInPeriod, (int)ActionType.ModifyUnitInPeriod, (int)ActionType.DeleteUnitInPeriod }
+            };
+            if (entity.Parent != null)
+                res.ParentId = entity.Parent.Id.SharedUnitId.Id;
+            return res;
+        }
+    }
+
 
 }

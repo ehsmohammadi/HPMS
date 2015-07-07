@@ -1,7 +1,10 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using MITD.Domain.Model;
 using System;
 using MITD.PMS.Domain.Model.Periods;
+using MITD.PMS.Domain.Service;
 
 namespace MITD.PMS.Domain.Model.Units
 {
@@ -34,6 +37,17 @@ namespace MITD.PMS.Domain.Model.Units
             get { return parent; }
         }
 
+        private readonly IList<UnitUnitIndex> unitIndexList;
+        public virtual IReadOnlyList<UnitUnitIndex> UnitIndexList
+        {
+            get { return unitIndexList.ToList().AsReadOnly(); }
+        }
+        private readonly IList<UnitCustomField> customFields;
+        public virtual IReadOnlyList<UnitCustomField> CustomFields
+        {
+            get { return customFields.ToList().AsReadOnly(); }
+        }
+
         #endregion
 
         #region Constructors
@@ -53,13 +67,127 @@ namespace MITD.PMS.Domain.Model.Units
             this.sharedUnit = sharedUnit;
             this.parent = parent;
         }
+        public Unit(Period period, SharedUnit sharedUnit, IList<UnitCustomField> customFieldList,
+            IList<UnitUnitIndex> unitIndexList,Unit parent)
+            : this(period, sharedUnit,parent)
+        {
+            assignCustomFields(customFieldList);
+            assignunitIndices(unitIndexList);
 
+        }
 
 
         #endregion
 
         #region Public Methods
 
+        public virtual void UpdateUnitIndices(IList<UnitUnitIndex> unitIndexList, IPeriodManagerService periodChecker)
+        {
+            if (isunitIndicesHaveChanged(unitIndexList))
+            {
+
+                foreach (var itm in unitIndexList)
+                {
+                    if (!this.UnitIndexList.Contains(itm))
+                        assignunitIndex(itm);
+                }
+
+                IList<UnitUnitIndex> copyOfUnitIndexIdList = new List<UnitUnitIndex>(this.unitIndexList);
+                foreach (var itm in copyOfUnitIndexIdList)
+                {
+                    if (!unitIndexList.Contains(itm))
+                        removeunitIndex(itm);
+                }
+                periodChecker.CheckModifyingUnitIndices(this);
+            }
+
+        }
+        private void assignunitIndices(IList<UnitUnitIndex> unitIndexList)
+        {
+            foreach (var itm in unitIndexList)
+            {
+                assignunitIndex(itm);
+            }
+        }
+
+        private void assignCustomFields(IList<UnitCustomField> customFieldList)
+        {
+
+            foreach (var sharedunitCustomField in customFieldList)
+            {
+                AssignSharedCustomField(sharedunitCustomField);
+            }
+
+        }
+
+        public virtual void UpdateCustomFields(IList<UnitCustomField> customFieldList, IPeriodManagerService periodChecker)
+        {
+            periodChecker.CheckModifyingUnitCustomFields(this);
+            foreach (var sharedunitCustomField in customFieldList)
+            {
+                if (!this.customFields.Contains(sharedunitCustomField))
+                    AssignSharedCustomField(sharedunitCustomField);
+            }
+
+            IList<UnitCustomField> copyOfCustomFields = new List<UnitCustomField>(customFields);
+            foreach (var itm in copyOfCustomFields)
+            {
+                if (!customFieldList.Contains(itm))
+                    RemoveSharedCustomField(itm);
+            }
+
+        }
+
+        public virtual void RemoveSharedCustomField(UnitCustomField sharedunitCustomField)
+        {
+            customFields.Remove(sharedunitCustomField);
+        }
+
+        public virtual void AssignSharedCustomField(UnitCustomField sharedunitCustomField)
+        {
+            customFields.Add(sharedunitCustomField);
+        }
+
+        public virtual void UpdateunitIndices(IList<UnitUnitIndex> unitIndexList, IPeriodManagerService periodChecker)
+        {
+            if (isunitIndicesHaveChanged(unitIndexList))
+            {
+
+                foreach (var itm in unitIndexList)
+                {
+                    if (!this.unitIndexList.Contains(itm))
+                        assignunitIndex(itm);
+                }
+
+                IList<UnitUnitIndex> copyOfunitIndexIdList = new List<UnitUnitIndex>(this.unitIndexList);
+                foreach (var itm in copyOfunitIndexIdList)
+                {
+                    if (!unitIndexList.Contains(itm))
+                        removeunitIndex(itm);
+                }
+                periodChecker.CheckModifyingUnitIndices(this);
+            }
+
+        }
+
+        private void removeunitIndex(UnitUnitIndex unitIndex)
+        {
+            unitIndexList.Remove(unitIndex);
+        }
+
+        private void assignunitIndex(UnitUnitIndex unitIndex)
+        {
+            unitIndexList.Add(unitIndex);
+        }
+
+        private bool isunitIndicesHaveChanged(IList<UnitUnitIndex> unitIndexList)
+        {
+            if (this.unitIndexList != null && this.unitIndexList.Count > 0 &&
+                (!unitIndexList.All(j => this.unitIndexList.Contains(j)) ||
+                 !this.unitIndexList.All(j => unitIndexList.Select(ji => ji).Contains(j))))
+                return true;
+            return false;
+        }
         #endregion
 
         #region IEntity Member

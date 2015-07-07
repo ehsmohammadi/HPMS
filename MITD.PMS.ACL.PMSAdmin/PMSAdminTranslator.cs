@@ -7,6 +7,7 @@ using MITD.PMS.Domain.Model.Employees;
 using MITD.PMS.Domain.Model.Jobs;
 using MITD.PMS.Domain.Model.JobIndices;
 using MITD.PMS.Domain.Model.JobPositions;
+using MITD.PMS.Domain.Model.UnitIndices;
 using MITD.PMS.Domain.Model.Units;
 using MITD.PMS.Domain.Service;
 using MITD.PMSAdmin.Application.Contracts;
@@ -21,12 +22,14 @@ namespace MITD.PMS.ACL.PMSAdmin
         private readonly IUnitService unitService;
         private readonly IJobService  jobService;
         private readonly IJobIndexService jobIndexService;
+        private readonly IUnitIndexService unitIndexService;
         private readonly ICustomFieldService customFieldService;
         private readonly IJobPositionService jobPositionService;
 
         public PMSAdminService(IUnitService unitService, IJobService jobService,
              ICustomFieldService customFieldService,IJobPositionService jobPositionService,
-            IJobIndexService jobIndexService
+            IJobIndexService jobIndexService,
+             IUnitIndexService unitIndexService
             )
         {
             this.unitService = unitService;
@@ -34,6 +37,7 @@ namespace MITD.PMS.ACL.PMSAdmin
             this.jobIndexService = jobIndexService;
             this.customFieldService = customFieldService;
             this.jobPositionService = jobPositionService;
+            this.unitIndexService = unitIndexService;
         }
 
 
@@ -43,6 +47,32 @@ namespace MITD.PMS.ACL.PMSAdmin
             var sharedUnit = new SharedUnit(new SharedUnitId(unit.Id.Id), unit.Name, unit.DictionaryName);
             return sharedUnit;
         }
+
+        public SharedUnitIndex GetSharedUnitIndex(SharedUnitIndexId sharedUnitIndexId)
+        {
+            var unitIndex = unitIndexService.GetBy(new PMSAdminModel.UnitIndices.AbstractUnitIndexId(sharedUnitIndexId.Id));
+            var sharedUnit = new SharedUnitIndex(new SharedUnitIndexId(unitIndex.Id.Id), unitIndex.Name, unitIndex.DictionaryName);
+            return sharedUnit;
+        }
+
+        public List<SharedUnitIndexCustomField> GetSharedCutomFieldListForUnitIndex(SharedUnitIndexId sharedUnitIndexId,
+                                                                        IList<SharedUnitIndexCustomFieldId> customFieldIdList)
+        {
+            var isValid = unitIndexService.IsValidCustomFieldIdList(new PMSAdminModel.UnitIndices.AbstractUnitIndexId(sharedUnitIndexId.Id),
+                                                              customFieldIdList.Select(c => new CustomFieldTypeId(c.Id))
+                                                                               .ToList());
+            if (!isValid)
+                throw new ArgumentException("Invalid unit customFieldIdList");
+
+            var res = customFieldService.GetBy(customFieldIdList.Select(c => new CustomFieldTypeId(c.Id)).ToList());
+            return
+                res.Select(
+                    r => new SharedUnitIndexCustomField(new SharedUnitIndexCustomFieldId(r.Id.Id), r.Name, r.DictionaryName, r.MinValue, r.MaxValue))
+                   .ToList();
+        }
+
+
+
 
         public SharedJobPosition GetSharedJobPosition(SharedJobPositionId sharedJobPositionId)
         {
@@ -124,7 +154,7 @@ namespace MITD.PMS.ACL.PMSAdmin
                   .ToList();
 
         }
-
+        
       
 
 

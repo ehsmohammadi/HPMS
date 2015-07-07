@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using MITD.Core;
 using MITD.Domain.Model;
 using MITD.PMS.Domain.Model.Jobs;
+using MITD.PMS.Domain.Model.Units;
 using MITD.PMS.Domain.Service;
 using MITD.PMS.Exceptions;
 
@@ -140,6 +141,17 @@ namespace MITD.PMS.Domain.Model.Periods
             throw new PeriodInvalidStateOperationException("Period", DisplayName, "CheckRemovingUnit");
         }
 
+        internal virtual void CheckAssigningUnitIndex()
+        {
+            throw new PeriodInvalidStateOperationException("Period", DisplayName, "CheckAssigningUnitIndex");
+        }
+
+        internal virtual void CheckModifingUnitIndex()
+        {
+            throw new PeriodInvalidStateOperationException("Period", DisplayName, "CheckModifingUnitIndex");
+        }
+
+
         internal virtual void CheckAssigningJobIndex()
         {
             throw new PeriodInvalidStateOperationException("Period", DisplayName, "CheckAssigningJobIndex");
@@ -159,6 +171,12 @@ namespace MITD.PMS.Domain.Model.Periods
         {
             throw new PeriodInvalidStateOperationException("Period", DisplayName, "CheckModifyingJobCustomFields");
         }
+
+        internal virtual void CheckModifyingUnitCustomFields()
+        {
+            throw new PeriodInvalidStateOperationException("Period", DisplayName, "CheckModifyingUnitCustomFields");
+        }
+
 
         internal virtual void CheckModifyingJobIndices(Job job)
         {
@@ -225,8 +243,13 @@ namespace MITD.PMS.Domain.Model.Periods
             throw new PeriodInvalidStateOperationException("Period", DisplayName, "CheckChangeCalculationDeterministicStatus");
         }
 
-        
 
-       
+
+
+
+        internal virtual void CheckModifyingUnitIndices(Unit unit)
+        {
+            throw new PeriodInvalidStateOperationException("Period", DisplayName, "CheckModifyingUnitIndices");
+        }
     }
 }
