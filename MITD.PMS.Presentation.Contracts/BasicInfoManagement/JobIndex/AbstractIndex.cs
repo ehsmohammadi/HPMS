@@ -14,6 +14,9 @@ namespace MITD.PMS.Presentation.Contracts
     [KnownType(typeof(JobIndexDTO))]
     [KnownType(typeof(JobIndexCategoryDTO))]
     [KnownType(typeof(AbstractJobIndexDTOWithActions))]
+    [KnownType(typeof(UnitIndexDTO))]
+    [KnownType(typeof(UnitIndexCategoryDTO))]
+    [KnownType(typeof(AbstractUnitIndexDTOWithActions))]
     [JsonConverter(typeof(AbstarctIndexDtoConverter))]
     public partial class AbstractIndex
     {
@@ -64,8 +67,15 @@ namespace MITD.PMS.Presentation.Contracts
             var dtoType = jObject.Value<string>("DTOTypeName");
             if (dtoType.Equals("JobIndexDTO"))
                 return new JobIndexDTO();
-            else
+            else if(dtoType.Equals("JobIndexCategoryDTO"))
                 return new JobIndexCategoryDTO();
+            else if(dtoType.Equals("UnitIndexDTO"))
+                return new UnitIndexDTO();
+            else
+            {
+                return new UnitIndexCategoryDTO();
+            }
+            
         }
     }
 
