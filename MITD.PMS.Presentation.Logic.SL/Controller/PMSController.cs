@@ -190,7 +190,7 @@ namespace MITD.PMS.Presentation.Logic
             }), token, newCurrentWorkListUser);
         }
 
-        private void getLogonUser()
+        public void getLogonUser()
         {
             userService.GetLogonUser((res, exp) =>
                 {

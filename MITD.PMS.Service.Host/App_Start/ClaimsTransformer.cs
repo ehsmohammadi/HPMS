@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Principal;
 using System.Text;
 using System.Web;
 using MITD.Core;
@@ -12,10 +13,29 @@ using MITD.PMSSecurity.Exceptions;
 
 namespace MITD.PMS.Service.Host.App_Start
 {
+    // for without security
+    public class UniversalIdentity : IIdentity
+    {
+        public string Name { get; private set; }
+        public string AuthenticationType { get; private set; }
+        public bool IsAuthenticated { get; private set; }
+
+        public UniversalIdentity(string name, string authenticationType, bool isAuthenticated)
+        {
+            Name = name;
+            AuthenticationType = authenticationType;
+            IsAuthenticated = isAuthenticated;
+        }
+    }
     public class ClaimsTransformer : ClaimsAuthenticationManager
     {
         public override ClaimsPrincipal Authenticate(string resourceName, ClaimsPrincipal incomingPrincipal)
         {
+            // if you want sst security comment this line 
+#if(DEBUG)
+            incomingPrincipal = CreateIncomingPrincipal();
+#endif
+
             if (!incomingPrincipal.Identity.IsAuthenticated)
             {
                 var res = base.Authenticate(resourceName, incomingPrincipal);
@@ -23,6 +43,25 @@ namespace MITD.PMS.Service.Host.App_Start
             }
             return configureAuthorizationClaim(incomingPrincipal);
 
+        }
+
+        private static ClaimsPrincipal CreateIncomingPrincipal()
+        {
+            ClaimsPrincipal incomingPrincipal;
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Role, "Admin"),
+                new Claim(ClaimTypes.Role, "Employee"),
+                new Claim("http://identityserver.thinktecture.com/claims/profileclaims/employeeno", "2000"),
+                new Claim("http://identityserver.thinktecture.com/claims/profileclaims/firstname", "احسان"),
+                new Claim("http://identityserver.thinktecture.com/claims/profileclaims/lastname", "محمدی"),
+                new Claim("http://identityserver.thinktecture.com/claims/profileclaims/jobpositionnames", "مدیر فنی"),
+            };
+            var identity = new UniversalIdentity("ehsan", AuthenticationTypes.Basic.ToString(), true);
+
+            incomingPrincipal = new ClaimsPrincipal(identity);
+            incomingPrincipal.Identities.First().AddClaims(claims);
+            return incomingPrincipal;
         }
 
         private ClaimsPrincipal configureAuthorizationClaim(ClaimsPrincipal incomingPrincipal)
@@ -43,13 +82,13 @@ namespace MITD.PMS.Service.Host.App_Start
                 currentUsername = HttpContext.Current.Request.QueryString["CurrentWorkListUserName"];
                 CheckIsValidWorkListCurrentUser(incomingPrincipal.Identity.Name, currentUsername);
                 var userService = ServiceLocator.Current.GetInstance<IUserManagementService>();
-                
+
                 roles = userService.GetRolesForUser(currentUsername).ToList();
             }
 
 
             incomingPrincipal.Identities.First().AddClaim(new Claim("CurrentUsername", currentUsername));
-            var strRolesBuilder =mergStringList(roles);
+            var strRolesBuilder = mergStringList(roles);
             incomingPrincipal.Identities.First().AddClaim(new Claim("CurrentUserRoles", strRolesBuilder.ToString()));
 
             if (isCurrentUserSameAsLogonUser())
@@ -58,13 +97,13 @@ namespace MITD.PMS.Service.Host.App_Start
             currentUserActions = getCurrentUserActions(incomingPrincipal);
             var strActionsbuilder = mergStringList(currentUserActions);
             incomingPrincipal.Identities.First().AddClaim(new Claim("CurrentUserActions", strActionsbuilder.ToString()));
-            
-           
+
+
 
             return incomingPrincipal;
         }
 
-        private void CheckIsValidWorkListCurrentUser(string logonUsername,string currentUsername)
+        private void CheckIsValidWorkListCurrentUser(string logonUsername, string currentUsername)
         {
             var securityService = SecurityServiceFacadeFactory.Create();
             try
@@ -88,7 +127,7 @@ namespace MITD.PMS.Service.Host.App_Start
                 return true;
         }
 
-        private void addUpdateLogonUser(ClaimsPrincipal  incomingPrincipal)
+        private void addUpdateLogonUser(ClaimsPrincipal incomingPrincipal)
         {
             var securityService = SecurityServiceFacadeFactory.Create();
             try

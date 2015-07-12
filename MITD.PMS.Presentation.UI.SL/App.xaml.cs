@@ -29,7 +29,11 @@ namespace MITD.PMS.Presentation.UI.SL
             Thread.CurrentThread.CurrentUICulture = culture;
             new BootStrapper().Execute();
             var controller = ServiceLocator.Current.GetInstance<IPMSController>();
-            controller.Login(() => { });
+#if(DEBUG)
+            controller.getLogonUser();
+#else
+            //controller.Login(() => { });
+#endif
         }
 
         private void Application_Exit(object sender, EventArgs e)

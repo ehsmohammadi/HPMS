@@ -8,6 +8,7 @@ namespace MITD.PMS.Presentation.Logic
 {
     public interface IPMSController : IApplicationController
     {
+        void getLogonUser();
         List<PMSAction> PMSActions { get; set; }
         PeriodDTO CurrentPriod { get; }
         CalculationStateWithRunSummaryDTO LastFinalCalculation { get; }
