@@ -56,6 +56,9 @@ namespace MITD.PMS.Persistence
 
             createPeriods_UnitsTable();
 
+            createPeriods_Units_CustomFieldsTable();
+
+
             createUnits_CustomFieldsTable();
             
             createJobs_CustomFieldsTable();
@@ -69,10 +72,14 @@ namespace MITD.PMS.Persistence
             createJobIndexTable();
 
             createUnitIndexTable();
+       
+            createPeriod_UnitIndex();
 
             createPeriod_JobIndex();
 
             createPeriodJob_JobIndices();
+
+            createPeriodUnit_UnitIndices();
 
             createInquiryTable();
 
@@ -165,6 +172,87 @@ namespace MITD.PMS.Persistence
 
         }
 
+        private void createPeriod_UnitIndex()
+        {
+            Create.Table("Periods_AbstractUnitIndices")
+                  .WithColumn("Id").AsInt64().PrimaryKey()
+                  .WithColumn("RowVersion").AsCustom("rowversion")
+                  .WithColumn("PeriodId").AsInt64().NotNullable();
+
+
+            Create.Table("Periods_UnitIndexGroups")
+                  .WithColumn("Id").AsInt64().PrimaryKey()
+                  .ForeignKey("fk_Period_AbstractUnitIndices_UnitIndexGroups_Id", "Periods_AbstractUnitIndices", "Id")
+
+                  .WithColumn("Name").AsString(256).NotNullable()
+                  .WithColumn("DictionaryName").AsString(512).NotNullable()
+                  .WithColumn("ParentId").AsInt64().Nullable()
+                  .ForeignKey("fk_Periods_UnitIndexGroups_UnitIndexGroups_ParentId", "Periods_UnitIndexGroups", "Id");
+
+            Create.Table("Periods_UnitIndices")
+                  .WithColumn("Id").AsInt64().PrimaryKey()
+                  .ForeignKey("fk_Periods_AbstractUnitIndices_Periods_UnitIndices_Id", "Periods_AbstractUnitIndices", "Id")
+
+                  .WithColumn("UnitIndexId").AsInt64().NotNullable()
+                  .ForeignKey("fk_UnitIndices_Periods_UnitIndices_UnitIndexId", "UnitIndices", "Id")
+                  .WithColumn("GroupId").AsInt64().NotNullable()
+                  .ForeignKey("fk_Periods_UnitIndexGroups_Periods_UnitIndices_GroupId", "Periods_UnitIndexGroups", "Id")
+                  .WithColumn("IsInquireable").AsBoolean().NotNullable()
+                  .WithColumn("CalculationLevel").AsInt64().Nullable()
+                  .WithColumn("CalculationOrder").AsInt32().Nullable()
+                  .WithColumn("RefUnitIndexId").AsInt64().Nullable()
+                  .ForeignKey("Periods_UnitIndices", "Id");
+
+            Create.Table("Periods_UnitIndices_CustomFields")
+                  .WithColumn("Id").AsInt64().PrimaryKey().Identity()
+                  .WithColumn("RowVersion").AsCustom("rowversion")
+                  .WithColumn("PeriodUnitIndexId").AsInt64().NotNullable()
+                  .ForeignKey("fk_Periods_UnitIndices_CustomFields_UnitIndexId", "Periods_UnitIndices", "Id")
+                  .WithColumn("CustomFieldTypeId").AsInt64().NotNullable()
+                  .ForeignKey("fk_JPeriods_UnitIndices_CustomFields_CustomFieldTypeId", "CustomFieldTypes", "Id")
+                  .WithColumn("CustomFieldValue").AsString();
+        }
+
+        private void createPeriods_Units_CustomFieldsTable()
+        {
+            Create.Table("Periods_Units_CustomFields")
+                  .WithColumn("Id").AsInt64().PrimaryKey()
+                  .WithColumn("RowVersion").AsCustom("rowversion")
+
+                  .WithColumn("PeriodUnitId").AsInt64().Nullable()
+                  .ForeignKey("Periods_Units", "Id")
+
+                  .WithColumn("CustomFieldId").AsInt64().NotNullable()
+                  .ForeignKey("CustomFieldTypes", "Id")
+
+                  .WithColumn("PeriodId").AsInt64().NotNullable()
+                  .ForeignKey("Periods", "Id")
+
+                  .WithColumn("UnitId").AsInt64().NotNullable()
+                  .ForeignKey("Units", "Id");
+        }
+
+        private void createPeriodUnit_UnitIndices()
+        {
+            Create.Table("Periods_Units_UnitIndices")
+                .WithColumn("Id").AsInt64().PrimaryKey().Identity()
+
+                .WithColumn("RowVersion").AsCustom("rowversion")
+
+                .WithColumn("PeriodUnitId").AsInt64().NotNullable()
+                .ForeignKey("fk_Periods_Units_UnitIndices_PeriodUnitId", "Periods_Units", "Id")
+
+                .WithColumn("PeriodUnitIndexId").AsInt64().NotNullable()
+                .ForeignKey("fk_Periods_Units_UnitIndices_PeriodUnitIndexId", "Periods_UnitIndices", "Id")
+                .WithColumn("ShowforTopLevel").AsBoolean()
+                .WithColumn("ShowforSameLevel").AsBoolean()
+                .WithColumn("ShowforLowLevel").AsBoolean();
+
+
+
+        }
+
+
         public override void Down()
         {
             Delete.Table("NH_Hilo");
@@ -204,6 +292,20 @@ namespace MITD.PMS.Persistence
 
             Delete.Table("Periods_JobPositions");
             Delete.Table("Periods_Jobs");
+
+
+
+
+            Delete.Table("Periods_Units_UnitIndices");
+            Delete.Table("Periods_UnitIndices_CustomFields");
+            Delete.Table("Periods_UnitIndices");
+            Delete.Table("Periods_UnitIndexGroups");
+            Delete.Table("Periods_AbstractUnitIndices");
+            Delete.Table("Periods_Units_CustomFields");
+            
+            
+            
+            
             Delete.Table("Periods_Units");
 
             Delete.Table("Employees_CustomFields");

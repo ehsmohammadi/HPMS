@@ -57,15 +57,15 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
         {
 
             var url = string.Format(baseAddress + makeApiAdress(periodId) + "?unitId=" + unitId);
-            url += !string.IsNullOrWhiteSpace(columnNames) ? "&SelectedColumns=" + columnNames : "";
+          //  url += !string.IsNullOrWhiteSpace(columnNames) ? "&SelectedColumns=" + columnNames : "";
             WebClientHelper.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
 
         }
 
         public void GetAllUnitInPeriod(Action<IList<UnitInPeriodDTO>, Exception> action, long periodId, string columnNames)
         {
-            var url = string.Format(baseAddress + makeApiAdress(periodId) + "?Typeof=unitInPeriodDTO");
-            url += !string.IsNullOrWhiteSpace(columnNames) ? "&SelectedColumns=" + columnNames : "";
+            var url = string.Format(baseAddress + makeApiAdress(periodId) + "?Type=unitInPeriodDTO");
+           // url += !string.IsNullOrWhiteSpace(columnNames) ? "&SelectedColumns=" + columnNames : "";
             WebClientHelper.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
 
         }

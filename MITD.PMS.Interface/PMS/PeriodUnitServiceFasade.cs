@@ -74,25 +74,25 @@ namespace MITD.PMS.Interface
         {
             var unit = unitRep.GetBy(new UnitId(new PeriodId(periodId), new SharedUnitId(unitId)));
             var unitDto = unitInPeriodDTOMapper.MapToModel(unit, selectedColumns.Split(','));
-            unitDto.CustomFields = unit.CustomFields.Select(c => unitCustomFieldMapper.MapToModel(c)).ToList();
-            var unitindexIdList = unit.UnitIndexList.Select(j => j.UnitIndexId).ToList();
-            var unitIndices = unitIndexService.FindUnitIndices(index => unitindexIdList.Contains(index.Id));
+         //   unitDto.CustomFields = unit.CustomFields.Select(c => unitCustomFieldMapper.MapToModel(c)).ToList();
+          //  var unitindexIdList = unit.UnitIndexList.Select(j => j.UnitIndexId).ToList();
+           // var unitIndices = unitIndexService.FindUnitIndices(index => unitindexIdList.Contains(index.Id));
             //todo change this mapping to valid mapping need som work !!!!!!
-            var unitInPeriodUnitIndexDTOList = new List<UnitInPeriodUnitIndexDTO>();
-            foreach (var unitIndex in unitIndices)
-            {
-                var unitUnitIndex = unit.UnitIndexList.Single(j => j.UnitIndexId == unitIndex.Id);
-                unitInPeriodUnitIndexDTOList.Add(new UnitInPeriodUnitIndexDTO
-                {
-                    Id = unitIndex.Id.Id,
-                    IsInquireable = unitIndex.IsInquireable,
-                    Name = unitIndex.Name,
-                    ShowforTopLevel = unitUnitIndex.ShowforTopLevel,
-                    ShowforSameLevel = unitUnitIndex.ShowforSameLevel,
-                    ShowforLowLevel = unitUnitIndex.ShowforLowLevel
-                });
-            }
-            unitDto.UnitIndices = unitInPeriodUnitIndexDTOList;
+            //var unitInPeriodUnitIndexDTOList = new List<UnitInPeriodUnitIndexDTO>();
+            //foreach (var unitIndex in unitIndices)
+            //{
+            //    var unitUnitIndex = unit.UnitIndexList.Single(j => j.UnitIndexId == unitIndex.Id);
+            //    unitInPeriodUnitIndexDTOList.Add(new UnitInPeriodUnitIndexDTO
+            //    {
+            //        Id = unitIndex.Id.Id,
+            //        IsInquireable = unitIndex.IsInquireable,
+            //        Name = unitIndex.Name,
+            //        ShowforTopLevel = unitUnitIndex.ShowforTopLevel,
+            //        ShowforSameLevel = unitUnitIndex.ShowforSameLevel,
+            //        ShowforLowLevel = unitUnitIndex.ShowforLowLevel
+            //    });
+            //}
+            //unitDto.UnitIndices = unitInPeriodUnitIndexDTOList;
             return unitDto;
 
 

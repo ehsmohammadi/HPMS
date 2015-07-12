@@ -41,11 +41,11 @@ namespace MITD.PMS.Service.Host.Controllers
             periodUnitService.RemoveUnit(periodId, unitId);
         }
 
-        public UnitInPeriodDTO GetUnit(long periodId, long unitId, string Type)
+        public UnitInPeriodDTO GetUnit(long periodId, long unitId)//, string Type)
         {
-            if (Type.ToLower() == unitInPeriodWithActionsClassType.ToLower())
+          //  if (Type.ToLower() == unitInPeriodWithActionsClassType.ToLower())
                 return periodUnitService.GetUnit(periodId, unitId, "");
-            return periodUnitService.GetUnit(periodId, unitId, "");
+          //  return periodUnitService.GetUnit(periodId, unitId, "");
         }
 
         public IEnumerable<UnitInPeriodDTO> GetAllUnitInPeriods(long periodId, string Type)
