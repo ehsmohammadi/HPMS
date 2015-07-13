@@ -32,7 +32,7 @@ namespace MITD.PMS.Presentation.UI.SL
 #if(DEBUG)
             controller.getLogonUser();
 #else
-            //controller.Login(() => { });
+            controller.Login(() => { });
 #endif
         }
 

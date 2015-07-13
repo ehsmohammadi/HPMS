@@ -13,14 +13,15 @@ using MITD.PMSSecurity.Exceptions;
 
 namespace MITD.PMS.Service.Host.App_Start
 {
-    // for without security
-    public class UniversalIdentity : IIdentity
+   
+    public class FakeIdentity : IIdentity
     {
+        // for without security
         public string Name { get; private set; }
         public string AuthenticationType { get; private set; }
         public bool IsAuthenticated { get; private set; }
 
-        public UniversalIdentity(string name, string authenticationType, bool isAuthenticated)
+        public FakeIdentity(string name, string authenticationType, bool isAuthenticated)
         {
             Name = name;
             AuthenticationType = authenticationType;
@@ -33,7 +34,7 @@ namespace MITD.PMS.Service.Host.App_Start
         {
             // if you want sst security comment this line 
 #if(DEBUG)
-            incomingPrincipal = CreateIncomingPrincipal();
+            incomingPrincipal = createIncomingPrincipal();
 #endif
 
             if (!incomingPrincipal.Identity.IsAuthenticated)
@@ -45,10 +46,12 @@ namespace MITD.PMS.Service.Host.App_Start
 
         }
 
-        private static ClaimsPrincipal CreateIncomingPrincipal()
+        private  ClaimsPrincipal createIncomingPrincipal()
         {
-            ClaimsPrincipal incomingPrincipal;
-            var claims = new List<Claim>
+            var identity = new FakeIdentity("ehsan", AuthenticationTypes.Basic, true);
+
+            var incomingPrincipal = new ClaimsPrincipal(identity);
+            incomingPrincipal.Identities.First().AddClaims( new List<Claim>
             {
                 new Claim(ClaimTypes.Role, "Admin"),
                 new Claim(ClaimTypes.Role, "Employee"),
@@ -56,11 +59,7 @@ namespace MITD.PMS.Service.Host.App_Start
                 new Claim("http://identityserver.thinktecture.com/claims/profileclaims/firstname", "احسان"),
                 new Claim("http://identityserver.thinktecture.com/claims/profileclaims/lastname", "محمدی"),
                 new Claim("http://identityserver.thinktecture.com/claims/profileclaims/jobpositionnames", "مدیر فنی"),
-            };
-            var identity = new UniversalIdentity("ehsan", AuthenticationTypes.Basic.ToString(), true);
-
-            incomingPrincipal = new ClaimsPrincipal(identity);
-            incomingPrincipal.Identities.First().AddClaims(claims);
+            });
             return incomingPrincipal;
         }
 
