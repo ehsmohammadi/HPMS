@@ -42,6 +42,8 @@ namespace MITD.PMS.Service.Host
     {
         public static void Execute()
         {
+            
+
             AreaRegistration.RegisterAllAreas();
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
