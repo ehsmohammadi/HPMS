@@ -15,6 +15,9 @@ namespace MITD.PMS.Presentation.Logic
 {
     public interface IPeriodController
     {
+
+        
+       
         void ShowPeriodView(PeriodDTO period, ActionType actionType);
         void ShowPeriodList(bool showInNewTab);
 
@@ -23,9 +26,11 @@ namespace MITD.PMS.Presentation.Logic
 
         void ShowUnitInPeriodView(UnitInPeriodAssignmentDTO unitInPeriod, ActionType action);
         void ShowUnitInPeriodView(long periodId, long? unitId, ActionType actionType);
-
-
         void ShowUnitInPeriodTreeView(PeriodDTOWithAction period, bool showInNewTab = false);
+        void ShowUnitIndexInPeriodView(UnitIndexInPeriodDTO unitIndexInPeriodDto, ActionType action);
+        void ShowUnitIndexInPeriodTreeView(PeriodDTOWithAction period, bool showInNewTab = false);
+        void ShowUnitIndexGroupInPeriodView(UnitIndexGroupInPeriodDTO unitIndexGroupInPeriodDto, ActionType action);
+
 
         void ShowUnitInPeriodCustomFieldManageView(long periodId, UnitInPeriodDTO unitInPeriodDto, ActionType modifyUnitInPrdField);
         void ShowUnitInPeriodUnitIndicesManageView(long periodId, UnitInPeriodDTO unitInPeriodDto, ActionType modifyUnitInPrdField);

@@ -168,6 +168,9 @@
     <Compile Include="Views\PeriodManagement\JobIndex\IJobIndexInPeriodView.cs" />
     <Compile Include="Views\PeriodManagement\JobPosition\IJobPositionInPeriodTreeView.cs" />
     <Compile Include="Views\PeriodManagement\JobPosition\IJobPositionInPeriodView.cs" />
+    <Compile Include="Views\PeriodManagement\UnitIndex\IJobIndexGroupInPeriodView.cs" />
+    <Compile Include="Views\PeriodManagement\UnitIndex\IUnitIndexInPeriodTreeView.cs" />
+    <Compile Include="Views\PeriodManagement\UnitIndex\IUnitIndexInPeriodView.cs" />
     <Compile Include="Views\PeriodManagement\Unit\IUnitInPeriodTreeView.cs" />
     <Compile Include="Views\PeriodManagement\Unit\IUnitInPeriodView.cs" />
     <Compile Include="Wrapper\BasicInfoManagement\UnitIndex\IUnitIndexCategoryServiceWrapper.cs" />

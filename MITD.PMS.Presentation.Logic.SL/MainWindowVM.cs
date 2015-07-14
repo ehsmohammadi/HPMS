@@ -323,7 +323,26 @@ namespace MITD.PMS.Presentation.Logic
                            });
                    }
                    )));
-
+            cmdList.Add(
+             new CommandViewModel(" مدیریت شاخص سازمانی در دوره جاری", new DelegateCommand(
+                 () =>
+                 {
+                     controller.ShowBusyIndicator("در حال بارگذاری ماجول...");
+                     controller.GetRemoteInstance<IPeriodController>(
+                         (res, exp) =>
+                         {
+                             controller.HideBusyIndicator();
+                             if (res != null)
+                             {
+                                 res.ShowUnitIndexInPeriodTreeView(new PeriodDTOWithAction { Id = CurrentPeriod.Id, Name = CurrentPeriod.Name }, isShiftPressed);
+                             }
+                             else if (exp != null)
+                             {
+                                 controller.HandleException(exp);
+                             }
+                         });
+                 }
+                 )));
 
             cmdList.Add(
               new CommandViewModel("مدیریت مشاغل در دوره جاری", new DelegateCommand(
