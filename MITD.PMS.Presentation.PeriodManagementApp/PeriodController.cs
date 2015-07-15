@@ -2,6 +2,7 @@
 using MITD.PMS.Presentation.Contracts;
 using MITD.PMS.Presentation.Logic;
 using MITD.PMS.Presentation.Logic.Views;
+using MITD.PMS.Presentation.Logic.Views.PeriodManagement.UnitIndex;
 using MITD.Presentation;
 
 namespace MITD.PMS.Presentation.PeriodManagementApp
@@ -21,6 +22,7 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
         }
 
         #region Period
+      
         public void ShowPeriodView(PeriodDTO period, ActionType actionType)
         {
             var view = ServiceLocator.Current.GetInstance<IPeriodView>();
@@ -44,7 +46,7 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
         #endregion
 
         #region Unit
-
+     
         public void ShowUnitInPeriodView(UnitInPeriodAssignmentDTO unitInPeriod, ActionType action)
         {
             throw new System.NotImplementedException();
@@ -78,6 +80,31 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
 
 
         #endregion
+
+        #region UnitIndex
+        public void ShowUnitIndexInPeriodView(UnitIndexInPeriodDTO unitIndexInPeriodDto, ActionType action)
+        {
+            var view = ServiceLocator.Current.GetInstance<IUnitIndexInPeriodView>();
+            ((UnitIndexInPeriodVM)view.ViewModel).Load(unitIndexInPeriodDto, action);
+            viewManager.ShowInDialog(view);
+        }
+        public void ShowUnitIndexInPeriodTreeView(PeriodDTOWithAction period, bool showInNewTab = false)
+        {
+            var view = ServiceLocator.Current.GetInstance<IUnitIndexInPeriodTreeView>();
+            ((UnitIndexInPeriodTreeVM)view.ViewModel).Load(period);
+            viewManager.ShowInTabControl(view);
+
+        }
+          public void ShowUnitIndexGroupInPeriodView(UnitIndexGroupInPeriodDTO unitIndexGroupInPeriodDto, ActionType action)
+        {
+            var view = ServiceLocator.Current.GetInstance<IUnitIndexGroupInPeriodView>();
+            ((UnitIndexGroupInPeriodVM)view.ViewModel).Load(unitIndexGroupInPeriodDto, action);
+            viewManager.ShowInDialog(view);
+        }
+
+        #endregion
+
+     
 
         #region JobPosition
         public void ShowJobPositionInPeriodView(JobPositionInPeriodAssignmentDTO jobPositionInPeriod, ActionType action)
@@ -289,13 +316,6 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
             var view = viewManager.ShowInTabControl<IEmployeeCalculationResultHistoryView>(showInNewTab);
             ((EmployeeCalculationResultHistoryVM)view.ViewModel).Load(employeeId);
         }
-
-
-
-
-
-
-
-      
+        
     }
 }

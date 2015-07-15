@@ -27,5 +27,9 @@ namespace MITD.PMS.Presentation.Logic
         string PeriodBasicDataCopyViewTitle { get;  }
         string CalculationExceptionListViewTitle { get; }
         string CalculationExceptionViewTitle { get; }
+        string UnitIndexInPeriodViewTitle { get; }
+        string UnitIndexInPeriodTreeViewTitle { get; }
+        string UnitIndexGroupInPeriodViewTitle { get; }
+
     }
 }

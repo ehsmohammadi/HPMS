@@ -117,5 +117,29 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
             get { return "مشاهده خطای  محاسبه"; }
         }
 
+        public string UnitIndexInPeriodViewTitle
+        {
+            get
+            {
+                return "شاخص سازمانی دوره";
+            }
+        }
+
+        public string UnitIndexInPeriodTreeViewTitle
+        {
+            get
+            {
+                return "مدیریت شاخص سازمانی دوره";
+            }
+        }
+        public string UnitIndexGroupInPeriodViewTitle
+        {
+            get
+            {
+                return "گروه شاخص سازمانی در دوره";
+            }
+        }
+        
+        
     }
 }
