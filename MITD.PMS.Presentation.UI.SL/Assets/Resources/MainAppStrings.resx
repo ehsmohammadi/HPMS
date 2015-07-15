@@ -459,4 +459,7 @@
   <data name="EmployeesInquiryListSubMenu" xml:space="preserve">
     <value>Inquiry subject list</value>
   </data>
+  <data name="BasicInfoManagementShowUnitIndicesTitle" xml:space="preserve">
+    <value>Unit index management</value>
+  </data>
 </root>

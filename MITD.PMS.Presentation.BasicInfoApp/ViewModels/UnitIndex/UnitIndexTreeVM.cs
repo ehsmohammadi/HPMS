@@ -106,7 +106,7 @@ namespace MITD.PMS.Presentation.Logic
 
         void init()
         {
-            DisplayName = "مدیریت شاخص ها ";
+            DisplayName = "مدیریت شاخص های واحد  ";
             UnitIndexTree = new ObservableCollection<TreeElementViewModel<AbstractUnitIndexDTOWithActions>>();
             UnitIndexCommands = new List<DataGridCommandViewModel> {
                 new  DataGridCommandViewModel{ CommandViewModel = AddRootCategory}

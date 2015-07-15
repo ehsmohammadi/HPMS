@@ -124,7 +124,7 @@
     <value>مدیریت فیلد های دلخواه</value>
   </data>
   <data name="BasicInfoManagementShowJobIndexsTitle" xml:space="preserve">
-    <value>مدیریت شاخص ها</value>
+    <value>مدیریت شاخص های شغل</value>
   </data>
   <data name="BasicInfoManagementShowJobPositionsTitle" xml:space="preserve">
     <value>مدیریت پست ها</value>
@@ -449,5 +449,8 @@
   </data>
   <data name="EmployeesInquiryListSubMenu" xml:space="preserve">
     <value>فهرست افراد نظرسنجی شونده</value>
+  </data>
+  <data name="BasicInfoManagementShowUnitIndicesTitle" xml:space="preserve">
+    <value>مدیریت شاخص های واحد سازمانی</value>
   </data>
 </root>

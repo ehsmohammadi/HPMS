@@ -10,7 +10,98 @@ namespace MITD.PMSSecurity.Domain
             {
                 return new List<ActionType>
                 {
-                    ActionType.AddPeriod,
+                    // BasicInfo mgmt Actions || PMSAdmin Domain Action 
+
+                    #region Policy
+		            ActionType.AddPolicy,
+                    ActionType.DeletePolicy,
+                    ActionType.ModifyPolicy,
+
+                    ActionType.ManageRules,
+                    ActionType.ManageFunctions,
+
+                    ActionType.AddFunction,
+                    ActionType.DeleteFunction,
+                    ActionType.ModifyFunction,
+
+                    ActionType.AddRule,
+                    ActionType.DeleteRule,
+                    ActionType.ModifyRule,
+                    ActionType.ShowRuleTrail,
+                    ActionType.ShowAllRuleTrails,
+	                #endregion
+
+                    #region CustomField
+		            ActionType.AddCustomField,
+                    ActionType.DeleteCustomField,
+                    ActionType.ModifyCustomField, 
+	                #endregion
+
+                    #region Job
+		            ActionType.AddJob,
+                    ActionType.DeleteJob,
+                    ActionType.ModifyJob,
+                    ActionType.ManageJobCustomFields, 
+	                #endregion
+
+                    #region JobIndex
+		            ActionType.AddJobIndex,
+                    ActionType.ModifyJobIndex,
+                    ActionType.DeleteJobIndex,
+                    ActionType.ManageJobIndexCustomFields,
+
+
+                    ActionType.AddJobIndexCategory,
+                    ActionType.DeleteJobIndexCategory,
+                    ActionType.ModifyJobIndexCategory, 
+	                #endregion
+
+                    #region Unit
+		            ActionType.AddUnit,
+                    ActionType.DeleteUnit,
+                    ActionType.ModifyUnit,
+                    ActionType.ManageUnitCustomFields, 
+	                #endregion
+
+                    //ActionType.AddUnitCustomFields,
+                    //ActionType.AddUnitIndex,
+                    //ActionType.AddUnitIndexCategory,
+                    //ActionType.AddUnitIndexCustomFields,
+                    //ActionType.ModifyUnitIndex,
+                    //ActionType.ModifyUnitIndexCategory,
+
+                    #region JobPosition
+		            ActionType.AddJobPosition,
+                    ActionType.DeleteJobPosition,
+                    ActionType.ModifyJobPosition, 
+	                #endregion
+
+                    #region User
+                    ActionType.AddPermittedUserToMyTasks,
+                    ActionType.RemovePermittedUserFromMyTasks,
+                    ActionType.SettingPermittedUserToMyTasks,
+
+                    ActionType.AddUser,
+                    ActionType.DeleteUser,
+                    ActionType.ModifyUser,
+                    ActionType.ManageUserCustomActions,
+                    ActionType.ManageUserWorkListUsers,
+
+                    ActionType.AddUserGroup,
+                    ActionType.DeleteUserGroup,
+                    ActionType.ModifyUserGroup,
+                    ActionType.ManageGroupCustomActions, 
+	                #endregion
+
+                    #region Log
+		            ActionType.ShowLog,
+                    ActionType.DeleteLog, 
+                    #endregion
+
+                    // PMS mgmt Actions || PMS Domain Action
+
+                    #region Period
+		            ActionType.AddPeriod,
                     ActionType.ModifyPeriod,
                     ActionType.DeletePeriod,
                     ActionType.ManageUnits,
@@ -28,86 +119,49 @@ namespace MITD.PMSSecurity.Domain
                     ActionType.ClosePeriod,
                     ActionType.CopyPeriodBasicData,
                     ActionType.GetPeriodInitializingInquiryStatus,
-                    ActionType.RollBackPeriodState,
+                    ActionType.RollBackPeriodState, 
+	                #endregion
                     
-                    ActionType.AddJobInPeriod,
+                    #region JobInPeriod
+		            ActionType.AddJobInPeriod,
                     ActionType.ModifyJobInPeriod,
-                    ActionType.DeleteJobInPeriod,
-                   // ActionType.ManageJobInPeriodCustomFields,
+                    ActionType.DeleteJobInPeriod, 
+	                #endregion
 
-                    ActionType.AddUnitInPeriod,
+                    #region UnitInPeriod
+		            ActionType.AddUnitInPeriod,
                     ActionType.ModifyUnitInPeriod,
-                    ActionType.DeleteUnitInPeriod,
+                    ActionType.DeleteUnitInPeriod, 
+	                #endregion
 
-                    ActionType.AddJobPositionInPeriod,
+                    #region JobPositionInPeriod
+		            ActionType.AddJobPositionInPeriod,
                     ActionType.DeleteJobPositionInPeriod,
-                    ActionType.ManageJobPositionInPeriodInquiry,
+                    ActionType.ManageJobPositionInPeriodInquiry, 
+	                #endregion
 
-                    ActionType.AddJobIndexInPeriod,
+                    #region JobIndexInPeriod
+		            ActionType.AddJobIndexInPeriod,
                     ActionType.ModifyJobIndexInPeriod,
                     ActionType.DeleteJobIndexInPeriod,
                     ActionType.AddJobIndexGroupInPeriod,
                     ActionType.ModifyJobIndexGroupInPeriod,
-                    ActionType.DeleteJobIndexGroupInPeriod,
+                    ActionType.DeleteJobIndexGroupInPeriod, 
+	                #endregion
 
-                    ActionType.AddEmployee,
+                    #region Employee
+		            ActionType.AddEmployee,
                     ActionType.ModifyEmployee,
                     ActionType.DeleteEmployee,
-                    //ActionType AddEmployeeJobPositions = new ActionType("1", "AddPeriod");
                     ActionType.ManageEmployeeJobPositions,
-                    //ActionType DeleteEmployeeJobPositions = new ActionType("3", "Employee"); 
                     ActionType.AddEmployeeJobCustomFields,
-                    ActionType.ModifyEmployeeJobCustomFields,
-                    //ActionType.GetEmployeeJobPositions,
-                    //ActionType DeleteEmployeeJobCustomFields = new ActionType("3", "Employee");
+                    ActionType.ModifyEmployeeJobCustomFields, 
+	                #endregion
 
-                    ActionType.AddJobIndex,
-                    ActionType.ModifyJobIndex,
-                    ActionType.DeleteJobIndex,
-                    ActionType.ManageJobIndexCustomFields,
-                    //ActionType AddJobIndexCustomFields = new ActionType("3", "Employee");
-                    //ActionType ModifyJobIndexCustomFields = new ActionType("3", "Employee");
+                    //---------------------------------------------
 
-                    ActionType.AddJobIndexCategory,
-                    ActionType.DeleteJobIndexCategory,
-                    ActionType.ModifyJobIndexCategory,
-
-                    ActionType.AddJobPosition,
-                    ActionType.DeleteJobPosition,
-                    ActionType.ModifyJobPosition,
-
-                    ActionType.AddFunction,
-                    ActionType.DeleteFunction,
-                    ActionType.ModifyFunction,
-
-                    ActionType.AddCustomField,
-                    ActionType.DeleteCustomField,
-                    ActionType.ModifyCustomField,
-
-                    ActionType.AddJob,
-                    ActionType.DeleteJob,
-                    ActionType.ModifyJob,
-                    ActionType.ManageJobCustomFields,
-
-                    ActionType.AddUnit,
-                    ActionType.DeleteUnit,
-                    ActionType.ModifyUnit,
-                    ActionType.ManageUnitCustomFields,
-
-                    ActionType.AddPolicy,
-                    ActionType.DeletePolicy,
-                    ActionType.ModifyPolicy,
-
-                    ActionType.ManageRules,
-                    ActionType.ManageFunctions,
-
-                    ActionType.AddRule,
-                    ActionType.DeleteRule,
-                    ActionType.ModifyRule,
-                    ActionType.ShowRuleTrail,
-                    ActionType.ShowAllRuleTrails,
-
-                    ActionType.AddCalculation,
+                    #region Calculation
+		            ActionType.AddCalculation,
                     ActionType.DeleteCalculation,
                     ActionType.ModifyCalculation,
 
@@ -121,42 +175,21 @@ namespace MITD.PMSSecurity.Domain
                     //ActionType.ShowCalculationResultDetail,
 
                     ActionType.RunCalculation,
-                    ActionType.StopCalculation,
-                    //bayad bardashte shee
+                    ActionType.StopCalculation, 
+	                #endregion
+
+                    #region Inquiry
+		            //bayad bardashte shee
                     ActionType.FillInquiryForm,
-                    ActionType.DeleteCustomInquirer,
+                    ActionType.DeleteCustomInquirer, 
+	                #endregion
 
-                    
-                    ActionType.ShowClaim,
+                    #region Claim
+		            ActionType.ShowClaim,
                     ActionType.ReplyToClaim,
-                    ActionType.ShowAdminClaimList,
-                    
+                    ActionType.ShowAdminClaimList, 
+	                #endregion                 
 
-                    ActionType.AddPermittedUserToMyTasks,
-                    ActionType.RemovePermittedUserFromMyTasks,
-                    ActionType.SettingPermittedUserToMyTasks,
-
-                    ActionType.AddUser,
-                    ActionType.DeleteUser,
-                    ActionType.ModifyUser,
-                    ActionType.ManageUserCustomActions,
-                    ActionType.ManageUserWorkListUsers,
-
-                    ActionType.AddUserGroup,
-                    ActionType.DeleteUserGroup,
-                    ActionType.ModifyUserGroup,
-                    ActionType.ManageGroupCustomActions,
-
-                    ActionType.ShowLog,
-                    ActionType.DeleteLog,
-                    ActionType.AddUnitCustomFields,
-                    ActionType.AddUnitIndex,
-                    ActionType.AddUnitIndexCategory,
-                    ActionType.AddUnitIndexCustomFields,
-                    ActionType.ModifyUnitIndex,
-                    ActionType.ModifyUnitIndexCategory,
-                  
-               
                 };
             }
         }

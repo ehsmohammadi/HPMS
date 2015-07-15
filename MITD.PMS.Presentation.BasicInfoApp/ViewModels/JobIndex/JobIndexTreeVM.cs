@@ -106,7 +106,7 @@ namespace MITD.PMS.Presentation.Logic
 
         void init()
         {
-            DisplayName = "مدیریت شاخص ها ";
+            DisplayName = "مدیریت شاخص های شغل ";
             JobIndexTree = new ObservableCollection<TreeElementViewModel<AbstractJobIndexDTOWithActions>>();
             JobIndexCommands = new List<DataGridCommandViewModel> {
                 new  DataGridCommandViewModel{ CommandViewModel = AddRootCategory}

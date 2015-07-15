@@ -12,6 +12,8 @@ namespace MITD.PMS.Presentation.Logic
 
     public sealed class MainWindowVM : WorkspaceViewModel, IEventHandler<MainWindowUpdateArgs>
     {
+
+        #region Report bar view model
         public class ReportBarVM : ViewModelBase
         {
             #region IsBusy
@@ -32,6 +34,7 @@ namespace MITD.PMS.Presentation.Logic
             }
             #endregion
         }
+        #endregion
 
         #region Fields
 
@@ -211,12 +214,12 @@ namespace MITD.PMS.Presentation.Logic
 
         #region Command Methods
 
-        private string path;
-        public string Path
-        {
-            get { return path; }
-            set { this.SetField(p => p.Path, ref path, value); }
-        }
+        //private string path;
+        //public string Path
+        //{
+        //    get { return path; }
+        //    set { this.SetField(p => p.Path, ref path, value); }
+        //}
 
         //public class CommandViewModelTree : ViewModelBase
         //{
@@ -273,7 +276,7 @@ namespace MITD.PMS.Presentation.Logic
                             () =>
                             {
                             }
-                            ),true);
+                            ), true);
                     }
                     buildTree(p + parentElement.Name + "/", res, x.Childs);
                     tree.Add(x);
@@ -419,7 +422,7 @@ namespace MITD.PMS.Presentation.Logic
                                controller.HideBusyIndicator();
                                if (res != null)
                                {
-                                   res.ShowCalculationListView(new PeriodDTOWithAction { Id = CurrentPeriod.Id, Name = CurrentPeriod.Name },isShiftPressed);
+                                   res.ShowCalculationListView(new PeriodDTOWithAction { Id = CurrentPeriod.Id, Name = CurrentPeriod.Name }, isShiftPressed);
                                }
                                else if (exp != null)
                                {
@@ -520,7 +523,47 @@ namespace MITD.PMS.Presentation.Logic
                   }
                   )));
 
+            cmdList.Add(
+                new CommandViewModel(LocalizedResources.BasicInfoManagementShowUnitsTitle, new DelegateCommand(
+                    () =>
+                    {
+                        controller.ShowBusyIndicator("در حال بارگذاری ماجول...");
+                        controller.GetRemoteInstance<IBasicInfoController>(
+                            (res, exp) =>
+                            {
+                                controller.HideBusyIndicator();
+                                if (res != null)
+                                {
+                                    res.ShowUnitList(isShiftPressed);
+                                }
+                                else if (exp != null)
+                                {
+                                    controller.HandleException(exp);
+                                }
+                            });
+                    }
+                    )));
 
+            cmdList.Add(
+                new CommandViewModel(LocalizedResources.BasicInfoManagementShowUnitIndexsTitle, new DelegateCommand(
+                    () =>
+                    {
+                        controller.ShowBusyIndicator("در حال بارگذاری ماجول...");
+                        controller.GetRemoteInstance<IBasicInfoController>(
+                            (res, exp) =>
+                            {
+                                controller.HideBusyIndicator();
+                                if (res != null)
+                                {
+                                    res.ShowUnitIndexTreeView(isShiftPressed);
+                                }
+                                else if (exp != null)
+                                {
+                                    controller.HandleException(exp);
+                                }
+                            });
+                    }
+                    )));
 
             cmdList.Add(
               new CommandViewModel(LocalizedResources.BasicInfoManagementShowJobPositionsTitle, new DelegateCommand(
@@ -545,47 +588,7 @@ namespace MITD.PMS.Presentation.Logic
 
 
 
-            cmdList.Add(
-              new CommandViewModel(LocalizedResources.BasicInfoManagementShowUnitsTitle, new DelegateCommand(
-                  () =>
-                  {
-                      controller.ShowBusyIndicator("در حال بارگذاری ماجول...");
-                      controller.GetRemoteInstance<IBasicInfoController>(
-                          (res, exp) =>
-                          {
-                              controller.HideBusyIndicator();
-                              if (res != null)
-                              {
-                                  res.ShowUnitList(isShiftPressed);
-                              }
-                              else if (exp != null)
-                              {
-                                  controller.HandleException(exp);
-                              }
-                          });
-                  }
-                  )));
 
-            cmdList.Add(
-              new CommandViewModel(LocalizedResources.BasicInfoManagementShowUnitIndexsTitle, new DelegateCommand(
-                  () =>
-                  {
-                      controller.ShowBusyIndicator("در حال بارگذاری ماجول...");
-                      controller.GetRemoteInstance<IBasicInfoController>(
-                          (res, exp) =>
-                          {
-                              controller.HideBusyIndicator();
-                              if (res != null)
-                              {
-                                  res.ShowUnitIndexTreeView(isShiftPressed);
-                              }
-                              else if (exp != null)
-                              {
-                                  controller.HandleException(exp);
-                              }
-                          });
-                  }
-                  )));
 
 
             cmdList.Add(
@@ -797,6 +800,7 @@ namespace MITD.PMS.Presentation.Logic
 
         #endregion
 
+        #region Methods
         public void Handle(MainWindowUpdateArgs eventData)
         {
             controller.BeginInvokeOnDispatcher(() =>
@@ -818,8 +822,11 @@ namespace MITD.PMS.Presentation.Logic
             CurrentPeriod = null;
             controller.Logout();
         }
+        #endregion
 
     }
+
+
 }
 
 

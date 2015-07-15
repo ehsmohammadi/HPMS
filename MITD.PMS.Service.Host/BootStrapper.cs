@@ -79,10 +79,14 @@ namespace MITD.PMS.Service.Host
                 Classes.FromThisAssembly().BasedOn<Controller>().LifestyleTransient()
                 );
 
-            container.Register(Component.For<IFacadeService>()
-                .Interceptors(InterceptorReference.ForType<Interception>()).Anywhere,
-                Component.For<Interception>()
-                );
+            //container.Register(Component.For<IFacadeService>()
+            //    .Interceptors(InterceptorReference.ForType<Interception>()).Anywhere,
+            //    Component.For<Interception>()
+            //    );
+
+            container.Register(
+                Component.For<IFacadeService>().Interceptors(InterceptorReference.ForType<Interception>()).Anywhere,
+                Component.For<Interception>().LifeStyle.Transient);
 
             container.Register(
                 Component.For<ILoggerService>().ImplementedBy<DbLoggerService>().Named("DB").LifeStyle.BoundTo<IService>(),
