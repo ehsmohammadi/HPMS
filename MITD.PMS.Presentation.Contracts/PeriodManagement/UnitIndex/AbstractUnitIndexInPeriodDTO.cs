@@ -68,9 +68,9 @@ namespace MITD.PMS.Presentation.Contracts
         {
             var dtoType = jObject.Value<string>("DTOTypeName");
             if (dtoType.Equals("UnitIndexInPeriodDTO"))
-                return new AbstractUnitIndexInPeriodDTO();
+                return new UnitIndexInPeriodDTO();
             else
-                return new AbstractUnitIndexInPeriodDTO();
+                return new UnitIndexGroupInPeriodDTO();
 
             //if (jObject.Value<string>("$type") != null)
             //{

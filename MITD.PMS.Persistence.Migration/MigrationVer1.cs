@@ -370,6 +370,7 @@ namespace MITD.PMS.Persistence
             Execute.Sql("Drop sequence [dbo].[AbstractJobIndexSeq]");
             Execute.Sql("Drop sequence [dbo].[AbstractUnitIndexSeq]");
             Execute.Sql("Drop sequence [dbo].[Periods_AbstractJobIndexSeq]");
+            Execute.Sql("Drop sequence [dbo].[Periods_AbstractUnitIndexSeq]");
             Execute.Sql("Drop sequence [dbo].[JobIndexPointSeq]");
             Execute.Sql("Drop sequence [dbo].[Inquiry_JobIndexPointsSeq]");
             Execute.Sql("Drop sequence [dbo].[Periods_ClaimsSeq]");
@@ -988,6 +989,15 @@ CREATE SEQUENCE [dbo].[AbstractUnitIndexSeq]
 
             Execute.Sql(@"
 CREATE SEQUENCE [dbo].[Periods_AbstractJobIndexSeq] 
+ AS [bigint]
+ START WITH 10
+ INCREMENT BY 1
+ MINVALUE -9223372036854775808
+ MAXVALUE 9223372036854775807
+ CACHE ");
+
+                        Execute.Sql(@"
+CREATE SEQUENCE [dbo].[Periods_AbstractUnitIndexSeq] 
  AS [bigint]
  START WITH 10
  INCREMENT BY 1

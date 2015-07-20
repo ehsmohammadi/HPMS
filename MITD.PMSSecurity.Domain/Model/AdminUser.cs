@@ -105,6 +105,7 @@ namespace MITD.PMSSecurity.Domain
                     ActionType.ModifyPeriod,
                     ActionType.DeletePeriod,
                     ActionType.ManageUnits,
+                    ActionType.ManageUnitIndices,
                     ActionType.ManageJobPositions,
                     ActionType.ManageJobIndices,
                     ActionType.ManageJobs,
@@ -128,18 +129,6 @@ namespace MITD.PMSSecurity.Domain
                     ActionType.DeleteJobInPeriod, 
 	                #endregion
 
-                    #region UnitInPeriod
-		            ActionType.AddUnitInPeriod,
-                    ActionType.ModifyUnitInPeriod,
-                    ActionType.DeleteUnitInPeriod, 
-	                #endregion
-
-                    #region JobPositionInPeriod
-		            ActionType.AddJobPositionInPeriod,
-                    ActionType.DeleteJobPositionInPeriod,
-                    ActionType.ManageJobPositionInPeriodInquiry, 
-	                #endregion
-
                     #region JobIndexInPeriod
 		            ActionType.AddJobIndexInPeriod,
                     ActionType.ModifyJobIndexInPeriod,
@@ -148,6 +137,29 @@ namespace MITD.PMSSecurity.Domain
                     ActionType.ModifyJobIndexGroupInPeriod,
                     ActionType.DeleteJobIndexGroupInPeriod, 
 	                #endregion
+
+                    #region UnitInPeriod
+		            ActionType.AddUnitInPeriod,
+                    ActionType.ModifyUnitInPeriod,
+                    ActionType.DeleteUnitInPeriod, 
+	                #endregion
+
+                    #region UnitIndexInPeriod
+		            ActionType.AddUnitIndexInPeriod,
+                    ActionType.ModifyUnitIndexInPeriod,
+                    ActionType.DeleteUnitIndexInPeriod,
+                    ActionType.AddUnitIndexGroupInPeriod,
+                    ActionType.ModifyUnitIndexGroupInPeriod,
+                    ActionType.DeleteUnitIndexGroupInPeriod, 
+	                #endregion
+
+                    #region JobPositionInPeriod
+		            ActionType.AddJobPositionInPeriod,
+                    ActionType.DeleteJobPositionInPeriod,
+                    ActionType.ManageJobPositionInPeriodInquiry, 
+	                #endregion
+
+
 
                     #region Employee
 		            ActionType.AddEmployee,

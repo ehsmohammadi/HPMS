@@ -21,6 +21,7 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
                 {(int) ActionType.ManageUnits, typeof (ManageUnitInPeriodService)},
                 {(int) ActionType.ManageJobs, typeof (ManageJobInPeriodService)},
                 {(int) ActionType.ManageJobIndices, typeof (ManageJobIndexInPeriodService)},
+                {(int) ActionType.ManageUnitIndices, typeof (ManageUnitIndexInPeriodService)},
                 {(int) ActionType.ManageJobPositions, typeof (ManageJobPositionInPeriodService)},
                 {(int) ActionType.ManageEmployees, typeof (ManageEmployeeService)},
                 {(int) ActionType.ManageCalculations, typeof (ManagePeriodCaculationsService)},
@@ -51,6 +52,14 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
                 {(int) ActionType.AddJobIndexGroupInPeriod, typeof (AddJobIndexGroupInPeriodService)},
                 {(int) ActionType.ModifyJobIndexGroupInPeriod, typeof (ModifyJobIndexGroupInPeriodService)},
                 {(int) ActionType.DeleteJobIndexGroupInPeriod, typeof (DeleteJobIndexGroupInPeriodService)},
+
+                {(int) ActionType.AddUnitIndexInPeriod, typeof (AddUnitIndexInPeriodService)},
+                {(int) ActionType.ModifyUnitIndexInPeriod, typeof (ModifyUnitIndexInPeriodService)},
+                {(int) ActionType.DeleteUnitIndexInPeriod, typeof (DeleteUnitIndexInPeriodService)},
+
+                {(int) ActionType.AddUnitIndexGroupInPeriod, typeof (AddUnitIndexGroupInPeriodService)},
+                {(int) ActionType.ModifyUnitIndexGroupInPeriod, typeof (ModifyUnitIndexGroupInPeriodService)},
+                {(int) ActionType.DeleteUnitIndexGroupInPeriod, typeof (DeleteUnitIndexGroupInPeriodService)},
 
                 {(int) ActionType.FillInquiryForm, typeof (ManageInquiryFormService)},
 

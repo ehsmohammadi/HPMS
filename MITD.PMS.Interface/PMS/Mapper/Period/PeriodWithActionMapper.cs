@@ -31,6 +31,7 @@ namespace MITD.PMS.Interface
                     (int) ActionType.ManageJobPositions,
                     (int) ActionType.ManageJobs,
                     (int) ActionType.ManageUnits,
+                    (int) ActionType.ManageUnitIndices,
                     (int) ActionType.ActivatePeriod,
                     (int) ActionType.InitializePeriodForInquiry,
                     (int) ActionType.StartInquiry,

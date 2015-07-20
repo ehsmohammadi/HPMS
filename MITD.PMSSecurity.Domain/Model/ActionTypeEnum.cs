@@ -20,22 +20,23 @@ namespace MITD.PMSSecurity.Domain
         public static readonly ActionType ModifyPeriod = new ActionType("101", "ModifyPeriod","ویرایش دوره");
         public static readonly ActionType DeletePeriod = new ActionType("102", "DeletePeriod","حذف دوره");
         public static readonly ActionType ManageUnits = new ActionType("103", "ManageUnits","مدیریت واحدهای سازمانی دوره");
-        public static readonly ActionType ManageJobIndices = new ActionType("104", "ManageJobIndices", "مدیریت شاخص های دوره ");
-        public static readonly ActionType ManageJobs = new ActionType("105", "ManageJobs", "مدیریت مشاغل دوره");
-        public static readonly ActionType ManageJobPositions = new ActionType("106", "ManageJobPositions","مدیریت پست های سازمانی دوره");
-        public static readonly ActionType ManageEmployees = new ActionType("107", "ManageEmployees", "مدیریت کارمندان دوره");
-        public static readonly ActionType ManageCalculations = new ActionType("108", "ManageCalculations","مدیریت محاسبات دوره");
+        public static readonly ActionType ManageUnitIndices = new ActionType("104", "ManageUnitIndices", "مدیریت شاخص های سازمانی دوره ");
+        public static readonly ActionType ManageJobIndices = new ActionType("105", "ManageJobIndices", "مدیریت شاخص های دوره ");
+        public static readonly ActionType ManageJobs = new ActionType("106", "ManageJobs", "مدیریت مشاغل دوره");
+        public static readonly ActionType ManageJobPositions = new ActionType("107", "ManageJobPositions","مدیریت پست های سازمانی دوره");
+        public static readonly ActionType ManageEmployees = new ActionType("108", "ManageEmployees", "مدیریت کارمندان دوره");
+        public static readonly ActionType ManageCalculations = new ActionType("109", "ManageCalculations","مدیریت محاسبات دوره");
         
-        public static readonly ActionType ActivatePeriod = new ActionType("109", "ActivatePeriod", "فعال سازی دوره");
-        public static readonly ActionType InitializePeriodForInquiry = new ActionType("110", "InitializePeriodForInquiry", "آماده سازی دوره برای نظرسنجی");
-        public static readonly ActionType StartInquiry = new ActionType("111", "StartInquiry", "شروع نظرسنجی ");
-        public static readonly ActionType CompleteInquiry = new ActionType("112", "CompelteInquiry", "اتمام نظرسنجی ");
-        public static readonly ActionType StartCliaming = new ActionType("113", "StartCliaming", "شروع زمان ثبت اعتراض ");
-        public static readonly ActionType FinishCliaming = new ActionType("114", "FinishCliaming", "پايان زمان ثبت اعتراض ");
-        public static readonly ActionType ClosePeriod = new ActionType("115", "ClosePeriod", "بستن دوره ");
-        public static readonly ActionType CopyPeriodBasicData = new ActionType("116", "CopyPeriodBasicData", "کپی اطلاعات از دوره های قبل ");
-        public static readonly ActionType GetPeriodInitializingInquiryStatus = new ActionType("117", "GetPeriodInitializingInquiryStatus", " نمایش وضعیت آماده سازی اجرای نظرسنجی");
-        public static readonly ActionType RollBackPeriodState = new ActionType("118", "RollBackPeriodState", " برگشت دوره به وضعیت قبل ");
+        public static readonly ActionType ActivatePeriod = new ActionType("110", "ActivatePeriod", "فعال سازی دوره");
+        public static readonly ActionType InitializePeriodForInquiry = new ActionType("111", "InitializePeriodForInquiry", "آماده سازی دوره برای نظرسنجی");
+        public static readonly ActionType StartInquiry = new ActionType("112", "StartInquiry", "شروع نظرسنجی ");
+        public static readonly ActionType CompleteInquiry = new ActionType("113", "CompelteInquiry", "اتمام نظرسنجی ");
+        public static readonly ActionType StartCliaming = new ActionType("114", "StartCliaming", "شروع زمان ثبت اعتراض ");
+        public static readonly ActionType FinishCliaming = new ActionType("115", "FinishCliaming", "پايان زمان ثبت اعتراض ");
+        public static readonly ActionType ClosePeriod = new ActionType("116", "ClosePeriod", "بستن دوره ");
+        public static readonly ActionType CopyPeriodBasicData = new ActionType("117", "CopyPeriodBasicData", "کپی اطلاعات از دوره های قبل ");
+        public static readonly ActionType GetPeriodInitializingInquiryStatus = new ActionType("118", "GetPeriodInitializingInquiryStatus", " نمایش وضعیت آماده سازی اجرای نظرسنجی");
+        public static readonly ActionType RollBackPeriodState = new ActionType("119", "RollBackPeriodState", " برگشت دوره به وضعیت قبل ");
 
 
         public static readonly ActionType AddJobInPeriod = new ActionType("120", "AddJobInPeriod","تخصیص شغل در دوره");
