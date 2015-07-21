@@ -84,7 +84,8 @@ namespace MITD.PMS.Application
                         ));
                 }
 
-                var unitIndices = unitIndexRep.FindUnitIndices(j => unitIndexList.Select(jj => jj.UnitIndexId).Contains(j.Id));
+                var unitIndexIds = unitIndexList.Select(jj => jj.UnitIndexId).ToList();
+                var unitIndices = unitIndexRep.FindUnitIndices(j =>unitIndexIds.Contains(j.Id));
                 //unit.UpdateUnitIndices(unitIndices.ToList());
                 var unitUnitInddices = new List<UnitUnitIndex>();
                 foreach (var unitIndex in unitIndices)

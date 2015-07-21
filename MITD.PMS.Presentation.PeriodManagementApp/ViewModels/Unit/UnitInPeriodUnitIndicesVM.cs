@@ -130,6 +130,7 @@ namespace MITD.PMS.Presentation.Logic
                         {
                             UnitIndexInPeriodList.Add(new UnitInPeriodUnitIndexDTO
                             {
+                                Id=unitIndex.Id,
                                 Name = unitIndex.Name,
                                 IsInquireable = unitIndex.IsInquireable,
                                 ShowforLowLevel = true,

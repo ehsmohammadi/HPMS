@@ -47,10 +47,12 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
 
         #region Unit
      
-        public void ShowUnitInPeriodView(UnitInPeriodAssignmentDTO unitInPeriod, ActionType action)
-        {
-            throw new System.NotImplementedException();
-        }
+        //public void ShowUnitInPeriodView(UnitInPeriodAssignmentDTO unitInPeriod, ActionType action)
+        //{
+        //    var view = ServiceLocator.Current.GetInstance<IUnitInPeriodView>();
+        //    ((UnitInPeriodVM)view.ViewModel).Load(unitInPeriod.PeriodId, unitInPeriod.UnitId, action);
+        //    viewManager.ShowInDialog(view);
+        //}
         public void ShowUnitInPeriodView(long periodId, long? unitId, ActionType actionType)
         {
             var view = ServiceLocator.Current.GetInstance<IUnitInPeriodView>();

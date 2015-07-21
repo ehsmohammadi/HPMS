@@ -17,7 +17,8 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
     {
         public UpdateUnitInPeriodCustomFieldListArgs(List<AbstractCustomFieldDescriptionDTO> UnitInPeriodCustomFieldDescriptionList,long periodId,long UnitId)
         {
-           this.UnitInPeriodCustomFieldDescriptionList = UnitInPeriodCustomFieldDescriptionList;
+           
+            this.UnitInPeriodCustomFieldDescriptionList = UnitInPeriodCustomFieldDescriptionList;
             PeriodId = periodId;
             this. UnitId = UnitId;
         }

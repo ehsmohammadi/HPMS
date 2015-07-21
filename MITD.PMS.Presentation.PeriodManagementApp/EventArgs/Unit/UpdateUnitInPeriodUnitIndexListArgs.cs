@@ -1,4 +1,4 @@
-﻿using MITD.PMS.Presentation.Contracts;
+﻿ using MITD.PMS.Presentation.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -15,11 +15,11 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
 {
     public class UpdateUnitInPeriodUnitIndexListArgs
     {
-        public UpdateUnitInPeriodUnitIndexListArgs(List<UnitInPeriodUnitIndexDTO> UnitInPeriodUnitIndices, long periodId, long UnitId)
+        public UpdateUnitInPeriodUnitIndexListArgs(List<UnitInPeriodUnitIndexDTO> unitInPeriodUnitIndices, long periodId, long unitId)
         {
-            UnitInPeriodUnitIndices = UnitInPeriodUnitIndices;
+            this.UnitInPeriodUnitIndices =unitInPeriodUnitIndices;
             PeriodId = periodId;
-            UnitId = UnitId;
+            this.UnitId = unitId;
         }
         public List<UnitInPeriodUnitIndexDTO> UnitInPeriodUnitIndices
         {

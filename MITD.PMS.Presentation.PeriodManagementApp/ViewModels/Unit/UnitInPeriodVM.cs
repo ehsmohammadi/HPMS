@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using MITD.Core;
@@ -274,6 +275,7 @@ namespace MITD.PMS.Presentation.Logic
         private void finalizeAction()
         {
             appController.Publish(new UpdateUnitInPeriodListArgs());
+            appController.Publish(new UpdateUnitInPeriodTreeArgs());
             OnRequestClose();
         }
 

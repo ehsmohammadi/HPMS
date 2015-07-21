@@ -63,6 +63,7 @@ namespace MITD.PMSSecurity.Domain
                     ActionType.ManageUnitCustomFields, 
 	                #endregion
 
+                    ActionType.ManageUnitCustomFields,
                     //ActionType.AddUnitCustomFields,
                     //ActionType.AddUnitIndex,
                     //ActionType.AddUnitIndexCategory,

@@ -24,7 +24,7 @@ namespace MITD.PMS.Presentation.Logic
         void ShowJobInPeriodListView(PeriodDTO period, bool showInNewTab = false);
         void ShowJobInPeriodView(long periodId, long? jobId, ActionType actionType);
 
-        void ShowUnitInPeriodView(UnitInPeriodAssignmentDTO unitInPeriod, ActionType action);
+        //void ShowUnitInPeriodView(UnitInPeriodAssignmentDTO unitInPeriod, ActionType action);
         void ShowUnitInPeriodView(long periodId, long? unitId, ActionType actionType);
         void ShowUnitInPeriodTreeView(PeriodDTOWithAction period, bool showInNewTab = false);
         void ShowUnitIndexInPeriodView(UnitIndexInPeriodDTO unitIndexInPeriodDto, ActionType action);

@@ -66,6 +66,8 @@ namespace MITD.PMS.Domain.Model.Units
             id = new UnitId(period.Id,sharedUnit.Id);
             this.sharedUnit = sharedUnit;
             this.parent = parent;
+            customFields = new List<UnitCustomField>();
+            unitIndexList = new List<UnitUnitIndex>();
         }
         public Unit(Period period, SharedUnit sharedUnit, IList<UnitCustomField> customFieldList,
             IList<UnitUnitIndex> unitIndexList,Unit parent)
