@@ -72,6 +72,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminMigrationUtility.cs" />
     <Compile Include="PeriodTest.cs" />
     <Compile Include="CreateSeedData.cs" />
     <Compile Include="MigrationVer1.cs" />
