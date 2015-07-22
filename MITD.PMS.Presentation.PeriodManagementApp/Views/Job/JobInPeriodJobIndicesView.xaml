@@ -29,12 +29,12 @@
             </StackPanel>
 
 
-            <sdk:DataGrid Grid.Row="2" AutoGenerateColumns="False" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Stretch"
+            <sdk:DataGrid Grid.Row="2" AutoGenerateColumns="False" VerticalScrollBarVisibility="Auto" SelectionMode="Extended" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Stretch"
                       ItemsSource="{Binding Path=JobIndexInPeriodList, Mode=TwoWay}" >
 
                 <sdk:DataGrid.Columns>
 
-                    <sdk:DataGridCheckBoxColumn Header="مربوط به شغل" Binding="{Binding IsChecked,Mode=TwoWay}"   />
+                    <sdk:DataGridCheckBoxColumn  Header="مربوط به شغل" Binding="{Binding IsChecked,Mode=TwoWay}"   />
 
                     <sdk:DataGridTextColumn Header="نام" CanUserReorder="True" IsReadOnly="True"
                                             CanUserResize="True" CanUserSort="True" Width="Auto" Binding="{Binding Path=Name,Mode=TwoWay}" />

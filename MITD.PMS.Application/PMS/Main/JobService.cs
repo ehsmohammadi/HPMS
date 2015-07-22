@@ -57,8 +57,8 @@ namespace MITD.PMS.Application
                         sharedJobCustomField
                         ));
                 }
-                
-                var jobIndices = jobIndexRep.FindJobIndices(j => jobIndexList.Select(jj=>jj.JobIndexId).Contains(j.Id));
+                var jobIndexIds=jobIndexList.Select(jj => jj.JobIndexId).ToList();
+                var jobIndices = jobIndexRep.FindJobIndices(j => jobIndexIds.Contains(j.Id));
                 //job.UpdateJobIndices(jobIndices.ToList());
                 var jobJobInddices = new List<JobJobIndex>();
                 foreach (var jobIndex in jobIndices)

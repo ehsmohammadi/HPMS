@@ -129,6 +129,7 @@ namespace MITD.PMS.Presentation.Logic
                         {
                             JobIndexInPeriodList.Add(new JobInPeriodJobIndexDTO
                             {
+                                Id = jobIndex.Id,
                                 Name = jobIndex.Name,
                                 IsInquireable = jobIndex.IsInquireable,
                                 ShowforLowLevel = true,
