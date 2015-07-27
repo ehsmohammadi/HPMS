@@ -15,7 +15,7 @@ namespace MITD.PMSAdmin.Persistence.NH
     {
         private static Lazy<ISessionFactory> sessionFactory =
             new Lazy<ISessionFactory>(createSessionFactory);
-        private const string sessionName = "PMSDBConnection";
+        public static string sessionName = "PMSDBConnection";
 
         private static ISessionFactory createSessionFactory()
         {

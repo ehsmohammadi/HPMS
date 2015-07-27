@@ -1,31 +1,16 @@
 ﻿using System;
 using FluentMigrator;
 using MITD.Data.NH;
-using MITD.PMS.Application;
-using MITD.PMS.Domain.Model.Employees;
-using MITD.PMS.Domain.Model.JobIndices;
-using MITD.PMS.Domain.Model.Jobs;
-using MITD.PMSAdmin.Domain.Model.CustomFieldTypes;
-using System.Transactions;
-using System.Collections.Generic;
-using System.Linq;
-using MITD.PMS.Domain.Service;
 using MITD.PMS.Persistence.NH;
-using MITD.Core.RuleEngine.NH;
-using MITD.Core;
-using MITD.PMS.Domain.Model.Policies;
-using MITD.PMS.Domain.Model.Periods;
-using MITD.PMS.Domain.Model.Employees;
-using MITD.PMS.Domain.Model.Jobs;
-using MITD.Core.RuleEngine.Model;
-using MITD.PMS.Domain.Model.Calculations;
-using MITD.PMS.Persistence;
+using MITD.PMS.Domain.Service;
 
 namespace MITD.PMS.Persistence
 {
     [Profile("IRISL")]
-    public class IRISLSeedData : FluentMigrator.Migration
+    public class IRISLSeedData : Migration
     {
+        private string behaviouralGroupStr = "Behavioural";
+        private string performanceGroupStr = "Performance";
         public override void Up()
         {
 
@@ -33,25 +18,27 @@ namespace MITD.PMS.Persistence
             #region  PMS Admin
 
             var uows = new MITD.Domain.Repository.UnitOfWorkScope(
-               new Data.NH.NHUnitOfWorkFactory(() =>
+               new NHUnitOfWorkFactory(() =>
                {
-                   RuleEngineSession.sessionName = "PMSDBConnection";
+                   PMSAdmin.Persistence.NH.PMSAdminSession.sessionName = "PMSDBConnection";
                    return PMSAdmin.Persistence.NH.PMSAdminSession.GetSession();
                }));
 
             using (var uow = uows.CurrentUnitOfWork as NHUnitOfWork)
             {
-                var cftRep = new PMSAdmin.Persistence.NH.CustomFieldRepository(uow);
+                var cftRep = new MITD.PMSAdmin.Persistence.NH.CustomFieldRepository(uow);
 
                 #region UnitIndex CustomFields Definition
 
-                AdminMigrationUtility.DefineCustomFieldType(cftRep, "اهمیت", "UnitIndexImportance", 0, 10, EntityTypeEnum.UnitIndex);
+                AdminMigrationUtility.DefineCustomFieldType(cftRep, "اهمیت", "UnitIndexImportance", 0, 10,
+                    MITD.PMSAdmin.Domain.Model.CustomFieldTypes.EntityTypeEnum.UnitIndex);
 
                 #endregion
 
                 #region JobIndex CustomFields Definition
 
-                AdminMigrationUtility.DefineCustomFieldType(cftRep, "اهمیت", "JobIndexImportance", 0, 10, EntityTypeEnum.JobIndex);
+                AdminMigrationUtility.DefineCustomFieldType(cftRep, "اهمیت", "JobIndexImportance", 0, 10,
+                    PMSAdmin.Domain.Model.CustomFieldTypes.EntityTypeEnum.JobIndex);
 
                 #endregion
 
@@ -110,7 +97,7 @@ namespace MITD.PMS.Persistence
                 #region UnitIndices Creation
 
                 AdminMigrationUtility.CreateUnitIndex(unitIndexRep, "تحقق برنامه های راهبردی", "RealizationOfStrategicPlans");
-                AdminMigrationUtility.CreateUnitIndex(unitIndexRep, "تحقق برنامه های عملیاتی", "RealizationOfoperationalPlans");
+                AdminMigrationUtility.CreateUnitIndex(unitIndexRep, "تحقق برنامه های عملیاتی", "RealizationOfOperationalPlans");
                 AdminMigrationUtility.CreateUnitIndex(unitIndexRep, "ضریب نفوذ اتوماسیون", "PenetrationAutomation");
 
                 #endregion
@@ -119,18 +106,7 @@ namespace MITD.PMS.Persistence
 
                 #region Jobs Creation
 
-                //var job1 = new PMSAdmin.Domain.Model.Jobs.Job(jobRep.GetNextId(),
-                //        " بازرس فنی", "TechnicalInspector");
-                //job1.AssignCustomFields(jobCftList);
-                //jobRep.AddJob(job1);
-                //jobList.Add(job1);
-
-                //var job2 = new PMSAdmin.Domain.Model.Jobs.Job(jobRep.GetNextId(),
-                //        " مدیر امور بازرسی", "TechnicalManager");
-                //jobRep.AddJob(job2);
-                //jobList.Add(job2);
-
-
+                AdminMigrationUtility.CreateJob(jobRep, "شغل سازمان", "OrganozationJob");
 
                 #endregion
 
@@ -138,17 +114,10 @@ namespace MITD.PMS.Persistence
 
                 #region JobPositions Creation
 
-                //for (int i = 1; i < 6; i++)
-                //{
-                //    var jobPosition = new PMSAdmin.Domain.Model.JobPositions.JobPosition(jobPositionRep.GetNextId(),
-                //        " بازرس فنی" + i, "TechnicalInspector" + i);
-                //    jobPositionRep.Add(jobPosition);
-                //    jobPositionList.Add(jobPosition);
-                //}
-
-                //technicalManagerJobPosition = new PMSAdmin.Domain.Model.JobPositions.JobPosition(jobPositionRep.GetNextId(),
-                //        "  مدیر امور فنی", "TechnicalInspectorJobPosition");
-                //jobPositionRep.Add(technicalManagerJobPosition);
+                AdminMigrationUtility.CreateJobPosition(jobPositionRep, "تحویل و ترخیص", "DeleiveryAndClearance");
+                AdminMigrationUtility.CreateJobPosition(jobPositionRep, "ثبت و طبقه بندی اسناد و مدارک", "RecordedAndClassifiedDocuments");
+                AdminMigrationUtility.CreateJobPosition(jobPositionRep, "پشتیبانی و خدمات", "SupportAndServices");
+                AdminMigrationUtility.CreateJobPosition(jobPositionRep, "مسئول انبار", "InventoryClerk");               
 
                 #endregion
 
@@ -157,33 +126,19 @@ namespace MITD.PMS.Persistence
 
                 #region JobIndexes Creation
 
-                //var jobIndexCategory = new PMSAdmin.Domain.Model.JobIndices.JobIndexCategory(jobIndexRep.GetNextId(), null, "دسته شاخص فنی", "TechnicalJobIndexCategory");
-                //jobIndexRep.Add(jobIndexCategory);
+                AdminMigrationUtility.CreateJobIndex(jobIndexRep, "سخت کوشی", "HardWorking", behaviouralGroupStr);
+                AdminMigrationUtility.CreateJobIndex(jobIndexRep, "نظم و ترتیب", "clarity", behaviouralGroupStr);
+                AdminMigrationUtility.CreateJobIndex(jobIndexRep, "مشارکت برنامه های راهبردی", "PartnershipOfStrategicPlans", performanceGroupStr);
+                AdminMigrationUtility.CreateJobIndex(jobIndexRep, "مشارکت برنامه های عملیاتی", "PartnershipOfOperationalPlans", performanceGroupStr);
+                AdminMigrationUtility.CreateJobIndex(jobIndexRep, "بهره گیری از سیستم اتوماسیون", "utilizationFromAutomation", performanceGroupStr);
 
-                //var jobIndex1 = new PMSAdmin.Domain.Model.JobIndices.JobIndex(jobIndexRep.GetNextId(), jobIndexCategory,
-                //        "فرهنگ و تعهد سازمانی", "OrganizationalCultureAndCommitment");
-                //jobIndex1.AssignCustomFields(jobIndexCftList);
-                //jobIndexRep.Add(jobIndex1);
-                //GenralJobIndexList.Add(new PeriodTest.JobindexDes { JobIndex = jobIndex1, Importance = "7", IsInquirable = true });
-
-             
-
-                #endregion
-
-                
+                #endregion              
 
                 var policyRep = new PMSAdmin.Persistence.NH.PolicyRepository(uow);
 
                 #region Policy Creation
-                ////policy = new PMSAdmin.Domain.Model.Policies.RuleEngineBasedPolicy(policyRep.GetNextId(),
-                ////        " خظ کش پرتر", "PorterRulerPolicy");
-                ////policyRep.Add(policy);
-                ////foreach (var rule in rules)
-                ////{
-                ////    policy.AssignRule(rule);
-                ////}
 
-                ////policy.AssignRuleFunction(rf);
+                AdminMigrationUtility.CreatePolicy(policyRep,"روش دفتر برنامه ها و روش ها","MethodsAndPlanOfficePolicy");
 
                 #endregion
 
@@ -196,23 +151,31 @@ namespace MITD.PMS.Persistence
             #region PMS
 
             uows = new MITD.Domain.Repository.UnitOfWorkScope(
-                new Data.NH.NHUnitOfWorkFactory(() => PMS.Persistence.NH.PMSSession.GetSession()));
+                new NHUnitOfWorkFactory(() => PMSSession.GetSession()));
 
             using (var uow = uows.CurrentUnitOfWork as NHUnitOfWork)
             {
                 var periodRep = new PeriodRepository(uow);
-                var periodManagerService = new PeriodManagerService(periodRep, null, null, null, null, null, null, null, null);
+
                 #region Period creation
 
-                //period = new Period(new PeriodId(periodRep.GetNextId()), Guid.NewGuid().ToString(), DateTime.Now, DateTime.Now);
-                //period.ChangeActiveStatus(periodManagerService, true);
-                //periodRep.Add(period);
+                PMSMigrationUtility.CreatePeriod(periodRep,"دوره آذر",DateTime.Now, DateTime.Now);
 
                 #endregion
 
-                var jobIndexRep = new PMS.Persistence.NH.JobIndexRepository(uow);
+                var jobIndexRep = new JobIndexRepository(uow);
 
                 #region JobIndex Creation
+
+                var behaviouralGroup = PMSMigrationUtility.CreateJobIndexGroup(jobIndexRep, "گروه رفتاری",
+                    "BehaviouralGroup");
+                var performanceGroup = PMSMigrationUtility.CreateJobIndexGroup(jobIndexRep, "گروه عملکردی",
+                    "PerformanceGroup");
+
+                foreach (var jobIndex in AdminMigrationUtility.JobIndices)
+                {
+                    //PMSMigrationUtility.CreateJobIndex(jobIndexRep,);
+                }
 
                 //var jobIndexGroupGenaral = new PMS.Domain.Model.JobIndices.JobIndexGroup(jobIndexRep.GetNextId(), period, null,
                 //    "گروه شاخص های عمومی", "General");
