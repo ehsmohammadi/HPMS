@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Linq;
 using FluentMigrator;
 using MITD.Data.NH;
 using MITD.PMS.Persistence.NH;
 using MITD.PMS.Domain.Service;
+using MITD.PMSAdmin.Domain.Model.CustomFieldTypes;
 
 namespace MITD.PMS.Persistence
 {
@@ -167,82 +169,97 @@ namespace MITD.PMS.Persistence
 
                 #region JobIndex Creation
 
-                var behaviouralGroup = PMSMigrationUtility.CreateJobIndexGroup(jobIndexRep, "گروه رفتاری",
+                var behaviouralGroup = PMSMigrationUtility.CreateJobIndexGroup(jobIndexRep, "گروه شاخص های رفتاری",
                     "BehaviouralGroup");
-                var performanceGroup = PMSMigrationUtility.CreateJobIndexGroup(jobIndexRep, "گروه عملکردی",
+                var performanceGroup = PMSMigrationUtility.CreateJobIndexGroup(jobIndexRep, "گروه شاخص های عملکردی",
                     "PerformanceGroup");
 
+                var value = 3;
                 foreach (var jobIndex in AdminMigrationUtility.JobIndices)
                 {
-                    //PMSMigrationUtility.CreateJobIndex(jobIndexRep,);
+                    if (jobIndex.Value == behaviouralGroupStr)
+                    {
+                        var cftDic =
+                            AdminMigrationUtility.DefinedCustomFields.Where(d => jobIndex.Key.CustomFieldTypeIdList.Contains(d.Id))
+                                .ToDictionary(c => c, c => "1");
+                        PMSMigrationUtility.CreateJobIndex(jobIndexRep, jobIndex.Key, behaviouralGroup, true, cftDic);
+                    }
+                    if (jobIndex.Value == performanceGroupStr)
+                    {
+                        var cftDic =
+                            AdminMigrationUtility.DefinedCustomFields.Where(d => jobIndex.Key.CustomFieldTypeIdList.Contains(d.Id))
+                                .ToDictionary(c => c, c => value.ToString());
+                        PMSMigrationUtility.CreateJobIndex(jobIndexRep, jobIndex.Key, performanceGroup, true, cftDic);
+                        value--;
+                    }
                 }
 
-                //var jobIndexGroupGenaral = new PMS.Domain.Model.JobIndices.JobIndexGroup(jobIndexRep.GetNextId(), period, null,
-                //    "گروه شاخص های عمومی", "General");
-                //jobIndexRep.Add(jobIndexGroupGenaral);
-                
 
-                //foreach (var itm in GenralJobIndexList)
-                //{
 
-                //    var sharedJobIndex =
-                //        new PMS.Domain.Model.JobIndices.SharedJobIndex(
-                //            new PMS.Domain.Model.JobIndices.SharedJobIndexId(itm.JobIndex.Id.Id), itm.JobIndex.Name,
-                //            itm.JobIndex.DictionaryName);
-                //    var jobIndex = new PMS.Domain.Model.JobIndices.JobIndex(jobIndexRep.GetNextId(), period,
-                //        sharedJobIndex, jobIndexGroupGenaral, itm.IsInquirable);
-
-                //    var dicSharedCutomField = jobIndexCftList
-                //        .Where(j => itm.JobIndex.CustomFieldTypeIdList.Select(i => i.Id).Contains(j.Id.Id)).Select(p =>
-                //            new PMS.Domain.Model.JobIndices.SharedJobIndexCustomField(
-                //                new PMS.Domain.Model.JobIndices.SharedJobIndexCustomFieldId(p.Id.Id), p.Name,
-                //                p.DictionaryName,
-                //                p.MinValue, p.MaxValue)).ToDictionary(s => s, s => s.DictionaryName == "Importance" ? itm.Importance : string.Empty);
-
-                //    jobIndex.UpdateCustomFields(dicSharedCutomField);
-                //    jobIndexInPeriodList.Add(jobIndex);
-                //    jobIndexRep.Add(jobIndex);
-
-                //}
-
-              
-                #endregion
-
-                var jobRep = new PMS.Persistence.NH.JobRepository(uow);
-
-                #region Job creation
-
-                //foreach (var pmsAdminJob in jobList)
-                //{
-                //    var jobJobIndices = jobIndexInPeriodList.Select(jobIndex => new JobJobIndex(jobIndex.Id, true, true, true)).ToList();
-                //    if (pmsAdminJob.DictionaryName == "TechnicalManager")
-                //        jobJobIndices = new List<JobJobIndex>();
-
-                //    var job = new PMS.Domain.Model.Jobs.Job(period, new PMS.Domain.Model.Jobs.SharedJob(
-                //        new PMS.Domain.Model.Jobs.SharedJobId(pmsAdminJob.Id.Id), pmsAdminJob.Name, pmsAdminJob.DictionaryName), jobCftList
-                //        .Where(j => pmsAdminJob.CustomFieldTypeIdList.Select(i => i.Id)
-                //            .Contains(j.Id.Id)).Select(p =>
-                //                new PMS.Domain.Model.Jobs.JobCustomField(new PMS.Domain.Model.Jobs.JobCustomFieldId(period.Id, new SharedJobCustomFieldId(p.Id.Id), new SharedJobId(pmsAdminJob.Id.Id))
-                //                    , new SharedJobCustomField(new SharedJobCustomFieldId(p.Id.Id), p.Name, p.DictionaryName, p.MinValue, p.MaxValue, p.TypeId))).ToList(), jobJobIndices);
-                //    jobInPeriodList.Add(job);
-                //    jobRep.Add(job);
-                //}
 
                 #endregion
 
-                var unitRep = new PMS.Persistence.NH.UnitRepository(uow);
+                //var jobRep = new JobRepository(uow);
 
-                #region Unit Creation
+                //#region Job creation
 
-                //foreach (var pmsAdminUnit in unitList)
+                //foreach (var job in AdminMigrationUtility.Jobs)
                 //{
-                //    var unit = new PMS.Domain.Model.Units.Unit(period, new PMS.Domain.Model.Units.SharedUnit(
-                //        new PMS.Domain.Model.Units.SharedUnitId(pmsAdminUnit.Id.Id), pmsAdminUnit.Name, pmsAdminUnit.DictionaryName), null);
-                //    unitInPeriodList.Add(unit);
-                //    unitRep.Add(unit);
+                //    PMSMigrationUtility.CreateJob(jobRep,job);
                 //}
 
-                #endregion
+                //#endregion
+
+                //var unitIndexRep = new UnitIndexRepository(uow);
+
+                //#region UnitIndex Creation
+                ////todo : meghdar zarib ahmiyat ha eshtebah ast 
+                //var unitGroup = PMSMigrationUtility.CreateUnitIndexGroup(unitIndexRep, "گروه شاخص های سازمانی","OrganizationUnitGroup");
+
+                //foreach (var unitIndex in AdminMigrationUtility.UnitIndices)
+                //{
+                //        var cftDic =
+                //            AdminMigrationUtility.DefinedCustomFields.Where(d => unitIndex.CustomFieldTypeIdList.Contains(d.Id))
+                //                .ToDictionary(c => c, c => "10");
+                //       PMSMigrationUtility.CreateUnitIndex(unitIndexRep, unitIndex, unitGroup, true, cftDic);
+
+                //}
+
+                //#endregion
+
+                //var unitRep = new UnitRepository(uow);
+
+                //#region Unit Creation
+
+                //var adminUnitChairManDepartment = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "ChairManDepartment");
+                //PMSMigrationUtility.CreateUnit(unitRep, adminUnitChairManDepartment, null);
+
+                //var adminUnitContinerTransportationCompany = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "ContinerTransportationCompany");
+                //PMSMigrationUtility.CreateUnit(unitRep, adminUnitContinerTransportationCompany, null);
+
+                //var adminUnitBulkTransportationCompany = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "BulkTransportationCompany");
+                //PMSMigrationUtility.CreateUnit(unitRep, adminUnitBulkTransportationCompany, null);
+
+                //var adminUnitFinancialDepartment = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "FinancialDepartment");
+                //PMSMigrationUtility.CreateUnit(unitRep, adminUnitFinancialDepartment, null);
+
+                //var adminUnitAdministrativeDepartment = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "AdministrativeDepartment");
+                //var parent=PMSMigrationUtility.CreateUnit(unitRep, adminUnitAdministrativeDepartment, null);
+
+                //var adminUnitOfficeOrganization = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "OfficeOrganization");
+                //PMSMigrationUtility.CreateUnit(unitRep, adminUnitOfficeOrganization, parent);
+
+                //var adminUnitPersonnelDepartment = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "PersonnelDepartment");
+                //PMSMigrationUtility.CreateUnit(unitRep, adminUnitPersonnelDepartment, parent);
+
+                //var adminUnitSupportDepartment = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "SupportDepartment");
+                //PMSMigrationUtility.CreateUnit(unitRep, adminUnitSupportDepartment, parent);
+
+                //var adminUnitPhysicalEducationOffice = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "PhysicalEducationOffice");
+                //PMSMigrationUtility.CreateUnit(unitRep, adminUnitPhysicalEducationOffice, parent);
+
+
+                //#endregion
 
                 var jobPositionRep = new PMS.Persistence.NH.JobPositionRepository(uow);
 

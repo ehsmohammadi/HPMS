@@ -15,6 +15,8 @@ namespace MITD.PMS.Persistence
     public static class PMSMigrationUtility
     {
         public static Period Period;
+        private static List<JobIndex> jobIndices=new List<JobIndex>();
+        private static List<UnitIndex> unitIndices = new List<UnitIndex>(); 
 
         public static void CreatePeriod(IPeriodRepository periodRepository, string name, DateTime from,DateTime to)
         {
@@ -27,67 +29,92 @@ namespace MITD.PMS.Persistence
 
         public static JobIndexGroup CreateJobIndexGroup(IJobIndexRepository jobIndexRepository, string name, string dictionaryName)
         {
-            //if (jobIndexCategory == null)
-            //{
-            //    jobIndexCategory = new JobIndexCategory(jobIndexRepository.GetNextId(), null, "شاخص های شغل/فردی",
-            //        "JobIndices");
-            //    jobIndexRepository.Add(jobIndexCategory);
-            //}
-
-            //var jobIndex = new JobIndex(jobIndexRepository.GetNextId(), jobIndexCategory,
-            //        name, dictionaryName);
-            // jobIndex.AssignCustomFields(DefinedCustomFields.Where(dc => dc.EntityId == EntityTypeEnum.JobIndex).ToList());
-            //jobIndexRepository.Add(jobIndex);
-            // GenralJobIndexList.Add(new UnitindexDes { JobIndex = jobIndex1, Importance = "7", IsInquirable = true });
             var jobIndexGroup=new JobIndexGroup(jobIndexRepository.GetNextId(),Period,null,name,dictionaryName);
             return jobIndexGroup;
         }
 
         public static void CreateJobIndex(IJobIndexRepository jobIndexRepository, PMSAdmin.Domain.Model.JobIndices.JobIndex adminJobIndex,
-            JobIndexGroup jobIndexGroup, bool isInquireable)
+            JobIndexGroup jobIndexGroup, bool isInquireable,Dictionary<PMSAdmin.Domain.Model.CustomFieldTypes.CustomFieldType,string> customFieldsDictionary)
         {
             var sharedJobIndex = new SharedJobIndex(new SharedJobIndexId(adminJobIndex.Id.Id), adminJobIndex.Name,
                 adminJobIndex.DictionaryName);
             var jobIndex = new JobIndex(jobIndexRepository.GetNextId(), Period, sharedJobIndex, jobIndexGroup,
                 isInquireable);
+            var sharedCustomFieldsDic =
+                customFieldsDictionary.ToDictionary(
+                    c =>
+                        new SharedJobIndexCustomField(new SharedJobIndexCustomFieldId(c.Key.Id.Id), c.Key.Name,
+                            c.Key.DictionaryName, c.Key.MinValue, c.Key.MaxValue),
+                    c => c.Value);
+            jobIndex.UpdateCustomFields(sharedCustomFieldsDic);
             jobIndexRepository.Add(jobIndex);
+            jobIndices.Add(jobIndex);
+
 
         }
 
-        public static void CreateUnit(IUnitRepository unitRepository, string name, string dictionaryName)
+        public static void CreateJob(IJobRepository jobRepository,PMSAdmin.Domain.Model.Jobs.Job adminJob )
         {
-            //var unit = new Unit(unitRepository.GetNextId(),
-            //            name, dictionaryName);
-            //unit.AssignCustomFields(DefinedCustomFields.Where(dc => dc.EntityId == EntityTypeEnum.Unit).ToList());
-            //unitRepository.Add(unit);
-            //unitList.Add(unit);
+            var jobCustomFields =
+                AdminMigrationUtility.DefinedCustomFields.Where(d => adminJob.CustomFieldTypeIdList.Contains(d.Id))
+                    .Select(
+                        c =>
+                            new JobCustomField(
+                                new JobCustomFieldId(Period.Id, new SharedJobCustomFieldId(c.Id.Id),
+                                    new SharedJobId(adminJob.Id.Id)),
+                                new SharedJobCustomField(new SharedJobCustomFieldId(c.Id.Id), c.Name, c.DictionaryName,
+                                    c.MinValue, c.MaxValue, c.TypeId))).ToList();
+            var jobJobIndices = jobIndices.Select(j => new JobJobIndex(j.Id, true, true, true)).ToList();
+            var job = new Job(Period, new SharedJob(new SharedJobId(adminJob.Id.Id), adminJob.Name, adminJob.DictionaryName), jobCustomFields, jobJobIndices);
+            jobRepository.Add(job);
+            
+
         }
 
-        public static void CreateUnitIndex(IUnitIndexRepository unitIndexRepository, string name, string dictionaryName)
+        public static UnitIndexGroup CreateUnitIndexGroup(IUnitIndexRepository unitIndexRepository, string name, string dictionaryName)
         {
-            //if (unitIndexCategory == null)
-            //{
-            //    unitIndexCategory = new UnitIndexCategory(unitIndexRepository.GetNextId(), null, "شاخص های سازمانی",
-            //        "UnitIndices");
-            //    unitIndexRepository.Add(unitIndexCategory);
-            //}
-
-            //var unitIndex = new UnitIndex(unitIndexRepository.GetNextId(), unitIndexCategory,
-            //        name, dictionaryName);
-            //unitIndex.AssignCustomFields(DefinedCustomFields.Where(dc => dc.EntityId == EntityTypeEnum.UnitIndex).ToList());
-            //unitIndexRepository.Add(unitIndex);
-            // GenralUnitIndexList.Add(new UnitindexDes { UnitIndex = jobIndex1, Importance = "7", IsInquirable = true });
+            var unitIndexGroup = new UnitIndexGroup(unitIndexRepository.GetNextId(), Period, null, name, dictionaryName);
+            return unitIndexGroup;
         }
 
-        public static void CreateJob(IJobRepository jobRepository, string name, string dictionaryName)
+        public static void CreateUnitIndex(IUnitIndexRepository unitIndexRepository, PMSAdmin.Domain.Model.UnitIndices.UnitIndex adminUnitIndex,
+            UnitIndexGroup unitIndexGroup, bool isInquireable, Dictionary<PMSAdmin.Domain.Model.CustomFieldTypes.CustomFieldType, string> customFieldsDictionary)
         {
-            //var job = new Job(jobRepository.GetNextId(),name, dictionaryName);
-           // job.AssignCustomFields(DefinedCustomFields.Where(dc => dc.EntityId.Equals(EntityTypeEnum.Job)).ToList());
-            //jobRepository.Add(job);
-            // GenralUnitIndexList.Add(new UnitindexDes { UnitIndex = jobIndex1, Importance = "7", IsInquirable = true });
+            var sharedUnitIndex = new SharedUnitIndex(new SharedUnitIndexId(adminUnitIndex.Id.Id), adminUnitIndex.Name,
+                adminUnitIndex.DictionaryName);
+            var unitIndex = new UnitIndex(unitIndexRepository.GetNextId(), Period, sharedUnitIndex, unitIndexGroup,
+                isInquireable);
+            var sharedCustomFieldsDic =
+                customFieldsDictionary.ToDictionary(
+                    c =>
+                        new SharedUnitIndexCustomField(new SharedUnitIndexCustomFieldId(c.Key.Id.Id), c.Key.Name,
+                            c.Key.DictionaryName, c.Key.MinValue, c.Key.MaxValue),
+                    c => c.Value);
+            unitIndex.UpdateCustomFields(sharedCustomFieldsDic);
+            unitIndexRepository.Add(unitIndex);
+            unitIndices.Add(unitIndex);
+
+
         }
 
-        
+        public static Unit CreateUnit(IUnitRepository unitRepository, PMSAdmin.Domain.Model.Units.Unit adminUnit,Unit parentUnit)
+        {
+            var unitCustomFields =
+                AdminMigrationUtility.DefinedCustomFields.Where(d => adminUnit.CustomFieldTypeIdList.Contains(d.Id))
+                    .Select(
+                        c =>
+                            new UnitCustomField(
+                                new UnitCustomFieldId(Period.Id, new SharedUnitCustomFieldId(c.Id.Id),
+                                    new SharedUnitId(adminUnit.Id.Id)),
+                                new SharedUnitCustomField(new SharedUnitCustomFieldId(c.Id.Id), c.Name, c.DictionaryName,
+                                    c.MinValue, c.MaxValue, c.TypeId))).ToList();
+            var unitUnitIndices = unitIndices.Select(j => new UnitUnitIndex(j.Id, true, true, true)).ToList();
+            var unit = new Unit(Period, new SharedUnit(new SharedUnitId(adminUnit.Id.Id), adminUnit.Name, adminUnit.DictionaryName), unitCustomFields, unitUnitIndices,parentUnit);
+            unitRepository.Add(unit);
+            return unit;
+        }
+
+       
 
         public static void CreateJobPosition(IJobPositionRepository jobPositionRepository, string name, string dictionaryName)
         {

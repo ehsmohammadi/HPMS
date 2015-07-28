@@ -14,7 +14,9 @@ namespace MITD.PMS.Persistence
     {
         public static List<CustomFieldType> DefinedCustomFields =new List<CustomFieldType>();
         public static List<UnitIndex> UnitIndices=new List<UnitIndex>();
-        public static Dictionary<string,JobIndex> JobIndices=new Dictionary<string, JobIndex>();
+        public static Dictionary<JobIndex, string> JobIndices = new Dictionary<JobIndex, string>();
+        public static List<Job> Jobs=new List<Job>();
+        public static List<Unit> Units = new List<Unit>(); 
  
         private static UnitIndexCategory unitIndexCategory;
         private static JobIndexCategory jobIndexCategory;
@@ -35,7 +37,7 @@ namespace MITD.PMS.Persistence
                         name, dictionaryName);
             unit.AssignCustomFields(DefinedCustomFields.Where(dc => dc.EntityId == EntityTypeEnum.Unit).ToList());
             unitRepository.Add(unit);
-            //unitList.Add(unit);
+            Units.Add(unit);
         }
 
         public static void CreateUnitIndex(IUnitIndexRepository unitIndexRepository, string name, string dictionaryName)
@@ -59,7 +61,7 @@ namespace MITD.PMS.Persistence
             var job = new Job(jobRepository.GetNextId(),name, dictionaryName);
             job.AssignCustomFields(DefinedCustomFields.Where(dc => dc.EntityId.Equals(EntityTypeEnum.Job)).ToList());
             jobRepository.AddJob(job);
-            // GenralUnitIndexList.Add(new UnitindexDes { UnitIndex = jobIndex1, Importance = "7", IsInquirable = true });
+            Jobs.Add(job);
         }
 
 
@@ -77,7 +79,7 @@ namespace MITD.PMS.Persistence
                     name, dictionaryName);
             jobIndex.AssignCustomFields(DefinedCustomFields.Where(dc => dc.EntityId == EntityTypeEnum.JobIndex).ToList());
             jobIndexRepository.Add(jobIndex);
-            JobIndices.Add(group,jobIndex);
+            JobIndices.Add(jobIndex, group);
         }
 
         public static void CreateJobPosition(IJobPositionRepository jobPositionRepository, string name, string dictionaryName)
