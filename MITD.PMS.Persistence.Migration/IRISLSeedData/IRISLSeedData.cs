@@ -115,11 +115,19 @@ namespace MITD.PMS.Persistence
                 var jobPositionRep = new PMSAdmin.Persistence.NH.JobPositionRepository(uow);
 
                 #region JobPositions Creation
+                AdminMigrationUtility.CreateJobPosition(jobPositionRep, "مدیر امور پشتیبانی", "SupportDepartmentManager");
 
-                AdminMigrationUtility.CreateJobPosition(jobPositionRep, "تحویل و ترخیص", "DeleiveryAndClearance");
-                AdminMigrationUtility.CreateJobPosition(jobPositionRep, "ثبت و طبقه بندی اسناد و مدارک", "RecordedAndClassifiedDocuments");
-                AdminMigrationUtility.CreateJobPosition(jobPositionRep, "پشتیبانی و خدمات", "SupportAndServices");
-                AdminMigrationUtility.CreateJobPosition(jobPositionRep, "مسئول انبار", "InventoryClerk");               
+                AdminMigrationUtility.CreateJobPosition(jobPositionRep, "مدیر واحد تحویل و ترخیص", "DeleiveryAndClearanceManager");
+                AdminMigrationUtility.CreateJobPosition(jobPositionRep, "کارمند واحد تحویل و ترخیص", "DeleiveryAndClearanceEmployee");
+
+                AdminMigrationUtility.CreateJobPosition(jobPositionRep, "مدیر واحد ثبت و طبقه بندی اسناد و مدارک", "RecordedAndClassifiedDocumentsManager");
+                AdminMigrationUtility.CreateJobPosition(jobPositionRep, "کارمند واحد ثبت و طبقه بندی اسناد و مدارک", "RecordedAndClassifiedDocumentsEmployee");
+
+                AdminMigrationUtility.CreateJobPosition(jobPositionRep, "مدیر واحد پشتیبانی و خدمات", "SupportAndServicesManager");
+                AdminMigrationUtility.CreateJobPosition(jobPositionRep, "کارمند واحد پشتیبانی و خدمات", "SupportAndServicesEmployee");
+
+                AdminMigrationUtility.CreateJobPosition(jobPositionRep, "مدیر انبار", "InventoryManager");
+                AdminMigrationUtility.CreateJobPosition(jobPositionRep, "مسئول انبار", "InventoryClerk"); 
 
                 #endregion
 
@@ -199,93 +207,110 @@ namespace MITD.PMS.Persistence
 
                 #endregion
 
-                //var jobRep = new JobRepository(uow);
+                var jobRep = new JobRepository(uow);
 
-                //#region Job creation
+                #region Job creation
 
-                //foreach (var job in AdminMigrationUtility.Jobs)
-                //{
-                //    PMSMigrationUtility.CreateJob(jobRep,job);
-                //}
+                foreach (var job in AdminMigrationUtility.Jobs)
+                {
+                    PMSMigrationUtility.CreateJob(jobRep, job);
+                }
 
-                //#endregion
+                #endregion
 
-                //var unitIndexRep = new UnitIndexRepository(uow);
+                var unitIndexRep = new UnitIndexRepository(uow);
 
-                //#region UnitIndex Creation
-                ////todo : meghdar zarib ahmiyat ha eshtebah ast 
-                //var unitGroup = PMSMigrationUtility.CreateUnitIndexGroup(unitIndexRep, "گروه شاخص های سازمانی","OrganizationUnitGroup");
+                #region UnitIndex Creation
+                //todo : meghdar zarib ahmiyat ha eshtebah ast 
+                var unitGroup = PMSMigrationUtility.CreateUnitIndexGroup(unitIndexRep, "گروه شاخص های سازمانی", "OrganizationUnitGroup");
 
-                //foreach (var unitIndex in AdminMigrationUtility.UnitIndices)
-                //{
-                //        var cftDic =
-                //            AdminMigrationUtility.DefinedCustomFields.Where(d => unitIndex.CustomFieldTypeIdList.Contains(d.Id))
-                //                .ToDictionary(c => c, c => "10");
-                //       PMSMigrationUtility.CreateUnitIndex(unitIndexRep, unitIndex, unitGroup, true, cftDic);
+                foreach (var unitIndex in AdminMigrationUtility.UnitIndices)
+                {
+                    var cftDic =
+                        AdminMigrationUtility.DefinedCustomFields.Where(d => unitIndex.CustomFieldTypeIdList.Contains(d.Id))
+                            .ToDictionary(c => c, c => "10");
+                    PMSMigrationUtility.CreateUnitIndex(unitIndexRep, unitIndex, unitGroup, true, cftDic);
 
-                //}
+                }
 
-                //#endregion
+                #endregion
 
-                //var unitRep = new UnitRepository(uow);
+                var unitRep = new UnitRepository(uow);
 
-                //#region Unit Creation
+                #region Unit Creation
 
-                //var adminUnitChairManDepartment = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "ChairManDepartment");
-                //PMSMigrationUtility.CreateUnit(unitRep, adminUnitChairManDepartment, null);
+                var adminUnitChairManDepartment = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "ChairManDepartment");
+                PMSMigrationUtility.CreateUnit(unitRep, adminUnitChairManDepartment, null);
 
-                //var adminUnitContinerTransportationCompany = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "ContinerTransportationCompany");
-                //PMSMigrationUtility.CreateUnit(unitRep, adminUnitContinerTransportationCompany, null);
+                var adminUnitContinerTransportationCompany = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "ContinerTransportationCompany");
+                PMSMigrationUtility.CreateUnit(unitRep, adminUnitContinerTransportationCompany, null);
 
-                //var adminUnitBulkTransportationCompany = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "BulkTransportationCompany");
-                //PMSMigrationUtility.CreateUnit(unitRep, adminUnitBulkTransportationCompany, null);
+                var adminUnitBulkTransportationCompany = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "BulkTransportationCompany");
+                PMSMigrationUtility.CreateUnit(unitRep, adminUnitBulkTransportationCompany, null);
 
-                //var adminUnitFinancialDepartment = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "FinancialDepartment");
-                //PMSMigrationUtility.CreateUnit(unitRep, adminUnitFinancialDepartment, null);
+                var adminUnitFinancialDepartment = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "FinancialDepartment");
+                PMSMigrationUtility.CreateUnit(unitRep, adminUnitFinancialDepartment, null);
 
-                //var adminUnitAdministrativeDepartment = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "AdministrativeDepartment");
-                //var parent=PMSMigrationUtility.CreateUnit(unitRep, adminUnitAdministrativeDepartment, null);
+                var adminUnitAdministrativeDepartment = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "AdministrativeDepartment");
+                var parent = PMSMigrationUtility.CreateUnit(unitRep, adminUnitAdministrativeDepartment, null);
 
-                //var adminUnitOfficeOrganization = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "OfficeOrganization");
-                //PMSMigrationUtility.CreateUnit(unitRep, adminUnitOfficeOrganization, parent);
+                var adminUnitOfficeOrganization = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "OfficeOrganization");
+                PMSMigrationUtility.CreateUnit(unitRep, adminUnitOfficeOrganization, parent);
 
-                //var adminUnitPersonnelDepartment = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "PersonnelDepartment");
-                //PMSMigrationUtility.CreateUnit(unitRep, adminUnitPersonnelDepartment, parent);
+                var adminUnitPersonnelDepartment = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "PersonnelDepartment");
+                PMSMigrationUtility.CreateUnit(unitRep, adminUnitPersonnelDepartment, parent);
 
-                //var adminUnitSupportDepartment = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "SupportDepartment");
-                //PMSMigrationUtility.CreateUnit(unitRep, adminUnitSupportDepartment, parent);
+                var adminUnitSupportDepartment = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "SupportDepartment");
+                PMSMigrationUtility.CreateUnit(unitRep, adminUnitSupportDepartment, parent);
 
-                //var adminUnitPhysicalEducationOffice = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "PhysicalEducationOffice");
-                //PMSMigrationUtility.CreateUnit(unitRep, adminUnitPhysicalEducationOffice, parent);
+                var adminUnitPhysicalEducationOffice = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "PhysicalEducationOffice");
+                PMSMigrationUtility.CreateUnit(unitRep, adminUnitPhysicalEducationOffice, parent);
 
 
-                //#endregion
+                #endregion
 
-                var jobPositionRep = new PMS.Persistence.NH.JobPositionRepository(uow);
+                var jobPositionRep = new JobPositionRepository(uow);
 
                 #region JobPosition Creation
 
-                //var jpIndex = 0;
-                //var jobPositionParent = new PMS.Domain.Model.JobPositions.JobPosition(period,
-                //        new Domain.Model.JobPositions.SharedJobPosition(new Domain.Model.JobPositions.SharedJobPositionId(technicalManagerJobPosition.Id.Id), technicalManagerJobPosition.Name, technicalManagerJobPosition.DictionaryName)
-                //        , null,
-                //        jobInPeriodList.Single(j => j.DictionaryName == "TechnicalManager"),
-                //        unitInPeriodList.First()
-                //        );
-                //jobPositionInPeriodList.Add(jobPositionParent);
-                //jobPositionRep.Add(jobPositionParent);
-                //foreach (var pmsAdminJobPosition in jobPositionList.Where(j => j.DictionaryName != "TechnicalInspectorJobPosition").ToList())
-                //{
-                //    var jobPosition = new PMS.Domain.Model.JobPositions.JobPosition(period,
-                //        new Domain.Model.JobPositions.SharedJobPosition(new Domain.Model.JobPositions.SharedJobPositionId(pmsAdminJobPosition.Id.Id), pmsAdminJobPosition.Name, pmsAdminJobPosition.DictionaryName)
-                //        , jobPositionParent,
-                //        jobInPeriodList.First(),
-                //        unitInPeriodList[jpIndex]
-                //        );
-                //    jobPositionInPeriodList.Add(jobPosition);
-                //    jobPositionRep.Add(jobPosition);
-                //    jpIndex++;
-                //}
+                var supportDepartmentManager = PMSMigrationUtility.CreateJobPosition(jobPositionRep,
+                    AdminMigrationUtility.JobPositions.Single(j => j.DictionaryName == "SupportDepartmentManager"), null,
+                    PMSMigrationUtility.Jobs.First(), PMSMigrationUtility.Units.Single(u => u.DictionaryName == "SupportDepartment"));
+
+                var deleiveryAndClearanceManager = PMSMigrationUtility.CreateJobPosition(jobPositionRep,
+                    AdminMigrationUtility.JobPositions.Single(j => j.DictionaryName == "DeleiveryAndClearanceManager"), supportDepartmentManager,
+                    PMSMigrationUtility.Jobs.First(), PMSMigrationUtility.Units.Single(u => u.DictionaryName == "SupportDepartment"));
+
+                PMSMigrationUtility.CreateJobPosition(jobPositionRep,
+                    AdminMigrationUtility.JobPositions.Single(j => j.DictionaryName == "DeleiveryAndClearanceEmployee"), deleiveryAndClearanceManager,
+                    PMSMigrationUtility.Jobs.First(), PMSMigrationUtility.Units.Single(u => u.DictionaryName == "SupportDepartment"));
+
+
+                var recordedAndClassifiedDocumentsManager = PMSMigrationUtility.CreateJobPosition(jobPositionRep,
+                    AdminMigrationUtility.JobPositions.Single(j => j.DictionaryName == "RecordedAndClassifiedDocumentsManager"), supportDepartmentManager,
+                    PMSMigrationUtility.Jobs.First(), PMSMigrationUtility.Units.Single(u => u.DictionaryName == "SupportDepartment"));
+
+                PMSMigrationUtility.CreateJobPosition(jobPositionRep,
+                    AdminMigrationUtility.JobPositions.Single(j => j.DictionaryName == "RecordedAndClassifiedDocumentsEmployee"), recordedAndClassifiedDocumentsManager,
+                    PMSMigrationUtility.Jobs.First(), PMSMigrationUtility.Units.Single(u => u.DictionaryName == "SupportDepartment"));
+
+
+                var supportAndServicesManager = PMSMigrationUtility.CreateJobPosition(jobPositionRep,
+                    AdminMigrationUtility.JobPositions.Single(j => j.DictionaryName == "SupportAndServicesManager"), supportDepartmentManager,
+                    PMSMigrationUtility.Jobs.First(), PMSMigrationUtility.Units.Single(u => u.DictionaryName == "SupportDepartment"));
+
+                PMSMigrationUtility.CreateJobPosition(jobPositionRep,
+                    AdminMigrationUtility.JobPositions.Single(j => j.DictionaryName == "SupportAndServicesEmployee"), supportAndServicesManager,
+                    PMSMigrationUtility.Jobs.First(), PMSMigrationUtility.Units.Single(u => u.DictionaryName == "SupportDepartment"));
+
+                var inventoryManager = PMSMigrationUtility.CreateJobPosition(jobPositionRep,
+                    AdminMigrationUtility.JobPositions.Single(j => j.DictionaryName == "InventoryManager"), supportDepartmentManager,
+                    PMSMigrationUtility.Jobs.First(), PMSMigrationUtility.Units.Single(u => u.DictionaryName == "SupportDepartment"));
+
+                PMSMigrationUtility.CreateJobPosition(jobPositionRep,
+                    AdminMigrationUtility.JobPositions.Single(j => j.DictionaryName == "InventoryClerk"), inventoryManager,
+                    PMSMigrationUtility.Jobs.First(), PMSMigrationUtility.Units.Single(u => u.DictionaryName == "SupportDepartment"));
+
 
                 #endregion
 
@@ -293,156 +318,22 @@ namespace MITD.PMS.Persistence
 
                 #region Employee Creation
 
+                PMSMigrationUtility.CreateEmployee(employeeRep, "100000", "مدیر", "مدیریان");
+
+                PMSMigrationUtility.CreateEmployee(employeeRep, "652547", "مجتبی", "یاوری");
+                PMSMigrationUtility.CreateEmployee(employeeRep, "100001", "کارمند ترخیص", "کارمندیان");
+
+                PMSMigrationUtility.CreateEmployee(employeeRep,"671061","رمضان","محمدی فیروزه");
+                PMSMigrationUtility.CreateEmployee(employeeRep, "100002", "کارمند ثبت", "کارمندیان");
+
+                PMSMigrationUtility.CreateEmployee(employeeRep,"701392","عباس","داوودی");
+                PMSMigrationUtility.CreateEmployee(employeeRep, "100003", "کارمند خدمات", "کارمندیان");
+
+                PMSMigrationUtility.CreateEmployee(employeeRep,"670151","محمد علی","بخشی");
+                PMSMigrationUtility.CreateEmployee(employeeRep, "100004", "کارمند انبار", "کارمندیان");
 
 
-
-                //var employee1 =
-                //        new PMS.Domain.Model.Employees.Employee(
-                //            ((1 + 1) * 2000).ToString(), period, "کارمند" + 1,
-                //            "کارمندیان" + 1);
-
-                //var jobPositionInPeriod1 = jobPositionInPeriodList[1];
-
-                //var jobcustomFields1 = jobInPeriodList.Single(j => j.Id.Equals(jobPositionInPeriod1.JobId)).CustomFields;
-                //if (jobcustomFields1 != null && jobcustomFields1.Count != 0)
-                //{
-                //    var employeeJobPosition = new Domain.Model.Employees.EmployeeJobPosition(employee1, jobPositionInPeriod1, period.StartDate, period.EndDate, 100, 1,
-                //    jobcustomFields1.Select(j => new EmployeeJobCustomFieldValue(j.Id, docSeedValues.Single(d => d.DicName == j.DictionaryName).Value1)).ToList()
-                //    );
-                //    employee1.AssignJobPositions(new List<Domain.Model.Employees.EmployeeJobPosition> { employeeJobPosition }, periodManagerService);
-
-                //}
-
-                //empList.Add(employee1);
-                //employeeRep.Add(employee1);
-
-
-                //var employee2 =
-                //            new PMS.Domain.Model.Employees.Employee(
-                //                ((2 + 2) * 2000).ToString(), period, "کارمند" + 2,
-                //                "کارمندیان" + 2);
-
-                //var jobPositionInPeriod2 = jobPositionInPeriodList[2];
-
-                //var jobcustomFields2 = jobInPeriodList.Single(j => j.Id.Equals(jobPositionInPeriod2.JobId)).CustomFields;
-                //if (jobcustomFields2 != null && jobcustomFields2.Count != 0)
-                //{
-                //    var employeeJobPosition = new Domain.Model.Employees.EmployeeJobPosition(employee2, jobPositionInPeriod2, period.StartDate, period.EndDate, 100, 1,
-                //    jobcustomFields2.Select(j => new EmployeeJobCustomFieldValue(j.Id, docSeedValues.Single(d => d.DicName == j.DictionaryName).Value2)).ToList()
-                //    );
-                //    employee2.AssignJobPositions(new List<Domain.Model.Employees.EmployeeJobPosition> { employeeJobPosition }, periodManagerService);
-
-                //}
-
-                //empList.Add(employee2);
-                //employeeRep.Add(employee2);
-
-
-                //var employee3 =
-                //           new PMS.Domain.Model.Employees.Employee(
-                //               ((3 + 3) * 2000).ToString(), period, "کارمند" + 3,
-                //               "کارمندیان" + 3);
-
-                //var jobPositionInPeriod3 = jobPositionInPeriodList[3];
-
-                //var jobcustomFields3 = jobInPeriodList.Single(j => j.Id.Equals(jobPositionInPeriod3.JobId)).CustomFields;
-                //if (jobcustomFields3 != null && jobcustomFields3.Count != 0)
-                //{
-                //    var employeeJobPosition = new Domain.Model.Employees.EmployeeJobPosition(employee3, jobPositionInPeriod3, period.StartDate, period.EndDate, 100, 1,
-                //    jobcustomFields3.Select(j => new EmployeeJobCustomFieldValue(j.Id, docSeedValues.Single(d => d.DicName == j.DictionaryName).Value3)).ToList()
-                //    );
-                //    employee3.AssignJobPositions(new List<Domain.Model.Employees.EmployeeJobPosition> { employeeJobPosition }, periodManagerService);
-
-                //}
-
-                //empList.Add(employee3);
-                //employeeRep.Add(employee3);
-
-
-                //var employee4 =
-                //           new PMS.Domain.Model.Employees.Employee(
-                //              ((4 + 4) * 2000).ToString(), period, "کارمند" + 4,
-                //               "کارمندیان" + 4);
-
-                //var jobPositionInPeriod4 = jobPositionInPeriodList[4];
-
-                //var jobcustomFields4 = jobInPeriodList.Single(j => j.Id.Equals(jobPositionInPeriod4.JobId)).CustomFields;
-                //if (jobcustomFields4 != null && jobcustomFields4.Count != 0)
-                //{
-                //    var employeeJobPosition = new Domain.Model.Employees.EmployeeJobPosition(employee4, jobPositionInPeriod4, period.StartDate, period.EndDate, 100, 1,
-                //    jobcustomFields4.Select(j => new EmployeeJobCustomFieldValue(j.Id, docSeedValues.Single(d => d.DicName == j.DictionaryName).Value4)).ToList()
-                //    );
-                //    employee4.AssignJobPositions(new List<Domain.Model.Employees.EmployeeJobPosition> { employeeJobPosition }, periodManagerService);
-
-                //}
-
-                //empList.Add(employee4);
-                //employeeRep.Add(employee4);
-
-
-                //var employee5 =
-                //           new PMS.Domain.Model.Employees.Employee(
-                //              ((5 + 5) * 2000).ToString(), period, "کارمند" + 5,
-                //               "کارمندیان" + 5);
-
-                //var jobPositionInPeriod5 = jobPositionInPeriodList[5];
-
-                //var jobcustomFields5 = jobInPeriodList.Single(j => j.Id.Equals(jobPositionInPeriod5.JobId)).CustomFields;
-                //if (jobcustomFields5 != null && jobcustomFields5.Count != 0)
-                //{
-                //    var employeeJobPosition = new Domain.Model.Employees.EmployeeJobPosition(employee5, jobPositionInPeriod5, period.StartDate, period.EndDate, 100, 1,
-                //    jobcustomFields5.Select(j => new EmployeeJobCustomFieldValue(j.Id, docSeedValues.Single(d => d.DicName == j.DictionaryName).Value5)).ToList()
-                //    );
-                //    employee5.AssignJobPositions(new List<Domain.Model.Employees.EmployeeJobPosition> { employeeJobPosition }, periodManagerService);
-
-                //}
-
-                //empList.Add(employee5);
-                //employeeRep.Add(employee5);
-
-                //var employee0 =
-                //       new PMS.Domain.Model.Employees.Employee(
-                //          ((0 + 1) * 2000).ToString(), period, "مدیر",
-                //           "امور");
-
-                //var jobPositionInPeriod0 = jobPositionInPeriodList[0];
-                //var employeeJobPosition0 = new Domain.Model.Employees.EmployeeJobPosition(employee0, jobPositionInPeriod0, period.StartDate, period.EndDate, 100, 1,
-                //null
-                //);
-                //employee0.AssignJobPositions(new List<Domain.Model.Employees.EmployeeJobPosition> { employeeJobPosition0 }, periodManagerService);
-                //empList.Add(employee0);
-                //employeeRep.Add(employee0);
-
-
-                //for (int i = 0; i < 100; i++)
-                //{
-                //    var employee =
-                //        new PMS.Domain.Model.Employees.Employee(
-                //            ((5 + i)).ToString(), period, "کارمند" + i*10,
-                //            "کارمندیان" + i*10);
-
-                //    var jobPositionInPeriod = jobPositionInPeriodList[5];
-
-                //    var jobcustomFields =
-                //        jobInPeriodList.Single(j => j.Id.Equals(jobPositionInPeriod.JobId)).CustomFields;
-                //    if (jobcustomFields != null && jobcustomFields.Count != 0)
-                //    {
-                //        var employeeJobPosition = new Domain.Model.Employees.EmployeeJobPosition(employee,
-                //            jobPositionInPeriod, period.StartDate, period.EndDate, 100,
-                //            jobcustomFields.Select(
-                //                j =>
-                //                    new EmployeeJobCustomFieldValue(j.Id,
-                //                        docSeedValues.Single(d => d.DicName == j.DictionaryName).Value5)).ToList()
-                //            );
-                //        employee.AssignJobPositions(
-                //            new List<Domain.Model.Employees.EmployeeJobPosition> {employeeJobPosition},
-                //            periodManagerService);
-
-                //    }
-
-                //    empList.Add(employee);
-                //    employeeRep.Add(employee);
-                //}
+              
 
                 #endregion
 

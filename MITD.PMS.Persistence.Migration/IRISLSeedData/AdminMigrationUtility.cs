@@ -12,15 +12,19 @@ namespace MITD.PMS.Persistence
 {
     public static class AdminMigrationUtility
     {
-        public static List<CustomFieldType> DefinedCustomFields =new List<CustomFieldType>();
-        public static List<UnitIndex> UnitIndices=new List<UnitIndex>();
+        #region Fields
+        public static List<CustomFieldType> DefinedCustomFields = new List<CustomFieldType>();
+        public static List<UnitIndex> UnitIndices = new List<UnitIndex>();
         public static Dictionary<JobIndex, string> JobIndices = new Dictionary<JobIndex, string>();
-        public static List<Job> Jobs=new List<Job>();
-        public static List<Unit> Units = new List<Unit>(); 
- 
-        private static UnitIndexCategory unitIndexCategory;
-        private static JobIndexCategory jobIndexCategory;
+        public static List<Job> Jobs = new List<Job>();
+        public static List<Unit> Units = new List<Unit>();
+        public static List<JobPosition> JobPositions = new List<JobPosition>();
 
+        private static UnitIndexCategory unitIndexCategory;
+        private static JobIndexCategory jobIndexCategory; 
+        #endregion
+
+        #region Methods
         public static void DefineCustomFieldType(ICustomFieldRepository customFieldRepository, string name,
             string dictionaryName, int min, int max, EntityTypeEnum entityType)
         {
@@ -29,7 +33,6 @@ namespace MITD.PMS.Persistence
             customFieldRepository.Add(customfieldType);
             DefinedCustomFields.Add(customfieldType);
         }
-
 
         public static void CreateUnit(IUnitRepository unitRepository, string name, string dictionaryName)
         {
@@ -58,15 +61,13 @@ namespace MITD.PMS.Persistence
 
         public static void CreateJob(IJobRepository jobRepository, string name, string dictionaryName)
         {
-            var job = new Job(jobRepository.GetNextId(),name, dictionaryName);
+            var job = new Job(jobRepository.GetNextId(), name, dictionaryName);
             job.AssignCustomFields(DefinedCustomFields.Where(dc => dc.EntityId.Equals(EntityTypeEnum.Job)).ToList());
             jobRepository.AddJob(job);
             Jobs.Add(job);
         }
 
-
-
-        public static void CreateJobIndex(IJobIndexRepository jobIndexRepository, string name, string dictionaryName,string group)
+        public static void CreateJobIndex(IJobIndexRepository jobIndexRepository, string name, string dictionaryName, string group)
         {
             if (jobIndexCategory == null)
             {
@@ -86,7 +87,7 @@ namespace MITD.PMS.Persistence
         {
             var jobPosition = new JobPosition(jobPositionRepository.GetNextId(), name, dictionaryName);
             jobPositionRepository.Add(jobPosition);
-            // GenralUnitIndexList.Add(new UnitindexDes { UnitIndex = jobPositionIndex1, Importance = "7", IsInquirable = true });
+            JobPositions.Add(jobPosition);
         }
 
         public static void CreatePolicy(IPolicyRepository policyRepository, string name, string dictionaryName)
@@ -99,10 +100,8 @@ namespace MITD.PMS.Persistence
             ////}
             ////policy.AssignRuleFunction(rf);
             // GenralUnitIndexList.Add(new UnitindexDes { UnitIndex = policyIndex1, Importance = "7", IsInquirable = true });
-        }
-
-        
-
+        } 
+        #endregion
 
     }
 }
