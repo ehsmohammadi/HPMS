@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{56905125-D056-46FD-BC30-0FE201C3AC28}</ProjectGuid>
+    <ProjectGuid>{B30A232A-AD2C-4AA0-BDDA-2D860F092FAD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MITD.PMS.Integration.Contract</RootNamespace>
-    <AssemblyName>MITD.PMS.Integration.Contract</AssemblyName>
+    <RootNamespace>MITD.PMS.Integration.PMS.API</RootNamespace>
+    <AssemblyName>MITD.PMS.Integration.PMS.API</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,26 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Period\IPeriodDataProvider.cs" />
-    <Compile Include="Period\IPeriodFunctions.cs" />
-    <Compile Include="Period\PeriodDataProvider.cs" />
-    <Compile Include="Period\PeriodFunctions.cs" />
-    <Compile Include="Period\PeriodProperties.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MITD.PMS.Integration.Data.Contract\MITD.PMS.Integration.Data.Contract.csproj">
-      <Project>{3823a549-6209-4d07-b859-db42981d5d19}</Project>
-      <Name>MITD.PMS.Integration.Data.Contract</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MITD.PMS.Integration.Domain\MITD.PMS.Integration.Domain.csproj">
-      <Project>{6e0a035e-9128-4663-8fe2-e910946be7f3}</Project>
-      <Name>MITD.PMS.Integration.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MITD.PMS.Presentation.Contracts\MITD.PMS.Presentation.Contracts.csproj">
-      <Project>{c2c01d60-617d-4a38-af22-091a1c3ae365}</Project>
-      <Name>MITD.PMS.Presentation.Contracts</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -38,7 +38,7 @@ namespace MITD.PMS.Integration.Contract.Period
         {
             if (_IsInsertable)
             {
-                _EmployeeService.InsertEmployees();
+                _EmployeeService.ConvertEmployee();
             }
             else
                 return;

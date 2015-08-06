@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MITD.PMS.Integration.Domain")]
+[assembly: AssemblyTitle("MITD.PMS.Integration.PMS.API")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MITD.PMS.Integration.Domain")]
+[assembly: AssemblyProduct("MITD.PMS.Integration.PMS.API")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("3711ceb5-be4f-4ded-9e58-b44ce739e1b4")]
+[assembly: Guid("5407423a-bc66-4bc5-bc24-4b9b274c934f")]
 
 // Version information for an assembly consists of the following four values:
 //

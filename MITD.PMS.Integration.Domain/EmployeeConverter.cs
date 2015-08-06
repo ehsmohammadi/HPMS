@@ -1,34 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MITD.PMS.Integration.Data.Contract.DataProvider;
-using MITD.PMS.Integration.Data.Contract.DTO;
-using MITD.PMS.Integration.Data.EF;
-
+﻿using MITD.PMS.Integration.Data.Contract.DataProvider;
+using MITD.PMS.Integration.PMS.Contract;
+using MITD.PMS.Presentation.Contracts;
 
 namespace MITD.PMS.Integration.Domain
 {
     public class EmployeeConverter
     {
-        private IEmployeeDataProvider _EmployeeService;//= new EmployeeDataProvider();
+        private IEmployeeDataProvider employeeDataProvider;//= new EmployeeDataProvider();
+        private readonly IPMSDataPusher _employeeDataPusher;
 
 
-        public EmployeeConverter(IEmployeeDataProvider EmployeeService)
+        public EmployeeConverter(IEmployeeDataProvider employeeDataProvider,IPMSDataPusher employeeDataPusher)
         {
-            _EmployeeService = EmployeeService;
+            this.employeeDataProvider = employeeDataProvider;
+            _employeeDataPusher = employeeDataPusher;
         }
 
-        public void InsertEmployees()
+        public void ConvertEmployee(PeriodDTO periodDto)
         {
-            IList<long> IDs = _EmployeeService.GetEmployeeIds();
+          
+            
 
-            foreach (var id in IDs)
+            var idList = employeeDataProvider.GetEmployeeIds();
+
+            foreach (var id in idList)
             {
-                EmployeeDTO PersonDetail = _EmployeeService.GetEmployeeDetails(id);
 
-                // We can call PMS APIs for insert employee data to PMS Database
+                var personDetail = employeeDataProvider.GetEmployeeDetails(id);
+                var desEmployee = new EmployeeDTO();
+                desEmployee.FirstName = personDetail.Name;
+                desEmployee.LastName = personDetail.Family;
+                desEmployee.PersonnelNo = personDetail.PersonnelCode;
+                desEmployee.PeriodId = periodDto.Id;
+                _employeeDataPusher.insertEmployee(desEmployee);
             }
         }
     }

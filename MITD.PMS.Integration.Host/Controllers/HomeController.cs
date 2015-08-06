@@ -35,18 +35,18 @@ namespace MITD.PMS.Integration.Host.Controllers
 
 
         
-        public ActionResult GetEmployeeList(string id)
-        {
-            //GetCurrentPeriodDetail
-            var PeriodID = Convert.ToInt64(id);
-            var PeriodInfo = PeriodService.GetPeriodInformation(PeriodID);
-            IEmployeeDataProvider EmployeeService= new EmployeeDataProvider();
-            IOrganChartDataProvider OrganchartService = new OrganChartDataPrivider();
-            var Service = new PeriodFunctions(PeriodInfo, EmployeeService, OrganchartService);
+        //public ActionResult GetEmployeeList(string id)
+        //{
+        //    //GetCurrentPeriodDetail
+        //    var PeriodID = Convert.ToInt64(id);
+        //    var PeriodInfo = PeriodService.GetPeriodInformation(PeriodID);
+        //    IEmployeeDataProvider EmployeeService= new EmployeeDataProvider();
+        //    IOrganChartDataProvider OrganchartService = new OrganChartDataPrivider();
+        //    var Service = new PeriodFunctions(PeriodInfo, EmployeeService, OrganchartService);
 
-            Service.InsertEmployees();
+        //    Service.InsertEmployees();
 
-            return View(PeriodInfo);
-        }
+        //    return View(PeriodInfo);
+        //}
 	}
 }
