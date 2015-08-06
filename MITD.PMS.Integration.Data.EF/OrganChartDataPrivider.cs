@@ -15,7 +15,7 @@ namespace MITD.PMS.Integration.Data.EF
         private PersonnelSoft2005Entities DB = new PersonnelSoft2005Entities();
 
 
-        #region GetUnitIds
+        #region GetOrganChartIds
         public IList<long> GetOrganChartIds()
         {
 
@@ -40,8 +40,7 @@ namespace MITD.PMS.Integration.Data.EF
 
         #endregion
 
-
-        #region GetUnitDetails
+        #region GetOrganChartDetails
 
         public OrganChartNodeDto GetOrganChartDetails(long id)
         {
@@ -61,7 +60,7 @@ namespace MITD.PMS.Integration.Data.EF
                                     PID=c.PID,
                                     TitleID=c.NCODE_TITLE,
                                     UnitID=c.Company_F
-                                }).First();
+                                }).FirstOrDefault();
                     Result = Temp;
                 }
                 catch (Exception e)
@@ -76,9 +75,6 @@ namespace MITD.PMS.Integration.Data.EF
         #endregion
 
 
-        
-        
-        
         
         #region Get Unit Detail
 
@@ -95,7 +91,7 @@ namespace MITD.PMS.Integration.Data.EF
                           {
                               UnitID = c.ID,
                               UnitName = c.Name
-                          }).First();
+                          }).FirstOrDefault();
             }
             catch (Exception e)
             {
@@ -106,7 +102,6 @@ namespace MITD.PMS.Integration.Data.EF
         }
 
         #endregion
-
 
         #region GetUnitIds
 
@@ -136,9 +131,6 @@ namespace MITD.PMS.Integration.Data.EF
 
 
 
-
-
-
         #region GetJobTitleIds
 
         public IList<long> GetJobTitleIds()
@@ -165,7 +157,6 @@ namespace MITD.PMS.Integration.Data.EF
 
         #endregion
 
-
         #region GetJobTitleDetail
 
         public JobTitleDto GetJobTitleDetail(long id)
@@ -181,7 +172,7 @@ namespace MITD.PMS.Integration.Data.EF
                           {
                               JobTitleID = c.ID,
                               JobTitle = c.Name
-                          }).First();
+                          }).FirstOrDefault();
             }
             catch (Exception e)
             {
@@ -192,8 +183,6 @@ namespace MITD.PMS.Integration.Data.EF
         }
 
         #endregion
-
-
 
 
 
@@ -223,7 +212,6 @@ namespace MITD.PMS.Integration.Data.EF
 
         #endregion
 
-
         #region GetNodeTypeDetail
 
         public NodeTypeDto GetNodeTypeDetail(long id)
@@ -239,7 +227,7 @@ namespace MITD.PMS.Integration.Data.EF
                           {
                               ID = c.ID,
                               TypeTitle = c.Name
-                          }).First();
+                          }).FirstOrDefault();
             }
             catch (Exception e)
             {

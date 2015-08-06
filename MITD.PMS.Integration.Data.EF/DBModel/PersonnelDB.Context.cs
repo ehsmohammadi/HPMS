@@ -25,11 +25,11 @@ namespace MITD.PMS.Integration.Data.EF.DBModel
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<VW_OrganTree> VW_OrganTree { get; set; }
         public virtual DbSet<affiliateCompany> affiliateCompanies { get; set; }
         public virtual DbSet<JOBSTitle> JOBSTitles { get; set; }
         public virtual DbSet<OrganTreeNodeType> OrganTreeNodeTypes { get; set; }
         public virtual DbSet<Rasteh> Rastehs { get; set; }
         public virtual DbSet<Reshteh> Reshtehs { get; set; }
+        public virtual DbSet<VW_OrganTree> VW_OrganTree { get; set; }
     }
 }
