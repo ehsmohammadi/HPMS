@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{90633156-8C7E-4562-A7CC-1478DA73F65A}</ProjectGuid>
+    <ProjectGuid>{B30A232A-AD2C-4AA0-BDDA-2D860F092FAD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MITD.PMS.Integration.IData</RootNamespace>
-    <AssemblyName>MITD.PMS.Integration.IData</AssemblyName>
+    <RootNamespace>MITD.PMS.Integration.PMS.API</RootNamespace>
+    <AssemblyName>MITD.PMS.Integration.PMS.API</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,12 +41,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MITD.PMS.Integration.Data.Contract\MITD.PMS.Integration.Data.Contract.csproj">
-      <Project>{3823a549-6209-4d07-b859-db42981d5d19}</Project>
-      <Name>MITD.PMS.Integration.Data.Contract</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

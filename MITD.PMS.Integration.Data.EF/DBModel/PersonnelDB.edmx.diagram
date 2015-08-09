@@ -4,13 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="54afcaf0501742fc86c0619f61078dea" Name="Diagram1">
-        <EntityTypeShape EntityType="PersonnelSoft2005Model.VW_OrganTree" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PersonnelSoft2005Model.affiliateCompany" Width="1.5" PointX="4.75" PointY="0.5" />
-        <EntityTypeShape EntityType="PersonnelSoft2005Model.JOBSTitle" Width="1.5" PointX="4.625" PointY="3.125" />
-        <EntityTypeShape EntityType="PersonnelSoft2005Model.OrganTreeNodeType" Width="1.5" PointX="8.375" PointY="3.125" />
-        <EntityTypeShape EntityType="PersonnelSoft2005Model.Rasteh" Width="1.5" PointX="6.5" PointY="3" />
-        <EntityTypeShape EntityType="PersonnelSoft2005Model.Reshteh" Width="1.5" PointX="6.5" PointY="0.625" />
+      <Diagram DiagramId="1a938b75fdf742aa98d5da9b562c8461" Name="Diagram1">
+        <EntityTypeShape EntityType="PersonnelSoft2005Model.affiliateCompany" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PersonnelSoft2005Model.JOBSTitle" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PersonnelSoft2005Model.OrganTreeNodeType" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PersonnelSoft2005Model.Rasteh" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PersonnelSoft2005Model.Reshteh" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PersonnelSoft2005Model.VW_OrganTree" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

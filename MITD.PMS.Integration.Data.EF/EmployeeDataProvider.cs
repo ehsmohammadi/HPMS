@@ -7,7 +7,7 @@ using MITD.PMS.Integration.Data.Contract.DataProvider;
 using MITD.PMS.Integration.Data.Contract.DTO;
 using MITD.PMS.Integration.Data.EF.DBModel;
 
-namespace MITD.PMS.Integration.Data
+namespace MITD.PMS.Integration.Data.EF
 {
     public class EmployeeDataProvider : IEmployeeDataProvider
     {
@@ -23,7 +23,11 @@ namespace MITD.PMS.Integration.Data
             try
             {
 
-                Result = (from C in DB.VW_OrganTree where C.ID_F > 0 select Convert.ToInt64(C.ID_F)).ToList();
+                var temp = (from C in DB.VW_OrganTree where C.ID_F > 0 select C.ID_F).ToList();
+                foreach (var item in temp)
+                {
+                    Result.Add(Convert.ToInt64(item));
+                }
 
             }
 
@@ -57,7 +61,7 @@ namespace MITD.PMS.Integration.Data
                                 Family = c.FamilyName,
                                 OrganID = c.ID,
                                 PersonnelCode = c.PersonnelCode.ToString()
-                            }).First();
+                            }).FirstOrDefault();
                 Result = Temp;
             }
             catch (Exception e)

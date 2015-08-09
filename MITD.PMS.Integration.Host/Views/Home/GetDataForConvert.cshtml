@@ -1,0 +1,57 @@
+﻿@model MITD.PMS.Integration.Contract.Period.PeriodProperties
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GetDataForConvert</title>
+</head>
+<body>
+    <div>
+        <h4>PeriodProperties</h4>
+    	<hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.PeriodName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.PeriodName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.PeriodID)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.PeriodID)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.PeriodStateID)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.PeriodStateID)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.PeriodStateName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.PeriodStateName)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+       @* @Html.ActionLink("GetEmployeeList", "GetEmployeeList", new { id = Model.PeriodID /* id = Model.PrimaryKey */ }) |*@
+    </p>
+</body>
+</html>

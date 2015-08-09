@@ -72,13 +72,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdminMigrationUtility.cs" />
+    <Compile Include="IRISLSeedData\PMSMigrationUtility.cs" />
+    <Compile Include="IRISLSeedData\AdminMigrationUtility.cs" />
     <Compile Include="PeriodTest.cs" />
-    <Compile Include="CreateSeedData.cs" />
+    <Compile Include="RODSeedData\CreateSeedData.cs" />
     <Compile Include="MigrationVer1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="IRISLSeedData.cs" />
-    <Compile Include="SampleData.cs">
+    <Compile Include="IRISLSeedData\IRISLSeedData.cs" />
+    <Compile Include="RODSeedData\SampleData.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

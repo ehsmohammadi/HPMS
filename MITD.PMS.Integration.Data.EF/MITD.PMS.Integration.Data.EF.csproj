@@ -87,13 +87,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <EntityDeploy Include="DBModel\PersonnelDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>PersonnelDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
     <None Include="DBModel\PersonnelDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>PersonnelDB.edmx</DependentUpon>
