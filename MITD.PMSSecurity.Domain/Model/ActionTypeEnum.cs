@@ -47,6 +47,9 @@ namespace MITD.PMSSecurity.Domain
         public static readonly ActionType AddUnitInPeriod = new ActionType("130", "AddUnitInPeriod","تخصیص واحد در دوره");
         public static readonly ActionType ModifyUnitInPeriod = new ActionType("132", "ModifyUnitInPeriod", "ویرایش واحد در دوره");
         public static readonly ActionType DeleteUnitInPeriod = new ActionType("131", "DeleteUnitInPeriod","حذف واحد از دوره");
+        public static readonly ActionType ManageUnitInPeriodInquiry = new ActionType("134", "ManageUnitInPeriodInquiry", "تعیین افراد نظر دهنده واحد سازمانی");
+
+
 
         public static readonly ActionType AddJobPositionInPeriod = new ActionType("140", "AddJobPositionInPeriod","تخصیص پست در دوره");
         public static readonly ActionType DeleteJobPositionInPeriod = new ActionType("141", "DeleteJobPositionInPeriod","حذف پست از دوره");

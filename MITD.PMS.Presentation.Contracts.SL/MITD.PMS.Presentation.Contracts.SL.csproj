@@ -297,6 +297,12 @@
     <Compile Include="..\MITD.PMS.Presentation.Contracts\EmployeeManagment\EmployeeJobPositionsDTO.cs">
       <Link>EmployeeManagement\EmployeeJobPositionsDTO.cs</Link>
     </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\EmployeeManagment\EmployeeUnitAssignmentDTO.cs">
+      <Link>EmployeeManagement\EmployeeUnitAssignmentDTO.cs</Link>
+    </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\EmployeeManagment\EmployeeUnitsDTO.cs">
+      <Link>EmployeeManagement\EmployeeUnitsDTO.cs</Link>
+    </Compile>
     <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\Claim\ClaimDescriptionDTO.cs">
       <Link>PeriodManagement\Claim\ClaimDescriptionDTO.cs</Link>
     </Compile>
@@ -489,6 +495,7 @@
     <Compile Include="BasicInfoManagement\Function\PolicyFunctions_Client.cs" />
     <Compile Include="BasicInfoManagement\Function\FunctionDTO_Client.cs" />
     <Compile Include="BasicInfoManagement\Function\FunctionDTODescriptionWithActions_Client.cs" />
+    <Compile Include="EmployeeManagement\EmployeeUnitAssignmentDTO_Client.cs" />
     <Compile Include="EmployeeManagement\EmployeeJobPositionAssignmentDTO_Client.cs" />
     <Compile Include="EmployeeManagement\EmployeeJobPositionsDTO_Client.cs" />
     <Compile Include="Calculation\AbstractOrganChartDTOWithActions_Client.cs" />
@@ -500,6 +507,7 @@
     <Compile Include="Calculation\EmployeeCalculationResultDetailsDTO_Client.cs" />
     <Compile Include="Calculation\EmployeeCalculationResultDTO_Client.cs" />
     <Compile Include="Calculation\OrganChartEmployeesCalculationDTO_Client.cs" />
+    <Compile Include="EmployeeManagement\EmployeeUnitsDTO_Client.cs" />
     <Compile Include="PeriodManagement\Claim\ClaimDescriptionDTO_Client.cs" />
     <Compile Include="PeriodManagement\Claim\ClaimState\ClaimStateDTO_Client.cs" />
     <Compile Include="PeriodManagement\Claim\ClaimTypeDTO_Client.cs" />

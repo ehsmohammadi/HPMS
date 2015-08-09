@@ -143,6 +143,7 @@ namespace MITD.PMSSecurity.Domain
 		            ActionType.AddUnitInPeriod,
                     ActionType.ModifyUnitInPeriod,
                     ActionType.DeleteUnitInPeriod, 
+                    ActionType.ManageUnitInPeriodInquiry,
 	                #endregion
 
                     #region UnitIndexInPeriod

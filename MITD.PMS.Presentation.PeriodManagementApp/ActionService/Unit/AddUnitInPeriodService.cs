@@ -17,17 +17,18 @@ namespace MITD.PMS.Presentation.Logic
         public void DoAction(UnitInPeriodTreeVM vm)
         {
 
-            //var unitInPeriod = new UnitInPeriodAssignmentDTO
-            //{
-            //    PeriodId = vm.Period.Id,
-                
-            //};
-            //if (vm.SelectedUnitInPeriod != null)
-            //    unitInPeriod.ParentUnitId = vm.SelectedUnitInPeriod.Data.UnitId;
-            //else
-            //    unitInPeriod.ParentUnitId = null;
+            var unitInPeriod = new UnitInPeriodAssignmentDTO
+            {
+                PeriodId = vm.Period.Id,
 
-            periodController.ShowUnitInPeriodView(vm.Period.Id,null, ActionType.AddUnitInPeriod);
+            };
+            if (vm.SelectedUnitInPeriod != null)
+                unitInPeriod.ParentUnitId = vm.SelectedUnitInPeriod.Data.UnitId;
+            else
+                unitInPeriod.ParentUnitId = null;
+
+            periodController.ShowUnitInPeriodView(vm.Period.Id,null, unitInPeriod.ParentUnitId, ActionType.AddUnitInPeriod);
+           // periodController.ShowUnitInPeriodView(unitInPeriod, ActionType.AddUnitInPeriod);
         }
 
 

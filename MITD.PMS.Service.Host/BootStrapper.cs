@@ -151,6 +151,11 @@ namespace MITD.PMS.Service.Host
                 Component.For<IJobPositionInquiryConfiguratorService>()
                     .ImplementedBy<JobPositionInquiryConfiguratorService>()
                     .LifestyleBoundTo<IService>());
+           
+            container.Register(
+              Component.For<IUnitInquiryConfiguratorService>()
+                  .ImplementedBy<UnitInquiryConfiguratorService>()
+                  .LifestyleBoundTo<IService>());
 
             container.Register(
                 Component.For<IJobIndexPointCalculatorProvider>()

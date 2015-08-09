@@ -70,6 +70,7 @@
     <Compile Include="CalculationRepository.cs" />
     <Compile Include="Context\MappingClass\ClaimMap.cs" />
     <Compile Include="Context\MappingClass\CalculationExceptionMap.cs" />
+    <Compile Include="Context\MappingClass\UnitInquiryConfigurationItemMap.cs" />
     <Compile Include="Context\MappingClass\UnitIndexInPeriodMap.cs" />
     <Compile Include="Context\MappingClass\JobPositionInquiryConfigurationItemMap.cs" />
     <Compile Include="Context\MappingClass\InquiryJobIndexPointMap.cs" />

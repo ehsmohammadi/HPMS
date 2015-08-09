@@ -10,18 +10,18 @@ using MITD.Presentation;
 
 namespace MITD.PMS.Presentation.Logic
 {
-    public sealed class UnitInPeriodVM : WorkspaceViewModel, IEventHandler<UpdateUnitInPeriodCustomFieldListArgs>,IEventHandler<UpdateUnitInPeriodUnitIndexListArgs>
+    public sealed class UnitInPeriodVM : WorkspaceViewModel, IEventHandler<UpdateUnitInPeriodCustomFieldListArgs>, IEventHandler<UpdateUnitInPeriodUnitIndexListArgs>
     {
         #region Fields
 
         private readonly IPMSController appController;
-        private readonly IPeriodController periodController;     
+        private readonly IPeriodController periodController;
         private readonly IUnitInPeriodServiceWrapper UnitInPeriodService;
         private readonly IUnitServiceWrapper UnitService;
         private readonly ICustomFieldServiceWrapper customFieldService;
         private readonly IPeriodServiceWrapper periodService;
         private ActionType actionType;
-    
+        private long? parentId;
         #endregion
 
         #region Properties & Back Fields
@@ -53,10 +53,10 @@ namespace MITD.PMS.Presentation.Logic
         {
             get
             {
-                if (addFields == null )
+                if (addFields == null)
                 {
                     addFields = new CommandViewModel("مدیریت فیلدها واحد",
-                                                     //new DelegateCommand(()=>appController.PMSActions.Single(a=>a.ActionCode==ActionType.AddUnitInPrdField).DoAction(UnitInPeriodAssign)));
+                        //new DelegateCommand(()=>appController.PMSActions.Single(a=>a.ActionCode==ActionType.AddUnitInPrdField).DoAction(UnitInPeriodAssign)));
                                                      new DelegateCommand(
                                                          () =>
                                                          periodController.ShowUnitInPeriodCustomFieldManageView(
@@ -73,7 +73,7 @@ namespace MITD.PMS.Presentation.Logic
         {
             get
             {
-                if (addUnitIndices == null )
+                if (addUnitIndices == null)
                 {
                     addUnitIndices = new CommandViewModel("مدیریت شاخص های واحد",
                                                            new DelegateCommand(
@@ -106,7 +106,7 @@ namespace MITD.PMS.Presentation.Logic
             {
                 if (cancelCommand == null)
                 {
-                    cancelCommand = new CommandViewModel("انصراف",new DelegateCommand(OnRequestClose));
+                    cancelCommand = new CommandViewModel("انصراف", new DelegateCommand(OnRequestClose));
                 }
                 return cancelCommand;
             }
@@ -137,7 +137,7 @@ namespace MITD.PMS.Presentation.Logic
 
         public UnitInPeriodVM()
         {
-            
+
         }
         public UnitInPeriodVM(IPMSController appController,
                              IPeriodController periodController,
@@ -154,7 +154,7 @@ namespace MITD.PMS.Presentation.Logic
             this.customFieldService = customFieldService;
             this.periodService = periodService;
             DisplayName = "مدیریت واحد در دوره ";
-        } 
+        }
 
         #endregion
 
@@ -163,63 +163,65 @@ namespace MITD.PMS.Presentation.Logic
         private List<DataGridCommandViewModel> createCommands()
         {
             var filterCommand = new List<DataGridCommandViewModel>();
-         
+
 
             return filterCommand;
         }
 
-        public void Load(long periodId,long? UnitId,ActionType actionTypeParam)
+        public void Load(long periodId, long? UnitId, long? parentId, ActionType actionTypeParam)
         {
-            
+            this.parentId = parentId;
             actionType = actionTypeParam;
-            preLoad(periodId,UnitId);
-            
+            preLoad(periodId, UnitId);
+
             if (UnitId.HasValue) // modify Unit
             {
                 Units = new List<UnitInPeriodDTO>();
                 ShowBusyIndicator("در حال دریافت اطلاعات...");
-                UnitInPeriodService.GetUnitInPeriod((res, exp) =>  appController.BeginInvokeOnDispatcher(() =>
+                UnitInPeriodService.GetUnitInPeriod((res, exp) => appController.BeginInvokeOnDispatcher(() =>
                     {
                         HideBusyIndicator();
                         if (exp == null)
-                        {  
+                        {
                             Units.Add(res);
                             SelectedUnitInPeriod = res;
                         }
-                    }),periodId,UnitId.Value);
+                    }), periodId, UnitId.Value);
             }
             else // add new Unit => action is  ActionType.AddUnitInPrdField
             {
+
                 ShowBusyIndicator();
-                UnitInPeriodService.GetAllUnitInPeriod((UnitInPeriodListRes, exp) => appController.BeginInvokeOnDispatcher(() => 
+                UnitInPeriodService.GetAllUnitInPeriod((UnitInPeriodListRes, exp) => appController.BeginInvokeOnDispatcher(() =>
                     {
                         if (exp == null)
                         {
-                            UnitService.GetAllUnits((UnitsRes, UnitsExp) => appController.BeginInvokeOnDispatcher(() => 
+                            UnitService.GetAllUnits((UnitsRes, UnitsExp) => appController.BeginInvokeOnDispatcher(() =>
                                 {
                                     HideBusyIndicator();
-                                   
+
                                     if (UnitsExp == null)
                                     {
                                         var jList = UnitsRes.Where(r => !UnitInPeriodListRes.Select(jip => jip.UnitId).Contains(r.Id)).ToList();
                                         Units = jList.Select(
                                             j => new UnitInPeriodDTO() { Name = j.Name, UnitId = j.Id, CustomFields = new List<CustomFieldDTO>() }).ToList();
 
-                                    }else
+                                    }
+                                    else
                                         appController.HandleException(UnitsExp);
-                                        
+
                                 }));
-                            
+
                         }
                         else
                             appController.HandleException(exp);
-                    }),periodId);
-                 
-              
+                    }), periodId);
+
+
             }
         }
 
-        private void preLoad(long periodId,long? UnitId)
+        private void preLoad(long periodId, long? UnitId)
         {
             ShowBusyIndicator("در حال دریافت اطلاعات...");
             periodService.GetPeriod((res, exp) => appController.BeginInvokeOnDispatcher(() =>
@@ -228,27 +230,28 @@ namespace MITD.PMS.Presentation.Logic
                     if (exp == null)
                         Period = res;
 
-                }),periodId);
+                }), periodId);
 
-            
+
             if (!UnitId.HasValue)
                 return;
-            
+
             UnitInPeriodService.GetUnitInPeriod((res, exp) => appController.BeginInvokeOnDispatcher(() =>
                 {
                     if (exp == null)
                         SelectedUnitInPeriod = res;
-                }),periodId,UnitId.Value);
+                }), periodId, UnitId.Value);
         }
 
         private void save()
         {
-            if (SelectedUnitInPeriod ==null || !SelectedUnitInPeriod.Validate()) 
+            if (SelectedUnitInPeriod == null || !SelectedUnitInPeriod.Validate())
                 return;
 
             ShowBusyIndicator();
-            if (actionType==ActionType.AddUnitInPeriod)
+            if (actionType == ActionType.AddUnitInPeriod)
             {
+                SelectedUnitInPeriod.ParentId = parentId;
                 UnitInPeriodService.AddUnitInPeriod((res, exp) => appController.BeginInvokeOnDispatcher(() =>
                     {
                         HideBusyIndicator();
@@ -256,7 +259,7 @@ namespace MITD.PMS.Presentation.Logic
                             appController.HandleException(exp);
                         else
                             finalizeAction();
-                    }),Period.Id, SelectedUnitInPeriod);
+                    }), Period.Id, SelectedUnitInPeriod);
             }
             else if (actionType == ActionType.ModifyUnitInPeriod)
             {
@@ -271,7 +274,7 @@ namespace MITD.PMS.Presentation.Logic
             }
 
         }
-        
+
         private void finalizeAction()
         {
             appController.Publish(new UpdateUnitInPeriodListArgs());
@@ -279,7 +282,7 @@ namespace MITD.PMS.Presentation.Logic
             OnRequestClose();
         }
 
-     
+
 
         protected override void OnRequestClose()
         {
@@ -305,9 +308,9 @@ namespace MITD.PMS.Presentation.Logic
 
         }
 
-        
 
-        
+
+
         #endregion
 
         public void Handle(UpdateUnitInPeriodUnitIndexListArgs eventData)
@@ -317,8 +320,8 @@ namespace MITD.PMS.Presentation.Logic
 
             SelectedUnitInPeriod.UnitIndices = eventData.UnitInPeriodUnitIndices;
 
-           
+
         }
     }
-    
+
 }

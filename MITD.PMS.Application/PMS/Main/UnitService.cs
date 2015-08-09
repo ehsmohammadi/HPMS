@@ -20,18 +20,22 @@ namespace MITD.PMS.Application
         private readonly IUnitRepository unitRep;
         private readonly IUnitIndexRepository unitIndexRep;
         private readonly IPeriodManagerService periodChecker;
+        private readonly IUnitInquiryConfiguratorService _configuratorService;
+
         public UnitService(
                            IUnitRepository unitRep,
                            IPeriodRepository periodRep,
                            IUnitIndexRepository unitIndexRep
                            ,IPMSAdminService ipmsAdminService,
-                            IPeriodManagerService periodChecker)
+                            IPeriodManagerService periodChecker,
+            IUnitInquiryConfiguratorService configuratorService)
         {
             this.periodRep = periodRep;
             this.ipmsAdminService = ipmsAdminService;
             this.unitRep = unitRep;
             this.unitIndexRep = unitIndexRep;
             this.periodChecker = periodChecker;
+            _configuratorService = configuratorService;
         }
 
 
@@ -67,7 +71,8 @@ namespace MITD.PMS.Application
             }
         }
 
-        public Unit AssignUnit(UnitId unitId, List<SharedUnitCustomFieldId> customFieldIdList, IList<UnitIndexForUnit> unitIndexList)
+        public Unit AssignUnit(UnitId parentId,UnitId unitId, List<SharedUnitCustomFieldId> customFieldIdList, 
+            IList<UnitIndexForUnit> unitIndexList)
         {
             using (var tr = new TransactionScope())
             {
@@ -93,8 +98,8 @@ namespace MITD.PMS.Application
                     var unitindexForUnit = unitIndexList.Single(j => j.UnitIndexId == unitIndex.Id);
                     unitUnitInddices.Add(new UnitUnitIndex(unitIndex.Id, unitindexForUnit.ShowforTopLevel, unitindexForUnit.ShowforSameLevel, unitindexForUnit.ShowforLowLevel));
                 }
-              
-                  var  parent = unitRep.GetBy(unitId);
+
+                var parent = unitRep.GetBy(parentId);
                 
                 var unit = new Unit(period, sharedUnit, unitCustomFields, unitUnitInddices,parent);
                 unitRep.Add(unit);
@@ -181,6 +186,18 @@ namespace MITD.PMS.Application
         {
             var unit = unitRep.GetBy(unitId);
             return unit;
+        }
+
+        public List<UnitInquiryConfigurationItem> GetInquirySubjectWithInquirer(UnitId unitId)
+        {
+            using (var tr = new TransactionScope())
+            {
+                var unit = unitRep.GetBy(unitId);
+                unit.ConfigeInquirer(_configuratorService, false);
+                tr.Complete();
+                return unit.ConfigurationItemList.ToList();
+
+            }
         }
     }
 }

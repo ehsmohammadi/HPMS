@@ -22,7 +22,14 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
         }
 
         #region Period
-      
+
+        public void ShowUnitInPeriodInquiryView(PeriodDTO period, UnitInPeriodDTO unitInPeriodDto, ActionType action)
+        {
+            var view = viewManager.ShowInTabControl<IUnitInPeriodInquiryView>(v => ((UnitInPeriodInquiryVM)v).Period.Id == period.Id
+                && ((UnitInPeriodInquiryVM)v).UnitInPeriod.Id == unitInPeriodDto.Id);
+            ((UnitInPeriodInquiryVM)view.ViewModel).Load(period, unitInPeriodDto);
+        }
+
         public void ShowPeriodView(PeriodDTO period, ActionType actionType)
         {
             var view = ServiceLocator.Current.GetInstance<IPeriodView>();
@@ -46,17 +53,17 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
         #endregion
 
         #region Unit
-     
+
         //public void ShowUnitInPeriodView(UnitInPeriodAssignmentDTO unitInPeriod, ActionType action)
         //{
         //    var view = ServiceLocator.Current.GetInstance<IUnitInPeriodView>();
         //    ((UnitInPeriodVM)view.ViewModel).Load(unitInPeriod.PeriodId, unitInPeriod.UnitId, action);
         //    viewManager.ShowInDialog(view);
         //}
-        public void ShowUnitInPeriodView(long periodId, long? unitId, ActionType actionType)
+        public void ShowUnitInPeriodView(long periodId, long? unitId,long? parentId , ActionType actionType)
         {
             var view = ServiceLocator.Current.GetInstance<IUnitInPeriodView>();
-            ((UnitInPeriodVM)view.ViewModel).Load(periodId, unitId,actionType);
+            ((UnitInPeriodVM)view.ViewModel).Load(periodId, unitId,parentId,actionType);
             viewManager.ShowInDialog(view);
         }
 
@@ -318,6 +325,9 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
             var view = viewManager.ShowInTabControl<IEmployeeCalculationResultHistoryView>(showInNewTab);
             ((EmployeeCalculationResultHistoryVM)view.ViewModel).Load(employeeId);
         }
-        
+
+
+
+       
     }
 }

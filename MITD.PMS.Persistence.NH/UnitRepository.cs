@@ -2,6 +2,7 @@
 using System.Linq;
 using MITD.Data.NH;
 using MITD.Domain.Repository;
+using MITD.PMS.Domain.Model.Employees;
 using MITD.PMS.Domain.Model.Periods;
 using MITD.PMS.Domain.Model.Units;
 using System;
@@ -61,6 +62,12 @@ namespace MITD.PMS.Persistence.NH
         public UnitId GetUnitIdBy(Period period, SharedUnitId sharedUnitId)
         {
             return rep.Find(u => u.Id.PeriodId == period.Id && u.Id.SharedUnitId == sharedUnitId).Single().Id;
+        }
+
+        public List<Unit> GetAllInquirySubjectUnits(EmployeeId inquirerId)
+        {
+            return rep.Find(j => j.ConfigurationItemList.Any(jc => jc.Id.InquirerId == inquirerId)).ToList();
+
         }
 
         public Exception ConvertException(Exception exp)

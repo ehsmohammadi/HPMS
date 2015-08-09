@@ -89,7 +89,9 @@
     <Compile Include="Model\Claims\Exception\ClaimModifyException.cs" />
     <Compile Include="Model\Claims\Exception\ClaimInvalidStateOperationException.cs" />
     <Compile Include="Model\Claims\Repository\IClaimRepository.cs" />
+    <Compile Include="Model\Employees\EmployeeUnitCustomFieldValue.cs" />
     <Compile Include="Model\Employees\EmployeeJobCutomFieldValue.cs" />
+    <Compile Include="Model\Employees\EmployeeUnit.cs" />
     <Compile Include="Model\Employees\Exception\EmployeeArgumentException.cs" />
     <Compile Include="Model\Employees\Exception\EmployeeDeleteException.cs" />
     <Compile Include="Model\Employees\Exception\EmployeeDuplicateException.cs" />
@@ -214,6 +216,9 @@
     <Compile Include="Model\Units\Exception\UnitDuplicateException.cs" />
     <Compile Include="Model\Units\Exception\UnitException.cs" />
     <Compile Include="Model\Units\Exception\UnitModifyException.cs" />
+    <Compile Include="Model\Units\UnitInquiryConfigurationItemId.cs" />
+    <Compile Include="Model\Units\UnitInquiryConfigurationItem.cs" />
+    <Compile Include="Model\Units\UnitEmployee.cs" />
     <Compile Include="Model\Units\UnitUnitIndex.cs" />
     <Compile Include="Model\Units\UnitCustomField.cs" />
     <Compile Include="Model\Units\UnitCustomFieldId.cs" />
@@ -221,6 +226,7 @@
     <Compile Include="Model\Units\SharedUnitCustomField.cs" />
     <Compile Include="ReportModel\CalculationWithPolicy.cs" />
     <Compile Include="ReportModel\CalculationData.cs" />
+    <Compile Include="ReportModel\EmployeeIdWithUnitId.cs" />
     <Compile Include="ReportModel\EmployeeIdWithJobPositionId.cs" />
     <Compile Include="ReportModel\EmployeePointData.cs" />
     <Compile Include="ReportModel\JobIndexPointWithEmployee.cs" />
@@ -229,10 +235,12 @@
     <Compile Include="Service\Imp\CalculationMakeDeterministicService.cs" />
     <Compile Include="Service\Imp\ClaimControlService.cs" />
     <Compile Include="Service\Imp\InquiryJobIndexPointCreatorService.cs" />
+    <Compile Include="Service\Imp\UnitInquiryConfiguratorService.cs" />
     <Compile Include="Service\Imp\JobPositionInquiryConfiguratorService.cs" />
     <Compile Include="Service\Imp\PeriodActivatorService.cs" />
     <Compile Include="Service\Imp\PeriodManagerService.cs" />
     <Compile Include="Service\Interface\ICalculationEngineService.cs" />
+    <Compile Include="Service\Interface\IUnitInquiryConfiguratorService.cs" />
     <Compile Include="Service\Interface\IPeriodBasicDataCopierService.cs" />
     <Compile Include="Service\Interface\IInquiryConfiguratorService.cs" />
     <Compile Include="Service\Interface\IPeriodEngineService.cs" />

@@ -40,6 +40,7 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
                 {(int) ActionType.AddUnitInPeriod, typeof (AddUnitInPeriodService)},
                 {(int) ActionType.ModifyUnitInPeriod, typeof (ModifyUnitInPeriodService)},
                 {(int) ActionType.DeleteUnitInPeriod, typeof (DeleteUnitInPeriodService)},
+                {(int) ActionType.ManageUnitInPeriodInquiry, typeof (ManageUnitInPeriodInquiryService)},
 
                 {(int) ActionType.AddJobPositionInPeriod, typeof (AddJobPositionInPeriodService)},
                 {(int) ActionType.DeleteJobPositionInPeriod, typeof (DeleteJobPositionInPeriodService)},

@@ -133,6 +133,10 @@
     <Compile Include="Calculation\JobPositionValueDTO.cs" />
     <Compile Include="BasicInfoManagement\User\UserDTOWithActions.cs" />
     <Compile Include="BasicInfoManagement\User\UserDTO.cs" />
+    <Compile Include="EmployeeManagment\EmployeeUnitAssignmentDTO_Server.cs" />
+    <Compile Include="EmployeeManagment\EmployeeUnitAssignmentDTO.cs" />
+    <Compile Include="EmployeeManagment\EmployeeUnitsDTO_Server.cs" />
+    <Compile Include="EmployeeManagment\EmployeeUnitsDTO.cs" />
     <Compile Include="EmployeeManagment\EmployeeJobPositionsDTO_Server.cs" />
     <Compile Include="EmployeeManagment\EmployeeJobPositionAssignmentDTO_Server.cs" />
     <Compile Include="EmployeeManagment\EmployeeJobPositionAssignmentDTO.cs" />

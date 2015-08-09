@@ -108,7 +108,7 @@ namespace MITD.PMS.Interface
                              EmployeeJobPositionId = itm.Id.InquirerJobPositionId.SharedJobPositionId.Id,
                              EmployeeJobPositionName = inquirerJobPositionName
                          });
-                    }
+                    } 
                     else
                     {
                       

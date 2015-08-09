@@ -7,6 +7,8 @@ namespace MITD.PMS.Presentation.Logic
 {
     public interface IUnitInPeriodServiceWrapper : IServiceWrapper
     {
+        void UpdateInquirySubjectInquirers(Action<InquirySubjectWithInquirersDTO, Exception> action, long periodId, long unitId, InquirySubjectWithInquirersDTO inquirySubjectWithInquirersDTO);
+        void GetInquirySubjectWithInquirers(Action<List<InquirySubjectWithInquirersDTO>, Exception> action, long periodId, long unitId);
         void GetAllUnitInPeriod(Action<IList<UnitInPeriodDTO>, Exception> action, long periodId);
         void GetUnitInPeriod(Action<UnitInPeriodDTO, Exception> action, long periodId, long unitId);
         void AddUnitInPeriod(Action<UnitInPeriodAssignmentDTO, Exception> action, UnitInPeriodAssignmentDTO jobPositionInPeriod);

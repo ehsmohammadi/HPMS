@@ -30,6 +30,7 @@ namespace MITD.PMS.Presentation.Logic
         string UnitIndexInPeriodViewTitle { get; }
         string UnitIndexInPeriodTreeViewTitle { get; }
         string UnitIndexGroupInPeriodViewTitle { get; }
+        string UnitInPeriodInquiryView { get; }
 
     }
 }

@@ -102,10 +102,26 @@ namespace MITD.PMS.Service.Host
                defaults: new { Controller = "PeriodUnits", id = RouteParameter.Optional });
 
             config.Routes.MapHttpRoute(
+               name: "UnitInquirySubjectsController",
+               routeTemplate: "api/Periods/{PeriodId}/Units/{UnitId}/InquirySubjects",
+               defaults: new { Controller = "UnitInquirySubjects", id = RouteParameter.Optional });
+
+              
+            config.Routes.MapHttpRoute(
+               name: "EmployeeUnits",
+               routeTemplate: "api/Periods/{PeriodId}/Employees/{EmployeeNo}/Units",
+               defaults: new { Controller = "EmployeeUnits", id = RouteParameter.Optional });
+
+
+
+
+            config.Routes.MapHttpRoute(
                name: "PeriodEmployees",
                routeTemplate: "api/Periods/{PeriodId}/Employees/{id}",
                defaults: new { Controller = "PeriodEmployees", id = RouteParameter.Optional });
 
+        
+            
             config.Routes.MapHttpRoute(
                name: "EmployeeJobPositions",
                routeTemplate: "api/Periods/{PeriodId}/Employees/{EmployeeNo}/JobPositions",

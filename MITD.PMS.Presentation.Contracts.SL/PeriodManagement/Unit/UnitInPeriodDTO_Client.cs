@@ -14,6 +14,10 @@ namespace MITD.PMS.Presentation.Contracts
 {
     public partial class UnitInPeriodDTO : ViewModelBase
     {
-        
+        public long Id
+        {
+            get { return UnitId; }
+
+        }
     }
 }

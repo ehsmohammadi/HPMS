@@ -112,6 +112,13 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
             WebClientHelper.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 
+        public void GetEmployeeUnitsInPeriod(Action<EmployeeUnitsDTO, Exception> action, string employeeNo, long periodId)
+        {
+            var url = string.Format(baseAddress + makeEmployeeUnitsApiAdress(periodId, employeeNo));
+            WebClientHelper.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+
+        }
+
         public void AssignJobPositionsToEmployee(Action<EmployeeJobPositionsDTO, Exception> action, long periodId, string employeeNo,
             EmployeeJobPositionsDTO employeeJobPositions)
         {
@@ -119,6 +126,9 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
             WebClientHelper.Put(new Uri(url, PMSClientConfig.UriKind), action, employeeJobPositions, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 
-
+        private string makeEmployeeUnitsApiAdress(long periodId, string employeeNo)
+        {
+            return "Periods/" + periodId + "/Employees/" + employeeNo + "/Units";
+        }
     }
 }

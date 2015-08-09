@@ -5,6 +5,7 @@ namespace MITD.PMS.Presentation.Contracts
 {
     public interface IPeriodUnitServiceFacade : IFacadeService
     {
+        List<InquirySubjectWithInquirersDTO> GetInquirySubjectsWithInquirers(long periodId, long unitId);
         PageResultDTO<UnitInPeriodDTOWithActions> GetAllUnits(long periodId, int pageSize, int pageIndex,
                                                             QueryStringConditions queryStringConditions, string selectedColumns);
         UnitInPeriodDTO UpdateUnit(long periodId, UnitInPeriodDTO unitInPeriod);

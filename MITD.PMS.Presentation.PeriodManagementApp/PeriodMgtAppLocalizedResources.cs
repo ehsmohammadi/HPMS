@@ -139,7 +139,13 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
                 return "گروه شاخص سازمانی در دوره";
             }
         }
-        
+        public string UnitInPeriodInquiryView
+        {
+            get
+            {
+                return "مدیریت پیکربندی نظر سنجی";
+            }
+        }    
         
     }
 }

@@ -194,4 +194,68 @@ namespace MITD.PMS.Persistence.NH
 
         }
     }
+
+    public class UnitEmployeeMap : ClassMapping<UnitEmployee>
+    {
+        public UnitEmployeeMap()
+        {
+            Table("Employees_Units");
+
+            ManyToOne(p => p.Unit, pm =>
+            {
+                pm.Access(Accessor.Field);
+                pm.Column("PeriodUnitId");
+                pm.NotNullable(true);
+            });
+
+            Property("dbId", m =>
+            {
+                m.Column("Id");
+                m.Access(Accessor.Field);
+                m.Generated(PropertyGeneration.Always);
+            });
+
+            Component(x => x.EmployeeId, m =>
+            {
+                m.Access(Accessor.Field);
+                m.Property("dbId", idMap =>
+                {
+                    idMap.Lazy(false);
+                    idMap.Column("EmployeeId");
+                    idMap.Generated(PropertyGeneration.Always);
+                });
+
+                m.Property(i => i.EmployeeNo, map =>
+                {
+                    map.Column("EmployeeNo");
+                    map.NotNullable(true);
+                    map.Access(Accessor.Field);
+                    map.Generated(PropertyGeneration.Always);
+                });
+                m.Component(i => i.PeriodId,
+                    mm =>
+                    {
+                        mm.Access(Accessor.Field);
+                        mm.Property(p => p.Id, pm =>
+                        {
+                            pm.Access(Accessor.Field);
+                            pm.Column("PeriodId");
+                            pm.Generated(PropertyGeneration.Always);
+                        });
+                    });
+            });
+
+            Property(c => c.FromDate, m =>
+            {
+                m.Access(Accessor.Field);
+                m.Generated(PropertyGeneration.Always);
+            });
+            Property(c => c.ToDate, m =>
+            {
+                m.Access(Accessor.Field);
+                m.Generated(PropertyGeneration.Always);
+            });
+
+        }
+    }
 }

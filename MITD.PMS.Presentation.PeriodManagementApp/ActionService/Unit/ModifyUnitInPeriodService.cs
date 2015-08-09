@@ -26,7 +26,7 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
                     if (exp == null)
                     {
                         if (res != null)
-                            periodController.ShowUnitInPeriodView(vm.Period.Id, vm.SelectedUnitInPeriod.Data.Id, ActionType.ModifyUnitInPeriod);
+                            periodController.ShowUnitInPeriodView(vm.Period.Id, vm.SelectedUnitInPeriod.Data.Id,null, ActionType.ModifyUnitInPeriod);
                         else
                             pmsController.ShowMessage("اطلاعات واحد دوره جهت ارسال به صفحه ویرایش معتبر نمی باشد");
                     }

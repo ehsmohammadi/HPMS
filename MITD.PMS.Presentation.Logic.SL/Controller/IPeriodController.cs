@@ -16,16 +16,16 @@ namespace MITD.PMS.Presentation.Logic
     public interface IPeriodController
     {
 
-        
-       
+
+        void ShowUnitInPeriodInquiryView(PeriodDTO period, UnitInPeriodDTO unitInPeriodDto, ActionType action);
         void ShowPeriodView(PeriodDTO period, ActionType actionType);
         void ShowPeriodList(bool showInNewTab);
 
         void ShowJobInPeriodListView(PeriodDTO period, bool showInNewTab = false);
         void ShowJobInPeriodView(long periodId, long? jobId, ActionType actionType);
 
-        //void ShowUnitInPeriodView(UnitInPeriodAssignmentDTO unitInPeriod, ActionType action);
-        void ShowUnitInPeriodView(long periodId, long? unitId, ActionType actionType);
+      //  void ShowUnitInPeriodView(UnitInPeriodAssignmentDTO unitInPeriod, ActionType action);
+        void ShowUnitInPeriodView(long periodId, long? unitId,long? parentId , ActionType actionType);
         void ShowUnitInPeriodTreeView(PeriodDTOWithAction period, bool showInNewTab = false);
         void ShowUnitIndexInPeriodView(UnitIndexInPeriodDTO unitIndexInPeriodDto, ActionType action);
         void ShowUnitIndexInPeriodTreeView(PeriodDTOWithAction period, bool showInNewTab = false);

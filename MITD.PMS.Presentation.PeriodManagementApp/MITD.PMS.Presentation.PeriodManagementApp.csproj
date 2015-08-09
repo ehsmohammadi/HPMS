@@ -172,6 +172,7 @@
     <Compile Include="ActionService\UnitIndex\ModifyUnitIndexInPeriodService.cs" />
     <Compile Include="ActionService\Unit\AddUnitInPeriodService.cs" />
     <Compile Include="ActionService\Unit\DeleteUnitInPeriodService.cs" />
+    <Compile Include="ActionService\Unit\ManageUnitInPeriodInquiryService.cs" />
     <Compile Include="ActionService\Unit\ModifyUnitInPeriodService.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -248,6 +249,8 @@
     <Compile Include="ViewModels\UnitIndex\UnitIndexGroupInPeriodVM.cs" />
     <Compile Include="ViewModels\UnitIndex\UnitIndexInPeriodTreeVM.cs" />
     <Compile Include="ViewModels\UnitIndex\UnitIndexInPeriodVM.cs" />
+    <Compile Include="ViewModels\Unit\InquirySubjectInquirersUnitVM.cs" />
+    <Compile Include="ViewModels\Unit\UnitInPeriodInquiryVM.cs" />
     <Compile Include="ViewModels\Unit\UnitInPeriodUnitIndicesVM.cs" />
     <Compile Include="ViewModels\Unit\UnitInPrdFieldsVM.cs" />
     <Compile Include="ViewModels\Unit\UnitInPeriodVM.cs" />
@@ -376,6 +379,9 @@
     </Compile>
     <Compile Include="Views\UnitIndex\UnitIndexInPeriodView.xaml.cs">
       <DependentUpon>UnitIndexInPeriodView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Unit\UnitInPeriodInquiryView.xaml.cs">
+      <DependentUpon>UnitInPeriodInquiryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Unit\UnitInPeriodUnitIndicesView.xaml.cs">
       <DependentUpon>UnitInPeriodUnitIndicesView.xaml</DependentUpon>
@@ -520,6 +526,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\UnitIndex\UnitIndexInPeriodView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Unit\UnitInPeriodInquiryView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

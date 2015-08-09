@@ -90,6 +90,24 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
             WebClientHelper.Put(new Uri(url, PMSClientConfig.UriKind), action, unitInPeriodDto, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
 
         }
-     
+
+
+        public void UpdateInquirySubjectInquirers(Action<InquirySubjectWithInquirersDTO, Exception> action, long periodId, long unitId,
+            InquirySubjectWithInquirersDTO inquirySubjectWithInquirersDTO)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void GetInquirySubjectWithInquirers(Action<List<InquirySubjectWithInquirersDTO>, Exception> action, long periodId, long unitId)
+        {
+            var url = string.Format(baseAddress + makeUnitPositionInquirySubjectsApiAdress(periodId, unitId) + "?Include=Inquirers");
+            WebClientHelper.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+
+        }
+
+        private string makeUnitPositionInquirySubjectsApiAdress(long periodId, long unitId)
+        {
+            return "Periods/" + periodId + "/Units/" + unitId + "/InquirySubjects";
+        }
     }
 }
