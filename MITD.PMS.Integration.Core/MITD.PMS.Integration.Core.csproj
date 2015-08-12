@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B30A232A-AD2C-4AA0-BDDA-2D860F092FAD}</ProjectGuid>
+    <ProjectGuid>{5BC98324-6E74-4475-A917-CAB0AC10D0B4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MITD.PMS.Integration.PMS.API</RootNamespace>
-    <AssemblyName>MITD.PMS.Integration.PMS.API</AssemblyName>
+    <RootNamespace>MITD.PMS.Integration.Core</RootNamespace>
+    <AssemblyName>MITD.PMS.Integration.Core</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -31,11 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MITD.Presentation">
-      <HintPath>..\Dependency\MITD.Presentation.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,24 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EmployeeServiceWrapper.cs" />
-    <Compile Include="PMSClientConfig.cs" />
+    <Compile Include="IntegrationWebClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MITD.PMS.Integration.Core\MITD.PMS.Integration.Core.csproj">
-      <Project>{5bc98324-6e74-4475-a917-cab0ac10d0b4}</Project>
-      <Name>MITD.PMS.Integration.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MITD.PMS.Integration.PMS.Contract\MITD.PMS.Integration.PMS.Contract.csproj">
-      <Project>{d56e14fc-7536-43e1-819c-0c11174bed1f}</Project>
-      <Name>MITD.PMS.Integration.PMS.Contract</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MITD.PMS.Presentation.Contracts\MITD.PMS.Presentation.Contracts.csproj">
-      <Project>{C2C01D60-617D-4A38-AF22-091A1C3AE365}</Project>
-      <Name>MITD.PMS.Presentation.Contracts</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
