@@ -60,34 +60,34 @@ namespace MITD.PMS.Persistence.NH
                         });
                 });
 
-                mapper.Component(x => x.InquirySubjectId, m =>
-                {
-                    m.Property("dbId", idMap =>
-                    {
-                        idMap.Lazy(false);
-                        idMap.Column("InquirySubjectId");
-                    });
+                //mapper.Component(x => x.InquirySubjectId, m =>
+                //{
+                //    m.Property("dbId", idMap =>
+                //    {
+                //        idMap.Lazy(false);
+                //        idMap.Column("InquirySubjectId");
+                //    });
 
 
-                    m.Access(Accessor.Field);
-                    m.Property(i => i.EmployeeNo, map =>
-                    {
-                        map.Column("SubjectEmployeeNo");
-                        map.NotNullable(true);
-                        map.Access(Accessor.Field);
-                    });
-                    m.Component(i => i.PeriodId,
-                        mm =>
-                        {
-                            mm.Access(Accessor.Field);
-                            mm.Property(p => p.Id, pm =>
-                            {
-                                pm.Access(Accessor.Field);
-                                pm.Column("PeriodId");
-                                pm.Generated(PropertyGeneration.Always);
-                            });
-                        });
-                });
+                //    m.Access(Accessor.Field);
+                //    m.Property(i => i.EmployeeNo, map =>
+                //    {
+                //        map.Column("SubjectEmployeeNo");
+                //        map.NotNullable(true);
+                //        map.Access(Accessor.Field);
+                //    });
+                //    m.Component(i => i.PeriodId,
+                //        mm =>
+                //        {
+                //            mm.Access(Accessor.Field);
+                //            mm.Property(p => p.Id, pm =>
+                //            {
+                //                pm.Access(Accessor.Field);
+                //                pm.Column("PeriodId");
+                //                pm.Generated(PropertyGeneration.Always);
+                //            });
+                //        });
+                //});
 
 
 
@@ -153,7 +153,7 @@ namespace MITD.PMS.Persistence.NH
                             mm.Property(p => p.Id, pm =>
                             {
                                 pm.Access(Accessor.Field);
-                                pm.Column("InquirerrUnitId");
+                                pm.Column("InquirerUnitId");
                             });
                         });
                 });
@@ -164,7 +164,7 @@ namespace MITD.PMS.Persistence.NH
             ManyToOne(p => p.Unit, pm =>
             {
                 pm.Access(Accessor.Field);
-                pm.Column("PeriodInquirySubjectrUnitId");
+                pm.Column("PeriodInquirySubjectUnitId");
                 pm.NotNullable(true);
             });
 
@@ -182,14 +182,8 @@ namespace MITD.PMS.Persistence.NH
                 m.NotNullable(true);
             });
 
-            //Property(p => p.InquirerJobPositionLevel, m =>
-            //{
-            //    m.Access(Accessor.Field);
-            //    m.Column("InquirerJobPositionLevel");
-            //    m.NotNullable(true);
-            //    m.Type<EnumerationTypeConverter<JobPositionLevel>>();
-            //});
-
+            
+         
            
 
 

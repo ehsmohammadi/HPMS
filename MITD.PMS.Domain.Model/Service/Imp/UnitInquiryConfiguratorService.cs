@@ -10,12 +10,14 @@ namespace MITD.PMS.Domain.Service
     {
         private readonly IUnitRepository _unitRep;
         private readonly IJobPositionRepository _jobPositionRepository;
+        private readonly IJobPositionInquiryConfiguratorService _jobPositionInquiryConfiguratorService;
 
 
-        public UnitInquiryConfiguratorService(IUnitRepository unitRep,IJobPositionRepository jobPositionRepository)
+        public UnitInquiryConfiguratorService(IUnitRepository unitRep,IJobPositionRepository jobPositionRepository,IJobPositionInquiryConfiguratorService jobPositionInquiryConfiguratorService)
         {
             this._unitRep = unitRep;
             _jobPositionRepository = jobPositionRepository;
+            _jobPositionInquiryConfiguratorService = jobPositionInquiryConfiguratorService;
         }
 
         public List<UnitInquiryConfigurationItem> Configure(Unit unit)
@@ -43,6 +45,7 @@ namespace MITD.PMS.Domain.Service
             var res = new List<UnitInquiryConfigurationItem>();
             foreach (var jobposition in jobpositions)
             {
+                jobposition.ConfigeInquirer(_jobPositionInquiryConfiguratorService,false);
                 foreach (var empl in jobposition.Employees)
                 {
                     res.Add(

@@ -18,67 +18,32 @@
         <Grid Background="White" >
             <Grid.RowDefinitions >
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <!--<sdk:DataGrid Grid.Row="0" Name="drgList" AutoGenerateColumns="False" RowHeight="40" HeadersVisibility="None"  
-                          HorizontalScrollBarVisibility="Disabled" ColumnWidth="*"   SelectionMode="Single" IsReadOnly="True"
-                      ItemsSource="{Binding InquirySubjectWithInquirers, Mode=TwoWay}">
+    
+            <sdk:Label Grid.Row="0"  Content="لیست ارزیاب های مجاز:" />
+            <StackPanel Grid.Row="1" Orientation="Horizontal" >
+               <sdk:Label Content="نام خانوادگی"></sdk:Label>
+                <TextBox Text="{Binding EmployeeCriteria.LastName,Mode=TwoWay}" ></TextBox>
+               <sdk:Label Content="کد پرسنلی"></sdk:Label>
+                <TextBox Text="{Binding EmployeeCriteria.EmployeeNo,Mode=TwoWay}"></TextBox>
 
-                <sdk:DataGrid.Columns>
-                    <sdk:DataGridTextColumn   Width="*" FontSize="13" FontWeight="ExtraBlack" Binding="{Binding Path=EmployeeName}"  />
-                </sdk:DataGrid.Columns>
+                <Button  Style="{StaticResource CustomButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                        Content="{Binding Path=SearchCommand.DisplayName}" 
+                                        Command="{Binding Path=SearchCommand.Command}"  />
 
-                <sdk:DataGrid.RowDetailsTemplate >
-                    <DataTemplate >
-                        <Grid Background="White">
-                            <Grid.RowDefinitions>
-                                <RowDefinition  Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition  Height="*"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>-->
-            <!--<sdk:Label Grid.Row="0"  Content="لیست ارزیاب ها بر اساس چارت سازمانی  و نظر سنجی 360 درجه:" />
-                            <Border Grid.Row="1" HorizontalAlignment="Stretch" AllowDrop="True" >
-
-                                <ContentControl HorizontalAlignment="Stretch"  Content="{Binding Path=SelectedInquirySubjectWithInquirers.Inquirers}"  >
-
-                                    <ContentControl.ContentTemplate >
-                                        <DataTemplate >
-                                            <ItemsControl IsTabStop="False" ItemsSource="{Binding}" Margin="6,2">
-                                                <ItemsControl.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <CheckBox Margin="10"  VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                        Content="{Binding Path=FullNameWithJobPositionName,Mode=TwoWay}" 
-                                        IsChecked="{Binding Mode=TwoWay, Path=IsPermitted}"/>
-                                                    </DataTemplate>
-                                                </ItemsControl.ItemTemplate>
-                                                <ItemsControl.ItemsPanel>
-                                                    <ItemsPanelTemplate>
-                                                        <toolkit:WrapPanel   ItemWidth="200" Orientation="Horizontal" >
-
-                                                        </toolkit:WrapPanel>
-                                                    </ItemsPanelTemplate>
-                                                </ItemsControl.ItemsPanel>
-                                            </ItemsControl>
-                                        </DataTemplate>
-                                    </ContentControl.ContentTemplate>
-                                </ContentControl>
-
-
-                            </Border>-->
-            <sdk:Label Grid.Row="0"  Content="لیست ارزیاب های انتخابی:" />
-            <StackPanel Grid.Row="1" Orientation="Vertical">
-
-                <sdk:DataGrid  Name="drgList" AutoGenerateColumns="False" MinHeight="200" HorizontalAlignment="Stretch" SelectionMode="Single" IsReadOnly="True"
-                                        ItemsSource="{Binding Path=SelectedInquirySubjectWithInquirers.CustomInquirers}" 
-                                        SelectedItem="{Binding Path=SelectedCustomInquirer, Mode=TwoWay}"  >
+            </StackPanel>
+            <StackPanel Grid.Row="2" Orientation="Vertical" >
+                <sdk:DataGrid   Name="drgList" AutoGenerateColumns="False" MinHeight="200" 
+                                
+                                HorizontalAlignment="Stretch" SelectionMode="Single" IsReadOnly="True"
+                                        ItemsSource="{Binding Path=Inquirers,Mode=TwoWay}" 
+                                        SelectedItem="{Binding Path=Inquirer, Mode=TwoWay}"  >
                     <sdk:DataGrid.Columns>
 
                         <sdk:DataGridTextColumn Header="نام ونام خانوادگی  "
@@ -86,66 +51,60 @@
 
 
                         <sdk:DataGridTextColumn Header="کد پرسنلی " 
-                                            Binding="{Binding Path=EmployeeNo}"  />
+                                            Binding="{Binding Path=PersonnelNo}"  />
 
-                        <sdk:DataGridTextColumn Header="پست سازمانی" 
-                                            Binding="{Binding Path=EmployeeJobPositionName}"  />
+                        <!--<sdk:DataGridTextColumn Header="پست سازمانی" 
+                                            Binding="{Binding Path=EmployeeJobPositionName}"  />-->
 
 
                     </sdk:DataGrid.Columns>
                 </sdk:DataGrid>
-
-
+                <StackPanel  HorizontalAlignment="Center" Orientation="Horizontal">
+                    <pr:CustomDataPager Height="26" FontFamily="Tahoma" FontSize="11" PageSize="10" Width="200" 
+                                    Source="{Binding Path=Inquirers, Mode=TwoWay}" />
+                </StackPanel>
 
             </StackPanel>
-
-            <StackPanel Grid.Row="2" Orientation="Horizontal">
-
-                <sdk:Label Content="انتخاب نظردهنده جدید:" />
-
-                <pr:ComboBoxEx Width="150" Margin="5" HorizontalAlignment="Left" 
-                             DisplayMemberPath="LastName" 
-                             ItemsSource="{Binding Path=Employees, Mode=TwoWay}" 
-                             SelectedItem="{Binding Mode=TwoWay, Path=SelectedEmployee,
-                             ValidatesOnExceptions=true,
-                             ValidatesOnDataErrors=true,
-                             NotifyOnValidationError=true}" 
-                             SelectedValuePath="Id">
-                    <pr:ComboBoxEx.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <VirtualizingStackPanel/>
-                        </ItemsPanelTemplate>
-                    </pr:ComboBoxEx.ItemsPanel>
-                </pr:ComboBoxEx>
+            <StackPanel Grid.Row="3" Orientation="Horizontal">
 
                 <Button  Style="{StaticResource CustomButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"
                                 Content="{Binding Path=AddInquirerCommand.DisplayName}" 
                                 Command="{Binding Path=AddInquirerCommand.Command}"  />
+             
+
+            </StackPanel>
+            <sdk:Label Grid.Row="4"  Content="لیست ارزیاب های انتخابی:" />
+            <sdk:DataGrid Grid.Row="5"   Name="drgList1" AutoGenerateColumns="False" MinHeight="200"
+                                       HorizontalAlignment="Stretch" 
+                                      SelectionMode="Single" IsReadOnly="True"
+                                        ItemsSource="{Binding Path=UnitInPeriod.Inquirers}" 
+                                        SelectedItem="{Binding Path=SelectedCustomInquirer, Mode=TwoWay}"  >
+                <sdk:DataGrid.Columns>
+
+                    <sdk:DataGridTextColumn Header="نام ونام خانوادگی  "
+                                            Binding="{Binding Path=FullName}"  />
+
+
+                    <sdk:DataGridTextColumn Header="کد پرسنلی " 
+                                            Binding="{Binding Path=EmployeeNo}"  />
+
+                    <!--<sdk:DataGridTextColumn Header="پست سازمانی" 
+                                            Binding="{Binding Path=EmployeeJobPositionName}"  />-->
+
+
+                </sdk:DataGrid.Columns>
+            </sdk:DataGrid>
+            <StackPanel Grid.Row="6" Orientation="Horizontal">
+            
 
                 <Button  Style="{StaticResource CustomButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"
                                         Content="{Binding Path=RemoveInquirerCommand.DisplayName}" 
                                         Command="{Binding Path=RemoveInquirerCommand.Command}"  />
 
-            </StackPanel>
+             </StackPanel>
 
-            <StackPanel Grid.Row="3" Background="AliceBlue" Height="30" Grid.ColumnSpan="2"   VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                                    Content="{Binding Path=SaveCommand.DisplayName}"
-                                    Command="{Binding Path=SaveCommand.Command}"  >
 
-                </Button>
-
-            </StackPanel>
         </Grid>
-        <!--</DataTemplate>
-
-                </sdk:DataGrid.RowDetailsTemplate>
-
-
-            </sdk:DataGrid>-->
-
-
-
-        <!--</Grid>-->
+      
     </ScrollViewer>
 </pr:ViewBase>

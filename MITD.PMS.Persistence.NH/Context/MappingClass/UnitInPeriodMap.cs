@@ -77,7 +77,18 @@ namespace MITD.PMS.Persistence.NH
                 m.Lazy(LazyRelation.NoLazy);
             });
 
+            Bag(e => e.ConfigurationItemList, cm =>
+            {
+                cm.Table("Unit_InquiryConfigurationItems");
+                cm.Key(k =>
+                {
+                    k.Column("PeriodInquirySubjectUnitId");
+                    k.ForeignKey("none");
+                });
+                cm.Access(Accessor.Field);
+                cm.Cascade(Cascade.All | Cascade.DeleteOrphans);
 
+            }, mapping => mapping.OneToMany());
         }
     }
 

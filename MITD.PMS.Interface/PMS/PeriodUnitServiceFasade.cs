@@ -27,7 +27,7 @@ namespace MITD.PMS.Interface
 
 
         public PeriodUnitServiceFacade(IUnitService unitService,
-            IMapper<Unit,UnitInPeriodAssignmentDTO> unitAssignmentMapper,
+            IMapper<Unit, UnitInPeriodAssignmentDTO> unitAssignmentMapper,
             IFilterMapper<Unit, UnitInPeriodDTOWithActions> unitInPeriodDTOWithActionsMapper,
             IFilterMapper<Unit, UnitInPeriodDTO> unitInPeriodDTOMapper,
             IMapper<UnitCustomField, CustomFieldDTO> unitCustomFieldMapper,
@@ -49,14 +49,14 @@ namespace MITD.PMS.Interface
         public UnitInPeriodDTO AssignUnit(long periodId, UnitInPeriodDTO unitInPeriod)
         {
             var unit = unitService.AssignUnit(
-                 new UnitId(new PeriodId(periodId), new SharedUnitId(unitInPeriod.ParentId.Value)),
+                (unitInPeriod.ParentId == null) ? new UnitId(new PeriodId(periodId), new SharedUnitId(0)) : new UnitId(new PeriodId(periodId), new SharedUnitId(unitInPeriod.ParentId.Value)),
                 new UnitId(new PeriodId(periodId), new SharedUnitId(unitInPeriod.UnitId)),
                 unitInPeriod.CustomFields.Select(c => new SharedUnitCustomFieldId(c.Id)).ToList(),
                 unitInPeriod.UnitIndices.Select(c => new UnitIndexForUnit(new AbstractUnitIndexId(c.Id), c.ShowforTopLevel, c.ShowforSameLevel, c.ShowforLowLevel)).ToList()
 
                           );
             return unitInPeriodDTOMapper.MapToModel(unit, new string[] { });
-    
+
         }
 
         public string RemoveUnit(long periodId, long unitId)
@@ -67,23 +67,45 @@ namespace MITD.PMS.Interface
 
         public IEnumerable<UnitInPeriodDTOWithActions> GetUnitsWithActions(long periodId)
         {
+            var res = new List<UnitInPeriodDTOWithActions>();
             var units=unitRep.GetUnits(new PeriodId(periodId));
-            return units.Select(u => unitInPeriodDTOWithActionsMapper.MapToModel(u,new string[]{}));
+
+            foreach (var unit in units)
+            {
+                var u = unitInPeriodDTOWithActionsMapper.MapToModel(unit, new string[] {});
+                 u.Inquirers=new List<EmployeeDTO>();
+
+                unit.ConfigurationItemList.ToList().ForEach(c =>
+                {
+                    var emp = _employeeRepository.GetBy(c.Id.InquirerId);
+                    u.Inquirers.Add(new EmployeeDTO()
+                    {
+                        FirstName = emp.FirstName,
+                        LastName = emp.LastName,
+                        PeriodId = emp.Id.PeriodId.Id,
+                        PersonnelNo=emp.Id.EmployeeNo
+                    });
+                });
+
+            res.Add(u);
+            }
+
+            return res;
         }
 
         public IEnumerable<UnitInPeriodDTO> GetUnits(long periodId)
         {
             var units = unitRep.GetUnits(new PeriodId(periodId));
-            return units.Select(u => unitInPeriodDTOMapper.MapToModel(u,new string[]{}));
+            return units.Select(u => unitInPeriodDTOMapper.MapToModel(u, new string[] { }));
         }
 
         public UnitInPeriodDTO GetUnit(long periodId, long unitId, string selectedColumns)
         {
             var unit = unitRep.GetBy(new UnitId(new PeriodId(periodId), new SharedUnitId(unitId)));
             var unitDto = unitInPeriodDTOMapper.MapToModel(unit, selectedColumns.Split(','));
-         //   unitDto.CustomFields = unit.CustomFields.Select(c => unitCustomFieldMapper.MapToModel(c)).ToList();
-          //  var unitindexIdList = unit.UnitIndexList.Select(j => j.UnitIndexId).ToList();
-           // var unitIndices = unitIndexService.FindUnitIndices(index => unitindexIdList.Contains(index.Id));
+            //   unitDto.CustomFields = unit.CustomFields.Select(c => unitCustomFieldMapper.MapToModel(c)).ToList();
+            //  var unitindexIdList = unit.UnitIndexList.Select(j => j.UnitIndexId).ToList();
+            // var unitIndices = unitIndexService.FindUnitIndices(index => unitindexIdList.Contains(index.Id));
             //todo change this mapping to valid mapping need som work !!!!!!
             //var unitInPeriodUnitIndexDTOList = new List<UnitInPeriodUnitIndexDTO>();
             //foreach (var unitIndex in unitIndices)
@@ -193,6 +215,18 @@ namespace MITD.PMS.Interface
         }
 
 
-        
+
+
+
+        public void AddInquirer(long periodId, long unitId, string employeeNo)
+        {
+
+            unitService.UpdateInquirers(new EmployeeId(employeeNo, new PeriodId(periodId)), new UnitId(new PeriodId(periodId), new SharedUnitId(unitId)));
+        }
+        public void RemoveInquirer(long periodId, long unitId, string employeeNo)
+        {
+
+           unitService.RemoveInquirer(new PeriodId(periodId),new SharedUnitId(unitId),new EmployeeId(employeeNo,new PeriodId(periodId))  );
+        }
     }
 }

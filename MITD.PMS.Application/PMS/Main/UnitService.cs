@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MITD.Domain.Repository;
 using MITD.PMS.Application.Contracts;
+using MITD.PMS.Domain.Model.Employees;
 using MITD.PMS.Domain.Model.Periods;
 using MITD.PMS.Domain.Model.UnitIndices;
 using MITD.PMS.Domain.Model.Units;
@@ -21,6 +22,7 @@ namespace MITD.PMS.Application
         private readonly IUnitIndexRepository unitIndexRep;
         private readonly IPeriodManagerService periodChecker;
         private readonly IUnitInquiryConfiguratorService _configuratorService;
+        private readonly IEmployeeRepository _employeeRepository;
 
         public UnitService(
                            IUnitRepository unitRep,
@@ -28,7 +30,8 @@ namespace MITD.PMS.Application
                            IUnitIndexRepository unitIndexRep
                            ,IPMSAdminService ipmsAdminService,
                             IPeriodManagerService periodChecker,
-            IUnitInquiryConfiguratorService configuratorService)
+            IUnitInquiryConfiguratorService configuratorService,
+            IEmployeeRepository employeeRepository)
         {
             this.periodRep = periodRep;
             this.ipmsAdminService = ipmsAdminService;
@@ -36,6 +39,7 @@ namespace MITD.PMS.Application
             this.unitIndexRep = unitIndexRep;
             this.periodChecker = periodChecker;
             _configuratorService = configuratorService;
+            _employeeRepository = employeeRepository;
         }
 
 
@@ -199,5 +203,43 @@ namespace MITD.PMS.Application
 
             }
         }
+
+        public void UpdateInquirers(EmployeeId inquirySubjectEmployeeId, UnitId unitId)
+        {
+            using (var tr = new TransactionScope())
+            {
+                var unit = unitRep.GetBy(unitId);
+                var inquirySubject = _employeeRepository.GetBy(inquirySubjectEmployeeId);
+
+               
+                unit.UpdateInquirersBy(inquirySubject);
+
+                tr.Complete();
+            }
+
+        }
+
+        public void RemoveInquirer(PeriodId periodId, SharedUnitId unitId, EmployeeId employeeId)
+        {
+            try
+            {
+                using (var tr = new TransactionScope())
+                {
+                    var unit = unitRep.GetBy(new UnitId(periodId, unitId));
+                    var empl=unit.ConfigurationItemList.SingleOrDefault(c => c.Id.InquirerId == employeeId);
+                    if (empl != null)
+                        unit.DeleteInquirer(empl);
+                    tr.Complete();
+                }
+            }
+            catch (Exception exp)
+            {
+                var res = unitRep.TryConvertException(exp);
+                if (res == null)
+                    throw;
+                throw res;
+            }
+        }
+
     }
 }

@@ -21,5 +21,18 @@ namespace MITD.PMS.Service.Host.Controllers
             return _periodUnitServiceFacade.GetInquirySubjectsWithInquirers(periodId, unitId);
             return null;
         }
+
+       [HttpPut]
+        public string PutInquiry(long periodId, long unitId,string employeeNo)
+        {
+             _periodUnitServiceFacade.AddInquirer( periodId,  unitId, employeeNo);
+             return "";
+        }
+
+       public string DeleteInquiry(long periodId, long unitId, string employeeNo)
+       {
+           _periodUnitServiceFacade.RemoveInquirer(periodId, unitId, employeeNo);
+           return "";
+       }
     }
 }

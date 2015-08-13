@@ -4,6 +4,6 @@ namespace MITD.PMS.Presentation.Contracts
 {
     public partial class EmployeeDTO : ViewModelBase
     {
-
+        public string FullName { get { return FirstName + " " + LastName; } }
     }
 }

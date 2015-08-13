@@ -109,5 +109,20 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
         {
             return "Periods/" + periodId + "/Units/" + unitId + "/InquirySubjects";
         }
+
+        public void AddInquirer(Action<string,Exception> action, long periodId, long unitId, string personalNo)
+        {
+            var url = string.Format(baseAddress + makeUnitPositionInquirySubjectsApiAdress(periodId, unitId) + "?employeeNo="+personalNo);
+            WebClientHelper.Put(new Uri(url, PMSClientConfig.UriKind),action,personalNo, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+
+        }
+
+
+        public void DeleteInquirer(Action<string, Exception> action, long periodId, long unitId, string personalNo)
+        {
+            var url = string.Format(baseAddress + makeUnitPositionInquirySubjectsApiAdress(periodId, unitId) + "?employeeNo=" + personalNo);
+            WebClientHelper.Delete(new Uri(url, PMSClientConfig.UriKind), action,  PMSClientConfig.CreateHeaderDic(userProvider.Token));
+
+        }
     }
 }

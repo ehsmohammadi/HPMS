@@ -1,6 +1,7 @@
 ﻿
 using System.Collections.Generic;
 using MITD.Core;
+using MITD.PMS.Domain.Model.Employees;
 using MITD.PMS.Domain.Model.Periods;
 using MITD.PMS.Domain.Model.Units;
 
@@ -8,8 +9,10 @@ namespace MITD.PMS.Application.Contracts
 {
     public interface IUnitService : IService
     {
-        List<UnitInquiryConfigurationItem> GetInquirySubjectWithInquirer(UnitId unitId);
 
+        void RemoveInquirer(PeriodId periodId, SharedUnitId unitId, EmployeeId employeeId);
+        List<UnitInquiryConfigurationItem> GetInquirySubjectWithInquirer(UnitId unitId);
+        void UpdateInquirers(EmployeeId inquirySubjectEmployeeId, UnitId unitId);
         Unit UpdateUnit(UnitId unitId, List<SharedUnitCustomFieldId> customFieldIdList, IList<UnitIndexForUnit> unitIndexList);
    //     Unit AssignUnit(UnitId unitId, List<SharedUnitCustomFieldId> customFieldIdList, IList<UnitIndexForUnit> unitIndexList);
 

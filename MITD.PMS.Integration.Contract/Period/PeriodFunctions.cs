@@ -27,7 +27,7 @@ namespace MITD.PMS.Integration.Contract.Period
 
 
             //IEmployeeDataProvider EmployeeService;
-            _EmployeeService = new EmployeeConverter(EmployeeService);
+         //   _EmployeeService = new EmployeeConverter(EmployeeService,);
 
             //IOrganChartDataProvider OrganchartService;
             _OrganchartService = new OrganChartConverter(OrganchartService);

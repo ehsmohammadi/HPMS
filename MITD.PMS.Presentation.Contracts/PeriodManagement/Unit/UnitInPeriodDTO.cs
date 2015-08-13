@@ -41,6 +41,14 @@ namespace MITD.PMS.Presentation.Contracts
             set { this.SetField(p => p.CustomFields, ref customFields, value); }
         }
 
+
+        private List<EmployeeDTO> inquirers = new List<EmployeeDTO>();
+        public List<EmployeeDTO> Inquirers
+        {
+            get { return inquirers; }
+            set { this.SetField(p => p.Inquirers, ref inquirers, value); }
+        }
+
         private List<UnitInPeriodUnitIndexDTO> _unitIndices = new List<UnitInPeriodUnitIndexDTO>();
         public List<UnitInPeriodUnitIndexDTO> UnitIndices
         {
