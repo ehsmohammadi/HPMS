@@ -1,5 +1,7 @@
-﻿using MITD.PMS.Integration.Data.Contract.DataProvider;
-using MITD.PMS.Integration.PMS.Contract;
+﻿using System;
+using System.Collections.Generic;
+using MITD.PMS.Integration.Data.Contract.DataProvider;
+using MITD.PMS.Integration.PMS.API;
 using MITD.PMS.Presentation.Contracts;
 
 namespace MITD.PMS.Integration.Domain
@@ -7,19 +9,19 @@ namespace MITD.PMS.Integration.Domain
     public class EmployeeConverter
     {
         private IEmployeeDataProvider employeeDataProvider;//= new EmployeeDataProvider();
-        private readonly IPMSDataPusher _employeeDataPusher;
+        private readonly IEmployeeServiceWrapper employeeService;
+        public int Result { get; set; }
 
 
-        public EmployeeConverter(IEmployeeDataProvider employeeDataProvider,IPMSDataPusher employeeDataPusher)
+        public EmployeeConverter(IEmployeeDataProvider employeeDataProvider, IEmployeeServiceWrapper employeeService)
         {
             this.employeeDataProvider = employeeDataProvider;
-            _employeeDataPusher = employeeDataPusher;
+            this.employeeService = employeeService;
+            Result = 0;
         }
 
         public void ConvertEmployee(PeriodDTO periodDto)
         {
-          
-            
 
             var idList = employeeDataProvider.GetEmployeeIds();
 
@@ -33,7 +35,18 @@ namespace MITD.PMS.Integration.Domain
                 desEmployee.LastName = personDetail.Family;
                 desEmployee.PersonnelNo = personDetail.PersonnelCode;
                 desEmployee.PeriodId = periodDto.Id;
-                _employeeDataPusher.insertEmployee(desEmployee);
+
+                desEmployee.CustomFields = new List<CustomFieldValueDTO>();
+
+                employeeService.AddEmployee(
+                    (r, e) =>
+                    {
+                        if(e!=null)
+                            throw new Exception("bad shod");
+                        Result++;
+
+                    }, desEmployee);
+                System.Threading.Thread.Sleep(500);
             }
         }
     }
