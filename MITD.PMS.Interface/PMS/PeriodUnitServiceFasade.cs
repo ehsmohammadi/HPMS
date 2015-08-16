@@ -103,6 +103,20 @@ namespace MITD.PMS.Interface
         {
             var unit = unitRep.GetBy(new UnitId(new PeriodId(periodId), new SharedUnitId(unitId)));
             var unitDto = unitInPeriodDTOMapper.MapToModel(unit, selectedColumns.Split(','));
+            unit.ConfigurationItemList.ToList().ForEach(c =>
+            {
+                var emp = _employeeRepository.GetBy(c.Id.InquirerId);
+                unitDto.Inquirers.Add(new EmployeeDTO()
+                {
+                    FirstName = emp.FirstName,
+                    LastName = emp.LastName,
+                    PeriodId = emp.Id.PeriodId.Id,
+                    PersonnelNo = emp.Id.EmployeeNo
+                });
+            });
+
+
+            
             //   unitDto.CustomFields = unit.CustomFields.Select(c => unitCustomFieldMapper.MapToModel(c)).ToList();
             //  var unitindexIdList = unit.UnitIndexList.Select(j => j.UnitIndexId).ToList();
             // var unitIndices = unitIndexService.FindUnitIndices(index => unitindexIdList.Contains(index.Id));

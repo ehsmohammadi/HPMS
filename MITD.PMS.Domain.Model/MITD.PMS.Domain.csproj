@@ -102,6 +102,10 @@
     <Compile Include="Model\InquiryJobIndexPoints\Exception\InquiryJobIndexPointDuplicateException.cs" />
     <Compile Include="Model\InquiryJobIndexPoints\Exception\InquiryJobIndexPointException.cs" />
     <Compile Include="Model\InquiryJobIndexPoints\Exception\InquiryJobIndexPointModifyException.cs" />
+    <Compile Include="Model\InquiryUnitIndexPoints\InquiryUnitIndexPointCreated.cs" />
+    <Compile Include="Model\InquiryUnitIndexPoints\InquiryUnitIndexPointId.cs" />
+    <Compile Include="Model\InquiryUnitIndexPoints\InquiryUnitIndexPoint.cs" />
+    <Compile Include="Model\InquiryUnitIndexPoints\Repository\IInquiryUnitIndexPointRepository.cs" />
     <Compile Include="Model\JobIndexPoints\CalculationPoint.cs" />
     <Compile Include="Model\JobIndexPoints\EmployeePointPersistanceHolder.cs" />
     <Compile Include="Model\CalculationException\EmployeeCalculationException.cs" />
@@ -211,6 +215,11 @@
     <Compile Include="Model\UnitIndices\UnitIndexGroup.cs" />
     <Compile Include="Model\UnitIndices\UnitIndex.cs" />
     <Compile Include="Model\UnitIndices\Repository\IUnitIndexRepository.cs" />
+    <Compile Include="Model\InquiryUnitIndexPoints\Exception\InquiryUnitIndexPointArgumentException.cs" />
+    <Compile Include="Model\InquiryUnitIndexPoints\Exception\InquiryUnitIndexPointDeleteException.cs" />
+    <Compile Include="Model\InquiryUnitIndexPoints\Exception\InquiryUnitIndexPointDuplicateException.cs" />
+    <Compile Include="Model\InquiryUnitIndexPoints\Exception\InquiryUnitIndexPointException.cs" />
+    <Compile Include="Model\InquiryUnitIndexPoints\Exception\InquiryUnitIndexPointModifyException.cs" />
     <Compile Include="Model\Units\Exception\UnitArgumentException.cs" />
     <Compile Include="Model\Units\Exception\UnitDeleteException.cs" />
     <Compile Include="Model\Units\Exception\UnitDuplicateException.cs" />

@@ -276,6 +276,12 @@ namespace MITD.PMS.Domain.Model.Periods
             State.CheckSettingInquiryJobIndexPointValue();
         }
 
+        public virtual void CheckSettingInquiryUnitIndexPointValueValue()
+        {
+            State.CheckSettingInquiryUnitIndexPointValue();
+        }
+
+
         public virtual void RollBack(IPeriodManagerService periodManagerService)
         {
             State.RollBack(this, periodManagerService);

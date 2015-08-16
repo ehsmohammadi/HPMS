@@ -61,6 +61,7 @@
     <Compile Include="PMSAdmin\IJobService.cs" />
     <Compile Include="PMSAdmin\ICustomFieldService.cs" />
     <Compile Include="PMS\ICalculationExceptionPersister.cs" />
+    <Compile Include="PMS\IUnitInquiryService.cs" />
     <Compile Include="PMS\IUnitIndexService.cs" />
     <Compile Include="PMS\InquiryJobIndexPoinItem.cs" />
     <Compile Include="PMS\InquirySubjectWithInquirers.cs" />

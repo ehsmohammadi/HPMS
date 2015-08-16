@@ -224,6 +224,12 @@ namespace MITD.PMS.Domain.Model.Periods
         {
             throw new PeriodInvalidStateOperationException("Period", DisplayName, "CheckSettingInquiryJobIndexPointValue");
         }
+
+        internal virtual void CheckSettingInquiryUnitIndexPointValue()
+        {
+            throw new PeriodInvalidStateOperationException("Period", DisplayName, "CheckSettingInquiryUnitIndexPointValue");
+        }
+
         internal virtual void CheckAddClaim()
         {
             throw new PeriodInvalidStateOperationException("Period", DisplayName, "CheckAddClaim");

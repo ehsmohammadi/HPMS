@@ -168,7 +168,7 @@ namespace MITD.PMS.Presentation.Logic
 
         private void init()
         {
-           employeeCriteria=new EmployeeCriteria();
+            employeeCriteria=new EmployeeCriteria();
             Inquirers=new PagedSortableCollectionView<EmployeeDTOWithActions>();
             SelectedCustomInquirer=new EmployeeDTO();
             Inquirers.OnRefresh += (s, args) => getSubjectsInquirers();

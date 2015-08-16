@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using MITD.PMS.Domain.Model.Employees;
 using MITD.PMS.Domain.Model.InquiryJobIndexPoints;
+using MITD.PMS.Domain.Model.InquiryUnitIndexPoints;
 using MITD.PMS.Domain.Model.Jobs;
 using MITD.PMS.Domain.Model.JobIndices;
 using MITD.PMS.Domain.Model.JobPositions;
@@ -35,6 +36,9 @@ namespace MITD.PMS.Domain.Service
         void CheckShowingInquirySubject(Employee inquirer);
         void CheckShowingInquiryJobIndexPoint(JobPosition jobPosition);
         void CheckSettingInquiryJobIndexPointValueValue(InquiryJobIndexPoint inquiryJobIndexPoint);
+        void CheckSettingInquiryUnitIndexPointValueValue(InquiryUnitIndexPoint inquiryJobIndexPoint);
+        
+
         void CopyBasicData(Period currentPeriod, Period sourcePeriod);
         void DeleteBasicData(Period period);
         BasicDataCopyingProgress GetCopyingStateProgress(Period period);

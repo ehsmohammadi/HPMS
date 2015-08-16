@@ -7,6 +7,7 @@ using MITD.PMS.Domain.Model.Calculations;
 using MITD.PMS.Domain.Model.Claims;
 using MITD.PMS.Domain.Model.Employees;
 using MITD.PMS.Domain.Model.InquiryJobIndexPoints;
+using MITD.PMS.Domain.Model.InquiryUnitIndexPoints;
 using MITD.PMS.Domain.Model.JobIndexPoints;
 using MITD.PMS.Domain.Model.JobIndices;
 using MITD.PMS.Domain.Model.JobPositions;
@@ -252,6 +253,13 @@ namespace MITD.PMS.Domain.Service
         {
             var period = periodRep.GetById(unit.Id.PeriodId);
             period.CheckModifyingUnitIndices(unit);
+        }
+
+
+        public void CheckSettingInquiryUnitIndexPointValueValue(InquiryUnitIndexPoint inquiryUnitIndexPoint)
+        {
+            var period = periodRep.GetById(inquiryUnitIndexPoint.ConfigurationItemId.InquirerId.PeriodId);
+            period.CheckSettingInquiryJobIndexPointValueValue();
         }
     }
 }
