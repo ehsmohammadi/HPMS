@@ -204,15 +204,15 @@ namespace MITD.PMS.Application
             }
         }
 
-        public void UpdateInquirers(EmployeeId inquirySubjectEmployeeId, UnitId unitId)
+        public void UpdateInquirers(EmployeeId inquirySubjectEmployeeId, UnitId unitId, long unitIndexInPeiodUnit)
         {
             using (var tr = new TransactionScope())
             {
                 var unit = unitRep.GetBy(unitId);
                 var inquirySubject = _employeeRepository.GetBy(inquirySubjectEmployeeId);
 
-               
-                unit.UpdateInquirersBy(inquirySubject);
+
+                unit.UpdateInquirersBy(inquirySubject, new AbstractUnitIndexId(unitIndexInPeiodUnit));
 
                 tr.Complete();
             }

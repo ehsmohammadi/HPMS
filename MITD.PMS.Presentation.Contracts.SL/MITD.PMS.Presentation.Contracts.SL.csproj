@@ -333,6 +333,9 @@
     <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\Inquiry\InquirySubjectDTO.cs">
       <Link>PeriodManagement\Inquiry\InquirySubjectDTO.cs</Link>
     </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\Inquiry\InquiryUnitDTO.cs">
+      <Link>PeriodManagement\Inquiry\InquiryUnitDTO.cs</Link>
+    </Compile>
     <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\Inquiry\JobIndexValueDTO.cs">
       <Link>PeriodManagement\Inquiry\JobIndexValueDTO.cs</Link>
     </Compile>
@@ -513,6 +516,7 @@
     <Compile Include="PeriodManagement\Claim\ClaimTypeDTO_Client.cs" />
     <Compile Include="PeriodManagement\Inquiry\InquiryForm\InquirySubjectInquiryFormListDTO_Client.cs" />
     <Compile Include="PeriodManagement\Inquiry\InquiryForm\InquiryFormInquirerDTO_Client.cs" />
+    <Compile Include="PeriodManagement\Inquiry\InquiryUnitDTO_Client.cs" />
     <Compile Include="PeriodManagement\Inquiry\JobIndexValueDTO_Client.cs" />
     <Compile Include="PeriodManagement\Inquiry\InquiryFormDTO_Client.cs" />
     <Compile Include="PeriodManagement\Inquiry\InquirySubjectDTO_Client.cs" />

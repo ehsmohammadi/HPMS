@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Castle.Core.Internal;
 using MITD.PMS.Presentation.Contracts;
+using MITD.PMS.Presentation.Logic.Wrapper.PeriodManagement.UnitIndex;
 using MITD.PMS.Presentation.PeriodManagementApp;
 using MITD.Presentation;
 
@@ -72,11 +73,16 @@ namespace MITD.PMS.Presentation.Logic
         private readonly IPMSController appController;
         private readonly IEmployeeServiceWrapper employeeService;
         private readonly IUnitInPeriodServiceWrapper unitInPeriodService;
-
+        private readonly IUnitIndexInPeriodServiceWrapper unitIndexInPeriodService;
         #endregion
 
         #region Properties & Back Fields
-
+        private ObservableCollection<UnitInPeriodUnitIndexDTO> unitIndexInPeriodList = new ObservableCollection<UnitInPeriodUnitIndexDTO>();
+        public ObservableCollection<UnitInPeriodUnitIndexDTO> UnitIndexInPeriodList
+        {
+            get { return unitIndexInPeriodList; }
+            set { this.SetField(vm => vm.UnitIndexInPeriodList, ref unitIndexInPeriodList, value); }
+        }
         private PeriodDTO period;
         public PeriodDTO Period
         {
@@ -89,6 +95,14 @@ namespace MITD.PMS.Presentation.Logic
         {
             get { return unitInPeriod; }
             set { this.SetField(s => s.UnitInPeriod, ref unitInPeriod, value); }
+        }
+
+
+        private UnitInPeriodUnitIndexDTO _unitInPeriodUnitIndexDto;
+        public UnitInPeriodUnitIndexDTO UnitInPeriodUnitIndexDto
+        {
+            get { return _unitInPeriodUnitIndexDto; }
+            set { this.SetField(s => s.UnitInPeriodUnitIndexDto, ref _unitInPeriodUnitIndexDto, value); }
         }
 
         //Todo change
@@ -112,13 +126,13 @@ namespace MITD.PMS.Presentation.Logic
             get { return _inquirer; }
             set { this.SetField(vm => vm.Inquirer, ref _inquirer, value); }
         }
-        private EmployeeDTO _selectedCustomInquirer;
-        public EmployeeDTO SelectedCustomInquirer
+        private InquiryUnitDTO _selectedCustomInquirer;
+        public InquiryUnitDTO SelectedCustomInquirer
         {
             get { return _selectedCustomInquirer; }
             set { this.SetField(vm => vm.SelectedCustomInquirer, ref _selectedCustomInquirer, value); }
         }
-        
+
 
         private EmployeeCriteria employeeCriteria;
         public EmployeeCriteria EmployeeCriteria
@@ -137,7 +151,7 @@ namespace MITD.PMS.Presentation.Logic
             set { this.SetField(vm => vm.InquirySubjectWithInquirers, ref inquirySubjectWithInquirers, value); }
         }
 
-   
+
 
         #endregion
 
@@ -147,16 +161,19 @@ namespace MITD.PMS.Presentation.Logic
         {
             PeriodMgtAppLocalizedResources = new PeriodMgtAppLocalizedResources();
             init();
+           
         }
 
         public UnitInPeriodInquiryVM(IPMSController appController,
                              IEmployeeServiceWrapper employeeService,
                              IUnitInPeriodServiceWrapper unitInPeriodService,
-                             IPeriodMgtAppLocalizedResources periodMgtAppLocalizedResources)
+                             IPeriodMgtAppLocalizedResources periodMgtAppLocalizedResources,
+                             IUnitIndexInPeriodServiceWrapper unitIndexInPeriodServiceWrapper)
         {
             this.appController = appController;
             this.employeeService = employeeService;
             this.unitInPeriodService = unitInPeriodService;
+            this.unitIndexInPeriodService = unitIndexInPeriodServiceWrapper;
             PeriodMgtAppLocalizedResources = periodMgtAppLocalizedResources;
             init();
 
@@ -168,9 +185,10 @@ namespace MITD.PMS.Presentation.Logic
 
         private void init()
         {
-            employeeCriteria=new EmployeeCriteria();
-            Inquirers=new PagedSortableCollectionView<EmployeeDTOWithActions>();
-            SelectedCustomInquirer=new EmployeeDTO();
+            employeeCriteria = new EmployeeCriteria();
+            Inquirers = new PagedSortableCollectionView<EmployeeDTOWithActions>();
+            SelectedCustomInquirer = new InquiryUnitDTO();
+            UnitInPeriodUnitIndexDto=new UnitInPeriodUnitIndexDTO();
             Inquirers.OnRefresh += (s, args) => getSubjectsInquirers();
         }
 
@@ -182,8 +200,8 @@ namespace MITD.PMS.Presentation.Logic
                 HideBusyIndicator();
                 if (exp == null)
                 {
-                   UnitInPeriod=res;
-             
+                    UnitInPeriod = res;
+
                 }
             }), Period.Id, UnitInPeriod.UnitId);
         }
@@ -193,12 +211,13 @@ namespace MITD.PMS.Presentation.Logic
 
             Period = periodDTOParam;
             UnitInPeriod = unitInPeriodParam;
+            Load();
             DisplayName = PeriodMgtAppLocalizedResources.UnitInPeriodInquiryView + " " +
                           unitInPeriodParam.Name;
             getSubjectsInquirers();
         }
 
-
+    
         private void getSubjectsInquirers()
         {
             ShowBusyIndicator("در حال بارگذاری اطلاعات");
@@ -208,17 +227,17 @@ namespace MITD.PMS.Presentation.Logic
                    HideBusyIndicator();
                    if (exp == null)
                    {
-                      
-                           Inquirers.TotalItemCount = res.TotalCount;
-                           Inquirers.PageIndex = Math.Max(0, res.CurrentPage - 1);
-                       Inquirers.SourceCollection=res.Result;
-                         
-                      
+
+                       Inquirers.TotalItemCount = res.TotalCount;
+                       Inquirers.PageIndex = Math.Max(0, res.CurrentPage - 1);
+                       Inquirers.SourceCollection = res.Result;
+
+
                    }
                    else appController.HandleException(exp);
                }), Period.Id, EmployeeCriteria, Inquirers.PageSize, Inquirers.PageIndex + 1);
 
-           
+
 
             //unitInPeriodService.GetInquirySubjectWithInquirers((res, exp) => appController.BeginInvokeOnDispatcher(() =>
             //{
@@ -237,7 +256,7 @@ namespace MITD.PMS.Presentation.Logic
             //                    EmployeeNo = c.PersonnelNo,
             //                    FullName = c.FullName
             //                }));
-                            
+
             //                //InquirySubjectWithInquirers =
             //                //    res.Select(i => new InquirySubjectInquirersUnitViewModel(unitInPeriodService, appController, employeeService)
             //                //    {
@@ -261,16 +280,16 @@ namespace MITD.PMS.Presentation.Logic
         {
             unitInPeriodService.DeleteInquirer((res, exp) => appController.BeginInvokeOnDispatcher(() =>
             {
-                if (exp==null)
+                if (exp == null)
                 {
-                    appController.ShowMessage("نظر دهنده  مورد نظر حذف شد");  
+                    appController.ShowMessage("نظر دهنده  مورد نظر حذف شد");
                     Load();
                 }
                 else
                 {
                     appController.HandleException(exp);
                 }
-            }), Period.Id, UnitInPeriod.UnitId, SelectedCustomInquirer.PersonnelNo);
+            }), Period.Id, UnitInPeriod.UnitId, SelectedCustomInquirer.EmployeeNo);
         }
         private void Add()
         {
@@ -285,10 +304,10 @@ namespace MITD.PMS.Presentation.Logic
                     {
                         appController.HandleException(exp);
                     }
-                    
-              
 
-                }), Period.Id, UnitInPeriod.UnitId,Inquirer.PersonnelNo );
+
+
+                }), Period.Id, UnitInPeriod.UnitId, Inquirer.PersonnelNo,UnitInPeriodUnitIndexDto.Id);
 
         }
 

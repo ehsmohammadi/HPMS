@@ -238,6 +238,7 @@
     <Compile Include="ReportModel\EmployeeIdWithUnitId.cs" />
     <Compile Include="ReportModel\EmployeeIdWithJobPositionId.cs" />
     <Compile Include="ReportModel\EmployeePointData.cs" />
+    <Compile Include="ReportModel\InquirySubjectWithUnit.cs" />
     <Compile Include="ReportModel\JobIndexPointWithEmployee.cs" />
     <Compile Include="Model\Policies\RulesCompiled.cs" />
     <Compile Include="ReportModel\InquirySubjectWithJobPosition.cs" />

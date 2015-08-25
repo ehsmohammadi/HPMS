@@ -158,6 +158,38 @@ namespace MITD.PMS.Persistence.NH
                         });
                 });
 
+                mapper.Component(x=>x.UnitIndexIdUintPeriod, m =>
+                {
+                    m.Access(Accessor.Field);
+                    m.Property(idMap => idMap.Id, idMap1 =>
+                    {
+                        
+                        idMap1.Access(Accessor.Field);
+                        idMap1.Column("UnitIndexIdUintPeriod");
+                       // idMap1.Generated(PropertyGeneration.Always);
+
+                      
+                    });
+                  
+
+                });
+
+              
+                //m.Component(i => i.PeriodId, mm =>
+                //{
+                //    mm.Access(Accessor.Field);
+                //    mm.Property(p => p.Id, pm =>
+                //    {
+                //        pm.Access(Accessor.Field);
+                //        pm.Column("PeriodId");
+
+                //    });
+                //});
+
+
+
+
+
 
             });
 

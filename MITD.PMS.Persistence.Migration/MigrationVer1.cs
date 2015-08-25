@@ -490,6 +490,7 @@ namespace MITD.PMS.Persistence
                 .ForeignKey("Periods", "Id")
 
                 .WithColumn("InquirySubjectId").AsInt64().Nullable()
+                .WithColumn("UnitIndexIdUintPeriod").AsInt64().NotNullable()
     
                 //.WithColumn("SubjectEmployeeNo").AsString()
 

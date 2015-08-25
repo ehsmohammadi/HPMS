@@ -24,10 +24,28 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-    
-            <sdk:Label Grid.Row="0"  Content="لیست ارزیاب های مجاز:" />
+
+            <sdk:Label Grid.Row="0"  Content="شاخص های ارزیابی واحد:" />
             <StackPanel Grid.Row="1" Orientation="Horizontal" >
+                <sdk:Label Content="شاخص"></sdk:Label>
+                <pr:ComboBoxEx   Width="150"  HorizontalAlignment="Right" 
+                             DisplayMemberPath="Name" 
+                             ItemsSource="{Binding Path=UnitInPeriod.UnitIndices, Mode=TwoWay}" 
+                              SelectedItem="{Binding Path=UnitInPeriodUnitIndexDto, Mode=TwoWay}"                            
+                                >
+                    <pr:ComboBoxEx.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel/>
+                        </ItemsPanelTemplate>
+                    </pr:ComboBoxEx.ItemsPanel>
+
+                </pr:ComboBoxEx>
+            </StackPanel>
+            <sdk:Label Grid.Row="2"  Content="لیست ارزیاب های مجاز:" />
+            <StackPanel Grid.Row="3" Orientation="Horizontal" >
                <sdk:Label Content="نام خانوادگی"></sdk:Label>
                 <TextBox Text="{Binding EmployeeCriteria.LastName,Mode=TwoWay}" ></TextBox>
                <sdk:Label Content="کد پرسنلی"></sdk:Label>
@@ -38,7 +56,7 @@
                                         Command="{Binding Path=SearchCommand.Command}"  />
 
             </StackPanel>
-            <StackPanel Grid.Row="2" Orientation="Vertical" >
+            <StackPanel Grid.Row="4" Orientation="Vertical" >
                 <sdk:DataGrid   Name="drgList" AutoGenerateColumns="False" MinHeight="200" 
                                 
                                 HorizontalAlignment="Stretch" SelectionMode="Single" IsReadOnly="True"
@@ -65,7 +83,7 @@
                 </StackPanel>
 
             </StackPanel>
-            <StackPanel Grid.Row="3" Orientation="Horizontal">
+            <StackPanel Grid.Row="5" Orientation="Horizontal">
 
                 <Button  Style="{StaticResource CustomButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"
                                 Content="{Binding Path=AddInquirerCommand.DisplayName}" 
@@ -73,8 +91,8 @@
              
 
             </StackPanel>
-            <sdk:Label Grid.Row="4"  Content="لیست ارزیاب های انتخابی:" />
-            <sdk:DataGrid Grid.Row="5"   Name="drgList1" AutoGenerateColumns="False" MinHeight="200"
+            <sdk:Label Grid.Row="6"  Content="لیست ارزیاب های انتخابی:" />
+            <sdk:DataGrid Grid.Row="7"   Name="drgList1" AutoGenerateColumns="False" MinHeight="200"
                                        HorizontalAlignment="Stretch" 
                                       SelectionMode="Single" IsReadOnly="True"
                                         ItemsSource="{Binding Path=UnitInPeriod.Inquirers}" 
@@ -88,13 +106,14 @@
                     <sdk:DataGridTextColumn Header="کد پرسنلی " 
                                             Binding="{Binding Path=EmployeeNo}"  />
 
-                    <!--<sdk:DataGridTextColumn Header="پست سازمانی" 
-                                            Binding="{Binding Path=EmployeeJobPositionName}"  />-->
+                    <sdk:DataGridTextColumn Header="عنوان شاخص ارزیابی" 
+                                            Binding="{Binding Path=IndexName}"  />
 
+                  
 
                 </sdk:DataGrid.Columns>
             </sdk:DataGrid>
-            <StackPanel Grid.Row="6" Orientation="Horizontal">
+            <StackPanel Grid.Row="8" Orientation="Horizontal">
             
 
                 <Button  Style="{StaticResource CustomButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"

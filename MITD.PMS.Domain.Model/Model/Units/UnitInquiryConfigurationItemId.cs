@@ -1,6 +1,7 @@
 ﻿using MITD.Core.Builders;
 using MITD.Domain.Model;
 using MITD.PMS.Domain.Model.Employees;
+using MITD.PMS.Domain.Model.UnitIndices;
 
 namespace MITD.PMS.Domain.Model.Units
 {
@@ -8,6 +9,12 @@ namespace MITD.PMS.Domain.Model.Units
     {
         #region Properties
 
+        private readonly AbstractUnitIndexId unitIndexIdUintPeriod;
+        public virtual AbstractUnitIndexId UnitIndexIdUintPeriod
+        {
+            get { return unitIndexIdUintPeriod; }
+        }
+        
         private readonly UnitId inquirerUnitId;
         public virtual UnitId InquirerUnitId
         {
@@ -42,12 +49,13 @@ namespace MITD.PMS.Domain.Model.Units
         }
 
         public UnitInquiryConfigurationItemId(UnitId inquirerUnitId, EmployeeId inquirerId,
-            UnitId inquirySubjectUnitId)//, EmployeeId inquirySubjectId)
+            UnitId inquirySubjectUnitId,AbstractUnitIndexId abstractUnitIndexId)//, EmployeeId inquirySubjectId)
         {
             this.inquirerId = inquirerId;
             this.inquirySubjectUnitId = inquirySubjectUnitId;
            // this.inquirySubjectId = inquirySubjectId;
             this.inquirerUnitId = inquirerUnitId;
+            this.unitIndexIdUintPeriod = abstractUnitIndexId;
         }
 
         #endregion

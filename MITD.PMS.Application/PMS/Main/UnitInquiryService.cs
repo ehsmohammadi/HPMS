@@ -12,7 +12,7 @@ using MITD.PMSReport.Domain.Model;
 
 namespace MITD.PMS.Application
 {
-    public class UnitInquiryService : IInquiryService
+    public class UnitInquiryService : IUnitInquiryService
     {
         private readonly IUnitInquiryConfiguratorService configurator;
         private readonly IEmployeeRepository employeeRep;
@@ -20,7 +20,7 @@ namespace MITD.PMS.Application
         private readonly IUnitRepository jobPositionRep;
         private readonly IUnitRepository jobRep;
         private readonly IUnitIndexRepository jobIndexRep;
-      //  private readonly IInquiryUnitIndexPointService inquiryUnitIndexPointService;
+   //     private readonly IInquiryUnitIndexPointService inquiryUnitIndexPointService;
         private readonly IPeriodManagerService periodChecker;
 
 
@@ -31,7 +31,7 @@ namespace MITD.PMS.Application
             IUnitRepository jobPositionRep,
             IUnitRepository jobRep,
             IUnitIndexRepository jobIndexRep,
-         //   IInquiryUnitIndexPointService inquiryUnitIndexPointService,
+          //  IInquiryUnitIndexPointService inquiryUnitIndexPointService,
             IPeriodManagerService periodChecker
             )
         {
@@ -50,6 +50,7 @@ namespace MITD.PMS.Application
             var inquirer = employeeRep.GetBy(inquirerEmployeeId);
             periodChecker.CheckShowingInquirySubject(inquirer);
             var configurationItems = configurator.GetUnitInquiryConfigurationItemBy(inquirer);
+
             return employeeRep.GetEmployeeByWithUnit(configurationItems.Select(c => c.Id),inquirer.Id.PeriodId);
         }
 

@@ -9,9 +9,9 @@ namespace MITD.PMS.Application.Contracts
 {
     public interface IUnitInquiryService : IService
     {
-       // List<InquirySubjectWithUnit> GetInquirySubjects(EmployeeId employeeId);
+        List<InquirySubjectWithUnit> GetInquirySubjects(EmployeeId employeeId);
         List<InquiryUnitIndexPoint> GetAllInquiryUnitIndexPointBy(UnitInquiryConfigurationItemId configurationItemId);
-      //  void UpdateInquiryUnitIndexPoints(IEnumerable<InquiryUnitIndexPoinItem> inquiryUnitIndexPoinItems);
+        void UpdateInquiryUnitIndexPoints(IEnumerable<InquiryUnitIndexPoinItem> inquiryUnitIndexPoinItems);
         void CreateAllInquiryUnitIndexPoint(UnitInquiryConfigurationItem itm);
     }
 }

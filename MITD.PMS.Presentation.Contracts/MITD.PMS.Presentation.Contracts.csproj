@@ -188,6 +188,8 @@
     <Compile Include="PeriodManagement\Inquiry\InquiryForm\InquiryFormInquirerDTO_Server.cs" />
     <Compile Include="PeriodManagement\Inquiry\InquiryForm\InquiryFormInquirerDTO.cs" />
     <Compile Include="PeriodManagement\Inquiry\InquiryForm\InquirySubjectInquiryFormListDTO.cs" />
+    <Compile Include="PeriodManagement\Inquiry\InquiryUnitDTO_Server.cs" />
+    <Compile Include="PeriodManagement\Inquiry\InquiryUnitDTO.cs" />
     <Compile Include="PeriodManagement\JobIndexPoint\JobIndexPointSummaryDTOWithAction.cs" />
     <Compile Include="PeriodManagement\JobIndexPoint\JobIndexPointSummaryDTOWithAction_Server.cs" />
     <Compile Include="Calculation\OrganChartEmployeesCalculationDTO.cs" />

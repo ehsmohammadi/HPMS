@@ -116,6 +116,18 @@ namespace MITD.PMS.Persistence.NH
                 .SetParameter("id", periodId.Id)
                 .ExecuteUpdate();
 
+
+            session.CreateSQLQuery(
+                "DELETE FROM Periods_Units_UnitIndices WHERE  PeriodUnitId in (select id from Periods_Units where PeriodId = :id)")
+                .SetParameter("id", periodId.Id)
+                .ExecuteUpdate();
+
+            session.CreateSQLQuery(
+                "DELETE FROM Periods_UnitIndices_CustomFields WHERE  PeriodUnitIndexId in (select id from Periods_AbstractUnitIndices where PeriodId = :id)")
+                .SetParameter("id", periodId.Id)
+                .ExecuteUpdate();
+
+
             session.CreateSQLQuery("DELETE FROM Periods_Units WHERE  PeriodId = :id")
                 .SetParameter("id", periodId.Id)
                 .ExecuteUpdate();

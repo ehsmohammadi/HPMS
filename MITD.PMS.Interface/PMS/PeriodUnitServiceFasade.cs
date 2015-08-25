@@ -17,13 +17,14 @@ namespace MITD.PMS.Interface
         private readonly IUnitService unitService;
         private readonly IUnitIndexService unitIndexService;
         private readonly IEmployeeRepository _employeeRepository;
+        private readonly IUnitIndexRepository _unitIndexRepository;
         private readonly IMapper<Unit, UnitInPeriodAssignmentDTO> unitAssignmentMapper;
 
         private readonly IFilterMapper<Unit, UnitInPeriodDTOWithActions> unitInPeriodDTOWithActionsMapper;
         private readonly IMapper<UnitCustomField, CustomFieldDTO> unitCustomFieldMapper;
         private readonly IFilterMapper<Unit, UnitInPeriodDTO> unitInPeriodDTOMapper;
         private readonly IUnitRepository unitRep;
-
+        
 
 
         public PeriodUnitServiceFacade(IUnitService unitService,
@@ -33,7 +34,8 @@ namespace MITD.PMS.Interface
             IMapper<UnitCustomField, CustomFieldDTO> unitCustomFieldMapper,
             IUnitRepository unitRep,
             IUnitIndexService unitIndexService,
-            IEmployeeRepository employeeRepository)
+            IEmployeeRepository employeeRepository,
+            IUnitIndexRepository unitIndexRepository)
         {
             this.unitService = unitService;
             this.unitAssignmentMapper = unitAssignmentMapper;
@@ -43,6 +45,7 @@ namespace MITD.PMS.Interface
             this.unitCustomFieldMapper = unitCustomFieldMapper;
             this.unitIndexService = unitIndexService;
             _employeeRepository = employeeRepository;
+            _unitIndexRepository = unitIndexRepository;
         }
 
 
@@ -73,19 +76,19 @@ namespace MITD.PMS.Interface
             foreach (var unit in units)
             {
                 var u = unitInPeriodDTOWithActionsMapper.MapToModel(unit, new string[] {});
-                 u.Inquirers=new List<EmployeeDTO>();
+                // u.Inquirers=new List<EmployeeDTO>();
 
-                unit.ConfigurationItemList.ToList().ForEach(c =>
-                {
-                    var emp = _employeeRepository.GetBy(c.Id.InquirerId);
-                    u.Inquirers.Add(new EmployeeDTO()
-                    {
-                        FirstName = emp.FirstName,
-                        LastName = emp.LastName,
-                        PeriodId = emp.Id.PeriodId.Id,
-                        PersonnelNo=emp.Id.EmployeeNo
-                    });
-                });
+                //unit.ConfigurationItemList.ToList().ForEach(c =>
+                //{
+                //    var emp = _employeeRepository.GetBy(c.Id.InquirerId);
+                //    u.Inquirers.Add(new EmployeeDTO()
+                //    {
+                //        FirstName = emp.FirstName,
+                //        LastName = emp.LastName,
+                //        PeriodId = emp.Id.PeriodId.Id,
+                //        PersonnelNo=emp.Id.EmployeeNo
+                //    });
+                //});
 
             res.Add(u);
             }
@@ -106,36 +109,33 @@ namespace MITD.PMS.Interface
             unit.ConfigurationItemList.ToList().ForEach(c =>
             {
                 var emp = _employeeRepository.GetBy(c.Id.InquirerId);
-                unitDto.Inquirers.Add(new EmployeeDTO()
+                unitDto.Inquirers.Add(new InquiryUnitDTO()
                 {
-                    FirstName = emp.FirstName,
-                    LastName = emp.LastName,
-                    PeriodId = emp.Id.PeriodId.Id,
-                    PersonnelNo = emp.Id.EmployeeNo
+                    FullName = emp.FirstName+" "+emp.LastName,
+                    EmployeeNo = emp.Id.EmployeeNo,
+                    IndexName = _unitIndexRepository.GetUnitIndexById(new AbstractUnitIndexId(c.Id.UnitIndexIdUintPeriod.Id)).Name
                 });
             });
-
-
             
-            //   unitDto.CustomFields = unit.CustomFields.Select(c => unitCustomFieldMapper.MapToModel(c)).ToList();
-            //  var unitindexIdList = unit.UnitIndexList.Select(j => j.UnitIndexId).ToList();
-            // var unitIndices = unitIndexService.FindUnitIndices(index => unitindexIdList.Contains(index.Id));
+               unitDto.CustomFields = unit.CustomFields.Select(c => unitCustomFieldMapper.MapToModel(c)).ToList();
+              var unitindexIdList = unit.UnitIndexList.Select(j => j.UnitIndexId).ToList();
+             var unitIndices = unitIndexService.FindUnitIndices(index => unitindexIdList.Contains(index.Id));
             //todo change this mapping to valid mapping need som work !!!!!!
-            //var unitInPeriodUnitIndexDTOList = new List<UnitInPeriodUnitIndexDTO>();
-            //foreach (var unitIndex in unitIndices)
-            //{
-            //    var unitUnitIndex = unit.UnitIndexList.Single(j => j.UnitIndexId == unitIndex.Id);
-            //    unitInPeriodUnitIndexDTOList.Add(new UnitInPeriodUnitIndexDTO
-            //    {
-            //        Id = unitIndex.Id.Id,
-            //        IsInquireable = unitIndex.IsInquireable,
-            //        Name = unitIndex.Name,
-            //        ShowforTopLevel = unitUnitIndex.ShowforTopLevel,
-            //        ShowforSameLevel = unitUnitIndex.ShowforSameLevel,
-            //        ShowforLowLevel = unitUnitIndex.ShowforLowLevel
-            //    });
-            //}
-            //unitDto.UnitIndices = unitInPeriodUnitIndexDTOList;
+            var unitInPeriodUnitIndexDTOList = new List<UnitInPeriodUnitIndexDTO>();
+            foreach (var unitIndex in unitIndices)
+            {
+                var unitUnitIndex = unit.UnitIndexList.Single(j => j.UnitIndexId == unitIndex.Id);
+                unitInPeriodUnitIndexDTOList.Add(new UnitInPeriodUnitIndexDTO
+                {
+                    Id = unitIndex.Id.Id,
+                    IsInquireable = unitIndex.IsInquireable,
+                    Name = unitIndex.Name,
+                    ShowforTopLevel = unitUnitIndex.ShowforTopLevel,
+                    ShowforSameLevel = unitUnitIndex.ShowforSameLevel,
+                    ShowforLowLevel = unitUnitIndex.ShowforLowLevel
+                });
+            }
+            unitDto.UnitIndices = unitInPeriodUnitIndexDTOList;
             return unitDto;
 
 
@@ -232,10 +232,10 @@ namespace MITD.PMS.Interface
 
 
 
-        public void AddInquirer(long periodId, long unitId, string employeeNo)
+        public void AddInquirer(long periodId, long unitId, string employeeNo,long unitIndexInPeiodUnit)
         {
 
-            unitService.UpdateInquirers(new EmployeeId(employeeNo, new PeriodId(periodId)), new UnitId(new PeriodId(periodId), new SharedUnitId(unitId)));
+            unitService.UpdateInquirers(new EmployeeId(employeeNo, new PeriodId(periodId)), new UnitId(new PeriodId(periodId), new SharedUnitId(unitId)), unitIndexInPeiodUnit);
         }
         public void RemoveInquirer(long periodId, long unitId, string employeeNo)
         {
