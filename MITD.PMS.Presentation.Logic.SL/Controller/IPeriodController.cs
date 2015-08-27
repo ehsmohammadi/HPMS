@@ -16,7 +16,7 @@ namespace MITD.PMS.Presentation.Logic
     public interface IPeriodController
     {
 
-
+        void ShowUnitsInquiryListView(string employeeNo, long periodId);
         void ShowUnitInPeriodInquiryView(PeriodDTO period, UnitInPeriodDTO unitInPeriodDto, ActionType action);
         void ShowPeriodView(PeriodDTO period, ActionType actionType);
         void ShowPeriodList(bool showInNewTab);

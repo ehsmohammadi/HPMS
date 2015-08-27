@@ -384,6 +384,7 @@ namespace MITD.PMS.Persistence
             Execute.Sql("Drop sequence [dbo].[Periods_AbstractUnitIndexSeq]");
             Execute.Sql("Drop sequence [dbo].[JobIndexPointSeq]");
             Execute.Sql("Drop sequence [dbo].[Inquiry_JobIndexPointsSeq]");
+            Execute.Sql("Drop sequence [dbo].[Inquiry_UnitIndexPointsSeq]");
             Execute.Sql("Drop sequence [dbo].[Periods_ClaimsSeq]");
             Execute.Sql("Drop sequence [dbo].[Calculations_ExceptionsSeq]");
 
@@ -990,6 +991,11 @@ namespace MITD.PMS.Persistence
                 "create sequence [dbo].[CustomFieldTypeSeq] as [bigint] start with 10 increment by 1 minvalue -9223372036854775808 maxValue 9223372036854775807  cache");
             Execute.Sql(
                 "create sequence [dbo].[Inquiry_JobIndexPointsSeq] as [bigint] start with 10 increment by 1 minvalue -9223372036854775808 maxValue 9223372036854775807  cache");
+            Execute.Sql(
+              "create sequence [dbo].[Inquiry_UnitIndexPointsSeq] as [bigint] start with 10 increment by 1 minvalue -9223372036854775808 maxValue 9223372036854775807  cache");
+
+
+
             Execute.Sql(@"
 CREATE SEQUENCE [dbo].[PeriodSeq] 
  AS [bigint]

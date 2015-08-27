@@ -22,14 +22,19 @@ namespace MITD.PMS.Presentation.Contracts
             set { this.SetField(p => p.IndexName, ref indexName, value); }
         }
 
+        private string unitName;
+        public string UnitName
+        {
+            get { return unitName; }
+            set { this.SetField(p => p.UnitName, ref unitName, value); }
+        }
+
         private string fullName;
         public string FullName
         {
             get { return fullName; }
             set { this.SetField(p => p.FullName, ref fullName, value); }
         }
-
-
     
     }
 }

@@ -172,13 +172,16 @@ namespace MITD.PMS.Domain.Service
             if (inquirer == null)
                 return;
             var period = periodRep.GetById(inquirer.Id.PeriodId);
-            period.CheckShowingInquirySubject();
+        //todo bz
+            // period.CheckShowingInquirySubject();
         }
 
         public void CheckShowingInquiryJobIndexPoint(JobPosition jobPosition)
         {
             var period = periodRep.GetById(jobPosition.Id.PeriodId);
-            period.CheckShowingInquirySubject();
+
+            //todo bz
+            //  period.CheckShowingInquirySubject();
         }
 
         public void CheckSettingInquiryJobIndexPointValueValue(InquiryJobIndexPoint inquiryJobIndexPoint)

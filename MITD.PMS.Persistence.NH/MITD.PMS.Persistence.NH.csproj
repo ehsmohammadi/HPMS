@@ -83,6 +83,7 @@
     <Compile Include="CalculationExceptionRepository.cs" />
     <Compile Include="DataAccess.NH\NHDataAccessExceptionAdapter.cs" />
     <Compile Include="IListFetchStrategy.cs" />
+    <Compile Include="IInquiryUnitIndexPointRepository.cs" />
     <Compile Include="InquiryJobIndexPointRepository.cs" />
     <Compile Include="UnitIndexRepository.cs" />
     <Compile Include="JobPositionRepository.cs" />

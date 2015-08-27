@@ -58,6 +58,9 @@ namespace MITD.PMS.Domain.Model.Units
             this.unitIndexIdUintPeriod = abstractUnitIndexId;
         }
 
+
+
+
         #endregion
 
         #region IValueObject Member

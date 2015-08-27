@@ -6,10 +6,12 @@ namespace MITD.PMS.Application.Contracts
 {
     public class InquiryUnitIndexPoinItem
     {
-        public InquiryUnitIndexPoinItem(UnitInquiryConfigurationItemId configurationItemId, AbstractUnitIndexId unitIndexId, string unitIndexValue)
+        public InquiryUnitIndexPoinItem(UnitInquiryConfigurationItemId configurationItemId
+            //, AbstractUnitIndexId unitIndexId
+            , string unitIndexValue)
         {
             ConfigurationItemId = configurationItemId;
-            UnitIndexId = unitIndexId;
+           // UnitIndexId = unitIndexId;
             UnitIndexValue = unitIndexValue;
         }
 
@@ -19,11 +21,11 @@ namespace MITD.PMS.Application.Contracts
             set;
         }
         
-        public AbstractUnitIndexId UnitIndexId
-        {
-            get;
-            set;
-        }
+        //public AbstractUnitIndexId UnitIndexId
+        //{
+        //    get;
+        //    set;
+        //}
 
 
         public string UnitIndexValue

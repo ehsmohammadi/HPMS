@@ -7,6 +7,7 @@ namespace MITD.PMSReport.Domain.Model
     {
         public Employee InquirerUnit { get; set; }
         public Unit InquirySubject { get; set; }
-        //   public Unit InquirySubjectUnit { get; set; }
+        
+       public UnitUnitIndex UnitIndex { get; set; }
     }
 }

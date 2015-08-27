@@ -687,6 +687,32 @@ namespace MITD.PMS.Presentation.Logic
         private ObservableCollection<CommandViewModel> createWorkListCommands()
         {
             var cmdList = new ObservableCollection<CommandViewModel>();
+
+            cmdList.Add(
+              new CommandViewModel("فهرست واحدهای آماده برای نظرسنجی", new DelegateCommand(
+                  () =>
+                  {
+                      controller.ShowBusyIndicator("در حال بارگذاری ماجول...");
+                      controller.GetRemoteInstance<IPeriodController>(
+                          (res, exp) =>
+                          {
+                              controller.HideBusyIndicator();
+                              if (res != null)
+                              {
+                                  res.ShowUnitsInquiryListView(CurrentUser.EmployeeNo, CurrentPeriod.Id);
+                              }
+                              else if (exp != null)
+                              {
+                                  controller.HandleException(exp);
+                              }
+                          });
+                  }
+                  )));
+            
+            
+            
+            
+            
             cmdList.Add(
                new CommandViewModel(LocalizedResources.EmployeesInquiryListSubMenu, new DelegateCommand(
                    () =>

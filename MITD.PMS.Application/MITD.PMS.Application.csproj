@@ -71,6 +71,7 @@
     <Compile Include="PMS\Domain\CalculationDataProvider.cs" />
     <Compile Include="Factory\CalculationDataProviderFactory.cs" />
     <Compile Include="PMS\Domain\CalculationExceptionPersister.cs" />
+    <Compile Include="PMS\Domain\InquiryUnitIndexPointService.cs" />
     <Compile Include="PMS\Domain\PeriodBasicDataCopierService.cs" />
     <Compile Include="PMS\Main\CalculationService.cs" />
     <Compile Include="PMS\Domain\CalculatorEngine.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="PMS\Main\PeriodService.cs" />
     <Compile Include="PMS\Main\JobService.cs" />
     <Compile Include="PMS\Main\ClaimService.cs" />
+    <Compile Include="PMS\Main\UnitInquiryService.cs" />
     <Compile Include="PMS\Main\UnitService.cs" />
     <Compile Include="PMS\Domain\JobIndexPointCalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

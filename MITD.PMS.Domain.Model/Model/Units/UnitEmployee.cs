@@ -20,11 +20,11 @@ namespace MITD.PMS.Domain.Model.Units
 
         #region Properties
 
-        private AbstractUnitIndexId _unitIndexId;
-        public virtual AbstractUnitIndexId UnitIndexId
-        {
-            get { return _unitIndexId; }
-        }
+        //private AbstractUnitIndexId _unitIndexId;
+        //public virtual AbstractUnitIndexId UnitIndexId
+        //{
+        //    get { return _unitIndexId; }
+        //}
 
 
 
@@ -79,7 +79,7 @@ namespace MITD.PMS.Domain.Model.Units
                 throw new ArgumentNullException("UnitIndexId");
 
 
-            this._unitIndexId = abstractUnitIndexId;
+          //  this._unitIndexId = abstractUnitIndexId;
             this._unit = unit;
             this.fromDate = fromDate;
             this.toDate = toDate.Date;
@@ -99,7 +99,7 @@ namespace MITD.PMS.Domain.Model.Units
             builder.Append(this.Unit, other.Unit);
             builder.Append(this.FromDate.Date, other.FromDate.Date);
             builder.Append(this.ToDate.Date, other.ToDate.Date);
-            builder.Append(this.UnitIndexId, other.UnitIndexId);
+            //builder.Append(this, other.UnitIndexId);
             return builder.IsEquals();
 
 

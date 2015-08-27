@@ -6,12 +6,12 @@ using MITD.Presentation;
 
 namespace MITD.PMS.Presentation.Logic
 {
-    public sealed class InquiryFormVM : PeriodMgtWorkSpaceViewModel 
+    public sealed class InquiryUnitFormVM : PeriodMgtWorkSpaceViewModel 
     {
         #region Fields
 
         private readonly IPMSController appController;
-        private readonly IInquiryServiceWrapper inquiryService;
+        private readonly IUnitInquiryServiceWrapper inquiryService;
         private ActionType actionType;
         private long periodId;
         
@@ -50,8 +50,8 @@ namespace MITD.PMS.Presentation.Logic
             set { this.SetField(vm => vm.SelectedInquirer, ref selectedInquirer, value); }
         }
 
-        private InquiryFormDTO inquiryForm;
-        public InquiryFormDTO InquiryForm
+        private InquiryUnitFormDTO inquiryForm;
+        public InquiryUnitFormDTO InquiryForm
         {
             get { return inquiryForm; }
             set { this.SetField(vm => vm.InquiryForm, ref inquiryForm, value); }
@@ -87,14 +87,14 @@ namespace MITD.PMS.Presentation.Logic
 
         #region Constructors
 
-        public InquiryFormVM()
+        public InquiryUnitFormVM()
         {
             PeriodMgtAppLocalizedResources=new PeriodMgtAppLocalizedResources();
             init();
             //Period = new Period { Name = "دوره اول", StartDate = DateTime.Now, EndDate = DateTime.Now };
         }
-        public InquiryFormVM(IPMSController appController, 
-                          IInquiryServiceWrapper inquiryService,
+        public InquiryUnitFormVM(IPMSController appController, 
+                          IUnitInquiryServiceWrapper inquiryService,
                           IPeriodMgtAppLocalizedResources localizedResources)
         {
             this.appController = appController;
@@ -118,19 +118,21 @@ namespace MITD.PMS.Presentation.Logic
         {
             periodId = inquiryFormDTOParam.PeriodId;
             actionType = actionTypeParam;
-            InquiryForm = inquiryFormDTOParam;
-            DisplayName = "فرم نظرسنجی" + " "; //+ InquiryForm.FullName;
-            ShowBusyIndicator("در حال دریافت اطلاعات...");
-            inquiryService.GetInquirySubjectSubEmployeesInquiryFormList((res, exp) =>
-                 appController.BeginInvokeOnDispatcher(() =>
-                {
-                    //HideBusyIndicator();
-                    if (exp == null)
-                        InquirySubjectInquirers = res;
-                    else
-                        appController.HandleException(exp);
+           
+            //todo bz
+            // InquiryForm = inquiryFormDTOParam;
+            //DisplayName = "فرم نظرسنجی" + " "; //+ InquiryForm.FullName;
+            //ShowBusyIndicator("در حال دریافت اطلاعات...");
+            //inquiryService.GetInquirySubjectSubEmployeesInquiryFormList((res, exp) =>
+            //     appController.BeginInvokeOnDispatcher(() =>
+            //    {
+            //        //HideBusyIndicator();
+            //        if (exp == null)
+            //            InquirySubjectInquirers = res;
+            //        else
+            //            appController.HandleException(exp);
 
-                }), periodId, InquiryForm.InquirySubjectEmployeeNo, InquiryForm.JobPositionId, inquiryForm.InquirerEmployeeNo, inquiryForm.InquirerJobPositionId);
+            //    }), periodId, InquiryForm.InquirySubjectEmployeeNo, InquiryForm.JobPositionId, inquiryForm.InquirerEmployeeNo, inquiryForm.InquirerJobPositionId);
         }
 
        
@@ -138,7 +140,6 @@ namespace MITD.PMS.Presentation.Logic
         {
             ShowBusyIndicator();
             UserStateDTO userState = appController.CurrentUserState;
-            //InquiryForm.JobIndexValueList = SelectedInquirer.JobIndexValueList;
             inquiryService.UpdateInquirySubjectForm((res, exp) => appController.BeginInvokeOnDispatcher(() =>
                     {
                         HideBusyIndicator();

@@ -111,6 +111,7 @@ namespace MITD.PMS.Interface
                 var emp = _employeeRepository.GetBy(c.Id.InquirerId);
                 unitDto.Inquirers.Add(new InquiryUnitDTO()
                 {
+                   
                     FullName = emp.FirstName+" "+emp.LastName,
                     EmployeeNo = emp.Id.EmployeeNo,
                     IndexName = _unitIndexRepository.GetUnitIndexById(new AbstractUnitIndexId(c.Id.UnitIndexIdUintPeriod.Id)).Name

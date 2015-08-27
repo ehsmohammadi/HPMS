@@ -76,6 +76,8 @@
     <Compile Include="PMSAdmin\Mapper\Rule\RuleDTOMapper.cs" />
     <Compile Include="PMSAdmin\Mapper\Rule\RuleDTOWithActionMapper.cs" />
     <Compile Include="PMSAdmin\RuleFacadeService.cs" />
+    <Compile Include="PMS\Mapper\Inquiry\InquiryUnitDTOMapper.cs" />
+    <Compile Include="PMS\UnitInquiryServiceFacade.cs" />
     <Compile Include="PMS\Mapper\Calculation\CalculationExceptionMapper.cs" />
     <Compile Include="PMS\Mapper\Claim\ClaimStateMapper.cs" />
     <Compile Include="PMS\Mapper\Claim\ClaimMapper.cs" />
