@@ -23,12 +23,7 @@ namespace MITD.PMS.Presentation.Contracts
         }
 
      
-        private long unitIndexId;
-        public long UnitIndexId
-        {
-            get { return unitIndexId; }
-            set { this.SetField(p => p.UnitIndexId, ref unitIndexId, value); }
-        }
+     
 
         private long inquiryUnitId;
         public long InquiryUnitId

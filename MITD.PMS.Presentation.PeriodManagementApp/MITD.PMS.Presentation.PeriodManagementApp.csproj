@@ -124,6 +124,7 @@
     <Compile Include="ActionService\Calculation\SetDeterministicCalculationService.cs" />
     <Compile Include="ActionService\Calculation\DeletePeriodCalculationExecService.cs" />
     <Compile Include="ActionService\Claim\CancelClaimService.cs" />
+    <Compile Include="ActionService\Inquiry\ManageInquiryUnitFormService.cs" />
     <Compile Include="ActionService\MyTasks\AddPermittedEmployeeToMyTasksService.cs" />
     <Compile Include="ActionService\Claim\ShowClaimService.cs" />
     <Compile Include="ActionService\MyTasks\RemovePermittedEmployeeFromMyTasksServiceService.cs" />

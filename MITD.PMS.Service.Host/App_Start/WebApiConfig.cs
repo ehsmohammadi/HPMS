@@ -117,7 +117,12 @@ namespace MITD.PMS.Service.Host
                name: "EmployeeUnits",
                routeTemplate: "api/Periods/{PeriodId}/Employees/{EmployeeNo}/Units",
                defaults: new { Controller = "EmployeeUnits", id = RouteParameter.Optional });
-
+         
+            config.Routes.MapHttpRoute(
+               name: "InquiryUnitInquiryUnitIndexPoints",
+               routeTemplate:
+                   "api/Periods/{PeriodId}/Inquirers/{InquirerEmployeeNo}/Units/{unitId}/InquiryUnitIndexPoints",
+               defaults: new { Controller = "InquiryUnitInquiryUnitIndexPoints", id = RouteParameter.Optional });
 
 
 

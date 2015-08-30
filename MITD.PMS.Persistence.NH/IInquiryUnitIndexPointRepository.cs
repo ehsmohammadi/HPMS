@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using MITD.PMS.Common;
+using MITD.PMS.Domain.Model.Employees;
 using MITD.PMS.Domain.Model.InquiryUnitIndexPoints;
 using MITD.PMS.Domain.Model.InquiryUnitIndexPoints;
 using MITD.PMS.Domain.Model.UnitIndices;
@@ -56,13 +57,23 @@ namespace MITD.PMS.Persistence.NH
             return session.CreateSQLQuery("select next value for [dbo].[Inquiry_UnitIndexPointsSeq]").UniqueResult<long>();
         }
 
-        public InquiryUnitIndexPoint GetBy(UnitInquiryConfigurationItemId configurationItemId, AbstractUnitIndexId unitIndexId)
+        public InquiryUnitIndexPoint GetBy(UnitInquiryConfigurationItemId configurationItemId)
         {
-            return  rep.Find(i => i.ConfigurationItemId.InquirerId.EmployeeNo == configurationItemId.InquirerId.EmployeeNo &&
-                 i.ConfigurationItemId.InquirySubjectId.EmployeeNo == configurationItemId.InquirySubjectId.EmployeeNo &&
-                 i.ConfigurationItemId.InquirySubjectUnitId.SharedUnitId.Id == configurationItemId.InquirySubjectUnitId.SharedUnitId.Id &&
-                 i.ConfigurationItemId.InquirerId.PeriodId == configurationItemId.InquirerId.PeriodId &&
-                i.UnitIndexId == unitIndexId).Single();
+            //return  rep.Find(i => i.ConfigurationItemId.InquirerId.EmployeeNo == configurationItemId.InquirerId.EmployeeNo &&
+            //     i.ConfigurationItemId.InquirySubjectId.EmployeeNo == configurationItemId.InquirySubjectId.EmployeeNo &&
+            //     i.ConfigurationItemId.InquirySubjectUnitId.SharedUnitId.Id == configurationItemId.InquirySubjectUnitId.SharedUnitId.Id &&
+            //     i.ConfigurationItemId.InquirerId.PeriodId == configurationItemId.InquirerId.PeriodId &&
+            //    i.UnitIndexId == unitInd exId).Single();
+
+            var res = rep.Find(
+                i => i.ConfigurationItemId.InquirerId.EmployeeNo == configurationItemId.InquirerId.EmployeeNo &&
+                     i.ConfigurationItemId.InquirySubjectUnitId.SharedUnitId.Id ==
+                     configurationItemId.InquirySubjectUnitId.SharedUnitId.Id &&
+                     i.ConfigurationItemId.InquirerId.PeriodId == configurationItemId.InquirerId.PeriodId &&
+                     i.ConfigurationItemId.UnitIndexIdUintPeriod == configurationItemId.UnitIndexIdUintPeriod
+                );
+            return res.SingleOrDefault();
+
         }
 
         public bool IsAllInquiryUnitIndexPointsHasValue(Period period)
@@ -76,9 +87,16 @@ namespace MITD.PMS.Persistence.NH
             rep.Delete(inquiryUnitIndexPoint);
         }
 
-        public List<InquiryUnitIndexPoint> GetAllBy(UnitInquiryConfigurationItemId unitPositionInquiryConfigurationItemId)
-        {
-            return rep.Find(i => i.ConfigurationItemId == unitPositionInquiryConfigurationItemId).ToList();
+      //  public List<InquiryUnitIndexPoint> GetAllBy(UnitInquiryConfigurationItemId configurationItemId)
+        public List<InquiryUnitIndexPoint> GetAllBy(EmployeeId employeeId,UnitId unitId)  
+    {
+            return rep.Find(
+                     i => i.ConfigurationItemId.InquirerId.EmployeeNo == employeeId.EmployeeNo &&
+                          i.ConfigurationItemId.InquirySubjectUnitId.SharedUnitId.Id ==unitId.SharedUnitId.Id &&
+                          i.ConfigurationItemId.InquirerId.PeriodId == unitId.PeriodId 
+                         ).ToList();
+            
+            //return rep.Find(i => i.ConfigurationItemId == unitPositionInquiryConfigurationItemId).ToList();
         }
 
         public Exception ConvertException(Exception exp)

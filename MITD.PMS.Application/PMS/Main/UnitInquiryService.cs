@@ -17,7 +17,7 @@ namespace MITD.PMS.Application
         private readonly IUnitInquiryConfiguratorService configurator;
         private readonly IEmployeeRepository employeeRep;
         private readonly IInquiryUnitIndexPointRepository inquiryUnitIndexPointRep;
-      
+
         private readonly IUnitRepository unitRep;
         private readonly IUnitIndexRepository unitIndexRep;
         private readonly IInquiryUnitIndexPointService inquiryUnitIndexPointService;
@@ -50,10 +50,10 @@ namespace MITD.PMS.Application
             //var configurationItems = configurator.GetUnitInquiryConfigurationItemBy(inquirer);
             //return employeeRep.GetEmployeeByWithUnit(configurationItems.Select(c => c.Id),inquirer.Id.PeriodId);
 
-            
-            var res =new List<InquirySubjectWithUnit>();
+
+            var res = new List<InquirySubjectWithUnit>();
             var inquirer = employeeRep.GetBy(inquirerEmployeeId);
-           
+
             //todo bz
             // periodChecker.CheckShowingInquirySubject(inquirer);
             var configurationItems = configurator.GetUnitInquiryConfigurationItemBy(inquirer);
@@ -63,47 +63,61 @@ namespace MITD.PMS.Application
                 {
                     InquirerUnit = inquirer,
                     InquirySubject = unitRep.GetBy(item.Id.InquirySubjectUnitId),
-                    UnitIndex = new UnitUnitIndex(item.Id.UnitIndexIdUintPeriod,false,false,false)
-                    
+                    UnitIndex = new UnitUnitIndex(item.Id.UnitIndexIdUintPeriod, false, false, false)
+
                 });
             }
-            
+
             return res;
 
         }
 
-        public List<InquiryUnitIndexPoint> GetAllInquiryUnitIndexPointBy(UnitInquiryConfigurationItemId configurationItemId)
+        //  public List<InquiryUnitIndexPoint> GetAllInquiryUnitIndexPointBy(UnitInquiryConfigurationItemId configurationItemId)
+        public List<InquiryUnitIndexPoint> GetAllInquiryUnitIndexPointBy(EmployeeId employeeId, UnitId id)
         {
+            #region comment
+
             //var unitPosition = unitPositionRep.GetBy(configurationItemId.InquirySubjectUnitId);
             //periodChecker.CheckShowingInquiryUnitIndexPoint(unitPosition);
             //var itm = unitPosition.ConfigurationItemList.Single(c => c.Id.Equals(configurationItemId));
             //CreateAllInquiryUnitIndexPoint(itm);
             //return inquiryUnitIndexPointRep.GetAllBy(itm.Id);
-            
-            var unit = unitRep.GetBy(configurationItemId.InquirySubjectUnitId);
-         
-            //todo bz question from mh
-            // periodChecker.CheckShowingInquiryUnitIndexPoint(unit);
-            var itm = unit.ConfigurationItemList.Single(c => c.Id.Equals(configurationItemId));
-            CreateAllInquiryUnitIndexPoint(itm);
-            return inquiryUnitIndexPointRep.GetAllBy(itm.Id);
 
+            //var unit = unitRep.GetBy(configurationItemId.InquirySubjectUnitId);
 
+            ////todo bz question from mh
+            //// periodChecker.CheckShowingInquiryUnitIndexPoint(unit);
+            //var itm = unit.ConfigurationItemList.Single(c => c.Id.Equals(configurationItemId));
+            //CreateAllInquiryUnitIndexPoint(itm);
+            //return inquiryUnitIndexPointRep.GetAllBy(itm.Id);
+
+            #endregion
+
+            ////todo bz question from mh
+            //// periodChecker.CheckShowingInquiryUnitIndexPoint(unit);
+            var inquirer = employeeRep.GetBy(employeeId);
+            var configurationItems = configurator.GetUnitInquiryConfigurationItemBy(inquirer);
+            var itm = configurationItems.Where(c => c.Id.InquirySubjectUnitId == id).ToList();
+            foreach (var unitInquiryConfigurationItem in itm)
+            {
+                CreateAllInquiryUnitIndexPoint(unitInquiryConfigurationItem);
+            }
+            return inquiryUnitIndexPointRep.GetAllBy(employeeId,id);
         }
 
         public void UpdateInquiryUnitIndexPoints(InquiryUnitIndexPoinItem inquiryUnitIndexPoinItem)
         {
             //foreach (var inquiryUnitIndexPoinItem in inquiryUnitIndexPoinItems)
-           // {
-                inquiryUnitIndexPointService.Update(inquiryUnitIndexPoinItem.ConfigurationItemId,
-                    inquiryUnitIndexPoinItem.ConfigurationItemId.UnitIndexIdUintPeriod, inquiryUnitIndexPoinItem.UnitIndexValue);
-           // }
+            // {
+            inquiryUnitIndexPointService.Update(inquiryUnitIndexPoinItem.ConfigurationItemId,
+                inquiryUnitIndexPoinItem.ConfigurationItemId.UnitIndexIdUintPeriod, inquiryUnitIndexPoinItem.UnitIndexValue);
+            // }
         }
 
         public void CreateAllInquiryUnitIndexPoint(UnitInquiryConfigurationItem itm)
         {
-            var inquryUnitIndexPoints = inquiryUnitIndexPointRep.GetAllBy(itm.Id);
-            if (inquryUnitIndexPoints == null || inquryUnitIndexPoints.Count == 0)
+            var inquryUnitIndexPoints = inquiryUnitIndexPointRep.GetBy(itm.Id);
+            if (inquryUnitIndexPoints == null)
             {
                 create(itm);
             }
@@ -111,26 +125,28 @@ namespace MITD.PMS.Application
 
         private void create(UnitInquiryConfigurationItem configurationItem)
         {
-            var unit = unitRep.GetBy(configurationItem.Id.InquirySubjectUnitId);
-            foreach (var unitUnitIndex in unit.UnitIndexList)
-            {
-                //todo check for no error
-                var unitIndex = unitIndexRep.GetById(unitUnitIndex.UnitIndexId);
-                if ((unitIndex as UnitIndex).IsInquireable)
-                {
-                    //if ((configurationItem.InquirerUnitLevel == UnitLevel.Childs &&
-                    //     unitUnitIndex.ShowforLowLevel) ||
-                    //    (configurationItem.InquirerUnitLevel == UnitLevel.Parents &&
-                    //     unitUnitIndex.ShowforTopLevel) ||
-                    //    (configurationItem.InquirerUnitLevel == UnitLevel.Siblings &&
-                    //     unitUnitIndex.ShowforSameLevel) || configurationItem.InquirerUnitLevel == UnitLevel.None)
-                        inquiryUnitIndexPointService.Add(configurationItem, unitIndex as UnitIndex, string.Empty);
+           // var unit = unitRep.GetBy(configurationItem.Id.InquirySubjectUnitId);
+            //foreach (var unitUnitIndex in unit.UnitIndexList)
+            //{
+            //    //todo check for no error
+            //    var unitIndex = unitIndexRep.GetById(unitUnitIndex.UnitIndexId);
+            //    if ((unitIndex as UnitIndex).IsInquireable)
+            //    {
+            //        //if ((configurationItem.InquirerUnitLevel == UnitLevel.Childs &&
+            //        //     unitUnitIndex.ShowforLowLevel) ||
+            //        //    (configurationItem.InquirerUnitLevel == UnitLevel.Parents &&
+            //        //     unitUnitIndex.ShowforTopLevel) ||
+            //        //    (configurationItem.InquirerUnitLevel == UnitLevel.Siblings &&
+            //        //     unitUnitIndex.ShowforSameLevel) || configurationItem.InquirerUnitLevel == UnitLevel.None)
+            //            inquiryUnitIndexPointService.Add(configurationItem, unitIndex as UnitIndex, string.Empty);
 
-                }
+            //    }
 
-            }
+            //todo bz question for check IsInquireable
+            //   var unitIndex = unit.UnitIndexList.Single(c => c.UnitIndexId == configurationItem.Id.UnitIndexIdUintPeriod);
+            inquiryUnitIndexPointService.Add(configurationItem, configurationItem.Id.UnitIndexIdUintPeriod, string.Empty);
         }
     }
 
-  
+
 }

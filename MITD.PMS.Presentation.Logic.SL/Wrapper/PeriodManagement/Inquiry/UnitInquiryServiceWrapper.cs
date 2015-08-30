@@ -21,11 +21,9 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
             return "Periods/" + periodId + "/Inquirers/" + inquirerEmployeeNo + "/InquiryUnits";
         }
 
-        private string makeInquirySubjectJobIndexPointApiAdress(long periodId, string inquirerEmployeeNo,
-            string inquirySubjectEmployeeNo, long jobPositionId)
+        private string makeInquiryUnitIndexPointApiAdress(long periodId, string inquirerEmployeeNo,long unitId)
         {
-            return "Periods/" + periodId + "/Inquirers/" + inquirerEmployeeNo + "/InquirySubjects/" +
-                   inquirySubjectEmployeeNo + "/JobPositions/" + jobPositionId + "/InquiryJobIndexPoints";
+            return "Periods/" + periodId + "/Inquirers/" + inquirerEmployeeNo + "/Units/" + unitId + "/InquiryUnitIndexPoints";
         }
 
 
@@ -35,12 +33,7 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
             WebClientHelper.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 
-        public void GetInquiryForm(Action<InquiryUnitDTO, Exception> action, long periodId, string inquirerEmployeeNo, long inquirerJobPositionId, string inquirySubjectEmployeeNo, long jobPositionId)
-        {
-            var url = string.Format(baseAddress + makeInquirySubjectJobIndexPointApiAdress(periodId, inquirerEmployeeNo, inquirySubjectEmployeeNo, jobPositionId) + "?InquirerJobPositionId=" + inquirerJobPositionId);
-            WebClientHelper.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
-        }
-
+      
         public void UpdateInquirySubjectForm(Action<InquiryUnitFormDTO, Exception> action, InquiryUnitFormDTO inquiryForm)
         {
             //var url =
@@ -63,6 +56,14 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
 
 
 
-      
+
+
+
+        public void GetInquiryForm(Action<InquiryUnitFormDTO, Exception> action, long periodId, string inquirerEmployeeNo, long unitId)
+        {
+            var url = string.Format(baseAddress + makeInquiryUnitIndexPointApiAdress(periodId, inquirerEmployeeNo,unitId) );
+            WebClientHelper.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+
+        }
     }
 }

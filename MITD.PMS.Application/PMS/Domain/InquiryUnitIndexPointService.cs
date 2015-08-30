@@ -29,7 +29,7 @@ namespace MITD.PMS.Application
         }
 
 
-        public void Add(UnitInquiryConfigurationItem itm, UnitIndex unitIndex, string value)
+        public void Add(UnitInquiryConfigurationItem itm, AbstractUnitIndexId unitIndex, string value)
         {
             using (var tr = new TransactionScope())
             {
@@ -46,7 +46,7 @@ namespace MITD.PMS.Application
         {
             using (var tr = new TransactionScope())
             {
-                InquiryUnitIndexPoint inquiryUnitIndexPoint = inquiryUnitIndexPointRep.GetBy(configurationItemId, unitIndexId);
+                InquiryUnitIndexPoint inquiryUnitIndexPoint = inquiryUnitIndexPointRep.GetBy(configurationItemId);
                 inquiryUnitIndexPoint.SetValue(unitIndexValue,periodChecker);
                 tr.Complete();
             }

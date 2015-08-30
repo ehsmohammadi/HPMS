@@ -40,8 +40,8 @@ namespace MITD.PMS.Presentation.Logic
                 if (selectedInquirySubject == null) return;
                 InquirySubjectCommands = createCommands();
               //todo bz
-                //if (View != null)
-                //    ((IEmployeesInquiryListView)View).CreateContextMenu(new ReadOnlyCollection<DataGridCommandViewModel>(InquirySubjectCommands));
+                if (View != null)
+                    ((IUnitsInquiryListView)View).CreateContextMenu(new ReadOnlyCollection<DataGridCommandViewModel>(InquirySubjectCommands));
             }
         }
 
@@ -102,7 +102,7 @@ namespace MITD.PMS.Presentation.Logic
         private List<DataGridCommandViewModel> createCommands()
         {
             if (SelectedInquirySubject != null)
-                return CommandHelper.GetControlCommands(this, appController, null);//SelectedInquirySubject.ActionCodes);
+                return CommandHelper.GetControlCommands(this, appController, new List<int>() { 342 });//SelectedInquirySubject.ActionCodes);
             return new List<DataGridCommandViewModel>();
         }
 

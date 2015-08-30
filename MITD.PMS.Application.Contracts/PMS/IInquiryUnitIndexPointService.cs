@@ -9,7 +9,7 @@ namespace MITD.PMS.Application.Contracts
 {
     public interface IInquiryUnitIndexPointService : IService
     {
-        void Add(UnitInquiryConfigurationItem itm, UnitIndex unitIndex, string empty);
+        void Add(UnitInquiryConfigurationItem itm, AbstractUnitIndexId unitIndex, string empty);
         void Update(UnitInquiryConfigurationItemId configurationItemId, AbstractUnitIndexId unitIndexId, string unitIndexValue);
     }
 }

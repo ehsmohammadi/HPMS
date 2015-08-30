@@ -7,8 +7,7 @@ namespace MITD.PMS.Presentation.Contracts
     {
         List<InquiryUnitDTO> GetInquirerInquirySubjects(long periodId, string inquirerEmployeeNo);
 
-        InquiryUnitFormDTO GetInquiryForm(long periodId,string inquirerEmployeeNo,long unitId,
-            long indexId);
+        InquiryUnitFormDTO GetInquiryForm(long periodId,string inquirerEmployeeNo,long unitId);
 
         InquiryUnitFormDTO UpdateInquirySubjectForm(InquiryUnitFormDTO inquiryForm);
     }

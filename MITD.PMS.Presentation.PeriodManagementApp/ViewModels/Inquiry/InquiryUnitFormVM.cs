@@ -114,7 +114,7 @@ namespace MITD.PMS.Presentation.Logic
             
         }
 
-        public void Load(InquiryFormDTO inquiryFormDTOParam, ActionType actionTypeParam)
+        public void Load(InquiryUnitFormDTO inquiryFormDTOParam, ActionType actionTypeParam)
         {
             periodId = inquiryFormDTOParam.PeriodId;
             actionType = actionTypeParam;

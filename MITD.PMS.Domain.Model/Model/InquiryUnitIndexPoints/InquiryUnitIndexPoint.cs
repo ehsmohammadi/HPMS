@@ -34,11 +34,11 @@ namespace MITD.PMS.Domain.Model.InquiryUnitIndexPoints
         }
 
         
-        private readonly AbstractUnitIndexId unitIndexId;
-        public virtual AbstractUnitIndexId UnitIndexId
-        {
-            get { return unitIndexId; }
-        }
+        //private readonly AbstractUnitIndexId unitIndexId;
+        //public virtual AbstractUnitIndexId UnitIndexId
+        //{
+        //    get { return unitIndexId; }
+        //}
 
         private  string unitIndexValue;
         public virtual string UnitIndexValue
@@ -69,11 +69,26 @@ namespace MITD.PMS.Domain.Model.InquiryUnitIndexPoints
             
             if (id == null)
                 throw new ArgumentNullException("unitIndex");
-            unitIndexId = unitIndex.Id;
+            //unitIndexId = unitIndex.Id;
             this.unitIndexValue = unitIndexValue;
         }
 
+        public InquiryUnitIndexPoint(InquiryUnitIndexPointId id, UnitInquiryConfigurationItem configurationItem,
+        AbstractUnitIndexId unitIndex, string unitIndexValue)
+        {
+            if (id == null)
+                throw new ArgumentNullException("inquiryUnitIndexPointId");
+            this.id = id;
+            if (id == null)
+                throw new ArgumentNullException("configurationItem");
+            configurationItemId = configurationItem.Id;
 
+            if (id == null)
+                throw new ArgumentNullException("unitIndex");
+           
+          //  unitIndexId = unitIndex;
+            this.unitIndexValue = unitIndexValue;
+        }
 
         #endregion
 

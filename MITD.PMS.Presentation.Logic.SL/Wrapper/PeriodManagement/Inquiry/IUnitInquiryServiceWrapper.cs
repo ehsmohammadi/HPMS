@@ -9,8 +9,8 @@ namespace MITD.PMS.Presentation.Logic
     {
         void GetInquirerInquirySubjects(Action<List<InquiryUnitDTO>, Exception> action, long periodId, string inquirerEmployeeNo);
 
-        void GetInquiryForm(Action<InquiryUnitDTO, Exception> action, long periodId, string inquirerEmployeeNo, long InquiererJobPositiobId,
-            string inquirySubjectEmployeeNo, long jobPositionId);
+        void GetInquiryForm(Action<InquiryUnitFormDTO, Exception> action, long periodId, string inquirerEmployeeNo,
+       long unitId);
 
         void UpdateInquirySubjectForm(Action<InquiryUnitFormDTO, Exception> action, InquiryUnitFormDTO inquiryForm);
 

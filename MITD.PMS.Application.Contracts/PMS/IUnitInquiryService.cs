@@ -10,7 +10,7 @@ namespace MITD.PMS.Application.Contracts
     public interface IUnitInquiryService : IService
     {
         List<InquirySubjectWithUnit> GetInquirySubjects(EmployeeId employeeId);
-        List<InquiryUnitIndexPoint> GetAllInquiryUnitIndexPointBy(UnitInquiryConfigurationItemId configurationItemId);
+        List<InquiryUnitIndexPoint> GetAllInquiryUnitIndexPointBy(EmployeeId employeeId, UnitId id);
         void UpdateInquiryUnitIndexPoints(InquiryUnitIndexPoinItem inquiryUnitIndexPoinItem);
         void CreateAllInquiryUnitIndexPoint(UnitInquiryConfigurationItem itm);
     }

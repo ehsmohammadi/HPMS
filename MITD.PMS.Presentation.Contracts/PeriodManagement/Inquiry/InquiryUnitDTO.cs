@@ -29,6 +29,15 @@ namespace MITD.PMS.Presentation.Contracts
             set { this.SetField(p => p.UnitName, ref unitName, value); }
         }
 
+        private long unitId;
+        public long UnitId
+        {
+            get { return unitId; }
+            set { this.SetField(p => p.UnitId, ref unitId, value); }
+        }
+
+
+
         private string fullName;
         public string FullName
         {
