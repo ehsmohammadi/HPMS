@@ -144,7 +144,7 @@ namespace MITD.PMS.Application
 
             //todo bz question for check IsInquireable
             //   var unitIndex = unit.UnitIndexList.Single(c => c.UnitIndexId == configurationItem.Id.UnitIndexIdUintPeriod);
-            inquiryUnitIndexPointService.Add(configurationItem, configurationItem.Id.UnitIndexIdUintPeriod, string.Empty);
+            inquiryUnitIndexPointService.Add(configurationItem, string.Empty);
         }
     }
 

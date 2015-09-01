@@ -480,8 +480,8 @@ namespace MITD.PMS.Persistence
 
                 .WithColumn("InquirerEmployeeNo").AsString()
 
-                .WithColumn("PeriodInquirerUnitId").AsInt64().Nullable()
-                .ForeignKey("Periods_Units", "Id")
+                //.WithColumn("PeriodInquirerUnitId").AsInt64().Nullable()
+                //.ForeignKey("Periods_Units", "Id")
 
                 .WithColumn("InquirerUnitId").AsInt64().Nullable()
                 .ForeignKey("Units", "Id")
@@ -490,8 +490,10 @@ namespace MITD.PMS.Persistence
                 .ForeignKey("Periods", "Id")
 
                 .WithColumn("InquirySubjectId").AsInt64().Nullable()
-                .WithColumn("UnitIndexIdUintPeriod").AsInt64().NotNullable()
-    
+
+              
+                 .WithColumn("UnitIndexIdUintPeriod").AsInt64().NotNullable()
+                .ForeignKey("Periods_UnitIndices", "Id")
                 //.WithColumn("SubjectEmployeeNo").AsString()
 
                 .WithColumn("PeriodInquirySubjectUnitId").AsInt64().Nullable()
@@ -504,45 +506,45 @@ namespace MITD.PMS.Persistence
                 .WithColumn("IsPermitted").AsBoolean().NotNullable();
             // .WithColumn("InquirerJobPositionLevel").AsInt32().NotNullable();
 
-
+        
             Create.Table("Inquiry_UnitIndexPoints")
-              .WithColumn("Id").AsInt64().PrimaryKey()
+                .WithColumn("Id").AsInt64().PrimaryKey()
 
-              .WithColumn("RowVersion").AsCustom("rowversion")
+                .WithColumn("RowVersion").AsCustom("rowversion")
 
-              .WithColumn("PeriodUnitIndexId").AsInt64().NotNullable()
-              .ForeignKey("Periods_UnitIndices", "Id")
+                .WithColumn("ConfigurationItemId").AsInt64().NotNullable()
+                .ForeignKey("Unit_InquiryConfigurationItems", "Id")
 
-              .WithColumn("ConfigurationItemId").AsInt64().NotNullable()
-              .ForeignKey("Unit_InquiryConfigurationItems", "Id")
+                .WithColumn("UnitIndexValue").AsString().Nullable()
 
-              .WithColumn("InquirerId").AsInt64().NotNullable()
-              .ForeignKey("Employees", "Id")
+                .WithColumn("UnitIndexIdUintPeriod").AsInt64().NotNullable()
+                .ForeignKey("Periods_UnitIndices", "Id")
+                
+                
+                .WithColumn("InquirerId").AsInt64().NotNullable()
+                .ForeignKey("Employees", "Id")
 
-              .WithColumn("InquirerEmployeeNo").AsString()
+                .WithColumn("InquirerEmployeeNo").AsString()
+                
+                //.WithColumn("PeriodInquirerUnitId").AsInt64().Nullable()
+                //.ForeignKey("Periods_Units", "Id")
 
-              .WithColumn("PeriodInquirerUnitId").AsInt64().Nullable()
-              .ForeignKey("Periods_Units", "Id")
+                .WithColumn("InquirerUnitId").AsInt64().Nullable()
+                .ForeignKey("Units", "Id")
 
-              .WithColumn("InquirerUnitId").AsInt64().Nullable()
-              .ForeignKey("Units", "Id")
+                .WithColumn("PeriodId").AsInt64().NotNullable()
+                .ForeignKey("Periods", "Id")
 
-              .WithColumn("PeriodId").AsInt64().NotNullable()
-              .ForeignKey("Periods", "Id")
+                .WithColumn("PeriodInquirySubjectUnitId").AsInt64().Nullable()
+                .ForeignKey("Periods_Units", "Id")
 
-              .WithColumn("InquirySubjectId").AsInt64().NotNullable()
-              .ForeignKey("Employees", "Id")
+                .WithColumn("InquirySubjectUnitId").AsInt64().NotNullable()
+                .ForeignKey("Units", "Id");
 
-              .WithColumn("SubjectEmployeeNo").AsString()
 
-              .WithColumn("PeriodInquirySubjectUnitId").AsInt64().Nullable()
-              .ForeignKey("Periods_Units", "Id")
+    
 
-              .WithColumn("InquirySubjectUnitId").AsInt64().NotNullable()
-              .ForeignKey("Units", "Id")
-
-              .WithColumn("UnitIndexValue").AsString().Nullable();
-
+            
 
 
 

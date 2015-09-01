@@ -125,38 +125,38 @@ namespace MITD.PMS.Persistence.NH
                         });
                 });
 
-                mapper.Component(x => x.InquirerUnitId, m =>
-                {
-                    m.Access(Accessor.Field);
-                    m.Property("dbId", idMap =>
-                    {
-                        idMap.Lazy(false);
-                        idMap.Column("PeriodInquirerUnitId");
+                //mapper.Component(x => x.InquirerUnitId, m =>
+                //{
+                //    m.Access(Accessor.Field);
+                //    m.Property("dbId", idMap =>
+                //    {
+                //        idMap.Lazy(false);
+                //        idMap.Column("PeriodInquirerUnitId");
 
-                    });
+                //    });
 
-                    m.Component(i => i.PeriodId,
-                        mm =>
-                        {
-                            mm.Access(Accessor.Field);
-                            mm.Property(p => p.Id, pm =>
-                            {
-                                pm.Access(Accessor.Field);
-                                pm.Column("PeriodId");
-                                pm.Generated(PropertyGeneration.Always);
-                            });
-                        });
-                    m.Component(i => i.SharedUnitId,
-                        mm =>
-                        {
-                            mm.Access(Accessor.Field);
-                            mm.Property(p => p.Id, pm =>
-                            {
-                                pm.Access(Accessor.Field);
-                                pm.Column("InquirerUnitId");
-                            });
-                        });
-                });
+                //    m.Component(i => i.PeriodId,
+                //        mm =>
+                //        {
+                //            mm.Access(Accessor.Field);
+                //            mm.Property(p => p.Id, pm =>
+                //            {
+                //                pm.Access(Accessor.Field);
+                //                pm.Column("PeriodId");
+                //                pm.Generated(PropertyGeneration.Always);
+                //            });
+                //        });
+                //    m.Component(i => i.SharedUnitId,
+                //        mm =>
+                //        {
+                //            mm.Access(Accessor.Field);
+                //            mm.Property(p => p.Id, pm =>
+                //            {
+                //                pm.Access(Accessor.Field);
+                //                pm.Column("InquirerUnitId");
+                //            });
+                //        });
+                //});
 
                 mapper.Component(x=>x.UnitIndexIdUintPeriod, m =>
                 {

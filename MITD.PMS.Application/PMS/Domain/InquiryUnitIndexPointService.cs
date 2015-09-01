@@ -29,12 +29,13 @@ namespace MITD.PMS.Application
         }
 
 
-        public void Add(UnitInquiryConfigurationItem itm, AbstractUnitIndexId unitIndex, string value)
-        {
+       // public void Add(UnitInquiryConfigurationItem itm, AbstractUnitIndexId unitIndex, string value)
+        public void Add(UnitInquiryConfigurationItem itm, string value)    
+    {
             using (var tr = new TransactionScope())
             {
                 var id = inquiryUnitIndexPointRep.GetNextId();
-                var inquiryIndexPoint = new InquiryUnitIndexPoint(new InquiryUnitIndexPointId(id), itm, unitIndex,value);
+                var inquiryIndexPoint = new InquiryUnitIndexPoint(new InquiryUnitIndexPointId(id), itm,value);
                 inquiryUnitIndexPointRep.Add(inquiryIndexPoint);
                 tr.Complete();
             }

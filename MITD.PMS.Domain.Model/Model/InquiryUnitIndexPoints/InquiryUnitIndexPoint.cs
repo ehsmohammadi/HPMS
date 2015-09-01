@@ -79,7 +79,7 @@ namespace MITD.PMS.Domain.Model.InquiryUnitIndexPoints
             if (id == null)
                 throw new ArgumentNullException("inquiryUnitIndexPointId");
             this.id = id;
-            if (id == null)
+            if (configurationItem == null)
                 throw new ArgumentNullException("configurationItem");
             configurationItemId = configurationItem.Id;
 
@@ -89,7 +89,18 @@ namespace MITD.PMS.Domain.Model.InquiryUnitIndexPoints
           //  unitIndexId = unitIndex;
             this.unitIndexValue = unitIndexValue;
         }
+        public InquiryUnitIndexPoint(InquiryUnitIndexPointId id, UnitInquiryConfigurationItem configurationItem,
+       string unitIndexValue)
+        {
+            if (id == null)
+                throw new ArgumentNullException("inquiryUnitIndexPointId");
+            this.id = id;
+            if (configurationItem == null)
+                throw new ArgumentNullException("configurationItem");
+            configurationItemId = configurationItem.Id;
 
+            this.unitIndexValue = unitIndexValue;
+        }
         #endregion
 
         #region Public Methods

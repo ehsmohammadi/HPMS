@@ -120,7 +120,7 @@ namespace MITD.PMS.Presentation.Logic
             actionType = actionTypeParam;
            
             //todo bz
-            // InquiryForm = inquiryFormDTOParam;
+            InquiryForm = inquiryFormDTOParam;
             //DisplayName = "فرم نظرسنجی" + " "; //+ InquiryForm.FullName;
             //ShowBusyIndicator("در حال دریافت اطلاعات...");
             //inquiryService.GetInquirySubjectSubEmployeesInquiryFormList((res, exp) =>

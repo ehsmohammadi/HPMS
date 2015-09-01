@@ -64,7 +64,7 @@ namespace MITD.PMS.Interface
                   
                 };
         
-
+            inquiryForm.UnitIndexValueList=new List<UnitIndexValueDTO>();
             foreach (var inquiryUnitIndexPoint in inquryUnitIndexPoints)
             {
             
