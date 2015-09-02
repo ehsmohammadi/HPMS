@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using MITD.Core.RuleEngine;
+using MITD.Core.RuleEngine.Model;
 using MITD.PMSAdmin.Domain.Model.CustomFieldTypes;
 using MITD.PMSAdmin.Domain.Model.JobIndices;
 using MITD.PMSAdmin.Domain.Model.JobPositions;
@@ -19,9 +21,13 @@ namespace MITD.PMS.Persistence
         public static List<Job> Jobs = new List<Job>();
         public static List<Unit> Units = new List<Unit>();
         public static List<JobPosition> JobPositions = new List<JobPosition>();
+        private static List<RuleFunction> ruleFunctions = new List<RuleFunction>();
+        private static List<Rule> rules = new List<Rule>();
 
         private static UnitIndexCategory unitIndexCategory;
-        private static JobIndexCategory jobIndexCategory; 
+        private static JobIndexCategory jobIndexCategory;
+        public static Policy Policy { get; set; }
+
         #endregion
 
         #region Methods
@@ -94,12 +100,39 @@ namespace MITD.PMS.Persistence
         {
             var policy = new RuleEngineBasedPolicy(policyRepository.GetNextId(), name, dictionaryName);
             policyRepository.Add(policy);
-            ////foreach (var rule in rules)
-            ////{
-            ////    policy.AssignRule(rule);
-            ////}
-            ////policy.AssignRuleFunction(rf);
-            // GenralUnitIndexList.Add(new UnitindexDes { UnitIndex = policyIndex1, Importance = "7", IsInquirable = true });
+            foreach (var rule in rules)
+            {
+                policy.AssignRule(rule);
+            }
+            foreach (var function in ruleFunctions)
+            {
+                policy.AssignRuleFunction(function);
+            }
+            Policy = policy;
+        }
+
+        public static void CreateRuleEnginConfigurationItem(IREConfigeRepository reConfigeRepository, string name, string value)
+        {
+            var rec = new RuleEngineConfigurationItem(
+                    new RuleEngineConfigurationItemId(name),value);
+            reConfigeRepository.Add(rec);
+
+        }
+
+        public static void CreateRule(IRuleRepository ruleRepository, string name, RuleType ruleType, int ruleOrder, string ruleText)
+        {
+            var rule = new Rule(new RuleId(ruleRepository.GetNextId()), name, ruleText, ruleType, ruleOrder);
+            ruleRepository.Add(rule);
+            rules.Add(rule);
+            
+        }
+
+        public static void CreateRuleFunction(IRuleFunctionRepository ruleFunctionRepository, string name, string ruleFunctionText)
+        {
+            var ruleFunction = new RuleFunction(ruleFunctionRepository.GetNextId(), name, ruleFunctionText);
+            ruleFunctionRepository.Add(ruleFunction);
+            ruleFunctions.Add(ruleFunction);
+
         } 
         #endregion
 

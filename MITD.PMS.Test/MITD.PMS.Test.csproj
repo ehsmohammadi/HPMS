@@ -100,7 +100,8 @@
     <Compile Include="BootStrapper.cs" />
     <Compile Include="CalculationDataProvider.cs" />
     <Compile Include="CalculationsTest.cs" />
-    <Compile Include="Class1.cs" />
+    <Compile Include="Rules\IRISLRules.cs" />
+    <Compile Include="Rules\RodRules.cs" />
     <Compile Include="LogTest.cs" />
     <Compile Include="JobIndexPointCalculator.cs" />
     <Compile Include="JobIndexPointPersister.cs" />

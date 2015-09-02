@@ -34,7 +34,7 @@ namespace MITD.PMS.Service.Host.App_Start
         {
             // if you want sst security comment this line 
 #if(DEBUG)
-            incomingPrincipal = createIncomingPrincipal();
+            incomingPrincipal = createIncomingPrincipalDefault();
 #endif
 
             if (!incomingPrincipal.Identity.IsAuthenticated)
@@ -46,7 +46,7 @@ namespace MITD.PMS.Service.Host.App_Start
 
         }
 
-        private  ClaimsPrincipal createIncomingPrincipal()
+        private  ClaimsPrincipal createIncomingPrincipalDefault()
         {
             var identity = new FakeIdentity("ehsan", AuthenticationTypes.Basic, true);
 
@@ -59,6 +59,22 @@ namespace MITD.PMS.Service.Host.App_Start
                 new Claim("http://identityserver.thinktecture.com/claims/profileclaims/firstname", "احسان"),
                 new Claim("http://identityserver.thinktecture.com/claims/profileclaims/lastname", "محمدی"),
                 new Claim("http://identityserver.thinktecture.com/claims/profileclaims/jobpositionnames", "مدیر فنی"),
+            });
+            return incomingPrincipal;
+        }
+
+        private ClaimsPrincipal createIncomingPrincipalSupportManager()
+        {
+            var identity = new FakeIdentity("ehsan", AuthenticationTypes.Basic, true);
+
+            var incomingPrincipal = new ClaimsPrincipal(identity);
+            incomingPrincipal.Identities.First().AddClaims(new List<Claim>
+            {
+                new Claim(ClaimTypes.Role, "Employee"),
+                new Claim("http://identityserver.thinktecture.com/claims/profileclaims/employeeno", "100000"),
+                new Claim("http://identityserver.thinktecture.com/claims/profileclaims/firstname", "مدیر"),
+                new Claim("http://identityserver.thinktecture.com/claims/profileclaims/lastname", "مدیریان"),
+                new Claim("http://identityserver.thinktecture.com/claims/profileclaims/jobpositionnames", "مدیر "),
             });
             return incomingPrincipal;
         }

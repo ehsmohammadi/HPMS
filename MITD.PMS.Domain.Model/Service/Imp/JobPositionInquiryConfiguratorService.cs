@@ -19,10 +19,14 @@ namespace MITD.PMS.Domain.Service
         public List<JobPositionInquiryConfigurationItem> Configure(JobPosition jobPosition)
         {
             var childs = jobPositionRep.Find(j => j.Parent.Id == jobPosition.Id);
-            //var siblings = jobPositionRep.Find(j => !(j.Id == jobPosition.Id) && j.Parent == jobPosition.Parent && j.Id.PeriodId.Id == jobPosition.Id.PeriodId.Id);
-            var siblings = jobPositionRep.Find(j => j.Parent == jobPosition.Parent && j.Id.PeriodId.Id == jobPosition.Id.PeriodId.Id);
             var inquirersjobPositions = childs.ToDictionary(j => j, u => JobPositionLevel.Childs);
-            inquirersjobPositions = inquirersjobPositions.Concat(siblings.ToDictionary(j => j, u => JobPositionLevel.Siblings)).ToDictionary(s => s.Key, s => s.Value);
+            //360 daraje
+            //var siblings = jobPositionRep.Find(j => j.Parent == jobPosition.Parent && j.Id.PeriodId.Id == jobPosition.Id.PeriodId.Id);
+            //inquirersjobPositions = inquirersjobPositions.Concat(siblings.ToDictionary(j => j, u => JobPositionLevel.Siblings)).ToDictionary(s => s.Key, s => s.Value);
+            //irisl
+            inquirersjobPositions.Add(jobPosition,JobPositionLevel.None);
+            /////////////////////////////////////////////////////////////////////////////////////////
+
             if (jobPosition.Parent != null)
                 inquirersjobPositions.Add(jobPosition.Parent, JobPositionLevel.Parents);
             /////////////////////////////////////////////////////////////////////////////////////////

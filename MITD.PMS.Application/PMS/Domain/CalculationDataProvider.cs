@@ -54,6 +54,7 @@ namespace MITD.PMS.Application
                     DictionaryName = i.Key.DictionaryName,
                    
                     Job = new Job { Name = i.Value.Job.Name, DictionaryName = i.Value.Job.DictionaryName },
+                    Unit = new Unit{Id=i.Key.UnitId.SharedUnitId.Id},
                     CustomFields = (from k in pmsAdminService.GetSharedCutomFieldListForJob(i.Value.Job.SharedJob.Id,
                         i.Value.CustomFields.Select(m => m.JobCustomFieldId.SharedJobCustomFieldId).ToList())
                                     join l in i.Value.CustomFields on k.Id equals l.JobCustomFieldId.SharedJobCustomFieldId
@@ -89,6 +90,7 @@ namespace MITD.PMS.Application
                                         {
                                             Name = f.JobPosition.Name,
                                             DictionaryName = f.JobPosition.DictionaryName,
+                                            JobPositionLevel =(int)i.Key.ConfigurationItemList.Single(cil=>cil.Id==f.Point.ConfigurationItemId).InquirerJobPositionLevel
                                             
                                             
                                         },

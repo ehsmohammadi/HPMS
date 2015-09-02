@@ -958,8 +958,8 @@ namespace MITD.PMS.Persistence
             Create.Table("REConfigItems")
                 .WithColumn("DbId").AsInt64().PrimaryKey()
                 .WithColumn("RowVersion").AsCustom("rowversion")
-                .WithColumn("Name").AsString(100).Unique("idx_Name_Unique").NotNullable().Unique()
-                .WithColumn("Value").AsString(1024);
+                .WithColumn("Name").AsString(1024).NotNullable().Unique()//jksdfjlskdjflksdfjlskfjlskdfjlksdfjlksdjflksjflksd
+                .WithColumn("Value").AsString(2048);
         }
 
         private void createPeriods_UnitsTable()

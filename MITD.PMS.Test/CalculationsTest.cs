@@ -74,8 +74,8 @@ namespace MITD.PMS.Test
                             new PMS.Persistence.NH.JobIndexPointRepository(uow));
                         var policy = policyRep.GetById(new PolicyId(10));
                         var period = periodRep.GetBy(c => c.Active);
-                        var emp = rep.GetBy(new EmployeeId("102", period.Id));
-                        var calculation = new Calculation(calcRep.GetNextId(), period, policy, Guid.NewGuid().ToString(), DateTime.Now, "8000");
+                        var emp = rep.GetBy(new EmployeeId("652547", period.Id));
+                        var calculation = new Calculation(calcRep.GetNextId(), period, policy, Guid.NewGuid().ToString(), DateTime.Now, "652547");
                         calcRep.Add(calculation);
                         uow.Commit();
                         MITD.PMSReport.Domain.Model.CalculationData empData;
@@ -92,10 +92,10 @@ namespace MITD.PMS.Test
                             rule1.Execute(data);
                             var rule2 = new Rule11();
                             rule2.Execute(data);
-                            var rule3 = new Rule12();
-                            rule3.Execute(data);
-                            var rule4 = new Rule13();
-                            rule4.Execute(data);
+                            //var rule3 = new Rule12();
+                            //rule3.Execute(data);
+                            //var rule4 = new Rule13();
+                            //rule4.Execute(data);
                             var res = provider.Convert(Utils.Res, empData, emp, period, calculation);
                             calcList = res.CalculationPoints.OfType<SummaryCalculationPoint>().ToList();
                             var jipRep = new JobIndexPointRepository(uow);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using MITD.PMS.Domain.Model.Employees;
 using MITD.PMS.Domain.Model.JobIndices;
@@ -9,6 +10,7 @@ using MITD.PMS.Domain.Model.Periods;
 using MITD.PMS.Domain.Model.UnitIndices;
 using MITD.PMS.Domain.Model.Units;
 using MITD.PMS.Domain.Service;
+using MITD.PMS.Persistence.NH;
 
 
 namespace MITD.PMS.Persistence
@@ -18,7 +20,9 @@ namespace MITD.PMS.Persistence
         #region Fields
         public static Period Period;
         public static List<Job> Jobs=new List<Job>();
-        public static List<Unit> Units=new List<Unit>(); 
+        public static List<Unit> Units=new List<Unit>();
+        public static Dictionary<JobPosition, Dictionary<string, List<string>>> JobPositions = new Dictionary<JobPosition, Dictionary<string, List<string>>>();
+
 
         private static List<JobIndex> jobIndices = new List<JobIndex>();
         private static List<UnitIndex> unitIndices = new List<UnitIndex>();  
@@ -43,12 +47,12 @@ namespace MITD.PMS.Persistence
         }
 
         public static void CreateJobIndex(IJobIndexRepository jobIndexRepository, PMSAdmin.Domain.Model.JobIndices.JobIndex adminJobIndex,
-            JobIndexGroup jobIndexGroup, bool isInquireable, Dictionary<PMSAdmin.Domain.Model.CustomFieldTypes.CustomFieldType, string> customFieldsDictionary)
+            JobIndexGroup jobIndexGroup, bool isInquireable, Dictionary<PMSAdmin.Domain.Model.CustomFieldTypes.CustomFieldType, string> customFieldsDictionary, long clacLevel)
         {
             var sharedJobIndex = new SharedJobIndex(new SharedJobIndexId(adminJobIndex.Id.Id), adminJobIndex.Name,
                 adminJobIndex.DictionaryName);
             var jobIndex = new JobIndex(jobIndexRepository.GetNextId(), Period, sharedJobIndex, jobIndexGroup,
-                isInquireable);
+                isInquireable,clacLevel);
             var sharedCustomFieldsDic =
                 customFieldsDictionary.ToDictionary(
                     c =>
@@ -126,20 +130,22 @@ namespace MITD.PMS.Persistence
             return unit;
         }
 
-        public static JobPosition CreateJobPosition(IJobPositionRepository jobPositionRepository, PMSAdmin.Domain.Model.JobPositions.JobPosition adminJobPosition, JobPosition parent, Job job, Unit unit)
+        public static JobPosition CreateJobPosition(IJobPositionRepository jobPositionRepository, PMSAdmin.Domain.Model.JobPositions.JobPosition adminJobPosition, JobPosition parent, Job job, Unit unit,Dictionary<string,List<string>> indexValues)
         {
 
             var jobPosition = new JobPosition(Period,
                 new SharedJobPosition(new SharedJobPositionId(adminJobPosition.Id.Id), adminJobPosition.Name,
                     adminJobPosition.DictionaryName), parent, job, unit);
             jobPositionRepository.Add(jobPosition);
+            JobPositions.Add(jobPosition, indexValues);
             return jobPosition;
         }
 
-        public static void CreateEmployee(IEmployeeRepository employeeRepository,string employeeNo,string firstName,string lastName)
+        public static void CreateEmployee(IEmployeeRepository employeeRepository,string employeeNo,string firstName,string lastName,JobPosition jobPosition)
         {
             var employee=new Employee(employeeNo,Period,firstName,lastName);
             employeeRepository.Add(employee);
+            employee.AssignJobPosition(jobPosition,DateTime.Now,DateTime.Now, 100,1,null);
             //var employee1 =
             //        new PMS.Domain.Model.Employees.Employee(
             //            ((1 + 1) * 2000).ToString(), period, "کارمند" + 1,
@@ -159,6 +165,52 @@ namespace MITD.PMS.Persistence
 
             //empList.Add(employee1);
             //employeeRep.Add(employee1);
+        }
+
+
+        public static void CreateJobIndexPointWithValuesFromMatrix(KeyValuePair<JobPosition, Dictionary<string, List<string>>> jobPositionWithValue,
+            JobRepository jobRep, JobIndexRepository jobIndexRep, InquiryJobIndexPointRepository inquiryRep,JobPositionRepository jobPositionRepository)
+        {
+            var jobPosition = jobPositionRepository.GetBy(jobPositionWithValue.Key.Id);
+            foreach (var itm in jobPosition.ConfigurationItemList)
+            {
+                var job = jobRep.GetById(itm.JobPosition.JobId);
+                foreach (var jobIndexId in job.JobIndexList)
+                {
+                    var jobIndex = (JobIndex)jobIndexRep.GetById(jobIndexId.JobIndexId);
+                    PMSMigrationUtility.CreateJobIndexIndexPointWithValue(inquiryRep, jobIndex, itm,
+                            jobPositionWithValue.Value[jobIndex.DictionaryName]);
+                }
+            }
+        }
+
+
+        private static void CreateJobIndexIndexPointWithValue(InquiryJobIndexPointRepository inquiryRep, JobIndex jobIndex,
+            JobPositionInquiryConfigurationItem itm, List<string> values)
+        {
+
+            if (itm.InquirerJobPositionLevel.Equals(JobPositionLevel.None))
+            {
+                CreateJobIndexPoint(inquiryRep, jobIndex, itm,values[0]);
+            }
+            if (itm.InquirerJobPositionLevel.Equals(JobPositionLevel.Childs))
+            {
+                CreateJobIndexPoint(inquiryRep, jobIndex, itm, values[1]);
+            }
+
+            if (itm.InquirerJobPositionLevel.Equals(JobPositionLevel.Parents))
+            {
+                CreateJobIndexPoint(inquiryRep, jobIndex, itm, values[2]);
+            }
+        }
+
+        private static void CreateJobIndexPoint(InquiryJobIndexPointRepository inquiryRep, JobIndex jobIndex,
+            JobPositionInquiryConfigurationItem itm, string value)
+        {
+            var inquiryIndexPoint = new Domain.Model.InquiryJobIndexPoints.InquiryJobIndexPoint(
+                new Domain.Model.InquiryJobIndexPoints.InquiryJobIndexPointId(inquiryRep.GetNextId()),
+                itm, jobIndex, value);
+            inquiryRep.Add(inquiryIndexPoint);
         }
 
         #endregion

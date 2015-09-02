@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 namespace MITD.PMS.RuleContracts
 {
@@ -33,6 +34,8 @@ namespace MITD.PMS.RuleContracts
         public string Name { get; set; }
         public string DictionaryName { get; set; }
         public Job Job { get; set; }
+
+        public Unit Unit { get; set; }
         public Dictionary<JobIndex, Dictionary<Employee, List<Inquiry>>> Indices { get; set; }
         public Dictionary<string,string> CustomFields { get; set; }
         public int WorkTimePercent { get; set; }
@@ -43,6 +46,14 @@ namespace MITD.PMS.RuleContracts
     [Serializable]
     public class Job
     {
+        public string Name { get; set; }
+        public string DictionaryName { get; set; }
+    }
+
+    [Serializable]
+    public class Unit
+    {
+        public long Id { get; set; }
         public string Name { get; set; }
         public string DictionaryName { get; set; }
     }

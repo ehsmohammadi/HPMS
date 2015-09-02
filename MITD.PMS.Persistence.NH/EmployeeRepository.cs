@@ -290,7 +290,7 @@ namespace MITD.PMS.Persistence.NH
             var inquiries = (from ij in session.Query<InquiryJobIndexPoint>().Where(i => i.ConfigurationItemId.InquirySubjectId == emp.Id)
                       join e in session.Query<Employee>() on ij.ConfigurationItemId.InquirerId equals e.Id
                       join je in session.Query<JobPositionEmployee>() on e.Id equals je.EmployeeId
-                      select new { ij, e, je.JobPosition.SharedJobPosition, ij.ConfigurationItemId.InquirySubjectJobPositionId.SharedJobPositionId }
+                      select new { ij, e, je.JobPosition.SharedJobPosition, ij.ConfigurationItemId.InquirySubjectJobPositionId.SharedJobPositionId, }
                           ).ToFuture();
 
             List<CalculationPoint> allPoints = new List<CalculationPoint>();
@@ -329,7 +329,7 @@ namespace MITD.PMS.Persistence.NH
                                select new { ji, k })
                               .ToDictionary(j => j.ji,
                               j => (j.k != null ? j.k.GroupBy(jk=>jk.e)
-                                  .ToDictionary(g => g.Key, g=>g.Select(f=>new InquiryData { JobPosition = f.SharedJobPosition, Point = f.ij }).ToList()) : null)),
+                                  .ToDictionary(g => g.Key, g=>g.Select(f=>new InquiryData { JobPosition = f.SharedJobPosition, Point = f.ij}).ToList()) : null)),
                     CustomFields = i.EmployeeJobCustomFieldValues,
                     WorkTimePercent = emp.JobPositions.Single(j=>j.JobPositionId==i.JobPosition.Id).WorkTimePercent,
                     Weight = emp.JobPositions.Single(j => j.JobPositionId == i.JobPosition.Id).JobPositionWeight
