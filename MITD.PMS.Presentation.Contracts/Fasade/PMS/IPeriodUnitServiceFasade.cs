@@ -16,7 +16,7 @@ namespace MITD.PMS.Presentation.Contracts
         IEnumerable<UnitInPeriodDTO> GetUnits(long periodId);
 
         UnitInPeriodDTO GetUnit(long periodId, long unitId, string selectedColumns);
-        void AddInquirer(long periodId, long unitId, string employeeNo);
+        void AddInquirer(long periodId, long unitId, string employeeNo,long unitIndexInPeiodUnit);
         void RemoveInquirer(long periodId, long unitId, string employeeNo);
     }
 }

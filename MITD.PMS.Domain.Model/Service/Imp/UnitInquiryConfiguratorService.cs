@@ -48,10 +48,10 @@ namespace MITD.PMS.Domain.Service
                 jobposition.ConfigeInquirer(_jobPositionInquiryConfiguratorService,false);
                 foreach (var empl in jobposition.Employees)
                 {
-                    res.Add(
-                     new UnitInquiryConfigurationItem(
-                         new UnitInquiryConfigurationItemId(parentUnit.Id, empl.EmployeeId, unit.Id)
-                         , unit, true, true));
+                    //res.Add(
+                    // new UnitInquiryConfigurationItem(
+                    //     new UnitInquiryConfigurationItemId(parentUnit.Id, empl.EmployeeId, unit.Id)
+                    //     , unit, true, true));
                 }
 
             }
@@ -73,9 +73,9 @@ namespace MITD.PMS.Domain.Service
         {
             if (inquirer == null)
                 return new List<UnitInquiryConfigurationItem>();
-            var jobpositionInquirySubjects = _unitRep.GetAllInquirySubjectUnits(inquirer.Id);
+            var unitInquirySubjects = _unitRep.GetAllInquirySubjectUnits(inquirer.Id);
             var res = new List<UnitInquiryConfigurationItem>();
-            foreach (var itm in jobpositionInquirySubjects)
+            foreach (var itm in unitInquirySubjects)
             {
                 res.AddRange(itm.ConfigurationItemList.Where(c => c.Id.InquirerId.Equals(inquirer.Id)));
             }

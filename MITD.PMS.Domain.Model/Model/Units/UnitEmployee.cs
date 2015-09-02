@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MITD.Core.Builders;
 using MITD.Domain.Model;
 using MITD.PMS.Domain.Model.Employees;
+using MITD.PMS.Domain.Model.UnitIndices;
 using MITD.PMS.Domain.Model.Units;
 using MITD.PMS.Domain.Model.Jobs;
 
@@ -18,6 +19,14 @@ namespace MITD.PMS.Domain.Model.Units
         private readonly byte[] rowVersion;
 
         #region Properties
+
+        //private AbstractUnitIndexId _unitIndexId;
+        //public virtual AbstractUnitIndexId UnitIndexId
+        //{
+        //    get { return _unitIndexId; }
+        //}
+
+
 
         private EmployeeId employeeId;
         public virtual EmployeeId EmployeeId
@@ -58,12 +67,19 @@ namespace MITD.PMS.Domain.Model.Units
 
         }
 
-        public UnitEmployee(Employee employee, Unit unit, DateTime fromDate, DateTime toDate, IDictionary<UnitCustomField, string> employeeUnitCustomFieldValues)
+        public UnitEmployee(Employee employee, Unit unit, DateTime fromDate, DateTime toDate,
+                            IDictionary<UnitCustomField, string> employeeUnitCustomFieldValues,
+                            AbstractUnitIndexId abstractUnitIndexId)
         {
             if (unit == null)
                 throw new ArgumentNullException("Unit");
             if (unit.Id == null)
                 throw new ArgumentException("Unit.Id");
+            if (abstractUnitIndexId == null)
+                throw new ArgumentNullException("UnitIndexId");
+
+
+          //  this._unitIndexId = abstractUnitIndexId;
             this._unit = unit;
             this.fromDate = fromDate;
             this.toDate = toDate.Date;
@@ -83,7 +99,7 @@ namespace MITD.PMS.Domain.Model.Units
             builder.Append(this.Unit, other.Unit);
             builder.Append(this.FromDate.Date, other.FromDate.Date);
             builder.Append(this.ToDate.Date, other.ToDate.Date);
-
+            //builder.Append(this, other.UnitIndexId);
             return builder.IsEquals();
 
 

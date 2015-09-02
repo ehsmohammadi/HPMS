@@ -70,6 +70,7 @@
     <Compile Include="CalculationRepository.cs" />
     <Compile Include="Context\MappingClass\ClaimMap.cs" />
     <Compile Include="Context\MappingClass\CalculationExceptionMap.cs" />
+    <Compile Include="Context\MappingClass\InquiryUnitIndexPointMap.cs" />
     <Compile Include="Context\MappingClass\UnitInquiryConfigurationItemMap.cs" />
     <Compile Include="Context\MappingClass\UnitIndexInPeriodMap.cs" />
     <Compile Include="Context\MappingClass\JobPositionInquiryConfigurationItemMap.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="CalculationExceptionRepository.cs" />
     <Compile Include="DataAccess.NH\NHDataAccessExceptionAdapter.cs" />
     <Compile Include="IListFetchStrategy.cs" />
+    <Compile Include="IInquiryUnitIndexPointRepository.cs" />
     <Compile Include="InquiryJobIndexPointRepository.cs" />
     <Compile Include="UnitIndexRepository.cs" />
     <Compile Include="JobPositionRepository.cs" />

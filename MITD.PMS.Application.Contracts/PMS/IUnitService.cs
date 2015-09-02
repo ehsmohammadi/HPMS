@@ -5,6 +5,7 @@ using MITD.PMS.Domain.Model.Employees;
 using MITD.PMS.Domain.Model.Periods;
 using MITD.PMS.Domain.Model.Units;
 
+
 namespace MITD.PMS.Application.Contracts
 {
     public interface IUnitService : IService
@@ -12,7 +13,7 @@ namespace MITD.PMS.Application.Contracts
 
         void RemoveInquirer(PeriodId periodId, SharedUnitId unitId, EmployeeId employeeId);
         List<UnitInquiryConfigurationItem> GetInquirySubjectWithInquirer(UnitId unitId);
-        void UpdateInquirers(EmployeeId inquirySubjectEmployeeId, UnitId unitId);
+        void UpdateInquirers(EmployeeId inquirySubjectEmployeeId, UnitId unitId,long unitIndexInPeiodUnit);
         Unit UpdateUnit(UnitId unitId, List<SharedUnitCustomFieldId> customFieldIdList, IList<UnitIndexForUnit> unitIndexList);
    //     Unit AssignUnit(UnitId unitId, List<SharedUnitCustomFieldId> customFieldIdList, IList<UnitIndexForUnit> unitIndexList);
 

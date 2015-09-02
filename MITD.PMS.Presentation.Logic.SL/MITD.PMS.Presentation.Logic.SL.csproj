@@ -209,6 +209,8 @@
     <Compile Include="Views\IOrganizationChartTreeView.cs" />
     <Compile Include="Views\IJobInPeriodListView.cs" />
     <Compile Include="Wrapper\IReportServiceWrapper.cs" />
+    <Compile Include="Wrapper\PeriodManagement\Inquiry\UnitInquiryServiceWrapper.cs" />
+    <Compile Include="Wrapper\PeriodManagement\Inquiry\IUnitInquiryServiceWrapper.cs" />
     <Compile Include="Wrapper\PeriodManagement\UnitIndex\IUnitIndexInPeriodServiceWrapper.cs" />
     <Compile Include="Wrapper\PeriodManagement\UnitIndex\UnitIndexInPeriodServiceWrapper.cs" />
     <Compile Include="Wrapper\ReportServiceWrapper.cs" />

@@ -146,6 +146,9 @@ namespace MITD.PMSSecurity.Domain
 
         public static readonly ActionType FillInquiryForm = new ActionType("340", "FillInquiryForm","پر کردن فرم نظر سنجی");
         public static readonly ActionType DeleteCustomInquirer = new ActionType("341", "DeleteCustomInquirer","حذف فرد از لیست نظر دهنده ها");
+        public static readonly ActionType FillInquiryUnitForm = new ActionType("342", "FillInquiryUnitForm", "پر کردن فرم نظر سنجی");
+
+
 
         public static readonly ActionType AddClaim = new ActionType("350", "AddClaim","درخواست اعتراض به نمره ارزیابی");
         public static readonly ActionType ShowClaim = new ActionType("351", "ShowClaim","نمایش درخواست اعتراض ");

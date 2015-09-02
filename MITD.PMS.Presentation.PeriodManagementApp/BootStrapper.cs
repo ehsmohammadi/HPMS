@@ -63,6 +63,8 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
                 {(int) ActionType.DeleteUnitIndexGroupInPeriod, typeof (DeleteUnitIndexGroupInPeriodService)},
 
                 {(int) ActionType.FillInquiryForm, typeof (ManageInquiryFormService)},
+                {(int) ActionType.FillInquiryUnitForm, typeof (ManageInquiryUnitFormService)},
+
 
                 {(int) ActionType.AddCalculation, typeof (AddPeriodCalculationExecService)},
                 //{(int) ActionType.ModifyPeriodCalculationExec, typeof (ModifyPeriodCalculationService)},

@@ -19,13 +19,13 @@ namespace MITD.PMS.Service.Host.Controllers
         public List<InquirySubjectWithInquirersDTO> GetUnitInquirySubjects(long periodId, long unitId, string include)
         {
             return _periodUnitServiceFacade.GetInquirySubjectsWithInquirers(periodId, unitId);
-            return null;
+         
         }
 
        [HttpPut]
-        public string PutInquiry(long periodId, long unitId,string employeeNo)
+        public string PutInquiry(long periodId, long unitId,string employeeNo,long unitIndexInPeiodUnit)
         {
-             _periodUnitServiceFacade.AddInquirer( periodId,  unitId, employeeNo);
+            _periodUnitServiceFacade.AddInquirer(periodId, unitId, employeeNo, unitIndexInPeiodUnit);
              return "";
         }
 

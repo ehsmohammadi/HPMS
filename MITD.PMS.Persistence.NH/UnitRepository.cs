@@ -46,7 +46,8 @@ namespace MITD.PMS.Persistence.NH
 
         public Unit GetBy(UnitId unitId)
         {
-            return rep.Single(u => u.Id.PeriodId == unitId.PeriodId && u.Id.SharedUnitId == unitId.SharedUnitId);
+           // return rep.Single(u => u.Id.PeriodId == unitId.PeriodId && u.Id.SharedUnitId == unitId.SharedUnitId);
+            return rep.Find(u => u.Id.PeriodId == unitId.PeriodId && u.Id.SharedUnitId == unitId.SharedUnitId).SingleOrDefault();
         }
 
         public List<Unit> GetAllParentUnits(Period period)

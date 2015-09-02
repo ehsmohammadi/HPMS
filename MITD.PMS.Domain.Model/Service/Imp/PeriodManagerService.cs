@@ -7,6 +7,7 @@ using MITD.PMS.Domain.Model.Calculations;
 using MITD.PMS.Domain.Model.Claims;
 using MITD.PMS.Domain.Model.Employees;
 using MITD.PMS.Domain.Model.InquiryJobIndexPoints;
+using MITD.PMS.Domain.Model.InquiryUnitIndexPoints;
 using MITD.PMS.Domain.Model.JobIndexPoints;
 using MITD.PMS.Domain.Model.JobIndices;
 using MITD.PMS.Domain.Model.JobPositions;
@@ -171,13 +172,16 @@ namespace MITD.PMS.Domain.Service
             if (inquirer == null)
                 return;
             var period = periodRep.GetById(inquirer.Id.PeriodId);
-            period.CheckShowingInquirySubject();
+        //todo bz
+            // period.CheckShowingInquirySubject();
         }
 
         public void CheckShowingInquiryJobIndexPoint(JobPosition jobPosition)
         {
             var period = periodRep.GetById(jobPosition.Id.PeriodId);
-            period.CheckShowingInquirySubject();
+
+            //todo bz
+            //  period.CheckShowingInquirySubject();
         }
 
         public void CheckSettingInquiryJobIndexPointValueValue(InquiryJobIndexPoint inquiryJobIndexPoint)
@@ -252,6 +256,13 @@ namespace MITD.PMS.Domain.Service
         {
             var period = periodRep.GetById(unit.Id.PeriodId);
             period.CheckModifyingUnitIndices(unit);
+        }
+
+
+        public void CheckSettingInquiryUnitIndexPointValueValue(InquiryUnitIndexPoint inquiryUnitIndexPoint)
+        {
+            var period = periodRep.GetById(inquiryUnitIndexPoint.ConfigurationItemId.InquirerId.PeriodId);
+            period.CheckSettingInquiryJobIndexPointValueValue();
         }
     }
 }

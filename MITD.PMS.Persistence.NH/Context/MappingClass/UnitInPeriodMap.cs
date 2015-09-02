@@ -77,6 +77,62 @@ namespace MITD.PMS.Persistence.NH
                 m.Lazy(LazyRelation.NoLazy);
             });
 
+            Bag(x => x.CustomFields, collectionMapping =>
+            {
+                collectionMapping.Access(Accessor.Field);
+                collectionMapping.Table("Periods_Units_CustomFields");
+                collectionMapping.Cascade(Cascade.All | Cascade.DeleteOrphans);
+                //collectionMapping.Inverse(false);
+                collectionMapping.Key(k => k.Column("PeriodUnitId"));
+
+
+            }, map => map.OneToMany());
+
+
+            IdBag(p => p.UnitIndexList, m =>
+            {
+                m.Table("Periods_Units_UnitIndices");
+                m.Key(i => i.Column("PeriodUnitId"));
+                m.Access(Accessor.Field);
+                m.Id(i =>
+                {
+                    i.Column("Id");
+                    i.Generator(Generators.Identity);
+                });
+            },
+            x => x.Component(m =>
+            {
+                m.Access(Accessor.Field);
+                m.Component(i => i.UnitIndexId, mc =>
+                {
+                    mc.Access(Accessor.Field);
+                    mc.Property(i => i.Id, ma =>
+                    {
+                        ma.Access(Accessor.Field);
+                        ma.Column("PeriodUnitIndexId");
+                    });
+                });
+                m.Property(i => i.ShowforTopLevel, mp =>
+                {
+                    mp.Access(Accessor.Field);
+                    mp.Column("ShowforTopLevel");
+                });
+
+                m.Property(i => i.ShowforSameLevel, mp =>
+                {
+                    mp.Access(Accessor.Field);
+                    mp.Column("ShowforSameLevel");
+                });
+
+                m.Property(i => i.ShowforLowLevel, mp =>
+                {
+                    mp.Access(Accessor.Field);
+                    mp.Column("ShowforLowLevel");
+                });
+
+            }));
+
+
             Bag(e => e.ConfigurationItemList, cm =>
             {
                 cm.Table("Unit_InquiryConfigurationItems");

@@ -42,8 +42,8 @@ namespace MITD.PMS.Presentation.Contracts
         }
 
 
-        private List<EmployeeDTO> inquirers = new List<EmployeeDTO>();
-        public List<EmployeeDTO> Inquirers
+        private List<InquiryUnitDTO> inquirers = new List<InquiryUnitDTO>();
+        public List<InquiryUnitDTO> Inquirers
         {
             get { return inquirers; }
             set { this.SetField(p => p.Inquirers, ref inquirers, value); }

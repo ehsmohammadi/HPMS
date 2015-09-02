@@ -196,6 +196,7 @@ namespace MITD.PMSSecurity.Domain
 		            //bayad bardashte shee
                     ActionType.FillInquiryForm,
                     ActionType.DeleteCustomInquirer, 
+                    ActionType.FillInquiryUnitForm,
 	                #endregion
 
                     #region Claim

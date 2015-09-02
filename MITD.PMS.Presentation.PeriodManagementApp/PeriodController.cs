@@ -263,6 +263,20 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
 
         #endregion
 
+        #region Inquiry
+
+        public void ShowInquiryUnitFormView(InquiryUnitFormDTO inquiryForm, ActionType action)
+        {
+            var view = ServiceLocator.Current.GetInstance<IUnitInquiryFormView>();
+            ((InquiryUnitFormVM)view.ViewModel).Load(inquiryForm, action);
+            viewManager.ShowInDialog(view);
+        }
+        public void ShowUnitsInquiryListView(string employeeNo, long periodId)
+        {
+            var view = viewManager.ShowInTabControl<IUnitsInquiryListView>();
+            ((InquirerInquiryUnitListVM)view.ViewModel).Load(employeeNo, periodId);
+        }
+
 
         public void ShowEmployeesInquiryListView()
         {
@@ -288,6 +302,8 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
             ((InquiryFormVM)view.ViewModel).Load(inquiryForm,action);
             viewManager.ShowInDialog(view);
         }
+
+        #endregion
 
         public void ShowCalculationListView(PeriodDTOWithAction period, bool showInNewTab = false)
         {

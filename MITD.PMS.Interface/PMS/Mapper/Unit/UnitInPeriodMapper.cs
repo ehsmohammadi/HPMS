@@ -22,7 +22,12 @@ namespace MITD.PMS.Interface
                 };
             if (entity.Parent != null)
                 res.ParentId = entity.Parent.Id.SharedUnitId.Id;
-           
+
+            //entity.UnitIndexList.ForEach(c =>
+            //{
+            //    res.UnitIndices.Add(new UnitInPeriodUnitIndexDTO() { Id = c.UnitIndexId.Id });
+
+            //});
 
             
             return res;
@@ -44,6 +49,8 @@ namespace MITD.PMS.Interface
             };
             if (entity.Parent != null)
                 res.ParentId = entity.Parent.Id.SharedUnitId.Id;
+
+         
             return res;
         }
     }

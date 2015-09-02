@@ -145,6 +145,7 @@
     <Compile Include="EmployeeManagment\EmployeeDTO_Server.cs" />
     <Compile Include="Fasade\PMSAdmin\IUnitIndexFacadeService.cs" />
     <Compile Include="Fasade\PMSAdmin\IRuleFacadeService.cs" />
+    <Compile Include="Fasade\PMS\IUnitInquiryServiceFacade.cs" />
     <Compile Include="Fasade\PMS\IPeriodClaimServiceFasade.cs" />
     <Compile Include="Fasade\PMS\IInquiryServiceFacade.cs" />
     <Compile Include="Fasade\PMS\IJobIndexPointFacadeService.cs" />
@@ -184,10 +185,16 @@
     <Compile Include="PeriodManagement\Claim\ClaimState\ClaimStateDTO.cs" />
     <Compile Include="PeriodManagement\Claim\ClaimTypeDTO.cs" />
     <Compile Include="PeriodManagement\Claim\ClaimTypeDTO_Server.cs" />
+    <Compile Include="PeriodManagement\Inquiry\InquiryUnitFormDTO_Server.cs" />
+    <Compile Include="PeriodManagement\Inquiry\InquiryUnitFormDTO.cs" />
     <Compile Include="PeriodManagement\Inquiry\InquiryForm\InquirySubjectInquiryFormListDTO_Server.cs" />
     <Compile Include="PeriodManagement\Inquiry\InquiryForm\InquiryFormInquirerDTO_Server.cs" />
     <Compile Include="PeriodManagement\Inquiry\InquiryForm\InquiryFormInquirerDTO.cs" />
     <Compile Include="PeriodManagement\Inquiry\InquiryForm\InquirySubjectInquiryFormListDTO.cs" />
+    <Compile Include="PeriodManagement\Inquiry\InquiryUnitDTO_Server.cs" />
+    <Compile Include="PeriodManagement\Inquiry\InquiryUnitDTO.cs" />
+    <Compile Include="PeriodManagement\Inquiry\UnitIndexValueDTO_Server.cs" />
+    <Compile Include="PeriodManagement\Inquiry\UnitIndexValueDTO.cs" />
     <Compile Include="PeriodManagement\JobIndexPoint\JobIndexPointSummaryDTOWithAction.cs" />
     <Compile Include="PeriodManagement\JobIndexPoint\JobIndexPointSummaryDTOWithAction_Server.cs" />
     <Compile Include="Calculation\OrganChartEmployeesCalculationDTO.cs" />

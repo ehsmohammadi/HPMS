@@ -124,6 +124,7 @@
     <Compile Include="ActionService\Calculation\SetDeterministicCalculationService.cs" />
     <Compile Include="ActionService\Calculation\DeletePeriodCalculationExecService.cs" />
     <Compile Include="ActionService\Claim\CancelClaimService.cs" />
+    <Compile Include="ActionService\Inquiry\ManageInquiryUnitFormService.cs" />
     <Compile Include="ActionService\MyTasks\AddPermittedEmployeeToMyTasksService.cs" />
     <Compile Include="ActionService\Claim\ShowClaimService.cs" />
     <Compile Include="ActionService\MyTasks\RemovePermittedEmployeeFromMyTasksServiceService.cs" />
@@ -223,6 +224,8 @@
     <Compile Include="ViewModels\Claim\EmployeeClaimListVM.cs" />
     <Compile Include="ViewModels\Claim\ClaimVM.cs" />
     <Compile Include="ViewModels\Claim\ShowClaimVM.cs" />
+    <Compile Include="ViewModels\Inquiry\InquirerInquiryUnitListVM.cs" />
+    <Compile Include="ViewModels\Inquiry\InquiryUnitFormVM.cs" />
     <Compile Include="ViewModels\Inquiry\InquiryFormVM.cs" />
     <Compile Include="ViewModels\Calculation\CalculationStatusVM.cs" />
     <Compile Include="ViewModels\JobPosition\InquirySubjectInquirersVM.cs" />
@@ -291,6 +294,8 @@
     <Compile Include="Views\Claim\ShowClaimView.xaml.cs">
       <DependentUpon>ShowClaimView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Contract\IUnitInquiryFormView.cs" />
+    <Compile Include="Views\Contract\IUnitsInquiryListView.cs" />
     <Compile Include="Views\Contract\IManagerClaimListView.cs" />
     <Compile Include="Views\Contract\IShowClaimView.cs" />
     <Compile Include="Views\Contract\IPermittedEmployeeListToMyTasksView.cs" />
@@ -310,6 +315,12 @@
     <Compile Include="Views\Contract\IJobPositionInPeriodInquiryView.cs" />
     <Compile Include="Views\Claim\ClaimView.xaml.cs">
       <DependentUpon>ClaimView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inquiry\InquiryUnitFormView.xaml.cs">
+      <DependentUpon>InquiryUnitFormView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inquiry\UnitsInquiryListView.xaml.cs">
+      <DependentUpon>UnitsInquiryListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Inquiry\EmployeesInquiryListView.xaml.cs">
       <DependentUpon>EmployeesInquiryListView.xaml</DependentUpon>
@@ -454,6 +465,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Claim\ShowClaimView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Inquiry\InquiryUnitFormView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Inquiry\UnitsInquiryListView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
