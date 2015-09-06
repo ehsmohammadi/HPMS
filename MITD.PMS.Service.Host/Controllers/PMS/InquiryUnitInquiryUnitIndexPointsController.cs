@@ -20,10 +20,10 @@ namespace MITD.PMS.Service.Host.Controllers
             return inquiryService.GetInquiryForm(periodId, inquirerEmployeeNo, unitId);
         }
 
-        //public InquiryUnitFormDTO PutInquirySubjectForm(InquiryFormDTO inquiryForm, string batch)
-        //{
-        //    return inquiryService.UpdateInquirySubjectForm(inquiryForm);
-        //}
+        public InquiryUnitFormDTO PutInquirySubjectForm(InquiryUnitFormDTO inquiryForm)
+        {
+            return inquiryService.UpdateInquirySubjectForm(inquiryForm);
+        }
 
       
     }

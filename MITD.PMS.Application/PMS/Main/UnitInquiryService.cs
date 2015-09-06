@@ -105,13 +105,13 @@ namespace MITD.PMS.Application
             return inquiryUnitIndexPointRep.GetAllBy(employeeId,id);
         }
 
-        public void UpdateInquiryUnitIndexPoints(InquiryUnitIndexPoinItem inquiryUnitIndexPoinItem)
+        public void UpdateInquiryUnitIndexPoints(List<InquiryUnitIndexPoinItem> inquiryUnitIndexPoinItems)
         {
-            //foreach (var inquiryUnitIndexPoinItem in inquiryUnitIndexPoinItems)
-            // {
-            inquiryUnitIndexPointService.Update(inquiryUnitIndexPoinItem.ConfigurationItemId,
-                inquiryUnitIndexPoinItem.ConfigurationItemId.UnitIndexIdUintPeriod, inquiryUnitIndexPoinItem.UnitIndexValue);
-            // }
+            foreach (var inquiryUnitIndexPoinItem in inquiryUnitIndexPoinItems)
+            {
+                inquiryUnitIndexPointService.Update(inquiryUnitIndexPoinItem.ConfigurationItemId,
+                    inquiryUnitIndexPoinItem.ConfigurationItemId.UnitIndexIdUintPeriod, inquiryUnitIndexPoinItem.UnitIndexValue);
+            }
         }
 
         public void CreateAllInquiryUnitIndexPoint(UnitInquiryConfigurationItem itm)
@@ -146,6 +146,9 @@ namespace MITD.PMS.Application
             //   var unitIndex = unit.UnitIndexList.Single(c => c.UnitIndexId == configurationItem.Id.UnitIndexIdUintPeriod);
             inquiryUnitIndexPointService.Add(configurationItem, string.Empty);
         }
+
+
+       
     }
 
 
