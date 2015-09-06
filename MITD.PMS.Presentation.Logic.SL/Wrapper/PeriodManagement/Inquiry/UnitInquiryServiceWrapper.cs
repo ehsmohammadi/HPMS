@@ -36,11 +36,12 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
       
         public void UpdateInquirySubjectForm(Action<InquiryUnitFormDTO, Exception> action, InquiryUnitFormDTO inquiryForm)
         {
-            //var url =
-            //    string.Format(baseAddress +
-            //                  makeInquirySubjectJobIndexPointApiAdress(inquiryForm.PeriodId, inquiryForm.InquirerEmployeeNo,
-            //                      inquiryForm.InquirySubjectEmployeeNo, inquiryForm.JobPositionId)+"?Batch=1");
-            //WebClientHelper.Put(new Uri(url, PMSClientConfig.UriKind), action, inquiryForm, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+            var url =
+                string.Format(baseAddress +makeInquiryUnitIndexPointApiAdress(
+                inquiryForm.PeriodId,
+                inquiryForm.InquirerEmployeeNo,
+                inquiryForm.InquiryUnitId));
+            WebClientHelper.Put(new Uri(url, PMSClientConfig.UriKind), action, inquiryForm, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 
         

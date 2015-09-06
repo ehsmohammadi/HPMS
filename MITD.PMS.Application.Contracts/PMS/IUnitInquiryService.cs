@@ -11,7 +11,8 @@ namespace MITD.PMS.Application.Contracts
     {
         List<InquirySubjectWithUnit> GetInquirySubjects(EmployeeId employeeId);
         List<InquiryUnitIndexPoint> GetAllInquiryUnitIndexPointBy(EmployeeId employeeId, UnitId id);
-        void UpdateInquiryUnitIndexPoints(InquiryUnitIndexPoinItem inquiryUnitIndexPoinItem);
+        //void UpdateInquiryUnitIndexPoints(InquiryUnitIndexPoinItem inquiryUnitIndexPoinItem);
+        void UpdateInquiryUnitIndexPoints(List<InquiryUnitIndexPoinItem> inquiryUnitIndexPoinItems);
         void CreateAllInquiryUnitIndexPoint(UnitInquiryConfigurationItem itm);
     }
 }

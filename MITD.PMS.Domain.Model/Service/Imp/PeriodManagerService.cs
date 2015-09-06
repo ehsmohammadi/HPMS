@@ -262,7 +262,8 @@ namespace MITD.PMS.Domain.Service
         public void CheckSettingInquiryUnitIndexPointValueValue(InquiryUnitIndexPoint inquiryUnitIndexPoint)
         {
             var period = periodRep.GetById(inquiryUnitIndexPoint.ConfigurationItemId.InquirerId.PeriodId);
-            period.CheckSettingInquiryJobIndexPointValueValue();
+          //todo bz
+            // period.CheckSettingInquiryJobIndexPointValueValue();
         }
     }
 }

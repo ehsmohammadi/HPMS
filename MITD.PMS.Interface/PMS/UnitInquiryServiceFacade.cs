@@ -88,15 +88,23 @@ namespace MITD.PMS.Interface
 
         public InquiryUnitFormDTO UpdateInquirySubjectForm(InquiryUnitFormDTO inquiryForm)
         {
-            inquiryService.UpdateInquiryUnitIndexPoints(
-                new InquiryUnitIndexPoinItem(
-                    new UnitInquiryConfigurationItemId(null,
-                        new EmployeeId(inquiryForm.InquirerEmployeeNo, new PeriodId(inquiryForm.PeriodId)),
-                        new UnitId(new PeriodId(inquiryForm.PeriodId), new SharedUnitId(inquiryForm.InquiryUnitId)),null
-                       // new AbstractUnitIndexId(inquiryForm.UnitIndexId)
-                        ), null));//todo bz  //inquiryForm.UnitIndexValueDTO.IndexValue));
+            //inquiryService.UpdateInquiryUnitIndexPoints(
+            //    new InquiryUnitIndexPoinItem(
+            //        new UnitInquiryConfigurationItemId(null,
+            //            new EmployeeId(inquiryForm.InquirerEmployeeNo, new PeriodId(inquiryForm.PeriodId)),
+            //            new UnitId(new PeriodId(inquiryForm.PeriodId), new SharedUnitId(inquiryForm.InquiryUnitId)),null
+            //           // new AbstractUnitIndexId(inquiryForm.UnitIndexId)
+            //            ), inquiryForm.UnitIndexValueList));//todo bz  //inquiryForm.UnitIndexValueDTO.IndexValue));
 
+            var res = inquiryForm.UnitIndexValueList.Select(item => new InquiryUnitIndexPoinItem(new UnitInquiryConfigurationItemId(null, 
+                new EmployeeId(inquiryForm.InquirerEmployeeNo,
+                new PeriodId(inquiryForm.PeriodId)),
+                new UnitId(new PeriodId(inquiryForm.PeriodId),
+                new SharedUnitId(inquiryForm.InquiryUnitId)),
+                new AbstractUnitIndexId(item.UnitIndexId)), item.IndexValue)).ToList();
 
+            inquiryService.UpdateInquiryUnitIndexPoints(res);
+           
             return inquiryForm;
         }
 
