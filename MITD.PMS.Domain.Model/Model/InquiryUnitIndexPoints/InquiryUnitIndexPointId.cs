@@ -17,7 +17,7 @@ namespace MITD.PMS.Domain.Model.InquiryUnitIndexPoints
 
         #region Constructors
         // for Or mapper
-        public InquiryUnitIndexPointId()
+        protected InquiryUnitIndexPointId()
         {
 
         }

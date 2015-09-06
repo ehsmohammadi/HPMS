@@ -19,13 +19,15 @@ namespace MITD.PMS.Persistence
     {
         #region Fields
         public static Period Period;
-        public static List<Job> Jobs=new List<Job>();
-        public static List<Unit> Units=new List<Unit>();
+        public static List<Job> Jobs = new List<Job>();
+        //public static List<Unit> Units = new List<Unit>();
+        public static Dictionary<Unit, Dictionary<string, string>> Units = new Dictionary<Unit, Dictionary<string, string>>(); 
         public static Dictionary<JobPosition, Dictionary<string, List<string>>> JobPositions = new Dictionary<JobPosition, Dictionary<string, List<string>>>();
+        public static List<Employee> Employees=new List<Employee>(); 
 
 
         private static List<JobIndex> jobIndices = new List<JobIndex>();
-        private static List<UnitIndex> unitIndices = new List<UnitIndex>();  
+        private static List<UnitIndex> unitIndices = new List<UnitIndex>();
         #endregion
 
 
@@ -52,7 +54,7 @@ namespace MITD.PMS.Persistence
             var sharedJobIndex = new SharedJobIndex(new SharedJobIndexId(adminJobIndex.Id.Id), adminJobIndex.Name,
                 adminJobIndex.DictionaryName);
             var jobIndex = new JobIndex(jobIndexRepository.GetNextId(), Period, sharedJobIndex, jobIndexGroup,
-                isInquireable,clacLevel);
+                isInquireable, clacLevel);
             var sharedCustomFieldsDic =
                 customFieldsDictionary.ToDictionary(
                     c =>
@@ -112,7 +114,7 @@ namespace MITD.PMS.Persistence
 
         }
 
-        public static Unit CreateUnit(IUnitRepository unitRepository, PMSAdmin.Domain.Model.Units.Unit adminUnit, Unit parentUnit)
+        public static Unit CreateUnit(IUnitRepository unitRepository, PMSAdmin.Domain.Model.Units.Unit adminUnit, Unit parentUnit,Dictionary<string,string> indexValue )
         {
             var unitCustomFields =
                 AdminMigrationUtility.DefinedCustomFields.Where(d => adminUnit.CustomFieldTypeIdList.Contains(d.Id))
@@ -126,11 +128,11 @@ namespace MITD.PMS.Persistence
             var unitUnitIndices = unitIndices.Select(j => new UnitUnitIndex(j.Id, true, true, true)).ToList();
             var unit = new Unit(Period, new SharedUnit(new SharedUnitId(adminUnit.Id.Id), adminUnit.Name, adminUnit.DictionaryName), unitCustomFields, unitUnitIndices, parentUnit);
             unitRepository.Add(unit);
-            Units.Add(unit);
+            Units.Add(unit,indexValue);
             return unit;
         }
 
-        public static JobPosition CreateJobPosition(IJobPositionRepository jobPositionRepository, PMSAdmin.Domain.Model.JobPositions.JobPosition adminJobPosition, JobPosition parent, Job job, Unit unit,Dictionary<string,List<string>> indexValues)
+        public static JobPosition CreateJobPosition(IJobPositionRepository jobPositionRepository, PMSAdmin.Domain.Model.JobPositions.JobPosition adminJobPosition, JobPosition parent, Job job, Unit unit, Dictionary<string, List<string>> indexValues)
         {
 
             var jobPosition = new JobPosition(Period,
@@ -141,11 +143,13 @@ namespace MITD.PMS.Persistence
             return jobPosition;
         }
 
-        public static void CreateEmployee(IEmployeeRepository employeeRepository,string employeeNo,string firstName,string lastName,JobPosition jobPosition)
+        public static void CreateEmployee(IEmployeeRepository employeeRepository, string employeeNo, string firstName, string lastName, JobPosition jobPosition)
         {
-            var employee=new Employee(employeeNo,Period,firstName,lastName);
+            var employee = new Employee(employeeNo, Period, firstName, lastName);
             employeeRepository.Add(employee);
-            employee.AssignJobPosition(jobPosition,DateTime.Now,DateTime.Now, 100,1,null);
+            if (jobPosition != null)
+                employee.AssignJobPosition(jobPosition, DateTime.Now, DateTime.Now, 100, 1, null);
+            Employees.Add(employee);
             //var employee1 =
             //        new PMS.Domain.Model.Employees.Employee(
             //            ((1 + 1) * 2000).ToString(), period, "کارمند" + 1,
@@ -165,11 +169,12 @@ namespace MITD.PMS.Persistence
 
             //empList.Add(employee1);
             //employeeRep.Add(employee1);
+
         }
 
 
         public static void CreateJobIndexPointWithValuesFromMatrix(KeyValuePair<JobPosition, Dictionary<string, List<string>>> jobPositionWithValue,
-            JobRepository jobRep, JobIndexRepository jobIndexRep, InquiryJobIndexPointRepository inquiryRep,JobPositionRepository jobPositionRepository)
+            JobRepository jobRep, JobIndexRepository jobIndexRep, InquiryJobIndexPointRepository inquiryRep, JobPositionRepository jobPositionRepository)
         {
             var jobPosition = jobPositionRepository.GetBy(jobPositionWithValue.Key.Id);
             foreach (var itm in jobPosition.ConfigurationItemList)
@@ -191,7 +196,7 @@ namespace MITD.PMS.Persistence
 
             if (itm.InquirerJobPositionLevel.Equals(JobPositionLevel.None))
             {
-                CreateJobIndexPoint(inquiryRep, jobIndex, itm,values[0]);
+                CreateJobIndexPoint(inquiryRep, jobIndex, itm, values[0]);
             }
             if (itm.InquirerJobPositionLevel.Equals(JobPositionLevel.Childs))
             {

@@ -7,6 +7,8 @@ using MITD.Core.RuleEngine.Model;
 using MITD.Core.RuleEngine.NH;
 using MITD.Data.NH;
 using MITD.PMS.Domain.Model.Calculations;
+using MITD.PMS.Domain.Model.Employees;
+using MITD.PMS.Domain.Model.InquiryUnitIndexPoints;
 using MITD.PMS.Domain.Model.JobIndices;
 using MITD.PMS.Domain.Model.JobPositions;
 using MITD.PMS.Domain.Model.Periods;
@@ -323,6 +325,8 @@ public static Exception exceptionConvertor(Exception ex, string keyName)
                 AdminMigrationUtility.CreateUnit(unitRep, "شرکت حمل فله", "BulkTransportationCompany");
                 AdminMigrationUtility.CreateUnit(unitRep, "معاونت مالی", "FinancialDepartment");
                 AdminMigrationUtility.CreateUnit(unitRep, "معاونت اداری", "AdministrativeDepartment");
+                AdminMigrationUtility.CreateUnit(unitRep, "معاونت فناوری اطلاعات", "ITDepartment");
+                AdminMigrationUtility.CreateUnit(unitRep, "دفتر برنامه ریزی و روش ها", "MethodsAndPlanningOffice");
 
                 AdminMigrationUtility.CreateUnit(unitRep, "دفتر تشکیلات", "OfficeOrganization");
                 AdminMigrationUtility.CreateUnit(unitRep, "امور کارکنان", "PersonnelDepartment");
@@ -478,31 +482,82 @@ public static Exception exceptionConvertor(Exception ex, string keyName)
                 #region Unit Creation
 
                 var adminUnitChairManDepartment = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "ChairManDepartment");
-                PMSMigrationUtility.CreateUnit(unitRep, adminUnitChairManDepartment, null);
+                PMSMigrationUtility.CreateUnit(unitRep, adminUnitChairManDepartment, null,new Dictionary<string, string>
+                {
+                    {"RealizationOfStrategicPlans","9"},
+                    {"RealizationOfOperationalPlans","10"},
+                    {"PenetrationAutomation","10"}
+                });
 
                 var adminUnitContinerTransportationCompany = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "ContinerTransportationCompany");
-                PMSMigrationUtility.CreateUnit(unitRep, adminUnitContinerTransportationCompany, null);
+                PMSMigrationUtility.CreateUnit(unitRep, adminUnitContinerTransportationCompany, null, new Dictionary<string, string>
+                {
+                    {"RealizationOfStrategicPlans","9"},
+                    {"RealizationOfOperationalPlans","10"},
+                    {"PenetrationAutomation","10"}
+                });
 
                 var adminUnitBulkTransportationCompany = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "BulkTransportationCompany");
-                PMSMigrationUtility.CreateUnit(unitRep, adminUnitBulkTransportationCompany, null);
+                PMSMigrationUtility.CreateUnit(unitRep, adminUnitBulkTransportationCompany, null, new Dictionary<string, string>
+                {
+                    {"RealizationOfStrategicPlans","9"},
+                    {"RealizationOfOperationalPlans","10"},
+                    {"PenetrationAutomation","10"}
+                });
 
                 var adminUnitFinancialDepartment = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "FinancialDepartment");
-                PMSMigrationUtility.CreateUnit(unitRep, adminUnitFinancialDepartment, null);
+                PMSMigrationUtility.CreateUnit(unitRep, adminUnitFinancialDepartment, null, new Dictionary<string, string>
+                {
+                    {"RealizationOfStrategicPlans","9"},
+                    {"RealizationOfOperationalPlans","10"},
+                    {"PenetrationAutomation","10"}
+                });
+
+                //var adminUnitITDepartment = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "ITDepartment");
+                //PMSMigrationUtility.CreateUnit(unitRep, adminUnitITDepartment, null);
+
+                //var adminUnitMethodsAndPlanningOffice = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "MethodsAndPlanningOffice");
+                //PMSMigrationUtility.CreateUnit(unitRep, adminUnitMethodsAndPlanningOffice, null);
 
                 var adminUnitAdministrativeDepartment = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "AdministrativeDepartment");
-                var parent = PMSMigrationUtility.CreateUnit(unitRep, adminUnitAdministrativeDepartment, null);
+                var parent = PMSMigrationUtility.CreateUnit(unitRep, adminUnitAdministrativeDepartment, null, new Dictionary<string, string>
+                {
+                    {"RealizationOfStrategicPlans","9"},
+                    {"RealizationOfOperationalPlans","10"},
+                    {"PenetrationAutomation","10"}
+                });
 
                 var adminUnitOfficeOrganization = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "OfficeOrganization");
-                PMSMigrationUtility.CreateUnit(unitRep, adminUnitOfficeOrganization, parent);
+                PMSMigrationUtility.CreateUnit(unitRep, adminUnitOfficeOrganization, parent, new Dictionary<string, string>
+                {
+                    {"RealizationOfStrategicPlans","9"},
+                    {"RealizationOfOperationalPlans","10"},
+                    {"PenetrationAutomation","10"}
+                });
 
                 var adminUnitPersonnelDepartment = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "PersonnelDepartment");
-                PMSMigrationUtility.CreateUnit(unitRep, adminUnitPersonnelDepartment, parent);
+                PMSMigrationUtility.CreateUnit(unitRep, adminUnitPersonnelDepartment, parent, new Dictionary<string, string>
+                {
+                    {"RealizationOfStrategicPlans","9"},
+                    {"RealizationOfOperationalPlans","10"},
+                    {"PenetrationAutomation","10"}
+                });
 
                 var adminUnitSupportDepartment = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "SupportDepartment");
-                PMSMigrationUtility.CreateUnit(unitRep, adminUnitSupportDepartment, parent);
+                PMSMigrationUtility.CreateUnit(unitRep, adminUnitSupportDepartment, parent, new Dictionary<string, string>
+                {
+                    {"RealizationOfStrategicPlans","9"},
+                    {"RealizationOfOperationalPlans","10"},
+                    {"PenetrationAutomation","10"}
+                });
 
                 var adminUnitPhysicalEducationOffice = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "PhysicalEducationOffice");
-                PMSMigrationUtility.CreateUnit(unitRep, adminUnitPhysicalEducationOffice, parent);
+                PMSMigrationUtility.CreateUnit(unitRep, adminUnitPhysicalEducationOffice, parent, new Dictionary<string, string>
+                {
+                    {"RealizationOfStrategicPlans","9"},
+                    {"RealizationOfOperationalPlans","10"},
+                    {"PenetrationAutomation","10"}
+                });
 
 
                 #endregion
@@ -514,7 +569,7 @@ public static Exception exceptionConvertor(Exception ex, string keyName)
                 var supportDepartmentManager = PMSMigrationUtility.CreateJobPosition(jobPositionRep,
                     AdminMigrationUtility.JobPositions.Single(j => j.DictionaryName == "SupportDepartmentManager"), null,
                     PMSMigrationUtility.Jobs.First(),
-                    PMSMigrationUtility.Units.Single(u => u.DictionaryName == "SupportDepartment"),
+                    PMSMigrationUtility.Units.Keys.Single(u => u.DictionaryName == "SupportDepartment"),
                     new Dictionary<string, List<string>>
                     {
                         {"HardWorking", new List<string> {"10", "9", ""}},
@@ -530,7 +585,7 @@ public static Exception exceptionConvertor(Exception ex, string keyName)
                  //Employee A opertional Point : 8.53  Total point 8.595
                 var deleiveryAndClearanceManager = PMSMigrationUtility.CreateJobPosition(jobPositionRep,
                     AdminMigrationUtility.JobPositions.Single(j => j.DictionaryName == "DeleiveryAndClearanceManager"), supportDepartmentManager,
-                    PMSMigrationUtility.Jobs.First(), PMSMigrationUtility.Units.Single(u => u.DictionaryName == "SupportDepartment"),
+                    PMSMigrationUtility.Jobs.First(), PMSMigrationUtility.Units.Keys.Single(u => u.DictionaryName == "SupportDepartment"),
                     new Dictionary<string, List<string>>
                     {
                         {"HardWorking", new List<string> {"10", "9", "10"}},
@@ -546,7 +601,7 @@ public static Exception exceptionConvertor(Exception ex, string keyName)
                 //Employee B opertional Point : 8.9 
                 var deleiveryAndClearanceEmployee=PMSMigrationUtility.CreateJobPosition(jobPositionRep,
                     AdminMigrationUtility.JobPositions.Single(j => j.DictionaryName == "DeleiveryAndClearanceEmployee"), deleiveryAndClearanceManager,
-                    PMSMigrationUtility.Jobs.First(), PMSMigrationUtility.Units.Single(u => u.DictionaryName == "SupportDepartment"),
+                    PMSMigrationUtility.Jobs.First(), PMSMigrationUtility.Units.Keys.Single(u => u.DictionaryName == "SupportDepartment"),
                     new Dictionary<string, List<string>>
                     {
                         {"HardWorking", new List<string> {"10", "9", "10"}},
@@ -563,7 +618,7 @@ public static Exception exceptionConvertor(Exception ex, string keyName)
                 // Employee c opertional Point : 9.1
                 var recordedAndClassifiedDocumentsManager = PMSMigrationUtility.CreateJobPosition(jobPositionRep,
                     AdminMigrationUtility.JobPositions.Single(j => j.DictionaryName == "RecordedAndClassifiedDocumentsManager"), supportDepartmentManager,
-                    PMSMigrationUtility.Jobs.First(), PMSMigrationUtility.Units.Single(u => u.DictionaryName == "SupportDepartment"),
+                    PMSMigrationUtility.Jobs.First(), PMSMigrationUtility.Units.Keys.Single(u => u.DictionaryName == "SupportDepartment"),
                     new Dictionary<string, List<string>>
                     {
                         {"HardWorking", new List<string> {"10", "9", "10"}},
@@ -619,6 +674,13 @@ public static Exception exceptionConvertor(Exception ex, string keyName)
                 //PMSMigrationUtility.CreateEmployee(employeeRep, "670151", "محمد علی", "بخشی", inventoryManager);
                 //PMSMigrationUtility.CreateEmployee(employeeRep, "100004", "کارمند انبار", "کارمندیان", inventoryEmployee);
 
+                PMSMigrationUtility.CreateEmployee(employeeRep, "30000", "مدیر", "دفتر برنامه ریزی و روش ها", null);
+                PMSMigrationUtility.CreateEmployee(employeeRep, "40000", "مدیر", "دفتر فناوری اطلاعات", null);
+                PMSMigrationUtility.CreateEmployee(employeeRep, "50000", "مدیر", "معاونت اداری", null);
+
+
+
+
                 #endregion
 
                 uow.Commit();
@@ -633,15 +695,63 @@ public static Exception exceptionConvertor(Exception ex, string keyName)
             using (var uow = uows.CurrentUnitOfWork as NHUnitOfWork)
             {
                 var jobPositionRep = new PMS.Persistence.NH.JobPositionRepository(uow);
+                var unitRep = new PMS.Persistence.NH.UnitRepository(uow);
+                var unitIndexRep = new PMS.Persistence.NH.UnitIndexRepository(uow);
+                var employeeRep = new EmployeeRepository(uow);
                 var inquiryConfiguratorService = new JobPositionInquiryConfiguratorService(jobPositionRep);
+               
 
                 foreach (var jobPosition in PMSMigrationUtility.JobPositions)
                 {
                     var jobp = jobPositionRep.GetBy(jobPosition.Key.Id);
                     jobp.ConfigeInquirer(inquiryConfiguratorService, false);
                 }
+
+                foreach (var unitc in PMSMigrationUtility.Units)
+                {
+                    var unit = unitRep.GetBy(unitc.Key.Id);
+                    string employeeNo = "";
+                    if (unit.Parent != null)
+                        employeeNo = "50000";
+                    foreach (var unitUnitIndex in unit.UnitIndexList)
+                    {
+                        var unitIndex = unitIndexRep.GetUnitIndexById(unitUnitIndex.UnitIndexId);
+                        if (unitIndex.DictionaryName == "RealizationOfStrategicPlans")
+                        {
+                            if (string.IsNullOrEmpty(employeeNo))
+                                employeeNo = "30000";
+                            var employee =
+                                employeeRep.GetBy(
+                                    PMSMigrationUtility.Employees.Single(e => e.Id.EmployeeNo == employeeNo).Id);
+                            unit.AddCustomInquirer(employee.Id, unitIndex.Id);
+                        }
+                        if (unitIndex.DictionaryName == "RealizationOfOperationalPlans")
+                        {
+                            if (string.IsNullOrEmpty(employeeNo))
+                                employeeNo = "30000";
+                            var employee =
+                               employeeRep.GetBy(
+                                   PMSMigrationUtility.Employees.Single(e => e.Id.EmployeeNo == employeeNo).Id);
+                            unit.AddCustomInquirer(employee.Id, unitIndex.Id);
+                        }
+                        if (unitIndex.DictionaryName == "PenetrationAutomation")
+                        {
+                            if (string.IsNullOrEmpty(employeeNo)||employeeNo.Equals("30000"))
+                                employeeNo = "40000";
+                            var employee =
+                              employeeRep.GetBy(
+                                  PMSMigrationUtility.Employees.Single(e => e.Id.EmployeeNo == employeeNo).Id);
+                            unit.AddCustomInquirer(employee.Id, unitIndex.Id);
+                        }
+
+                    }
+                    //unit.AddCustomInquirer(new EmployeeId("2000",PMSMigrationUtility.Period.Id),unit );
+                }
                 uow.Commit();
             }
+
+
+
 
             using (var uow = uows.CurrentUnitOfWork as NHUnitOfWork)
             {
@@ -649,11 +759,30 @@ public static Exception exceptionConvertor(Exception ex, string keyName)
                 var jobRep = new JobRepository(uow);
                 var jobIndexRep = new JobIndexRepository(uow);
                 var inquiryRep = new InquiryJobIndexPointRepository(uow);
+                //////////////////////////////////////////////
+                var unitRep = new PMS.Persistence.NH.UnitRepository(uow);
+                var inquiryUnitIndexRep = new InquiryUnitIndexPointRepository(uow);
+                var unitIndexRep=new UnitIndexRepository(uow);
+                //////////////////////////////////////////////////
                 var periodRep = new PeriodRepository(uow);
                 foreach (var jobPosition in PMSMigrationUtility.JobPositions)
                 {
                     PMSMigrationUtility.CreateJobIndexPointWithValuesFromMatrix(jobPosition, jobRep, jobIndexRep, inquiryRep, jobPositionRep);
                 }
+
+                foreach (var unitDic in PMSMigrationUtility.Units)
+                {
+                    var unit = unitRep.GetBy(unitDic.Key.Id);
+                    foreach (var unitInquiryConfigurationItem in unit.ConfigurationItemList)
+                    {
+                        var unitIndex =
+                            unitIndexRep.GetUnitIndexById(unitInquiryConfigurationItem.Id.UnitIndexIdUintPeriod);
+                        var unitIndexPoint = new InquiryUnitIndexPoint(new InquiryUnitIndexPointId(inquiryUnitIndexRep.GetNextId()), unitInquiryConfigurationItem, unitIndex.Id,unitDic.Value[unitIndex.DictionaryName]);
+                        inquiryUnitIndexRep.Add(unitIndexPoint);
+                    }
+                }
+
+
                 var p = periodRep.GetById(PMSMigrationUtility.Period.Id);
                 p.State = new PeriodInquiryCompletedState();
                 uow.Commit();
