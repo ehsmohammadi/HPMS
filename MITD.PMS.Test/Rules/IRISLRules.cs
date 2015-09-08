@@ -232,7 +232,7 @@ namespace MITD.Core.RuleEngine
 
 
         }
-        
+
         #endregion
     }
 
@@ -259,6 +259,22 @@ namespace MITD.Core.RuleEngine
             decimal sumPerformanceGroupImportance = 0;
             foreach (var position in data.JobPositions)
             {
+                var x = 0m;
+                var y = 0m;
+
+                if (Utils.GetCalculationPoint(data, position.Unit.Id + "/TotalPointUnitIndex")==null)
+                {
+                    foreach (var index in position.Unit.Indices)
+                    {
+                        x += Convert.ToDecimal(index.Value.Item2) * Convert.ToDecimal(index.Key.CustomFields["UnitImportance"]);
+                        y += Convert.ToDecimal(index.Key.CustomFields["UnitImportance"]);
+
+                    }
+                    var res = x / y;
+                    Utils.AddCalculationPoint(position.Unit.ParentId + ";" + position.Unit.Id + "/TotalPointUnit", res);
+                }
+                
+                
                 foreach (var index in position.Indices)
                 {
                     var parentPoint = Utils.GetInquiryByJobPositionlevel(index, 1);
@@ -275,12 +291,12 @@ namespace MITD.Core.RuleEngine
                     Utils.AddEmployeePoint(position, index, "gross", point);
 
                 }
-                var finalPerformancePoint = performancePoint/sumPerformanceGroupImportance;
+                var finalPerformancePoint = performancePoint / sumPerformanceGroupImportance;
                 Utils.AddEmployeePoint(position, "PerformanceIndices", finalPerformancePoint);
-                Utils.AddCalculationPoint(data.Employee.EmployeeNo+"/"+position.Unit.Id + "/PerformanceIndex", finalPerformancePoint);
+                Utils.AddCalculationPoint(data.Employee.EmployeeNo + "/" + position.Unit.Id + "/PerformanceIndex", finalPerformancePoint);
             }
 
-            
+
 
             ////decimal z = .4m;
             ////Utils.AddCalculationPoint("z", z);
@@ -309,7 +325,7 @@ namespace MITD.Core.RuleEngine
 
             if (data.PathNo != 2) return;
             decimal total = 0;
-            
+
 
             foreach (var position in data.JobPositions)
             {
@@ -324,17 +340,17 @@ namespace MITD.Core.RuleEngine
                     throw new Exception("unit performance points count is 0");
 
 
-                var unitPerformanceAveragePoint = unitPerformancePoints.Sum(up => up.Value)/
+                var unitPerformanceAveragePoint = unitPerformancePoints.Sum(up => up.Value) /
                                                   unitPerformancePoints.Count();
 
-                if (unitPerformanceAveragePoint==0)
+                if (unitPerformanceAveragePoint == 0)
                     throw new Exception("unitPerformanceAveragePoint is 0");
                 var totalPerformancePoint =
                     unitPerformancePoints.Single(up => up.Name.Contains(data.Employee.EmployeeNo)).Value * (9 / unitPerformanceAveragePoint);
 
                 foreach (var index in position.Indices)
                 {
-                   
+
                     var jobindexImportance = Convert.ToDecimal(index.Key.CustomFields["JobIndexImportance"]);
                     sumIndexImportance += jobindexImportance;
                     if (index.Key.Group.DictionaryName == "BehaviouralGroup")
@@ -353,13 +369,13 @@ namespace MITD.Core.RuleEngine
                 }
                 if (sumIndexImportance == 0)
                     throw new Exception("sumIndexImportance is 0");
-                total = total + ((sumBehaviralPoint + totalPerformancePoint * sumPerformanceGroupImportance )/ sumIndexImportance);
+                total = total + ((sumBehaviralPoint + totalPerformancePoint * sumPerformanceGroupImportance) / sumIndexImportance);
                 Utils.AddEmployeePoint(position, "finalJob", sumBehaviralPoint + totalPerformancePoint / sumIndexImportance);
 
 
             }
 
-            Utils.AddEmployeePoint("final", total/data.JobPositions.Count*10, true);
+            Utils.AddEmployeePoint("final", total / data.JobPositions.Count * 10, true);
 
             //var jobs = data.JobPositions.Where(j => j.Job.DictionaryName == "TechnicalInspector");
             //if (jobs == null || jobs.Count() == 0) return;
@@ -403,5 +419,46 @@ namespace MITD.Core.RuleEngine
 
         }
     }
+
+    public class Rule12 : IRule<CalculationData>
+    {
+
+        public void Execute(CalculationData data)
+        {
+
+            var lstPoints = data.Points.CalculationPoints.Where(c => c.Name.Contains("TotalPointUnit")).ToList();
+            var lstTupls=new List<Tuple<long,long,decimal>>(); 
+            lstPoints.ForEach(c =>
+            {
+                var ids = c.Name.Split('/')[0].Split(';');
+                lstTupls.Add(new Tuple<long, long, decimal>(Convert.ToInt64(ids[0]), Convert.ToInt64(ids[1]),c.Value));
+            });
+            
+
+            var roots = lstTupls.Where(c => c.Item1 == 0).ToList();
+
+            roots.ForEach(c =>
+            {
+                var lstChild = lstTupls.Where(d => d.Item1 == c.Item2).ToList();
+
+                if (lstChild.Count!=0)
+                {
+                    var coeff = (c.Item3/lstChild.Sum(x => x.Item3)/lstChild.Count);
+                    lstChild.ForEach(f =>
+                    {
+                        var t = new Tuple<long, long, decimal>(f.Item1, f.Item2, f.Item3);
+                        f = t;
+                    });
+                }
+            });
+
+
+
+        }
+
+    }
+
+
+
 
 }
