@@ -345,8 +345,13 @@ namespace MITD.Core.RuleEngine
 
                 if (unitPerformanceAveragePoint == 0)
                     throw new Exception("unitPerformanceAveragePoint is 0");
+
+                var unitPoint =
+                    data.Points.CalculationPoints.Single(
+                        c => c.Name == position.Unit.ParentId + ";" + position.Unit.Id + "/TotalPointUnit").Value;
+
                 var totalPerformancePoint =
-                    unitPerformancePoints.Single(up => up.Name.Contains(data.Employee.EmployeeNo)).Value * (9 / unitPerformanceAveragePoint);
+                    unitPerformancePoints.Single(up => up.Name.Contains(data.Employee.EmployeeNo)).Value * (unitPoint / unitPerformanceAveragePoint);
 
                 foreach (var index in position.Indices)
                 {
@@ -425,6 +430,8 @@ namespace MITD.Core.RuleEngine
 
         public void Execute(CalculationData data)
         {
+            if (data.PathNo != 2)
+                return;
 
             var lstPoints = data.Points.CalculationPoints.Where(c => c.Name.Contains("TotalPointUnit")).ToList();
             var lstTupls=new List<Tuple<long,long,decimal>>(); 
@@ -439,26 +446,58 @@ namespace MITD.Core.RuleEngine
 
             roots.ForEach(c =>
             {
-                var lstChild = lstTupls.Where(d => d.Item1 == c.Item2).ToList();
-
-                if (lstChild.Count!=0)
-                {
-                    var coeff = (c.Item3/lstChild.Sum(x => x.Item3)/lstChild.Count);
-                    lstChild.ForEach(f =>
-                    {
-                        var t = new Tuple<long, long, decimal>(f.Item1, f.Item2, f.Item3);
-                        f = t;
-                    });
-                }
+                Recurcive(c, lstTupls);
             });
 
+            lstTupls.ForEach(c =>
+            {
+                lstPoints.Single(d => d.Name.Contains(string.Concat(c.Item1, ';', c.Item2))).Value = c.Item3;
+            });
+
+
+
+            
+        }
+
+        static List<Tuple<long, long, decimal>> Recurcive(Tuple<long, long, decimal> tuple, List<Tuple<long, long, decimal>> tuples)
+        {
+
+            var childs = tuples.Where(c => c.Item1 == tuple.Item2).ToList();
+
+            foreach (var child in childs)
+            {
+                var sum = childs.Sum(c => c.Item3);
+                var average = sum / childs.Count();
+                var cof = tuple.Item3 / average;
+                var newValue = cof * child.Item3;
+                tuples.Update(child, newValue);
+                var tpl = tuples.Find(c => c.Item2 == child.Item2);
+                Recurcive(tpl, tuples);
+            }
+
+
+
+
+
+            return tuples;
 
 
         }
 
     }
 
+    public static class Exten
+    {
+        public static void Update(this List<Tuple<long, long, decimal>> tuples,
+            Tuple<long, long, decimal> tuple, decimal value)
+        {
+            var index = tuples.FindIndex(c => c == tuple);
+            tuples.Insert(index, Tuple.Create(tuples[index].Item1, tuples[index].Item2, value));
+            tuples.RemoveAt(index + 1);
 
+
+        }
+    }
 
 
 }
