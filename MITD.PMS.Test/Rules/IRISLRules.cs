@@ -14,7 +14,6 @@ namespace MITD.Core.RuleEngine
     {
         public static RuleResult Res = new RuleResult();
 
-
         #region Function
         public static int IndexCount(JobPosition job, string indexCFName, string indexCFValue, string group)
         {
@@ -223,14 +222,40 @@ namespace MITD.Core.RuleEngine
             }
         }
 
-
-
         public static decimal GetInquiryByEmployeeNoAndJobPositionName(KeyValuePair<JobIndex, Dictionary<Employee, List<Inquiry>>> index, string inquirerEmployeeNo, string JobPositionName)
         {
 
             return Convert.ToDecimal(index.Value.Where(e => e.Key.EmployeeNo == inquirerEmployeeNo).SelectMany(j => j.Value).SingleOrDefault(x => x.JobPosition.DictionaryName == JobPositionName).Value);
 
 
+        }
+
+        public static void Update(this List<Tuple<long, long, decimal>> tuples,
+            Tuple<long, long, decimal> tuple, decimal value)
+        {
+            var index = tuples.FindIndex(c => c == tuple);
+            tuples.Insert(index, Tuple.Create(tuples[index].Item1, tuples[index].Item2, value));
+            tuples.RemoveAt(index + 1);
+
+
+        }
+
+        public static List<Tuple<long, long, decimal>> CalculatePoint(Tuple<long, long, decimal> tuple, List<Tuple<long, long, decimal>> tuples)
+        {
+
+            var childs = tuples.Where(c => c.Item1 == tuple.Item2).ToList();
+
+            foreach (var child in childs)
+            {
+                var sum = childs.Sum(c => c.Item3);
+                var average = sum / childs.Count();
+                var cof = tuple.Item3 / average;
+                var newValue = cof * child.Item3;
+                tuples.Update(child, newValue);
+                var tpl = tuples.Find(c => c.Item2 == child.Item2);
+                CalculatePoint(tpl, tuples);
+            }
+            return tuples;
         }
 
         #endregion
@@ -262,19 +287,19 @@ namespace MITD.Core.RuleEngine
                 var x = 0m;
                 var y = 0m;
 
-                if (Utils.GetCalculationPoint(data, position.Unit.Id + "/TotalPointUnitIndex")==null)
+                if (Utils.GetCalculationPoint(data, position.Unit.Id + "/TotalPointUnitIndex") == null)
                 {
                     foreach (var index in position.Unit.Indices)
                     {
-                        x += Convert.ToDecimal(index.Value.Item2) * Convert.ToDecimal(index.Key.CustomFields["UnitImportance"]);
-                        y += Convert.ToDecimal(index.Key.CustomFields["UnitImportance"]);
+                        x += Convert.ToDecimal(index.Value.Item2) * Convert.ToDecimal(index.Key.CustomFields["UnitIndexImportance"]);
+                        y += Convert.ToDecimal(index.Key.CustomFields["UnitIndexImportance"]);
 
                     }
                     var res = x / y;
                     Utils.AddCalculationPoint(position.Unit.ParentId + ";" + position.Unit.Id + "/TotalPointUnit", res);
                 }
-                
-                
+
+
                 foreach (var index in position.Indices)
                 {
                     var parentPoint = Utils.GetInquiryByJobPositionlevel(index, 1);
@@ -296,29 +321,47 @@ namespace MITD.Core.RuleEngine
                 Utils.AddCalculationPoint(data.Employee.EmployeeNo + "/" + position.Unit.Id + "/PerformanceIndex", finalPerformancePoint);
             }
 
-
-
-            ////decimal z = .4m;
-            ////Utils.AddCalculationPoint("z", z);
-            //foreach (var job in data.JobPositions)
-            //{
-            //    if (Utils.GetPoint(job, "a1") != null) break;
-            //    decimal notPresentIndexesCount = 1;
-            //    if (job.CustomFields["PeriodicMaintenance"] == "0")
-            //        notPresentIndexesCount = 2;
-
-            //    decimal a1 = Utils.IndexCount(job, "Importance", "1", "General");
-
-
-            //    //محاسبه عدد وزنی شاخص های عمومی
-
-            //    Utils.AddEmployeePoint(job, "a1", a1);
-
-            //}
-
         }
     }
+
     public class Rule11 : IRule<CalculationData>
+    {
+
+        public void Execute(CalculationData data)
+        {
+            if (data.PathNo != 2)
+                return;
+            var unitCalculationFlag = Utils.GetCalculationPoint(data, "UnitCalculationFlag");
+            if (unitCalculationFlag != null)
+                return;
+
+            var allstringUnitPoints = data.Points.CalculationPoints.Where(c => c.Name.Contains("TotalPointUnit")).ToList();
+            var unitPoints = new List<Tuple<long, long, decimal>>();
+            allstringUnitPoints.ForEach(c =>
+            {
+                var ids = c.Name.Split('/')[0].Split(';');
+                unitPoints.Add(new Tuple<long, long, decimal>(Convert.ToInt64(ids[0]), Convert.ToInt64(ids[1]), c.Value));
+            });
+
+            var roots = unitPoints.Where(c => c.Item1 == 0).ToList();
+
+            roots.ForEach(r =>
+            {
+                Utils.CalculatePoint(r, unitPoints);
+            });
+
+            unitPoints.ForEach(c =>
+            {
+                allstringUnitPoints.Single(d => d.Name.Contains(string.Concat(c.Item1, ';', c.Item2))).Value = c.Item3;
+            });
+
+            Utils.AddCalculationPoint("UnitCalculationFlag", 1);
+
+        }
+
+    }
+
+    public class Rule12 : IRule<CalculationData>
     {
         public void Execute(CalculationData data)
         {
@@ -382,122 +425,7 @@ namespace MITD.Core.RuleEngine
 
             Utils.AddEmployeePoint("final", total / data.JobPositions.Count * 10, true);
 
-            //var jobs = data.JobPositions.Where(j => j.Job.DictionaryName == "TechnicalInspector");
-            //if (jobs == null || jobs.Count() == 0) return;
-
-            //decimal calcPointMinCostControl;
-            //var rulePointCalcPointMinCostControl = Utils.GetCalculationPoint(data, "MinPereiodicMaintenancePlaningTime");
-            //calcPointMinCostControl = rulePointCalcPointMinCostControl != null ? rulePointCalcPointMinCostControl.Value : decimal.MaxValue;
-
-
-            //foreach (var job in jobs)
-            //{
-
-
-            //    //محاسبه تعداد شاخص ها با اهمیت های مختلف
-            //    foreach (var index in job.Indices)
-            //    {
-            //        decimal x = 0;
-            //        //فرهنگ و تعهد سازمانی
-            //        if (index.Key.DictionaryName == "OrganizationalCultureAndCommitment")
-            //        {
-            //            var inquiryPointTechnicalInspectorJobPosition = Utils.GetInquiryByJobPositionName(index, "TechnicalInspectorJobPosition");
-            //            var inquiryPointExpertOfPurchasingAndTechnicalOrders = Utils.GetInquiryByJobPositionName(index, "ExpertOfPurchasingAndTechnicalOrdersJobPosition");
-            //            var inquiryPointElectricalSupervisorEngineer = Utils.GetInquiryByJobPositionName(index, "ElectricalSupervisorEngineerJobPosition");
-            //            var inquiryPointElectronicsSupervisorEngineer = Utils.GetInquiryByJobPositionName(index, "ElectronicsSupervisorEngineerJobPosition");
-            //            var inquiryPointTechnicalInspector = Utils.GetInquiryByEmployeeNoAndJobPositionName(index, data.Employee.EmployeeNo, data.JobPositions[0].Name);
-            //            var inquiryPoint = (inquiryPointTechnicalInspectorJobPosition * 4 + inquiryPointTechnicalInspector * 2 + inquiryPointExpertOfPurchasingAndTechnicalOrders + inquiryPointElectricalSupervisorEngineer + inquiryPointElectronicsSupervisorEngineer) / 9;
-
-            //            if (inquiryPoint > 70) inquiryPoint = Math.Min(inquiryPoint + inquiryPoint * Convert.ToDecimal("0.05"), 100);
-            //            else if (inquiryPoint < 60) inquiryPoint = Math.Max(inquiryPoint - inquiryPoint * Convert.ToDecimal("0.05"), 0);
-
-            //            x = inquiryPoint / 9;
-            //        }
-
-
-            //        Utils.AddEmployeePoint(job, index, "gross", x);
-            //    }
-
-            //}
-            //Utils.AddCalculationPoint("MinPereiodicMaintenancePlaningTime", calcPointMinCostControl);
-
-
         }
     }
-
-    public class Rule12 : IRule<CalculationData>
-    {
-
-        public void Execute(CalculationData data)
-        {
-            if (data.PathNo != 2)
-                return;
-
-            var lstPoints = data.Points.CalculationPoints.Where(c => c.Name.Contains("TotalPointUnit")).ToList();
-            var lstTupls=new List<Tuple<long,long,decimal>>(); 
-            lstPoints.ForEach(c =>
-            {
-                var ids = c.Name.Split('/')[0].Split(';');
-                lstTupls.Add(new Tuple<long, long, decimal>(Convert.ToInt64(ids[0]), Convert.ToInt64(ids[1]),c.Value));
-            });
-            
-
-            var roots = lstTupls.Where(c => c.Item1 == 0).ToList();
-
-            roots.ForEach(c =>
-            {
-                Recurcive(c, lstTupls);
-            });
-
-            lstTupls.ForEach(c =>
-            {
-                lstPoints.Single(d => d.Name.Contains(string.Concat(c.Item1, ';', c.Item2))).Value = c.Item3;
-            });
-
-
-
-            
-        }
-
-        static List<Tuple<long, long, decimal>> Recurcive(Tuple<long, long, decimal> tuple, List<Tuple<long, long, decimal>> tuples)
-        {
-
-            var childs = tuples.Where(c => c.Item1 == tuple.Item2).ToList();
-
-            foreach (var child in childs)
-            {
-                var sum = childs.Sum(c => c.Item3);
-                var average = sum / childs.Count();
-                var cof = tuple.Item3 / average;
-                var newValue = cof * child.Item3;
-                tuples.Update(child, newValue);
-                var tpl = tuples.Find(c => c.Item2 == child.Item2);
-                Recurcive(tpl, tuples);
-            }
-
-
-
-
-
-            return tuples;
-
-
-        }
-
-    }
-
-    public static class Exten
-    {
-        public static void Update(this List<Tuple<long, long, decimal>> tuples,
-            Tuple<long, long, decimal> tuple, decimal value)
-        {
-            var index = tuples.FindIndex(c => c == tuple);
-            tuples.Insert(index, Tuple.Create(tuples[index].Item1, tuples[index].Item2, value));
-            tuples.RemoveAt(index + 1);
-
-
-        }
-    }
-
 
 }

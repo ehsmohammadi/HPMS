@@ -48,18 +48,65 @@ namespace MITD.PMS.Application
                              employee.CustomFieldValues.Select(m => m.Key).ToList())
                      join l in employee.CustomFieldValues on k.Id equals l.Key
                      select new { k, l }).ToDictionary(j => j.k.DictionaryName, j => j.l.Value),
-                JobPositions = calculationData.JobPositions.Select(i => new JobPosition
+                JobPositions = calculationData.JobPositions.Select(jobPositionAndData => new JobPosition
                 {
-                    Name = i.Key.Name,
-                    DictionaryName = i.Key.DictionaryName,
+                    Name = jobPositionAndData.Key.Name,
+                    DictionaryName = jobPositionAndData.Key.DictionaryName,
                    
-                    Job = new Job { Name = i.Value.Job.Name, DictionaryName = i.Value.Job.DictionaryName },
-                    Unit = new Unit{Id=i.Key.UnitId.SharedUnitId.Id},
-                    CustomFields = (from k in pmsAdminService.GetSharedCutomFieldListForJob(i.Value.Job.SharedJob.Id,
-                        i.Value.CustomFields.Select(m => m.JobCustomFieldId.SharedJobCustomFieldId).ToList())
-                                    join l in i.Value.CustomFields on k.Id equals l.JobCustomFieldId.SharedJobCustomFieldId
+                    Job = new Job { Name = jobPositionAndData.Value.Job.Name, DictionaryName = jobPositionAndData.Value.Job.DictionaryName },
+                    Unit = new Unit
+                    {
+                        Id = jobPositionAndData.Value.Unit.Id.SharedUnitId.Id, ParentId = jobPositionAndData.Value.Unit.Parent.Id.SharedUnitId.Id, Name = jobPositionAndData.Value.Unit.Name,DictionaryName =jobPositionAndData.Value.Unit.DictionaryName,
+                        Indices = jobPositionAndData.Value.UnitIndices.ToDictionary(
+                        j => new UnitIndex
+                        {
+                            Name = j.Key.Name,
+                            DictionaryName = j.Key.DictionaryName,
+                            IsInquireable = j.Key.IsInquireable,
+                            //Group =
+                            //    new JobIndexGroup { Name = j.Key.Group.Name, DictionaryName = j.Key.Group.DictionaryName },
+                            CustomFields =
+                                (from k in
+                                     pmsAdminService.GetSharedCutomFieldListForUnitIndex(j.Key.SharedUnitIndexId,
+                                         j.Key.CustomFieldValues.Select(m => m.Key).ToList())
+                                 join l in j.Key.CustomFieldValues on k.Id equals l.Key
+                                 select new { k, l }).ToDictionary(m => m.k.DictionaryName, m => m.l.Value)
+                        },
+                        j => (j.Value != null
+                            ? new Tuple<PMS.RuleContracts.Employee, string>(new RuleContracts.Employee()
+                            {
+                                EmployeeNo = j.Value.Item1.Id.EmployeeNo,
+                                FirstName = j.Value.Item1.FirstName,
+                                LastName = j.Value.Item1.LastName
+                            }, j.Value.Item2)
+                            //j.Value.ToDictionary(
+                            //    k => new PMS.RuleContracts.Employee
+                            //    {
+                            //        FirstName = k.Key.FirstName,
+                            //        LastName = k.Key.LastName,
+                            //        EmployeeNo = k.Key.Id.EmployeeNo
+                            //    },
+                            //    k => k.Value.Select(f =>
+                            //        new Inquiry
+                            //        {
+                            //            JobPosition =
+                            //                new InquirerJobPosition
+                            //                {
+                            //                    Name = f.JobPosition.Name,
+                            //                    DictionaryName = f.JobPosition.DictionaryName,
+                            //                    JobPositionLevel = (int)jobPositionAndData.Key.ConfigurationItemList.Single(cil => cil.Id == f.Point.ConfigurationItemId).InquirerJobPositionLevel
+
+
+                            //                },
+                            //            Value = f.Point.JobIndexValue
+                            //        }).ToList())
+                            : null))
+                    },
+                    CustomFields = (from k in pmsAdminService.GetSharedCutomFieldListForJob(jobPositionAndData.Value.Job.SharedJob.Id,
+                        jobPositionAndData.Value.CustomFields.Select(m => m.JobCustomFieldId.SharedJobCustomFieldId).ToList())
+                                    join l in jobPositionAndData.Value.CustomFields on k.Id equals l.JobCustomFieldId.SharedJobCustomFieldId
                                     select new { k, l }).ToDictionary(j => j.k.DictionaryName, j => j.l.JobCustomFieldValue),
-                    Indices = i.Value.Indices.ToDictionary(
+                    Indices = jobPositionAndData.Value.Indices.ToDictionary(
                         j => new JobIndex
                         {
                             Name = j.Key.Name,
@@ -90,14 +137,19 @@ namespace MITD.PMS.Application
                                         {
                                             Name = f.JobPosition.Name,
                                             DictionaryName = f.JobPosition.DictionaryName,
-                                            JobPositionLevel =(int)i.Key.ConfigurationItemList.Single(cil=>cil.Id==f.Point.ConfigurationItemId).InquirerJobPositionLevel
+                                            JobPositionLevel =(int)jobPositionAndData.Key.ConfigurationItemList.Single(cil=>cil.Id==f.Point.ConfigurationItemId).InquirerJobPositionLevel
                                             
                                             
                                         },
                                     Value = f.Point.JobIndexValue
                                 }).ToList())
                             : null))
+                           
+
+
                 }).ToList()
+
+
             };
 
             var ruleResult = addPreviousEmployeePointsToCalculationData(calculationData, calculationSession.CalculationPoints);

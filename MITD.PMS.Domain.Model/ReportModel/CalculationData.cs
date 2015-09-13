@@ -1,18 +1,13 @@
-﻿using MITD.PMS.Domain.Model.Employees;
+﻿using System;
+using System.Collections.Generic;
+using MITD.PMS.Domain.Model.Employees;
 using MITD.PMS.Domain.Model.InquiryJobIndexPoints;
 using MITD.PMS.Domain.Model.JobIndexPoints;
+using MITD.PMS.Domain.Model.JobIndices;
 using MITD.PMS.Domain.Model.JobPositions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MITD.PMS.RuleContracts;
-using Employee = MITD.PMS.Domain.Model.Employees.Employee;
-using Job = MITD.PMS.Domain.Model.Jobs.Job;
-using JobIndex = MITD.PMS.Domain.Model.JobIndices.JobIndex;
-using JobPosition = MITD.PMS.Domain.Model.JobPositions.JobPosition;
-using UnitIndex = MITD.PMS.Domain.Model.UnitIndices.UnitIndex;
+using MITD.PMS.Domain.Model.Jobs;
+using MITD.PMS.Domain.Model.UnitIndices;
+using MITD.PMS.Domain.Model.Units;
 
 namespace MITD.PMSReport.Domain.Model
 {

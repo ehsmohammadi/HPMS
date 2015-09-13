@@ -92,8 +92,8 @@ namespace MITD.PMS.Test
                             rule1.Execute(data);
                             var rule2 = new Rule11();
                             rule2.Execute(data);
-                            //var rule3 = new Rule12();
-                            //rule3.Execute(data);
+                            var rule3 = new Rule12();
+                            rule3.Execute(data);
                             //var rule4 = new Rule13();
                             //rule4.Execute(data);
                             var res = provider.Convert(Utils.Res, empData, emp, period, calculation);
