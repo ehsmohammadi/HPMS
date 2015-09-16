@@ -351,16 +351,16 @@ namespace MITD.PMS.Persistence.NH
                               j => (j.k != null ? j.k.GroupBy(jk=>jk.e)
                                   .ToDictionary(g => g.Key, g=>g.Select(f=>new InquiryData { JobPosition = f.SharedJobPosition, Point = f.ij}).ToList()) : null)),
                               
-                              //UnitIndices =(from ji in i.unit.UnitIndexList
-                              // join jii in unitInquiries.Where(g=> g.ij.ConfigurationItemId.InquirySubjectUnitId==i.unit.Id).GroupBy(g => g.ij.ConfigurationItemId.UnitIndexIdUintPeriod).ToList() on ji.UnitIndexId equals jii.Key into gjii
-                              // from k in gjii.DefaultIfEmpty()
-                              // select new { ji, k })
-                              //.ToDictionary(j => j.ji,
-                              //j => (j.k != null ? j.k.GroupBy(jk=>jk.e)
-                              //    .ToDictionary(g => g.Key, g=>g.Select(f=>new InquiryData { JobPosition = f.SharedJobPosition, Point = f.ij}).ToList()) : null))
+                              UnitIndices =(from ji in i.unit.UnitIndexList
+                               join jii in unitInquiries.Where(g=> g.ij.ConfigurationItemId.InquirySubjectUnitId==i.unit.Id).GroupBy(g => g.ij.ConfigurationItemId.UnitIndexIdUintPeriod).ToList() on ji.UnitIndexId equals jii.Key into gjii
+                               from k in gjii.DefaultIfEmpty()
+                               select new { ji, k })
+                              .ToDictionary(j => j.ji,
+                              j => (j.k != null ? j.k.GroupBy(jk=>jk.e)
+                                  .ToDictionary(g => g.Key, g=>g.Select(f=>new InquiryData { JobPosition = f.SharedJobPosition, Point = f.ij}).ToList()) : null))
                                   
                                   
-                               //   ),
+                                  ),
                     CustomFields = i.EmployeeJobCustomFieldValues,
                     WorkTimePercent = emp.JobPositions.Single(j=>j.JobPositionId==i.JobPosition.Id).WorkTimePercent,
                     Weight = emp.JobPositions.Single(j => j.JobPositionId == i.JobPosition.Id).JobPositionWeight
