@@ -56,7 +56,10 @@ namespace MITD.PMS.Application
                     Job = new Job { Name = jobPositionAndData.Value.Job.Name, DictionaryName = jobPositionAndData.Value.Job.DictionaryName },
                     Unit = new Unit
                     {
-                        Id = jobPositionAndData.Value.Unit.Id.SharedUnitId.Id, ParentId = jobPositionAndData.Value.Unit.Parent.Id.SharedUnitId.Id, Name = jobPositionAndData.Value.Unit.Name,DictionaryName =jobPositionAndData.Value.Unit.DictionaryName,
+                        Id = jobPositionAndData.Value.Unit.Id.SharedUnitId.Id,
+                        ParentId = jobPositionAndData.Value.Unit.Parent!=null ? jobPositionAndData.Value.Unit.Parent.Id.SharedUnitId.Id:0, 
+                        Name = jobPositionAndData.Value.Unit.Name,
+                        DictionaryName =jobPositionAndData.Value.Unit.DictionaryName,
                         Indices = jobPositionAndData.Value.UnitIndices.ToDictionary(
                         j => new UnitIndex
                         {

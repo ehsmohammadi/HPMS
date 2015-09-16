@@ -71,8 +71,8 @@
 
 
                             </Border>
-                            <sdk:Label Grid.Row="2"  Content="لیست ارزیاب های انتخابی:" />
-                            <StackPanel Grid.Row="3" Orientation="Vertical">
+                            <sdk:Label Grid.Row="2"  Content="لیست ارزیاب های انتخابی:" Visibility="Collapsed" />
+                            <StackPanel Grid.Row="3" Orientation="Vertical" Visibility="Collapsed">
 
                                 <sdk:DataGrid  Name="drgList" AutoGenerateColumns="False" MinHeight="200" HorizontalAlignment="Stretch" SelectionMode="Single" IsReadOnly="True"
                                         ItemsSource="{Binding Path=SelectedInquirySubjectWithInquirers.CustomInquirers}" 
@@ -97,7 +97,7 @@
 
                             </StackPanel>
 
-                            <StackPanel Grid.Row="4" Orientation="Horizontal">
+                            <StackPanel Grid.Row="4" Orientation="Horizontal" Visibility="Collapsed">
 
                                 <sdk:Label Content="انتخاب نظردهنده جدید:" />
 

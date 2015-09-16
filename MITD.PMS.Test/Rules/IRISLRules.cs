@@ -296,7 +296,8 @@ namespace MITD.Core.RuleEngine
 
                     }
                     var res = x / y;
-                    Utils.AddCalculationPoint(position.Unit.ParentId + ";" + position.Unit.Id + "/TotalPointUnit", res);
+                    Utils.AddCalculationPoint(position.Unit.ParentId + ";" + position.Unit.Id + "/UnitPoint", res);
+                    Utils.AddEmployeePoint(position, "UnitPoint", res);
                 }
 
 
@@ -318,6 +319,7 @@ namespace MITD.Core.RuleEngine
                 }
                 var finalPerformancePoint = performancePoint / sumPerformanceGroupImportance;
                 Utils.AddEmployeePoint(position, "PerformanceIndices", finalPerformancePoint);
+                
                 Utils.AddCalculationPoint(data.Employee.EmployeeNo + "/" + position.Unit.Id + "/PerformanceIndex", finalPerformancePoint);
             }
 
@@ -331,11 +333,11 @@ namespace MITD.Core.RuleEngine
         {
             if (data.PathNo != 2)
                 return;
-            var unitCalculationFlag = Utils.GetCalculationPoint(data, "UnitCalculationFlag");
+            var unitCalculationFlag = Utils.Res.CalculationPoints.SingleOrDefault(c => c.Name == "UnitCalculationFlag");
             if (unitCalculationFlag != null)
                 return;
 
-            var allstringUnitPoints = data.Points.CalculationPoints.Where(c => c.Name.Contains("TotalPointUnit")).ToList();
+            var allstringUnitPoints = data.Points.CalculationPoints.Where(c => c.Name.Contains("UnitPoint")).ToList();
             var unitPoints = new List<Tuple<long, long, decimal>>();
             allstringUnitPoints.ForEach(c =>
             {
@@ -352,7 +354,9 @@ namespace MITD.Core.RuleEngine
 
             unitPoints.ForEach(c =>
             {
-                allstringUnitPoints.Single(d => d.Name.Contains(string.Concat(c.Item1, ';', c.Item2))).Value = c.Item3;
+                Utils.AddCalculationPoint(c.Item1 + ";" + c.Item2 + "/TotalPointUnit", c.Item3);
+                //data.Points.CalculationPoints.Where(f => f.Name.Contains("TotalPointUnit")).Single(d => d.Name.Contains(string.Concat(c.Item1, ';', c.Item2))).Value = c.Item3;
+                //data.Points.CalculationPoints.Where(f => f.Name.Contains("TotalPointUnit")).Single(d => d.Name.Contains(string.Concat(c.Item1, ';', c.Item2))).Value = 8;
             });
 
             Utils.AddCalculationPoint("UnitCalculationFlag", 1);
@@ -389,9 +393,9 @@ namespace MITD.Core.RuleEngine
                 if (unitPerformanceAveragePoint == 0)
                     throw new Exception("unitPerformanceAveragePoint is 0");
 
-                var unitPoint =
-                    data.Points.CalculationPoints.Single(
+                var unitPoint =Utils.Res.CalculationPoints.Single(
                         c => c.Name == position.Unit.ParentId + ";" + position.Unit.Id + "/TotalPointUnit").Value;
+                Utils.AddEmployeePoint(position, "finalunitPoint", unitPoint);
 
                 var totalPerformancePoint =
                     unitPerformancePoints.Single(up => up.Name.Contains(data.Employee.EmployeeNo)).Value * (unitPoint / unitPerformanceAveragePoint);
@@ -418,7 +422,7 @@ namespace MITD.Core.RuleEngine
                 if (sumIndexImportance == 0)
                     throw new Exception("sumIndexImportance is 0");
                 total = total + ((sumBehaviralPoint + totalPerformancePoint * sumPerformanceGroupImportance) / sumIndexImportance);
-                Utils.AddEmployeePoint(position, "finalJob", sumBehaviralPoint + totalPerformancePoint / sumIndexImportance);
+                Utils.AddEmployeePoint(position, "finalJob", (sumBehaviralPoint + totalPerformancePoint * sumPerformanceGroupImportance) / sumIndexImportance);
 
 
             }

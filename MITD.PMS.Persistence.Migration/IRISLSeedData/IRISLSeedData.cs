@@ -84,7 +84,7 @@ namespace MITD.PMS.Persistence
                             }
 
                             <#rules#>
-                        }"); 
+                        }");
 
                 #endregion
 
@@ -197,7 +197,7 @@ namespace MITD.PMS.Persistence
                 throw exceptionConvertor(ex, name);
             }
         }
-        "); 
+        ");
 
                 #endregion
 
@@ -223,7 +223,8 @@ namespace MITD.PMS.Persistence
 
                     }
                     var res = x / y;
-                    Utils.AddCalculationPoint(position.Unit.ParentId + "";"" + position.Unit.Id + ""/TotalPointUnit"", res);
+                    Utils.AddCalculationPoint(position.Unit.ParentId + "";"" + position.Unit.Id + ""/UnitPoint"", res);
+                    Utils.AddEmployeePoint(position, ""UnitPoint"", res);
                 }
 
 
@@ -245,17 +246,18 @@ namespace MITD.PMS.Persistence
                 }
                 var finalPerformancePoint = performancePoint / sumPerformanceGroupImportance;
                 Utils.AddEmployeePoint(position, ""PerformanceIndices"", finalPerformancePoint);
+                
                 Utils.AddCalculationPoint(data.Employee.EmployeeNo + ""/"" + position.Unit.Id + ""/PerformanceIndex"", finalPerformancePoint);
             }");
 
                 AdminMigrationUtility.CreateRule(ruleRep, "محاسبه واحد ها  در دور دوم", RuleType.PerCalculation, 2, @"
             if (data.PathNo != 2)
                 return;
-            var unitCalculationFlag = Utils.GetCalculationPoint(data, ""UnitCalculationFlag"");
+            var unitCalculationFlag = Utils.Res.CalculationPoints.SingleOrDefault(c => c.Name == ""UnitCalculationFlag"");
             if (unitCalculationFlag != null)
                 return;
 
-            var allstringUnitPoints = data.Points.CalculationPoints.Where(c => c.Name.Contains(""TotalPointUnit"")).ToList();
+            var allstringUnitPoints = data.Points.CalculationPoints.Where(c => c.Name.Contains(""UnitPoint"")).ToList();
             var unitPoints = new List<Tuple<long, long, decimal>>();
             allstringUnitPoints.ForEach(c =>
             {
@@ -272,14 +274,16 @@ namespace MITD.PMS.Persistence
 
             unitPoints.ForEach(c =>
             {
-                allstringUnitPoints.Single(d => d.Name.Contains(string.Concat(c.Item1, ';', c.Item2))).Value = c.Item3;
+                Utils.AddCalculationPoint(c.Item1 + "";"" + c.Item2 + ""/TotalPointUnit"", c.Item3);
+                //data.Points.CalculationPoints.Where(f => f.Name.Contains(""TotalPointUnit"")).Single(d => d.Name.Contains(string.Concat(c.Item1, ';', c.Item2))).Value = c.Item3;
+                //data.Points.CalculationPoints.Where(f => f.Name.Contains(""TotalPointUnit"")).Single(d => d.Name.Contains(string.Concat(c.Item1, ';', c.Item2))).Value = 8;
             });
 
             Utils.AddCalculationPoint(""UnitCalculationFlag"", 1);
             ");
 
                 AdminMigrationUtility.CreateRule(ruleRep, "محاسبه شاخص های کارمندان در دور دوم", RuleType.PerCalculation, 3, @"
-             if (data.PathNo != 2) return;
+           if (data.PathNo != 2) return;
             decimal total = 0;
 
 
@@ -302,9 +306,9 @@ namespace MITD.PMS.Persistence
                 if (unitPerformanceAveragePoint == 0)
                     throw new Exception(""unitPerformanceAveragePoint is 0"");
 
-                var unitPoint =
-                    data.Points.CalculationPoints.Single(
+                var unitPoint =Utils.Res.CalculationPoints.Single(
                         c => c.Name == position.Unit.ParentId + "";"" + position.Unit.Id + ""/TotalPointUnit"").Value;
+                Utils.AddEmployeePoint(position, ""finalunitPoint"", unitPoint);
 
                 var totalPerformancePoint =
                     unitPerformancePoints.Single(up => up.Name.Contains(data.Employee.EmployeeNo)).Value * (unitPoint / unitPerformanceAveragePoint);
@@ -331,14 +335,14 @@ namespace MITD.PMS.Persistence
                 if (sumIndexImportance == 0)
                     throw new Exception(""sumIndexImportance is 0"");
                 total = total + ((sumBehaviralPoint + totalPerformancePoint * sumPerformanceGroupImportance) / sumIndexImportance);
-                Utils.AddEmployeePoint(position, ""finalJob"", sumBehaviralPoint + totalPerformancePoint / sumIndexImportance);
+                Utils.AddEmployeePoint(position, ""finalJob"", (sumBehaviralPoint + totalPerformancePoint * sumPerformanceGroupImportance) / sumIndexImportance);
 
 
             }
 
             Utils.AddEmployeePoint(""final"", total / data.JobPositions.Count * 10, true);
             ");
-               
+
 
                 #endregion
 
@@ -381,7 +385,7 @@ namespace MITD.PMS.Persistence
                 //cftRep.Add(cft1);
                 //jobCftList.Add(cft1);
 
-              
+
                 //for (int i = 1; i < 7; i++)
                 //{
                 //    var cft = new PMSAdmin.Domain.Model.CustomFieldTypes.CustomFieldType(cftRep.GetNextId(),
@@ -390,7 +394,7 @@ namespace MITD.PMS.Persistence
                 //    jobCftList.Add(cft);
                 //}
 
-               
+
 
                 #endregion
 
@@ -410,7 +414,7 @@ namespace MITD.PMS.Persistence
 
                 #region Unit Creation
 
-                AdminMigrationUtility.CreateUnit(unitRep,"حوزه مدیرعامل","ChairManDepartment");
+                AdminMigrationUtility.CreateUnit(unitRep, "حوزه مدیرعامل", "ChairManDepartment");
                 AdminMigrationUtility.CreateUnit(unitRep, "شرکت حمل کانتینری", "ContinerTransportationCompany");
                 AdminMigrationUtility.CreateUnit(unitRep, "شرکت حمل فله", "BulkTransportationCompany");
                 AdminMigrationUtility.CreateUnit(unitRep, "معاونت مالی", "FinancialDepartment");
@@ -469,7 +473,7 @@ namespace MITD.PMS.Persistence
                 AdminMigrationUtility.CreateJobPosition(jobPositionRep, "کارمند واحد پشتیبانی و خدمات", "SupportAndServicesEmployee");
 
                 AdminMigrationUtility.CreateJobPosition(jobPositionRep, "مدیر انبار", "InventoryManager");
-                AdminMigrationUtility.CreateJobPosition(jobPositionRep, "مسئول انبار", "InventoryClerk"); 
+                AdminMigrationUtility.CreateJobPosition(jobPositionRep, "مسئول انبار", "InventoryClerk");
 
                 #endregion
 
@@ -484,13 +488,13 @@ namespace MITD.PMS.Persistence
                 AdminMigrationUtility.CreateJobIndex(jobIndexRep, "مشارکت برنامه های عملیاتی", "PartnershipOfOperationalPlans", performanceGroupStr);
                 AdminMigrationUtility.CreateJobIndex(jobIndexRep, "بهره گیری از سیستم اتوماسیون", "utilizationFromAutomation", performanceGroupStr);
 
-                #endregion              
+                #endregion
 
                 var policyRep = new PMSAdmin.Persistence.NH.PolicyRepository(uow);
 
                 #region Policy Creation
 
-                AdminMigrationUtility.CreatePolicy(policyRep,"روش دفتر برنامه ها و روش ها","MethodsAndPlanOfficePolicy");
+                AdminMigrationUtility.CreatePolicy(policyRep, "روش دفتر برنامه ها و روش ها", "MethodsAndPlanOfficePolicy");
 
                 #endregion
 
@@ -511,7 +515,7 @@ namespace MITD.PMS.Persistence
 
                 #region Period creation
 
-                PMSMigrationUtility.CreatePeriod(periodRep,"دوره آذر",DateTime.Now, DateTime.Now);
+                PMSMigrationUtility.CreatePeriod(periodRep, "دوره آذر", DateTime.Now, DateTime.Now);
 
                 #endregion
 
@@ -532,14 +536,14 @@ namespace MITD.PMS.Persistence
                         var cftDic =
                             AdminMigrationUtility.DefinedCustomFields.Where(d => jobIndex.Key.CustomFieldTypeIdList.Contains(d.Id))
                                 .ToDictionary(c => c, c => "1");
-                        PMSMigrationUtility.CreateJobIndex(jobIndexRep, jobIndex.Key, behaviouralGroup, true, cftDic,1);
+                        PMSMigrationUtility.CreateJobIndex(jobIndexRep, jobIndex.Key, behaviouralGroup, true, cftDic, 1);
                     }
                     if (jobIndex.Value == performanceGroupStr)
                     {
                         var cftDic =
                             AdminMigrationUtility.DefinedCustomFields.Where(d => jobIndex.Key.CustomFieldTypeIdList.Contains(d.Id))
                                 .ToDictionary(c => c, c => value.ToString());
-                        PMSMigrationUtility.CreateJobIndex(jobIndexRep, jobIndex.Key, performanceGroup, true, cftDic,2);
+                        PMSMigrationUtility.CreateJobIndex(jobIndexRep, jobIndex.Key, performanceGroup, true, cftDic, 2);
                         value--;
                     }
                 }
@@ -568,8 +572,14 @@ namespace MITD.PMS.Persistence
 
                 foreach (var unitIndex in AdminMigrationUtility.UnitIndices)
                 {
-                    var cftDic =
-                        AdminMigrationUtility.DefinedCustomFields.Where(d => unitIndex.CustomFieldTypeIdList.Contains(d.Id))
+                    Dictionary<CustomFieldType, string> cftDic;
+                    if (unitIndex.DictionaryName == "PenetrationAutomation")
+                        cftDic = AdminMigrationUtility.DefinedCustomFields.Where(
+                            d => unitIndex.CustomFieldTypeIdList.Contains(d.Id))
+                            .ToDictionary(c => c, c => "2");
+                    else
+                        cftDic = AdminMigrationUtility.DefinedCustomFields.Where(
+                            d => unitIndex.CustomFieldTypeIdList.Contains(d.Id))
                             .ToDictionary(c => c, c => "10");
                     PMSMigrationUtility.CreateUnitIndex(unitIndexRep, unitIndex, unitGroup, true, cftDic);
 
@@ -582,7 +592,7 @@ namespace MITD.PMS.Persistence
                 #region Unit Creation
 
                 var adminUnitChairManDepartment = AdminMigrationUtility.Units.Single(u => u.DictionaryName == "ChairManDepartment");
-                PMSMigrationUtility.CreateUnit(unitRep, adminUnitChairManDepartment, null,new Dictionary<string, string>
+                PMSMigrationUtility.CreateUnit(unitRep, adminUnitChairManDepartment, null, new Dictionary<string, string>
                 {
                     {"RealizationOfStrategicPlans","9"},
                     {"RealizationOfOperationalPlans","10"},
@@ -826,7 +836,7 @@ namespace MITD.PMS.Persistence
 
                         {"utilizationFromAutomation", new List<string> {"10", "10", ""}}
                     });
-                 //Employee A opertional Point : 8.53  Total point 8.595
+                //Employee A opertional Point : 8.53  Total point 8.595
                 var deleiveryAndClearanceManager = PMSMigrationUtility.CreateJobPosition(jobPositionRep,
                     AdminMigrationUtility.JobPositions.Single(j => j.DictionaryName == "DeleiveryAndClearanceManager"), supportDepartmentManager,
                     PMSMigrationUtility.Jobs.First(), PMSMigrationUtility.Units.Keys.Single(u => u.DictionaryName == "SupportDepartment"),
@@ -843,7 +853,7 @@ namespace MITD.PMS.Persistence
                         {"utilizationFromAutomation", new List<string> {"10", "9", "9"}}
                     });
                 //Employee B opertional Point : 8.9 
-                var deleiveryAndClearanceEmployee=PMSMigrationUtility.CreateJobPosition(jobPositionRep,
+                var deleiveryAndClearanceEmployee = PMSMigrationUtility.CreateJobPosition(jobPositionRep,
                     AdminMigrationUtility.JobPositions.Single(j => j.DictionaryName == "DeleiveryAndClearanceEmployee"), deleiveryAndClearanceManager,
                     PMSMigrationUtility.Jobs.First(), PMSMigrationUtility.Units.Keys.Single(u => u.DictionaryName == "SupportDepartment"),
                     new Dictionary<string, List<string>>
@@ -938,7 +948,7 @@ namespace MITD.PMS.Persistence
                 PMSMigrationUtility.CreateEmployee(employeeRep, "40000", "مدیر", "دفتر فناوری اطلاعات", null);
 
 
-                
+
 
 
 
@@ -948,7 +958,7 @@ namespace MITD.PMS.Persistence
                 uow.Commit();
             }
 
-            
+
             #endregion
 
 
@@ -961,7 +971,7 @@ namespace MITD.PMS.Persistence
                 var unitIndexRep = new PMS.Persistence.NH.UnitIndexRepository(uow);
                 var employeeRep = new EmployeeRepository(uow);
                 var inquiryConfiguratorService = new JobPositionInquiryConfiguratorService(jobPositionRep);
-               
+
 
                 foreach (var jobPosition in PMSMigrationUtility.JobPositions)
                 {
@@ -998,7 +1008,7 @@ namespace MITD.PMS.Persistence
                         }
                         if (unitIndex.DictionaryName == "PenetrationAutomation")
                         {
-                            if (string.IsNullOrEmpty(employeeNo)||employeeNo.Equals("30000"))
+                            if (string.IsNullOrEmpty(employeeNo) || employeeNo.Equals("30000"))
                                 employeeNo = "40000";
                             var employee =
                               employeeRep.GetBy(
@@ -1024,7 +1034,7 @@ namespace MITD.PMS.Persistence
                 //////////////////////////////////////////////
                 var unitRep = new PMS.Persistence.NH.UnitRepository(uow);
                 var inquiryUnitIndexRep = new InquiryUnitIndexPointRepository(uow);
-                var unitIndexRep=new UnitIndexRepository(uow);
+                var unitIndexRep = new UnitIndexRepository(uow);
                 //////////////////////////////////////////////////
                 var periodRep = new PeriodRepository(uow);
                 foreach (var jobPosition in PMSMigrationUtility.JobPositions)
@@ -1039,7 +1049,7 @@ namespace MITD.PMS.Persistence
                     {
                         var unitIndex =
                             unitIndexRep.GetUnitIndexById(unitInquiryConfigurationItem.Id.UnitIndexIdUintPeriod);
-                        var unitIndexPoint = new InquiryUnitIndexPoint(new InquiryUnitIndexPointId(inquiryUnitIndexRep.GetNextId()), unitInquiryConfigurationItem, unitIndex.Id,unitDic.Value[unitIndex.DictionaryName]);
+                        var unitIndexPoint = new InquiryUnitIndexPoint(new InquiryUnitIndexPointId(inquiryUnitIndexRep.GetNextId()), unitInquiryConfigurationItem, unitIndex.Id, unitDic.Value[unitIndex.DictionaryName]);
                         inquiryUnitIndexRep.Add(unitIndexPoint);
                     }
                 }
@@ -1060,8 +1070,14 @@ namespace MITD.PMS.Persistence
                 var pmsPolicy = policyRep.GetById(new PolicyId(AdminMigrationUtility.Policy.Id.Id));
                 var p = periodRep.GetById(PMSMigrationUtility.Period.Id);
                 var calcRep = new CalculationRepository(uow);
-                var calc = new Calculation(calcRep.GetNextId(), p, pmsPolicy,
-                    "محاسبه آزمایشی", DateTime.Now, "100000" + ";" + "652547" + ";" + "100001" + ";" + "671061");
+                var calc = new Calculation
+                    (calcRep.GetNextId(), 
+                    p, 
+                    pmsPolicy,
+                    "محاسبه آزمایشی", 
+                    DateTime.Now, 
+                    "1" + ";" + "2" + ";" + "3" + ";" + "4" + ";" + "5" + ";" + "6" + ";" + "7" + ";" + "8" + ";" 
+                    +"100000" + ";" + "652547" + ";" + "100001" + ";" + "671061");
                 calcRep.Add(calc);
                 uow.Commit();
             }
@@ -1069,7 +1085,7 @@ namespace MITD.PMS.Persistence
 
         }
 
-        
+
 
         public override void Down()
         {
