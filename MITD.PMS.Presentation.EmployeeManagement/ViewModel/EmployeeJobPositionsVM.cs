@@ -66,7 +66,7 @@ namespace MITD.PMS.Presentation.Logic
             {
                 this.SetField(p => p.SelectedJobPositionDuration, ref selectedJobPositionDuration, value);
                 //EmployeeCommands = createCommands();
-                if (View != null&& value!=null)
+                if (View != null && value != null)
                     ((IEmployeeJobPositionsView)View).CreateContextMenu(new ReadOnlyCollection<DataGridCommandViewModel>(createCommands()));
             }
         }
@@ -203,7 +203,7 @@ namespace MITD.PMS.Presentation.Logic
 
         private void getEmployeeJobPositions()
         {
-            employeeService.GetEmployeeJobPositionsInPeriod( (res, exp) => appController.BeginInvokeOnDispatcher(() =>
+            employeeService.GetEmployeeJobPositionsInPeriod((res, exp) => appController.BeginInvokeOnDispatcher(() =>
             {
                 if (exp == null)
                 {
@@ -280,7 +280,10 @@ namespace MITD.PMS.Presentation.Logic
                 return;
             if (eventData.Action == ActionType.AddEmployeeJobCustomFields)
             {
-                EmployeeJobPositions.EmployeeJobPositionAssignmentList.Add(eventData.EmployeeJobPositionAssignment);
+                if (EmployeeJobPositions.EmployeeJobPositionAssignmentList.Count > 0)
+                    appController.ShowMessage("هر کارمند می تواند تنها یک پست سازمانی داشته باشد ");
+                else
+                    EmployeeJobPositions.EmployeeJobPositionAssignmentList.Add(eventData.EmployeeJobPositionAssignment);
             }
             else
             {
@@ -288,7 +291,7 @@ namespace MITD.PMS.Presentation.Logic
                     c => c.Id == eventData.EmployeeJobPositionAssignment.Id);
                 selectedJobPos = eventData.EmployeeJobPositionAssignment;
             }
-            
+
         }
     }
 

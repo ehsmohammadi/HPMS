@@ -756,68 +756,68 @@ namespace MITD.PMS.Presentation.Logic
                    )));
 
 
-            cmdList.Add(
-              new CommandViewModel(LocalizedResources.ClaimSubMenu, new DelegateCommand(
-                  () =>
-                  {
-                      controller.ShowBusyIndicator("در حال بارگذاری ماجول...");
-                      controller.GetRemoteInstance<IPeriodController>(
-                          (res, exp) =>
-                          {
-                              controller.HideBusyIndicator();
-                              if (res != null)
-                              {
-                                  res.ShowEmployeeClaimListView(currentPriod, CurrentUser.EmployeeNo, isShiftPressed);
-                              }
-                              else if (exp != null)
-                              {
-                                  controller.HandleException(exp);
-                              }
-                          });
-                  }
-                  )));
+            //cmdList.Add(
+            //  new CommandViewModel(LocalizedResources.ClaimSubMenu, new DelegateCommand(
+            //      () =>
+            //      {
+            //          controller.ShowBusyIndicator("در حال بارگذاری ماجول...");
+            //          controller.GetRemoteInstance<IPeriodController>(
+            //              (res, exp) =>
+            //              {
+            //                  controller.HideBusyIndicator();
+            //                  if (res != null)
+            //                  {
+            //                      res.ShowEmployeeClaimListView(currentPriod, CurrentUser.EmployeeNo, isShiftPressed);
+            //                  }
+            //                  else if (exp != null)
+            //                  {
+            //                      controller.HandleException(exp);
+            //                  }
+            //              });
+            //      }
+            //      )));
 
-            cmdList.Add(
-              new CommandViewModel("لیست کل اعتراضات", new DelegateCommand(
-                  () =>
-                  {
-                      controller.ShowBusyIndicator("در حال بارگذاری ماجول...");
-                      controller.GetRemoteInstance<IPeriodController>(
-                          (res, exp) =>
-                          {
-                              controller.HideBusyIndicator();
-                              if (res != null)
-                              {
-                                  res.ShowManagerClaimListView(currentPriod, isShiftPressed);
-                              }
-                              else if (exp != null)
-                              {
-                                  controller.HandleException(exp);
-                              }
-                          });
-                  }
-                  )));
+            //cmdList.Add(
+            //  new CommandViewModel("لیست کل اعتراضات", new DelegateCommand(
+            //      () =>
+            //      {
+            //          controller.ShowBusyIndicator("در حال بارگذاری ماجول...");
+            //          controller.GetRemoteInstance<IPeriodController>(
+            //              (res, exp) =>
+            //              {
+            //                  controller.HideBusyIndicator();
+            //                  if (res != null)
+            //                  {
+            //                      res.ShowManagerClaimListView(currentPriod, isShiftPressed);
+            //                  }
+            //                  else if (exp != null)
+            //                  {
+            //                      controller.HandleException(exp);
+            //                  }
+            //              });
+            //      }
+            //      )));
 
-            cmdList.Add(
-              new CommandViewModel(LocalizedResources.MyTasksAccessibilitySettingSubMenu, new DelegateCommand(
-                  () =>
-                  {
-                      controller.ShowBusyIndicator("در حال بارگذاری ماجول...");
-                      controller.GetRemoteInstance<IPeriodController>(
-                          (res, exp) =>
-                          {
-                              controller.HideBusyIndicator();
-                              if (res != null)
-                              {
-                                  res.ShowPermittedUserListToMyTasksView(CurrentUser);
-                              }
-                              else if (exp != null)
-                              {
-                                  controller.HandleException(exp);
-                              }
-                          });
-                  }
-                  )));
+            //cmdList.Add(
+            //  new CommandViewModel(LocalizedResources.MyTasksAccessibilitySettingSubMenu, new DelegateCommand(
+            //      () =>
+            //      {
+            //          controller.ShowBusyIndicator("در حال بارگذاری ماجول...");
+            //          controller.GetRemoteInstance<IPeriodController>(
+            //              (res, exp) =>
+            //              {
+            //                  controller.HideBusyIndicator();
+            //                  if (res != null)
+            //                  {
+            //                      res.ShowPermittedUserListToMyTasksView(CurrentUser);
+            //                  }
+            //                  else if (exp != null)
+            //                  {
+            //                      controller.HandleException(exp);
+            //                  }
+            //              });
+            //      }
+            //      )));
 
             //cmdList.Add(
             //   new CommandViewModel(LocalizedResources.EmployeesMyInquiryHistorySubMenu, new DelegateCommand(
