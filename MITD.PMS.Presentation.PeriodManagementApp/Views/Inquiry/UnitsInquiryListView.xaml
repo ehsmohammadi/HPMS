@@ -48,11 +48,11 @@
                 </controls:ContextMenuService.ContextMenu >
                 <sdk:DataGrid.Columns>
 
-                    <sdk:DataGridTextColumn Header="نام واحد " CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto"
+                    <sdk:DataGridTextColumn Header="نام واحد ارزیابی شونده" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto"
                     Binding="{Binding Path=UnitName}"  />
                   
-                    <sdk:DataGridTextColumn Header="عنوان شاخص" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto"
-                    Binding="{Binding Path=IndexName}"  />
+                    <!--<sdk:DataGridTextColumn Header="عنوان شاخص" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto"
+                    Binding="{Binding Path=IndexName}"  />-->
 
                   
                 </sdk:DataGrid.Columns>

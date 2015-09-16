@@ -72,19 +72,41 @@
                 </Grid>
             </Border>
 
-            <Border  Grid.Row="1" >
-                <pr:SilverlightTreeView Name="trJobPositionInPeriodTree" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" BorderThickness="0" HorizontalAlignment="Stretch"  
+      <Border  Grid.Row="1" >
+          <Grid >
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+              <sdk:Label Content="واحد مربوطه : " Grid.Row="0" Grid.Column="0"></sdk:Label>
+                    <sdk:Label Content="عنوان شغلی : " Grid.Row="0" Grid.Column="2"></sdk:Label>
+                    <TextBox Grid.Row="0" Grid.Column="1" Width="150" HorizontalAlignment="Left" 
+                           Text="{Binding SelectedJobPositionInPeriod.Data.UnitName,Mode=TwoWay}"   IsReadOnly="True"/>
+                    <TextBox Grid.Row="0" Grid.Column="3" Width="150" HorizontalAlignment="Left" IsReadOnly="True"
+                              Text="{Binding SelectedJobPositionInPeriod.Data.JobName,Mode=TwoWay}" 
+                            />
+                    <!--Text="{Binding Path=UnitIndexInPeriod.CalculationLevel, Mode=TwoWay}"-->
+                    <pr:SilverlightTreeView Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4"
+                                        Name="trJobPositionInPeriodTree" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" BorderThickness="0" HorizontalAlignment="Stretch"  
                                         ItemsSource="{Binding Path=JobPositionInPeriodTree }"  
                                         ItemTemplate="{StaticResource TreeTemplate}" 
                                         SelectedItem="{Binding Path=SelectedJobPositionInPeriod,Mode=TwoWay}"
                                         SelectedValuePath="Id" 
                                         MouseRightButtonDown="trJobPositionInPeriodTree_MouseRightButtonDown">
 
-                    <toolkit:ContextMenuService.ContextMenu >
-                        <toolkit:ContextMenu Name="cmCommands" FlowDirection="RightToLeft" />
-                    </toolkit:ContextMenuService.ContextMenu >
-                </pr:SilverlightTreeView>
-            </Border>
+                        <toolkit:ContextMenuService.ContextMenu >
+                            <toolkit:ContextMenu Name="cmCommands" FlowDirection="RightToLeft" />
+                        </toolkit:ContextMenuService.ContextMenu >
+                    </pr:SilverlightTreeView>
+
+                </Grid>
+              </Border>
         </Grid>
     </ScrollViewer>
 </pr:ViewBase>

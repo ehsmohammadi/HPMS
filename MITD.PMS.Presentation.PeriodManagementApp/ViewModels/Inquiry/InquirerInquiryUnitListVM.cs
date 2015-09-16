@@ -122,8 +122,20 @@ namespace MITD.PMS.Presentation.Logic
                     HideBusyIndicator();
                     if (exp == null)
                     {
-                        InquirySubjects = new ObservableCollection<InquiryUnitDTO>(res);
-                        SelectedInquirySubject = res.FirstOrDefault();
+                        var res1 = new List<InquiryUnitDTO>();
+                        res.ForEach(c =>
+                        {
+                            if (res1.SingleOrDefault(d => d.UnitId == c.UnitId) == null)
+                            {
+                                res1.Add(c);
+                            }
+                        });
+
+                        InquirySubjects = new ObservableCollection<InquiryUnitDTO>(res1);
+                        SelectedInquirySubject = res1.FirstOrDefault();
+
+                        //InquirySubjects = new ObservableCollection<InquiryUnitDTO>(res);
+                        //SelectedInquirySubject = res.FirstOrDefault();
                     }
                     else appController.HandleException(exp);
                 }), periodId, inquirerEmployeeNo);

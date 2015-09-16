@@ -9,12 +9,14 @@ namespace MITD.PMS.Interface
 {
     public class JobPositionInPeriodWithActionMapper : BaseMapper<JobPosition, JobPositionInPeriodDTOWithActions>, IMapper<JobPosition, JobPositionInPeriodDTOWithActions>
     {
-
+     
         public override JobPositionInPeriodDTOWithActions MapToModel(JobPosition entity)
         {
             var res = new JobPositionInPeriodDTOWithActions
             {
                 Name = entity.Name,
+                JobId=entity.JobId.SharedJobId.Id,
+                Unitid = entity.UnitId.SharedUnitId.Id,
                 JobPositionId = entity.Id.SharedJobPositionId.Id,
                 ActionCodes = new List<int>
                 {
