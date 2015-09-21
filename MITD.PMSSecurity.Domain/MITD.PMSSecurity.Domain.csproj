@@ -62,6 +62,7 @@
     <Compile Include="Model\Logs\LogLevel.cs" />
     <Compile Include="Model\Logs\Log.cs" />
     <Compile Include="Model\Logs\LogId.cs" />
+    <Compile Include="Model\SuperAdminUser.cs" />
     <Compile Include="Repository\ILogRepository.cs" />
     <Compile Include="Model\Party.cs" />
     <Compile Include="Model\Group.cs" />
