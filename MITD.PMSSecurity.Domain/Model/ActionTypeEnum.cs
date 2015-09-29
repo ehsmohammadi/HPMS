@@ -16,6 +16,29 @@ namespace MITD.PMSSecurity.Domain
     {
 #endif
 
+
+        #region PMSAdmin
+
+        #region Policy
+
+        public static readonly ActionType AddPolicy = new ActionType("280", "AddPolicy", "ایجاد نظام محاسبه عملکرد");
+        public static readonly ActionType DeletePolicy = new ActionType("281", "DeletePolicy", "حذف نظام محاسبه عملکرد");
+        public static readonly ActionType ModifyPolicy = new ActionType("282", "ModifyPolicy", "ویرایش نظام محاسبه عملکرد");
+        public static readonly ActionType ManagePolicies = new ActionType("283", "ManagePolicies", "مدیریت نظام محاسبه عملکرد");
+
+        public static readonly ActionType ManageRules = new ActionType("290", "ManageRules", "مدیریت قوانین");
+        public static readonly ActionType ManageFunctions = new ActionType("291", "ManageFunctions", "مدیریت توابع");
+
+        public static readonly ActionType AddRule = new ActionType("310", "AddRule", "ایجاد قانون");
+        public static readonly ActionType DeleteRule = new ActionType("311", "DeleteRule", "حذف قانون");
+        public static readonly ActionType ModifyRule = new ActionType("312", "ModifyRule", "ویرایش قانون");
+        public static readonly ActionType ShowRuleTrail = new ActionType("313", "ShowRuleTrail", "نمایش سابقه قانون");
+        public static readonly ActionType ShowAllRuleTrails = new ActionType("314", "ShowAllRuleTrails", "نمایش سوابق تغییرات قانون");
+
+        #endregion
+
+        #endregion
+
         public static readonly ActionType AddPeriod = new ActionType("100", "AddPeriod","ایجاد دوره");
         public static readonly ActionType ModifyPeriod = new ActionType("101", "ModifyPeriod","ویرایش دوره");
         public static readonly ActionType DeletePeriod = new ActionType("102", "DeletePeriod","حذف دوره");
@@ -119,18 +142,7 @@ namespace MITD.PMSSecurity.Domain
 
 
 
-        public static readonly ActionType AddPolicy = new ActionType("280", "AddPolicy","ایجاد نظام محاسبه عملکرد");
-        public static readonly ActionType DeletePolicy = new ActionType("281", "DeletePolicy", "حذف نظام محاسبه عملکرد");
-        public static readonly ActionType ModifyPolicy = new ActionType("282", "ModifyPolicy", "ویرایش نظام محاسبه عملکرد");
-
-        public static readonly ActionType ManageRules = new ActionType("290", "ManageRules","مدیریت قوانین");
-        public static readonly ActionType ManageFunctions = new ActionType("291", "ManageFunctions","مدیریت توابع");
-
-        public static readonly ActionType AddRule = new ActionType("310", "AddRule","ایجاد قانون");
-        public static readonly ActionType DeleteRule = new ActionType("311", "DeleteRule","حذف قانون");
-        public static readonly ActionType ModifyRule = new ActionType("312", "ModifyRule","ویرایش قانون");
-        public static readonly ActionType ShowRuleTrail = new ActionType("313", "ShowRuleTrail", "نمایش سابقه قانون");
-        public static readonly ActionType ShowAllRuleTrails = new ActionType("314", "ShowAllRuleTrails", "نمایش سوابق تغییرات قانون");
+        
 
         public static readonly ActionType AddCalculation = new ActionType("320", "AddCalculation","ایجاد محاسبه");
         public static readonly ActionType DeleteCalculation = new ActionType("321", "DeleteCalculation","حذف محاسبه");

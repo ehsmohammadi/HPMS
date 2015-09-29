@@ -43,8 +43,6 @@ namespace MITD.PMS.Interface
             return res;
         }
 
-
-
         public PolicyDTO AddPolicy(PolicyDTO dto)
         {
             var res = policyService.AddPolicy(dto.Name,dto.DictionaryName);

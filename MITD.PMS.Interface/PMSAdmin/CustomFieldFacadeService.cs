@@ -12,7 +12,9 @@ using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
 {
+
     //  [Interceptor(typeof(Interception))]
+
     public class CustomFieldFacadeService : ICustomFieldFacadeService
     { 
         private readonly IMapper<CustomFieldType, CustomFieldDTOWithActions> customFieldWithActionMapper;

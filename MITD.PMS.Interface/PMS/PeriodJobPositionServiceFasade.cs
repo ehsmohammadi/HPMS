@@ -69,7 +69,7 @@ namespace MITD.PMS.Interface
             var units = _unitRepository.GetUnits(new PeriodId(periodId));
             var jobs = _jobRepository.GetAllJob(new PeriodId(periodId));
 
-
+   
 
             var res1 = (from jobpos in jobPositions
                         join u in units on jobpos.UnitId equals u.Id
@@ -79,13 +79,13 @@ namespace MITD.PMS.Interface
 
           
            var res= res1.Select(u =>new {jobposition=jobPositionInPeriodDTOWithActionsMapper.MapToModel(u.jobpos),u.unitname,u.jobname}).ToList();
-            
+        
 
-            res.ForEach(d =>
-            {
+           res.ForEach(d =>
+           {
                 d.jobposition.UnitName =d.unitname ;
                 d.jobposition.JobName = d.jobname;
-            });
+           });
 
             return res.Select(c=>c.jobposition);
 

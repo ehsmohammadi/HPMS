@@ -10,7 +10,9 @@ using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
 {
+
     //  [Interceptor(typeof(Interception))]
+
     public class FunctionFacadeService : IFunctionFacadeService
     {
         private readonly IMapper<RuleFunctionBase, FunctionDTODescriptionWithActions> functionWithActionMapper;

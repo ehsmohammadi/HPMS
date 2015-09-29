@@ -13,16 +13,8 @@ namespace MITD.PMSSecurity.Domain
             {
                 return new List<ActionType>
                 {
-                    //ActionType.GetEmployeeJobPositions,
-                    //ActionType.ShowCalculationResultDetail,
-                    ActionType.FillInquiryForm,                   
-                    ActionType.AddClaim,
-                    ActionType.ShowClaim,
-                    ActionType.DeleteClaim,
-                    ActionType.CancelClaim,
-                    ActionType.AddPermittedUserToMyTasks,
-                    ActionType.RemovePermittedUserFromMyTasks,
-                    ActionType.SettingPermittedUserToMyTasks,
+                    ActionType.FillInquiryForm,
+                    ActionType.FillInquiryUnitForm
                 };
             }
         }
