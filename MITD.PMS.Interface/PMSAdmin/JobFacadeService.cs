@@ -12,9 +12,9 @@ using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
 {
-   // [Interceptor(typeof(Interception))]
+    [Interceptor(typeof(Interception))]
     public class JobFacadeService : IJobFacadeService
-    { 
+    {
         private readonly IJobRepository jobRep;
         private readonly ICustomFieldRepository customFieldRep;
         private readonly IMapper<Job, JobDTO> jobMapper;
@@ -58,32 +58,32 @@ namespace MITD.PMS.Interface
         public IList<JobDTO> GetAllJobs()
         {
             var res = jobRep.GetAllJob();
-            return res.Select(r=> jobMapper.MapToModel(r)).ToList();
+            return res.Select(r => jobMapper.MapToModel(r)).ToList();
         }
 
         public JobDTO AddJob(JobDTO jobDto)
         {
-            var res = jobService.AddJob(jobDto.Name,jobDto.DictionaryName,jobDto.CustomFields.Select(c=> new CustomFieldTypeId(c.Id)).ToList());
+            var res = jobService.AddJob(jobDto.Name, jobDto.DictionaryName, jobDto.CustomFields.Select(c => new CustomFieldTypeId(c.Id)).ToList());
             return jobMapper.MapToModel(res);
         }
 
         public JobDTO UpdateJob(JobDTO jobDto)
         {
             var job = jobMapper.MapToEntity(jobDto);
-            var res = jobService.UppdateJob(job.Id,job.Name,job.DictionaryName, jobDto.CustomFields.Select(c => new CustomFieldTypeId(c.Id)).ToList());
+            var res = jobService.UppdateJob(job.Id, job.Name, job.DictionaryName, jobDto.CustomFields.Select(c => new CustomFieldTypeId(c.Id)).ToList());
             return jobMapper.MapToModel(res);
         }
 
         public string DeleteJob(long id)
         {
             jobService.DeleteJob(new JobId(id));
-            return "Job with Id:" +id + " deleted";
+            return "Job with Id:" + id + " deleted";
         }
 
         public JobDTO GetJobById(long id)
         {
             Job job = jobRep.GetById(new JobId(id));
-            var  customFieldList =  customFieldRep.GetAllCustomField(new JobId(id));
+            var customFieldList = customFieldRep.GetAllCustomField(new JobId(id));
             var jobDto = jobMapper.MapToModel(job);
             jobDto.CustomFields = customFieldList.Select(c => ctcustomFieldDtoMapper.MapToModel(c)).ToList();
             return jobDto;

@@ -11,7 +11,7 @@ using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
 {
-   // [Interceptor(typeof(Interception))]
+    [Interceptor(typeof(Interception))]
     public class PolicyFacadeService : IPolicyFacadeService
     { 
         private readonly IMapper<Policy, PolicyDTOWithActions> policyWithActionMapper;
@@ -42,8 +42,6 @@ namespace MITD.PMS.Interface
             res.Result = fs.PageCriteria.PageResult.Result.Select(r => policyWithActionMapper.MapToModel(r)).ToList();
             return res;
         }
-
-
 
         public PolicyDTO AddPolicy(PolicyDTO dto)
         {

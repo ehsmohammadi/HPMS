@@ -14,7 +14,7 @@ using MITD.PMSReport.Domain.Model;
 
 namespace MITD.PMS.Interface
 {
-   // [Interceptor(typeof(Interception))]
+   [Interceptor(typeof(Interception))]
     public class PeriodJobPositionServiceFacade : IPeriodJobPositionServiceFacade
     {
         private readonly IJobPositionService jobPositionService;

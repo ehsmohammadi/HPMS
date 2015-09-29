@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using MITD.Core;
 using MITD.PMS.Presentation.Contracts;
 using MITD.PMS.Presentation.Contracts.Fasade;
 using MITD.PMSSecurity.Domain;
@@ -24,7 +25,6 @@ namespace MITD.PMS.Interface
 
         private readonly List<MethodAction> mapTable = new List<MethodAction>
         {
-
             new MethodAction(typeof (IPeriodServiceFacade).Name,
                 typeof (IPeriodServiceFacade).GetMethod("AddPeriod").Name, new List<ActionType> {ActionType.AddPeriod}),
             new MethodAction(typeof (IPeriodServiceFacade).Name,
@@ -272,9 +272,15 @@ namespace MITD.PMS.Interface
 
         };
 
+        public MethodMapper()
+        {
+
+
+        }
+
         public List<ActionType> Map(string className, string methodName)
         {
-             //var mapRow = mapTable.SingleOrDefault(m => m.ClassName == className && m.MethodName == methodName);
+            //var mapRow = mapTable.SingleOrDefault(m => m.ClassName == className && m.MethodName == methodName);
             //if (mapRow == null)
             //    return new List<ActionType>();
             //return mapRow.Actions;
@@ -284,6 +290,20 @@ namespace MITD.PMS.Interface
                 return new List<ActionType>();
             return mapRow.FirstOrDefault().Actions;
 
+        }
+
+        private void addMethodAction(Type fecadeService, string methodName, Type[] constructorParam,
+            List<ActionType> actions)
+        {
+            MethodAction methodAction;
+            if (constructorParam == null || !constructorParam.Any())
+                methodAction = new MethodAction(fecadeService.Name,
+                    fecadeService.GetMethod(methodName).Name, actions);
+            else
+                methodAction = new MethodAction(fecadeService.Name,
+                    fecadeService.GetMethod(methodName, constructorParam).Name, actions);
+
+            mapTable.Add(methodAction);
         }
 
     }

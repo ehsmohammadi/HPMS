@@ -18,9 +18,10 @@ namespace MITD.PMSSecurity.Domain
                     //ActionType.AddPolicy,
                     //ActionType.DeletePolicy,
                     //ActionType.ModifyPolicy,
+                    ActionType.ManagePolicies,
 
-                    //ActionType.ManageRules,
-                    //ActionType.ManageFunctions,
+                    ActionType.ManageRules,
+                    ActionType.ManageFunctions,
 
                     //ActionType.AddFunction,
                     //ActionType.DeleteFunction,

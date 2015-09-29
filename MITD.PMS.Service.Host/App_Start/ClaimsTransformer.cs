@@ -34,7 +34,7 @@ namespace MITD.PMS.Service.Host.App_Start
         {
             // if you want sst security comment this line 
 #if(DEBUG)
-            incomingPrincipal = createIncomingPrincipalDefault();
+            incomingPrincipal = createIncomingPrincipalSupportManager();
 #endif
 
             if (!incomingPrincipal.Identity.IsAuthenticated)
@@ -46,12 +46,14 @@ namespace MITD.PMS.Service.Host.App_Start
 
         }
 
-        private  ClaimsPrincipal createIncomingPrincipalDefault()
+        #region Fake Athentication Methods
+
+        private ClaimsPrincipal createIncomingPrincipalDefault()
         {
             var identity = new FakeIdentity("ehsan", AuthenticationTypes.Basic, true);
 
             var incomingPrincipal = new ClaimsPrincipal(identity);
-            incomingPrincipal.Identities.First().AddClaims( new List<Claim>
+            incomingPrincipal.Identities.First().AddClaims(new List<Claim>
             {
                 new Claim(ClaimTypes.Role, "Admin"),
                 new Claim(ClaimTypes.Role, "Employee"),
@@ -77,7 +79,9 @@ namespace MITD.PMS.Service.Host.App_Start
                 new Claim("http://identityserver.thinktecture.com/claims/profileclaims/jobpositionnames", "مدیر "),
             });
             return incomingPrincipal;
-        }
+        } 
+
+        #endregion
 
         private ClaimsPrincipal configureAuthorizationClaim(ClaimsPrincipal incomingPrincipal)
         {

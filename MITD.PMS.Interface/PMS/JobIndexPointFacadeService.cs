@@ -19,7 +19,7 @@ using System;
 
 namespace MITD.PMS.Interface
 {
-   // [Interceptor(typeof(Interception))]
+   [Interceptor(typeof(Interception))]
     public class JobIndexPointFacadeService : IJobIndexPointFacadeService
     {
         private IJobIndexPointRepository repository;

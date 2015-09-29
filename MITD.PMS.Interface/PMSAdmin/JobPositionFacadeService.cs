@@ -11,7 +11,7 @@ using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
 {
-   // [Interceptor(typeof(Interception))]
+    [Interceptor(typeof(Interception))]
     public class JobPositionFacadeService : IJobPositionFacadeService
     { 
         private readonly IMapper<JobPosition, JobPositionDTOWithActions> jobPositionWithActionMapper;

@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Security.Claims;
 using Castle.DynamicProxy;
-using MITD.PMS.Presentation.Contracts;
 using MITD.PMSSecurity.Exceptions;
 
 namespace MITD.PMS.Interface
@@ -22,7 +16,7 @@ namespace MITD.PMS.Interface
                 if (securityService.IsAuthorize(invocation.Method.DeclaringType.Name, invocation.Method.Name, user))
                 {
                     invocation.Proceed();
-                    logServicesAccess(invocation, user);
+                    //logServicesAccess(invocation, user);
                 }
                 else
                     throw new PMSSecurityAccessException();

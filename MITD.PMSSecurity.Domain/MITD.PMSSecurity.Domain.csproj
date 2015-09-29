@@ -50,7 +50,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\PMSSecurityException.cs" />
-    <Compile Include="Model\AdminUser.cs" />
+    <Compile Include="Model\AccessPermissions\AccessPermission.cs" />
+    <Compile Include="Model\AccessPermissions\AccessPermissionId.cs" />
+    <Compile Include="Model\AccessPermissions\Permission.cs" />
+    <Compile Include="Model\Parties\AdminUser.cs" />
     <Compile Include="Model\ActionTypeEnum.cs" />
     <Compile Include="Model\Exception\PartyArgumentException.cs" />
     <Compile Include="Model\Exception\PartyDuplicateException.cs" />
@@ -62,13 +65,13 @@
     <Compile Include="Model\Logs\LogLevel.cs" />
     <Compile Include="Model\Logs\Log.cs" />
     <Compile Include="Model\Logs\LogId.cs" />
-    <Compile Include="Model\SuperAdminUser.cs" />
+    <Compile Include="Model\Parties\SuperAdminUser.cs" />
     <Compile Include="Repository\ILogRepository.cs" />
-    <Compile Include="Model\Party.cs" />
-    <Compile Include="Model\Group.cs" />
-    <Compile Include="Model\PartyId.cs" />
-    <Compile Include="Model\EmployeeUser.cs" />
-    <Compile Include="Model\User.cs" />
+    <Compile Include="Model\Parties\Party.cs" />
+    <Compile Include="Model\Parties\Group.cs" />
+    <Compile Include="Model\Parties\PartyId.cs" />
+    <Compile Include="Model\Parties\EmployeeUser.cs" />
+    <Compile Include="Model\Parties\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IUserRepository.cs" />
     <Compile Include="Service\ExceptionHelper.cs" />
@@ -86,6 +89,7 @@
       <Name>MITD.PMS.Common</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
