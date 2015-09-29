@@ -11,7 +11,7 @@ using MITD.PMS.Presentation.Contracts;
 
 namespace MITD.PMS.Interface
 {
-    //[Interceptor(typeof(Interception))]
+    //  [Interceptor(typeof(Interception))]
     public class PeriodUnitServiceFacade : IPeriodUnitServiceFacade
     {
         private readonly IUnitService unitService;

@@ -14,7 +14,7 @@ using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
 {
-    //[Interceptor(typeof(Interception))]
+    //  [Interceptor(typeof(Interception))]
     public class PeriodJobIndexFacadeService : IPeriodJobIndexServiceFacade
     { 
         private readonly IJobIndexService jobIndexService;

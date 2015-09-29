@@ -22,7 +22,7 @@ namespace MITD.PMS.Interface
                 if (securityService.IsAuthorize(invocation.Method.DeclaringType.Name, invocation.Method.Name, user))
                 {
                     invocation.Proceed();
-                    logServicesAccess(invocation, user);
+                    //logServicesAccess(invocation, user);
                 }
                 else
                     throw new PMSSecurityAccessException();

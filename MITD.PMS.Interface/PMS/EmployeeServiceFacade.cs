@@ -17,7 +17,7 @@ using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
 {
-    //[Interceptor(typeof(Interception))]
+    //  [Interceptor(typeof(Interception))]
     public class EmployeeServiceFacade : IEmployeeServiceFacade
     {
         private readonly IEmployeeRepository employeeRep;

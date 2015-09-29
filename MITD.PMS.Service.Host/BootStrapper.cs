@@ -63,8 +63,14 @@ namespace MITD.PMS.Service.Host
             var container = new WindsorContainer();
             container.Kernel.ComponentModelBuilder.RemoveContributor(
                 container.Kernel.ComponentModelBuilder.Contributors.OfType<PropertiesDependenciesModelInspector>().Single());
+            container.Register(
+  Component.For<IFacadeService>().Interceptors(InterceptorReference.ForType<Interception>()).Last,
+  Component.For<Interception>());
 
             RegisterDataAccess(container);
+
+
+
 
             container.Register(
                 Classes.FromAssemblyContaining<CalculationMapper>()
@@ -84,9 +90,7 @@ namespace MITD.PMS.Service.Host
             //    Component.For<Interception>()
             //    );
 
-            container.Register(
-                Component.For<IFacadeService>().Interceptors(InterceptorReference.ForType<Interception>()).Anywhere,
-                Component.For<Interception>().LifeStyle.Transient);
+          
 
             container.Register(
                 Component.For<ILoggerService>().ImplementedBy<DbLoggerService>().Named("DB").LifeStyle.BoundTo<IService>(),

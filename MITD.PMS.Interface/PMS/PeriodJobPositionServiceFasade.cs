@@ -14,7 +14,7 @@ using MITD.PMSReport.Domain.Model;
 
 namespace MITD.PMS.Interface
 {
-   // [Interceptor(typeof(Interception))]
+  //  [Interceptor(typeof(Interception))]
     public class PeriodJobPositionServiceFacade : IPeriodJobPositionServiceFacade
     {
         private readonly IJobPositionService jobPositionService;
@@ -69,26 +69,37 @@ namespace MITD.PMS.Interface
             var units = _unitRepository.GetUnits(new PeriodId(periodId));
             var jobs = _jobRepository.GetAllJob(new PeriodId(periodId));
 
-   
 
-            //var res1 = (from jobpos in jobPositions
-            //    join u in units on jobpos.UnitId equals u.Id
-            //    join j in jobs on jobpos.JobId equals j.Id
-            //    select new {jobpos,unitname= u.Name  ,jobname= j.Name}).ToList();
+
+            var res1 = (from jobpos in jobPositions
+                        join u in units on jobpos.UnitId equals u.Id
+                        join j in jobs on jobpos.JobId equals j.Id
+                        select new { jobpos, unitname = u.Name, jobname = j.Name }).ToList();
 
 
           
-           //var res= res1.Select(u =>new {jobposition=jobPositionInPeriodDTOWithActionsMapper.MapToModel(u.jobpos),u.unitname,u.jobname}).ToList();
+           var res= res1.Select(u =>new {jobposition=jobPositionInPeriodDTOWithActionsMapper.MapToModel(u.jobpos),u.unitname,u.jobname}).ToList();
+            
+
+            res.ForEach(d =>
+            {
+                d.jobposition.UnitName =d.unitname ;
+                d.jobposition.JobName = d.jobname;
+            });
+
+            return res.Select(c=>c.jobposition);
+
+
         
-            var res= jobPositions.Select(u =>jobPositionInPeriodDTOWithActionsMapper.MapToModel(u)).ToList();
+           // var res= jobPositions.Select(u =>jobPositionInPeriodDTOWithActionsMapper.MapToModel(u)).ToList();
 
-           res.ForEach(d =>
-           {
-               d.UnitName = units.Single(u=>u.SharedUnit.Id.Id==d.Unitid).Name;
-               d.JobName = jobs.Single(u => u.SharedJob.Id.Id == d.JobId).Name;
-           });
+           //res.ForEach(d =>
+           //{
+           //    d.UnitName = units.Single(u=>u.SharedUnit.Id.Id==d.Unitid).Name;
+           //    d.JobName = jobs.Single(u => u.SharedJob.Id.Id == d.JobId).Name;
+           //});
 
-            return res;
+           // return res;
         }
 
         public IEnumerable<JobPositionInPeriodDTO> GetJobPositions(long periodId)

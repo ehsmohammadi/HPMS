@@ -15,7 +15,7 @@ using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
 {
-    //[Interceptor(typeof(Interception))]
+    //  [Interceptor(typeof(Interception))]
     public class PeriodUnitIndexFacadeService : IPeriodUnitIndexServiceFasade
     { 
         private readonly IUnitIndexService UnitIndexService;

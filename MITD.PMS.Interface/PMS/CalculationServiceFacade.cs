@@ -16,7 +16,7 @@ using MITD.PMS.Domain.Service;
 
 namespace MITD.PMS.Interface
 {
-  //  [Interceptor(typeof(Interception))]
+    //  [Interceptor(typeof(Interception))]
     public class CalculationServiceFacade : ICalculationServiceFacade
     {
         private readonly ICalculationService calculationService;
