@@ -1,4 +1,6 @@
-﻿using Castle.MicroKernel.Registration;
+﻿using System;
+using System.Collections.Generic;
+using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using MITD.Core.Config;
 using MITD.Core;
@@ -17,6 +19,7 @@ using MITD.PMS.Calculation.Contracts;
 using MITD.PMS.Domain.Service;
 using MITD.PMS.Persistence.NH;
 using MITD.PMS.Interface;
+using MITD.PMS.Presentation.Contracts;
 using MITD.PMSAdmin.Application;
 using MITD.PMSAdmin.Persistence.NH;
 using MITD.PMSSecurity.Application;
@@ -27,6 +30,8 @@ using MITD.Data.NH;
 using System.Linq;
 using System.Data.SqlClient;
 using System.Web.Http.Dispatcher;
+using MITD.PMSSecurity.Domain;
+using MITD.PMSSecurity.Domain.Model.AccessPermissions;
 using MITD.PMSSecurity.Persistence.NH;
 using MITD.PMSSecurity.Domain.Service;
 using Castle.Core;
@@ -217,7 +222,23 @@ namespace MITD.PMS.Service.Host
 
             var locator = new WindsorServiceLocator(container);
             ServiceLocator.SetLocatorProvider(() => locator);
-            
+
+
+            //AccessPermission ap = new AccessPermission();
+            //ap.Inintialize();
+
+
+
+            var ap=new AccessPermission();
+
+            var catalog = new PermissionCatalog(typeof(IUnitFacadeService));
+            catalog.AddPermission(new Permission("MethodName",new List<ActionType>()));
+
+            ap.AddCatalog(catalog);
+
+          //  var x = ap.FindCatalog("IUnitFacadeService");
+
+
             NHibernateInnerJoinSupport.Enable();
             PMSAdminSession.GetSession();
             PMSSession.GetSession();
