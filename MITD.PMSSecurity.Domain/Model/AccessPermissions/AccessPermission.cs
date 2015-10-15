@@ -16,6 +16,14 @@ namespace MITD.PMSSecurity.Domain.Model.AccessPermissions
         private readonly AccessPermissionId id;
         public virtual AccessPermissionId Id { get { return id; } }
 
+        public int CatalogCount
+        {
+            get
+            {
+                return PermissionCatalogs.Count;
+            }
+        }
+
         private List<PermissionCatalog> PermissionCatalogs { get; set; }
 
 
@@ -122,6 +130,8 @@ namespace MITD.PMSSecurity.Domain.Model.AccessPermissions
         {
             return FindCatalog(catalogType).GetMethodsNameByAction(actionType);
         } 
+
+       
 
         #endregion
 

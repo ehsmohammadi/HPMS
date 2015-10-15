@@ -158,15 +158,7 @@ namespace MITD.PMSSecurity.Domain.Model.AccessPermissions
     }
 
 
-    public static class ext
-    {
-        public static string MethodName<T>(this T x, string name)
-        {
-
-            return typeof(T).GetMethods().Single(c => c.Name.ToLower() == name.ToLower()).Name;
-        }
-
-    }
+  
 
 
 
