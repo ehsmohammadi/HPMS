@@ -189,3 +189,4 @@ MITD.PMS.Calculation.Host/web.config
 MITD.PMS.Calculation.Host/web.debug.config
 
 Migration.bat
+*.zip
