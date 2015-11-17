@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Castle.Components.DictionaryAdapter.Xml;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using MITD.Core.Config;
@@ -220,23 +221,19 @@ namespace MITD.PMS.Service.Host
             container.Register(
                 Component.For<IFaultExceptionAdapter>().ImplementedBy<CalculationFaultExceptionAdapter>().LifeStyle.Singleton);
 
+            container.Register(
+            Component.For<AccessPermission>().LifeStyle.Singleton);
+
+
             var locator = new WindsorServiceLocator(container);
             ServiceLocator.SetLocatorProvider(() => locator);
+            
 
+            var accessPermissionSetup=new AccessPermissionSetup();
+            accessPermissionSetup.Execute(ServiceLocator.Current.GetInstance<AccessPermission>(),
+                container.Kernel.GetAssignableHandlers(typeof (IFacadeService)).Count());
 
-            //AccessPermission ap = new AccessPermission();
-            //ap.Inintialize();
-
-
-
-            var ap=new AccessPermission();
-
-            var catalog = new PermissionCatalog(typeof(IUnitFacadeService));
-            catalog.AddPermission(new Permission("MethodName",new List<ActionType>()));
-
-            ap.AddCatalog(catalog);
-
-          //  var x = ap.FindCatalog("IUnitFacadeService");
+         
 
 
             NHibernateInnerJoinSupport.Enable();
