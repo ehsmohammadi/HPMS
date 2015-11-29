@@ -17,6 +17,7 @@ namespace MITD.PMS.Interface
     //  [Interceptor(typeof(Interception))]
     public class UserServiceFacade : IUserServiceFacade
     {
+
         private readonly ISecurityService securityService;
         private readonly IUserRepository userRep;
         private IMapper<ClaimsPrincipal, UserStateDTO> userStateMapper;
