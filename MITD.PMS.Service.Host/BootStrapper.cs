@@ -229,9 +229,9 @@ namespace MITD.PMS.Service.Host
             ServiceLocator.SetLocatorProvider(() => locator);
             
 
-            var accessPermissionSetup=new AccessPermissionSetup();
-            accessPermissionSetup.Execute(ServiceLocator.Current.GetInstance<AccessPermission>(),
-                container.Kernel.GetAssignableHandlers(typeof (IFacadeService)).Count());
+            //var accessPermissionSetup=new AccessPermissionSetup();
+            //accessPermissionSetup.Execute(ServiceLocator.Current.GetInstance<AccessPermission>(),
+            //    container.Kernel.GetAssignableHandlers(typeof (IFacadeService)).Count());
 
          
 

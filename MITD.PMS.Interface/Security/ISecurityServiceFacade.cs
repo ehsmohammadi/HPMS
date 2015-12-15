@@ -12,8 +12,9 @@ namespace MITD.PMS.Interface
 {
     public interface ISecurityServiceFacade : IService
     {
-        bool IsAuthorize(string className, string methodName, ClaimsPrincipal user);
-
+        //bool IsAuthorized(string className, string methodName, ClaimsPrincipal user);
+        bool IsAuthorized(ClaimsPrincipal user, List<ActionType> actions);
+        
         List<ActionType> GetUserAuthorizedActions(ClaimsPrincipal currentUsername);
         void AddUpdateUser(ClaimsPrincipal incomingPrincipal);
         User GetLogonUser();

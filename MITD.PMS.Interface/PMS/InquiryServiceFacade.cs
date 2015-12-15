@@ -10,6 +10,8 @@ using MITD.PMS.Domain.Model.JobPositions;
 using MITD.PMS.Domain.Model.Periods;
 using MITD.PMS.Presentation.Contracts;
 using MITD.PMSReport.Domain.Model;
+using MITD.PMSSecurity.Domain;
+using MITD.PMSSecurity.Domain.Model;
 
 namespace MITD.PMS.Interface
 {
@@ -38,6 +40,7 @@ namespace MITD.PMS.Interface
             return inquirySubjects.Select(i => inquiySubjectMapper.MapToModel(i)).ToList();
         }
 
+        [RequiredPermission(ActionType.FillInquiryForm)]
         public InquiryFormDTO GetInquiryForm(long periodId,long inquirerJobPositionId, string inquirerEmployeeNo, string inquirySubjectEmployeeNo,
             long jobPositionId)
         {
@@ -78,6 +81,7 @@ namespace MITD.PMS.Interface
             return inquiryForm;
         }
 
+        [RequiredPermission(ActionType.FillInquiryForm)]
         public InquiryFormDTO UpdateInquirySubjectForm(InquiryFormDTO inquiryForm)
         {
             inquiryService.UpdateInquiryJobIndexPoints(

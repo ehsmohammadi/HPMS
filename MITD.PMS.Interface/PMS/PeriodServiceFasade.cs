@@ -8,11 +8,13 @@ using MITD.PMS.Domain.Model.Periods;
 using MITD.PMS.Domain.Service;
 using MITD.PMS.Presentation.Contracts;
 using MITD.PMS.Presentation.Contracts.Fasade;
+using MITD.PMSSecurity.Domain;
+using MITD.PMSSecurity.Domain.Model;
 using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
 {
-    //  [Interceptor(typeof(Interception))]
+    [Interceptor(typeof(Interception))]
     public class PeriodServiceFacade : IPeriodServiceFacade
     {
         private readonly IPeriodService periodService;
@@ -27,11 +29,11 @@ namespace MITD.PMS.Interface
 
         public PeriodServiceFacade(IPeriodService periodService,
             IMapper<Period, PeriodDescriptionDTO> periodDescriptionMapper,
-            IMapper<Period,PeriodDTOWithAction> periodDTOWithActionsMapper,
+            IMapper<Period, PeriodDTOWithAction> periodDTOWithActionsMapper,
             IMapper<Period, PeriodDTO> periodDTOMapper,
             IMapper<InquiryInitializingProgress, PeriodStateWithIntializeInquirySummaryDTO> periodInitializeInquiryStateReportMapper,
             IMapper<BasicDataCopyingProgress, PeriodStateWithCopyingSummaryDTO> periodCopyingStateReportMapper,
-            IPeriodRepository periodRep,IPeriodEngineService periodEngine)
+            IPeriodRepository periodRep, IPeriodEngineService periodEngine)
         {
             this.periodService = periodService;
             this.periodDescriptionMapper = periodDescriptionMapper;
@@ -41,9 +43,8 @@ namespace MITD.PMS.Interface
             this.periodCopyingStateReportMapper = periodCopyingStateReportMapper;
             this.periodRep = periodRep;
             this.periodEngine = periodEngine;
-            
-        }
 
+        }
 
         public PageResultDTO<PeriodDTOWithAction> GetAllPeriods(int pageSize, int pageIndex)
         {
@@ -69,6 +70,7 @@ namespace MITD.PMS.Interface
             return periods.Select(p => periodDescriptionMapper.MapToModel(p)).ToList();
         }
 
+        [RequiredPermission(ActionType.DeletePeriod)]
         public string DeletePeriod(long id)
         {
             periodService.Delete(new PeriodId(id));
@@ -81,12 +83,14 @@ namespace MITD.PMS.Interface
             return periodDTOMapper.MapToModel(period);
         }
 
+        [RequiredPermission(ActionType.AddPeriod)]
         public PeriodDTO AddPeriod(PeriodDTO dto)
         {
-            var period=periodService.AddPeriod(dto.Name, dto.StartDate, dto.EndDate);
+            var period = periodService.AddPeriod(dto.Name, dto.StartDate, dto.EndDate);
             return periodDTOMapper.MapToModel(period);
         }
 
+        [RequiredPermission(ActionType.ModifyPeriod)]
         public PeriodDTO UpdatePeriod(PeriodDTO dto)
         {
 
@@ -96,11 +100,16 @@ namespace MITD.PMS.Interface
 
         public PeriodDTO GetCurrentPeriod()
         {
-           
+
             Period period = periodService.GetCurrentPeriod();
             return periodDTOMapper.MapToModel(period);
         }
 
+        [RequiredPermission(ActionType.ActivatePeriod)]
+        [RequiredPermission(ActionType.InitializePeriodForInquiry)]
+        [RequiredPermission(ActionType.StartInquiry)]
+        [RequiredPermission(ActionType.CompleteInquiry)]
+        [RequiredPermission(ActionType.ClosePeriod)]
         public void ChangePeriodState(long periodId, PeriodStateDTO stateDto)
         {
             if (stateDto.State == (int)PeriodState.InitializingForInquiry)
@@ -125,10 +134,10 @@ namespace MITD.PMS.Interface
         public PeriodStateWithIntializeInquirySummaryDTO GetPeriodState(long id)
         {
             var inquiryIp = periodEngine.GetIntializeInquiryState(new PeriodId(id));
-            return new PeriodStateWithIntializeInquirySummaryDTO 
+            return new PeriodStateWithIntializeInquirySummaryDTO
             {
-                MessageList=inquiryIp.MessageList,
-                Percent=inquiryIp.Percent,
+                MessageList = inquiryIp.MessageList,
+                Percent = inquiryIp.Percent,
                 StateName = inquiryIp.StateName
             };
         }
@@ -151,7 +160,7 @@ namespace MITD.PMS.Interface
 
         public void ChangePeriodActiveStatus(long id, bool active)
         {
-            periodService.ChangePeriodActiveStatus(new PeriodId(id),active);
+            periodService.ChangePeriodActiveStatus(new PeriodId(id), active);
 
         }
 

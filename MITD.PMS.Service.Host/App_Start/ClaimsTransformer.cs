@@ -168,7 +168,7 @@ namespace MITD.PMS.Service.Host.App_Start
                 var actions = securityService.GetUserAuthorizedActions(incomingPrincipal);
                 if (actions != null && actions.Any())
                 {
-                    currentUserActions = actions.Select(c => c.Value).ToList();
+                    currentUserActions = actions.Select(c => ((int)c).ToString()).ToList();
                 }
             }
             finally

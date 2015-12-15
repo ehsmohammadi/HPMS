@@ -8,6 +8,8 @@ using MITD.PMS.Presentation.Contracts.Fasade;
 using MITD.PMSAdmin.Application.Contracts;
 using MITD.PMSAdmin.Domain.Model.CustomFieldTypes;
 using MITD.PMSAdmin.Domain.Model.Jobs;
+using MITD.PMSSecurity.Domain;
+using MITD.PMSSecurity.Domain.Model;
 using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
@@ -63,12 +65,15 @@ namespace MITD.PMS.Interface
             return res.Select(r => jobMapper.MapToModel(r)).ToList();
         }
 
+        [RequiredPermission(ActionType.AddJob)]
         public JobDTO AddJob(JobDTO jobDto)
         {
             var res = jobService.AddJob(jobDto.Name, jobDto.DictionaryName, jobDto.CustomFields.Select(c => new CustomFieldTypeId(c.Id)).ToList());
             return jobMapper.MapToModel(res);
         }
 
+        [RequiredPermission(ActionType.ModifyJob)]
+        [RequiredPermission(ActionType.ManageJobCustomFields)]
         public JobDTO UpdateJob(JobDTO jobDto)
         {
             var job = jobMapper.MapToEntity(jobDto);
@@ -76,6 +81,7 @@ namespace MITD.PMS.Interface
             return jobMapper.MapToModel(res);
         }
 
+        [RequiredPermission(ActionType.DeleteJob)]
         public string DeleteJob(long id)
         {
             jobService.DeleteJob(new JobId(id));

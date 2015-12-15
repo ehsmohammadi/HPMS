@@ -8,6 +8,8 @@ using MITD.Domain.Repository;
 using MITD.PMS.Presentation.Contracts;
 using MITD.PMSAdmin.Application.Contracts;
 using MITD.PMSAdmin.Domain.Model.CustomFieldTypes;
+using MITD.PMSSecurity.Domain;
+using MITD.PMSSecurity.Domain.Model;
 using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
@@ -77,6 +79,7 @@ namespace MITD.PMS.Interface
             return res;
         }
 
+        [RequiredPermission(ActionType.AddCustomField)]
         public CustomFieldDTO AddCustomField(CustomFieldDTO customField)
         {
             var res = customFieldService.AddCustomFieldType(customField.Name, customField.DictionaryName,
@@ -85,6 +88,7 @@ namespace MITD.PMS.Interface
             return customFieldMapper.MapToModel(res);
         }
 
+        [RequiredPermission(ActionType.ModifyCustomField)]
         public CustomFieldDTO UpdateCustomField(CustomFieldDTO customField)
         {
             var customFieldType = customFieldMapper.MapToEntity(customField);
@@ -92,6 +96,7 @@ namespace MITD.PMS.Interface
             return customFieldMapper.MapToModel(res);
         }
 
+        [RequiredPermission(ActionType.DeleteCustomField)]
         public string DeleteCustomeField(long id)
         {
             var customFieldType = customFieldRep.GetById(new CustomFieldTypeId(id));

@@ -62,13 +62,13 @@ namespace MITD.PMS.Interface
             {
                 foreach (var actionCode in claimUserActions.Value.Split(','))
                 {
-                    var actionType = Enumeration.FromValue<ActionType>(actionCode);
+                    var actionType = (ActionType)int.Parse(actionCode);
                     if (actionType != null)
                         userStateDto.PermittedActions.Add(new ActionTypeDTO
                         {
-                            Id = Convert.ToInt32(actionType.Value),
-                            ActionName = actionType.DisplayName,
-                            Description = actionType.Description
+                            Id =(int)actionType,
+                            ActionName = actionType.GetAttribute<ActionInfoAttribute>().DisplayName,
+                            Description = actionType.GetAttribute<ActionInfoAttribute>().Description
                         });
                 }
                 

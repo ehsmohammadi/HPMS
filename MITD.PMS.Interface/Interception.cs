@@ -1,5 +1,8 @@
-﻿using System.Security.Claims;
+﻿using System.Collections.Generic;
+using System.Security.Claims;
 using Castle.DynamicProxy;
+using MITD.PMSSecurity.Domain;
+using MITD.PMSSecurity.Domain.Model;
 using MITD.PMSSecurity.Exceptions;
 
 namespace MITD.PMS.Interface
@@ -13,7 +16,15 @@ namespace MITD.PMS.Interface
             try
             {
                 var user = ClaimsPrincipal.Current;
-                if (securityService.IsAuthorize(invocation.Method.DeclaringType.Name, invocation.Method.Name, user))
+                RequiredPermissionAttribute[] actionAttrList = (RequiredPermissionAttribute[])invocation.MethodInvocationTarget.GetCustomAttributes(typeof (RequiredPermissionAttribute), true);
+                List<ActionType> requiredActions = new List<ActionType>();
+                foreach (RequiredPermissionAttribute actionAttr in actionAttrList)
+                {
+                    requiredActions.Add(actionAttr.ActionType);
+                }
+
+                //if (securityService.IsAuthorized(invocation.Method.DeclaringType.Name, invocation.Method.Name, user))
+                if (requiredActions.Count == 0 || securityService.IsAuthorized(user, requiredActions))
                 {
                     invocation.Proceed();
                     //logServicesAccess(invocation, user);

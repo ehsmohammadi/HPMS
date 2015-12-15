@@ -299,7 +299,6 @@
     <Compile Include="Report\ReportDTO.cs" />
     <Compile Include="UtilityClass\QueryConditionHelper.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

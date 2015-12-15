@@ -34,7 +34,7 @@ namespace MITD.PMSSecurity.Domain.Service
 
             foreach (var itm in user.CustomActions)
             {
-                var custAct = ActionType.GetAll<ActionType>().Where(a => a.Value == itm.Key.ToString()).Single();
+                ActionType custAct = (ActionType) itm.Key;
                 if (itm.Value)
                 {
                     if (!authorizedActionsUser.Contains(custAct))
@@ -52,7 +52,7 @@ namespace MITD.PMSSecurity.Domain.Service
 
         }
 
-        public bool IsAuthorize(List<ActionType> authorizedActionsUser, List<ActionType> actions)
+        public bool IsAuthorized(List<ActionType> authorizedActionsUser, List<ActionType> actions)
         {
             return actions.All(authorizedActionsUser.Contains);
         }

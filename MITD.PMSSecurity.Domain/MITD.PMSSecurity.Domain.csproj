@@ -53,6 +53,7 @@
     <Compile Include="Model\AccessPermissions\AccessPermission.cs" />
     <Compile Include="Model\AccessPermissions\AccessPermissionId.cs" />
     <Compile Include="Model\AccessPermissions\PermissionCatalog.cs" />
+    <Compile Include="Model\RequiredPermissionAttribute.cs" />
     <Compile Include="Model\Parties\AdminUser.cs" />
     <Compile Include="Model\ActionTypeEnum.cs" />
     <Compile Include="Model\Exception\PartyArgumentException.cs" />

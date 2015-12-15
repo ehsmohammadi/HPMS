@@ -8,6 +8,8 @@ using MITD.PMS.Presentation.Contracts;
 using MITD.PMSAdmin.Application.Contracts;
 using MITD.PMSAdmin.Domain.Model.CustomFieldTypes;
 using MITD.PMSAdmin.Domain.Model.Units;
+using MITD.PMSSecurity.Domain;
+using MITD.PMSSecurity.Domain.Model;
 using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
@@ -57,12 +59,14 @@ namespace MITD.PMS.Interface
             return res;
         }
 
+        [RequiredPermission(ActionType.AddUnit)]
         public UnitDTO AddUnit(UnitDTO dto)
         {
             var res = unitService.AddUnit(dto.Name, dto.DictionaryName, dto.CustomFields.Select(c => new CustomFieldTypeId(c.Id)).ToList());
             return unitMapper.MapToModel(res);
         }
 
+        [RequiredPermission(ActionType.ModifyUnit)]
         public UnitDTO UpdateUnit(UnitDTO dto)
         {
             //var unit = unitMapper.MapToEntity(dto);
@@ -81,6 +85,7 @@ namespace MITD.PMS.Interface
 
         }
 
+        [RequiredPermission(ActionType.DeleteUnit)]
         public string DeleteUnit(long unitId)
         {
             unitService.DeleteUnit(new UnitId(unitId));

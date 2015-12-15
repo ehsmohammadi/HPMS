@@ -22,9 +22,9 @@ namespace MITD.PMSSecurity.Application
             this.securityCheckerService = securityCheckerService;
         }
 
-        public bool IsAuthorize(List<ActionType> userActions, List<ActionType> methodRequiredActions)
+        public bool IsAuthorized(List<ActionType> userActions, List<ActionType> methodRequiredActions)
         {
-            return securityCheckerService.IsAuthorize(userActions, methodRequiredActions);
+            return securityCheckerService.IsAuthorized(userActions, methodRequiredActions);
         }
 
         public List<ActionType> GetAllAuthorizedActions(List<User> pmsUsers)
@@ -109,9 +109,8 @@ namespace MITD.PMSSecurity.Application
                 using (var scope = new TransactionScope())
                 {
                     var u = userRep.GetUserById(partyId);
-                    var validSelectedActions =ActionType.GetAll<ActionType>()
-                                  .Where(c => customActions.Keys.Contains(int.Parse(c.Value))).ToList();
-                    var validCustomActions = validSelectedActions.ToDictionary(c => c,c => customActions[int.Parse(c.Value)]);
+                    var validSelectedActions = ActionTypeHelper.SelectActionTypes(customActions.Keys);
+                    var validCustomActions = validSelectedActions.ToDictionary(c => c,c => customActions[(int)c]);
                     var validGroups = userRep.GetAllUserGroup().Where(g => groups.Contains(g.Id)).ToList();
                     var validWorkListUsers =
                         userRep.GetAllUsers().Where(g => permittedWorkListUsers.Contains(g.Id)).ToList();
@@ -156,12 +155,15 @@ namespace MITD.PMSSecurity.Application
                 using (var scope = new TransactionScope())
                 {
                     var ug = userRep.GetUserGroupById(partyId);
-                    var validSelectedActions =
-                        ActionType.GetAll<ActionType>()
-                                  .Where(c => customActions.Keys.Contains(int.Parse(c.Value)))
-                                  .ToList();
-                    var validCustomActions = validSelectedActions.ToDictionary(c => c,
-                                                                               c => customActions[int.Parse(c.Value)]);
+                    //var validSelectedActions =
+                    //    ActionType.GetAll<ActionType>()
+                    //              .Where(c => customActions.Keys.Contains(int.Parse(c.Value)))
+                    //              .ToList();
+                    //var validCustomActions = validSelectedActions.ToDictionary(c => c,
+                    //                                                           c => customActions[int.Parse(c.Value)]);
+                    var validSelectedActions = ActionTypeHelper.SelectActionTypes(customActions.Keys);
+                    var validCustomActions = validSelectedActions.ToDictionary(c => c, c => customActions[(int)c]);
+
                     ug.Update(description, validCustomActions);
                     scope.Complete();
                     return ug;
@@ -231,7 +233,7 @@ namespace MITD.PMSSecurity.Application
         {
             foreach (var actId in customActionIdList)
             {
-                ActionType act = ActionType.FromValue<ActionType>(actId.Key.ToString());
+                ActionType act = (ActionType)actId.Key;
                 party.AssignCustomAction(act,actId.Value);
             }
         }

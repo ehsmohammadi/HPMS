@@ -9,6 +9,8 @@ using MITD.PMS.Domain.Model.JobPositions;
 using MITD.PMS.Domain.Model.Jobs;
 using MITD.PMS.Domain.Model.Periods;
 using MITD.PMS.Presentation.Contracts;
+using MITD.PMSSecurity.Domain;
+using MITD.PMSSecurity.Domain.Model;
 using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
@@ -46,6 +48,7 @@ namespace MITD.PMS.Interface
         }
 
 
+        [RequiredPermission(ActionType.ManageJobs)]
         public PageResultDTO<JobInPeriodDTOWithActions> GetAllJobs(long periodId,int pageSize, int pageIndex, QueryStringConditions queryStringConditions, string selectedColumns)
         {
             //var fs = new ListFetchStrategy<Job>(Enums.FetchInUnitOfWorkOption.NoTracking);
@@ -76,6 +79,7 @@ namespace MITD.PMS.Interface
             return pResDto ;
         }
 
+        [RequiredPermission(ActionType.AddJobInPeriod)]
         public JobInPeriodDTO AssignJob(long periodId, JobInPeriodDTO jobInPeriod)
         {
             //Job job= jobService.AssignJob(new JobId(new PeriodId(periodId), new SharedJobId(jobInPeriod.JobId)));
@@ -88,6 +92,7 @@ namespace MITD.PMS.Interface
             return jobInPeriodDTOMapper.MapToModel(job,new string[]{});
         }
 
+        [RequiredPermission(ActionType.DeleteJobInPeriod)]
         public void RemoveJob(long periodId, long jobId)
         {
             jobService.RemoveJob(new JobId(new PeriodId(periodId), new SharedJobId(jobId)));
@@ -140,6 +145,7 @@ namespace MITD.PMS.Interface
             return res.Select(r => jobInPeriodDTOMapper.MapToModel(r, selectedColumns.Split(','))).ToList();
         }
 
+        [RequiredPermission(ActionType.ModifyJobInPeriod)]
         public JobInPeriodDTO UpdateJob(long periodId, JobInPeriodDTO jobInPeriod)
         {
             

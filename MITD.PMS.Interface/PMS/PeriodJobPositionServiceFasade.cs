@@ -11,6 +11,8 @@ using MITD.PMS.Domain.Model.Units;
 using MITD.PMS.Presentation.Contracts;
 using System;
 using MITD.PMSReport.Domain.Model;
+using MITD.PMSSecurity.Domain;
+using MITD.PMSSecurity.Domain.Model;
 
 namespace MITD.PMS.Interface
 {
@@ -45,7 +47,7 @@ namespace MITD.PMS.Interface
             _jobRepository = jobRepository;
         }
 
-
+        [RequiredPermission(ActionType.AddJobPositionInPeriod)]
         public JobPositionInPeriodAssignmentDTO AssignJobPosition(long periodId, JobPositionInPeriodAssignmentDTO jobPositionInPeriod)
         {
             var jobPosition = jobPositionService.AssignJobPosition(new PeriodId(periodId),
@@ -57,12 +59,14 @@ namespace MITD.PMS.Interface
             return jobPositionAssignmentMapper.MapToModel(jobPosition);
         }
 
+        [RequiredPermission(ActionType.DeleteJobPositionInPeriod)]
         public string RemoveJobPosition(long periodId, long jobPositionId)
         {
             jobPositionService.RemoveJobPosition(new PeriodId(periodId), new SharedJobPositionId(jobPositionId));
             return "JobPosition with Id " + jobPositionId + " removed";
         }
 
+        [RequiredPermission(ActionType.ManageJobPositions)]
         public IEnumerable<JobPositionInPeriodDTOWithActions> GetJobPositionsWithActions(long periodId)
         {
             var jobPositions=jobPositionRep.GetJobPositions(new PeriodId(periodId));
@@ -114,6 +118,7 @@ namespace MITD.PMS.Interface
             return jobPositionInPeriodDTOMapper.MapToModel(jobPosition);
         }
 
+        [RequiredPermission(ActionType.ManageJobPositionInPeriodInquiry)]
         public List<InquirySubjectWithInquirersDTO> GetInquirySubjectsWithInquirers(long periodId, long jobPositionId)
         {
             var inquirySubjectWIthInquirersList = new List<InquirySubjectWithInquirersDTO>(); 
@@ -170,6 +175,7 @@ namespace MITD.PMS.Interface
 
         }
 
+        [RequiredPermission(ActionType.ManageJobPositionInPeriodInquiry)]
         public InquirySubjectWithInquirersDTO UpdateInquirySubjectInquirers(long periodId, long jobPositionId,
             string inquirySubjectEmployeeNo, InquirySubjectWithInquirersDTO inquirySubjectWithInquirersDTO)
         {

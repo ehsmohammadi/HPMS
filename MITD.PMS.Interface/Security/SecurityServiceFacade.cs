@@ -23,12 +23,12 @@ namespace MITD.PMS.Interface
             this.userActionMapper = userActionMapper;
         }
 
-        public bool IsAuthorize(string className, string methodName, ClaimsPrincipal user)
+        public bool IsAuthorized(ClaimsPrincipal user, List<ActionType> actions)
         {
             var methodMapper = new MethodMapper();
-            var methodRequiredActions = methodMapper.Map(className, methodName);
+            //var methodRequiredActions = methodMapper.Map(className, methodName);
             List<ActionType> userActions = userActionMapper.MapToEntity(user);
-            return securityService.IsAuthorize(userActions, methodRequiredActions);          
+            return securityService.IsAuthorized(userActions, actions);          
         }
 
         public List<ActionType> GetUserAuthorizedActions(ClaimsPrincipal currentUsername)

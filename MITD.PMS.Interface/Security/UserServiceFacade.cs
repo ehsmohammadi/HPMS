@@ -28,7 +28,7 @@ namespace MITD.PMS.Interface
         private IMapper<Group, UserGroupDTO> userGroupDTOMapper;
         private IMapper<Group, UserGroupDescriptionDTO> userGroupDescriptionDTOMapper;
         private IMapper<User, UserDescriptionDTO> userDescriptionDTOMapper;
-        private IMapper<ActionType, ActionTypeDTO> actionTypeDTOMapper;
+        private ActionTypeDtoMapper actionTypeDTOMapper;
 
         public UserServiceFacade(ISecurityService securityService,
             IMapper<ClaimsPrincipal, UserStateDTO> userStateMapper, 
@@ -38,7 +38,7 @@ namespace MITD.PMS.Interface
             IMapper<User, UserDTO> userDTOMapper,
             IMapper<Group, UserGroupDTOWithActions> userGroupDTOWithActionsMapper,
             IMapper<Group, UserGroupDTO> userGroupDTOMapper,
-            IMapper<ActionType, ActionTypeDTO> actionTypeDTOMapper ,
+            //IMapper<ActionType, ActionTypeDTO> actionTypeDTOMapper ,
             IMapper<Group, UserGroupDescriptionDTO> userGroupDescriptionDTOMapper,
             IMapper<User, UserDescriptionDTO> userDescriptionDTOMapper
 
@@ -52,7 +52,7 @@ namespace MITD.PMS.Interface
             this.userDTOMapper = userDTOMapper;
             this.userGroupDTOWithActionsMapper = userGroupDTOWithActionsMapper;
             this.userGroupDTOMapper = userGroupDTOMapper;
-            this.actionTypeDTOMapper = actionTypeDTOMapper;
+            this.actionTypeDTOMapper = new ActionTypeDtoMapper();
             this.userGroupDescriptionDTOMapper = userGroupDescriptionDTOMapper;
             this.userDescriptionDTOMapper = userDescriptionDTOMapper;
         }
@@ -190,8 +190,13 @@ namespace MITD.PMS.Interface
 
         public List<ActionTypeDTO> GetAllActionTypes()
         {
-            var actionTypes = ActionType.GetAll<ActionType>();
-            return actionTypes.Select(p => actionTypeDTOMapper.MapToModel(p)).ToList();
+            var actionTypes = Enum.GetValues(typeof(ActionType));
+            List<ActionTypeDTO> result = new List<ActionTypeDTO>();
+            foreach (ActionType actionType in actionTypes)
+            {
+                result.Add(actionTypeDTOMapper.MapToModel(actionType));
+            }
+            return result.ToList();
         }
 
 

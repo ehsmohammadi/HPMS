@@ -156,12 +156,12 @@ namespace MITD.PMS.Persistence
 
             #region ActionTypes
 
-            foreach (var actiontype in Enumeration.GetAll<ActionType>())
+            foreach (ActionType actiontype in Enum.GetValues(typeof(ActionType)))
             {
                 Insert.IntoTable("ActionTypes").Row(new
                 {
-                    Id = actiontype.Value,
-                    Name = actiontype.DisplayName,
+                    Id = (int)actiontype,
+                    Name = actiontype.GetAttribute<ActionInfoAttribute>().DisplayName,
 
                 });
             }

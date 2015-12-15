@@ -15,6 +15,8 @@ using MITD.PMS.Domain.Model.Periods;
 using MITD.PMSReport.Domain.Model;
 using MITD.PMS.Domain.Model.JobIndexPoints;
 using System;
+using MITD.PMSSecurity.Domain;
+using MITD.PMSSecurity.Domain.Model;
 
 
 namespace MITD.PMS.Interface
@@ -40,6 +42,7 @@ namespace MITD.PMS.Interface
             this.employeeRep = employeeRep;
         }
 
+        [RequiredPermission(ActionType.ShowCalculationResult)]
         public PageResultDTO<JobIndexPointSummaryDTOWithAction> GetAllJobIndexPoints(long periodId, long calculationId, int pageSize, int pageIndex)
         {
             var fs = new ListFetchStrategy<JobIndexPointWithEmployee>(Enums.FetchInUnitOfWorkOption.NoTracking);

@@ -81,12 +81,12 @@ namespace MITD.PMS.Presentation.Logic
 
         private void createPMSActions()
         {
-            foreach (var actionType in Enumeration.GetAll<ActionType>())
+            foreach (ActionType actionType in Enum.GetValues(typeof(ActionType)))
             {
                 PMSActions.Add(new PMSAction
                 {
-                    ActionCode = (int)actionType,
-                    ActionName = actionType.Description
+                    ActionCode = actionType,
+                    ActionName = actionType.GetAttribute<ActionInfoAttribute>().Description
 
                 });
             }

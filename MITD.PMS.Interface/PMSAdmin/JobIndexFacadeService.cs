@@ -9,6 +9,8 @@ using MITD.PMS.Presentation.Contracts.Fasade;
 using MITD.PMSAdmin.Application.Contracts;
 using MITD.PMSAdmin.Domain.Model.CustomFieldTypes;
 using MITD.PMSAdmin.Domain.Model.JobIndices;
+using MITD.PMSSecurity.Domain;
+using MITD.PMSSecurity.Domain.Model;
 using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
@@ -101,8 +103,7 @@ namespace MITD.PMS.Interface
             return abstractIndexDto;
         }
 
-       
-
+        [RequiredPermission(ActionType.AddJobIndex)]
         public AbstractIndex AddJobIndex(JobIndexDTO jobIndexDto)
         {
             var jobIndex = jobIndexService.AddJobIndex(new AbstractJobIndexId(jobIndexDto.ParentId.Value),
@@ -111,6 +112,7 @@ namespace MITD.PMS.Interface
             return jobIndexMapper.MapToModel(jobIndex);
         }
 
+        [RequiredPermission(ActionType.AddJobIndexCategory)]
         public AbstractIndex AddJobIndexCategory(JobIndexCategoryDTO jobIndexCategoryDto)
         {
             var jobIndexCat = jobIndexService.AddJobIndexCategory(
@@ -119,7 +121,8 @@ namespace MITD.PMS.Interface
             return jobIndexMapper.MapToModel(jobIndexCat);
         }
 
-
+        [RequiredPermission(ActionType.ModifyJobIndex)]
+        [RequiredPermission(ActionType.ManageJobIndexCustomFields)]
         public AbstractIndex UpdateJobIndex(JobIndexDTO jobIndexDto)
         {
             var jobIndex = jobIndexService.UpdateJobIndex(new AbstractJobIndexId(jobIndexDto.Id)
@@ -129,6 +132,7 @@ namespace MITD.PMS.Interface
             return jobIndexMapper.MapToModel(jobIndex);
         }
 
+        [RequiredPermission(ActionType.ModifyJobIndexCategory)]
         public AbstractIndex UpdateJobIndexCategory(JobIndexCategoryDTO jobIndexCatDto)
         {
             var jobIndexCat = jobIndexService.UpdateJobIndexCategory(new AbstractJobIndexId(jobIndexCatDto.Id)
@@ -137,6 +141,8 @@ namespace MITD.PMS.Interface
             return jobIndexMapper.MapToModel(jobIndexCat);
         }
 
+        [RequiredPermission(ActionType.DeleteJobIndex)]
+        [RequiredPermission(ActionType.DeleteJobIndexCategory)]
         public string DeleteAbstractJobIndex(long id)
         {
             jobIndexService.DeleteAbstractJobIndex(new AbstractJobIndexId(id));
