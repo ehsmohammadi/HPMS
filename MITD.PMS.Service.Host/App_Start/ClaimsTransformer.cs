@@ -34,7 +34,7 @@ namespace MITD.PMS.Service.Host.App_Start
         {
             // if you want sst security comment this line 
 #if(DEBUG)
-            incomingPrincipal = createIncomingPrincipalSupportManager();
+            incomingPrincipal = createIncomingPrincipalDefault();
 #endif
 
             if (!incomingPrincipal.Identity.IsAuthenticated)

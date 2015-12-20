@@ -42,7 +42,7 @@ namespace MITD.PMS.Interface
                     ActionType.StartInquiry,
                     ActionType.CompleteInquiry,
                     ActionType.ClosePeriod
-                }), // Sharif Done
+                }), 
 
                 //RollBackPeriodState
 
@@ -67,7 +67,7 @@ namespace MITD.PMS.Interface
             new MethodAction(typeof (IEmployeeServiceFacade).Name,
                 typeof (IEmployeeServiceFacade).GetMethod("GetAllEmployees",
                     new[] {typeof (long), typeof (int), typeof (int)}).Name,
-                new List<ActionType> {ActionType.ManageEmployees}), // Sharif Done
+                new List<ActionType> {ActionType.ManageEmployees}), 
 
             new MethodAction(typeof (IPeriodJobServiceFacade).Name,
                 typeof (IPeriodJobServiceFacade).GetMethod("AssignJob").Name,
@@ -113,7 +113,7 @@ namespace MITD.PMS.Interface
                 new List<ActionType> {ActionType.AddJobIndexGroupInPeriod}),
             new MethodAction(typeof (IPeriodJobIndexServiceFacade).Name,
                 typeof (IPeriodJobIndexServiceFacade).GetMethod("UpdateJobIndexGroup").Name,
-                new List<ActionType> {ActionType.ModifyJobIndexGroupInPeriod}), // Sharif Done
+                new List<ActionType> {ActionType.ModifyJobIndexGroupInPeriod}), 
 
             new MethodAction(typeof (IEmployeeServiceFacade).Name,
                 typeof (IEmployeeServiceFacade).GetMethod("AddEmployee").Name,
@@ -233,7 +233,7 @@ namespace MITD.PMS.Interface
                     ActionType.RunCalculation,
                     ActionType.StopCalculation,
                     ActionType.SetDeterministicCalculation
-                }), // Sharif Done
+                }), 
             //new MethodAction(typeof(CalculationServiceFacade).Name ,typeof(IPeriodServiceFacade).GetMethod("").Name, new List<ActionType> {ActionType.ShowCalculationState}),
             new MethodAction(typeof (IJobIndexPointFacadeService).Name,
                 typeof (IJobIndexPointFacadeService).GetMethod("GetAllJobIndexPoints").Name,
