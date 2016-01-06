@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security;
 using System.Security.Claims;
 using System.Transactions;
+using MITD.Core;
 using MITD.PMSSecurity.Application.Contracts;
 using MITD.PMSSecurity.Domain;
 using MITD.PMSSecurity.Domain.Service;
@@ -104,27 +105,12 @@ namespace MITD.PMSSecurity.Application
         public User UpdateUser(PartyId partyId, string firstName, string lastName, string email, bool isActive,
             Dictionary<int, bool> customActions, List<PartyId> groups,List<PartyId> permittedWorkListUsers)
         {
-            try
+            using (var scope = new TransactionScope())
             {
-                using (var scope = new TransactionScope())
-                {
-                    var u = userRep.GetUserById(partyId);
-                    var validSelectedActions = ActionTypeHelper.SelectActionTypes(customActions.Keys);
-                    var validCustomActions = validSelectedActions.ToDictionary(c => c,c => customActions[(int)c]);
-                    var validGroups = userRep.GetAllUserGroup().Where(g => groups.Contains(g.Id)).ToList();
-                    var validWorkListUsers =
-                        userRep.GetAllUsers().Where(g => permittedWorkListUsers.Contains(g.Id)).ToList();
-                    u.Update(firstName, lastName, email, isActive, validCustomActions, validGroups, validWorkListUsers);
-                    scope.Complete();
-                    return u;
-                }
-            }
-            catch (Exception exp)
-            {
-                var res = userRep.TryConvertException(exp);
-                if (res == null)
-                    throw;
-                throw res;
+                var u = userRep.GetUserById(partyId);
+                ((User)u).Update(firstName, lastName, email);
+                scope.Complete();
+                return u as User;
             }
         }
 
@@ -238,7 +224,35 @@ namespace MITD.PMSSecurity.Application
             }
         }
 
-       
+        public void UpdateUserAccess(PartyId id, Dictionary<int, bool> customActions)
+        {
+            using (var scope = new TransactionScope())
+            {
+                //var ums = new UserManagementServiceClient();
+
+                User user = userRep.GetUserById(id);
+                user.Actions = new AdminUser(id, "", "", "").Actions;
+
+                //var rols = ums.GetRolesForUser(u.PartyName);
+                //var roleActions = securityCheckerService.GetAllAuthorizedActionTypesForRole(rols.ToList());
+                var actionsFromRole = user.Actions;
+                //var rep = ServiceLocator.Current.GetInstance<IPartyCustomActionRepository>();
+                //using (var scope1 = new TransactionScope())
+                //{
+                //    rep.DeleteAllByPartyId(id);
+                //    _unitOfWorkScope.Commit();
+                //    scope1.Complete();
+                //}
+
+                user.UpdateCustomActions(customActions, user.Id, actionsFromRole);
+                //user.Update();
+                //_unitOfWorkScope.Commit();
+                //scope.Complete();
+            //}
+                //userRep.Update(user);
+                scope.Complete();
+            }
+        }
 
     }
 }

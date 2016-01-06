@@ -22,15 +22,36 @@ namespace MITD.PMS.Service.Host.Controllers
     public class ActionTypesController : ApiController
     {
         private readonly IUserServiceFacade userServiceFacade;
+        private ISecurityServiceFacade _securityFacadeService;
 
-        public ActionTypesController(IUserServiceFacade userServiceFacade)
+        public ActionTypesController(IUserServiceFacade userServiceFacade, ISecurityServiceFacade securityFacadeService)
         {
             this.userServiceFacade = userServiceFacade;
+            this._securityFacadeService = securityFacadeService;
         }
 
-        public List<ActionTypeDTO> GetAllActionTypes()
+        public List<ActionType> GetAllActionTypes()
         {
             return userServiceFacade.GetAllActionTypes();
+        }
+        public List<ActionType> GetAllUserActionTypes(string userName, bool isGroup, string groupId)
+        {
+
+            if (isGroup)
+            {
+                return userServiceFacade.GetGroupActionType(groupId);
+            }
+            else
+            {
+                return _securityFacadeService.GetUserAuthorizedActions(userName);
+            }
+
+
+        }
+
+        public void Put([FromBody] Dictionary<int, bool> entity, string username)
+        {
+            this.userServiceFacade.UpdateUserAccess(username, entity);
         }
         
     }

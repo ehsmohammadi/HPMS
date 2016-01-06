@@ -1,17 +1,23 @@
-﻿using MITD.Presentation;
+﻿using System;
+using MITD.Presentation;
 
 namespace MITD.PMS.Presentation.Contracts
 {
     public class Privilege : ViewModelBase
     {
-        private ActionTypeDTO actionType;
-        public ActionTypeDTO ActionType
+        private ActionType actionType;
+        public ActionType ActionType
         {
             get { return actionType; }
             set
             {
                 this.SetField(p => p.ActionType, ref actionType, value);
             }
+        }
+
+        public string ActionName
+        {
+            get { return actionType.GetAttribute<ActionInfoAttribute>().Description; }
         }
 
         private bool  isGrant;
@@ -24,15 +30,15 @@ namespace MITD.PMS.Presentation.Contracts
             }
         }
 
-        private bool isDeny;
-        public bool IsDeny
-        {
-            get { return isDeny; }
-            set
-            {
-                this.SetField(p => p.IsDeny, ref isDeny, value);
-            }
-        }
+        //private bool isDeny;
+        //public bool IsDeny
+        //{
+        //    get { return isDeny; }
+        //    set
+        //    {
+        //        this.SetField(p => p.IsDeny, ref isDeny, value);
+        //    }
+        //}
 
     }
 }

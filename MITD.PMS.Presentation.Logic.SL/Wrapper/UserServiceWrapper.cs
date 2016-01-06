@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using Castle.Core.Internal;
 using MITD.PMS.Presentation.Contracts;
 using MITD.Presentation;
 
@@ -158,9 +159,19 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
             WebClientHelper.Get(new Uri(baseAddressUserGroups, UriKind.Absolute), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 
-        public void GetAllActionTypes(Action<List<ActionTypeDTO>, Exception> action)
+        public void GetAllActionTypes(Action<List<ActionType>, Exception> action)
         {
             WebClientHelper.Get(new Uri(baseAddressActionTypes, UriKind.Absolute), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+        }
+
+        public void GetAllUserActionTypes(Action<List<ActionType>, Exception> action, string userName, bool isGroup, string groupId)
+        {
+            if (groupId.IsNullOrEmpty())
+                groupId = "0";
+
+            var url = baseAddressActionTypes + "?userName=" + userName + "&isGroup=" + isGroup + "&groupId=" + groupId;
+            WebClientHelper.Get(new Uri(url, UriKind.Absolute),
+                action, WebClientHelper.MessageFormat.Json, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 
         public void ChangeCurrentWorkListUserName(Action<string, Exception> action, string logonUserName, string currentPermittedUser)
@@ -176,6 +187,13 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
                 url += "&SortBy=" + QueryConditionHelper.GetSortByQueryString(sortBy);
             WebClientHelper.Get(new Uri(url, UriKind.Absolute), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
 
+        }
+
+        public void UpdateUserAccess(Action<UserGroupDTO, Exception> action, string username, Dictionary<int, bool> actionList)
+        {
+            var url = string.Format(baseAddressActionTypes + "?username=" + username);
+            WebClientHelper.Put(new Uri(url, UriKind.Absolute), action, actionList, WebClientHelper.MessageFormat.Json
+               , PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
     }
 }

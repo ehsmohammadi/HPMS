@@ -60,7 +60,7 @@ namespace MITD.PMS.Presentation.Logic
         void ShowUserGroupList(bool isShiftPressed);
         void ShowUserView(UserDTO user, ActionType action);
         void ShowUserGroupView(UserGroupDTO userGroup, ActionType action);
-        void ShowCustomActionsManageViews(PartyDTO party);
+        void ShowCustomActionsManageViews(PartyDTO party, bool isgroup, string groupId);
         void ShowWorkListUsersManageViews(UserDTO user);
 
         void ShowLogList(bool isShiftPressed);

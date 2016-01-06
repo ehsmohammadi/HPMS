@@ -16,6 +16,10 @@ namespace MITD.PMS.Interface
         bool IsAuthorized(ClaimsPrincipal user, List<ActionType> actions);
         
         List<ActionType> GetUserAuthorizedActions(ClaimsPrincipal currentUsername);
+        List<ActionType> GetAllAuthorizedActions(List<User> users);
+
+        List<ActionType> GetUserAuthorizedActions(string userName);
+
         void AddUpdateUser(ClaimsPrincipal incomingPrincipal);
         User GetLogonUser();
         EmployeeUser GetCurrentEmployeeUser();

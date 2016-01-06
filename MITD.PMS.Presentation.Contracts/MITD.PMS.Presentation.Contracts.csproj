@@ -302,6 +302,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MITD.PMSSecurity.Domain\MITD.PMSSecurity.Domain.csproj">
+      <Project>{58e04975-ac8a-42bb-9a49-d68b48f84e79}</Project>
+      <Name>MITD.PMSSecurity.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

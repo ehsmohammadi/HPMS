@@ -57,7 +57,7 @@ namespace MITD.PMS.Interface
 
         private void FilterActionsFromPageResultDtosBasedOnUserPermissions(object pageResult, List<ActionType> authorizedActionsForUser)
         {
-            if (pageResult.GetType().IsGenericType &&
+            if (pageResult != null && pageResult.GetType().IsGenericType &&
                         pageResult.GetType().GetGenericTypeDefinition() == typeof(PageResultDTO<>))
             {
                 Type pageResultDtoType = pageResult.GetType().GetGenericTypeDefinition();
