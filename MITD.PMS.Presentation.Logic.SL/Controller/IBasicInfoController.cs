@@ -41,7 +41,7 @@ namespace MITD.PMS.Presentation.Logic
         void ShowCustomFieldView(CustomFieldDTO jobIndex, ActionType addCustomField);
         void ShowCustomFieldListView(bool isShiftPressed);
 
-
+        [RequiredPermission(ActionType.ManageJobCustomFields)]
         void ShowJobCustomFieldManageView(JobDTO job, ActionType modifyJobFields);
         
 
@@ -56,7 +56,9 @@ namespace MITD.PMS.Presentation.Logic
         void ShowFunctionListView(long policyDto);
         void ShowFunctionView(FunctionDTO function, ActionType action);
 
+        [RequiredPermission(ActionType.ModifyUser)]
         void ShowUserList(bool isShiftPressed);
+
         void ShowUserGroupList(bool isShiftPressed);
         void ShowUserView(UserDTO user, ActionType action);
         void ShowUserGroupView(UserGroupDTO userGroup, ActionType action);

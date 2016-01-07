@@ -228,28 +228,10 @@ namespace MITD.PMSSecurity.Application
         {
             using (var scope = new TransactionScope())
             {
-                //var ums = new UserManagementServiceClient();
-
                 User user = userRep.GetUserById(id);
                 user.Actions = new AdminUser(id, "", "", "").Actions;
-
-                //var rols = ums.GetRolesForUser(u.PartyName);
-                //var roleActions = securityCheckerService.GetAllAuthorizedActionTypesForRole(rols.ToList());
                 var actionsFromRole = user.Actions;
-                //var rep = ServiceLocator.Current.GetInstance<IPartyCustomActionRepository>();
-                //using (var scope1 = new TransactionScope())
-                //{
-                //    rep.DeleteAllByPartyId(id);
-                //    _unitOfWorkScope.Commit();
-                //    scope1.Complete();
-                //}
-
                 user.UpdateCustomActions(customActions, user.Id, actionsFromRole);
-                //user.Update();
-                //_unitOfWorkScope.Commit();
-                //scope.Complete();
-            //}
-                //userRep.Update(user);
                 scope.Complete();
             }
         }

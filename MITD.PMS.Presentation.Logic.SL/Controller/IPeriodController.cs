@@ -19,6 +19,8 @@ namespace MITD.PMS.Presentation.Logic
         void ShowUnitsInquiryListView(string employeeNo, long periodId);
         void ShowUnitInPeriodInquiryView(PeriodDTO period, UnitInPeriodDTO unitInPeriodDto, ActionType action);
         void ShowPeriodView(PeriodDTO period, ActionType actionType);
+
+        [RequiredPermission(ActionType.ModifyPeriod)]
         void ShowPeriodList(bool showInNewTab);
 
         void ShowJobInPeriodListView(PeriodDTO period, bool showInNewTab = false);
@@ -26,6 +28,8 @@ namespace MITD.PMS.Presentation.Logic
 
       //  void ShowUnitInPeriodView(UnitInPeriodAssignmentDTO unitInPeriod, ActionType action);
         void ShowUnitInPeriodView(long periodId, long? unitId,long? parentId , ActionType actionType);
+
+        [RequiredPermission(ActionType.ModifyUnitInPeriod)]
         void ShowUnitInPeriodTreeView(PeriodDTOWithAction period, bool showInNewTab = false);
         void ShowUnitIndexInPeriodView(UnitIndexInPeriodDTO unitIndexInPeriodDto, ActionType action);
         void ShowUnitIndexInPeriodTreeView(PeriodDTOWithAction period, bool showInNewTab = false);
