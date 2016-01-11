@@ -28,7 +28,7 @@ namespace MITD.PMS.Interface
 
             foreach (var actionCode in claimUserActions.Value.Split(','))
             {
-                var actionType = Enumeration.FromValue<ActionType>(actionCode);
+                var actionType = (ActionType)int.Parse(actionCode);
                 if (actionType != null)
                     res.Add(actionType);
             }

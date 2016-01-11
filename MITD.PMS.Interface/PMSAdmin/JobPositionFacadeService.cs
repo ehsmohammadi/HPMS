@@ -7,6 +7,8 @@ using MITD.Domain.Repository;
 using MITD.PMS.Presentation.Contracts;
 using MITD.PMSAdmin.Application.Contracts;
 using MITD.PMSAdmin.Domain.Model.JobPositions;
+using MITD.PMSSecurity.Domain;
+using MITD.PMSSecurity.Domain.Model;
 using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
@@ -51,12 +53,14 @@ namespace MITD.PMS.Interface
             return res;
         }
 
+        [RequiredPermission(ActionType.AddJobPosition)]
         public JobPositionDTO AddJobPosition(JobPositionDTO dto)
         {
             var res=jobPositionService.AddJobPosition(dto.Name,dto.DictionaryName);
             return jobPositionMapper.MapToModel(res);
         }
 
+        [RequiredPermission(ActionType.ModifyJobPosition)]
         public JobPositionDTO UpdateJobPosition(JobPositionDTO dto)
         {
             //var jobPosition = jobPositionMapper.MapToEntity(dto);
@@ -70,6 +74,7 @@ namespace MITD.PMS.Interface
             return jobPositionMapper.MapToModel(jobPosition);
         }
 
+        [RequiredPermission(ActionType.DeleteJobPosition)]
         public string DeleteJob(long id)
         {
             jobPositionService.Delete(new JobPositionId(id));

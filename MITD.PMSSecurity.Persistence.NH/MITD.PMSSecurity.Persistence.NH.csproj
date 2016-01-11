@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PartyCustomActionRepository.cs" />
     <Compile Include="Context\MappingClass\LogMap.cs" />
     <Compile Include="Context\MappingClass\UserMap.cs" />
     <Compile Include="Context\PMSSecuritySession.cs" />

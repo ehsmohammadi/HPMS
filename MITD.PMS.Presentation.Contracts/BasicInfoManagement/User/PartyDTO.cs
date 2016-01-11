@@ -6,12 +6,12 @@ namespace MITD.PMS.Presentation.Contracts
 {
     public partial class PartyDTO
     {
-        //private long id;
-        //public long Id
-        //{
-        //    get { return id; }
-        //    set { this.SetField(p => p.Id, ref id, value); }
-        //}
+        private string id;
+        public string Id
+        {
+            get { return id; }
+            set { this.SetField(p => p.Id, ref id, value); }
+        }
 
 
         private string partyName;

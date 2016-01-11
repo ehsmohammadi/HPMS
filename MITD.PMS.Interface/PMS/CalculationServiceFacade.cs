@@ -13,6 +13,8 @@ using MITD.PMSReport.Domain.Model;
 using System;
 using MITD.PMS.Domain.Model.Policies;
 using MITD.PMS.Domain.Service;
+using MITD.PMSSecurity.Domain;
+using MITD.PMSSecurity.Domain.Model;
 
 namespace MITD.PMS.Interface
 {
@@ -57,6 +59,7 @@ namespace MITD.PMS.Interface
             this.calcEngineService = calcEngineService;
         }
 
+        [RequiredPermission(ActionType.AddCalculation)]
         public CalculationDTO AddCalculation(CalculationDTO calculation)
         {
             var calc=calculationService.AddCalculation(new PolicyId(calculation.PolicyId),
@@ -71,6 +74,7 @@ namespace MITD.PMS.Interface
 
         }
 
+        [RequiredPermission(ActionType.ManageCalculations)]
         public PageResultDTO<CalculationBriefDTOWithAction> GetAllCalculations(long periodId,int pageSize, int pageIndex)
         {
             var fs = new ListFetchStrategy<CalculationWithPolicyAndPeriod>(Enums.FetchInUnitOfWorkOption.NoTracking);
@@ -107,7 +111,10 @@ namespace MITD.PMS.Interface
             return calculationMapper.MapToModel(res);
         }
 
-
+        [RequiredPermission(ActionType.ModifyCalculation)]
+        [RequiredPermission(ActionType.RunCalculation)]
+        [RequiredPermission(ActionType.StopCalculation)]
+        [RequiredPermission(ActionType.SetDeterministicCalculation)]
         public void ChangeCalculationState(long periodId, long Id, CalculationStateDTO stateDto)
         {
             if (stateDto.State == Convert.ToInt32(CalculationState.Running.Value))
@@ -118,6 +125,7 @@ namespace MITD.PMS.Interface
                 calcEngineService.PauseCalculation(new CalculationId(Id));
         }
 
+        [RequiredPermission(ActionType.DeleteCalculation)]
         public void DeleteCalculation(long id)
         {
             calculationService.DeleteCalculation(new CalculationId(id));

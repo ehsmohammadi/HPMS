@@ -18,7 +18,7 @@ namespace MITD.PMS.Presentation.BasicInfoApp
 
         public void DoAction(UserVM vm)
         {
-            basicInfoController.ShowCustomActionsManageViews(vm.User);
+            basicInfoController.ShowCustomActionsManageViews(vm.User, false, "");
         }
 
 

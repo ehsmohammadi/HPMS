@@ -45,18 +45,20 @@ namespace MITD.PMSSecurity.Domain
         public virtual void UpdateCustomActions(Dictionary<ActionType,bool> customActionsParam)
         {
             var actions = customActionsParam.Keys;
+            int actValue;
             foreach (ActionType act in actions)
             {
-                if (customActions.Keys.Contains(int.Parse(act.Value)))
-                    customActions[int.Parse(act.Value)] = customActionsParam[act];
+                actValue = (int) act;
+                if (customActions.Keys.Contains(actValue))
+                    customActions[actValue] = customActionsParam[act];
                 else
-                    customActions.Add(int.Parse(act.Value), customActionsParam[act]);
+                    customActions.Add(actValue, customActionsParam[act]);
             }
 
             var actionIds = new List<int>(customActions.Keys);
             foreach (int actId in actionIds)
             {
-                if (!customActionsParam.Keys.Select(a => a.Value).Contains(actId.ToString()))
+                if (!customActionsParam.Keys.Select(a => ((int)a).ToString()).Contains(actId.ToString()))
                     customActions.Remove(actId);
             }
             
@@ -66,10 +68,11 @@ namespace MITD.PMSSecurity.Domain
         {
             if (act == null)
                 throw new PMSSecurityException("نوع دسترسی  برای اختصاص  مناسب نیست");
-            int actId = int.Parse(act.Value);
+
+            int actId = (int) act;
             if (CustomActions.Keys.Contains(actId))
                 customActions.Remove(actId);
-            customActions.Add(int.Parse(act.Value), value);
+            customActions.Add(actId, value);
         }
 
         #endregion

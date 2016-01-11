@@ -9,6 +9,10 @@ namespace MITD.PMS.Presentation.Logic
     {
         void GetAllUsers(Action<PageResultDTO<UserDTOWithActions>, Exception> action, int pageSize,
                                  int pageIndex, Dictionary<string, string> sortBy, UserCriteria criteria);
+
+        void GetAllUserActionTypes(Action<List<ActionType>, Exception> action, string userName, bool isGroup,
+            string groupId);
+
         void GetUser(Action<UserDTO, Exception> action, string username);
         void AddUser(Action<UserDTO, Exception> action, UserDTO userDto);
         void UpdateUser(Action<UserDTO, Exception> action, UserDTO userDto);
@@ -26,12 +30,15 @@ namespace MITD.PMS.Presentation.Logic
         void GetLogonUser(Action<UserStateDTO, Exception> action);
         void LogoutUser(Action<string,Exception> action);
         void GetAllUserGroupsDescriptions(Action<List<UserGroupDescriptionDTO>, Exception> action);
-        void GetAllActionTypes(Action<List<ActionTypeDTO>, Exception> action);
+        void GetAllActionTypes(Action<List<ActionType>, Exception> action);
 
         void ChangeCurrentWorkListUserName(Action<string, Exception> action, string currentUsername,
             string newUserName);
 
         void GetAllUserDescriptions(Action<PageResultDTO<UserDescriptionDTO>, Exception> action, int pageSize,
                                  int pageIndex, Dictionary<string, string> sortBy, UserCriteria criteria);
+
+        void UpdateUserAccess(Action<UserGroupDTO, Exception> action, string username, Dictionary<int, bool> actionList);
+        bool IsUserPermissionGranted(Type controllerType, string methodName, List<ActionType> authorizedActions);
     }
 }

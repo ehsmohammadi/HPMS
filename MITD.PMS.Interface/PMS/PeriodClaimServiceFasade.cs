@@ -7,6 +7,8 @@ using MITD.PMS.Application.Contracts;
 using MITD.PMS.Domain.Model.Periods;
 using MITD.PMS.Domain.Model.Claims;
 using MITD.PMS.Presentation.Contracts;
+using MITD.PMSSecurity.Domain;
+using MITD.PMSSecurity.Domain.Model;
 using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
@@ -38,7 +40,7 @@ namespace MITD.PMS.Interface
             
         }
 
-
+        [RequiredPermission(ActionType.AddClaim)]
         public ClaimDTO AddClaim(long periodId, ClaimDTO claimDto)
         {
             if (ClaimTypeEnum.FromValue<ClaimTypeEnum>(claimDto.ClaimTypeId.ToString()) == null)
@@ -49,12 +51,14 @@ namespace MITD.PMS.Interface
             return claimDTOMapper.MapToModel(claim);
         }
 
+        [RequiredPermission(ActionType.DeleteClaim)]
         public string DeleteClaim(long periodId, long claimId)
         {
             claimService.DeleteClaim(new ClaimId(claimId));
             return "Claim with Id " + claimId + " Deleted";
         }
 
+        [RequiredPermission(ActionType.ShowClaim)]
         public ClaimDTO GetClaim(long periodId, long claimId)
         {
             var claim = claimRep.GetById(new ClaimId(claimId));
@@ -81,6 +85,7 @@ namespace MITD.PMS.Interface
             return res;
          }
 
+        [RequiredPermission(ActionType.ShowAdminClaimList)]
         public PageResultDTO<ClaimDTOWithAction> GetAllClaimsForAdminWithActions(long periodId, int pageSize, int pageIndex,
            QueryStringConditions queryStringCondition)
         {
@@ -116,6 +121,7 @@ namespace MITD.PMS.Interface
 
         }
 
+        [RequiredPermission(ActionType.ReplyToClaim)]
         public ClaimDTO ChangeClaimState(long periodId, long id, string message, ClaimStateDTO claimStateDto)
         {
             var claimState = claimStateDTOMapper.MapToEntity(claimStateDto);

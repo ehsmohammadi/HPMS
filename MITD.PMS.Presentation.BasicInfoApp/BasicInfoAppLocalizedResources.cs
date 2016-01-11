@@ -121,7 +121,7 @@ namespace MITD.PMS.Presentation.BasicInfoApp
 
         public string PolicyListViewTitle
         {
-            get { return "مدیریت نظام ها محاسبه عملکرد"; }
+            get { return "مدیریت نظام های محاسبه عملکرد"; }
         }
 
         public string RuleListViewTitle

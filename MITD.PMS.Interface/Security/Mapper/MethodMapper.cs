@@ -42,7 +42,7 @@ namespace MITD.PMS.Interface
                     ActionType.StartInquiry,
                     ActionType.CompleteInquiry,
                     ActionType.ClosePeriod
-                }),
+                }), 
 
                 //RollBackPeriodState
 
@@ -67,7 +67,7 @@ namespace MITD.PMS.Interface
             new MethodAction(typeof (IEmployeeServiceFacade).Name,
                 typeof (IEmployeeServiceFacade).GetMethod("GetAllEmployees",
                     new[] {typeof (long), typeof (int), typeof (int)}).Name,
-                new List<ActionType> {ActionType.ManageEmployees}),
+                new List<ActionType> {ActionType.ManageEmployees}), 
 
             new MethodAction(typeof (IPeriodJobServiceFacade).Name,
                 typeof (IPeriodJobServiceFacade).GetMethod("AssignJob").Name,
@@ -113,7 +113,7 @@ namespace MITD.PMS.Interface
                 new List<ActionType> {ActionType.AddJobIndexGroupInPeriod}),
             new MethodAction(typeof (IPeriodJobIndexServiceFacade).Name,
                 typeof (IPeriodJobIndexServiceFacade).GetMethod("UpdateJobIndexGroup").Name,
-                new List<ActionType> {ActionType.ModifyJobIndexGroupInPeriod}),
+                new List<ActionType> {ActionType.ModifyJobIndexGroupInPeriod}), 
 
             new MethodAction(typeof (IEmployeeServiceFacade).Name,
                 typeof (IEmployeeServiceFacade).GetMethod("AddEmployee").Name,
@@ -137,7 +137,7 @@ namespace MITD.PMS.Interface
             new MethodAction(typeof (IJobIndexFacadeService).Name,
                 typeof (IJobIndexFacadeService).GetMethod("AddJobIndex").Name,
                 new List<ActionType> {ActionType.AddJobIndex}),
-            new MethodAction(typeof (IJobIndexFacadeService).Name,
+            new MethodAction(typeof (IJobIndexFacadeService).Name, 
                 typeof (IJobIndexFacadeService).GetMethod("UpdateJobIndex").Name,
                 new List<ActionType> {ActionType.ModifyJobIndex, ActionType.ManageJobIndexCustomFields}),
             new MethodAction(typeof (IJobIndexFacadeService).Name,
@@ -233,7 +233,7 @@ namespace MITD.PMS.Interface
                     ActionType.RunCalculation,
                     ActionType.StopCalculation,
                     ActionType.SetDeterministicCalculation
-                }),
+                }), 
             //new MethodAction(typeof(CalculationServiceFacade).Name ,typeof(IPeriodServiceFacade).GetMethod("").Name, new List<ActionType> {ActionType.ShowCalculationState}),
             new MethodAction(typeof (IJobIndexPointFacadeService).Name,
                 typeof (IJobIndexPointFacadeService).GetMethod("GetAllJobIndexPoints").Name,

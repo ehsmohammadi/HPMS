@@ -33,7 +33,7 @@ namespace MITD.PMS.Interface
                 lName = lNameClaim.Value;
             userStateDto.LastName = lName;
 
-            var jobPositionNameClaim = user.Claims.SingleOrDefault(c => c.Type == "http://identityserver.thinktecture.com/claims/profileclaims/jobpositionnames");          
+            var jobPositionNameClaim = user.Claims.SingleOrDefault(c => c.Type == "http://identityserver.thinktecture.com/claims/profileclaims/jobpositionnames");
             if (jobPositionNameClaim != null)
                 jobPositionName = jobPositionNameClaim.Value;
 
@@ -62,20 +62,20 @@ namespace MITD.PMS.Interface
             {
                 foreach (var actionCode in claimUserActions.Value.Split(','))
                 {
-                    var actionType = Enumeration.FromValue<ActionType>(actionCode);
-                    if (actionType != null)
-                        userStateDto.PermittedActions.Add(new ActionTypeDTO
-                        {
-                            Id = Convert.ToInt32(actionType.Value),
-                            ActionName = actionType.DisplayName,
-                            Description = actionType.Description
-                        });
+                    var actionType = (ActionType)int.Parse(actionCode);
+                    userStateDto.PermittedActions.Add(actionType);
+                    //userStateDto.PermittedActions.Add(new ActionTypeDTO
+                    //{
+                    //    Id =(int)actionType,
+                    //    ActionName = actionType.GetAttribute<ActionInfoAttribute>().DisplayName,
+                    //    Description = actionType.GetAttribute<ActionInfoAttribute>().Description
+                    //});
                 }
-                
+
             }
 
-            
-          
+
+
 
 
             return userStateDto;

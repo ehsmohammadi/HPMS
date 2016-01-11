@@ -7,7 +7,7 @@ namespace MITD.PMSSecurity.Application.Contracts
 {
     public interface ISecurityService : IService
     {
-        bool IsAuthorize(List<ActionType> userActions, List<ActionType> methodRequiredActions);
+        bool IsAuthorized(List<ActionType> userActions, List<ActionType> methodRequiredActions);
         List<ActionType> GetAllAuthorizedActions(List<User> pmsUsers);
         User GetUser(PartyId userId);
         User AddUpdate(PartyId partyId, string firstName, string lastName, string email);
@@ -19,6 +19,7 @@ namespace MITD.PMSSecurity.Application.Contracts
         User GetLogonUser();
         User GetCurrentUser();
         List<User> GetPermittedWorkListFor(User user);
+        void UpdateUserAccess(PartyId id, Dictionary<int, bool> customActions);
         
     }
 }

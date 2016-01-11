@@ -2,6 +2,11 @@
 using System.ComponentModel.DataAnnotations;
 using MITD.Presentation;
 
+#if !SILVERLIGHT
+using MITD.PMSSecurity.Domain;
+#endif
+
+
 namespace MITD.PMS.Presentation.Contracts
 {
     public partial class UserStateDTO
@@ -63,8 +68,8 @@ namespace MITD.PMS.Presentation.Contracts
         }
 
        
-        private List<ActionTypeDTO> permittedActions = new List<ActionTypeDTO>();
-        public List<ActionTypeDTO> PermittedActions
+        private List<ActionType> permittedActions = new List<ActionType>();
+        public List<ActionType> PermittedActions
         {
             get { return permittedActions; }
             set { this.SetField(p => p.PermittedActions, ref permittedActions, value); }

@@ -85,20 +85,20 @@ namespace MITD.PMSSecurity.Domain
 	                #endregion
 
                     #region User
-                    //ActionType.AddPermittedUserToMyTasks,
-                    //ActionType.RemovePermittedUserFromMyTasks,
-                    //ActionType.SettingPermittedUserToMyTasks,
+                    ActionType.AddPermittedUserToMyTasks,
+                    ActionType.RemovePermittedUserFromMyTasks,
+                    ActionType.SettingPermittedUserToMyTasks,
 
-                    //ActionType.AddUser,
-                    //ActionType.DeleteUser,
-                    //ActionType.ModifyUser,
-                    //ActionType.ManageUserCustomActions,
-                    //ActionType.ManageUserWorkListUsers,
+                    ActionType.AddUser,
+                    ActionType.DeleteUser,
+                    ActionType.ModifyUser,
+                    ActionType.ManageUserCustomActions,
+                    ActionType.ManageUserWorkListUsers,
 
-                    //ActionType.AddUserGroup,
-                    //ActionType.DeleteUserGroup,
-                    //ActionType.ModifyUserGroup,
-                    //ActionType.ManageGroupCustomActions, 
+                    ActionType.AddUserGroup,
+                    ActionType.DeleteUserGroup,
+                    ActionType.ModifyUserGroup,
+                    ActionType.ManageGroupCustomActions, 
 	                #endregion
 
                     #region Log
@@ -136,9 +136,9 @@ namespace MITD.PMSSecurity.Domain
 	                #endregion
                     
                     #region JobInPeriod
-		            ActionType.AddJobInPeriod,
-                    ActionType.ModifyJobInPeriod,
-                    ActionType.DeleteJobInPeriod, 
+                    //ActionType.AddJobInPeriod,
+                    //ActionType.ModifyJobInPeriod,
+                    //ActionType.DeleteJobInPeriod, 
 	                #endregion
 
                     #region JobIndexInPeriod

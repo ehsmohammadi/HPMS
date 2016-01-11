@@ -9,6 +9,8 @@ namespace MITD.PMSSecurity.Domain.Service
     public interface ISecurityCheckerService
     {
         List<ActionType> GetAllAuthorizedActions(List<User> pmsUsers);
-        bool IsAuthorize(List<ActionType> pmsUsers, List<ActionType> actions);
+        bool IsAuthorized(List<ActionType> pmsUsers, List<ActionType> actions);
+
+        //List<ActionType> GetAllAuthorizedActionTypesForRole(List<string> rols);
     }
 }

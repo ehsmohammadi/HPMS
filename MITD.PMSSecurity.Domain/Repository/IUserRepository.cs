@@ -7,6 +7,9 @@ namespace MITD.PMSSecurity.Domain
 {
     public interface IUserRepository : IRepository
     {
+        //List<User> FindUsers(Expression<Func<User, bool>> predicate, ListFetchStrategy<User> fs, string frname,
+        //    string lsName, string username, int pageSize, int pageIndex);
+
         IList<User> GetAllUsers();
         void GetAllUsers(ListFetchStrategy<User> fs);
         IList<User> FindUsers(Expression<Func<User, bool>> predicate);

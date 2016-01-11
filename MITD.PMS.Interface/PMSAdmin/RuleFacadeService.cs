@@ -9,6 +9,8 @@ using MITD.PMS.Presentation.Contracts;
 using MITD.PMSAdmin.Application.Contracts;
 using MITD.PMSAdmin.Domain.Model.Policies;
 using MITD.PMSAdminReport.Domain.Model;
+using MITD.PMSSecurity.Domain;
+using MITD.PMSSecurity.Domain.Model;
 using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
@@ -40,7 +42,7 @@ namespace MITD.PMS.Interface
             this.ruleService = ruleService;
         }
 
-
+        [RequiredPermission(ActionType.ManageRules)]
         public PolicyRules GetPolicyRulesWithPagination(long policyId)
         {
             var ruleBasePolicy = policyRep.GetRuleBasePolicyById(new PolicyId(policyId));
@@ -55,12 +57,14 @@ namespace MITD.PMS.Interface
 
         }
 
+        [RequiredPermission(ActionType.AddRule)]
         public RuleDTO AddRule(RuleDTO dto)
         {
             var res = pmsRuleService.AddRule(dto.Name, dto.RuleText,Enumeration.FromValue<RuleType>(dto.ExcuteTime.ToString()), new PolicyId(dto.PolicyId),dto.ExcuteOrder);
             return ruleMapper.MapToModel(res);
         }
 
+        [RequiredPermission(ActionType.ModifyRule)]
         public RuleDTO UpdateRule(RuleDTO dto)
         {
 
@@ -73,7 +77,7 @@ namespace MITD.PMS.Interface
             var rule= pmsRuleService.GetRuleById(new PolicyId(policyId), new RuleId(id));
             return ruleMapper.MapToModel(rule);
         }
-
+        
         public PageResultDTO<RuleTrailDTOWithAction> GetRuleTrailsWithPagination(long ruleId, int pageSize, int pageIndex)
         {
 
@@ -99,6 +103,7 @@ namespace MITD.PMS.Interface
             return ruleTrailMapper.MapToModel(ruleTrail); 
         }
 
+        [RequiredPermission(ActionType.DeleteRule)]
         public string DeleteRule(long policyId, long id)
         {
             pmsRuleService.DeleteRule(new PolicyId(policyId), new RuleId(id));

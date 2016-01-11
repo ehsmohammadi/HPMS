@@ -2,7 +2,7 @@
 
 namespace MITD.PMS.Presentation.Contracts
 {
-    public partial class ActionTypeDTO : ViewModelBase
+    public partial class ActionTypeDTO_Depricated : ViewModelBase
     {
         
     }

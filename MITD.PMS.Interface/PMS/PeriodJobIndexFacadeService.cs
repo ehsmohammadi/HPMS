@@ -10,6 +10,8 @@ using MITD.PMS.Presentation.Contracts.Fasade;
 using MITD.PMS.Application.Contracts;
 using MITD.PMSAdmin.Domain.Model.CustomFieldTypes;
 using MITD.PMS.Domain.Model.JobIndices;
+using MITD.PMSSecurity.Domain;
+using MITD.PMSSecurity.Domain.Model;
 using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
@@ -38,7 +40,7 @@ namespace MITD.PMS.Interface
             this.jobIndexRep = jobIndexRep;
         }
 
-
+        [RequiredPermission(ActionType.ManageJobIndices)]
         public IEnumerable<AbstractIndexInPeriodDTOWithActions> GetAllAbstractJobIndices(long periodId)
         {
             var abstractList = jobIndexRep.GetAll(new PeriodId(periodId));
@@ -68,6 +70,7 @@ namespace MITD.PMS.Interface
             return abstractIndexDto;
         }
 
+        [RequiredPermission(ActionType.AddJobIndexInPeriod)]
         public AbstractIndexInPeriodDTO AddJobIndex(JobIndexInPeriodDTO abstractIndex)
         {
             //var jobIndex = jobIndexService.AddJobIndex(new PeriodId(abstractIndex.PeriodId), new AbstractJobIndexId(abstractIndex.ParentId.Value),
@@ -84,6 +87,7 @@ namespace MITD.PMS.Interface
 
         }
 
+        [RequiredPermission(ActionType.AddJobIndexGroupInPeriod)]
         public AbstractIndexInPeriodDTO AddJobIndexGroup(JobIndexGroupInPeriodDTO abstractIndex)
         {
             var jobIndexGroup = jobIndexService.AddJobIndexGroup(new PeriodId(abstractIndex.PeriodId), 
@@ -92,6 +96,7 @@ namespace MITD.PMS.Interface
             return jobIndexMapper.MapToModel(jobIndexGroup);
         }
 
+        [RequiredPermission(ActionType.ModifyJobInPeriod)]
         public AbstractIndexInPeriodDTO UpdateJobIndex(JobIndexInPeriodDTO abstractIndex)
         {
             var jobIndex = jobIndexService.UpdateJobIndex(new AbstractJobIndexId(abstractIndex.Id)
@@ -103,6 +108,7 @@ namespace MITD.PMS.Interface
            
         }
 
+        [RequiredPermission(ActionType.ModifyJobIndexGroupInPeriod)]
         public AbstractIndexInPeriodDTO UpdateJobIndexGroup(JobIndexGroupInPeriodDTO abstractIndex)
         {
             var jobIndexGroup = jobIndexService.UpdateJobIndexGroup(new AbstractJobIndexId(abstractIndex.Id)
@@ -111,6 +117,8 @@ namespace MITD.PMS.Interface
             return jobIndexMapper.MapToModel(jobIndexGroup);
         }
 
+        [RequiredPermission(ActionType.DeleteJobIndexInPeriod)]
+        [RequiredPermission(ActionType.DeleteJobIndexGroupInPeriod)]
         public string  DeleteAbstractJobIndex(long id)
         {
             jobIndexService.DeleteAbstractJobIndex(new AbstractJobIndexId(id));

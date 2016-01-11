@@ -13,6 +13,7 @@ using MITD.PMS.Domain.Model.Periods;
 using MITD.PMS.Domain.Service;
 using MITD.PMS.Presentation.Contracts;
 using MITD.PMSSecurity.Domain;
+using MITD.PMSSecurity.Domain.Model;
 using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
@@ -48,6 +49,7 @@ namespace MITD.PMS.Interface
             this.converter = converter;
         }
 
+        [RequiredPermission(ActionType.ManageEmployees)]
         public PageResultDTO<EmployeeDTOWithActions> GetAllEmployees(long periodId, int pageSize, int pageIndex)
         {
             var fs = new ListFetchStrategy<Employee>(Enums.FetchInUnitOfWorkOption.NoTracking);
@@ -61,6 +63,7 @@ namespace MITD.PMS.Interface
             return res;
         }
 
+        [RequiredPermission(ActionType.ManageEmployees)]
         public PageResultDTO<EmployeeDTOWithActions> GetAllEmployees(long periodId, int pageSize, int pageIndex,
             string filter)
         {
@@ -108,12 +111,13 @@ namespace MITD.PMS.Interface
             return res;
         }
 
-
+        [RequiredPermission(ActionType.ManageEmployees)]
         public List<EmployeeDTO> GetAllEmployees(long periodId)
         {
             return employeeRep.Find(e => e.Id.PeriodId == new PeriodId(periodId)).Select(p => employeeDTOMapper.MapToModel(p)).ToList();
         }
 
+        [RequiredPermission(ActionType.DeleteEmployee)]
         public string DeleteEmployee(long periodId, string personnelNo)
         {
             employeeService.Delete(new EmployeeId(personnelNo, new PeriodId(periodId)));
@@ -139,6 +143,7 @@ namespace MITD.PMS.Interface
 
         }
 
+        [RequiredPermission(ActionType.AddEmployee)]
         public EmployeeDTO AddEmployee(long periodId, EmployeeDTO dto)
         {
             var employee = employeeService.Add(new PeriodId(periodId), dto.PersonnelNo, dto.FirstName, dto.LastName,
@@ -146,6 +151,7 @@ namespace MITD.PMS.Interface
             return employeeDTOMapper.MapToModel(employee);
         }
 
+        [RequiredPermission(ActionType.ModifyEmployee)]
         public EmployeeDTO UpdateEmployee(long periodId, EmployeeDTO dto)
         {
             var employee = employeeService.Update(new EmployeeId(dto.PersonnelNo, new PeriodId(periodId)), dto.FirstName,
@@ -159,6 +165,7 @@ namespace MITD.PMS.Interface
             return mapToEmployeeJobPositionDTO(employee);
         }
 
+        [RequiredPermission(ActionType.ManageEmployeeJobPositions)]
         public EmployeeJobPositionsDTO AssignJobPositionsToEmployee(long periodId, string employeeNo,
             EmployeeJobPositionsDTO employeeJobPositions)
         {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security;
 using System.Security.Claims;
 using System.Transactions;
+using MITD.Core;
 using MITD.PMSSecurity.Application.Contracts;
 using MITD.PMSSecurity.Domain;
 using MITD.PMSSecurity.Domain.Service;
@@ -22,9 +23,9 @@ namespace MITD.PMSSecurity.Application
             this.securityCheckerService = securityCheckerService;
         }
 
-        public bool IsAuthorize(List<ActionType> userActions, List<ActionType> methodRequiredActions)
+        public bool IsAuthorized(List<ActionType> userActions, List<ActionType> methodRequiredActions)
         {
-            return securityCheckerService.IsAuthorize(userActions, methodRequiredActions);
+            return securityCheckerService.IsAuthorized(userActions, methodRequiredActions);
         }
 
         public List<ActionType> GetAllAuthorizedActions(List<User> pmsUsers)
@@ -104,28 +105,12 @@ namespace MITD.PMSSecurity.Application
         public User UpdateUser(PartyId partyId, string firstName, string lastName, string email, bool isActive,
             Dictionary<int, bool> customActions, List<PartyId> groups,List<PartyId> permittedWorkListUsers)
         {
-            try
+            using (var scope = new TransactionScope())
             {
-                using (var scope = new TransactionScope())
-                {
-                    var u = userRep.GetUserById(partyId);
-                    var validSelectedActions =ActionType.GetAll<ActionType>()
-                                  .Where(c => customActions.Keys.Contains(int.Parse(c.Value))).ToList();
-                    var validCustomActions = validSelectedActions.ToDictionary(c => c,c => customActions[int.Parse(c.Value)]);
-                    var validGroups = userRep.GetAllUserGroup().Where(g => groups.Contains(g.Id)).ToList();
-                    var validWorkListUsers =
-                        userRep.GetAllUsers().Where(g => permittedWorkListUsers.Contains(g.Id)).ToList();
-                    u.Update(firstName, lastName, email, isActive, validCustomActions, validGroups, validWorkListUsers);
-                    scope.Complete();
-                    return u;
-                }
-            }
-            catch (Exception exp)
-            {
-                var res = userRep.TryConvertException(exp);
-                if (res == null)
-                    throw;
-                throw res;
+                var u = userRep.GetUserById(partyId);
+                ((User)u).Update(firstName, lastName, email);
+                scope.Complete();
+                return u as User;
             }
         }
 
@@ -156,12 +141,15 @@ namespace MITD.PMSSecurity.Application
                 using (var scope = new TransactionScope())
                 {
                     var ug = userRep.GetUserGroupById(partyId);
-                    var validSelectedActions =
-                        ActionType.GetAll<ActionType>()
-                                  .Where(c => customActions.Keys.Contains(int.Parse(c.Value)))
-                                  .ToList();
-                    var validCustomActions = validSelectedActions.ToDictionary(c => c,
-                                                                               c => customActions[int.Parse(c.Value)]);
+                    //var validSelectedActions =
+                    //    ActionType.GetAll<ActionType>()
+                    //              .Where(c => customActions.Keys.Contains(int.Parse(c.Value)))
+                    //              .ToList();
+                    //var validCustomActions = validSelectedActions.ToDictionary(c => c,
+                    //                                                           c => customActions[int.Parse(c.Value)]);
+                    var validSelectedActions = ActionTypeHelper.SelectActionTypes(customActions.Keys);
+                    var validCustomActions = validSelectedActions.ToDictionary(c => c, c => customActions[(int)c]);
+
                     ug.Update(description, validCustomActions);
                     scope.Complete();
                     return ug;
@@ -231,12 +219,22 @@ namespace MITD.PMSSecurity.Application
         {
             foreach (var actId in customActionIdList)
             {
-                ActionType act = ActionType.FromValue<ActionType>(actId.Key.ToString());
+                ActionType act = (ActionType)actId.Key;
                 party.AssignCustomAction(act,actId.Value);
             }
         }
 
-       
+        public void UpdateUserAccess(PartyId id, Dictionary<int, bool> customActions)
+        {
+            using (var scope = new TransactionScope())
+            {
+                User user = userRep.GetUserById(id);
+                user.Actions = new AdminUser(id, "", "", "").Actions;
+                var actionsFromRole = user.Actions;
+                user.UpdateCustomActions(customActions, user.Id, actionsFromRole);
+                scope.Complete();
+            }
+        }
 
     }
 }

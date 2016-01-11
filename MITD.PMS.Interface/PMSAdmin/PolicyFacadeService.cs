@@ -7,6 +7,8 @@ using MITD.Domain.Repository;
 using MITD.PMS.Presentation.Contracts;
 using MITD.PMSAdmin.Application.Contracts;
 using MITD.PMSAdmin.Domain.Model.Policies;
+using MITD.PMSSecurity.Domain;
+using MITD.PMSSecurity.Domain.Model;
 using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
@@ -43,12 +45,14 @@ namespace MITD.PMS.Interface
             return res;
         }
 
+        [RequiredPermission(ActionType.AddPolicy)]
         public PolicyDTO AddPolicy(PolicyDTO dto)
         {
             var res = policyService.AddPolicy(dto.Name,dto.DictionaryName);
             return policyMapper.MapToModel(res);
         }
 
+        [RequiredPermission(ActionType.ModifyPolicy)]
         public PolicyDTO UpdatePolicy(PolicyDTO dto)
         {
             
@@ -62,6 +66,7 @@ namespace MITD.PMS.Interface
             return policyMapper.MapToModel(policy);
         }
 
+        [RequiredPermission(ActionType.DeletePolicy)]
         public string DeletePolicy(long id)
         {
             policyService.DeletePolicy(new PolicyId(id));

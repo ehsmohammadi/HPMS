@@ -6,6 +6,8 @@ using MITD.Core.RuleEngine.Model;
 using MITD.PMS.Presentation.Contracts;
 using MITD.PMSAdmin.Application.Contracts;
 using MITD.PMSAdmin.Domain.Model.Policies;
+using MITD.PMSSecurity.Domain;
+using MITD.PMSSecurity.Domain.Model;
 using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
@@ -33,7 +35,7 @@ namespace MITD.PMS.Interface
             this.ruleService = ruleService;
         }
 
-
+        [RequiredPermission(ActionType.ManageFunctions)]
         public PolicyFunctions GetPolicyFunctionsWithPagination(long policyId)
         {
             var ruleBasePolicy = policyRep.GetRuleBasePolicyById(new PolicyId(policyId));
@@ -48,12 +50,14 @@ namespace MITD.PMS.Interface
 
         }
 
+        [RequiredPermission(ActionType.AddFunction)]
         public FunctionDTO AddFunction(FunctionDTO dto)
         {
             var res = functionService.AddFunction(dto.Name, dto.Content, new PolicyId(dto.PolicyId));
             return functionMapper.MapToModel(res);
         }
 
+        [RequiredPermission(ActionType.ModifyFunction)]
         public FunctionDTO UpdateFunction(FunctionDTO dto)
         {
 
@@ -67,6 +71,7 @@ namespace MITD.PMS.Interface
             return functionMapper.MapToModel(function);
         }
 
+        [RequiredPermission(ActionType.DeleteFunction)]
         public string DeleteFunction(long policyId, long id)
         {
             functionService.DeleteFunction(new PolicyId(policyId),new RuleFunctionId(id));

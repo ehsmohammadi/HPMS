@@ -8,6 +8,8 @@ using MITD.PMS.Domain.Model.Periods;
 using MITD.PMS.Domain.Model.UnitIndices;
 using MITD.PMS.Domain.Model.Units;
 using MITD.PMS.Presentation.Contracts;
+using MITD.PMSSecurity.Domain;
+using MITD.PMSSecurity.Domain.Model;
 
 namespace MITD.PMS.Interface
 {
@@ -48,7 +50,7 @@ namespace MITD.PMS.Interface
             _unitIndexRepository = unitIndexRepository;
         }
 
-
+        [RequiredPermission(ActionType.AddUnitInPeriod)]
         public UnitInPeriodDTO AssignUnit(long periodId, UnitInPeriodDTO unitInPeriod)
         {
             var unit = unitService.AssignUnit(
@@ -62,12 +64,14 @@ namespace MITD.PMS.Interface
 
         }
 
+        [RequiredPermission(ActionType.DeleteUnitInPeriod)]
         public string RemoveUnit(long periodId, long unitId)
         {
             unitService.RemoveUnit(new PeriodId(periodId), new SharedUnitId(unitId));
             return "Unit with Id " + unitId + " removed";
         }
 
+        [RequiredPermission(ActionType.ManageUnits)]
         public IEnumerable<UnitInPeriodDTOWithActions> GetUnitsWithActions(long periodId)
         {
             var res = new List<UnitInPeriodDTOWithActions>();
