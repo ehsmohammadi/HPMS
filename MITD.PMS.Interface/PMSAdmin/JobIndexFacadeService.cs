@@ -43,7 +43,7 @@ namespace MITD.PMS.Interface
         }
 
 
-
+        [RequiredPermission(ActionType.ShowJobIndex)]
         public PageResultDTO<AbstractJobIndexDTOWithActions> GetAllJobIndicesWithPagination(int pageSize, int pageIndex, QueryStringConditions queryStringConditions)
         {
             var fs = new ListFetchStrategy<JobIndex>(Enums.FetchInUnitOfWorkOption.NoTracking);
@@ -64,6 +64,7 @@ namespace MITD.PMS.Interface
             return res;
         }
 
+        [RequiredPermission(ActionType.ShowJobIndex)]
         public PageResultDTO<AbstractJobIndexDTOWithActions> GetAllJobIndexCategoriesWithPagination(int pageSize, int pageIndex, QueryStringConditions queryStringConditions)
         {
             var fs = new ListFetchStrategy<JobIndexCategory>(Enums.FetchInUnitOfWorkOption.NoTracking);
@@ -84,6 +85,7 @@ namespace MITD.PMS.Interface
             return res;
         }
 
+        [RequiredPermission(ActionType.ShowJobIndex)]
         public IEnumerable<AbstractJobIndexDTOWithActions> GetAllAbstractJobIndices()
         {
             var abstractList = jobIndexRep.GetAll();
@@ -149,12 +151,14 @@ namespace MITD.PMS.Interface
             return "JobIndex deleted successfully";
         }
 
+        [RequiredPermission(ActionType.ShowJobIndex)]
         public IList<AbstractIndex> GetAllJobIndices()
         {
             var jobIndexList =  jobIndexRep.GetAllJobIndex();
             return jobIndexList.Select(j => jobIndexMapper.MapToModel(j)).ToList();
         }
 
+        [RequiredPermission(ActionType.ShowJobIndex)]
         public IList<AbstractIndex> GetAllJobIndexCategories()
         {
             var jobIndexList = jobIndexRep.GetAllJobIndexCategory();

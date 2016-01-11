@@ -68,7 +68,7 @@ namespace MITD.PMS.Interface
             this._securityApplicationService = _securityApplicationService;
         }
 
-
+        [RequiredPermission(ActionType.ShowUser)]
         public UserStateDTO GetUserState(ClaimsPrincipal u)
         {
             if (u == null)
@@ -233,6 +233,7 @@ namespace MITD.PMS.Interface
 
         #endregion
 
+        [RequiredPermission(ActionType.ShowUser)]
         public UserDTO GetUserByUsername(string username)
         {
             var user = userRep.GetUserById(new PartyId(username));
@@ -271,6 +272,7 @@ namespace MITD.PMS.Interface
             return "user deleted successfully ";
         }
 
+        [RequiredPermission(ActionType.ShowUser)]
         public PageResultDTO<UserDTOWithActions> GetAllUsers(int pageSize, int pageIndex, string filter)
         {
             var fs = new ListFetchStrategy<User>(Enums.FetchInUnitOfWorkOption.NoTracking);
@@ -303,12 +305,15 @@ namespace MITD.PMS.Interface
             return res;
 
         }
+
+        [RequiredPermission(ActionType.ShowUserGroup)]
         public List<UserGroupDTOWithActions> GetAllUserGroups()
         {
             var userGroups = userRep.GetAllUserGroup();
             return userGroups.Select(p => userGroupDTOWithActionsMapper.MapToModel(p)).ToList();
         }
 
+        [RequiredPermission(ActionType.ShowUserGroup)]
         public UserGroupDTO GetUserGroupByName(string groupName)
         {
             Group group = userRep.GetUserGroupById(new PartyId(groupName));

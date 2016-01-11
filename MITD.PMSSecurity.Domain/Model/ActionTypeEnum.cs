@@ -91,6 +91,8 @@ namespace MITD.PMSSecurity.Domain
         ModifyPolicy = 282,
         [ActionInfoAttribute("ManagePolicies", "مدیریت نظام محاسبه عملکرد")]
         ManagePolicies = 283,
+        [ActionInfoAttribute("ShowPolicies", "نمایش نظام محاسبه عملکرد")]
+        ShowPolicies = 284,
 
         [ActionInfoAttribute("ManageRules", "مدیریت قوانین")]
         ManageRules = 290,
@@ -156,11 +158,19 @@ namespace MITD.PMSSecurity.Domain
         AddJobInPeriod = 120,
         [ActionInfoAttribute("ModifyJobInPeriod", "ویرایش شغل در دوره")]
         ModifyJobInPeriod = 121,
-
         [ActionInfoAttribute("DeleteJobInPeriod", "حذف شغل در دوره")]
         DeleteJobInPeriod = 122,
         // ManageJobInPeriodCustomFields , [ActionInfoAttribute("123", "ManageJobInPeriodCustomFields","مدیریت فیلدهای دلخواه شغل در دوره")]
-
+        [ActionInfoAttribute("ShowPeriod", "نمایش دوره")]
+        ShowPeriod = 123,
+        [ActionInfoAttribute("ShowJobInPeriod", "نمایش شغل در دوره")]
+        ShowJobInPeriod = 124,
+        [ActionInfoAttribute("ShowEmployees", "نمایش کارمندان دوره")]
+        ShowEmployees = 125,
+        [ActionInfoAttribute("ShowCalculations", "نمایش محاسبات دوره")]
+        ShowCalculations = 126,
+        [ActionInfoAttribute("ShowJobs", "نمایش مشاغل دوره")]
+        ShowJobs = 127,
 
         [ActionInfoAttribute("AddUnitInPeriod", "تخصیص واحد در دوره")]
         AddUnitInPeriod = 130,
@@ -168,14 +178,20 @@ namespace MITD.PMSSecurity.Domain
         ModifyUnitInPeriod = 132,
         [ActionInfoAttribute("DeleteUnitInPeriod", "حذف واحد از دوره")]
         DeleteUnitInPeriod = 131,
+        [ActionInfoAttribute("ShowUnitInPeriod", "نمایش واحد سازمانی در دوره")]
+        ShowUnitInPeriod = 133,
         [ActionInfoAttribute("ManageUnitInPeriodInquiry", "تعیین افراد نظر دهنده واحد سازمانی")]
         ManageUnitInPeriodInquiry = 134,
+        [ActionInfoAttribute("ShowUnitInPeriodInquiry", "نمایش افراد نظر دهنده واحد سازمانی")]
+        ShowUnitInPeriodInquiry = 135,
         [ActionInfoAttribute("AddJobPositionInPeriod", "تخصیص پست در دوره")]
         AddJobPositionInPeriod = 140,
         [ActionInfoAttribute("DeleteJobPositionInPeriod", "حذف پست از دوره")]
         DeleteJobPositionInPeriod = 141,
         [ActionInfoAttribute("ManageJobPositionInPeriodInquiry", "تعیین افراد نظر دهنده پست سازمانی")]
         ManageJobPositionInPeriodInquiry = 142,
+        [ActionInfoAttribute("ShowJobPositionInPeriod", "نمایش پست در دوره")]
+        ShowJobPositionInPeriod = 143,
         [ActionInfoAttribute("AddJobIndexInPeriod", "تخصیص شاخص در دوره")]
         AddJobIndexInPeriod = 150,
         [ActionInfoAttribute("ModifyJobIndexInPeriod", "ویرایش شاخص در دوره")]
@@ -188,6 +204,8 @@ namespace MITD.PMSSecurity.Domain
         ModifyJobIndexGroupInPeriod = 154,
         [ActionInfoAttribute("DeleteJobIndexGroupInPeriod", "حذف گروه شاخص از دوره")]
         DeleteJobIndexGroupInPeriod = 155,
+        [ActionInfoAttribute("ShowJobIndexInPeriod", "نمایش شاخص در دوره")]
+        ShowJobIndexInPeriod = 156,
         [ActionInfoAttribute("AddEmployee", "ایجاد کارمند")]
         AddEmployee = 160,
         [ActionInfoAttribute("ModifyEmployee", "ویزایش کارمند")]
@@ -202,12 +220,13 @@ namespace MITD.PMSSecurity.Domain
         [ActionInfoAttribute("ModifyEmployeeJobCustomFields", "ویرایش فیلدهای دلخواه کارمند")]
         ModifyEmployeeJobCustomFields = 165,
         // GetEmployeeJobPositions , [ActionInfoAttribute("166", "GetEmployeeJobPositions","")]
-
-        [ActionInfoAttribute("AddJobIndex", "ایجاد شاخص")]
+        [ActionInfoAttribute("ShowEmployeeInquiery", "نمایش نظر سنجی کارمند")]
+        ShowEmployeeInquiry = 166,
+        [ActionInfoAttribute("AddJobIndex", "یجاد شاخص شغل")]
         AddJobIndex = 210,
-        [ActionInfoAttribute("ModifyJobIndex", "ویرایش شاخص")]
+        [ActionInfoAttribute("ModifyJobIndex", "ویرایش شاخص شغل")]
         ModifyJobIndex = 211,
-        [ActionInfoAttribute("DeleteJobIndex", "حذف شاخص")]
+        [ActionInfoAttribute("DeleteJobIndex", "حذف شاخص شغل")]
         DeleteJobIndex = 212,
         [ActionInfoAttribute("ManageJobIndexCustomFields", "مدیریت فیلدهای دلخواه شاخص")]
         ManageJobIndexCustomFields = 213,
@@ -235,12 +254,20 @@ namespace MITD.PMSSecurity.Domain
         DeleteUnitIndexCategory = 224,
         [ActionInfoAttribute("ModifyUnitIndexCategory", "ویرایش دسته شاخص")]
         ModifyUnitIndexCategory = 225,
+        [ActionInfoAttribute("ShowUnitIndex", "نمایش شاخص")]
+        ShowUnitIndexInPeriod = 226,
+        [ActionInfoAttribute("ShowJobIndex", "نمایش شاخص شغل")]
+        ShowJobIndex = 227,
+        [ActionInfoAttribute("ShowUnitIndex", "نمایش شاخص واحد")]
+        ShowUnitIndex = 228,
         [ActionInfoAttribute("AddJobPosition", "ایجاد پست سازمانی")]
         AddJobPosition = 230,
         [ActionInfoAttribute("DeleteJobPosition", "حذف پست سازمانی")]
         DeleteJobPosition = 231,
         [ActionInfoAttribute("ModifyJobPosition", "ویرایش پست سازمانی")]
         ModifyJobPosition = 232,
+        [ActionInfoAttribute("ShowJobPosition", "نمایش پست سازمانی")]
+        ShowJobPosition = 233,
         [ActionInfoAttribute("AddFunction", "ایجاد تابع")]
         AddFunction = 240,
         [ActionInfoAttribute("DeleteFunction", "حذف تابع")]
@@ -253,6 +280,8 @@ namespace MITD.PMSSecurity.Domain
         DeleteCustomField = 251,
         [ActionInfoAttribute("ModifyCustomField", "ویرایش فیلد دلخواه")]
         ModifyCustomField = 252,
+        [ActionInfoAttribute("ShowCustomField", "نمایش فیلد دلخواه")]
+        ShowCustomField = 253,
         [ActionInfoAttribute("AddJob", "ایجاد شغل")]
         AddJob = 260,
         [ActionInfoAttribute("DeleteJob", "حذف شغل")]
@@ -267,6 +296,8 @@ namespace MITD.PMSSecurity.Domain
         AddUnit = 270,
         [ActionInfoAttribute("DeleteUnit", "حذف واحد سازمانی")]
         DeleteUnit = 271,
+        [ActionInfoAttribute("ShowUnit", "نمایش واحد سازمانی")]
+        ShowUnit = 272,
         [ActionInfoAttribute("ManageUnitCustomFields", "مدیریت فیلدهای دلخواه واحد")]
         ManageUnitCustomFields = 273,
         [ActionInfoAttribute("AddUnitCustomFields", "ایجاد فیلد دلخواه برای واحد")]
@@ -331,6 +362,8 @@ namespace MITD.PMSSecurity.Domain
         ManageUserCustomActions = 1514,
         [ActionInfoAttribute("ManageUserWorkListUsers", "تنظیم دسترسی کارتابل از طرف کاربر")]
         ManageUserWorkListUsers = 1515,
+        [ActionInfoAttribute("ShowUser", "نمایش کاربر")]
+        ShowUser = 1516,
         [ActionInfoAttribute("AddUserGroup", "ایجاد گروه کاربری")]
         AddUserGroup = 1611,
         [ActionInfoAttribute("ModifyUserGroup", "ویرایش گروه کاربری")]
@@ -339,6 +372,8 @@ namespace MITD.PMSSecurity.Domain
         DeleteUserGroup = 1613,
         [ActionInfoAttribute("ManageGroupCustomActions", "تعیین دسترسی های گروه کاربری")]
         ManageGroupCustomActions = 1614,
+        [ActionInfoAttribute("ShowUserGroup", "نمایش گروه کاربری")]
+        ShowUserGroup = 1615,
         [ActionInfoAttribute("ShowLog", "نمایش لاگ")]
         ShowLog = 1711,
         [ActionInfoAttribute("DeleteLog", "حذف لاگ")]

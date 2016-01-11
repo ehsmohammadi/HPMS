@@ -204,6 +204,9 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
 
             if (permissionAttributes.Length > 0)
             {
+                if (authorizedActions == null)
+                    return false;
+
                 foreach (RequiredPermissionAttribute attr in permissionAttributes)
                 {
                     if (!authorizedActions.Contains(attr.ActionType))

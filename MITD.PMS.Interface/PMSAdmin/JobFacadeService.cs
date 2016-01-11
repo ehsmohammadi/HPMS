@@ -39,6 +39,7 @@ namespace MITD.PMS.Interface
             this.jobService = jobService;
         }
 
+        [RequiredPermission(ActionType.ShowJobs)]
         public PageResultDTO<JobDTOWithActions> GetAllJobs(int pageSize, int pageIndex, QueryStringConditions queryStringConditions)
         {
             var fs = new ListFetchStrategy<Job>(Enums.FetchInUnitOfWorkOption.NoTracking);
@@ -88,6 +89,7 @@ namespace MITD.PMS.Interface
             return "Job with Id:" + id + " deleted";
         }
 
+        [RequiredPermission(ActionType.ShowJobs)]
         public JobDTO GetJobById(long id)
         {
             Job job = jobRep.GetById(new JobId(id));

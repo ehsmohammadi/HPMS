@@ -16,22 +16,27 @@ namespace MITD.PMS.Presentation.Logic
     public interface IPeriodController
     {
         void ShowInquiryUnitFormView(InquiryUnitFormDTO inquiryForm, ActionType action);
+
+        [RequiredPermission(ActionType.ShowUnitInPeriodInquiry)]
         void ShowUnitsInquiryListView(string employeeNo, long periodId);
         void ShowUnitInPeriodInquiryView(PeriodDTO period, UnitInPeriodDTO unitInPeriodDto, ActionType action);
         void ShowPeriodView(PeriodDTO period, ActionType actionType);
 
-        [RequiredPermission(ActionType.ModifyPeriod)]
+        [RequiredPermission(ActionType.ShowPeriod)]
         void ShowPeriodList(bool showInNewTab);
 
+        [RequiredPermission(ActionType.ShowJobInPeriod)]
         void ShowJobInPeriodListView(PeriodDTO period, bool showInNewTab = false);
         void ShowJobInPeriodView(long periodId, long? jobId, ActionType actionType);
 
       //  void ShowUnitInPeriodView(UnitInPeriodAssignmentDTO unitInPeriod, ActionType action);
         void ShowUnitInPeriodView(long periodId, long? unitId,long? parentId , ActionType actionType);
 
-        [RequiredPermission(ActionType.ModifyUnitInPeriod)]
+        [RequiredPermission(ActionType.ShowUnitInPeriod)]
         void ShowUnitInPeriodTreeView(PeriodDTOWithAction period, bool showInNewTab = false);
         void ShowUnitIndexInPeriodView(UnitIndexInPeriodDTO unitIndexInPeriodDto, ActionType action);
+
+        [RequiredPermission(ActionType.ShowUnitIndexInPeriod)]
         void ShowUnitIndexInPeriodTreeView(PeriodDTOWithAction period, bool showInNewTab = false);
         void ShowUnitIndexGroupInPeriodView(UnitIndexGroupInPeriodDTO unitIndexGroupInPeriodDto, ActionType action);
 
@@ -45,23 +50,32 @@ namespace MITD.PMS.Presentation.Logic
 
 
         void ShowJobPositionInPeriodView(JobPositionInPeriodAssignmentDTO jobPositionInPeriod, ActionType action);
+
+        [RequiredPermission(ActionType.ShowJobPositionInPeriod)]
         void ShowJobPositionInPeriodTreeView(PeriodDTOWithAction period, bool showInNewTab = false);
         void ShowPeriodBasicDataCopyView(PeriodDTO period);
         void ShowPeriodBasicDataCopyStatusView(PeriodDTO period);
 
         void ShowJobIndexInPeriodView(JobIndexInPeriodDTO jobIndexInPeriod, ActionType action);
+
+        [RequiredPermission(ActionType.ShowJobIndexInPeriod)]
         void ShowJobIndexInPeriodTreeView(PeriodDTOWithAction period, bool showInNewTab = false);
         void ShowJobIndexGroupInPeriodView(JobIndexGroupInPeriodDTO jobIndexGroupInPeriod, ActionType action);
         void ShowJobPositionInPeriodInquiryView(PeriodDTO period, JobPositionInPeriodDTO jobPositionInPeriod, ActionType action);
 
         void ShowPrepareToExcuteInquiryView(long id);
+
+        [RequiredPermission(ActionType.ShowEmployeeInquiry)]
         void ShowEmployeesInquiryListView(string employeeNo, long id, bool showInNewTab = false);
         void ShowInquiryFormView(InquiryFormDTO inquiryForm, ActionType action);
+
+        [RequiredPermission(ActionType.ShowCalculations)]
         void ShowCalculationListView(PeriodDTOWithAction periodId, bool showInNewTab = false);
         void ShowCalculationExceptionView(CalculationExceptionDTO calculationExceptionDto);
         void ShowCalculationResultListView(long calcId, bool showInNewTab = false);
         //void AddPeriodCalculationView(CalculationDTO calculation);
 
+        [RequiredPermission(ActionType.ShowCalculationResult)]
         void ShowPeriodCalculationResultView(PeriodDTO currentPeriod, string employeeNo, bool isShiftPressed);
 
         void ShowPeriodCalculationExecView(CalculationDTO calculation, ActionType action);

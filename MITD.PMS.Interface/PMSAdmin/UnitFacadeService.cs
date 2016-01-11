@@ -38,6 +38,7 @@ namespace MITD.PMS.Interface
             this.ctcustomFieldDtoMapper = ctcustomFieldDtoMapper;
         }
 
+        [RequiredPermission(ActionType.ShowUnit)]
         public PageResultDTO<UnitDTOWithActions> GetAllUnits(int pageSize, int pageIndex, QueryStringConditions queryStringConditions)
         {
             
@@ -75,6 +76,7 @@ namespace MITD.PMS.Interface
 
         }
 
+        [RequiredPermission(ActionType.ShowUnit)]
         public UnitDTO GetUnitById(long id)
         {
             var unit = unitRep.GetById(new UnitId(id));
@@ -92,6 +94,7 @@ namespace MITD.PMS.Interface
             return "عملیات با موفقیت انجام شد";
         }
 
+        [RequiredPermission(ActionType.ShowUnit)]
         public List<UnitDTO> GetAllUnits()
         {
             var units = unitRep.GetAll();

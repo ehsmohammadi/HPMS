@@ -125,6 +125,7 @@ namespace MITD.PMS.Interface
                 return "JobIndex deleted successfully";
         }
 
+        [RequiredPermission(ActionType.ShowJobIndexInPeriod)]
         public IEnumerable<AbstractIndexInPeriodDTO> GetAllJobIndices(long periodId)
         {
             var abstractList = jobIndexRep.GetAllJobIndex(new PeriodId(periodId));

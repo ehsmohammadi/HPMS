@@ -11,6 +11,7 @@ using MITD.PMS.Application.Contracts;
 using MITD.PMS.Application.Contracts;
 using MITD.PMSAdmin.Domain.Model.CustomFieldTypes;
 using MITD.PMS.Domain.Model.UnitIndices;
+using MITD.PMSSecurity.Domain;
 using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
@@ -118,6 +119,7 @@ namespace MITD.PMS.Interface
                 return "UnitIndex deleted successfully";
         }
 
+        [RequiredPermission(ActionType.ShowUnitIndexInPeriod)] 
         public IEnumerable<AbstractUnitIndexInPeriodDTO> GetAllUnitIndices(long periodId)
         {
             var abstractList = UnitIndexRep.GetAllUnitIndex(new PeriodId(periodId));

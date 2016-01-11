@@ -17,7 +17,7 @@ namespace MITD.PMS.Presentation.Logic
     {
 
 
-
+        [RequiredPermission(ActionType.ShowEmployees)]
         void ShowEmployeeListView(PeriodDTO period, bool isShiftPressed);
         void ShowEmployeeView(EmployeeDTO employee, ActionType action);
         void ShowEmployeeJobPositionsView(EmployeeDTO employee, PeriodDTO period);

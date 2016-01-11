@@ -32,6 +32,7 @@ namespace MITD.PMS.Interface
             this.jobPositionRep = jobPositionRep;
         }
 
+        [RequiredPermission(ActionType.ShowJobPosition)]
         public PageResultDTO<JobPositionDTOWithActions> GetAllJobPositions(int pageSize, int pageIndex, QueryStringConditions queryStringConditions)
         {
             
@@ -68,6 +69,7 @@ namespace MITD.PMS.Interface
             return jobPositionMapper.MapToModel(res);
         }
 
+        [RequiredPermission(ActionType.ShowJobPosition)]
         public JobPositionDTO GetJobPositionById(long id)
         {
             var jobPosition = jobPositionRep.GetById(new JobPositionId(id));
@@ -81,12 +83,11 @@ namespace MITD.PMS.Interface
             return "JobPosition With Id " + id + " delted";
         }
 
+        [RequiredPermission(ActionType.ShowJobPosition)]
         public List<JobPositionDTO> GetAllJobPositions()
         {
             List<JobPosition> jobPositions= jobPositionRep.GetAll();
             return jobPositions.Select(j => jobPositionMapper.MapToModel(j)).ToList();
         }
-
-
     }
 }

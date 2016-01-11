@@ -67,6 +67,7 @@ namespace MITD.PMS.Interface
             return res;
         }
 
+        [RequiredPermission(ActionType.ShowCalculationResult)]
         public JobIndexPointSummaryDTOWithAction GetEmployeeSummaryCalculationResult(long periodId, long calculationId, string employeeNo)
         {
             var fs = new ListFetchStrategy<JobIndexPointWithEmployee>(Enums.FetchInUnitOfWorkOption.NoTracking);
@@ -85,7 +86,7 @@ namespace MITD.PMS.Interface
             return jobIndexPointMapper.MapToModel(sumaryPoints);
         }
 
-
+        [RequiredPermission(ActionType.ShowCalculationResult)]
         public List<JobPositionValueDTO> GetEmployeeJobPositionsCalculationResult(long periodId, long calculationId, string employeeNo)
         {
             var res = new List<JobPositionValueDTO>();

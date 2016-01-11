@@ -42,6 +42,7 @@ namespace MITD.PMS.Interface
             
         }
 
+        [RequiredPermission(ActionType.ShowCustomField)]
         public List<CustomFieldEntity> GetAllCustomFieldEntityType()
         {
             var res = new List<CustomFieldEntity>();
@@ -56,6 +57,7 @@ namespace MITD.PMS.Interface
             return res;
         }
 
+        [RequiredPermission(ActionType.ShowCustomField)]
         public PageResultDTO<CustomFieldDTOWithActions> GetAllCustomFieldes(int pageSize, int pageIndex, QueryStringConditions queryStringConditions)
         {
             
@@ -104,12 +106,14 @@ namespace MITD.PMS.Interface
             return "customField deleted";
         }
 
+        [RequiredPermission(ActionType.ShowCustomField)]
         public CustomFieldDTO GetCustomFieldById(long id)
         {
             var customFieldType = customFieldRep.GetById(new CustomFieldTypeId(id));
             return customFieldMapper.MapToModel(customFieldType);
         }
 
+        [RequiredPermission(ActionType.ShowCustomField)]
         public List<CustomFieldDTO> GetAllCustomFields(string entityType)
         {
             var entityCustomFieldList = customFieldRep.GetAll(Enumeration.FromDisplayName<EntityTypeEnum>(entityType));
@@ -118,6 +122,7 @@ namespace MITD.PMS.Interface
                   .ToList();
         }
 
+        [RequiredPermission(ActionType.ShowCustomField)]
         public List<AbstractCustomFieldDescriptionDTO> GetAllCustomFieldsDescription(string entityType)
         {
             //var fs = new ListFetchStrategy<CustomFieldType>(Enums.FetchInUnitOfWorkOption.NoTracking);
