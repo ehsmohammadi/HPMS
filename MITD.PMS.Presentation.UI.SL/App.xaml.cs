@@ -30,11 +30,11 @@ namespace MITD.PMS.Presentation.UI.SL
 
             new BootStrapper().Execute();
             var controller = ServiceLocator.Current.GetInstance<IPMSController>();
-#if(DEBUG)
-            controller.getLogonUser();
-#else
+//#if(DEBUG)
+//            controller.getLogonUser();
+//#else
             controller.Login(() => { });
-#endif
+//#endif
 
         }
 
