@@ -335,6 +335,13 @@
     <None Include="Configuration\Web.Debug.config" />
     <None Include="Properties\PublishProfiles\HPMS-Presentation.pubxml" />
     <None Include="Web.base.config" />
+    <Content Include="Web.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
