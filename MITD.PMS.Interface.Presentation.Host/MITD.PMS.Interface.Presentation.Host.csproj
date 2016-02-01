@@ -168,7 +168,7 @@
     <Content Include="Reporting\Report.aspx" />
     <Content Include="Silverlight.js" />
     <Content Include="SilverlightLogin.aspx" />
-    <Content Include="Web.config">
+    <!--<Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.Debug.config">
@@ -177,7 +177,7 @@
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
-    </Content>
+    </Content>-->
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
