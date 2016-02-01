@@ -15,10 +15,22 @@ namespace MITD.PMS.Presentation.Logic
 {
     public interface IPeriodController
     {
-        void ShowInquiryUnitFormView(InquiryUnitFormDTO inquiryForm, ActionType action);
+        #region Work list commands
 
         [RequiredPermission(ActionType.ShowUnitInPeriodInquiry)]
         void ShowUnitsInquiryListView(string employeeNo, long periodId);
+
+        [RequiredPermission(ActionType.ShowEmployeeInquiry)]
+        void ShowEmployeesInquiryListView(string employeeNo, long id, bool showInNewTab = false);
+
+        [RequiredPermission(ActionType.ShowCalculationResult)]
+        void ShowPeriodCalculationResultView(PeriodDTO currentPeriod, string employeeNo, bool isShiftPressed);
+        
+        #endregion
+
+        void ShowInquiryUnitFormView(InquiryUnitFormDTO inquiryForm, ActionType action);
+
+        
         void ShowUnitInPeriodInquiryView(PeriodDTO period, UnitInPeriodDTO unitInPeriodDto, ActionType action);
         void ShowPeriodView(PeriodDTO period, ActionType actionType);
 
@@ -44,11 +56,6 @@ namespace MITD.PMS.Presentation.Logic
         void ShowUnitInPeriodCustomFieldManageView(long periodId, UnitInPeriodDTO unitInPeriodDto, ActionType modifyUnitInPrdField);
         void ShowUnitInPeriodUnitIndicesManageView(long periodId, UnitInPeriodDTO unitInPeriodDto, ActionType modifyUnitInPrdField);
 
-      
-
-
-
-
         void ShowJobPositionInPeriodView(JobPositionInPeriodAssignmentDTO jobPositionInPeriod, ActionType action);
 
         [RequiredPermission(ActionType.ShowJobPositionInPeriod)]
@@ -65,8 +72,7 @@ namespace MITD.PMS.Presentation.Logic
 
         void ShowPrepareToExcuteInquiryView(long id);
 
-        [RequiredPermission(ActionType.ShowEmployeeInquiry)]
-        void ShowEmployeesInquiryListView(string employeeNo, long id, bool showInNewTab = false);
+        
         void ShowInquiryFormView(InquiryFormDTO inquiryForm, ActionType action);
 
         [RequiredPermission(ActionType.ShowCalculations)]
@@ -74,9 +80,6 @@ namespace MITD.PMS.Presentation.Logic
         void ShowCalculationExceptionView(CalculationExceptionDTO calculationExceptionDto);
         void ShowCalculationResultListView(long calcId, bool showInNewTab = false);
         //void AddPeriodCalculationView(CalculationDTO calculation);
-
-        [RequiredPermission(ActionType.ShowCalculationResult)]
-        void ShowPeriodCalculationResultView(PeriodDTO currentPeriod, string employeeNo, bool isShiftPressed);
 
         void ShowPeriodCalculationExecView(CalculationDTO calculation, ActionType action);
         void ShowPeriodCalculationStateView(long calculationId);

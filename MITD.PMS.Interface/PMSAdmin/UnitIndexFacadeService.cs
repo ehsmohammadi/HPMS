@@ -111,7 +111,8 @@ namespace MITD.PMS.Interface
         {
             var unitIndex = unitIndexService.AddUnitIndex(new AbstractUnitIndexId(unitIndexDto.ParentId.Value),
                                                 unitIndexDto.Name, unitIndexDto.DictionaryName
-                                                , unitIndexDto.CustomFields.Select(c => new CustomFieldTypeId(c.Id)).ToList());
+                                                , unitIndexDto.CustomFields.Select(c => new CustomFieldTypeId(c.Id)).ToList()
+                                                ,unitIndexDto.TransferId);
             return unitIndexMapper.MapToModel(unitIndex);
         }
 

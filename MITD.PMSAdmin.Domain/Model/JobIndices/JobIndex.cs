@@ -27,7 +27,7 @@ namespace MITD.PMSAdmin.Domain.Model.JobIndices
         {
             get { return customFieldTypeIdList.ToList().AsReadOnly(); }
         }
-
+        
         #endregion
 
         #region Constructors

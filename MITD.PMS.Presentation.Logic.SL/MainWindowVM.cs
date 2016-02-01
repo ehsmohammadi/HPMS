@@ -41,7 +41,10 @@ namespace MITD.PMS.Presentation.Logic
 
         private readonly IPMSController controller;
         private readonly IUserServiceWrapper userService;
+        private readonly IInquiryServiceWrapper inquiryService;
         private List<ActionType> userAuthorizedActions;
+        private bool userHasInquirerRoleInActivePeriod;
+
         #endregion
 
         #region Properties
@@ -133,10 +136,12 @@ namespace MITD.PMS.Presentation.Logic
 
         public MainWindowVM(IPMSController controller,
             IUserServiceWrapper userService,
+            IInquiryServiceWrapper inquiryService,
             IMainAppLocalizedResources localizedResources)
         {
             this.controller = controller;
             this.userService = userService;
+            this.inquiryService = inquiryService;
             LocalizedResources = localizedResources;
             DisplayName = LocalizedResources.PMSTitle;
             ReportVM = new ReportBarVM();
@@ -162,7 +167,8 @@ namespace MITD.PMS.Presentation.Logic
         }
 
         private ObservableCollection<CommandViewModel> workListCommands;
-        public ObservableCollection<CommandViewModel> WorkListCommands {
+        public ObservableCollection<CommandViewModel> WorkListCommands
+        {
             get { return workListCommands; }
             set { this.SetField(p => p.WorkListCommands, ref workListCommands, value); }
         }
@@ -322,7 +328,7 @@ namespace MITD.PMS.Presentation.Logic
                                     if (res != null)
                                     {
                                         res.ShowUnitIndexInPeriodTreeView(
-                                            new PeriodDTOWithAction {Id = CurrentPeriod.Id, Name = CurrentPeriod.Name},
+                                            new PeriodDTOWithAction { Id = CurrentPeriod.Id, Name = CurrentPeriod.Name },
                                             isShiftPressed);
                                     }
                                     else if (exp != null)
@@ -349,7 +355,7 @@ namespace MITD.PMS.Presentation.Logic
                                     if (res != null)
                                     {
                                         res.ShowJobInPeriodListView(
-                                            new PeriodDTO {Id = CurrentPeriod.Id, Name = CurrentPeriod.Name},
+                                            new PeriodDTO { Id = CurrentPeriod.Id, Name = CurrentPeriod.Name },
                                             isShiftPressed);
                                     }
                                     else if (exp != null)
@@ -376,7 +382,7 @@ namespace MITD.PMS.Presentation.Logic
                                     if (res != null)
                                     {
                                         res.ShowJobIndexInPeriodTreeView(
-                                            new PeriodDTOWithAction {Id = CurrentPeriod.Id, Name = CurrentPeriod.Name},
+                                            new PeriodDTOWithAction { Id = CurrentPeriod.Id, Name = CurrentPeriod.Name },
                                             isShiftPressed);
                                     }
                                     else if (exp != null)
@@ -403,7 +409,7 @@ namespace MITD.PMS.Presentation.Logic
                                     if (res != null)
                                     {
                                         res.ShowJobPositionInPeriodTreeView(
-                                            new PeriodDTOWithAction {Id = CurrentPeriod.Id, Name = CurrentPeriod.Name},
+                                            new PeriodDTOWithAction { Id = CurrentPeriod.Id, Name = CurrentPeriod.Name },
                                             isShiftPressed);
                                     }
                                     else if (exp != null)
@@ -455,7 +461,7 @@ namespace MITD.PMS.Presentation.Logic
                                     if (res != null)
                                     {
                                         res.ShowCalculationListView(
-                                            new PeriodDTOWithAction {Id = CurrentPeriod.Id, Name = CurrentPeriod.Name},
+                                            new PeriodDTOWithAction { Id = CurrentPeriod.Id, Name = CurrentPeriod.Name },
                                             isShiftPressed);
                                     }
                                     else if (exp != null)
@@ -758,7 +764,7 @@ namespace MITD.PMS.Presentation.Logic
             }
 
             if (userService.IsUserPermissionGranted(typeof(IPeriodController), "ShowEmployeesInquiryListView",
-                userAuthorizedActions))
+                userAuthorizedActions) && userHasInquirerRoleInActivePeriod)
             {
                 cmdList.Add(
                     new CommandViewModel(LocalizedResources.EmployeesInquiryListSubMenu, new DelegateCommand(
@@ -901,19 +907,45 @@ namespace MITD.PMS.Presentation.Logic
         #region Methods
         public void Handle(MainWindowUpdateArgs eventData)
         {
-            controller.BeginInvokeOnDispatcher(() =>
+            long currentPeriodId = controller.CurrentPriod != null ? controller.CurrentPriod.Id : -1;
+            inquiryService.GetInquirerInquirySubjects(
+                (res, exp) => controller.BeginInvokeOnDispatcher(() =>
                 {
 
-                    CurrentPeriod = controller.CurrentPriod;
-                    LogonUser = controller.LoggedInUserState;
-                    userAuthorizedActions = logonUser.PermittedActions;
-                    if (CurrentWorkListUser == null)
-                        CurrentWorkListUser = LogonUser.PermittedUsersOnMyWorkList.First();
-                    WorkListCommands = new ObservableCollection<CommandViewModel>(createWorkListCommands());
-                    BasicInfoCommands = new ObservableCollection<CommandViewModel>(createBasicInfoCommands());
-                    PeriodCommands = new ObservableCollection<CommandViewModel>(createPeriodCommands());
-                    HideBusyIndicator();
-                });
+                    if (exp != null)
+                    {
+                        //appController.HandleException(exp);
+                    }
+                    else
+                    {
+                        userHasInquirerRoleInActivePeriod = (res.Count > 0);
+
+                        CurrentPeriod = controller.CurrentPriod;
+                        LogonUser = controller.LoggedInUserState;
+                        userAuthorizedActions = logonUser.PermittedActions;
+                        if (CurrentWorkListUser == null)
+                            CurrentWorkListUser = LogonUser.PermittedUsersOnMyWorkList.First();
+                        WorkListCommands = new ObservableCollection<CommandViewModel>(createWorkListCommands());
+                        BasicInfoCommands = new ObservableCollection<CommandViewModel>(createBasicInfoCommands());
+                        PeriodCommands = new ObservableCollection<CommandViewModel>(createPeriodCommands());
+                        HideBusyIndicator();
+                    }
+                    ;
+                }), currentPeriodId, CurrentUser.EmployeeNo);
+
+            //controller.BeginInvokeOnDispatcher(() =>
+            //    {
+
+            //        CurrentPeriod = controller.CurrentPriod;
+            //        LogonUser = controller.LoggedInUserState;
+            //        userAuthorizedActions = logonUser.PermittedActions;
+            //        if (CurrentWorkListUser == null)
+            //            CurrentWorkListUser = LogonUser.PermittedUsersOnMyWorkList.First();
+            //        WorkListCommands = new ObservableCollection<CommandViewModel>(createWorkListCommands());
+            //        BasicInfoCommands = new ObservableCollection<CommandViewModel>(createBasicInfoCommands());
+            //        PeriodCommands = new ObservableCollection<CommandViewModel>(createPeriodCommands());
+            //        HideBusyIndicator();
+            //    });
         }
 
         private void signOut()
@@ -936,7 +968,7 @@ namespace MITD.PMS.Presentation.Logic
                     userAuthorizedActions = res;
 
                 }
-            }, LogonUser.Username, false, string.Empty);  
+            }, LogonUser.Username, false, string.Empty);
         }
 
         #endregion

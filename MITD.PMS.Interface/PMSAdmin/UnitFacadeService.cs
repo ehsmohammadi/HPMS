@@ -63,7 +63,7 @@ namespace MITD.PMS.Interface
         [RequiredPermission(ActionType.AddUnit)]
         public UnitDTO AddUnit(UnitDTO dto)
         {
-            var res = unitService.AddUnit(dto.Name, dto.DictionaryName, dto.CustomFields.Select(c => new CustomFieldTypeId(c.Id)).ToList());
+            var res = unitService.AddUnit(dto.Name, dto.DictionaryName, dto.CustomFields.Select(c => new CustomFieldTypeId(c.Id)).ToList(), dto.TransferId);
             return unitMapper.MapToModel(res);
         }
 

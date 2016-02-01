@@ -1,4 +1,5 @@
-﻿using MITD.Data.NH;
+﻿using System;
+using MITD.Data.NH;
 using MITD.PMSAdmin.Domain.Model.Jobs;
 using NHibernate.Mapping.ByCode;
 using NHibernate.Mapping.ByCode.Conformist;
@@ -36,6 +37,11 @@ namespace MITD.PMSAdmin.Persistence.NH.Context.MappingClass
                 mapper.Access(Accessor.Field);
                 mapper.Length(256);
                 mapper.NotNullable(true);
+            });
+            Property(pi => pi.TransferId, mapper =>
+            {
+                mapper.Access(Accessor.Field);
+                mapper.NotNullable(false);
             });
 
             IdBag(p => p.CustomFieldTypeIdList, m =>

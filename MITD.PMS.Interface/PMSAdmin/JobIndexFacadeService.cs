@@ -110,7 +110,8 @@ namespace MITD.PMS.Interface
         {
             var jobIndex = jobIndexService.AddJobIndex(new AbstractJobIndexId(jobIndexDto.ParentId.Value),
                                                 jobIndexDto.Name, jobIndexDto.DictionaryName
-                                                ,jobIndexDto.CustomFields.Select(c => new CustomFieldTypeId(c.Id)).ToList());
+                                                ,jobIndexDto.CustomFields.Select(c => new CustomFieldTypeId(c.Id)).ToList()
+                                                ,jobIndexDto.TransferId);
             return jobIndexMapper.MapToModel(jobIndex);
         }
 

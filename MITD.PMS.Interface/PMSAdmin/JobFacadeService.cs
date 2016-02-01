@@ -69,7 +69,7 @@ namespace MITD.PMS.Interface
         [RequiredPermission(ActionType.AddJob)]
         public JobDTO AddJob(JobDTO jobDto)
         {
-            var res = jobService.AddJob(jobDto.Name, jobDto.DictionaryName, jobDto.CustomFields.Select(c => new CustomFieldTypeId(c.Id)).ToList());
+            var res = jobService.AddJob(jobDto.Name, jobDto.DictionaryName, jobDto.CustomFields.Select(c => new CustomFieldTypeId(c.Id)).ToList(), jobDto.TransferId);
             return jobMapper.MapToModel(res);
         }
 

@@ -57,7 +57,7 @@ namespace MITD.PMS.Interface
         [RequiredPermission(ActionType.AddJobPosition)]
         public JobPositionDTO AddJobPosition(JobPositionDTO dto)
         {
-            var res=jobPositionService.AddJobPosition(dto.Name,dto.DictionaryName);
+            var res=jobPositionService.AddJobPosition(dto.Name,dto.DictionaryName, dto.TransferId);
             return jobPositionMapper.MapToModel(res);
         }
 

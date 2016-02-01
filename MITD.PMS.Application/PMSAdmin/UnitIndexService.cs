@@ -50,7 +50,7 @@ namespace MITD.PMSAdmin.Application
 
 
         public UnitIndex AddUnitIndex(AbstractUnitIndexId categoryId, string name
-            , string dictionaryName, IList<CustomFieldTypeId> customFieldTypeIdList)
+            , string dictionaryName, IList<CustomFieldTypeId> customFieldTypeIdList, Guid transferId)
         {
             try
             {
@@ -60,6 +60,7 @@ namespace MITD.PMSAdmin.Application
                     var category = unitIndexRep.GetUnitIndexCategory(categoryId);
                     var unitIndex = new UnitIndex(id, category, name, dictionaryName);
                     assignUnitIndexCustomField(unitIndex, customFieldTypeIdList);
+                    unitIndex.TransferId = transferId;
                     unitIndexRep.Add(unitIndex);
                     scope.Complete();
                     return unitIndex;

@@ -31,6 +31,11 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
 
         public void GetInquirerInquirySubjects(Action<List<InquirySubjectDTO>, Exception> action, long periodId, string inquirerEmployeeNo)
         {
+            if (periodId == -1)
+            {
+                action(new List<InquirySubjectDTO>(), null);
+            }
+
             var url = string.Format(baseAddress + makeInquirerInquirySubjectApiAdress(periodId, inquirerEmployeeNo ));
             WebClientHelper.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }

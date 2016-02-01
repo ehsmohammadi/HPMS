@@ -68,7 +68,7 @@ namespace MITD.PMS.Interface
             this._securityApplicationService = _securityApplicationService;
         }
 
-        [RequiredPermission(ActionType.ShowUser)]
+        //[RequiredPermission(ActionType.ShowUser)]
         public UserStateDTO GetUserState(ClaimsPrincipal u)
         {
             if (u == null)

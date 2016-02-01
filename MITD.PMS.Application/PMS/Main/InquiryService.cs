@@ -47,6 +47,11 @@ namespace MITD.PMS.Application
         public List<InquirySubjectWithJobPosition> GetInquirySubjects(EmployeeId inquirerEmployeeId)
         {
             var inquirer = employeeRep.GetBy(inquirerEmployeeId);
+
+            // Return a list with 0 elements indicating that the given employee has no inquiry subjects
+            if (inquirer == null)
+                return new List<InquirySubjectWithJobPosition>();
+
             periodChecker.CheckShowingInquirySubject(inquirer);
             var configurationItems = configurator.GetJobPositionInquiryConfigurationItemBy(inquirer);
             return employeeRep.GetEmployeeByWithJobPosition(configurationItems.Select(c => c.Id),inquirer.Id.PeriodId);

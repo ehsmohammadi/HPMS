@@ -1,4 +1,5 @@
-﻿using MITD.Domain.Model;
+﻿using System;
+using MITD.Domain.Model;
 using MITD.PMSAdmin.Exceptions;
 
 namespace MITD.PMSAdmin.Domain.Model.JobPositions
@@ -31,6 +32,11 @@ namespace MITD.PMSAdmin.Domain.Model.JobPositions
         {
             get { return dictionaryName; }
             
+        }
+
+        private Guid transferId;
+        public virtual Guid TransferId { get { return transferId; }
+            set { transferId = value; }
         }
 
         #endregion

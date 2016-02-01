@@ -254,7 +254,7 @@ namespace MITD.PMSSecurity.Domain
         DeleteUnitIndexCategory = 224,
         [ActionInfoAttribute("ModifyUnitIndexCategory", "ویرایش دسته شاخص")]
         ModifyUnitIndexCategory = 225,
-        [ActionInfoAttribute("ShowUnitIndex", "نمایش شاخص")]
+        [ActionInfoAttribute("ShowUnitIndexInPeriod", "نمایش شاخص")]
         ShowUnitIndexInPeriod = 226,
         [ActionInfoAttribute("ShowJobIndex", "نمایش شاخص شغل")]
         ShowJobIndex = 227,
@@ -303,7 +303,7 @@ namespace MITD.PMSSecurity.Domain
         [ActionInfoAttribute("AddUnitCustomFields", "ایجاد فیلد دلخواه برای واحد")]
         AddUnitCustomFields = 274,
         [ActionInfoAttribute("ModifyUnit", "ویرایش واحد سازمانی")]
-        ModifyUnit = 272,
+        ModifyUnit = 275,
         [ActionInfoAttribute("AddCalculation", "ایجاد محاسبه")]
         AddCalculation = 320,
         [ActionInfoAttribute("DeleteCalculation", "حذف محاسبه")]
@@ -392,5 +392,4 @@ namespace MITD.PMSSecurity.Domain
         DeleteUnitIndexGroupInPeriod = 1816
 
     }
-
 }

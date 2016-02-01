@@ -20,7 +20,7 @@ namespace MITD.PMSAdmin.Application
             this.customFieldRep = customFieldRep;
         }
 
-        public Unit AddUnit(string name, string dictionaryName, IList<CustomFieldTypeId> customFieldTypeIdList)
+        public Unit AddUnit(string name, string dictionaryName, IList<CustomFieldTypeId> customFieldTypeIdList, Guid transferId)
         {
             try
             {
@@ -28,6 +28,7 @@ namespace MITD.PMSAdmin.Application
                 {
                     var id = unitRep.GetNextId();
                     var unit = new Unit(id, name, dictionaryName);
+                    unit.TransferId = transferId;
                     assignJobCustomField(unit, customFieldTypeIdList);
                     unitRep.Add(unit);
                     scope.Complete();
