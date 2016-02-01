@@ -46,6 +46,7 @@ namespace MITD.PMS.Interface
 
         }
 
+        [RequiredPermission(ActionType.ShowPeriod)]
         public PageResultDTO<PeriodDTOWithAction> GetAllPeriods(int pageSize, int pageIndex)
         {
             var fs = new ListFetchStrategy<Period>(Enums.FetchInUnitOfWorkOption.NoTracking);
@@ -58,6 +59,7 @@ namespace MITD.PMS.Interface
             return res;
         }
 
+        [RequiredPermission(ActionType.ShowPeriod)]
         public List<PeriodDescriptionDTO> GetAllPeriods()
         {
             var periods = periodRep.GetAll();

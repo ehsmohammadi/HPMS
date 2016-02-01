@@ -41,9 +41,29 @@ namespace MITD.PMSSecurity.Persistence.NH
            // rep.GetAll<User>(fs);
         }
 
+        //public List<User> FindUsers(Expression<Func<User, bool>> predicate, ListFetchStrategy<User> fs, string frname, string lsName, string username, int pageSize, int pageIndex)
+        //{
+
+        //    var q = this.Context.CreateObjectSet<Party>().OfType<User>().Where(c =>
+
+        //        (c.FirstName.Contains(frname) || string.IsNullOrEmpty(frname)) &&
+        //        (c.LastName.Contains(lsName) || string.IsNullOrEmpty(lsName)) &&
+        //        (c.PartyName.Contains(username) || string.IsNullOrEmpty(username))
+        //        ).OrderBy(c => c.Id).AsQueryable();
+
+        //    pageIndex = (pageIndex == 0) ? 1 : pageIndex;
+        //    fs.PageCriteria.PageResult.Result = q.Skip(pageSize * (pageIndex - 1)).Take(pageSize).ToList();
+
+        //    fs.PageCriteria.PageResult.TotalCount = q.Count();
+        //    fs.PageCriteria.PageResult.TotalPages = Convert.ToInt32(Math.Ceiling(decimal.Divide(fs.PageCriteria.PageResult.TotalCount, pageSize)));
+        //    fs.PageCriteria.PageResult.CurrentPage = pageIndex;
+
+        //    return fs.PageCriteria.PageResult.Result.ToList();
+        //}
 
         public User GetUserById(PartyId userId)
         {
+            //return rep.Find<User>(u => u.Id.PartyName.ToLower() == userId.PartyName.ToLower(), new ListFetchStrategy<User>().Include(u => u.CustomActions)).SingleOrDefault();
             return rep.Find<User>(u=>u.Id.PartyName.ToLower() == userId.PartyName.ToLower()).SingleOrDefault();
         }
 

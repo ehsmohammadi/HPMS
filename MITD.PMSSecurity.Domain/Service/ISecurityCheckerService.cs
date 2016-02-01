@@ -10,5 +10,7 @@ namespace MITD.PMSSecurity.Domain.Service
     {
         List<ActionType> GetAllAuthorizedActions(List<User> pmsUsers);
         bool IsAuthorized(List<ActionType> pmsUsers, List<ActionType> actions);
+
+        //List<ActionType> GetAllAuthorizedActionTypesForRole(List<string> rols);
     }
 }

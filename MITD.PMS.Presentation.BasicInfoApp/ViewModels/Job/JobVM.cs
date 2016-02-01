@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using MITD.PMS.Presentation.Contracts;
 using MITD.Presentation;
@@ -109,6 +110,8 @@ namespace MITD.PMS.Presentation.Logic
             if (!job.Validate()) return;
 
             ShowBusyIndicator();
+
+            job.TransferId = Guid.NewGuid();
             if (actionType==ActionType.AddJob)
             {
                 jobService.AddJob((res, exp) => appController.BeginInvokeOnDispatcher(() =>

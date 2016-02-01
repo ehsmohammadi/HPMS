@@ -34,17 +34,17 @@
             <sdk:DataGrid Grid.Row="2" AutoGenerateColumns="False"  Name="drgList"  VerticalScrollBarVisibility="Auto" SelectionMode="Single"
                       ItemsSource="{Binding Path=PrivilegeList}" >
                 <sdk:DataGrid.Columns>
-                    <sdk:DataGridTextColumn Binding="{Binding Path=ActionType.Description}" 
+                    <sdk:DataGridTextColumn Binding="{Binding Path=ActionName}" 
                                             CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto" 
-                                            Header="نام کاربری"
+                                            Header="نام دسترسی"
                                             />
                     <sdk:DataGridCheckBoxColumn Binding="{Binding Path=IsGrant}" 
                                             CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto" 
                                             Header="مجاز"
                                             />
-                    <sdk:DataGridCheckBoxColumn Binding="{Binding Path=IsDeny}" 
+                    <!--<sdk:DataGridCheckBoxColumn Binding="{Binding Path=IsDeny}" 
                                             CanUserReorder="true" CanUserResize="True" CanUserSort="True" Width="Auto" 
-                                            Header="غیر مجاز" />
+                                            Header="غیر مجاز" />-->
                   
 
                 </sdk:DataGrid.Columns>

@@ -117,6 +117,8 @@ namespace MITD.PMS.Presentation.Logic
             if (!unit.Validate()) return;
 
             ShowBusyIndicator();
+
+            unit.TransferId = Guid.NewGuid();
             if (actionType==ActionType.AddUnit)
             {
                 unitService.AddUnit((res, exp) => appController.BeginInvokeOnDispatcher(() =>

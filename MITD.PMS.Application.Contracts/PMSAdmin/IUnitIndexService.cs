@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MITD.Core;
 using MITD.PMSAdmin.Domain.Model.CustomFieldTypes;
 using MITD.PMSAdmin.Domain.Model.UnitIndices;
@@ -9,7 +10,7 @@ namespace MITD.PMSAdmin.Application.Contracts
     {
         UnitIndexCategory AddUnitIndexCategory(AbstractUnitIndexId parentId, string name, string dictionaryName);
         UnitIndex AddUnitIndex(AbstractUnitIndexId categoryId, string name, string dictionaryName
-            , IList<CustomFieldTypeId> customFieldTypeIdList);
+            , IList<CustomFieldTypeId> customFieldTypeIdList, Guid transferId);
 
         UnitIndexCategory UpdateUnitIndexCategory(AbstractUnitIndexId unitIndexCatId, AbstractUnitIndexId parentId,
                                                 string name, string dictionaryName);

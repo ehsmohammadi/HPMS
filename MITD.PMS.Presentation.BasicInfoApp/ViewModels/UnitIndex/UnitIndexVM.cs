@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using MITD.Core;
 using MITD.PMS.Presentation.Contracts;
@@ -112,6 +113,8 @@ namespace MITD.PMS.Presentation.Logic
             if (!unitIndex.Validate()) return;
 
             ShowBusyIndicator();
+
+            unitIndex.TransferId = Guid.NewGuid();
             if (actionType==ActionType.AddUnitIndex)
             {
                 unitIndexService.AddUnitIndex((res, exp) => appController.BeginInvokeOnDispatcher(() =>

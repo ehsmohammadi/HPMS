@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MITD.Core;
 using MITD.PMSAdmin.Domain.Model.CustomFieldTypes;
 using MITD.PMSAdmin.Domain.Model.JobIndices;
@@ -9,7 +10,7 @@ namespace MITD.PMSAdmin.Application.Contracts
     {
         JobIndexCategory AddJobIndexCategory(AbstractJobIndexId parentId, string name, string dictionaryName);
         JobIndex AddJobIndex(AbstractJobIndexId categoryId, string name, string dictionaryName
-            , IList<CustomFieldTypeId> customFieldTypeIdList);
+            , IList<CustomFieldTypeId> customFieldTypeIdList, Guid transferId);
 
         JobIndexCategory UpdateJobIndexCategory(AbstractJobIndexId jobIndexCatId, AbstractJobIndexId parentId,
                                                 string name, string dictionaryName);

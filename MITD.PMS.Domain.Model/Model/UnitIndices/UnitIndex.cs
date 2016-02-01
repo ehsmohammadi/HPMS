@@ -45,6 +45,8 @@ namespace MITD.PMS.Domain.Model.UnitIndices
 
         public virtual string DictionaryName { get { return sharedUnitIndex.DictionaryName; } }
 
+        public virtual Guid TransferId { get { return sharedUnitIndex.TransferId; } }
+
         private  bool isInquireable;
         public virtual bool IsInquireable { get { return isInquireable; } }
 

@@ -35,8 +35,10 @@ namespace MITD.PMSAdmin.Domain.Model.Jobs
 
         private string dictionaryName;
         public virtual string DictionaryName { get { return dictionaryName; } }
-      
-        
+
+        private Guid transferId;
+        public virtual Guid TransferId { get { return transferId; } set { transferId = value; }}  
+
         #endregion
 
         #region Constructors

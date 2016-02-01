@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using MITD.Core;
 using MITD.PMS.Presentation.Contracts;
@@ -112,6 +113,8 @@ namespace MITD.PMS.Presentation.Logic
             if (!jobIndex.Validate()) return;
 
             ShowBusyIndicator();
+
+            jobIndex.TransferId = Guid.NewGuid();
             if (actionType==ActionType.AddJobIndex)
             {
                 jobIndexService.AddJobIndex((res, exp) => appController.BeginInvokeOnDispatcher(() =>

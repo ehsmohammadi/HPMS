@@ -246,10 +246,10 @@ namespace MITD.PMS.Presentation.BasicInfoApp
             viewManager.ShowInDialog(view);
         }
 
-        public void ShowCustomActionsManageViews(PartyDTO party)
+        public void ShowCustomActionsManageViews(PartyDTO party, bool isgroup, string groupId)
         {
             var view = ServiceLocator.Current.GetInstance<IPartyCustomActionsView>();
-            ((PartyCustomActionsVM)view.ViewModel).Load(party);
+            ((PartyCustomActionsVM)view.ViewModel).Load(party, isgroup, groupId);
             viewManager.ShowInDialog(view);
         }
 

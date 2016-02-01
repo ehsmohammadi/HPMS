@@ -34,7 +34,7 @@ namespace MITD.PMS.Service.Host.App_Start
         {
             // if you want sst security comment this line 
 #if(DEBUG)
-            incomingPrincipal = createIncomingPrincipalDefault();
+            incomingPrincipal = CreateIncomingPrincipalDefault();
 #endif
 
             if (!incomingPrincipal.Identity.IsAuthenticated)
@@ -48,7 +48,7 @@ namespace MITD.PMS.Service.Host.App_Start
 
         #region Fake Athentication Methods
 
-        private ClaimsPrincipal createIncomingPrincipalDefault()
+        public static ClaimsPrincipal CreateIncomingPrincipalDefault()
         {
             var identity = new FakeIdentity("ehsan", AuthenticationTypes.Basic, true);
 

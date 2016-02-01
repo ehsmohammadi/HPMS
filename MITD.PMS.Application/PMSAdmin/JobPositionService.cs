@@ -18,7 +18,7 @@ namespace MITD.PMSAdmin.Application
 
 
 
-        public JobPosition AddJobPosition(string name, string dictionaryName)
+        public JobPosition AddJobPosition(string name, string dictionaryName, Guid transferId)
         {
             try
             {
@@ -26,6 +26,7 @@ namespace MITD.PMSAdmin.Application
                 {
                     var id = jobPositionRep.GetNextId();
                     var jobPosition = new JobPosition(id, name, dictionaryName);
+                    jobPosition.TransferId = transferId;
                     jobPositionRep.Add(jobPosition);
                     scope.Complete();
                     return jobPosition;

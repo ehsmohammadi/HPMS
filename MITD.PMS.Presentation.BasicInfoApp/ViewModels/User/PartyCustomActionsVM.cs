@@ -12,13 +12,22 @@ namespace MITD.PMS.Presentation.Logic
 
         private readonly IPMSController appController;
         private readonly IUserServiceWrapper userService;
-        private ActionType actionType;
+
+        private Dictionary<int, bool> _userActions;
+
+        public bool IsGroup { get; set; }
+
+        public Dictionary<int, bool> UserActions
+        {
+            get { return _userActions; }
+            set { this.SetField(p => p.UserActions, ref _userActions, value); }
+        }
 
         #endregion
 
         #region Properties
 
-        private PartyDTO party ;
+        private PartyDTO party;
         public PartyDTO Party
         {
             get { return party; }
@@ -32,7 +41,7 @@ namespace MITD.PMS.Presentation.Logic
             set { this.SetField(vm => vm.PrivilegeList, ref privilegeList, value); }
         }
 
-       
+
         private CommandViewModel saveCommand;
         public CommandViewModel SaveCommand
         {
@@ -53,11 +62,11 @@ namespace MITD.PMS.Presentation.Logic
             {
                 if (cancelCommand == null)
                 {
-                    cancelCommand = new CommandViewModel("انصراف",new DelegateCommand(OnRequestClose));
+                    cancelCommand = new CommandViewModel("انصراف", new DelegateCommand(OnRequestClose));
                 }
                 return cancelCommand;
             }
-        } 
+        }
 
         #endregion
 
@@ -65,13 +74,13 @@ namespace MITD.PMS.Presentation.Logic
 
         public PartyCustomActionsVM()
         {
-            BasicInfoAppLocalizedResources=new BasicInfoAppLocalizedResources();
+            BasicInfoAppLocalizedResources = new BasicInfoAppLocalizedResources();
             init();
             party = new PartyDTO();
         }
 
 
-        public PartyCustomActionsVM(IPMSController appController, 
+        public PartyCustomActionsVM(IPMSController appController,
             IUserServiceWrapper userService,
             IBasicInfoAppLocalizedResources basicInfoAppLocalizedResources
             )
@@ -81,7 +90,7 @@ namespace MITD.PMS.Presentation.Logic
             BasicInfoAppLocalizedResources = basicInfoAppLocalizedResources;
             init();
 
-        } 
+        }
 
         #endregion
 
@@ -92,58 +101,97 @@ namespace MITD.PMS.Presentation.Logic
             party = new PartyDTO();
             DisplayName = BasicInfoAppLocalizedResources.ManagePartyCustomActions;
             PrivilegeList = new List<Privilege>();
-            
+            UserActions = new Dictionary<int, bool>();
         }
 
 
-        public void Load(PartyDTO partyDto)
+        public void Load(PartyDTO partyDto, bool isgroup, string groupId)
         {
+            IsGroup = isgroup;
             Party = partyDto;
             ShowBusyIndicator();
             userService.GetAllActionTypes((res, exp) => appController.BeginInvokeOnDispatcher(() =>
+            {
+                HideBusyIndicator();
+                if (exp == null)
                 {
-                    HideBusyIndicator();
-                    if (exp == null)
-                    {
-                        PrivilegeList = res.Select(a => new Privilege() {ActionType = a, IsDeny = false, IsGrant = false}).ToList();
-                        setPartyCustomActions();
-                    }
-                    else
-                    {
-                        appController.HandleException(exp);
-                    }
-                }));
+                    PrivilegeList = res.Select(a => new Privilege() { ActionType = a, IsGrant = false }).ToList();
+                    setPartyCustomActions(isgroup, groupId);
+                }
+                else
+                {
+                    appController.HandleException(exp);
+                }
+            }));
 
         }
 
-        private void setPartyCustomActions()
+        private void setPartyCustomActions(bool isgroup, string groupId)
         {
-           PrivilegeList.Where(all => Party.CustomActions.Where(c => c.Value).Select(c => c.Key).Contains(all.ActionType.Id))
-                .ToList().ForEach(p => p.IsGrant = true);
+            userService.GetAllUserActionTypes((res, exp) => appController.BeginInvokeOnDispatcher(() =>
+            {
+                HideBusyIndicator();
+                if (exp == null)
+                {
+                    res.ForEach(c =>
+                    {
+                        UserActions.Add((int)c, true);
+                    });
 
-            PrivilegeList.Where(all => Party.CustomActions.Where(c => !c.Value).Select(c => c.Key).Contains(all.ActionType.Id))
-                .ToList().ForEach(p => p.IsDeny = true);
+
+                    PrivilegeList.Where(all => UserActions.Where(c => c.Value).Select(c => c.Key).Contains((int)all.ActionType))
+                        .ToList().ForEach(p => p.IsGrant = true);
+
+                    PrivilegeList.Where(all => UserActions.Where(c => !c.Value).Select(c => c.Key).Contains((int)all.ActionType))
+                        .ToList().ForEach(p => p.IsGrant = false);
+                }
+                else
+                {
+                    appController.HandleException(exp);
+                }
+            }), Party.PartyName, isgroup, groupId);
+
+            //PrivilegeList.Where(all => Party.CustomActions.Where(c => c.Value).Select(c => c.Key).Contains(all.ActionType.Id))
+            //     .ToList().ForEach(p => p.IsGrant = true);
+
+            // PrivilegeList.Where(all => Party.CustomActions.Where(c => !c.Value).Select(c => c.Key).Contains(all.ActionType.Id))
+            //     .ToList().ForEach(p => p.IsDeny = true);
         }
 
         private void save()
         {
-            var grants = PrivilegeList.Where(p => p.IsGrant).Select(p => p.ActionType).ToDictionary(p => p.Id, p=>true);
-            var denies = PrivilegeList.Where(p => p.IsDeny).Select(p => p.ActionType).ToDictionary(p => p.Id, p => false);
-            
+            var grants = PrivilegeList.Where(p => p.IsGrant).Select(p => p.ActionType).ToDictionary(p => (int)p, p => true);
+            var denies = PrivilegeList.Where(p => !p.IsGrant).Select(p => p.ActionType).ToDictionary(p => (int)p, p => false);
+
             foreach (int k in denies.Keys)
             {
                 if (!grants.Keys.Contains(k))
-                    grants.Add(k,denies[k]);
+                    grants.Add(k, denies[k]);
             }
-            appController.Publish(new UpdatePartyCustomActionsArgs(grants,Party.PartyName));
-            OnRequestClose();
+            if (!IsGroup)
+            {
+                userService.UpdateUserAccess((res, exp) => appController.BeginInvokeOnDispatcher(() =>
+                {
+                    if (exp != null)
+                    {
+                        appController.HandleException(exp);
+                    }
+                    else
+                    {
+                        OnRequestClose();
+                    }
+
+                }), Party.PartyName, grants);
+            }
+            //appController.Publish(new UpdatePartyCustomActionsArgs(grants,Party.PartyName));
+            //OnRequestClose();
         }
 
         protected override void OnRequestClose()
         {
             base.OnRequestClose();
             appController.Close(this);
-        } 
+        }
 
         #endregion
     }

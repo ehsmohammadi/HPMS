@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IRISLSeedData\ConvertSeedData.cs" />
+    <Compile Include="IRISLSeedData\IRISLSeedDataForTest.cs" />
     <Compile Include="IRISLSeedData\PMSMigrationUtility.cs" />
     <Compile Include="IRISLSeedData\AdminMigrationUtility.cs" />
     <Compile Include="PeriodTest.cs" />

@@ -48,7 +48,7 @@ namespace MITD.PMS.Interface
         }
 
 
-        [RequiredPermission(ActionType.ManageJobs)]
+        [RequiredPermission(ActionType.ShowJobInPeriod)]
         public PageResultDTO<JobInPeriodDTOWithActions> GetAllJobs(long periodId,int pageSize, int pageIndex, QueryStringConditions queryStringConditions, string selectedColumns)
         {
             //var fs = new ListFetchStrategy<Job>(Enums.FetchInUnitOfWorkOption.NoTracking);
@@ -98,6 +98,7 @@ namespace MITD.PMS.Interface
             jobService.RemoveJob(new JobId(new PeriodId(periodId), new SharedJobId(jobId)));
         }
 
+        [RequiredPermission(ActionType.ShowJobInPeriod)]
         public JobInPeriodDTOWithActions GetJobWithActions(long periodId, long jobId, string selectedColumns)
         {
             Job job = jobRep.GetById(new JobId(new PeriodId(periodId), new SharedJobId(jobId)));
@@ -107,6 +108,7 @@ namespace MITD.PMS.Interface
             return jobDto;
         }
 
+        [RequiredPermission(ActionType.ShowJobInPeriod)]
         public JobInPeriodDTO GetJob(long periodId, long jobId, string selectedColumns)
         {
             var job = jobRep.GetById(new JobId(new PeriodId(periodId), new SharedJobId(jobId)));
@@ -133,12 +135,14 @@ namespace MITD.PMS.Interface
             return jobDto;
         }
 
+        [RequiredPermission(ActionType.ShowJobInPeriod)]
         public List<JobInPeriodDTOWithActions> GetAllJobWithActions(long periodId, string selectedColumns)
         {
             var res = jobRep.GetAllJob(new PeriodId(periodId));
             return res.Select(r => jobInPeriodDTOWithActionsMapper.MapToModel(r, selectedColumns.Split(','))).ToList();
         }
 
+        [RequiredPermission(ActionType.ShowJobInPeriod)]
         public List<JobInPeriodDTO> GetAllJob(long periodId, string selectedColumns)
         {
             var res = jobRep.GetAllJob(new PeriodId(periodId));

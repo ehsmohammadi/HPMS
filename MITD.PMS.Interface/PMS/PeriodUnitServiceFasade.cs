@@ -100,12 +100,14 @@ namespace MITD.PMS.Interface
             return res;
         }
 
+        [RequiredPermission(ActionType.ShowUnitInPeriod)]
         public IEnumerable<UnitInPeriodDTO> GetUnits(long periodId)
         {
             var units = unitRep.GetUnits(new PeriodId(periodId));
             return units.Select(u => unitInPeriodDTOMapper.MapToModel(u, new string[] { }));
         }
 
+        [RequiredPermission(ActionType.ShowUnitInPeriod)]
         public UnitInPeriodDTO GetUnit(long periodId, long unitId, string selectedColumns)
         {
             var unit = unitRep.GetBy(new UnitId(new PeriodId(periodId), new SharedUnitId(unitId)));
@@ -146,6 +148,7 @@ namespace MITD.PMS.Interface
 
         }
 
+        [RequiredPermission(ActionType.ShowUnitInPeriod)]
         public PageResultDTO<UnitInPeriodDTOWithActions> GetAllUnits(long periodId, int pageSize, int pageIndex, QueryStringConditions queryStringConditions, string selectedColumns)
         {
             var result = GetAllUnitWithActions(periodId, "");
@@ -160,6 +163,7 @@ namespace MITD.PMS.Interface
             return pResDto;
         }
 
+        [RequiredPermission(ActionType.ShowUnitInPeriod)]
         public List<UnitInPeriodDTOWithActions> GetAllUnitWithActions(long periodId, string selectedColumns)
         {
             var res = unitRep.GetUnits(new PeriodId(periodId));

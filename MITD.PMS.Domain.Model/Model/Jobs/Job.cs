@@ -33,6 +33,8 @@ namespace MITD.PMS.Domain.Model.Jobs
 
         public virtual string DictionaryName { get { return sharedJob.DictionaryName; } }
 
+        public virtual Guid TransferId { get { return sharedJob.TransferId; } }
+
         private readonly IList<JobCustomField> customFields;
         public virtual IReadOnlyList<JobCustomField> CustomFields
         {

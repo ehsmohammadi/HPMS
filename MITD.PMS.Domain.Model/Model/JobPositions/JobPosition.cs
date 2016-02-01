@@ -36,6 +36,8 @@ namespace MITD.PMS.Domain.Model.JobPositions
 
         public virtual string DictionaryName { get { return sharedJobPosition.DictionaryName; } }
 
+        public virtual Guid TransferId { get { return sharedJobPosition.TransferId; } }
+
         private readonly UnitId unitId;
         public virtual UnitId UnitId
         {

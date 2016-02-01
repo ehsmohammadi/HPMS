@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using MITD.Domain.Model;
@@ -148,8 +149,33 @@ namespace MITD.PMSSecurity.Domain
         }
         #endregion
 
+        public virtual void UpdateCustomActions(Dictionary<int, bool> actions, PartyId userId, List<ActionType> roleActionTypes)
+        {
+            var newList = new List<PartyCustomAction>();
+            actions.ToList().ForEach(c =>
+            {
+                newList.Add(new PartyCustomAction(userId, c.Key, c.Value));
+            });
 
-
+            this.customActions = new Dictionary<int, bool>();
+            newList.ForEach(d =>
+            {
+                if (d.IsGranted)
+                {
+                     if (!roleActionTypes.Exists(c => (int)c == d.ActionTypeId ))
+                    {
+                        this.customActions.Add(d.ActionTypeId, d.IsGranted);
+                    }
+                }
+                else
+                {
+                    if (roleActionTypes.Exists(c => (int)c == d.ActionTypeId ))
+                    {
+                        this.customActions.Add(d.ActionTypeId, d.IsGranted);
+                    }
+                }
+            });
+        }
         
     }
 }

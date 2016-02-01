@@ -26,7 +26,7 @@ namespace MITD.PMSAdmin.Domain.Model.UnitIndices
         public virtual IReadOnlyList<CustomFieldTypeId> CustomFieldTypeIdList
         {
             get { return customFieldTypeIdList.ToList().AsReadOnly(); }
-        }
+        }  
 
         #endregion
 

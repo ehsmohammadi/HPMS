@@ -32,6 +32,7 @@ namespace MITD.PMS.Interface
             this.policyRep = policyRep;
         }
 
+        [RequiredPermission(ActionType.ShowPolicies)]
         public PageResultDTO<PolicyDTOWithActions> GetAllPolicies(int pageSize, int pageIndex)
         {
             
@@ -73,7 +74,7 @@ namespace MITD.PMS.Interface
             return "Policy with" +" "+id+"Deleted";
         }
 
-
+        [RequiredPermission(ActionType.ShowPolicies)]
         public List<PolicyDTOWithActions> GetAllPolicies()
         {
             return policyRep.GetAll().Select(r => policyWithActionMapper.MapToModel(r)).ToList();

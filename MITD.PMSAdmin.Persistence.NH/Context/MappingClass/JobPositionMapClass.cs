@@ -38,6 +38,11 @@ namespace MITD.PMSAdmin.Persistence.NH
                 mapper.Length(256);
                 mapper.NotNullable(true);
             });
+            Property(pi => pi.TransferId, mapper =>
+            {
+                mapper.Access(Accessor.Field);
+                mapper.NotNullable(false);
+            });
         }
     }
 }

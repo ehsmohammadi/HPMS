@@ -11,15 +11,16 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using Castle.Core.Internal;
 using MITD.PMS.Presentation.Contracts;
 using MITD.Presentation;
 
 namespace MITD.PMS.Presentation.Logic.Wrapper
 {
-    public partial class UserServiceWrapper:IUserServiceWrapper
+    public partial class UserServiceWrapper : IUserServiceWrapper
     {
         private readonly IUserProvider userProvider;
-        private readonly string baseAddressUsers = PMSClientConfig.BaseApiAddress+"Users";
+        private readonly string baseAddressUsers = PMSClientConfig.BaseApiAddress + "Users";
         private readonly string baseAddressUserGroups = PMSClientConfig.BaseApiAddress + "UserGroups";
         private readonly string baseAddressActionTypes = PMSClientConfig.BaseApiAddress + "ActionTypes";
 
@@ -43,17 +44,17 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
                 return string.Empty;
 
             var qs = string.Empty;
-            
+
             if (!string.IsNullOrEmpty(userCriteria.Fname))
                 qs += "FirstName:" + userCriteria.Fname + ";";
-            
+
             if (!string.IsNullOrEmpty(userCriteria.Lname))
                 qs += "LastName:" + userCriteria.Lname + ";";
-            
+
             if (!string.IsNullOrEmpty(userCriteria.PartyName))
                 qs += "PartyName:" + userCriteria.PartyName + ";";
-            
-            if ( string.IsNullOrEmpty(qs))
+
+            if (string.IsNullOrEmpty(qs))
                 return string.Empty;
 
             return "&Filter=" + qs;
@@ -84,7 +85,7 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
             WebClientHelper.Delete(new Uri(url, UriKind.Absolute), action, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 
-        public void GetAllUserGroups(Action<List<UserGroupDTOWithActions>,Exception> action)
+        public void GetAllUserGroups(Action<List<UserGroupDTOWithActions>, Exception> action)
         {
             WebClientHelper.Get(new Uri(baseAddressUserGroups, UriKind.Absolute), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
@@ -103,14 +104,14 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
 
         public void UpdateUserGroup(Action<UserGroupDTO, Exception> action, UserGroupDTO userGroupDto)
         {
-            var url = string.Format(baseAddressUserGroups + "?partyname="+userGroupDto.PartyName);
+            var url = string.Format(baseAddressUserGroups + "?partyname=" + userGroupDto.PartyName);
             WebClientHelper.Put(new Uri(url, UriKind.Absolute), action, userGroupDto, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 
         public void DeleteUserGroup(Action<string, Exception> action, string groupName)
         {
             var url = string.Format(baseAddressUserGroups + "?partyName=" + groupName);
-            WebClientHelper.Delete(new Uri(url,UriKind.Absolute), action, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+            WebClientHelper.Delete(new Uri(url, UriKind.Absolute), action, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 
         public void GetToken(Action<string, Exception> action, string userName, string password)
@@ -124,7 +125,7 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
             var url = string.Format(PMSClientConfig.BaseApiAddress + "/token");
             if (!string.IsNullOrWhiteSpace(newCurrentWorkListUser))
                 url = url + "?CurrentWorkListUserName=" + newCurrentWorkListUser;
-            WebClientHelper.GetString(new Uri(url, PMSClientConfig.UriKind), action, 
+            WebClientHelper.GetString(new Uri(url, PMSClientConfig.UriKind), action,
                 new Dictionary<string, string> { { "SilverLight", "1" }, { "Authorization", "SAML " + token } });
         }
 
@@ -136,15 +137,15 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
 
             client.DownloadStringCompleted += (s, a) =>
             {
-                action(a.Result,a.Error);
+                action(a.Result, a.Error);
             };
             client.DownloadStringAsync(new Uri(url, UriKind.Relative));
         }
 
         public void GetLogonUser(Action<UserStateDTO, Exception> action)
         {
-            var url = string.Format(baseAddressUsers );
-            WebClientHelper.Get(new Uri(url, PMSClientConfig.UriKind), action,PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+            var url = string.Format(baseAddressUsers);
+            WebClientHelper.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 
         public void LogoutUser(Action<string, Exception> action)
@@ -158,14 +159,24 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
             WebClientHelper.Get(new Uri(baseAddressUserGroups, UriKind.Absolute), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 
-        public void GetAllActionTypes(Action<List<ActionTypeDTO>, Exception> action)
+        public void GetAllActionTypes(Action<List<ActionType>, Exception> action)
         {
             WebClientHelper.Get(new Uri(baseAddressActionTypes, UriKind.Absolute), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 
+        public void GetAllUserActionTypes(Action<List<ActionType>, Exception> action, string userName, bool isGroup, string groupId)
+        {
+            if (groupId.IsNullOrEmpty())
+                groupId = "0";
+
+            var url = baseAddressActionTypes + "?userName=" + userName + "&isGroup=" + isGroup + "&groupId=" + groupId;
+            WebClientHelper.Get(new Uri(url, UriKind.Absolute),
+                action, WebClientHelper.MessageFormat.Json, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+        }
+
         public void ChangeCurrentWorkListUserName(Action<string, Exception> action, string logonUserName, string currentPermittedUser)
         {
-            var url =string.Format(baseAddressUsers + "/" + logonUserName + "/CurrentPermittedUser");
+            var url = string.Format(baseAddressUsers + "/" + logonUserName + "/CurrentPermittedUser");
             WebClientHelper.Put(new Uri(url, UriKind.Absolute), action, currentPermittedUser, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 
@@ -176,6 +187,42 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
                 url += "&SortBy=" + QueryConditionHelper.GetSortByQueryString(sortBy);
             WebClientHelper.Get(new Uri(url, UriKind.Absolute), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
 
+        }
+
+        public void UpdateUserAccess(Action<UserGroupDTO, Exception> action, string username, Dictionary<int, bool> actionList)
+        {
+            var url = string.Format(baseAddressActionTypes + "?username=" + username);
+            WebClientHelper.Put(new Uri(url, UriKind.Absolute), action, actionList, WebClientHelper.MessageFormat.Json
+               , PMSClientConfig.CreateHeaderDic(userProvider.Token));
+        }
+
+        public bool IsUserPermissionGranted(Type controllerType, string methodName, List<ActionType> authorizedActions)
+        {
+            bool result = false;
+            RequiredPermissionAttribute[] permissionAttributes = (RequiredPermissionAttribute[])
+                controllerType.GetMethod(methodName).GetCustomAttributes(typeof(RequiredPermissionAttribute), true);
+
+            if (permissionAttributes.Length > 0)
+            {
+                if (authorizedActions == null)
+                    return false;
+
+                foreach (RequiredPermissionAttribute attr in permissionAttributes)
+                {
+                    if (!authorizedActions.Contains(attr.ActionType))
+                    {
+                        // Break the loop without setting the result to true
+                        break;
+                    }
+                    result = true;
+                }
+            }
+            else
+            {
+                result = true;
+            }
+
+            return result;
         }
     }
 }

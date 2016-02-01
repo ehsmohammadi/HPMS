@@ -32,6 +32,8 @@ namespace MITD.PMS.Domain.Model.Units
 
         public virtual string DictionaryName { get { return sharedUnit.DictionaryName; } }
 
+        public virtual Guid TransferId { get { return sharedUnit.TransferId; } }
+
         public virtual SharedUnit SharedUnit { get { return sharedUnit; } }
 
         private readonly Unit parent;

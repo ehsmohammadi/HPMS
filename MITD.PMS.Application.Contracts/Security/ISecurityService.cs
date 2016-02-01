@@ -19,6 +19,7 @@ namespace MITD.PMSSecurity.Application.Contracts
         User GetLogonUser();
         User GetCurrentUser();
         List<User> GetPermittedWorkListFor(User user);
+        void UpdateUserAccess(PartyId id, Dictionary<int, bool> customActions);
         
     }
 }
