@@ -8,6 +8,7 @@ namespace MITD.PMS.Integration.PMS.API
     {
 
         void GetJob(Action<JobDTO, Exception> action, long id);
+        void GetJob(Action<JobDTO, Exception> action, string transferId);
         void AddJob(Action<JobDTO, Exception> action, JobDTO job);
         void UpdateJob(Action<JobDTO, Exception> action, JobDTO job);
         void GetAllJobs(Action<PageResultDTO<JobDTOWithActions>, Exception> action, int pageSize, int pageIndex, Dictionary<string, string> sortBy);

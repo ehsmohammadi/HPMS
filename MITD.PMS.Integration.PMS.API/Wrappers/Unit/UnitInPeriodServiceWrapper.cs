@@ -8,7 +8,7 @@ using MITD.PMS.Presentation.Contracts;
 
 namespace MITD.PMS.Integration.PMS.API
 {
-    public class UnitInPeriodServiceWrapper : IUnitInPeriodServiceWrapper
+    public class UnitInPeriodServiceWrapper //: IUnitAssignmentService
     {
         private readonly IUserProvider userProvider;
         private readonly string baseAddress = PMSClientConfig.BaseApiAddress;
@@ -78,7 +78,7 @@ namespace MITD.PMS.Integration.PMS.API
         }
 
 
-        public void AddUnitInPeriod(Action<JobInPeriodDTO, Exception> action, long periodId, UnitInPeriodDTO unitInPeriodDto)
+        public void AddUnitInPeriod(Action<UnitInPeriodDTO, Exception> action, long periodId, UnitInPeriodDTO unitInPeriodDto)
         {
             var url = string.Format(baseAddress + makeApiAdress(periodId));
             IntegrationWebClient.Post(new Uri(url, PMSClientConfig.UriKind), action, unitInPeriodDto, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));

@@ -4,9 +4,9 @@ using MITD.PMS.Presentation.Contracts;
 
 namespace MITD.PMS.Integration.PMS.API
 {
-    public interface IUnitInPeriodServiceWrapper
+    public interface IUnitInPeriodServiceWrapper : MITD.Presentation.IServiceWrapper
     {
-        void AddInquirer(Action<string, Exception> action, long periodId, long unitId, string personalNo);
+        void AddInquirer(Action<string, Exception> action, long periodId, long unitId, string personalNo, long unitIndexInUnitId);
         void UpdateInquirySubjectInquirers(Action<InquirySubjectWithInquirersDTO, Exception> action, long periodId, long unitId, InquirySubjectWithInquirersDTO inquirySubjectWithInquirersDTO);
         void GetInquirySubjectWithInquirers(Action<List<InquirySubjectWithInquirersDTO>, Exception> action, long periodId, long unitId);
         void GetAllUnitInPeriod(Action<IList<UnitInPeriodDTO>, Exception> action, long periodId);

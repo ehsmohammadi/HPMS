@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MITD.PMS.Integration.Core;
 using MITD.PMS.Presentation.Contracts;
+using MITD.PMS.Integration.PMS.Contract;
 
 namespace MITD.PMS.Integration.PMS.API
 {

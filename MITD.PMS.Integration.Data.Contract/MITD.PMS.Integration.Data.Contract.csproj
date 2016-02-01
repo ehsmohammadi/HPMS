@@ -39,14 +39,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataProvider\IOrganChartDataProvider.cs" />
-    <Compile Include="DTO\UnitDto.cs" />
+    <Compile Include="DataProvider\IJobDataProvider.cs" />
+    <Compile Include="DataProvider\IJobIndexDataProvider.cs" />
+    <Compile Include="DataProvider\IUnitIndexDataProvider.cs" />
+    <Compile Include="DTO\ExclusiveJobIndexDto.cs" />
+    <Compile Include="DTO\GeneralJobIndexDto.cs" />
+    <Compile Include="DTO\JobIndexBase.cs" />
+    <Compile Include="DTO\JobPositionIntegrationDTO.cs" />
+    <Compile Include="DTO\UnitIndexIntegrationDTO.cs" />
+    <Compile Include="DTO\UnitNodeIntegrationDTO.cs" />
     <Compile Include="DataProvider\IEmployeeDataProvider.cs" />
-    <Compile Include="DataProvider\IPersonneDataPrivider.cs" />
     <Compile Include="DTO\JobTitleDto.cs" />
     <Compile Include="DTO\NodeTypeDto.cs" />
-    <Compile Include="DTO\OrganChartNodeDto.cs" />
+    <Compile Include="DTO\UnitNodeIntegrationDTO_Old.cs" />
     <Compile Include="DTO\EmployeeDto.cs" />
+    <Compile Include="DataProvider\IUnitDataProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

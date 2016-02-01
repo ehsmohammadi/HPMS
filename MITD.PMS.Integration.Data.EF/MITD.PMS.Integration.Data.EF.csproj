@@ -72,6 +72,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PersonnelDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DBModel\PMS_GeneralIndex.cs">
+      <DependentUpon>PersonnelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\PMS_IndexType.cs">
+      <DependentUpon>PersonnelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\PMS_JobIndex.cs">
+      <DependentUpon>PersonnelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\PMS_JobTitle.cs">
+      <DependentUpon>PersonnelDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBModel\Rasteh.cs">
       <DependentUpon>PersonnelDB.tt</DependentUpon>
     </Compile>
@@ -82,12 +94,15 @@
       <DependentUpon>PersonnelDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EmployeeDataProvider.cs" />
-    <Compile Include="GetDataMethod.cs" />
-    <Compile Include="OrganChartDataPrivider.cs" />
+    <Compile Include="JobDataProvider.cs" />
+    <Compile Include="JobIndexDataProvider.cs" />
+    <Compile Include="UnitDataPrivider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <EntityDeploy Include="DBModel\PersonnelDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>PersonnelDB.Designer.cs</LastGenOutput>

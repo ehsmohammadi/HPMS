@@ -44,24 +44,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Wrappers\CustomField\CustomFieldServiceWrapper.cs" />
-    <Compile Include="Wrappers\CustomField\ICustomFieldServiceWrapper.cs" />
     <Compile Include="Wrappers\EmployeeManagement\EmployeeServiceWrapper.cs" />
-    <Compile Include="Wrappers\JobIndex\IJobIndexInPeriodServiceWrapper.cs" />
-    <Compile Include="Wrappers\JobIndex\IJobIndexServiceWrapper.cs" />
     <Compile Include="Wrappers\JobIndex\JobIndexInPeriodServiceWrapper.cs" />
     <Compile Include="Wrappers\JobIndex\JobIndexServiceWrapper.cs" />
-    <Compile Include="Wrappers\JobPosition\IJobPositionInPeriodServiceWrapper.cs" />
-    <Compile Include="Wrappers\JobPosition\IJobPositionServiceWrapper.cs" />
     <Compile Include="Wrappers\JobPosition\JobPositionInPeriodServiceWrapper.cs" />
-    <Compile Include="Wrappers\Job\IJobInPeriodServiceWrapper.cs" />
-    <Compile Include="Wrappers\Job\IJobServiceWrapper.cs" />
     <Compile Include="Wrappers\Job\JobInPeriodServiceWrapper.cs" />
-    <Compile Include="Wrappers\UnitIndex\IUnitIndexInPeriodServiceWrapper.cs" />
-    <Compile Include="Wrappers\UnitIndex\IUnitIndexServiceWrapper.cs" />
+    <Compile Include="Wrappers\Period\PeriodServiceWrapper.cs" />
     <Compile Include="Wrappers\UnitIndex\UnitIndexInPeriodServiceWrapper.cs" />
     <Compile Include="Wrappers\UnitIndex\UnitIndexServiceWrapper.cs" />
-    <Compile Include="Wrappers\Unit\IUnitInPeriodServiceWrapper.cs" />
-    <Compile Include="Wrappers\Unit\IUnitServiceWrapper.cs" />
     <Compile Include="Wrappers\JobPosition\JobPositionServiceWrapper.cs" />
     <Compile Include="Wrappers\Job\JobServiceWrapper.cs" />
     <Compile Include="PMSClientConfig.cs" />

@@ -1,54 +1,49 @@
-﻿@model IEnumerable<MITD.PMS.Integration.Contract.Period.PeriodProperties>
+﻿@model IEnumerable<MITD.PMS.Integration.Domain.Period>
 
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.PeriodName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PeriodID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PeriodStateID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PeriodStateName)
-            </th>
-            <th></th>
-        </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PeriodName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PeriodID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PeriodStateID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PeriodStateName)
-            </td>
-            <td>
-                @Html.ActionLink("GetDataForConvert", "GetDataForConvert", new { id = item.PeriodID }) |
-            </td>
-        </tr>
+    @{
+        Layout = null;
     }
-    
-    </table>
-</body>
+
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Index</title>
+    </head>
+    <body>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.State.Name)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.State.Name)
+                    </td>
+                    <td>
+                        @Html.ActionLink("PeriodDetail", "PeriodDetail", new { id = item.ID }) |
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </body>
 </html>

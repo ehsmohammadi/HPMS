@@ -42,5 +42,6 @@ namespace MITD.PMS.Integration.Data.EF.DBModel
         public Nullable<bool> IsInFullPath { get; set; }
         public string Radif { get; set; }
         public Nullable<bool> IsManager { get; set; }
+        public Nullable<long> ID_PMS_JobTitle { get; set; }
     }
 }

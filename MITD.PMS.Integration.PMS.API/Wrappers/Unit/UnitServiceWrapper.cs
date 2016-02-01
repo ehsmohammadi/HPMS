@@ -8,7 +8,7 @@ using MITD.PMS.Presentation.Contracts;
 
 namespace MITD.PMS.Integration.PMS.API
 {
-    public class UnitServiceWrapper : IUnitServiceWrapper 
+    public class UnitServiceWrapper// : IUnitService
     {
 
         private readonly IUserProvider userProvider;

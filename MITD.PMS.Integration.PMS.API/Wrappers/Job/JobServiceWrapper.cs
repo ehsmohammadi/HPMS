@@ -59,6 +59,11 @@ namespace MITD.PMS.Integration.PMS.API
             IntegrationWebClient.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 
+        public void GetJob(Action<JobDTO, Exception> action, string transferId)
+        {
+
+        }
+
         public void AddJob(Action<JobDTO, Exception> action, JobDTO job)
         {
             IntegrationWebClient.Post(new Uri(apiAddress, PMSClientConfig.UriKind), action, job, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));

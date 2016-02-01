@@ -1,0 +1,60 @@
+﻿@model MITD.PMS.Integration.Domain.Period
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GetDataForConvert</title>
+</head>
+<body>
+    <div>
+        <h4>PeriodProperties</h4>
+    	<hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ID)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ID)
+            </dd>
+   
+            <dt>
+                @Html.DisplayNameFor(model => model.State.Name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.State.Name)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+       @Html.ActionLink("Convert Employees", "GetEmployeeList", new { id = Model.ID })
+    </p>
+    <p>
+       @Html.ActionLink("Convert Jobs", "GetJobs", new { id = Model.ID })
+    </p>
+    <p>
+       @Html.ActionLink("Convert General Job Indexes", "ConvertGeneralJobIndexes", new { id = Model.ID })
+    </p>
+    <p>
+        @Html.ActionLink("Convert Exclusive Job Indexes", "ConvertExclusiveJobIndexes", new { id = Model.ID })
+    </p>
+    <br />
+    @ViewBag.ResultMessage
+</body>
+</html>

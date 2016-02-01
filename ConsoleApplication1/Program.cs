@@ -14,34 +14,68 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
+
+            var res = Console.ReadLine();
+            Console.ReadLine();
+
             var empConverter = new EmployeeConverter(new EmployeeDataProvider(), new EmployeeServiceWrapper(new UserProvider()));
+            var jobConverter = new JobConverter(new JobDataProvider(), new JobServiceWrapper(new UserProvider()), new JobInPeriodServiceWrapper(new UserProvider()), new PeriodServiceWrapper(new UserProvider()));
+            var periodService = new PeriodDataProvider(new PeriodServiceWrapper(new UserProvider()));//new PeriodServiceWrapper(new UserProvider()));
+            //var CnManager = new ConverterManager(new CustomFieldServiceWrapper(new UserProvider()));
 
-            var period = new PeriodDTO();
-            period.Id = 10;
+            
+
+            var period = new  Period();
+            period.ID = 10;
             period.Name = "name";
+
+
+
+
+            //CnManager.Run(period);
+
             int convertedEmployee = 0;
+            int convertedJob=0;
 
-            string res = "";
+            //string res = "";
 
-            var task2 = new Task(act =>
-            {
-                while (string.IsNullOrEmpty(res))
-                {
-                    if (convertedEmployee != empConverter.Result)
-                        Console.WriteLine(empConverter.Result + "employee converted");
-                    convertedEmployee = empConverter.Result;
+            //var ShowProgressTask = new Task(act =>
+            //{
+            //    while (string.IsNullOrEmpty(res))
+            //    {
+            //        if (convertedEmployee != empConverter.Result)
+            //            Console.WriteLine(empConverter.Result + "employee converted");
+            //        convertedEmployee = empConverter.Result;
 
-                }
-            }, null);
+            //        if (convertedJob != jobConverter.ProgressCount)
+            //            Console.WriteLine(jobConverter.ProgressCount + "Job Converted");
+            //        convertedJob = jobConverter.ProgressCount;
+            //    }
+            //}, null);
 
-            task2.Start();
+            //ShowProgressTask.Start();
 
-            var task = new Task(act =>
-            {
-                empConverter.ConvertEmployee(period);
-            }, null);
+            //var employeeConvertTask = new Task(act2 =>
+            //{
+            //    empConverter.ConvertEmployee(period);
+            //}, null);
 
-            task.Start();
+            ////employeeConvertTask.Start();
+
+            //var jobConvertTask = new Task(act =>
+            //{
+            //    jobConverter.ConvertJob(period);
+            //}, null);
+            ////jobConvertTask.Start();
+
+
+            //var GetAllPeriodsTask = new Task(act =>
+            //{
+            //    periodService.GetAllPeriods(
+                    
+            //        );
+            //}, null);
+            //GetAllPeriodsTask.Start();
 
 
 

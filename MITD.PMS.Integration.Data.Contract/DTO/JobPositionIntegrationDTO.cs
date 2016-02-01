@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace MITD.PMS.Integration.Data.Contract.DTO
 {
-    public class UnitDto
+    public class JobPositionIntegrationDTO
     {
-        public String UnitName { get; set; }
+        public int ID { get; set; }
 
-        public int UnitID { get; set; }
+        public string JobPositionName { get; set; }
+
 
     }
 }
