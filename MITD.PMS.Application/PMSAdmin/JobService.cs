@@ -22,7 +22,7 @@ namespace MITD.PMSAdmin.Application
         }
 
 
-        public Job AddJob(string jobName, string dictionaryName, List<CustomFieldTypeId> customFieldTypeIdList)
+        public Job AddJob(string jobName, string dictionaryName, List<CustomFieldTypeId> customFieldTypeIdList, Guid transferId)
         {
             try
             {
@@ -30,6 +30,7 @@ namespace MITD.PMSAdmin.Application
                 {
                     JobId jobId = jobRep.GetNextId();
                     var job = new Job(jobId, jobName, dictionaryName);
+                    job.TransferId = transferId;
                     assignJobCustomField(job, customFieldTypeIdList);
                     jobRep.AddJob(job);
                     scope.Complete();

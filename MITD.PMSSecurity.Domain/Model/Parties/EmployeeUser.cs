@@ -14,7 +14,9 @@ namespace MITD.PMSSecurity.Domain
                 return new List<ActionType>
                 {
                     ActionType.FillInquiryForm,
-                    ActionType.FillInquiryUnitForm
+                    ActionType.FillInquiryUnitForm,
+                    ActionType.ShowEmployeeInquiry,
+                    ActionType.ShowCalculationResult
                 };
             }
         }

@@ -166,10 +166,6 @@ namespace MITD.PMS.Persistence
                 });
             }
 
-
-
-
-
             #endregion
 
 
@@ -799,7 +795,8 @@ namespace MITD.PMS.Persistence
                   .WithColumn("Id").AsInt64().PrimaryKey()
                   .WithColumn("RowVersion").AsCustom("rowversion")
                   .WithColumn("Name").AsString(256).NotNullable()
-                  .WithColumn("DictionaryName").AsString(256).NotNullable();
+                  .WithColumn("DictionaryName").AsString(256).NotNullable()
+                  .WithColumn("TransferId").AsGuid().Nullable(); 
 
             Create.Table("JobIndexCategories")
                   .WithColumn("Id").AsInt64().PrimaryKey()
@@ -813,7 +810,9 @@ namespace MITD.PMS.Persistence
                   .ForeignKey("fk_AbstractJobIndices_JobIndices_Id", "AbstractJobIndices", "Id")
 
                   .WithColumn("CategoryId").AsInt64().NotNullable()
-                  .ForeignKey("fk_JobIndexCategories_JobIndices_CategoryId", "JobIndexCategories", "Id");
+                  .ForeignKey("fk_JobIndexCategories_JobIndices_CategoryId", "JobIndexCategories", "Id")
+
+                  .WithColumn("TransferId").AsGuid().Nullable();
 
             Create.Table("JobIndices_CustomFields")
                   .WithColumn("Id").AsInt64().PrimaryKey().Identity()
@@ -832,7 +831,8 @@ namespace MITD.PMS.Persistence
                   .WithColumn("Id").AsInt64().PrimaryKey()
                   .WithColumn("RowVersion").AsCustom("rowversion")
                   .WithColumn("Name").AsString(256).NotNullable()
-                  .WithColumn("DictionaryName").AsString(256).NotNullable();
+                  .WithColumn("DictionaryName").AsString(256).NotNullable()
+                  .WithColumn("TransferId").AsGuid().Nullable();
 
             Create.Table("UnitIndexCategories")
                   .WithColumn("Id").AsInt64().PrimaryKey()
@@ -846,7 +846,9 @@ namespace MITD.PMS.Persistence
                   .ForeignKey("fk_AbstractUnitIndices_UnitIndices_Id", "AbstractUnitIndices", "Id")
 
                   .WithColumn("CategoryId").AsInt64().NotNullable()
-                  .ForeignKey("fk_UnitIndexCategories_UnitIndices_CategoryId", "UnitIndexCategories", "Id");
+                  .ForeignKey("fk_UnitIndexCategories_UnitIndices_CategoryId", "UnitIndexCategories", "Id")
+
+                  .WithColumn("TransferId").AsGuid().Nullable();
 
             Create.Table("UnitIndices_CustomFields")
                   .WithColumn("Id").AsInt64().PrimaryKey().Identity()
@@ -1273,7 +1275,7 @@ CREATE SEQUENCE [dbo].[Calculations_ExceptionsSeq]
                   .WithColumn("RowVersion").AsCustom("rowversion")
                   .WithColumn("Name").AsString(256).NotNullable()
                   .WithColumn("DictionaryName").AsString(512).NotNullable().Unique("Units_Unique_DictionaryName")
-                ;
+                  .WithColumn("TransferId").AsGuid().Nullable();
         }
 
         private void createJobPostionTable()
@@ -1283,7 +1285,7 @@ CREATE SEQUENCE [dbo].[Calculations_ExceptionsSeq]
                   .WithColumn("RowVersion").AsCustom("rowversion")
                   .WithColumn("Name").AsString(256).NotNullable()
                   .WithColumn("DictionaryName").AsString(512).NotNullable().Unique("JobPositions_Unique_DictionaryName")
-                ;
+                 .WithColumn("TransferId").AsGuid().Nullable();
         }
 
         private void createJobTable()
@@ -1293,7 +1295,7 @@ CREATE SEQUENCE [dbo].[Calculations_ExceptionsSeq]
                   .WithColumn("RowVersion").AsCustom("rowversion")
                   .WithColumn("Name").AsString(256).NotNullable()
                   .WithColumn("DictionaryName").AsString(512).NotNullable()
-                ;
+                .WithColumn("TransferId").AsGuid().Nullable();
             Create.UniqueConstraint("Jobs_Unique_DictionaryName")
                   .OnTable("Jobs").Column("DictionaryName");
         }

@@ -28,7 +28,7 @@ namespace MITD.PMS.Interface
             this.userRep = userRep;
         }
 
-
+        [RequiredPermission(ActionType.ShowLog)]
         public PageResultDTO<LogDTOWithActions> GetAllLogs(int pageSize, int pageIndex,  QueryStringConditions conditions )
         {
             var logs = logService.GetAllLogs();
@@ -44,6 +44,7 @@ namespace MITD.PMS.Interface
             return res;
         }
 
+        [RequiredPermission(ActionType.ShowLog)]
         public LogDTO GetLog(Guid logId)
         {
             Log log = logService.GetLogById(new LogId(logId));

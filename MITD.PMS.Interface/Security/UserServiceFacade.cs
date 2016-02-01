@@ -37,7 +37,7 @@ namespace MITD.PMS.Interface
         private readonly ISecurityServiceFacade securityServiceFacade;
 
         public UserServiceFacade(ISecurityService securityService,
-            IMapper<ClaimsPrincipal, UserStateDTO> userStateMapper, 
+            IMapper<ClaimsPrincipal, UserStateDTO> userStateMapper,
             IMapper<List<User>, ClaimsPrincipal> pmsUsersMapper,
             IUserRepository userRep,
             IMapper<User, UserDTOWithActions> userDTOWithActionsMapper,
@@ -68,7 +68,7 @@ namespace MITD.PMS.Interface
             this._securityApplicationService = _securityApplicationService;
         }
 
-        
+        //[RequiredPermission(ActionType.ShowUser)]
         public UserStateDTO GetUserState(ClaimsPrincipal u)
         {
             if (u == null)
@@ -87,7 +87,7 @@ namespace MITD.PMS.Interface
                 var permittedWorkList = securityService.GetPermittedWorkListFor(user);
                 userState.PermittedUsersOnMyWorkList.AddRange(
                     permittedWorkList.Select(w => new UserDescriptionDTO { FirstName = w.FirstName, LastName = w.LastName, PartyName = w.Id.PartyName }).ToList());
-            }           
+            }
             return userState;
         }
 
@@ -150,7 +150,7 @@ namespace MITD.PMS.Interface
                 Name = name;
                 AuthenticationType = authenticationType;
                 IsAuthenticated = isAuthenticated;
-        }
+            }
         }
 
         public static ClaimsPrincipal CreateFakePrincipal()
@@ -233,6 +233,7 @@ namespace MITD.PMS.Interface
 
         #endregion
 
+        [RequiredPermission(ActionType.ShowUser)]
         public UserDTO GetUserByUsername(string username)
         {
             var user = userRep.GetUserById(new PartyId(username));
@@ -271,6 +272,7 @@ namespace MITD.PMS.Interface
             return "user deleted successfully ";
         }
 
+        [RequiredPermission(ActionType.ShowUser)]
         public PageResultDTO<UserDTOWithActions> GetAllUsers(int pageSize, int pageIndex, string filter)
         {
             var fs = new ListFetchStrategy<User>(Enums.FetchInUnitOfWorkOption.NoTracking);
@@ -303,12 +305,15 @@ namespace MITD.PMS.Interface
             return res;
 
         }
+
+        [RequiredPermission(ActionType.ShowUserGroup)]
         public List<UserGroupDTOWithActions> GetAllUserGroups()
         {
             var userGroups = userRep.GetAllUserGroup();
             return userGroups.Select(p => userGroupDTOWithActionsMapper.MapToModel(p)).ToList();
         }
 
+        [RequiredPermission(ActionType.ShowUserGroup)]
         public UserGroupDTO GetUserGroupByName(string groupName)
         {
             Group group = userRep.GetUserGroupById(new PartyId(groupName));
@@ -401,7 +406,7 @@ namespace MITD.PMS.Interface
             var lname = "";
             var uname = "";
             foreach (var criteria in criterias)
-        {
+            {
                 var sp = criteria.Split(':');
                 if (sp[0] == "FirstName" && !string.IsNullOrEmpty(sp[1]))
                     fname = sp[1];

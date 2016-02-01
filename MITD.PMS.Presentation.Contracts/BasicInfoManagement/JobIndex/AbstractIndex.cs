@@ -29,7 +29,7 @@ namespace MITD.PMS.Presentation.Contracts
         public long Id
         {
             get { return id; }
-            set { this.SetField (p => p.Id, ref id, value); }
+            set { this.SetField(p => p.Id, ref id, value); }
         }
 
         private string name;
@@ -53,8 +53,13 @@ namespace MITD.PMS.Presentation.Contracts
         {
             get { return dictionaryName; }
             set { this.SetField(p => p.DictionaryName, ref dictionaryName, value); }
+        }
 
-            
+        private Guid transferId;
+        public Guid TransferId
+        {
+            get { return transferId; }
+            set { this.SetField(p => p.TransferId, ref transferId, value); }
         }
     }
 
@@ -67,15 +72,15 @@ namespace MITD.PMS.Presentation.Contracts
             var dtoType = jObject.Value<string>("DTOTypeName");
             if (dtoType.Equals("JobIndexDTO"))
                 return new JobIndexDTO();
-            else if(dtoType.Equals("JobIndexCategoryDTO"))
+            else if (dtoType.Equals("JobIndexCategoryDTO"))
                 return new JobIndexCategoryDTO();
-            else if(dtoType.Equals("UnitIndexDTO"))
+            else if (dtoType.Equals("UnitIndexDTO"))
                 return new UnitIndexDTO();
             else
             {
                 return new UnitIndexCategoryDTO();
             }
-            
+
         }
     }
 

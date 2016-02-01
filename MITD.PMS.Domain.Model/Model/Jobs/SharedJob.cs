@@ -24,8 +24,10 @@ namespace MITD.PMS.Domain.Model.Jobs
 
         private readonly string dictionaryName;
         public virtual string DictionaryName { get { return dictionaryName; } }
-      
-        
+
+        private readonly Guid transferId;
+        public virtual Guid TransferId { get { return transferId; } }
+
         #endregion
 
         #region Constructors

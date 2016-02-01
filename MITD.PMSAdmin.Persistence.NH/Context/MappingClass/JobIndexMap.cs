@@ -42,6 +42,11 @@ namespace MITD.PMSAdmin.Persistence.NH.Context.MappingClass
                 mapper.Length(512);
                 mapper.NotNullable(true);
             });
+            Property(pi => pi.TransferId, mapper =>
+            {
+                mapper.Access(Accessor.Field);
+                mapper.NotNullable(false);
+            });
         }
     }
 

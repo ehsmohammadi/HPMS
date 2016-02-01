@@ -66,7 +66,7 @@ namespace MITD.PMS.Interface
             return "JobPosition with Id " + jobPositionId + " removed";
         }
 
-        [RequiredPermission(ActionType.ManageJobPositions)]
+        [RequiredPermission(ActionType.ShowJobPositionInPeriod)]
         public IEnumerable<JobPositionInPeriodDTOWithActions> GetJobPositionsWithActions(long periodId)
         {
             var jobPositions=jobPositionRep.GetJobPositions(new PeriodId(periodId));
@@ -106,12 +106,14 @@ namespace MITD.PMS.Interface
            // return res;
         }
 
+        [RequiredPermission(ActionType.ShowJobPositionInPeriod)]
         public IEnumerable<JobPositionInPeriodDTO> GetJobPositions(long periodId)
         {
             var jobPositions = jobPositionRep.GetJobPositions(new PeriodId(periodId));
             return jobPositions.Select(u => jobPositionInPeriodDTOMapper.MapToModel(u));
         }
 
+        [RequiredPermission(ActionType.ShowJobPositionInPeriod)]
         public JobPositionInPeriodDTO GetJobPosition(long periodId, long jobPositionId)
         {
             var jobPosition = jobPositionRep.GetBy(new JobPositionId(new PeriodId(periodId),new SharedJobPositionId(jobPositionId) ));

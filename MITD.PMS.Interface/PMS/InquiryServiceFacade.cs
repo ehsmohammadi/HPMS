@@ -32,7 +32,7 @@ namespace MITD.PMS.Interface
             this.jobIndexRep = jobIndexRep;
         }
 
-
+        [RequiredPermission(ActionType.ShowEmployeeInquiry)]
         public List<InquirySubjectDTO> GetInquirerInquirySubjects(long periodId, string inquirerEmployeeNo)
         {
             List<InquirySubjectWithJobPosition> inquirySubjects =

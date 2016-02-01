@@ -40,6 +40,9 @@ namespace MITD.PMSAdmin.Domain.Model.Units
             get { return dictionaryName; }
         }
 
+        private Guid transferId;
+        public virtual Guid TransferId { get { return transferId; } set { transferId = value; }}  
+
         private IList<CustomFieldTypeId> customFieldTypeIdList = new List<CustomFieldTypeId>();
         public virtual IReadOnlyList<CustomFieldTypeId> CustomFieldTypeIdList
         {

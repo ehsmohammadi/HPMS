@@ -27,13 +27,15 @@ namespace MITD.PMS.Presentation.UI.SL
             var culture = new CultureInfo("fa-IR");//new CultureInfo("en-US");// new CultureInfo("fa-IR");
             Thread.CurrentThread.CurrentCulture = culture;
             Thread.CurrentThread.CurrentUICulture = culture;
+
             new BootStrapper().Execute();
             var controller = ServiceLocator.Current.GetInstance<IPMSController>();
-#if(DEBUG)
-            controller.getLogonUser();
-#else
+//#if(DEBUG)
+//            controller.getLogonUser();
+//#else
             controller.Login(() => { });
-#endif
+//#endif
+
         }
 
         private void Application_Exit(object sender, EventArgs e)

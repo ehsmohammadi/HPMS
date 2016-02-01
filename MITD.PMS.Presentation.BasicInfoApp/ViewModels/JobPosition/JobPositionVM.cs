@@ -100,6 +100,8 @@ namespace MITD.PMS.Presentation.Logic
             if (!jobPosition.Validate()) return;
 
             ShowBusyIndicator();
+
+            jobPosition.TransferId = Guid.NewGuid();
             if (actionType==ActionType.AddJobPosition)
             {
                 jobPositionService.AddJobPosition((res, exp) => appController.BeginInvokeOnDispatcher(() =>

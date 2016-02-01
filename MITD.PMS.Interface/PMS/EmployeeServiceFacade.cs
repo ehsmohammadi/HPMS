@@ -49,7 +49,7 @@ namespace MITD.PMS.Interface
             this.converter = converter;
         }
 
-        [RequiredPermission(ActionType.ManageEmployees)]
+        [RequiredPermission(ActionType.ShowEmployees)]
         public PageResultDTO<EmployeeDTOWithActions> GetAllEmployees(long periodId, int pageSize, int pageIndex)
         {
             var fs = new ListFetchStrategy<Employee>(Enums.FetchInUnitOfWorkOption.NoTracking);
@@ -63,7 +63,7 @@ namespace MITD.PMS.Interface
             return res;
         }
 
-        [RequiredPermission(ActionType.ManageEmployees)]
+        [RequiredPermission(ActionType.ShowEmployees)]
         public PageResultDTO<EmployeeDTOWithActions> GetAllEmployees(long periodId, int pageSize, int pageIndex,
             string filter)
         {
@@ -81,6 +81,7 @@ namespace MITD.PMS.Interface
             return res;
         }
 
+        [RequiredPermission(ActionType.ShowEmployees)]
         public List<string> GetAllEmployeeNo(long periodId, string filter)
         {
             var criterias = filter.Split(';');
@@ -111,7 +112,7 @@ namespace MITD.PMS.Interface
             return res;
         }
 
-        [RequiredPermission(ActionType.ManageEmployees)]
+        [RequiredPermission(ActionType.ShowEmployees)]
         public List<EmployeeDTO> GetAllEmployees(long periodId)
         {
             return employeeRep.Find(e => e.Id.PeriodId == new PeriodId(periodId)).Select(p => employeeDTOMapper.MapToModel(p)).ToList();

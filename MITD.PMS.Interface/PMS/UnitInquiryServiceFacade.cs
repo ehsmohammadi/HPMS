@@ -11,6 +11,7 @@ using MITD.PMS.Domain.Model.Units;
 using MITD.PMS.Domain.Model.Periods;
 using MITD.PMS.Presentation.Contracts;
 using MITD.PMSReport.Domain.Model;
+using MITD.PMSSecurity.Domain;
 
 namespace MITD.PMS.Interface
 {
@@ -31,7 +32,7 @@ namespace MITD.PMS.Interface
             this.unitIndexRep = unitIndexRep;
         }
 
-
+        [RequiredPermission(ActionType.ShowUnitInPeriodInquiry)]
         public List<InquiryUnitDTO> GetInquirerInquirySubjects(long periodId, string inquirerEmployeeNo)
         {
             var res = new List<InquiryUnitDTO>();
@@ -47,6 +48,7 @@ namespace MITD.PMS.Interface
             return res;
         }
 
+        [RequiredPermission(ActionType.ShowUnitInPeriodInquiry)]
         public InquiryUnitFormDTO GetInquiryForm(long periodId, string inquirerEmployeeNo, long unitId)
         {
             List<InquiryUnitIndexPoint> inquryUnitIndexPoints =

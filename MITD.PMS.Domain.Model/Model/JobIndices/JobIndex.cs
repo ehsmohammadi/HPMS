@@ -45,6 +45,8 @@ namespace MITD.PMS.Domain.Model.JobIndices
 
         public virtual string DictionaryName { get { return sharedJobIndex.DictionaryName; } }
 
+        public virtual Guid TransferId { get { return sharedJobIndex.TransferId; } }
+
         private  bool isInquireable;
         public virtual bool IsInquireable { get { return isInquireable; } }
 

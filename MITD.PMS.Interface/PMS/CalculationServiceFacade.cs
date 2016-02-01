@@ -74,7 +74,7 @@ namespace MITD.PMS.Interface
 
         }
 
-        [RequiredPermission(ActionType.ManageCalculations)]
+        [RequiredPermission(ActionType.ShowCalculations)]
         public PageResultDTO<CalculationBriefDTOWithAction> GetAllCalculations(long periodId,int pageSize, int pageIndex)
         {
             var fs = new ListFetchStrategy<CalculationWithPolicyAndPeriod>(Enums.FetchInUnitOfWorkOption.NoTracking);

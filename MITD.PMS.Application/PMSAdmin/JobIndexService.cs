@@ -53,7 +53,7 @@ namespace MITD.PMSAdmin.Application
 
 
         public JobIndex AddJobIndex(AbstractJobIndexId categoryId, string name
-            , string dictionaryName, IList<CustomFieldTypeId> customFieldTypeIdList)
+            , string dictionaryName, IList<CustomFieldTypeId> customFieldTypeIdList, Guid transferId)
         {
             try
             {
@@ -63,6 +63,7 @@ namespace MITD.PMSAdmin.Application
                     var category = jobIndexRep.GetJobIndexCategory(categoryId);
                     var jobIndex = new JobIndex(id, category, name, dictionaryName);
                     assignJobIndexCustomField(jobIndex, customFieldTypeIdList);
+                    jobIndex.TransferId = transferId;
                     jobIndexRep.Add(jobIndex);
                     scope.Complete();
                     return jobIndex;
