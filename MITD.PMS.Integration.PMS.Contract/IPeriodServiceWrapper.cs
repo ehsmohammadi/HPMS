@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using MITD.PMS.Presentation.Contracts;
+using MITD.Presentation;
 
 namespace MITD.PMS.Integration.PMS.API
 {
-    public partial interface IPeriodServiceWrapper
+    public partial interface IPeriodServiceWrapper : IServiceWrapper
     {
 
         void GetCurrentPeriod(Action<PeriodDTO, Exception> action);

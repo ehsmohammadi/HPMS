@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using MITD.PMS.Presentation.Contracts;
+using MITD.Presentation;
 
 namespace MITD.PMS.Integration.PMS.Contract
 {
-    public interface ICustomFieldServiceWrapper
+    public interface ICustomFieldServiceWrapper : IServiceWrapper
     {
         void GetCustomField(Action<CustomFieldDTO, Exception> action, long id);
         void AddCustomField(Action<CustomFieldDTO, Exception> action, CustomFieldDTO jobIndex);

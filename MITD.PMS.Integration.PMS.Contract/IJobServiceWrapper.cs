@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using MITD.PMS.Presentation.Contracts;
+using MITD.Presentation;
 
 namespace MITD.PMS.Integration.PMS.API
 {
-    public interface IJobServiceWrapper
+    public interface IJobServiceWrapper : IServiceWrapper
     {
 
         void GetJob(Action<JobDTO, Exception> action, long id);
