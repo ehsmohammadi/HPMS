@@ -1,95 +1,110 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MITD.PMS.Integration.PMS.API;
 using MITD.PMS.Integration.Data.Contract;
-using MITD.PMS.Integration.PMS.Contract;
-using MITD.PMS.Integration.Data.Contract.DataProvider;
 using MITD.PMS.Integration.Data.Contract.DTO;
-using MITD.PMS.Presentation.Contracts;
-using MITD.PMS.Integration.Data.EF;
 using MITD.PMS.Integration.Domain.Contract;
+using MITD.PMS.Integration.PMS.Contract;
+using MITD.PMS.Presentation.Contracts;
 
 namespace MITD.PMS.Integration.Domain
 {
-    class UnitIndexConverter : IUnitIndexConverter
+    public class UnitIndexConverter : IUnitIndexConverter
     {
 
         #region Fields
 
-        IUnitIndexServiceWrapper unitIndexService;
-        IUnitIndexDataProvider unitIndexDataProvider;
-        IUnitIndexInPeriodServiceWrapper unitIndexInPeriodService;
+        private readonly IUnitIndexDataProvider unitIndexDataProvider;
+        private readonly IUnitIndexServiceWrapper unitIndexService;
+        private readonly IUnitIndexInPeriodServiceWrapper unitIndexAssignmentService;
+
         #endregion
 
+        #region Constructors
 
-
-        public UnitIndexConverter(IUnitIndexDataProvider UnitIndexDataProvider, IUnitIndexServiceWrapper UnitIndexService, IUnitIndexInPeriodServiceWrapper UnitIndexInPeriodService)
+        public UnitIndexConverter(IUnitIndexDataProvider unitIndexDataProvider,
+            IUnitIndexServiceWrapper unitIndexService, IUnitIndexInPeriodServiceWrapper unitIndexAssignmentService)
         {
-            this.unitIndexService = UnitIndexService;
-            this.unitIndexDataProvider = UnitIndexDataProvider;
-            this.unitIndexInPeriodService = UnitIndexInPeriodService;
+            this.unitIndexDataProvider = unitIndexDataProvider;
+            this.unitIndexService = unitIndexService;
+            this.unitIndexAssignmentService = unitIndexAssignmentService;
         }
+
+        #endregion
 
         #region Public Methods
 
         public void ConvertUnitIndex(Period period)
         {
-            var UnitIndexList = unitIndexDataProvider.GetUnitIndexList();
-            // Create Unit Index Category
-            var PmsUnitIndexCategory = new UnitIndexCategoryDTO
+            var sourceUnitIndexListId = unitIndexDataProvider.GetUnitIndexListId();
+            foreach (var sourceUnitIndexId in sourceUnitIndexListId)
             {
-                Name = "گروه شاخص های سازمانی",
-                DictionaryName = "UnitIndexCategoryDicName"
-            };
-            
-            unitIndexService.AddUnitIndexCategory((unitIndexCategoryResult, exp) =>
-            {
-                if (exp != null)
-                    throw new Exception("Error in Add UnitIndexCategory!");
-
-                foreach (var UnitIndexItem in UnitIndexList)
+                var sourceUnitIndexDTO = unitIndexDataProvider.GetBy(sourceUnitIndexId);
+                var desUnitIndexDTO = createDestinationUnitIndex(sourceUnitIndexDTO);
+                unitIndexService.AddUnitIndex((unitIndex, addUnitIndexExp) =>
                 {
-                    var PmsUnitIndex = new UnitIndexDTO
+                    if (addUnitIndexExp != null)
                     {
-                        Name = UnitIndexItem.Title,
-                        ParentId = unitIndexCategoryResult.Id,
-                        CustomFields=new  List<CustomFieldDTO>(),
-                        DictionaryName="CUI"+Guid.NewGuid()
-                    };
-                    unitIndexService.AddUnitIndex((unitIndexResult, ueExp) =>
+                        handleException(addUnitIndexExp);
+                    }
+                    else
                     {
-                        if (ueExp != null)
+                        var periodUnitIndexDTO = createPeriodUnitIndexDTO(unitIndex);
+                        unitIndexAssignmentService.AddUnitIndexInPeriod((res, exp) =>
                         {
-                            throw new Exception("Error in Assignment Unit!");
-                        }
-                        UnitIndexInPeriodDTO UnitIndexInPriodAssignment = new UnitIndexInPeriodDTO();
+                            if (exp != null)
+                            {
+                                handleException(exp);
+                            }
+                            else
+                            {
 
-                        //UnitInPriodAssignment = periodId;
-                        UnitIndexInPriodAssignment.Id = unitIndexCategoryResult.Id;
-                        UnitIndexInPriodAssignment.UnitIndexId = unitIndexCategoryResult.Id;
-                        //NewUnitID = unitResult.Id;
+                            }
 
+                        }, periodUnitIndexDTO);
 
+                    }
 
-                    }, PmsUnitIndex);   
-                }
-
-                
-            }, PmsUnitIndexCategory);
+                }, desUnitIndexDTO);
+            }
         }
 
         #endregion
 
-
         #region Private Methods
+
+        private UnitIndexDTO createDestinationUnitIndex(UnitIndexIntegrationDTO sourceUnitIndex)
+        {
+            var res = new UnitIndexDTO
+            {
+                Name = sourceUnitIndex.Title,
+                ParentId = PMSCostantData.UnitIndexCategoryId,
+                CustomFields = new List<CustomFieldDTO>
+                {
+                    new CustomFieldDTO
+                    {
+                        Id = PMSCostantData.UnitIndexFieldId,
+                    }
+                },
+                DictionaryName = "CUI" + Guid.NewGuid(),
+                TransferId = sourceUnitIndex.TransferId
+            };
+            return res;
+        }
+
+        private UnitIndexInPeriodDTO createPeriodUnitIndexDTO(UnitIndexDTO unitIndex)
+        {
+            var res = new UnitIndexInPeriodDTO();
+            return res;
+        }
+
+        private void handleException(Exception exception)
+        {
+            throw exception;
+        }
 
 
 
         #endregion
-
 
     }
 }

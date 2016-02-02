@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MITD.PMS.Integration.Data.EF;
+using MITD.PMS.Integration.Data.Contract;
 using MITD.PMS.Integration.Domain;
 using MITD.PMS.Integration.PMS.API;
-using MITD.PMS.Presentation.Contracts;
 
 namespace ConsoleApplication1
 {
@@ -15,72 +10,48 @@ namespace ConsoleApplication1
         static void Main(string[] args)
         {
 
-            var res = Console.ReadLine();
-            Console.ReadLine();
+            #region Entrance
 
-            var empConverter = new EmployeeConverter(new EmployeeDataProvider(), new EmployeeServiceWrapper(new UserProvider()));
-            var jobConverter = new JobConverter(new JobDataProvider(), new JobServiceWrapper(new UserProvider()), new JobInPeriodServiceWrapper(new UserProvider()), new PeriodServiceWrapper(new UserProvider()));
-            var periodService = new PeriodDataProvider(new PeriodServiceWrapper(new UserProvider()));//new PeriodServiceWrapper(new UserProvider()));
-            //var CnManager = new ConverterManager(new CustomFieldServiceWrapper(new UserProvider()));
+            Console.ReadLine(); 
 
-            
+            #endregion
 
-            var period = new  Period();
-            period.ID = 10;
-            period.Name = "name";
+            #region Prepare Manager
 
+            var userProvider = new UserProvider();
 
+            var period = new Period
+            {
+                ID = 10,
+                Name = "name"
+            };
 
+            #region Create UnitIndexConverter 
 
-            //CnManager.Run(period);
+            var unitIndexService = new UnitIndexServiceWrapper(userProvider);
+            var unitIndexInPeriodService = new UnitIndexInPeriodServiceWrapper(userProvider);
+            var unitIndexDataProvider = Activator.CreateInstance<IUnitIndexDataProvider>();
+            var unitIndexConverter = new UnitIndexConverter(unitIndexDataProvider, unitIndexService,
+                unitIndexInPeriodService); 
 
-            int convertedEmployee = 0;
-            int convertedJob=0;
+            #endregion
 
-            //string res = "";
+            #endregion
 
-            //var ShowProgressTask = new Task(act =>
-            //{
-            //    while (string.IsNullOrEmpty(res))
-            //    {
-            //        if (convertedEmployee != empConverter.Result)
-            //            Console.WriteLine(empConverter.Result + "employee converted");
-            //        convertedEmployee = empConverter.Result;
+            #region Manager Progress
 
-            //        if (convertedJob != jobConverter.ProgressCount)
-            //            Console.WriteLine(jobConverter.ProgressCount + "Job Converted");
-            //        convertedJob = jobConverter.ProgressCount;
-            //    }
-            //}, null);
+            var manager = new ConverterManager(unitIndexConverter);
+            manager.Init(period);
+            manager.Run(); 
 
-            //ShowProgressTask.Start();
+            #endregion
 
-            //var employeeConvertTask = new Task(act2 =>
-            //{
-            //    empConverter.ConvertEmployee(period);
-            //}, null);
+            #region End
 
-            ////employeeConvertTask.Start();
+            Console.WriteLine("This progress finished");
+            Console.ReadLine(); 
 
-            //var jobConvertTask = new Task(act =>
-            //{
-            //    jobConverter.ConvertJob(period);
-            //}, null);
-            ////jobConvertTask.Start();
-
-
-            //var GetAllPeriodsTask = new Task(act =>
-            //{
-            //    periodService.GetAllPeriods(
-                    
-            //        );
-            //}, null);
-            //GetAllPeriodsTask.Start();
-
-
-
-            res = Console.ReadLine();
-            Console.ReadLine();
+            #endregion
 
 
         }

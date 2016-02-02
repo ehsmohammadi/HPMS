@@ -95,59 +95,59 @@ namespace MITD.PMS.Persistence
             Insert.IntoTable("NH_Hilo").Row(new
                 {
                     TableKey = "Periods_Jobs",
-                    NextHi = 3
+                    NextHi = 1
                 }).Row(new
             {
                 TableKey = "Periods_Jobs_CustomFields",
-                NextHi = 3
+                NextHi = 1
             }).Row(new
             {
                 TableKey = "REConfigItems",
-                NextHi = 3
+                NextHi = 1
             }).Row(new
             {
                 TableKey = "Periods_Units",
-                NextHi = 3
+                NextHi = 1
             }).Row(new
             {
                 TableKey = "Periods_JobPositions",
-                NextHi = 3
+                NextHi = 1
             }).Row(new
             {
                 TableKey = "Employees",
-                NextHi = 3
+                NextHi = 1
             }).Row(new
             {
                 TableKey = "Periods_Jobs_CustomFields",
-                NextHi = 10
+                NextHi = 1
             }).Row(new
             {
                 TableKey = "Employees_JobPositions",
-                NextHi = 10
+                NextHi = 1
             }).Row(new
                 {
                     TableKey = "JobPostion_InquiryConfigurationItems",
-                    NextHi = 10
+                    NextHi = 1
                 }).Row(new
                 {
                     TableKey = "Employees_JobCustomField_Values",
-                    NextHi = 10
+                    NextHi = 1
                 }).Row(new
                 {
                     TableKey = "Parties",
-                    NextHi = 10
+                    NextHi = 1
                 }).Row(new
                 {
                     TableKey = "Jobs",
-                    NextHi = 10
+                    NextHi = 1
                 }).Row(new
                 {
                     TableKey = "Logs",
-                    NextHi = 10
+                    NextHi = 1
                 }).Row(new
                 {
                     TableKey = "Unit_InquiryConfigurationItems",
-                    NextHi = 10
+                    NextHi = 1
                 });
 
 
@@ -1025,26 +1025,26 @@ namespace MITD.PMS.Persistence
         {
 
             Execute.Sql(
-                "create sequence [dbo].[PeriodJobsSeq] as [bigint] start with 10 increment by 1 minvalue -9223372036854775808 maxValue 9223372036854775807  cache");
+                "create sequence [dbo].[PeriodJobsSeq] as [bigint] start with 1 increment by 1 minvalue -9223372036854775808 maxValue 9223372036854775807  cache");
             Execute.Sql(
-                "create sequence [dbo].[UnitSeq] as [bigint] start with 10 increment by 1 minvalue -9223372036854775808 maxValue 9223372036854775807  cache");
+                "create sequence [dbo].[UnitSeq] as [bigint] start with 1 increment by 1 minvalue -9223372036854775808 maxValue 9223372036854775807  cache");
             Execute.Sql(
-                "create sequence [dbo].[JobPositionSeq] as [bigint] start with 10 increment by 1 minvalue -9223372036854775808 maxValue 9223372036854775807  cache");
+                "create sequence [dbo].[JobPositionSeq] as [bigint] start with 1 increment by 1 minvalue -9223372036854775808 maxValue 9223372036854775807  cache");
             Execute.Sql(
-                "create sequence [dbo].[Jobseq] as [bigint] start with 10 increment by 1 minvalue -9223372036854775808 maxValue 9223372036854775807  cache");
+                "create sequence [dbo].[Jobseq] as [bigint] start with 1 increment by 1 minvalue -9223372036854775808 maxValue 9223372036854775807  cache");
             Execute.Sql(
-                "create sequence [dbo].[CustomFieldTypeSeq] as [bigint] start with 10 increment by 1 minvalue -9223372036854775808 maxValue 9223372036854775807  cache");
+                "create sequence [dbo].[CustomFieldTypeSeq] as [bigint] start with 1 increment by 1 minvalue -9223372036854775808 maxValue 9223372036854775807  cache");
             Execute.Sql(
-                "create sequence [dbo].[Inquiry_JobIndexPointsSeq] as [bigint] start with 10 increment by 1 minvalue -9223372036854775808 maxValue 9223372036854775807  cache");
+                "create sequence [dbo].[Inquiry_JobIndexPointsSeq] as [bigint] start with 1 increment by 1 minvalue -9223372036854775808 maxValue 9223372036854775807  cache");
             Execute.Sql(
-              "create sequence [dbo].[Inquiry_UnitIndexPointsSeq] as [bigint] start with 10 increment by 1 minvalue -9223372036854775808 maxValue 9223372036854775807  cache");
+              "create sequence [dbo].[Inquiry_UnitIndexPointsSeq] as [bigint] start with 1 increment by 1 minvalue -9223372036854775808 maxValue 9223372036854775807  cache");
 
 
 
             Execute.Sql(@"
 CREATE SEQUENCE [dbo].[PeriodSeq] 
  AS [bigint]
- START WITH 10
+ START WITH 1
  INCREMENT BY 1
  MINVALUE -9223372036854775808
  MAXVALUE 9223372036854775807
@@ -1053,7 +1053,7 @@ CREATE SEQUENCE [dbo].[PeriodSeq]
             Execute.Sql(@"
 CREATE SEQUENCE [dbo].[PolicySeq] 
  AS [bigint]
- START WITH 10
+ START WITH 1
  INCREMENT BY 1
  MINVALUE -9223372036854775808
  MAXVALUE 9223372036854775807
@@ -1062,7 +1062,7 @@ CREATE SEQUENCE [dbo].[PolicySeq]
             Execute.Sql(@"
 CREATE SEQUENCE [dbo].[CalculationSeq] 
  AS [bigint]
- START WITH 10
+ START WITH 1
  INCREMENT BY 1
  MINVALUE -9223372036854775808
  MAXVALUE 9223372036854775807
@@ -1070,7 +1070,7 @@ CREATE SEQUENCE [dbo].[CalculationSeq]
             Execute.Sql(@"
 CREATE SEQUENCE [dbo].[EmployeeSeq] 
  AS [bigint]
- START WITH 10
+ START WITH 1
  INCREMENT BY 1
  MINVALUE -9223372036854775808
  MAXVALUE 9223372036854775807
@@ -1078,7 +1078,7 @@ CREATE SEQUENCE [dbo].[EmployeeSeq]
             Execute.Sql(@"
 CREATE SEQUENCE [dbo].[RuleSeq] 
  AS [bigint]
- START WITH 10
+ START WITH 1
  INCREMENT BY 1
  MINVALUE -9223372036854775808
  MAXVALUE 9223372036854775807
@@ -1086,7 +1086,7 @@ CREATE SEQUENCE [dbo].[RuleSeq]
             Execute.Sql(@"
 CREATE SEQUENCE [dbo].[RuleFunctionSeq] 
  AS [bigint]
- START WITH 10
+ START WITH 1
  INCREMENT BY 1
  MINVALUE -9223372036854775808
  MAXVALUE 9223372036854775807
@@ -1094,7 +1094,7 @@ CREATE SEQUENCE [dbo].[RuleFunctionSeq]
             Execute.Sql(@"
 CREATE SEQUENCE [dbo].[REConfigItemSeq] 
  AS [bigint]
- START WITH 3
+ START WITH 1
  INCREMENT BY 1
  MINVALUE -9223372036854775808
  MAXVALUE 9223372036854775807
@@ -1103,7 +1103,7 @@ CREATE SEQUENCE [dbo].[REConfigItemSeq]
             Execute.Sql(@"
 CREATE SEQUENCE [dbo].[PeriodJobCustomFieldsSeq] 
  AS [bigint]
- START WITH 10
+ START WITH 1
  INCREMENT BY 1
  MINVALUE -9223372036854775808
  MAXVALUE 9223372036854775807
@@ -1112,7 +1112,7 @@ CREATE SEQUENCE [dbo].[PeriodJobCustomFieldsSeq]
             Execute.Sql(@"
 CREATE SEQUENCE [dbo].[AbstractJobIndexSeq] 
  AS [bigint]
- START WITH 10
+ START WITH 1
  INCREMENT BY 1
  MINVALUE -9223372036854775808
  MAXVALUE 9223372036854775807
@@ -1121,7 +1121,7 @@ CREATE SEQUENCE [dbo].[AbstractJobIndexSeq]
             Execute.Sql(@"
 CREATE SEQUENCE [dbo].[AbstractUnitIndexSeq] 
  AS [bigint]
- START WITH 10
+ START WITH 1
  INCREMENT BY 1
  MINVALUE -9223372036854775808
  MAXVALUE 9223372036854775807
@@ -1131,7 +1131,7 @@ CREATE SEQUENCE [dbo].[AbstractUnitIndexSeq]
             Execute.Sql(@"
 CREATE SEQUENCE [dbo].[Periods_AbstractJobIndexSeq] 
  AS [bigint]
- START WITH 10
+ START WITH 1
  INCREMENT BY 1
  MINVALUE -9223372036854775808
  MAXVALUE 9223372036854775807
@@ -1140,7 +1140,7 @@ CREATE SEQUENCE [dbo].[Periods_AbstractJobIndexSeq]
                         Execute.Sql(@"
 CREATE SEQUENCE [dbo].[Periods_AbstractUnitIndexSeq] 
  AS [bigint]
- START WITH 10
+ START WITH 1
  INCREMENT BY 1
  MINVALUE -9223372036854775808
  MAXVALUE 9223372036854775807
@@ -1151,7 +1151,7 @@ CREATE SEQUENCE [dbo].[Periods_AbstractUnitIndexSeq]
             Execute.Sql(@"
 CREATE SEQUENCE [dbo].[JobIndexPointSeq] 
  AS [bigint]
- START WITH 10
+ START WITH 1
  INCREMENT BY 1
  MINVALUE -9223372036854775808
  MAXVALUE 9223372036854775807
@@ -1161,7 +1161,7 @@ CREATE SEQUENCE [dbo].[JobIndexPointSeq]
             Execute.Sql(@"
 CREATE SEQUENCE [dbo].[Periods_ClaimsSeq] 
  AS [bigint]
- START WITH 10
+ START WITH 1
  INCREMENT BY 1
  MINVALUE -9223372036854775808
  MAXVALUE 9223372036854775807
@@ -1172,7 +1172,7 @@ CREATE SEQUENCE [dbo].[Periods_ClaimsSeq]
             Execute.Sql(@"
 CREATE SEQUENCE [dbo].[Calculations_ExceptionsSeq] 
  AS [bigint]
- START WITH 10
+ START WITH 1
  INCREMENT BY 1
  MINVALUE -9223372036854775808
  MAXVALUE 9223372036854775807

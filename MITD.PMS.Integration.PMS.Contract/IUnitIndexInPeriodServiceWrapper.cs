@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using MITD.PMS.Presentation.Contracts;
 
-namespace MITD.PMS.Integration.PMS.API
+namespace MITD.PMS.Integration.PMS.Contract
 {
     public interface IUnitIndexInPeriodServiceWrapper
     {

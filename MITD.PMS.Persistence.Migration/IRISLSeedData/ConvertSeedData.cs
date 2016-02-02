@@ -22,8 +22,6 @@ namespace MITD.PMS.Persistence
     [Profile("Convert")]
     public class ConvertSeedData : Migration
     {
-        private string behaviouralGroupStr = "Behavioural";
-        private string performanceGroupStr = "Performance";
         public override void Up()
         {
 
@@ -350,6 +348,93 @@ namespace MITD.PMS.Persistence
             }
             #endregion
 
+            #region  PMS Admin
+
+            uows = new MITD.Domain.Repository.UnitOfWorkScope(
+               new NHUnitOfWorkFactory(() =>
+               {
+                   PMSAdmin.Persistence.NH.PMSAdminSession.sessionName = "PMSDBConnection";
+                   return PMSAdmin.Persistence.NH.PMSAdminSession.GetSession();
+               }));
+
+            using (var uow = uows.CurrentUnitOfWork as NHUnitOfWork)
+            {
+                var cftRep = new MITD.PMSAdmin.Persistence.NH.CustomFieldRepository(uow);
+
+                #region UnitIndex CustomFields Definition
+
+                AdminMigrationUtility.DefineCustomFieldType(cftRep, "اهمیت", "UnitIndexImportance", 0, 10,
+                    MITD.PMSAdmin.Domain.Model.CustomFieldTypes.EntityTypeEnum.UnitIndex);
+
+                #endregion
+
+                #region JobIndex CustomFields Definition
+
+                AdminMigrationUtility.DefineCustomFieldType(cftRep, "اهمیت", "JobIndexImportance", 0, 10,
+                    PMSAdmin.Domain.Model.CustomFieldTypes.EntityTypeEnum.JobIndex);
+
+                #endregion
+
+                #region Job CustomFields Definition
+
+                //var cft1 = new PMSAdmin.Domain.Model.CustomFieldTypes.CustomFieldType(cftRep.GetNextId(),
+                //    "بودجه سالانه مصوب (U.S $)", "DeclaredAnnualBudget", 0, 1000000, EntityTypeEnum.Job, "string");
+                //cftRep.Add(cft1);
+                //jobCftList.Add(cft1);
+
+
+                //for (int i = 1; i < 7; i++)
+                //{
+                //    var cft = new PMSAdmin.Domain.Model.CustomFieldTypes.CustomFieldType(cftRep.GetNextId(),
+                //        "سن كشتی" + i, "ShipAge" + i, 0, 100, EntityTypeEnum.Job, "string");
+                //    cftRep.Add(cft);
+                //    jobCftList.Add(cft);
+                //}
+
+
+
+                #endregion
+
+                #region Employee CustomFields Definition
+
+                //for (int i = 0; i < 10; i++)
+                //{
+                //    var cft = new PMSAdmin.Domain.Model.CustomFieldTypes.CustomFieldType(cftRep.GetNextId(),
+                //        "فبلد دلخواه کارمند" + i, "EmployeeCft" + i, 0, 100, EntityTypeEnum.Employee, "string");
+                //    cftRep.Add(cft);
+                //    employeeCftList.Add(cft);
+                //}
+
+                #endregion
+
+                var unitIndexRep = new PMSAdmin.Persistence.NH.UnitIndexRepository(uow);
+
+                #region UnitIndexCategory Creation
+
+                AdminMigrationUtility.CreateUnitIndexCategory(unitIndexRep);
+
+                #endregion
+
+                var jobIndexRep = new PMSAdmin.Persistence.NH.JobIndexRepository(uow);
+
+                #region JobIndexCategory Creation
+
+                AdminMigrationUtility.CreateJobIndexCategory(jobIndexRep);
+
+                #endregion
+
+                var policyRep = new PMSAdmin.Persistence.NH.PolicyRepository(uow);
+
+                #region Policy Creation
+
+                AdminMigrationUtility.CreatePolicy(policyRep, "روش دفتر برنامه ها و روش ها", "MethodsAndPlanOfficePolicy");
+
+                #endregion
+
+                uow.Commit();
+            }
+
+            #endregion
 
             #region PMS
 
@@ -366,22 +451,32 @@ namespace MITD.PMS.Persistence
 
                 #endregion
 
+                var jobIndexRep = new JobIndexRepository(uow);
+
+                #region JobIndexGroup Creation
+
+                var behaviouralGroup = PMSMigrationUtility.CreateJobIndexGroup(jobIndexRep, "گروه شاخص های رفتاری",
+                    "BehaviouralGroup");
+                var performanceGroup = PMSMigrationUtility.CreateJobIndexGroup(jobIndexRep, "گروه شاخص های عملکردی",
+                    "PerformanceGroup");
+
+                #endregion
+
+                var unitIndexRep = new UnitIndexRepository(uow);
+
+                #region UnitIndexGroup Creation
+
+                var unitGroup = PMSMigrationUtility.CreateUnitIndexGroup(unitIndexRep, "گروه شاخص های سازمانی", "OrganizationUnitGroup");
+
+                #endregion
+
                 uow.Commit();
             }
 
 
             #endregion
 
-
-            // ready for inquiry //////////////////////////////////////////////////////////////////////////////
-
-          
-
-
         }
-
-
-
         public override void Down()
         {
         }
