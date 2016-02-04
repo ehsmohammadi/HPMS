@@ -31,7 +31,7 @@ namespace MITD.PMS.Integration.Domain
                 TemResult = res;
             }, id);
 
-            Result.ID=TemResult.Id;
+            Result.Id=TemResult.Id;
             Result.State = new PeriodState { Name = TemResult.StateName }; ;
             Result.Name = TemResult.Name;
 
@@ -50,7 +50,7 @@ namespace MITD.PMS.Integration.Domain
 
             foreach (var item in PeriodList)
             {
-                if (item.ID==id)
+                if (item.Id==id)
                 {
                     return item;
                 }
@@ -109,7 +109,7 @@ namespace MITD.PMS.Integration.Domain
                 foreach (var item in PeriodList.Result)
                 {
                     Period tempPeriod = new Period();
-                    tempPeriod.ID = item.Id;
+                    tempPeriod.Id = item.Id;
                     tempPeriod.Name = item.Name;
                     tempPeriod.State = new PeriodState { Name = item.StateName };
                     Result.Add(tempPeriod);

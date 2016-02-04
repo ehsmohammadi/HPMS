@@ -49,6 +49,7 @@
     <Compile Include="IDataProvider.cs" />
     <Compile Include="IntegrationWebClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sync.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

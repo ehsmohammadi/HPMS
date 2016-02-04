@@ -1,7 +1,7 @@
 ﻿
 using System;
-using System.Threading;
-using MITD.PMS.Integration.Domain.Contract;
+using System.Collections.Generic;
+using MITD.Core;
 using MITD.PMS.Presentation.Contracts;
 
 namespace MITD.PMS.Integration.Domain
@@ -11,23 +11,33 @@ namespace MITD.PMS.Integration.Domain
 
 
         #region Fields
-
+        private List<UnitIndexInPeriodDTO> unitIndexInperiodList;
+        private List<JobIndexInPeriodDTO> jobIndexInperiodList;
         private Period period;
         private bool isInitialized = false;
+        private DelegateHandler<UnitIndexConverted> unitIndexConvertedHandler;
+        private DelegateHandler<UnitConverted> unitConvertedHandler;
+        private DelegateHandler<JobIndexConverted> jobIndexConvertedHandler;
         private readonly IUnitIndexConverter unitIndexConverter;
-        
+        private readonly IUnitConverter unitConverter;
+        private readonly IJobIndexConverter jobIndexConverter;
+        private readonly IEventPublisher publisher;
+
         #endregion
 
         #region Properties & BackFields
 
 
- 
+
         #endregion
 
         #region Constructors
-        public ConverterManager(IUnitIndexConverter unitIndexConverter)
+        public ConverterManager(IUnitIndexConverter unitIndexConverter, IUnitConverter unitConverter, IJobIndexConverter jobIndexConverter, IEventPublisher publisher)
         {
             this.unitIndexConverter = unitIndexConverter;
+            this.unitConverter = unitConverter;
+            this.jobIndexConverter = jobIndexConverter;
+            this.publisher = publisher;
         }
 
         #endregion
@@ -37,21 +47,51 @@ namespace MITD.PMS.Integration.Domain
         {
             if (isInitialized)
             {
-                unitIndexConverter.ConvertUnitIndex(period);
-
+                RegisterHandler();
+                //unitIndexConverter.ConvertUnitIndex(period);
+                jobIndexConverter.ConvertJobIndex(period);
             }
             else
             {
-                throw new ArgumentNullException("period","ConverterManager was not initialized");
+                throw new ArgumentNullException("period", "ConverterManager was not initialized");
             }
+        }
+
+        private void RegisterHandler()
+        {
+            unitIndexConvertedHandler = new DelegateHandler<UnitIndexConverted>(e =>
+            {
+                unitIndexInperiodList = e.UnitIndexInperiodList;
+                Console.WriteLine("{0} Converted , Unit index Progress finished", unitIndexInperiodList.Count);
+                //unitConverter.ConvertUnits(period, unitIndexInperiodList);
+            });
+            publisher.RegisterHandler(unitIndexConvertedHandler);
+
+            unitConvertedHandler = new DelegateHandler<UnitConverted>(e =>
+            {
+                Console.WriteLine("{0} Converted , Unit Progress finished");
+                
+            });
+
+            jobIndexConvertedHandler = new DelegateHandler<JobIndexConverted>(e =>
+            {
+                jobIndexInperiodList = e.JobIndexInperiodList;
+                Console.WriteLine("{0} Converted , Job index Progress finished", jobIndexInperiodList.Count);
+                //jobConverter.ConvertJobs(period, jobIndexInperiodList);
+            });
+
+
+
+
+            publisher.RegisterHandler(unitConvertedHandler);
         }
 
         public void Init(Period preiodParam)
         {
             if (preiodParam == null)
-               throw new ArgumentNullException("period", "Period can not be null");
+                throw new ArgumentNullException("period", "Period can not be null");
             this.period = preiodParam;
-            isInitialized=true;
+            isInitialized = true;
         }
 
         #endregion

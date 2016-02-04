@@ -12,5 +12,6 @@ namespace MITD.PMSAdmin.Application.Contracts
         List<CustomFieldType> GetBy(List<CustomFieldTypeId> customFieldIdList);
 
         void DeleteCustomField(CustomFieldType customFieldType);
+        CustomFieldType GetBy(CustomFieldTypeId id);
     }
 }

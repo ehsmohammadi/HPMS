@@ -22,6 +22,16 @@ namespace MITD.PMS.Interface.Mappers
                         Name = entity.Name,
                         DictionaryName = entity.DictionaryName,
                         ParentId = ((UnitIndex)entity).Category.Id.Id,
+                        //CustomFields = (entity as UnitIndex).CustomFieldTypeIdList.Select(c=>new CustomFieldDTO
+                        //{
+                        //    Id = c.Id,
+                        //    Name = "Dont Use",
+                        //    DictionaryName = "Dont Use",
+                        //    EntityId = 1,
+                        //    MaxValue = 10,
+                        //    MinValue = 1,
+                        //    TypeId = "Dont Use"
+                        //}).ToList()
                     };
                 return res;
             }

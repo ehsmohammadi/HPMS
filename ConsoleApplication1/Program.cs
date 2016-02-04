@@ -22,27 +22,17 @@ namespace ConsoleApplication1
 
             var period = new Period
             {
-                ID = 10,
+                Id = 10,
                 Name = "name"
             };
-
-            #region Create UnitIndexConverter 
-
-            var unitIndexService = new UnitIndexServiceWrapper(userProvider);
-            var unitIndexInPeriodService = new UnitIndexInPeriodServiceWrapper(userProvider);
-            var unitIndexDataProvider = Activator.CreateInstance<IUnitIndexDataProvider>();
-            var unitIndexConverter = new UnitIndexConverter(unitIndexDataProvider, unitIndexService,
-                unitIndexInPeriodService); 
-
-            #endregion
 
             #endregion
 
             #region Manager Progress
 
-            var manager = new ConverterManager(unitIndexConverter);
-            manager.Init(period);
-            manager.Run(); 
+            //var manager = new ConverterManager(unitIndexConverter);
+            //manager.Init(period);
+            //manager.Run(); 
 
             #endregion
 

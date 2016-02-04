@@ -4,43 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="PersonnelSoft2005Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="affiliateCompany">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="MapCode_PayRoll" Type="int" />
-          <Property Name="LogUserID" Type="int" />
-          <Property Name="LogActionType" Type="char" MaxLength="1" />
-          <Property Name="LogActionDate" Type="datetime" />
-          <Property Name="LogComputerName" Type="nvarchar" MaxLength="100" />
-        </EntityType>
-        <EntityType Name="JOBSTitle">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="series_F" Type="int" />
-          <Property Name="PayRoll_MapCode" Type="int" />
-          <Property Name="LogUserID" Type="int" />
-          <Property Name="LogActionType" Type="char" MaxLength="1" />
-          <Property Name="LogActionDate" Type="datetime" />
-          <Property Name="LogComputerName" Type="nvarchar" MaxLength="100" />
-        </EntityType>
-        <EntityType Name="OrganTreeNodeType">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="LogUserID" Type="int" />
-          <Property Name="LogActionType" Type="char" MaxLength="1" />
-          <Property Name="LogActionDate" Type="datetime" />
-          <Property Name="LogComputerName" Type="nvarchar" MaxLength="100" />
-        </EntityType>
+    <Schema Namespace="PersonnelSoft2005Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="PMS_GeneralIndex">
           <Key>
             <PropertyRef Name="ID" />
@@ -50,6 +14,7 @@
           <Property Name="Title" Type="nvarchar" MaxLength="4000" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="4000" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="TransferId" Type="uniqueidentifier" />
           <Property Name="LogUserID" Type="int" />
           <Property Name="LogActionType" Type="char" MaxLength="1" />
           <Property Name="LogActionDate" Type="datetime" />
@@ -62,6 +27,7 @@
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IndexTypeTitle" Type="nvarchar" MaxLength="300" Nullable="false" />
           <Property Name="IndexTypeDescription" Type="nvarchar" MaxLength="4000" />
+          <Property Name="TransferId" Type="uniqueidentifier" />
           <Property Name="LogUserID" Type="int" />
           <Property Name="LogActionType" Type="char" MaxLength="1" />
           <Property Name="LogActionDate" Type="datetime" />
@@ -78,6 +44,7 @@
           <Property Name="Discription" Type="nvarchar" MaxLength="4000" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="LogUserID" Type="int" />
+          <Property Name="TransferId" Type="uniqueidentifier" />
           <Property Name="LogActionType" Type="char" MaxLength="1" />
           <Property Name="LogActionDate" Type="datetime" />
           <Property Name="LogComputerName" Type="nvarchar" MaxLength="100" />
@@ -89,35 +56,46 @@
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="1000" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="4000" />
-          <Property Name="LogUserID" Type="int" />
-          <Property Name="LogActionType" Type="char" MaxLength="1" />
-          <Property Name="LogActionDate" Type="datetime" />
-          <Property Name="LogComputerName" Type="nvarchar" MaxLength="100" />
-        </EntityType>
-        <EntityType Name="Rasteh">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="LogUserID" Type="int" />
-          <Property Name="LogActionType" Type="char" MaxLength="1" />
-          <Property Name="LogActionDate" Type="datetime" />
-          <Property Name="LogComputerName" Type="nvarchar" MaxLength="100" />
-        </EntityType>
-        <EntityType Name="Reshteh">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TransferId" Type="uniqueidentifier" />
           <Property Name="LogUserID" Type="int" />
           <Property Name="LogActionType" Type="char" MaxLength="1" />
           <Property Name="LogActionDate" Type="datetime" />
           <Property Name="LogComputerName" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Pers1016.dbo.VW_OrganTree' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'Pers1108.dbo.PMS_IndexList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PMS_IndexList">
+          <Key>
+            <PropertyRef Name="IndexTypeID" />
+            <PropertyRef Name="IndexTypeTitle" />
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="IsActive" />
+          </Key>
+          <Property Name="IndexTypeID" Type="bigint" Nullable="false" />
+          <Property Name="IndexTypeTitle" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="IndexId" Type="uniqueidentifier" />
+          <Property Name="Title" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ID_Job" Type="bigint" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pers1108.dbo.PMS_JobIndexList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PMS_JobIndexList">
+          <Key>
+            <PropertyRef Name="JobID" />
+            <PropertyRef Name="JobTitle" />
+            <PropertyRef Name="IndexTitle" />
+            <PropertyRef Name="IndexTypeTitle" />
+            <PropertyRef Name="ItemState" />
+          </Key>
+          <Property Name="JobID" Type="bigint" Nullable="false" />
+          <Property Name="JobTitle" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="IndexTitle" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="IndexTypeTitle" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="ItemState" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pers1108.dbo.VW_OrganTree' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VW_OrganTree">
           <Key>
             <PropertyRef Name="ID" />
@@ -154,6 +132,7 @@ warning 6002: The table/view 'Pers1016.dbo.VW_OrganTree' does not have a primary
           <Property Name="Radif" Type="nvarchar" MaxLength="10" />
           <Property Name="IsManager" Type="bit" />
           <Property Name="ID_PMS_JobTitle" Type="bigint" />
+          <Property Name="TranferId" Type="uniqueidentifier" />
         </EntityType>
         <Association Name="FK_PMS_GeneralIndex_PMS_GeneralIndex">
           <End Role="PMS_IndexType" Type="Self.PMS_IndexType" Multiplicity="1" />
@@ -192,15 +171,29 @@ warning 6002: The table/view 'Pers1016.dbo.VW_OrganTree' does not have a primary
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="PersonnelSoft2005ModelStoreContainer">
-          <EntitySet Name="affiliateCompany" EntityType="Self.affiliateCompany" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="JOBSTitle" EntityType="Self.JOBSTitle" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="OrganTreeNodeType" EntityType="Self.OrganTreeNodeType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PMS_GeneralIndex" EntityType="Self.PMS_GeneralIndex" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PMS_IndexType" EntityType="Self.PMS_IndexType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PMS_JobIndex" EntityType="Self.PMS_JobIndex" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PMS_JobTitle" EntityType="Self.PMS_JobTitle" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Rasteh" EntityType="Self.Rasteh" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Reshteh" EntityType="Self.Reshteh" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PMS_IndexList" EntityType="Self.PMS_IndexList" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PMS_IndexList].[IndexTypeID] AS [IndexTypeID], 
+    [PMS_IndexList].[IndexTypeTitle] AS [IndexTypeTitle], 
+    [PMS_IndexList].[IndexId] AS [IndexId], 
+    [PMS_IndexList].[Title] AS [Title], 
+    [PMS_IndexList].[IsActive] AS [IsActive], 
+    [PMS_IndexList].[ID_Job] AS [ID_Job]
+    FROM [dbo].[PMS_IndexList] AS [PMS_IndexList]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PMS_JobIndexList" EntityType="Self.PMS_JobIndexList" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PMS_JobIndexList].[JobID] AS [JobID], 
+    [PMS_JobIndexList].[JobTitle] AS [JobTitle], 
+    [PMS_JobIndexList].[IndexTitle] AS [IndexTitle], 
+    [PMS_JobIndexList].[IndexTypeTitle] AS [IndexTypeTitle], 
+    [PMS_JobIndexList].[ItemState] AS [ItemState]
+    FROM [dbo].[PMS_JobIndexList] AS [PMS_JobIndexList]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VW_OrganTree" EntityType="Self.VW_OrganTree" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [VW_OrganTree].[Name_JobTitle] AS [Name_JobTitle], 
@@ -231,7 +224,8 @@ warning 6002: The table/view 'Pers1016.dbo.VW_OrganTree' does not have a primary
     [VW_OrganTree].[IsInFullPath] AS [IsInFullPath], 
     [VW_OrganTree].[Radif] AS [Radif], 
     [VW_OrganTree].[IsManager] AS [IsManager], 
-    [VW_OrganTree].[ID_PMS_JobTitle] AS [ID_PMS_JobTitle]
+    [VW_OrganTree].[ID_PMS_JobTitle] AS [ID_PMS_JobTitle], 
+    [VW_OrganTree].[TranferId] AS [TranferId]
     FROM [dbo].[VW_OrganTree] AS [VW_OrganTree]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_PMS_GeneralIndex_PMS_GeneralIndex" Association="Self.FK_PMS_GeneralIndex_PMS_GeneralIndex">
@@ -251,112 +245,12 @@ warning 6002: The table/view 'Pers1016.dbo.VW_OrganTree' does not have a primary
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PersonnelSoft2005Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="affiliateCompany">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="MapCode_PayRoll" Type="Int32" />
-          <Property Name="LogUserID" Type="Int32" />
-          <Property Name="LogActionType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="LogActionDate" Type="DateTime" Precision="3" />
-          <Property Name="LogComputerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="JOBSTitle">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="series_F" Type="Int32" />
-          <Property Name="PayRoll_MapCode" Type="Int32" />
-          <Property Name="LogUserID" Type="Int32" />
-          <Property Name="LogActionType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="LogActionDate" Type="DateTime" Precision="3" />
-          <Property Name="LogComputerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="OrganTreeNodeType">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="LogUserID" Type="Int32" />
-          <Property Name="LogActionType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="LogActionDate" Type="DateTime" Precision="3" />
-          <Property Name="LogComputerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Rasteh">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="LogUserID" Type="Int32" />
-          <Property Name="LogActionType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="LogActionDate" Type="DateTime" Precision="3" />
-          <Property Name="LogComputerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Reshteh">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="LogUserID" Type="Int32" />
-          <Property Name="LogActionType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="LogActionDate" Type="DateTime" Precision="3" />
-          <Property Name="LogComputerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="VW_OrganTree">
-          <Key>
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="PI" />
-            <PropertyRef Name="Ind" />
-            <PropertyRef Name="NodeName" />
-          </Key>
-          <Property Name="Name_JobTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="PI" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Ind" Type="Int32" Nullable="false" />
-          <Property Name="NodeName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ID_F" Type="Int32" />
-          <Property Name="NCODE_SERIES" Type="Int32" />
-          <Property Name="NCODE_TITLE" Type="Int32" />
-          <Property Name="FullPath" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="Rasteh" Type="Int32" />
-          <Property Name="Reshteh" Type="Int32" />
-          <Property Name="Name_Rasteh" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Name_Reshteh" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Company_F" Type="Int32" />
-          <Property Name="NodeType" Type="Int32" />
-          <Property Name="Name" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="FamilyName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="PersonnelCode" Type="Int32" />
-          <Property Name="LogUserID" Type="Int32" />
-          <Property Name="LogActionType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="LogActionDate" Type="DateTime" Precision="3" />
-          <Property Name="LogComputerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="IsAgent" Type="Boolean" />
-          <Property Name="PID" Type="Int32" />
-          <Property Name="FinalPath" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="IsInFullPath" Type="Boolean" />
-          <Property Name="Radif" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="IsManager" Type="Boolean" />
-          <Property Name="ID_PMS_JobTitle" Type="Int64" />
-        </EntityType>
         <EntityContainer Name="PersonnelSoft2005Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="affiliateCompanies" EntityType="Self.affiliateCompany" />
-          <EntitySet Name="JOBSTitles" EntityType="Self.JOBSTitle" />
-          <EntitySet Name="OrganTreeNodeTypes" EntityType="Self.OrganTreeNodeType" />
-          <EntitySet Name="Rastehs" EntityType="Self.Rasteh" />
-          <EntitySet Name="Reshtehs" EntityType="Self.Reshteh" />
-          <EntitySet Name="VW_OrganTree" EntityType="Self.VW_OrganTree" />
-          <EntitySet Name="PMS_JobTitle" EntityType="PersonnelSoft2005Model.PMS_JobTitle" />
           <EntitySet Name="PMS_GeneralIndex" EntityType="PersonnelSoft2005Model.PMS_GeneralIndex" />
           <EntitySet Name="PMS_IndexType" EntityType="PersonnelSoft2005Model.PMS_IndexType" />
           <EntitySet Name="PMS_JobIndex" EntityType="PersonnelSoft2005Model.PMS_JobIndex" />
+          <EntitySet Name="PMS_JobTitle" EntityType="PersonnelSoft2005Model.PMS_JobTitle" />
+          <EntitySet Name="PMS_JobIndexList" EntityType="PersonnelSoft2005Model.PMS_JobIndexList" />
           <AssociationSet Name="FK_PMS_GeneralIndex_PMS_GeneralIndex" Association="PersonnelSoft2005Model.FK_PMS_GeneralIndex_PMS_GeneralIndex">
             <End Role="PMS_IndexType" EntitySet="PMS_IndexType" />
             <End Role="PMS_GeneralIndex" EntitySet="PMS_GeneralIndex" />
@@ -369,20 +263,9 @@ warning 6002: The table/view 'Pers1016.dbo.VW_OrganTree' does not have a primary
             <End Role="PMS_JobTitle" EntitySet="PMS_JobTitle" />
             <End Role="PMS_JobIndex" EntitySet="PMS_JobIndex" />
           </AssociationSet>
+          <EntitySet Name="VW_OrganTree" EntityType="PersonnelSoft2005Model.VW_OrganTree" />
+          <EntitySet Name="PMS_IndexList" EntityType="PersonnelSoft2005Model.PMS_IndexList" />
         </EntityContainer>
-        <EntityType Name="PMS_JobTitle">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
-          <Property Name="LogUserID" Type="Int32" />
-          <Property Name="LogActionType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="LogActionDate" Type="DateTime" Precision="3" />
-          <Property Name="LogComputerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="PMS_JobIndex" Relationship="PersonnelSoft2005Model.FK_PMS_JobIndex_PMS_JobTitle" FromRole="PMS_JobTitle" ToRole="PMS_JobIndex" />
-        </EntityType>
         <EntityType Name="PMS_GeneralIndex">
           <Key>
             <PropertyRef Name="ID" />
@@ -392,6 +275,7 @@ warning 6002: The table/view 'Pers1016.dbo.VW_OrganTree' does not have a primary
           <Property Name="Title" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="TransferId" Type="Guid" />
           <Property Name="LogUserID" Type="Int32" />
           <Property Name="LogActionType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="LogActionDate" Type="DateTime" Precision="3" />
@@ -405,6 +289,7 @@ warning 6002: The table/view 'Pers1016.dbo.VW_OrganTree' does not have a primary
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IndexTypeTitle" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="IndexTypeDescription" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="TransferId" Type="Guid" />
           <Property Name="LogUserID" Type="Int32" />
           <Property Name="LogActionType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="LogActionDate" Type="DateTime" Precision="3" />
@@ -423,11 +308,40 @@ warning 6002: The table/view 'Pers1016.dbo.VW_OrganTree' does not have a primary
           <Property Name="Discription" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="LogUserID" Type="Int32" />
+          <Property Name="TransferId" Type="Guid" />
           <Property Name="LogActionType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="LogActionDate" Type="DateTime" Precision="3" />
           <Property Name="LogComputerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PMS_IndexType" Relationship="PersonnelSoft2005Model.FK_PMS_JobIndex_PMS_IndexType" FromRole="PMS_JobIndex" ToRole="PMS_IndexType" />
           <NavigationProperty Name="PMS_JobTitle" Relationship="PersonnelSoft2005Model.FK_PMS_JobIndex_PMS_JobTitle" FromRole="PMS_JobIndex" ToRole="PMS_JobTitle" />
+        </EntityType>
+        <EntityType Name="PMS_JobTitle">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="TransferId" Type="Guid" />
+          <Property Name="LogUserID" Type="Int32" />
+          <Property Name="LogActionType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="LogActionDate" Type="DateTime" Precision="3" />
+          <Property Name="LogComputerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PMS_JobIndex" Relationship="PersonnelSoft2005Model.FK_PMS_JobIndex_PMS_JobTitle" FromRole="PMS_JobTitle" ToRole="PMS_JobIndex" />
+        </EntityType>
+        <EntityType Name="PMS_JobIndexList">
+          <Key>
+            <PropertyRef Name="JobID" />
+            <PropertyRef Name="JobTitle" />
+            <PropertyRef Name="IndexTitle" />
+            <PropertyRef Name="IndexTypeTitle" />
+            <PropertyRef Name="ItemState" />
+          </Key>
+          <Property Name="JobID" Type="Int64" Nullable="false" />
+          <Property Name="JobTitle" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="IndexTitle" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="IndexTypeTitle" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ItemState" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_PMS_GeneralIndex_PMS_GeneralIndex">
           <End Type="PersonnelSoft2005Model.PMS_IndexType" Role="PMS_IndexType" Multiplicity="1" />
@@ -465,123 +379,64 @@ warning 6002: The table/view 'Pers1016.dbo.VW_OrganTree' does not have a primary
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="VW_OrganTree">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="PI" />
+            <PropertyRef Name="Ind" />
+            <PropertyRef Name="NodeName" />
+          </Key>
+          <Property Name="Name_JobTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="PI" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Ind" Type="Int32" Nullable="false" />
+          <Property Name="NodeName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ID_F" Type="Int32" />
+          <Property Name="NCODE_SERIES" Type="Int32" />
+          <Property Name="NCODE_TITLE" Type="Int32" />
+          <Property Name="FullPath" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Rasteh" Type="Int32" />
+          <Property Name="Reshteh" Type="Int32" />
+          <Property Name="Name_Rasteh" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Name_Reshteh" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Company_F" Type="Int32" />
+          <Property Name="NodeType" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="FamilyName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PersonnelCode" Type="Int32" />
+          <Property Name="LogUserID" Type="Int32" />
+          <Property Name="LogActionType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="LogActionDate" Type="DateTime" Precision="3" />
+          <Property Name="LogComputerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsAgent" Type="Boolean" />
+          <Property Name="PID" Type="Int32" />
+          <Property Name="FinalPath" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="IsInFullPath" Type="Boolean" />
+          <Property Name="Radif" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="IsManager" Type="Boolean" />
+          <Property Name="ID_PMS_JobTitle" Type="Int64" />
+          <Property Name="TranferId" Type="Guid" />
+        </EntityType>
+        <EntityType Name="PMS_IndexList">
+          <Key>
+            <PropertyRef Name="IndexTypeID" />
+            <PropertyRef Name="IndexTypeTitle" />
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="IsActive" />
+          </Key>
+          <Property Name="IndexTypeID" Type="Int64" Nullable="false" />
+          <Property Name="IndexTypeTitle" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="IndexId" Type="Guid" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ID_Job" Type="Int64" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="PersonnelSoft2005ModelStoreContainer" CdmEntityContainer="PersonnelSoft2005Entities">
-          <EntitySetMapping Name="affiliateCompanies">
-            <EntityTypeMapping TypeName="PersonnelSoft2005Model.affiliateCompany">
-              <MappingFragment StoreEntitySet="affiliateCompany">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="MapCode_PayRoll" ColumnName="MapCode_PayRoll" />
-                <ScalarProperty Name="LogUserID" ColumnName="LogUserID" />
-                <ScalarProperty Name="LogActionType" ColumnName="LogActionType" />
-                <ScalarProperty Name="LogActionDate" ColumnName="LogActionDate" />
-                <ScalarProperty Name="LogComputerName" ColumnName="LogComputerName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="JOBSTitles">
-            <EntityTypeMapping TypeName="PersonnelSoft2005Model.JOBSTitle">
-              <MappingFragment StoreEntitySet="JOBSTitle">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="series_F" ColumnName="series_F" />
-                <ScalarProperty Name="PayRoll_MapCode" ColumnName="PayRoll_MapCode" />
-                <ScalarProperty Name="LogUserID" ColumnName="LogUserID" />
-                <ScalarProperty Name="LogActionType" ColumnName="LogActionType" />
-                <ScalarProperty Name="LogActionDate" ColumnName="LogActionDate" />
-                <ScalarProperty Name="LogComputerName" ColumnName="LogComputerName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OrganTreeNodeTypes">
-            <EntityTypeMapping TypeName="PersonnelSoft2005Model.OrganTreeNodeType">
-              <MappingFragment StoreEntitySet="OrganTreeNodeType">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="LogUserID" ColumnName="LogUserID" />
-                <ScalarProperty Name="LogActionType" ColumnName="LogActionType" />
-                <ScalarProperty Name="LogActionDate" ColumnName="LogActionDate" />
-                <ScalarProperty Name="LogComputerName" ColumnName="LogComputerName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Rastehs">
-            <EntityTypeMapping TypeName="PersonnelSoft2005Model.Rasteh">
-              <MappingFragment StoreEntitySet="Rasteh">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="LogUserID" ColumnName="LogUserID" />
-                <ScalarProperty Name="LogActionType" ColumnName="LogActionType" />
-                <ScalarProperty Name="LogActionDate" ColumnName="LogActionDate" />
-                <ScalarProperty Name="LogComputerName" ColumnName="LogComputerName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Reshtehs">
-            <EntityTypeMapping TypeName="PersonnelSoft2005Model.Reshteh">
-              <MappingFragment StoreEntitySet="Reshteh">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="LogUserID" ColumnName="LogUserID" />
-                <ScalarProperty Name="LogActionType" ColumnName="LogActionType" />
-                <ScalarProperty Name="LogActionDate" ColumnName="LogActionDate" />
-                <ScalarProperty Name="LogComputerName" ColumnName="LogComputerName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VW_OrganTree">
-            <EntityTypeMapping TypeName="PersonnelSoft2005Model.VW_OrganTree">
-              <MappingFragment StoreEntitySet="VW_OrganTree">
-                <ScalarProperty Name="ID_PMS_JobTitle" ColumnName="ID_PMS_JobTitle" />
-                <ScalarProperty Name="Name_JobTitle" ColumnName="Name_JobTitle" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="PI" ColumnName="PI" />
-                <ScalarProperty Name="Ind" ColumnName="Ind" />
-                <ScalarProperty Name="NodeName" ColumnName="NodeName" />
-                <ScalarProperty Name="ID_F" ColumnName="ID_F" />
-                <ScalarProperty Name="NCODE_SERIES" ColumnName="NCODE_SERIES" />
-                <ScalarProperty Name="NCODE_TITLE" ColumnName="NCODE_TITLE" />
-                <ScalarProperty Name="FullPath" ColumnName="FullPath" />
-                <ScalarProperty Name="Rasteh" ColumnName="Rasteh" />
-                <ScalarProperty Name="Reshteh" ColumnName="Reshteh" />
-                <ScalarProperty Name="Name_Rasteh" ColumnName="Name_Rasteh" />
-                <ScalarProperty Name="Name_Reshteh" ColumnName="Name_Reshteh" />
-                <ScalarProperty Name="Company_F" ColumnName="Company_F" />
-                <ScalarProperty Name="NodeType" ColumnName="NodeType" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="FamilyName" ColumnName="FamilyName" />
-                <ScalarProperty Name="PersonnelCode" ColumnName="PersonnelCode" />
-                <ScalarProperty Name="LogUserID" ColumnName="LogUserID" />
-                <ScalarProperty Name="LogActionType" ColumnName="LogActionType" />
-                <ScalarProperty Name="LogActionDate" ColumnName="LogActionDate" />
-                <ScalarProperty Name="LogComputerName" ColumnName="LogComputerName" />
-                <ScalarProperty Name="IsAgent" ColumnName="IsAgent" />
-                <ScalarProperty Name="PID" ColumnName="PID" />
-                <ScalarProperty Name="FinalPath" ColumnName="FinalPath" />
-                <ScalarProperty Name="IsInFullPath" ColumnName="IsInFullPath" />
-                <ScalarProperty Name="Radif" ColumnName="Radif" />
-                <ScalarProperty Name="IsManager" ColumnName="IsManager" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PMS_JobTitle">
-            <EntityTypeMapping TypeName="PersonnelSoft2005Model.PMS_JobTitle">
-              <MappingFragment StoreEntitySet="PMS_JobTitle">
-                <ScalarProperty Name="LogComputerName" ColumnName="LogComputerName" />
-                <ScalarProperty Name="LogActionDate" ColumnName="LogActionDate" />
-                <ScalarProperty Name="LogActionType" ColumnName="LogActionType" />
-                <ScalarProperty Name="LogUserID" ColumnName="LogUserID" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="PMS_GeneralIndex">
             <EntityTypeMapping TypeName="PersonnelSoft2005Model.PMS_GeneralIndex">
               <MappingFragment StoreEntitySet="PMS_GeneralIndex">
@@ -589,6 +444,7 @@ warning 6002: The table/view 'Pers1016.dbo.VW_OrganTree' does not have a primary
                 <ScalarProperty Name="LogActionDate" ColumnName="LogActionDate" />
                 <ScalarProperty Name="LogActionType" ColumnName="LogActionType" />
                 <ScalarProperty Name="LogUserID" ColumnName="LogUserID" />
+                <ScalarProperty Name="TransferId" ColumnName="TransferId" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
@@ -604,6 +460,7 @@ warning 6002: The table/view 'Pers1016.dbo.VW_OrganTree' does not have a primary
                 <ScalarProperty Name="LogActionDate" ColumnName="LogActionDate" />
                 <ScalarProperty Name="LogActionType" ColumnName="LogActionType" />
                 <ScalarProperty Name="LogUserID" ColumnName="LogUserID" />
+                <ScalarProperty Name="TransferId" ColumnName="TransferId" />
                 <ScalarProperty Name="IndexTypeDescription" ColumnName="IndexTypeDescription" />
                 <ScalarProperty Name="IndexTypeTitle" ColumnName="IndexTypeTitle" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -616,6 +473,7 @@ warning 6002: The table/view 'Pers1016.dbo.VW_OrganTree' does not have a primary
                 <ScalarProperty Name="LogComputerName" ColumnName="LogComputerName" />
                 <ScalarProperty Name="LogActionDate" ColumnName="LogActionDate" />
                 <ScalarProperty Name="LogActionType" ColumnName="LogActionType" />
+                <ScalarProperty Name="TransferId" ColumnName="TransferId" />
                 <ScalarProperty Name="LogUserID" ColumnName="LogUserID" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Discription" ColumnName="Discription" />
@@ -623,6 +481,79 @@ warning 6002: The table/view 'Pers1016.dbo.VW_OrganTree' does not have a primary
                 <ScalarProperty Name="ID_IndexType" ColumnName="ID_IndexType" />
                 <ScalarProperty Name="ID_Job" ColumnName="ID_Job" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PMS_JobTitle">
+            <EntityTypeMapping TypeName="PersonnelSoft2005Model.PMS_JobTitle">
+              <MappingFragment StoreEntitySet="PMS_JobTitle">
+                <ScalarProperty Name="LogComputerName" ColumnName="LogComputerName" />
+                <ScalarProperty Name="LogActionDate" ColumnName="LogActionDate" />
+                <ScalarProperty Name="LogActionType" ColumnName="LogActionType" />
+                <ScalarProperty Name="LogUserID" ColumnName="LogUserID" />
+                <ScalarProperty Name="TransferId" ColumnName="TransferId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PMS_JobIndexList">
+            <EntityTypeMapping TypeName="PersonnelSoft2005Model.PMS_JobIndexList">
+              <MappingFragment StoreEntitySet="PMS_JobIndexList">
+                <ScalarProperty Name="ItemState" ColumnName="ItemState" />
+                <ScalarProperty Name="IndexTypeTitle" ColumnName="IndexTypeTitle" />
+                <ScalarProperty Name="IndexTitle" ColumnName="IndexTitle" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="JobID" ColumnName="JobID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_OrganTree">
+            <EntityTypeMapping TypeName="PersonnelSoft2005Model.VW_OrganTree">
+              <MappingFragment StoreEntitySet="VW_OrganTree">
+                <ScalarProperty Name="TranferId" ColumnName="TranferId" />
+                <ScalarProperty Name="ID_PMS_JobTitle" ColumnName="ID_PMS_JobTitle" />
+                <ScalarProperty Name="IsManager" ColumnName="IsManager" />
+                <ScalarProperty Name="Radif" ColumnName="Radif" />
+                <ScalarProperty Name="IsInFullPath" ColumnName="IsInFullPath" />
+                <ScalarProperty Name="FinalPath" ColumnName="FinalPath" />
+                <ScalarProperty Name="PID" ColumnName="PID" />
+                <ScalarProperty Name="IsAgent" ColumnName="IsAgent" />
+                <ScalarProperty Name="LogComputerName" ColumnName="LogComputerName" />
+                <ScalarProperty Name="LogActionDate" ColumnName="LogActionDate" />
+                <ScalarProperty Name="LogActionType" ColumnName="LogActionType" />
+                <ScalarProperty Name="LogUserID" ColumnName="LogUserID" />
+                <ScalarProperty Name="PersonnelCode" ColumnName="PersonnelCode" />
+                <ScalarProperty Name="FamilyName" ColumnName="FamilyName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NodeType" ColumnName="NodeType" />
+                <ScalarProperty Name="Company_F" ColumnName="Company_F" />
+                <ScalarProperty Name="Name_Reshteh" ColumnName="Name_Reshteh" />
+                <ScalarProperty Name="Name_Rasteh" ColumnName="Name_Rasteh" />
+                <ScalarProperty Name="Reshteh" ColumnName="Reshteh" />
+                <ScalarProperty Name="Rasteh" ColumnName="Rasteh" />
+                <ScalarProperty Name="FullPath" ColumnName="FullPath" />
+                <ScalarProperty Name="NCODE_TITLE" ColumnName="NCODE_TITLE" />
+                <ScalarProperty Name="NCODE_SERIES" ColumnName="NCODE_SERIES" />
+                <ScalarProperty Name="ID_F" ColumnName="ID_F" />
+                <ScalarProperty Name="NodeName" ColumnName="NodeName" />
+                <ScalarProperty Name="Ind" ColumnName="Ind" />
+                <ScalarProperty Name="PI" ColumnName="PI" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name_JobTitle" ColumnName="Name_JobTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PMS_IndexList">
+            <EntityTypeMapping TypeName="PersonnelSoft2005Model.PMS_IndexList">
+              <MappingFragment StoreEntitySet="PMS_IndexList">
+                <ScalarProperty Name="ID_Job" ColumnName="ID_Job" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="IndexId" ColumnName="IndexId" />
+                <ScalarProperty Name="IndexTypeTitle" ColumnName="IndexTypeTitle" />
+                <ScalarProperty Name="IndexTypeID" ColumnName="IndexTypeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

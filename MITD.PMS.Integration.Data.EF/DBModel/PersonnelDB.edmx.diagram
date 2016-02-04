@@ -5,19 +5,16 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="1a938b75fdf742aa98d5da9b562c8461" Name="Diagram1">
-        <EntityTypeShape EntityType="PersonnelSoft2005Model.affiliateCompany" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PersonnelSoft2005Model.JOBSTitle" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PersonnelSoft2005Model.OrganTreeNodeType" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PersonnelSoft2005Model.Rasteh" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PersonnelSoft2005Model.Reshteh" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PersonnelSoft2005Model.VW_OrganTree" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PersonnelSoft2005Model.PMS_JobTitle" Width="1.5" PointX="7.75" PointY="1.125" />
-        <EntityTypeShape EntityType="PersonnelSoft2005Model.PMS_GeneralIndex" Width="1.5" PointX="9.625" PointY="11.25" />
-        <EntityTypeShape EntityType="PersonnelSoft2005Model.PMS_IndexType" Width="1.5" PointX="7.375" PointY="7.25" />
-        <EntityTypeShape EntityType="PersonnelSoft2005Model.PMS_JobIndex" Width="1.5" PointX="10" PointY="3.875" />
+        <EntityTypeShape EntityType="PersonnelSoft2005Model.PMS_GeneralIndex" Width="1.5" PointX="3" PointY="8.875" />
+        <EntityTypeShape EntityType="PersonnelSoft2005Model.PMS_IndexType" Width="1.5" PointX="0.75" PointY="4.625" />
+        <EntityTypeShape EntityType="PersonnelSoft2005Model.PMS_JobIndex" Width="1.5" PointX="3" PointY="4.375" />
+        <EntityTypeShape EntityType="PersonnelSoft2005Model.PMS_JobTitle" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PersonnelSoft2005Model.PMS_JobIndexList" Width="1.5" PointX="7.75" PointY="5" />
         <AssociationConnector Association="PersonnelSoft2005Model.FK_PMS_GeneralIndex_PMS_GeneralIndex" />
         <AssociationConnector Association="PersonnelSoft2005Model.FK_PMS_JobIndex_PMS_IndexType" />
         <AssociationConnector Association="PersonnelSoft2005Model.FK_PMS_JobIndex_PMS_JobTitle" />
+        <EntityTypeShape EntityType="PersonnelSoft2005Model.VW_OrganTree" Width="1.5" PointX="5.375" PointY="7.75" />
+        <EntityTypeShape EntityType="PersonnelSoft2005Model.PMS_IndexList" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

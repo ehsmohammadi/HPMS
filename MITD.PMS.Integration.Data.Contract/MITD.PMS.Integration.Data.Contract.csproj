@@ -45,9 +45,10 @@
     <Compile Include="DTO\ExclusiveJobIndexDto.cs" />
     <Compile Include="DTO\GeneralJobIndexDto.cs" />
     <Compile Include="DTO\JobIndexBase.cs" />
+    <Compile Include="DTO\JobIndexIntegrationDTO.cs" />
     <Compile Include="DTO\JobPositionIntegrationDTO.cs" />
     <Compile Include="DTO\UnitIndexIntegrationDTO.cs" />
-    <Compile Include="DTO\UnitNodeIntegrationDTO.cs" />
+    <Compile Include="DTO\UnitIntegrationDTO.cs" />
     <Compile Include="DataProvider\IEmployeeDataProvider.cs" />
     <Compile Include="DTO\JobTitleDto.cs" />
     <Compile Include="DTO\NodeTypeDto.cs" />
@@ -55,6 +56,12 @@
     <Compile Include="DTO\EmployeeDto.cs" />
     <Compile Include="DataProvider\IUnitDataProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MITD.PMS.Integration.Core\MITD.PMS.Integration.Core.csproj">
+      <Project>{5BC98324-6E74-4475-A917-CAB0AC10D0B4}</Project>
+      <Name>MITD.PMS.Integration.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

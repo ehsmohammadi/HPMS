@@ -9,12 +9,13 @@ using Newtonsoft.Json;
 
 namespace MITD.PMS.Integration.Core
 {
-    public class IntegrationWebClient
+    public enum MessageFormat { Json, Xml };
+    public class IntegrationWebClientnew
     {
 
-        public enum MessageFormat { Json, Xml };
+        
 
-        public static void Get<T>(Uri uri, Action<T, Exception> action, MessageFormat format = MessageFormat.Xml, Dictionary<string, string> headers = null)
+        public  void Get<T>(Uri uri, Action<T, Exception> action, MessageFormat format = MessageFormat.Xml, Dictionary<string, string> headers = null)
         {
             var request = (HttpWebRequest)WebRequest.Create(uri);
             request.Method = "GET";
@@ -43,7 +44,7 @@ namespace MITD.PMS.Integration.Core
             }, null);
         }
 
-        public static void GetString(Uri uri, Action<string, Exception> action, Dictionary<string, string> headers = null)
+        public  void GetString(Uri uri, Action<string, Exception> action, Dictionary<string, string> headers = null)
         {
             var request = (HttpWebRequest)WebRequest.Create(uri);
             request.Method = "GET";
@@ -71,7 +72,7 @@ namespace MITD.PMS.Integration.Core
             }, null);
         }
 
-        private static Exception convertException(WebException exp)
+        private  Exception convertException(WebException exp)
         {
             Exception exp2 = exp;
             var s = readString(exp.Response.GetResponseStream());
@@ -87,29 +88,29 @@ namespace MITD.PMS.Integration.Core
             return exp2;
         }
 
-        public static void Post(Uri uri, Action<string, Exception> action, string sendData, Dictionary<string, string> headers = null)
+        public  void Post(Uri uri, Action<string, Exception> action, string sendData, Dictionary<string, string> headers = null)
         {
             webRequstCall(uri, action, sendData, "POST", headers);
         }
 
-        public static void Post<T1, T2>(Uri uri, Action<T1, Exception> action, T2 sendData,
+        public  void Post<T1, T2>(Uri uri, Action<T1, Exception> action, T2 sendData,
             MessageFormat format = MessageFormat.Xml, Dictionary<string, string> headers = null)
         {
             webRequstCall<T1, T2>(uri, action, sendData, format, "POST", headers);
         }
 
-        public static void Put<T1, T2>(Uri uri, Action<T1, Exception> action, T2 sendData,
+        public  void Put<T1, T2>(Uri uri, Action<T1, Exception> action, T2 sendData,
             MessageFormat format = MessageFormat.Xml, Dictionary<string, string> headers = null)
         {
             webRequstCall<T1, T2>(uri, action, sendData, format, "PUT", headers);
         }
 
-        public static void Delete(Uri uri, Action<string, Exception> action, Dictionary<string, string> headers = null)
+        public  void Delete(Uri uri, Action<string, Exception> action, Dictionary<string, string> headers = null)
         {
             webRequstCall(uri, action, "", "DELETE", headers);
         }
 
-        private static void setAcceptHeader(MessageFormat format, HttpWebRequest client)
+        private  void setAcceptHeader(MessageFormat format, HttpWebRequest client)
         {
             switch (format)
             {
@@ -122,7 +123,7 @@ namespace MITD.PMS.Integration.Core
             }
         }
 
-        private static void setContentType(MessageFormat format, WebRequest request)
+        private  void setContentType(MessageFormat format, WebRequest request)
         {
             switch (format)
             {
@@ -135,7 +136,7 @@ namespace MITD.PMS.Integration.Core
             }
         }
 
-        private static T deserializeObject<T>(MessageFormat format, Stream stream)
+        private  T deserializeObject<T>(MessageFormat format, Stream stream)
         {
             T obj;
             switch (format)
@@ -158,7 +159,7 @@ namespace MITD.PMS.Integration.Core
             return obj;
         }
 
-        private static T serializeObject<T>(MessageFormat format, Stream stream, T obj)
+        private  T serializeObject<T>(MessageFormat format, Stream stream, T obj)
         {
             switch (format)
             {
@@ -181,20 +182,20 @@ namespace MITD.PMS.Integration.Core
             return obj;
         }
 
-        private static string readString(Stream stream)
+        private  string readString(Stream stream)
         {
             var reader = new StreamReader(stream);
             return reader.ReadToEnd();
         }
 
-        private static void writeString(Stream stream, string str)
+        private  void writeString(Stream stream, string str)
         {
             var writer = new StreamWriter(stream);
             writer.Write(str);
             writer.Flush();
         }
 
-        private static void webRequstCall<T1, T2>(Uri uri, Action<T1, Exception> action, T2 sendData,
+        private  void webRequstCall<T1, T2>(Uri uri, Action<T1, Exception> action, T2 sendData,
             MessageFormat format, string method = "POST", Dictionary<string, string> headers = null)
         {
             var request = (HttpWebRequest)WebRequest.Create(uri);
@@ -204,7 +205,7 @@ namespace MITD.PMS.Integration.Core
             if (headers != null)
                 foreach (var header in headers)
                     request.Headers[header.Key] = header.Value;
-            var x=request.BeginGetRequestStream(iar =>
+            var x = request.BeginGetRequestStream(iar =>
             {
                 var reqStr = request.EndGetRequestStream(iar);
                 serializeObject(format, reqStr, sendData);
@@ -231,7 +232,7 @@ namespace MITD.PMS.Integration.Core
             }, null);
         }
 
-        private static void webRequstCall(Uri uri, Action<string, Exception> action, string senData, string method = "POST", Dictionary<string, string> headers = null)
+        private  void webRequstCall(Uri uri, Action<string, Exception> action, string senData, string method = "POST", Dictionary<string, string> headers = null)
         {
             var request = (HttpWebRequest)WebRequest.Create(uri);
             request.Method = method;

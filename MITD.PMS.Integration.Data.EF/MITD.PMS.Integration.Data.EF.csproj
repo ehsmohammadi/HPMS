@@ -48,15 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DBModel\affiliateCompany.cs">
-      <DependentUpon>PersonnelDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBModel\JOBSTitle.cs">
-      <DependentUpon>PersonnelDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBModel\OrganTreeNodeType.cs">
-      <DependentUpon>PersonnelDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="DBModel\PersonnelDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -75,19 +66,19 @@
     <Compile Include="DBModel\PMS_GeneralIndex.cs">
       <DependentUpon>PersonnelDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBModel\PMS_IndexList.cs">
+      <DependentUpon>PersonnelDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBModel\PMS_IndexType.cs">
       <DependentUpon>PersonnelDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DBModel\PMS_JobIndex.cs">
       <DependentUpon>PersonnelDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBModel\PMS_JobIndexList.cs">
+      <DependentUpon>PersonnelDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBModel\PMS_JobTitle.cs">
-      <DependentUpon>PersonnelDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBModel\Rasteh.cs">
-      <DependentUpon>PersonnelDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBModel\Reshteh.cs">
       <DependentUpon>PersonnelDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DBModel\VW_OrganTree.cs">
@@ -95,6 +86,7 @@
     </Compile>
     <Compile Include="EmployeeDataProvider.cs" />
     <Compile Include="JobDataProvider.cs" />
+    <Compile Include="UnitIndexDataProvider.cs" />
     <Compile Include="JobIndexDataProvider.cs" />
     <Compile Include="UnitDataPrivider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -126,6 +118,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MITD.PMS.Integration.Core\MITD.PMS.Integration.Core.csproj">
+      <Project>{5BC98324-6E74-4475-A917-CAB0AC10D0B4}</Project>
+      <Name>MITD.PMS.Integration.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MITD.PMS.Integration.Data.Contract\MITD.PMS.Integration.Data.Contract.csproj">
       <Project>{3823a549-6209-4d07-b859-db42981d5d19}</Project>
       <Name>MITD.PMS.Integration.Data.Contract</Name>

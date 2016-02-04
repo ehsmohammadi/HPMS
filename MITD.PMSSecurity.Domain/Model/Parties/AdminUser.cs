@@ -55,6 +55,7 @@ namespace MITD.PMSSecurity.Domain
                     ActionType.ModifyJobIndex,
                     ActionType.DeleteJobIndex,
                     ActionType.ManageJobIndexCustomFields,
+                    ActionType.ShowJobIndex,
 
 
                     ActionType.AddJobIndexCategory,

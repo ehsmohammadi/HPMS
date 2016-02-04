@@ -21,6 +21,7 @@ namespace MITD.PMS.Integration.Data.EF.DBModel
         public string Discription { get; set; }
         public bool IsActive { get; set; }
         public Nullable<int> LogUserID { get; set; }
+        public Nullable<System.Guid> TransferId { get; set; }
         public string LogActionType { get; set; }
         public Nullable<System.DateTime> LogActionDate { get; set; }
         public string LogComputerName { get; set; }

@@ -69,7 +69,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -80,6 +82,10 @@
     <ProjectReference Include="..\MITD.PMS.Integration.Data.Contract\MITD.PMS.Integration.Data.Contract.csproj">
       <Project>{3823a549-6209-4d07-b859-db42981d5d19}</Project>
       <Name>MITD.PMS.Integration.Data.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.PMS.Integration.Data.EF\MITD.PMS.Integration.Data.EF.csproj">
+      <Project>{84117807-56b1-419c-8de5-ad8ea079269b}</Project>
+      <Name>MITD.PMS.Integration.Data.EF</Name>
     </ProjectReference>
     <ProjectReference Include="..\MITD.PMS.Integration.Domain\MITD.PMS.Integration.Domain.csproj">
       <Project>{d588b2ee-0741-4fdc-a9ec-bdf90f06abb2}</Project>

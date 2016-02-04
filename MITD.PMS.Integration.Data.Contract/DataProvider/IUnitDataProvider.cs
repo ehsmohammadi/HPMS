@@ -1,16 +1,13 @@
-﻿using MITD.PMS.Integration.Data.Contract.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using MITD.PMS.Integration.Core;
+using MITD.PMS.Integration.Data.Contract.DTO;
 
 namespace MITD.PMS.Integration.Data.Contract.DataProvider
 {
-    public interface IUnitDataProvider
+    public interface IUnitDataProvider : IDataProvider
     {
 
-        UnitNodeIntegrationDTO GetRoot();
+        UnitIntegrationDTO GetRoot();
 
         List<int> GetChildIDs(int ParentID);
 
@@ -18,7 +15,7 @@ namespace MITD.PMS.Integration.Data.Contract.DataProvider
 
         List<JobPositionIntegrationDTO> GetUnitJobPositions(int UnitID);
 
-        UnitNodeIntegrationDTO GetUnitDetail(int id);
+        UnitIntegrationDTO GetUnitDetail(int id);
 
     }
 }

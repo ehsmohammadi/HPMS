@@ -9,7 +9,7 @@ namespace MITD.PMS.Integration.Domain
 {
     public class Period
     {
-        public long ID { get; set; }
+        public long Id { get; set; }
 
         public string Name { get; set; }
 

@@ -27,7 +27,7 @@ namespace ConsoleApplication1
 
             var period = new Period
             {
-                ID = 1
+                Id = 1
             };
 
             #region Manager Progress
@@ -40,7 +40,7 @@ namespace ConsoleApplication1
 
             #region End
 
-            Console.WriteLine("This progress finished");
+            Console.WriteLine("Progress started");
             Console.ReadLine();
 
             #endregion

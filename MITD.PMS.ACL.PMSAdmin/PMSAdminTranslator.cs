@@ -20,14 +20,14 @@ namespace MITD.PMS.ACL.PMSAdmin
     public class PMSAdminService : IPMSAdminService
     {
         private readonly IUnitService unitService;
-        private readonly IJobService  jobService;
+        private readonly IJobService jobService;
         private readonly IJobIndexService jobIndexService;
         private readonly IUnitIndexService unitIndexService;
         private readonly ICustomFieldService customFieldService;
         private readonly IJobPositionService jobPositionService;
 
         public PMSAdminService(IUnitService unitService, IJobService jobService,
-             ICustomFieldService customFieldService,IJobPositionService jobPositionService,
+             ICustomFieldService customFieldService, IJobPositionService jobPositionService,
             IJobIndexService jobIndexService,
              IUnitIndexService unitIndexService
             )
@@ -58,13 +58,18 @@ namespace MITD.PMS.ACL.PMSAdmin
         public List<SharedUnitIndexCustomField> GetSharedCutomFieldListForUnitIndex(SharedUnitIndexId sharedUnitIndexId,
                                                                         IList<SharedUnitIndexCustomFieldId> customFieldIdList)
         {
+            //todo:Need more attention to this method and all the same 
             var isValid = unitIndexService.IsValidCustomFieldIdList(new PMSAdminModel.UnitIndices.AbstractUnitIndexId(sharedUnitIndexId.Id),
                                                               customFieldIdList.Select(c => new CustomFieldTypeId(c.Id))
                                                                                .ToList());
             if (!isValid)
                 throw new ArgumentException("Invalid unit customFieldIdList");
 
-            var res = customFieldService.GetBy(customFieldIdList.Select(c => new CustomFieldTypeId(c.Id)).ToList());
+            var res =
+                customFieldIdList.Select(
+                    sharedUnitIndexCustomFieldId =>
+                        customFieldService.GetBy(new CustomFieldTypeId(sharedUnitIndexCustomFieldId.Id))).ToList();
+            //customFieldService.GetBy(customFieldIdList.Select(c => new CustomFieldTypeId(c.Id)).ToList());
             return
                 res.Select(
                     r => new SharedUnitIndexCustomField(new SharedUnitIndexCustomFieldId(r.Id.Id), r.Name, r.DictionaryName, r.MinValue, r.MaxValue))
@@ -104,7 +109,7 @@ namespace MITD.PMS.ACL.PMSAdmin
             return sharedJob;
         }
 
-       
+
         //public List<SharedJobCustomFieldId> GetSharedCutomFieldListForJob(SharedJobId sharedJobId,
         //                                                                IList<SharedJobCustomFieldId> customFieldIdList)
         //{
@@ -141,21 +146,21 @@ namespace MITD.PMS.ACL.PMSAdmin
 
         public List<SharedJobCustomField> GetSharedCutomFieldListForJob(SharedJobId sharedJobId, List<SharedJobCustomFieldId> customFieldIdList)
         {
-           var isValid = jobService.IsValidCustomFieldIdList(new PMSAdminModel.Jobs.JobId(sharedJobId.Id),
-                                                              customFieldIdList.Select(c => new CustomFieldTypeId(c.Id))
-                                                                               .ToList());
-           if (!isValid)
-               throw new ArgumentException("Invalid job customFieldIdList");
+            var isValid = jobService.IsValidCustomFieldIdList(new PMSAdminModel.Jobs.JobId(sharedJobId.Id),
+                                                               customFieldIdList.Select(c => new CustomFieldTypeId(c.Id))
+                                                                                .ToList());
+            if (!isValid)
+                throw new ArgumentException("Invalid job customFieldIdList");
 
-           var res = customFieldService.GetBy(customFieldIdList.Select(c => new CustomFieldTypeId(c.Id)).ToList());
-           return
-               res.Select(
-                   r => new SharedJobCustomField(new SharedJobCustomFieldId(r.Id.Id), r.Name, r.DictionaryName, r.MinValue, r.MaxValue, r.TypeId))
-                  .ToList();
+            var res = customFieldService.GetBy(customFieldIdList.Select(c => new CustomFieldTypeId(c.Id)).ToList());
+            return
+                res.Select(
+                    r => new SharedJobCustomField(new SharedJobCustomFieldId(r.Id.Id), r.Name, r.DictionaryName, r.MinValue, r.MaxValue, r.TypeId))
+                   .ToList();
 
         }
-        
-      
+
+
 
 
         public List<SharedJobIndexCustomField> GetSharedCutomFieldListForJobIndex(SharedJobIndexId sharedJobIndexId,
@@ -167,7 +172,10 @@ namespace MITD.PMS.ACL.PMSAdmin
             if (!isValid)
                 throw new ArgumentException("Invalid job customFieldIdList");
 
-            var res = customFieldService.GetBy(customFieldIdList.Select(c => new CustomFieldTypeId(c.Id)).ToList());
+            var res =
+                customFieldIdList.Select(
+                    sharedJobIndexCustomFieldId =>
+                        customFieldService.GetBy(new CustomFieldTypeId(sharedJobIndexCustomFieldId.Id))).ToList();
             return
                 res.Select(
                     r => new SharedJobIndexCustomField(new SharedJobIndexCustomFieldId(r.Id.Id), r.Name, r.DictionaryName, r.MinValue, r.MaxValue))

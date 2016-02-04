@@ -12,14 +12,13 @@ namespace MITD.PMS.Integration.Data.EF.DBModel
     using System;
     using System.Collections.Generic;
     
-    public partial class affiliateCompany
+    public partial class PMS_IndexList
     {
-        public int ID { get; set; }
-        public string Name { get; set; }
-        public Nullable<int> MapCode_PayRoll { get; set; }
-        public Nullable<int> LogUserID { get; set; }
-        public string LogActionType { get; set; }
-        public Nullable<System.DateTime> LogActionDate { get; set; }
-        public string LogComputerName { get; set; }
+        public long IndexTypeID { get; set; }
+        public string IndexTypeTitle { get; set; }
+        public Nullable<System.Guid> IndexId { get; set; }
+        public string Title { get; set; }
+        public bool IsActive { get; set; }
+        public Nullable<long> ID_Job { get; set; }
     }
 }

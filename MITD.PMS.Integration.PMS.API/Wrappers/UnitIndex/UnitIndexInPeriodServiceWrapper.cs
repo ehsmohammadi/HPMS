@@ -26,12 +26,6 @@ namespace MITD.PMS.Integration.PMS.API
             return "Periods/" + periodId + "/UnitIndices";
         }
 
-        #region Temprory Presentation Code
-
-
-        #endregion
-
-
         public void DeleteUnitIndexInPeriod(Action<string, Exception> action, long periodId, long unitIndexId)
         {
             var url = string.Format(baseAddress + makeApiAdress(periodId) + "?abstractId=" + unitIndexId);
@@ -54,14 +48,6 @@ namespace MITD.PMS.Integration.PMS.API
 
         public void GetUnitIndexInPeriod(Action<UnitIndexInPeriodDTO, Exception> action, long periodId, long abstractId)
         {
-            //var c = TestData.abstractIndexInPeriodDtoWithActionses.Single(j => j.Id == id);
-            //action(new UnitIndexInPeriodDTO
-            //{
-            //    Id = c.Id,
-            //    Name = c.Name,
-            //    ParentId = c.ParentId,
-            //    UnitIndexId = ((UnitIndexInPeriodDTOWithActions)c).UnitIndexId 
-            //}, null);
             GetUnitIndexInPeriod(action, periodId, abstractId, "");
         }
 
@@ -75,12 +61,6 @@ namespace MITD.PMS.Integration.PMS.API
 
         public void AddUnitIndexInPeriod(Action<UnitIndexInPeriodDTO, Exception> action, UnitIndexInPeriodDTO unitIndexInPeriod)
         {
-            //action(unitIndexInPeriod, null);
-            //var url = string.Format(baseAddress);
-            //WebClientHelper.Post<UnitIndexInPeriod, UnitIndexInPeriod>(new Uri(url, UriKind.Absolute),
-            //    (res, exp) => action(res, exp), unitIndexInPeriod,
-            //    WebClientHelper.MessageFormat.Json);
-
             var url = string.Format(baseAddress + makeApiAdress(unitIndexInPeriod.PeriodId));
             IntegrationWebClient.Post(new Uri(url, PMSClientConfig.UriKind), action, unitIndexInPeriod, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
 
@@ -88,11 +68,6 @@ namespace MITD.PMS.Integration.PMS.API
 
         public void UpdateUnitIndexInPeriod(Action<UnitIndexInPeriodDTO, Exception> action, UnitIndexInPeriodDTO unitIndexInPeriod)
         {
-            //action(unitIndexInPeriod, null);
-            //var url = string.Format(baseAddress + "?Id=" + unitIndexInPeriod.Id);
-            //WebClientHelper.Put<UnitIndexInPeriod, UnitIndexInPeriod>(new Uri(url, UriKind.Absolute),
-            //    (res, exp) => action(res, exp), unitIndexInPeriod,
-            //    WebClientHelper.MessageFormat.Json);
             var url = string.Format(baseAddress + makeApiAdress(unitIndexInPeriod.PeriodId));
             IntegrationWebClient.Put(new Uri(url, PMSClientConfig.UriKind), action, unitIndexInPeriod, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
 
@@ -120,14 +95,6 @@ namespace MITD.PMS.Integration.PMS.API
 
         public void GetUnitIndexGroupInPeriod(Action<UnitIndexGroupInPeriodDTO, Exception> action, long periodId, long abstractId, string columnNames)
         {
-            //var c = TestData.abstractIndexInPeriodDtoWithActionses.Single(j => j.Id == id);
-            //action(new UnitIndexGroupInPeriodDTO
-            //    {
-            //        Id = c.Id,
-            //        Name = c.Name,
-            //        ParentId = c.ParentId
-            //    }, null);
-
             var url = string.Format(baseAddress + makeApiAdress(periodId) + "?abstractId=" + abstractId);
             url += !string.IsNullOrWhiteSpace(columnNames) ? "&SelectedColumns=" + columnNames : "";
             IntegrationWebClient.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
