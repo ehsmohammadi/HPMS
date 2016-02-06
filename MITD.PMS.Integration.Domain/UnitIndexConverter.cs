@@ -1,15 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MITD.PMS.Integration.PMS.API;
-using MITD.PMS.Integration.Data.Contract;
-using MITD.PMS.Integration.PMS.Contract;
 using MITD.PMS.Integration.Data.Contract.DataProvider;
-using MITD.PMS.Integration.Data.Contract.DTO;
 using MITD.PMS.Presentation.Contracts;
-using MITD.PMS.Integration.Data.EF;
 using MITD.PMS.Integration.Domain.Contract;
 
 namespace MITD.PMS.Integration.Domain
@@ -50,10 +43,17 @@ namespace MITD.PMS.Integration.Domain
                 if (exp != null)
                     throw new Exception("Error in Add UnitIndexCategory!");
 
+
+
+
+
+
+
                 foreach (var UnitIndexItem in UnitIndexList)
                 {
                     var PmsUnitIndex = new UnitIndexDTO
                     {
+                        
                         Name = UnitIndexItem.Title,
                         ParentId = unitIndexCategoryResult.Id,
                         CustomFields=new  List<CustomFieldDTO>(),
@@ -65,7 +65,10 @@ namespace MITD.PMS.Integration.Domain
                         {
                             throw new Exception("Error in Assignment Unit!");
                         }
-                        UnitIndexInPeriodDTO UnitIndexInPriodAssignment = new UnitIndexInPeriodDTO();
+                        UnitIndexInPeriodDTO UnitIndexInPriodAssignment = new UnitIndexInPeriodDTO
+                        {
+                            
+                        };
 
                         //UnitInPriodAssignment = periodId;
                         UnitIndexInPriodAssignment.Id = unitIndexCategoryResult.Id;
