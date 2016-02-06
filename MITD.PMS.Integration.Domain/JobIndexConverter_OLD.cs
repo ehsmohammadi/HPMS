@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace MITD.PMS.Integration.Domain
 {
-    public class JobIndexConverter
+    public class JobIndexConverter_OLD
     {
         private IJobIndexDataProvider jobIndexDataProvider;
         private readonly IJobIndexServiceWrapper jobIndexService;
         public int ProgressCount;
 
-        public JobIndexConverter(IJobIndexDataProvider jobIndexDataProvider, IJobIndexServiceWrapper jobIndexService, IJobIndexInPeriodServiceWrapper JobIndexInPeriodService, IPeriodServiceWrapper PeriodService)
+        public JobIndexConverter_OLD(IJobIndexDataProvider jobIndexDataProvider, IJobIndexServiceWrapper jobIndexService, IJobIndexInPeriodServiceWrapper JobIndexInPeriodService, IPeriodServiceWrapper PeriodService)
         {
 
             this.jobIndexDataProvider = jobIndexDataProvider;

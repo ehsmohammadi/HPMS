@@ -33,6 +33,14 @@
   <ItemGroup>
     <Reference Include="Microsoft.Build" />
     <Reference Include="Microsoft.Build.Tasks.v4.0" />
+    <Reference Include="MITD.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependency\MITD.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MITD.Domain.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependency\MITD.Domain.Model.dll</HintPath>
+    </Reference>
     <Reference Include="MITD.Presentation">
       <HintPath>..\Dependency\MITD.Presentation.dll</HintPath>
     </Reference>
@@ -54,22 +62,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contract\IUnitConverter.cs" />
-    <Compile Include="Contract\IUnitIndexConverter.cs" />
+    <Compile Include="Unit\IUnitConverter.cs" />
+    <Compile Include="JobIndex\IJobIndexConverter.cs" />
+    <Compile Include="UnitIndex\IUnitIndexConverter.cs" />
     <Compile Include="ConverterManager.cs" />
-    <Compile Include="Periods\CustomFieldManager.cs" />
     <Compile Include="EmployeeConverter.cs" />
     <Compile Include="Periods\EntityEnum.cs" />
     <Compile Include="JobConverter.cs" />
-    <Compile Include="JobIndexConverter.cs" />
+    <Compile Include="JobIndexConverter_OLD.cs" />
     <Compile Include="Periods\PeriodDataProvider.cs" />
     <Compile Include="Periods\Period.cs" />
     <Compile Include="Periods\PeriodState.cs" />
+    <Compile Include="PMSCostantData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitConverter.cs" />
-    <Compile Include="UnitIndexConverter.cs" />
+    <Compile Include="JobIndex\JobIndexConverted.cs" />
+    <Compile Include="JobIndex\JobIndexConverter.cs" />
+    <Compile Include="Unit\UnitConverter.cs" />
+    <Compile Include="UnitIndex\UnitIndexConverted.cs" />
+    <Compile Include="UnitIndex\UnitIndexConverter.cs" />
+    <Compile Include="Unit\UnitConverted.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MITD.PMS.Integration.Core\MITD.PMS.Integration.Core.csproj">
+      <Project>{5BC98324-6E74-4475-A917-CAB0AC10D0B4}</Project>
+      <Name>MITD.PMS.Integration.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MITD.PMS.Integration.Data.Contract\MITD.PMS.Integration.Data.Contract.csproj">
       <Project>{3823a549-6209-4d07-b859-db42981d5d19}</Project>
       <Name>MITD.PMS.Integration.Data.Contract</Name>
@@ -92,6 +109,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

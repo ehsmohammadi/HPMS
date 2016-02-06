@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using MITD.PMS.Presentation.Contracts;
+using MITD.Presentation;
 
-namespace MITD.PMS.Integration.PMS.API
+namespace MITD.PMS.Integration.PMS.Contract
 {
-    public partial interface IUnitIndexServiceWrapper
+    public partial interface IUnitIndexServiceWrapper : IServiceWrapper
     {
         void GetUnitIndexCategory(Action<UnitIndexCategoryDTO, Exception> action, long id);
         void AddUnitIndexCategory(Action<UnitIndexCategoryDTO, Exception> action, UnitIndexCategoryDTO unit);

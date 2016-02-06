@@ -12,13 +12,12 @@ namespace MITD.PMS.Integration.Data.EF.DBModel
     using System;
     using System.Collections.Generic;
     
-    public partial class OrganTreeNodeType
+    public partial class PMS_JobIndexList
     {
-        public int ID { get; set; }
-        public string Name { get; set; }
-        public Nullable<int> LogUserID { get; set; }
-        public string LogActionType { get; set; }
-        public Nullable<System.DateTime> LogActionDate { get; set; }
-        public string LogComputerName { get; set; }
+        public long JobID { get; set; }
+        public string JobTitle { get; set; }
+        public string IndexTitle { get; set; }
+        public string IndexTypeTitle { get; set; }
+        public bool ItemState { get; set; }
     }
 }

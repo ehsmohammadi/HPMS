@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using MITD.PMS.Presentation.Contracts;
+using MITD.Presentation;
 
 namespace MITD.PMS.Integration.PMS.API
 {
-    public partial interface IJobIndexInPeriodServiceWrapper
+    public partial interface IJobIndexInPeriodServiceWrapper : IServiceWrapper
     {
         void GetJobIndexInPeriod(Action<JobIndexInPeriodDTO, Exception> action, long periodId, long abstractId);
         void AddJobIndexInPeriod(Action<JobIndexInPeriodDTO, Exception> action, JobIndexInPeriodDTO jobIndexInPeriod);

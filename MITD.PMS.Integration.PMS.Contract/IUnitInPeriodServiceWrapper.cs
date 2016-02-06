@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using MITD.PMS.Presentation.Contracts;
+using MITD.Presentation;
 
 namespace MITD.PMS.Integration.PMS.API
 {
-    public interface IUnitInPeriodServiceWrapper : MITD.Presentation.IServiceWrapper
+    public interface IUnitInPeriodServiceWrapper : IServiceWrapper
     {
         void AddInquirer(Action<string, Exception> action, long periodId, long unitId, string personalNo, long unitIndexInUnitId);
         void UpdateInquirySubjectInquirers(Action<InquirySubjectWithInquirersDTO, Exception> action, long periodId, long unitId, InquirySubjectWithInquirersDTO inquirySubjectWithInquirersDTO);

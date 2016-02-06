@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using MITD.PMS.Presentation.Contracts;
+using MITD.Presentation;
 
 namespace MITD.PMS.Integration.PMS.Contract
 {
-    public interface IUnitService
+    public interface IUnitServiceWrapper : IServiceWrapper
     {
 
         void GetUnit(Action<UnitDTO, Exception> action, long id);

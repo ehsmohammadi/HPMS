@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MITD.PMS.Integration.Core;
+using MITD.PMS.Integration.PMS.Contract;
 using MITD.PMS.Presentation.Contracts;
 
 namespace MITD.PMS.Integration.PMS.API
 {
-    public class UnitServiceWrapper// : IUnitService
+    public class UnitServiceWrapper : IUnitServiceWrapper
     {
 
         private readonly IUserProvider userProvider;

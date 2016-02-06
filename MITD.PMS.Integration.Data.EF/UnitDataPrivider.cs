@@ -12,16 +12,16 @@ namespace MITD.PMS.Integration.Data.EF
     public class UnitDataPrivider : IUnitDataProvider
     {
 
-        private PersonnelSoft2005Entities DB = new PersonnelSoft2005Entities();
+        private PersonnelSoft2005Entities db = new PersonnelSoft2005Entities();
 
 
         #region GetRoot
 
-        public UnitNodeIntegrationDTO GetRoot()
+        public UnitIntegrationDTO GetRoot()
         {
-            return (from c in DB.VW_OrganTree
+            return (from c in db.VW_OrganTree
                     where c.ID == c.PID
-                    select new UnitNodeIntegrationDTO
+                    select new UnitIntegrationDTO
                     {
                         ID = c.ID,
                         UnitName = c.NodeName,
@@ -36,9 +36,10 @@ namespace MITD.PMS.Integration.Data.EF
         {
             try
             {
-                return (from c in DB.VW_OrganTree
+                return (from c in db.VW_OrganTree
                         where c.PID == ParentID && c.ID != ParentID
                             && c.NodeType != 1
+                            //todo: Add Not Used Node Condition
                         orderby c.ID
                         select c.ID).ToList();
             }
@@ -54,16 +55,16 @@ namespace MITD.PMS.Integration.Data.EF
 
         #region GetUnitDetail
 
-        public UnitNodeIntegrationDTO GetUnitDetail(int id)
+        public UnitIntegrationDTO GetUnitDetail(int id)
         {
             {
-                UnitNodeIntegrationDTO Result = new UnitNodeIntegrationDTO();
+                UnitIntegrationDTO Result = new UnitIntegrationDTO();
                 try
                 {
 
-                    return (from c in DB.VW_OrganTree
+                    return (from c in db.VW_OrganTree
                                 where c.ID == id
-                                select new UnitNodeIntegrationDTO()
+                                select new UnitIntegrationDTO()
                                 {
                                     ID = c.ID,
                                     UnitName = c.NodeName,
@@ -83,8 +84,9 @@ namespace MITD.PMS.Integration.Data.EF
 
         public List<JobPositionIntegrationDTO> GetUnitJobPositions(int UnitID)
         {
-            return (from c in DB.VW_OrganTree
+            return (from c in db.VW_OrganTree
                     where c.NodeType == 1 && c.PID == UnitID
+                    //todo: Add Not Used Job Position Condition
                     orderby c.ID
                     select new JobPositionIntegrationDTO
                     {
@@ -145,7 +147,7 @@ namespace MITD.PMS.Integration.Data.EF
             try
             {
 
-                Result = (from C in DB.affiliateCompanies select Convert.ToInt64(C.ID)).ToList();
+                //Result = (from C in db.affiliateCompanies select Convert.ToInt64(C.ID)).ToList();
 
             }
 

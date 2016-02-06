@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace MITD.PMS.Integration.Data.Contract.DTO
 {
-    public class UnitNodeIntegrationDTO
+    public class UnitIntegrationDTO
     {
         public int ID { get; set; }
 
         public String UnitName { get; set; }
 
         public long? ParentID { get; set; }
+
+        public Guid TransferId { get; set; }
+
 
     }
 }

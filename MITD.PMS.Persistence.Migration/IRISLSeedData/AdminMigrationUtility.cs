@@ -49,6 +49,16 @@ namespace MITD.PMS.Persistence
             Units.Add(unit);
         }
 
+        public static void CreateUnitIndexCategory(IUnitIndexRepository unitIndexRepository)
+        {
+            if (unitIndexCategory == null)
+            {
+                unitIndexCategory = new UnitIndexCategory(unitIndexRepository.GetNextId(), null, "شاخص های سازمانی",
+                    "UnitIndexCategory");
+                unitIndexRepository.Add(unitIndexCategory);
+            }
+        }
+
         public static void CreateUnitIndex(IUnitIndexRepository unitIndexRepository, string name, string dictionaryName)
         {
             if (unitIndexCategory == null)
@@ -71,6 +81,17 @@ namespace MITD.PMS.Persistence
             job.AssignCustomFields(DefinedCustomFields.Where(dc => dc.EntityId.Equals(EntityTypeEnum.Job)).ToList());
             jobRepository.AddJob(job);
             Jobs.Add(job);
+        }
+
+        public static void CreateJobIndexCategory(IJobIndexRepository jobIndexRepository)
+        {
+            if (jobIndexCategory == null)
+            {
+                jobIndexCategory = new JobIndexCategory(jobIndexRepository.GetNextId(), null, "شاخص های شغل/فردی",
+                    "JobIndexCategory");
+                jobIndexRepository.Add(jobIndexCategory);
+            }
+
         }
 
         public static void CreateJobIndex(IJobIndexRepository jobIndexRepository, string name, string dictionaryName, string group)

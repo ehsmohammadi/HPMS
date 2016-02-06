@@ -12,7 +12,7 @@ namespace MITD.PMS.Integration.Data.EF
     public class JobIndexDataProvider:IJobIndexDataProvider
     {
 
-        private PersonnelSoft2005Entities DB = new PersonnelSoft2005Entities();
+        private PersonnelSoft2005Entities db = new PersonnelSoft2005Entities();
 
 
         public List<GeneralJobIndexDto> GetGeneralIndexes()
@@ -24,7 +24,7 @@ namespace MITD.PMS.Integration.Data.EF
             {
                 try
                 {
-                    var TempGeneralIndex = (from c in DB.PMS_GeneralIndex where c.ID == item select c).FirstOrDefault();
+                    var TempGeneralIndex = (from c in db.PMS_GeneralIndex where c.ID == item select c).FirstOrDefault();
 
                     GeneralJobIndexDto GeneralIndex = new GeneralJobIndexDto();
                     GeneralIndex.IndexTitle = TempGeneralIndex.Title;
@@ -48,7 +48,7 @@ namespace MITD.PMS.Integration.Data.EF
         {
             try
             {
-                var ids = (from c in DB.PMS_GeneralIndex where c.IsActive == true select c.ID).ToList();
+                var ids = (from c in db.PMS_GeneralIndex where c.IsActive == true select c.ID).ToList();
                 return ids;
             }
             catch (Exception e)
@@ -75,7 +75,7 @@ namespace MITD.PMS.Integration.Data.EF
             {
                 try
                 {
-                    var TempExclusiveIndex = (from c in DB.PMS_JobIndex where c.ID == item && c.IsActive == true select c).FirstOrDefault();
+                    var TempExclusiveIndex = (from c in db.PMS_JobIndex where c.ID == item && c.IsActive == true select c).FirstOrDefault();
 
                     ExclusiveJobIndexDto ExclusiveIndex = new ExclusiveJobIndexDto();
                     ExclusiveIndex.IndexTitle = TempExclusiveIndex.Title;
@@ -97,11 +97,31 @@ namespace MITD.PMS.Integration.Data.EF
             return ExclusiveIndexesList;
         }
 
+        public List<Nullable<Guid>> GetJobIndexListId()
+        {
+            return (from c in db.PMS_IndexList where c.IsActive == true select c.IndexId).ToList();
+        }
+
+        public JobIndexIntegrationDTO GetBy(Guid? id)
+        {
+            return (from c in db.PMS_IndexList
+                where c.IndexId==id
+                select new JobIndexIntegrationDTO
+                {
+                    ID = c.IndexId,
+                    TransferId = Guid.NewGuid(),
+                    Title = c.Title,
+                    JobIndexId = c.IndexTypeID,
+                    JobId = c.ID_Job,
+                    IndexType = c.IndexTypeID
+                }).Single();
+        }
+
         private IList<long> GetExclusiveJobIndexIds()
         {
             try
             {
-                var ids = (from c in DB.PMS_JobIndex where c.IsActive == true select c.ID).ToList();
+                var ids = (from c in db.PMS_JobIndex where c.IsActive == true select c.ID).ToList();
                 return ids;
             }
             catch (Exception e)
@@ -111,6 +131,5 @@ namespace MITD.PMS.Integration.Data.EF
             }
         }
 
-        
     }
 }

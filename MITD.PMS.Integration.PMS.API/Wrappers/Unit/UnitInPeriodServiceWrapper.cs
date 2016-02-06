@@ -4,16 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MITD.PMS.Integration.Core;
+using MITD.PMS.Integration.PMS.Contract;
 using MITD.PMS.Presentation.Contracts;
 
 namespace MITD.PMS.Integration.PMS.API
 {
-    public class UnitInPeriodServiceWrapper //: IUnitAssignmentService
+    public class UnitInPeriodServiceWrapperWrapper : Contract.IUnitInPeriodServiceWrapper
     {
         private readonly IUserProvider userProvider;
         private readonly string baseAddress = PMSClientConfig.BaseApiAddress;
 
-        public UnitInPeriodServiceWrapper(IUserProvider userProvider)
+        public UnitInPeriodServiceWrapperWrapper(IUserProvider userProvider)
         {
             this.userProvider = userProvider;
         }
@@ -126,5 +127,6 @@ namespace MITD.PMS.Integration.PMS.API
             IntegrationWebClient.Delete(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.CreateHeaderDic(userProvider.Token));
 
         }
+
     }
 }

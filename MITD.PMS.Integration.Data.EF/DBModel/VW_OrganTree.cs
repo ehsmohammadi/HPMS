@@ -43,5 +43,6 @@ namespace MITD.PMS.Integration.Data.EF.DBModel
         public string Radif { get; set; }
         public Nullable<bool> IsManager { get; set; }
         public Nullable<long> ID_PMS_JobTitle { get; set; }
+        public Nullable<System.Guid> TranferId { get; set; }
     }
 }

@@ -13,6 +13,6 @@ namespace MITD.PMS.Integration.Data.Contract.DTO
         public string Title { get; set; }
 
         public string Description { get; set; }
-
+        public Guid TransferId { get; set; }
     }
 }

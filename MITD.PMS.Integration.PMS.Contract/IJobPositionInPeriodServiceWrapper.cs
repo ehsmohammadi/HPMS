@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using MITD.PMS.Presentation.Contracts;
+using MITD.Presentation;
 
 namespace MITD.PMS.Integration.PMS.API
 {
-    public partial interface IJobPositionInPeriodServiceWrapper
+    public partial interface IJobPositionInPeriodServiceWrapper : IServiceWrapper
     {
         void AddJobPositionInPeriod(Action<JobPositionInPeriodAssignmentDTO, Exception> action, JobPositionInPeriodAssignmentDTO unitInPeriod);
         void DeleteJobPositionInPeriod(Action<string, Exception> action, long periodId, long unitId);

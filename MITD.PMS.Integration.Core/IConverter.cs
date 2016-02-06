@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MITD.PMS.Integration.Domain.Contract
+namespace MITD.PMS.Integration.Core
 {
-    public interface IUnitConverter
+    public interface IConverter
     {
-        void ConvertUnits(long PeriodId);
     }
 }

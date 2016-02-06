@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using MITD.PMS.Presentation.Contracts;
+using MITD.Presentation;
 
 namespace MITD.PMS.Integration.PMS.API
 {
-    public interface IEmployeeServiceWrapper
+    public interface IEmployeeServiceWrapper : IServiceWrapper
     {
         void GetEmployee(Action<EmployeeDTO, Exception> action, long periodId, string employeeNo);
         void AddEmployee(Action<EmployeeDTO, Exception> action, EmployeeDTO employee);

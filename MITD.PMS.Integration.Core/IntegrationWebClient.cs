@@ -204,7 +204,7 @@ namespace MITD.PMS.Integration.Core
             if (headers != null)
                 foreach (var header in headers)
                     request.Headers[header.Key] = header.Value;
-            request.BeginGetRequestStream(iar =>
+            var x=request.BeginGetRequestStream(iar =>
             {
                 var reqStr = request.EndGetRequestStream(iar);
                 serializeObject(format, reqStr, sendData);
