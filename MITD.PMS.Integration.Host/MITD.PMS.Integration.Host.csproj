@@ -134,6 +134,10 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MITD.PMS.Integration.Core\MITD.PMS.Integration.Core.csproj">
+      <Project>{5bc98324-6e74-4475-a917-cab0ac10d0b4}</Project>
+      <Name>MITD.PMS.Integration.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MITD.PMS.Integration.Data.Contract\MITD.PMS.Integration.Data.Contract.csproj">
       <Project>{3823a549-6209-4d07-b859-db42981d5d19}</Project>
       <Name>MITD.PMS.Integration.Data.Contract</Name>

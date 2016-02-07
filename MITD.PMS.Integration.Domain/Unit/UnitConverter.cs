@@ -19,9 +19,10 @@ namespace MITD.PMS.Integration.Domain
         private readonly IUnitInPeriodServiceWrapper unitInPeriodServiceWrapper;
         private List<UnitIndexInPeriodDTO> unitIndexInperiodList;
         private UnitIntegrationDTO root;
+        private List<UnitInPeriodDTO> unitInPeriodList = new List<UnitInPeriodDTO>();
         //private UnitInPeriodServiceWrapper unitAssignmentService;
         //private UnitServiceWrapper unitService;
-
+        private int totalUnitsCount;
         private readonly IEventPublisher publisher;
         #endregion
 
@@ -134,6 +135,7 @@ namespace MITD.PMS.Integration.Domain
         {
             unitIndexInperiodList = unitIndexInperiodListParam;
             root = unitDataProvider.GetRoot();
+            totalUnitsCount = unitDataProvider.GetCount();
             convertUnit_Rec(root, period.Id, null);
         }
 
@@ -145,6 +147,7 @@ namespace MITD.PMS.Integration.Domain
 
         private void convertUnit_Rec(UnitIntegrationDTO sourceUnitDTO, long periodId, long? unitParentIdParam)
         {
+            //var unitInPeriodList = new List<UnitInPeriodDTO>();
             var desUnitDTO = createDestinationUnit(sourceUnitDTO);
             unitService.AddUnit((unit, addUnitExp) =>
             {
@@ -157,16 +160,16 @@ namespace MITD.PMS.Integration.Domain
                 {
                     if (exp != null)
                         handleException(exp);
-
+                    unitInPeriodList.Add(res);
                     var unitDataChildIdList = unitDataProvider.GetChildIDs(sourceUnitDTO.ID);
                     foreach (var unitDataChildId in unitDataChildIdList)
                     {
                         var unitdataChid = unitDataProvider.GetUnitDetail(unitDataChildId);
                         convertUnit_Rec(unitdataChid, periodId, res.UnitId);
                     }
-                    if (sourceUnitDTO.ID==root.ID)
+                    if (unitInPeriodList.Count==totalUnitsCount)
                     {
-                        publisher.Publish(new UnitConverted(new List<UnitInPeriodDTO>()));
+                        publisher.Publish(new UnitConverted(unitInPeriodList));
                     }
                 }, periodId, unitInPriodAssignment);
             }, desUnitDTO);

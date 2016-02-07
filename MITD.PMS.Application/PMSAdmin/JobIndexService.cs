@@ -164,7 +164,14 @@ namespace MITD.PMSAdmin.Application
         public bool IsValidCustomFieldIdList(AbstractJobIndexId jobIndexId, IList<CustomFieldTypeId> customFieldTypeIds)
         {
             var jobIndex = (JobIndex)jobIndexRep.GetById(jobIndexId);
-            var customFieldList = customFieldRep.Find(c => customFieldTypeIds.Contains(c.Id));
+
+            var customFieldList = new List<CustomFieldType>(); //customFieldRep.Find(c => customFieldTypeIds.Contains(c.Id));
+
+            foreach (var customFieldTypeId in customFieldTypeIds)
+            {
+                customFieldList.Add(customFieldRep.GetById(customFieldTypeId));
+
+            }
             return jobIndex.IsValidCustomFields(customFieldList);
         }
 

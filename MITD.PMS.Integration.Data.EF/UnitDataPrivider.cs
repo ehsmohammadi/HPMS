@@ -12,13 +12,20 @@ namespace MITD.PMS.Integration.Data.EF
     public class UnitDataPrivider : IUnitDataProvider
     {
 
-        private PersonnelSoft2005Entities db = new PersonnelSoft2005Entities();
+        private PersonnelSoft2005Entities db;
 
 
         #region GetRoot
 
         public UnitIntegrationDTO GetRoot()
         {
+            db = new PersonnelSoft2005Entities();
+            return new UnitIntegrationDTO
+                   {
+                       ID = 4334,
+                       TransferId = Guid.NewGuid(),
+                       UnitName = "شرکت مديريت کشتي"
+                   };
             return (from c in db.VW_OrganTree
                     where c.ID == c.PID
                     select new UnitIntegrationDTO
@@ -34,11 +41,13 @@ namespace MITD.PMS.Integration.Data.EF
 
         public List<int> GetChildIDs(int ParentID)
         {
+            db = new PersonnelSoft2005Entities();
             try
             {
                 return (from c in db.VW_OrganTree
                         where c.PID == ParentID && c.ID != ParentID
                             && c.NodeType != 1
+                            && c.NodeType!=6
                             //todo: Add Not Used Node Condition
                         orderby c.ID
                         select c.ID).ToList();
@@ -57,8 +66,7 @@ namespace MITD.PMS.Integration.Data.EF
 
         public UnitIntegrationDTO GetUnitDetail(int id)
         {
-            {
-                UnitIntegrationDTO Result = new UnitIntegrationDTO();
+            db = new PersonnelSoft2005Entities();
                 try
                 {
 
@@ -75,6 +83,29 @@ namespace MITD.PMS.Integration.Data.EF
                 {
                     throw e;
                 }
+            
+        }
+
+        public int GetCount()
+        {
+            db = new PersonnelSoft2005Entities();
+            //todo: Predicate
+            var RootFullPath= (from c in db.VW_OrganTree
+                    where c.ID == 4334
+                    select c.FullPath
+                    ).FirstOrDefault();
+            try
+            {
+                return (from c in db.VW_OrganTree
+                    where c.NodeType != 1
+                          && c.NodeType != 6
+                          && c.FullPath.StartsWith(RootFullPath)
+                    select c.ID).Count();
+            }
+            catch (Exception e)
+            {
+
+                throw e;
             }
         }
 
@@ -84,6 +115,7 @@ namespace MITD.PMS.Integration.Data.EF
 
         public List<JobPositionIntegrationDTO> GetUnitJobPositions(int UnitID)
         {
+            db = new PersonnelSoft2005Entities();
             return (from c in db.VW_OrganTree
                     where c.NodeType == 1 && c.PID == UnitID
                     //todo: Add Not Used Job Position Condition
@@ -141,7 +173,7 @@ namespace MITD.PMS.Integration.Data.EF
 
         public IList<long> GetIdList()
         {
-
+            db = new PersonnelSoft2005Entities();
             List<long> Result = new List<long>();
 
             try

@@ -48,7 +48,7 @@ namespace MITD.PMS.Integration.Domain
             if (isInitialized)
             {
                 RegisterHandler();
-                //unitIndexConverter.ConvertUnitIndex(period);
+                unitIndexConverter.ConvertUnitIndex(period);
                 jobIndexConverter.ConvertJobIndex(period);
             }
             else
@@ -63,13 +63,13 @@ namespace MITD.PMS.Integration.Domain
             {
                 unitIndexInperiodList = e.UnitIndexInperiodList;
                 Console.WriteLine("{0} Converted , Unit index Progress finished", unitIndexInperiodList.Count);
-                //unitConverter.ConvertUnits(period, unitIndexInperiodList);
+                unitConverter.ConvertUnits(period, unitIndexInperiodList);
             });
             publisher.RegisterHandler(unitIndexConvertedHandler);
 
             unitConvertedHandler = new DelegateHandler<UnitConverted>(e =>
             {
-                Console.WriteLine("{0} Converted , Unit Progress finished");
+                Console.WriteLine("{0} Units Converted , Unit Progress finished",e.UnitInperiodList.Count);
                 
             });
 

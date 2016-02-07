@@ -69,7 +69,14 @@ namespace MITD.PMSAdmin.Application
         {
             using (var scope = new TransactionScope())
             {
-                var res = customFieldRep.Find(c => customFieldIdList.Contains(c.Id)).ToList();
+                //var res = customFieldRep.Find(c => customFieldIdList.Contains(c.Id)).ToList();
+                var res = new List<CustomFieldType>(); //customFieldRep.Find(c => customFieldTypeIds.Contains(c.Id));
+
+                foreach (var customFieldTypeId in customFieldIdList)
+                {
+                    res.Add(customFieldRep.GetById(customFieldTypeId));
+
+                }
                 scope.Complete();
                 return res;
             }

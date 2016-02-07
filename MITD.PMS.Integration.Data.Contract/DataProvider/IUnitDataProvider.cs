@@ -17,5 +17,6 @@ namespace MITD.PMS.Integration.Data.Contract.DataProvider
 
         UnitIntegrationDTO GetUnitDetail(int id);
 
+        int GetCount();
     }
 }

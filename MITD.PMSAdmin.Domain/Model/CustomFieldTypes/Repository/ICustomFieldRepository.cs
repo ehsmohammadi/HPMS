@@ -21,7 +21,7 @@ namespace MITD.PMSAdmin.Domain.Model.CustomFieldTypes
         List<CustomFieldType> GetAllCustomField(AbstractJobIndexId jobIndexId);
         void GetAll(EntityTypeEnum entityTypeEnum, ListFetchStrategy<CustomFieldType> fs);
         List<CustomFieldType> GetAll(EntityTypeEnum entityTypeEnum);
-        IList<CustomFieldType> Find(System.Linq.Expressions.Expression<Func<CustomFieldType, bool>> predicate);
+        //IList<CustomFieldType> Find(System.Linq.Expressions.Expression<Func<CustomFieldType, bool>> predicate);
         void DeleteCustomField(CustomFieldType customField);
 
         CustomFieldTypeException ConvertException(Exception exp);
