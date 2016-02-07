@@ -23,11 +23,13 @@ namespace ConsoleApplication1
             var periodService = new PeriodDataProvider(new PeriodServiceWrapper(new UserProvider()));//new PeriodServiceWrapper(new UserProvider()));
             //var CnManager = new ConverterManager(new CustomFieldServiceWrapper(new UserProvider()));
 
-            
 
-            var period = new  Period();
-            period.ID = 10;
-            period.Name = "name";
+
+            var period = new Period
+            {
+                Id = 10,
+                Name = "name"
+            };
 
 
 
