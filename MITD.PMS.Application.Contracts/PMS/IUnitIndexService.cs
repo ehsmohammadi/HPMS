@@ -21,7 +21,7 @@ namespace MITD.PMS.Application.Contracts
 
         IList<SharedUnitIndexCustomField> GetSharedUnitIndexCustomField(SharedUnitIndexId sharedUnitIndexId, List<SharedUnitIndexCustomFieldId> fieldIdList);
 
-        IEnumerable<UnitIndex> FindUnitIndices(Expression<Func<UnitIndex, bool>> where);
+        IEnumerable<UnitIndex> FindUnitIndices(IEnumerable<AbstractUnitIndexId> unitIndexIds);
         //bool IsValidCustomFieldIdList(AbstractUnitIndexId UnitIndexId, IList<SharedUnitIndexCustomFieldId> customFieldTypeIds);
         //bool IsValidCustomFieldIdList(SharedUnitIndexId UnitIndexId, IList<SharedUnitIndexCustomFieldId> customFieldTypeIds);
         List<AbstractUnitIndex> GetAllAbstractUnitIndexByParentId(AbstractUnitIndexId id);

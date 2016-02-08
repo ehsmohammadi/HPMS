@@ -73,7 +73,13 @@ namespace MITD.PMSAdmin.Persistence.NH
         public List<CustomFieldType> GetAllCustomField(AbstractJobIndexId jobIndexId)
         {
             var jobIndex = Session.Query<JobIndex>().Single(j => j.Id == jobIndexId);
-            return Session.Query<CustomFieldType>().Where(c => jobIndex.CustomFieldTypeIdList.Contains(c.Id)).ToList();
+            var res = new List<CustomFieldType>();
+            foreach (var customFieldTypeId in jobIndex.CustomFieldTypeIdList)
+            {
+                res.Add(GetById(customFieldTypeId));
+
+            }
+            return res;
         }
 
         public List<CustomFieldType> GetAllCustomField(AbstractUnitIndexId unitIndexId)

@@ -91,9 +91,15 @@ namespace MITD.PMS.Persistence.NH
             rep.Update(jobIndex);
         }
 
-        public IEnumerable<JobIndex> FindJobIndices(Expression<Func<JobIndex, bool>> predicate)
+        public IEnumerable<JobIndex> FindJobIndices(IEnumerable<AbstractJobIndexId> jobIndexIds )
         {
-            return rep.Find(predicate).ToList();
+            var res = new List<JobIndex>();
+            foreach (var jobIndexId in jobIndexIds)
+            {
+                res.Add((JobIndex)GetById(jobIndexId));
+
+            }
+            return res;
         }
 
         public List<AbstractJobIndex> GetAllAbstractJobIndexByParentId(AbstractJobIndexId id)

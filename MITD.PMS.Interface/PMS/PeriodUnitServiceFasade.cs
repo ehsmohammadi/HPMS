@@ -126,7 +126,7 @@ namespace MITD.PMS.Interface
             
                unitDto.CustomFields = unit.CustomFields.Select(c => unitCustomFieldMapper.MapToModel(c)).ToList();
               var unitindexIdList = unit.UnitIndexList.Select(j => j.UnitIndexId).ToList();
-             var unitIndices = unitIndexService.FindUnitIndices(index => unitindexIdList.Contains(index.Id));
+             var unitIndices = unitIndexService.FindUnitIndices(unitindexIdList);
             //todo change this mapping to valid mapping need som work !!!!!!
             var unitInPeriodUnitIndexDTOList = new List<UnitInPeriodUnitIndexDTO>();
             foreach (var unitIndex in unitIndices)

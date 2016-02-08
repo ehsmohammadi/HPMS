@@ -26,7 +26,22 @@ namespace ConsoleApplication1
 
             #endregion
 
-            Task.Run(() => mainAsync(args)).Wait();
+            var period = new Period
+            {
+                Id = 1
+            };
+
+            #region Manager Progress
+
+            var manager = ServiceLocator.Current.GetInstance<ConverterManager>();
+            manager.Init(period);
+            manager.Run();
+
+
+
+            #endregion
+
+            //Task.Run(() => mainAsync(args)).Wait();
             //AsyncContext.Run(
             //    () => mainAsync(args));
 
@@ -43,20 +58,7 @@ namespace ConsoleApplication1
         static async void mainAsync(string[] args)
         {
 
-            var period = new Period
-            {
-                Id = 1
-            };
-
-            #region Manager Progress
-
-            var manager = ServiceLocator.Current.GetInstance<ConverterManager>();
-            manager.Init(period);
-            await manager.Run();
-
             
-
-            #endregion
         }
     }
 }

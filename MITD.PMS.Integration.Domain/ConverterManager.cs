@@ -47,12 +47,13 @@ namespace MITD.PMS.Integration.Domain
         #endregion
 
         #region Public methods
-        public async Task Run()
+        public void Run()
         {
             if (isInitialized)
             {
                 RegisterHandler();
                 unitIndexConverter.ConvertUnitIndex(period);
+               
                 
             }
             else
@@ -63,34 +64,51 @@ namespace MITD.PMS.Integration.Domain
 
         private void RegisterHandler()
         {
+            #region UnitIndex Converter handler
+
             unitIndexConvertedHandler = new DelegateHandler<UnitIndexConverted>(e =>
-            {
-                unitIndexInperiodList = e.UnitIndexInperiodList;
-                Console.WriteLine("{0} Converted , Unit index progress finished", unitIndexInperiodList.Count);
-                unitConverter.ConvertUnits(period, unitIndexInperiodList);
-            });
-            publisher.RegisterHandler(unitIndexConvertedHandler);
+                {
+                    unitIndexInperiodList = e.UnitIndexInperiodList;
+                    Console.WriteLine("{0} Converted , Unit index progress finished", unitIndexInperiodList.Count);
+                    unitConverter.ConvertUnits(period, unitIndexInperiodList);
+                });
+            publisher.RegisterHandler(unitIndexConvertedHandler); 
+
+            #endregion
+
+            #region Unit Converter handler
 
             unitConvertedHandler = new DelegateHandler<UnitConverted>(e =>
-            {
-                Console.WriteLine("{0} Units converted , Unit progress finished",e.UnitInperiodList.Count);
-            });
-            publisher.RegisterHandler(unitConvertedHandler);
+                {
+                    Console.WriteLine("{0} Units converted , Unit progress finished", e.UnitInperiodList.Count);
+                    jobIndexConverter.ConvertJobIndex(period);
+                });
+            publisher.RegisterHandler(unitConvertedHandler); 
+
+            #endregion
+
+            #region JobIndex Converter handler
 
             jobIndexConvertedHandler = new DelegateHandler<JobIndexConverted>(e =>
-            {
-                jobIndexInperiodList = e.JobIndexInperiodList;
-                Console.WriteLine("{0} Job index converted , Job index progress finished", jobIndexInperiodList.Count);
-                jobConverter.ConvertJobs(period, jobIndexInperiodList);
-            });
-            publisher.RegisterHandler(jobIndexConvertedHandler);
+                {
+                    jobIndexInperiodList = e.JobIndexInperiodList;
+                    Console.WriteLine("{0} Job index converted , Job index progress finished", jobIndexInperiodList.Count);
+                    jobConverter.ConvertJobs(period, jobIndexInperiodList);
+                });
+            publisher.RegisterHandler(jobIndexConvertedHandler); 
+
+            #endregion
+
+            #region Job Conveter Handler
 
             jobConvertedHandler = new DelegateHandler<JobConverted>(e =>
-            {
-                Console.WriteLine("{0} Jobs Converted , Job progress finished", e.JobInperiodList.Count);
+                {
+                    Console.WriteLine("{0} Jobs Converted , Job progress finished", e.JobInperiodList.Count);
 
-            });
-            publisher.RegisterHandler(jobIndexConvertedHandler);
+                });
+            publisher.RegisterHandler(jobConvertedHandler); 
+
+            #endregion
 
 
 

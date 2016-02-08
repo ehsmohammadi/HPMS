@@ -115,7 +115,7 @@ namespace MITD.PMS.Interface
             var jobDto = jobInPeriodDTOMapper.MapToModel(job, selectedColumns.Split(','));
             jobDto.CustomFields = job.CustomFields.Select(c => jobCustomFieldMapper.MapToModel(c)).ToList();
             var jobindexIdList = job.JobIndexList.Select(j => j.JobIndexId).ToList();
-            var jobIndices = jobIndexService.FindJobIndices(index => jobindexIdList.Contains(index.Id));
+            var jobIndices = jobIndexService.FindJobIndices(jobindexIdList);
             //todo change this mapping to valid mapping need som work !!!!!!
             var jobInPeriodJobIndexDTOList = new List<JobInPeriodJobIndexDTO>();
             foreach (var jobIndex in jobIndices)

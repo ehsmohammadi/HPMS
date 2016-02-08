@@ -23,7 +23,7 @@ namespace MITD.PMS.Domain.Model.UnitIndices
         AbstractUnitIndexId GetNextId();
         void Update(AbstractUnitIndex UnitIndex);
 
-        IEnumerable<UnitIndex> FindUnitIndices(Expression<Func<UnitIndex, bool>> where);
+        IEnumerable<UnitIndex> FindUnitIndices(IEnumerable<AbstractUnitIndexId> unitIndexIds);
         List<AbstractUnitIndex> GetAllAbstractUnitIndexByParentId(AbstractUnitIndexId id);
         List<UnitIndexGroup> GetAllParentUnitIndexGroup(Period period);
         SharedUnitIndexId GetSharedUnitIndexIdBy(AbstractUnitIndexId abstractUnitIndexId);

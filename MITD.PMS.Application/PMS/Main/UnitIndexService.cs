@@ -193,11 +193,11 @@ namespace MITD.PMS.Application
             }
         }
 
-        public IEnumerable<UnitIndex> FindUnitIndices(Expression<Func<UnitIndex, bool>> where)
+        public IEnumerable<UnitIndex> FindUnitIndices(IEnumerable<AbstractUnitIndexId> unitIndexIds)
         {
             using (var tr = new TransactionScope())
             {
-                var res = unitIndexRep.FindUnitIndices(where);
+                var res = unitIndexRep.FindUnitIndices(unitIndexIds);
                 tr.Complete();
                 return res;
             }
