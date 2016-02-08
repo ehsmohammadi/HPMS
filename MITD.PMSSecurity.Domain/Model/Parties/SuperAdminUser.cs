@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using MITD.Core;
 
 
-namespace MITD.PMSSecurity.Domain.Model
+namespace MITD.PMSSecurity.Domain
 {
     public sealed class SuperAdminUser:User
     {
