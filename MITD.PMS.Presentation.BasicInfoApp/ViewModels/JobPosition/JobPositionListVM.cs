@@ -93,7 +93,7 @@ namespace MITD.PMS.Presentation.Logic
 
         void init()
         {
-            JobPositions = new PagedSortableCollectionView<JobPositionDTOWithActions>();
+            JobPositions = new PagedSortableCollectionView<JobPositionDTOWithActions> { PageSize = 20 };
             JobPositions.OnRefresh += (s, args) => Load();
             JobPositionCommands = new List<DataGridCommandViewModel>
             {

@@ -78,7 +78,7 @@
 
             <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" >
 
-                <pr:CustomDataPager Height="26" HorizontalAlignment="Center" FontFamily="Tahoma" FontSize="11" PageSize="10" Width="250" 
+                <pr:CustomDataPager Height="26" HorizontalAlignment="Center" FontFamily="Tahoma" FontSize="11" PageSize="20" Width="250" 
                                     Source="{Binding Path=Policys, Mode=TwoWay}" />
 
 

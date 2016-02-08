@@ -94,7 +94,7 @@ namespace MITD.PMS.Presentation.Logic
         void init()
         {
             DisplayName = PeriodMgtAppLocalizedResources.PeriodListViewTitle;
-            periods = new PagedSortableCollectionView<PeriodDTOWithAction>();
+            periods = new PagedSortableCollectionView<PeriodDTOWithAction> { PageSize = 20 };
             periods.OnRefresh += (s, args) => refresh();
             PeriodCommands = new List<DataGridCommandViewModel>
             {

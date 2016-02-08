@@ -103,7 +103,7 @@ namespace MITD.PMS.Presentation.Logic
         void init()
         {
             DisplayName = PeriodMgtAppLocalizedResources.ClaimListViewTitle;
-            claims = new PagedSortableCollectionView<ClaimDTOWithAction>();
+            claims = new PagedSortableCollectionView<ClaimDTOWithAction> { PageSize = 20 };
             claims.OnRefresh += (s, args) => refresh();
             ClaimCommands = new List<DataGridCommandViewModel>
             {

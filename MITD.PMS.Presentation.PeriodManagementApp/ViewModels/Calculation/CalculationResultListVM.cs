@@ -116,7 +116,7 @@ namespace MITD.PMS.Presentation.Logic
         void init()
         {
             EmployeeCalculationResult = new EmployeeCalculationResultDTO();
-            EmployeeCalcTotalScores = new PagedSortableCollectionView<JobIndexPointSummaryDTOWithAction>();
+            EmployeeCalcTotalScores = new PagedSortableCollectionView<JobIndexPointSummaryDTOWithAction> { PageSize = 20 };
             EmployeeCalcTotalScores.OnRefresh += (s, args) => refresh();
         }
 

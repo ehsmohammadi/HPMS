@@ -89,7 +89,7 @@ namespace MITD.PMS.Presentation.Logic
 
         void init()
         {
-            Logs = new PagedSortableCollectionView<LogDTOWithActions>();
+            Logs = new PagedSortableCollectionView<LogDTOWithActions> { PageSize = 20 };
             Logs.OnRefresh += (s, args) => Load();
             LogCommands = new List<DataGridCommandViewModel>();
         }

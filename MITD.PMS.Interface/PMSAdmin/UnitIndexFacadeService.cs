@@ -60,7 +60,7 @@ namespace MITD.PMS.Interface
             unitIndexRep.GetAllUnitIndex(fs);
             var res = new PageResultDTO<AbstractUnitIndexDTOWithActions>();
             res.InjectFrom(fs.PageCriteria.PageResult);
-            res.Result = fs.PageCriteria.PageResult.Result.Select(r => unitIndexWithActionsMapper.MapToModel(r));
+            res.Result = fs.PageCriteria.PageResult.Result.Select(r => unitIndexWithActionsMapper.MapToModel(r)).ToList();
             return res;
         }
 

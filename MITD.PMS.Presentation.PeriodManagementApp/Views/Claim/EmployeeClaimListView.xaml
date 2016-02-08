@@ -82,7 +82,7 @@
                 </sdk:DataGrid.Columns>
             </sdk:DataGrid>
             <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
-                <pr:CustomDataPager Height="26" FontFamily="Tahoma" FontSize="11" PageSize="10" Width="200" 
+                <pr:CustomDataPager Height="26" FontFamily="Tahoma" FontSize="11" PageSize="20" Width="200" 
                                     Source="{Binding Path=Claims, Mode=TwoWay}" />
             </StackPanel>
             

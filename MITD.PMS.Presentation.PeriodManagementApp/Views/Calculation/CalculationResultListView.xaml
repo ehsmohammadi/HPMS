@@ -134,7 +134,7 @@
             </sdk:DataGrid>
         </ScrollViewer>
         <StackPanel Grid.Row="2" Grid.ColumnSpan="4" HorizontalAlignment="Center" Orientation="Horizontal">
-            <pr:CustomDataPager Height="26" FontFamily="Tahoma" FontSize="11" PageSize="10" Width="200" 
+            <pr:CustomDataPager Height="26" FontFamily="Tahoma" FontSize="11" PageSize="20" Width="200" 
                                     Source="{Binding Path=EmployeeCalcTotalScores, Mode=TwoWay}" />
         </StackPanel>
     </Grid>
