@@ -18,9 +18,9 @@ namespace ConsoleApplication1
             var res = Console.ReadLine();
             Console.ReadLine();
 
-            var empConverter = new EmployeeConverter(new EmployeeDataProvider(), new EmployeeServiceWrapper(new UserProvider()));
-            var jobConverter = new JobConverter(new JobDataProvider(), new JobServiceWrapper(new UserProvider()), new JobInPeriodServiceWrapper(new UserProvider()), new PeriodServiceWrapper(new UserProvider()));
-            var periodService = new PeriodDataProvider(new PeriodServiceWrapper(new UserProvider()));//new PeriodServiceWrapper(new UserProvider()));
+            //var empConverter = new EmployeeConverter(new EmployeeDataProvider(), new EmployeeServiceWrapper(new UserProvider()));
+            //var jobConverter = new JobConverter(new JobDataProvider(), new JobServiceWrapper(new UserProvider()), new JobInPeriodServiceWrapper(new UserProvider()), new PeriodServiceWrapper(new UserProvider()));
+            //var periodService = new PeriodDataProvider(new PeriodServiceWrapper(new UserProvider()));//new PeriodServiceWrapper(new UserProvider()));
             //var CnManager = new ConverterManager(new CustomFieldServiceWrapper(new UserProvider()));
 
 

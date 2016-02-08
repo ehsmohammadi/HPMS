@@ -4,14 +4,16 @@ using System.Text;
 
 namespace MITD.PMS.Integration.Data.Contract.DTO
 {
-    public class JobTitleDto
+    public class JobIntegrationDto
     {
 
-        public long JobTitleID { get; set; }
+        public long Id { get; set; }
 
-        public string JobTitle { get; set; }
+        public string Title { get; set; }
 
-        public string JobDecscription { get; set; }
+        public string Decscription { get; set; }
+
+        public Guid TransferId { get; set; }
     
     }
 }

@@ -62,6 +62,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Job\IJobConverter.cs" />
+    <Compile Include="Job\JobConverted.cs" />
+    <Compile Include="Job\JobConverter.cs" />
     <Compile Include="Unit\IUnitConverter.cs" />
     <Compile Include="JobIndex\IJobIndexConverter.cs" />
     <Compile Include="UnitIndex\IUnitIndexConverter.cs" />

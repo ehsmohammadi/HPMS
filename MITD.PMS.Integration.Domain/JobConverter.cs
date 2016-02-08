@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace MITD.PMS.Integration.Domain
 {
-    public class JobConverter
+    public class JobConverter_Old
     {
         private IJobDataProvider jobDataProvider;
         private readonly IJobServiceWrapper jobService;
         public int ProgressCount;
 
-        public JobConverter(IJobDataProvider jobDataProvider, IJobServiceWrapper jobService, IJobInPeriodServiceWrapper JobInPeriodService, IPeriodServiceWrapper PeriodService)
+        public JobConverter_Old(IJobDataProvider jobDataProvider, IJobServiceWrapper jobService, IJobInPeriodServiceWrapper JobInPeriodService, IPeriodServiceWrapper PeriodService)
         {
 
             this.jobDataProvider = jobDataProvider;
@@ -44,12 +44,12 @@ namespace MITD.PMS.Integration.Domain
 
                 var jobDetail = jobDataProvider.GetJobDetails(id);
                 var desJob = new JobDTO();
-                desJob.Name = jobDetail.JobTitle;
+                desJob.Name = jobDetail.Title;
                 desJob.DictionaryName = "DicName" + Guid.NewGuid();
                 desJob.CustomFields = new List<CustomFieldDTO>();
 
                 JobDTO CurrentJob = new JobDTO();
-                CurrentJob = GetJob(jobDetail.JobTitleID);
+                CurrentJob = GetJob(jobDetail.Id);
 
                 if (CurrentJob.Id != null && CurrentJob.Id != 0)
                 {

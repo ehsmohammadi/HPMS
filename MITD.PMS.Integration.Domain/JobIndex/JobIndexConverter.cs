@@ -39,6 +39,8 @@ namespace MITD.PMS.Integration.Domain
 
         public void ConvertJobIndex(Period period)
         {
+            Console.WriteLine("Starting jobs convert progress...");
+
             var jobIndexInperiodList = new List<JobIndexInPeriodDTO>();
             var sourceJobIndexListId = jobIndexDataProvider.GetJobIndexListId();
             foreach (var sourceJobIndexId in sourceJobIndexListId)
@@ -70,6 +72,7 @@ namespace MITD.PMS.Integration.Domain
                                     else
                                     {
                                         jobIndexInperiodList.Add(res);
+                                        Console.WriteLine("Job index convert progress state: " + jobIndexInperiodList.Count + " From " + sourceJobIndexListId.Count.ToString());
                                         if (jobIndexInperiodList.Count == sourceJobIndexListId.Count)
                                             publisher.Publish(new JobIndexConverted(jobIndexInperiodList));
                                     }

@@ -133,6 +133,7 @@ namespace MITD.PMS.Integration.Domain
         #region public methods
         public void ConvertUnits(Period period, List<UnitIndexInPeriodDTO> unitIndexInperiodListParam)
         {
+            Console.WriteLine("Starting units Convert progress...");
             unitIndexInperiodList = unitIndexInperiodListParam;
             root = unitDataProvider.GetRoot();
             totalUnitsCount = unitDataProvider.GetCount();
@@ -167,7 +168,8 @@ namespace MITD.PMS.Integration.Domain
                         var unitdataChid = unitDataProvider.GetUnitDetail(unitDataChildId);
                         convertUnit_Rec(unitdataChid, periodId, res.UnitId);
                     }
-                    if (unitInPeriodList.Count==totalUnitsCount)
+                    Console.WriteLine("Unit convert progress state: " + unitInPeriodList.Count + " From "+ totalUnitsCount.ToString());
+                    if (unitInPeriodList.Count == totalUnitsCount)
                     {
                         publisher.Publish(new UnitConverted(unitInPeriodList));
                     }
