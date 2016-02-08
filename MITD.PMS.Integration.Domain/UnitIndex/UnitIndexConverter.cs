@@ -139,7 +139,7 @@ namespace MITD.PMS.Integration.Domain
 
         private void handleException(Exception exception)
         {
-            throw new Exception("bad shod", exception);
+            throw exception;
         }
         #endregion
 

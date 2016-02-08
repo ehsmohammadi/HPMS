@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Threading.Tasks;
 using MITD.Core;
 using MITD.PMS.Integration.Data.Contract;
 using MITD.PMS.Integration.Domain;
 using MITD.PMS.Integration.Host.Console;
 using MITD.PMS.Integration.PMS.API;
+using Nito.AsyncEx;
 
 namespace ConsoleApplication1
 {
@@ -11,19 +13,35 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-
             #region Entrance
 
             Console.ReadLine();
-
+            Console.WriteLine("Progress started");
             #endregion
 
             #region Bootsrapper
 
-            var bootstrapper=new Bootstrapper();
+            var bootstrapper = new Bootstrapper();
             bootstrapper.Execute();
 
             #endregion
+
+            Task.Run(() => mainAsync(args)).Wait();
+            //AsyncContext.Run(
+            //    () => mainAsync(args));
+
+
+
+            #region End
+
+            Console.WriteLine("Progress started");
+            Console.ReadLine();
+
+            #endregion
+        }
+
+        static async void mainAsync(string[] args)
+        {
 
             var period = new Period
             {
@@ -34,18 +52,11 @@ namespace ConsoleApplication1
 
             var manager = ServiceLocator.Current.GetInstance<ConverterManager>();
             manager.Init(period);
-            manager.Run();
+            await manager.Run();
+
+            
 
             #endregion
-
-            #region End
-
-            Console.WriteLine("Progress started");
-            Console.ReadLine();
-
-            #endregion
-
-
         }
     }
 }

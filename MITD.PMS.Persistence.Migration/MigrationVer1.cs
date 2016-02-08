@@ -831,7 +831,7 @@ namespace MITD.PMS.Persistence
                   .WithColumn("Id").AsInt64().PrimaryKey()
                   .WithColumn("RowVersion").AsCustom("rowversion")
                   .WithColumn("Name").AsString(256).NotNullable()
-                  .WithColumn("DictionaryName").AsString(256).NotNullable()
+                  .WithColumn("DictionaryName").AsString(256).NotNullable().Unique()
                   .WithColumn("TransferId").AsGuid().Nullable();
 
             Create.Table("UnitIndexCategories")

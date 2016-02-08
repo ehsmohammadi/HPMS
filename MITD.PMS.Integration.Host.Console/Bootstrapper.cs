@@ -18,7 +18,7 @@ namespace MITD.PMS.Integration.Host.Console
                 .BasedOn<IConverter>().WithService.FromInterface().LifestyleTransient());
 
             container.Register(Classes.FromAssemblyNamed("MITD.PMS.Integration.Data.EF")
-                    .BasedOn<IDataProvider>().WithService.FromInterface().LifestyleTransient());
+                    .BasedOn<IDataProvider>().WithService.FromInterface().LifestylePerThread());
 
             container.Register(Classes.FromAssemblyNamed("MITD.PMS.Integration.PMS.API")
                     .BasedOn<IServiceWrapper>().WithService.FromInterface().LifestyleTransient());
@@ -27,7 +27,7 @@ namespace MITD.PMS.Integration.Host.Console
 
             container.Register(Component.For<IEventPublisher>().ImplementedBy<EventPublisher>().LifestyleSingleton());
 
-            container.Register(Component.For<ConverterManager>().LifestyleSingleton());
+            container.Register(Component.For<ConverterManager>().LifestyleTransient());
 
             var locator = new WindsorServiceLocator(container);
             ServiceLocator.SetLocatorProvider(() => locator);
