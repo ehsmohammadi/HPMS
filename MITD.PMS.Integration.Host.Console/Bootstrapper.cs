@@ -15,13 +15,13 @@ namespace MITD.PMS.Integration.Host.Console
         {
             var container = new WindsorContainer();
             container.Register(Classes.FromAssemblyNamed("MITD.PMS.Integration.Domain")
-                .BasedOn<IConverter>().WithService.FromInterface().LifestyleTransient());
+                .BasedOn<IConverter>().WithService.FromInterface().LifestyleSingleton());
 
             container.Register(Classes.FromAssemblyNamed("MITD.PMS.Integration.Data.EF")
-                    .BasedOn<IDataProvider>().WithService.FromInterface().LifestyleTransient());
+                    .BasedOn<IDataProvider>().WithService.FromInterface().LifestyleSingleton());
 
             container.Register(Classes.FromAssemblyNamed("MITD.PMS.Integration.PMS.API")
-                    .BasedOn<IServiceWrapper>().WithService.FromInterface().LifestyleTransient());
+                    .BasedOn<IServiceWrapper>().WithService.FromInterface().LifestyleSingleton());
 
             container.Register(Component.For<IUserProvider>().ImplementedBy<UserProvider>().LifestyleSingleton());
 

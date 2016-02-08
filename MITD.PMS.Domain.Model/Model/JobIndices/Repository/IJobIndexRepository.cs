@@ -23,7 +23,7 @@ namespace MITD.PMS.Domain.Model.JobIndices
         AbstractJobIndexId GetNextId();
         void Update(AbstractJobIndex jobIndex);
 
-        IEnumerable<JobIndex> FindJobIndices(Expression<Func<JobIndex, bool>> where);
+        IEnumerable<JobIndex> FindJobIndices(IEnumerable<AbstractJobIndexId> jobIndexIds);
         List<AbstractJobIndex> GetAllAbstractJobIndexByParentId(AbstractJobIndexId id);
         List<JobIndexGroup> GetAllParentJobIndexGroup(Period period);
         SharedJobIndexId GetSharedJobIndexIdBy(AbstractJobIndexId abstractJobIndexId);

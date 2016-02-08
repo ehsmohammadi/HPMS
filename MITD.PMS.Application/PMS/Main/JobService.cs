@@ -58,7 +58,7 @@ namespace MITD.PMS.Application
                         ));
                 }
                 var jobIndexIds=jobIndexList.Select(jj => jj.JobIndexId).ToList();
-                var jobIndices = jobIndexRep.FindJobIndices(j => jobIndexIds.Contains(j.Id));
+                var jobIndices = jobIndexRep.FindJobIndices(jobIndexIds);
                 //job.UpdateJobIndices(jobIndices.ToList());
                 var jobJobInddices = new List<JobJobIndex>();
                 foreach (var jobIndex in jobIndices)
@@ -112,7 +112,7 @@ namespace MITD.PMS.Application
                 }
                 job.UpdateCustomFields(jobCustomFields, periodChecker);
                 var jobindexIdList = jobIndexList.Select(jj => jj.JobIndexId).ToList();
-                var jobIndices = jobIndexRep.FindJobIndices(j => jobindexIdList.Contains(j.Id));
+                var jobIndices = jobIndexRep.FindJobIndices(jobindexIdList);
 
                 var jobJobIndices = new List<JobJobIndex>();
                 foreach (var jobIndex in jobIndices)

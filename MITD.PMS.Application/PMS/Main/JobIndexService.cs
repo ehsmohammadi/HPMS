@@ -193,11 +193,11 @@ namespace MITD.PMS.Application
             }
         }
 
-        public IEnumerable<JobIndex> FindJobIndices(Expression<Func<JobIndex, bool>> where)
+        public IEnumerable<JobIndex> FindJobIndices(IEnumerable<AbstractJobIndexId> jobIndexIds)
         {
             using (var tr = new TransactionScope())
             {
-                var res = jobIndexRep.FindJobIndices(where);
+                var res = jobIndexRep.FindJobIndices(jobIndexIds);
                 tr.Complete();
                 return res;
             }

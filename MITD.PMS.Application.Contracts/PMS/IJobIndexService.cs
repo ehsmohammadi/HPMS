@@ -21,7 +21,7 @@ namespace MITD.PMS.Application.Contracts
 
         IList<SharedJobIndexCustomField> GetSharedJobIndexCustomField(SharedJobIndexId sharedJobIndexId, List<SharedJobIndexCustomFieldId> fieldIdList);
 
-        IEnumerable<JobIndex> FindJobIndices(Expression<Func<JobIndex, bool>> where);
+        IEnumerable<JobIndex> FindJobIndices(IEnumerable<AbstractJobIndexId> jobIndexIds);
         //bool IsValidCustomFieldIdList(AbstractJobIndexId jobIndexId, IList<SharedJobIndexCustomFieldId> customFieldTypeIds);
         //bool IsValidCustomFieldIdList(SharedJobIndexId jobIndexId, IList<SharedJobIndexCustomFieldId> customFieldTypeIds);
         List<AbstractJobIndex> GetAllAbstractJobIndexByParentId(AbstractJobIndexId id);

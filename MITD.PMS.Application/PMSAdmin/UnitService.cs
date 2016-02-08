@@ -107,11 +107,7 @@ namespace MITD.PMSAdmin.Application
         public bool IsValidCustomFieldIdList(UnitId unitId, IList<CustomFieldTypeId> customFieldTypeIds)
         {
             var unit = unitRep.GetById(unitId);
-            var customFieldList = new List<CustomFieldType>(); //customFieldRep.Find(c => customFieldTypeIds.Contains(c.Id));
-            foreach (var customFieldTypeId in customFieldTypeIds)
-            {
-                customFieldList.Add(customFieldRep.GetById(customFieldTypeId));
-            }
+            var customFieldList =customFieldRep.Find(customFieldTypeIds);
             return unit.IsValidCustomFields(customFieldList);
         }
     }

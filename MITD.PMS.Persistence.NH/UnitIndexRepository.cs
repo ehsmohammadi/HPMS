@@ -92,9 +92,15 @@ namespace MITD.PMS.Persistence.NH
             rep.Update(unitIndex);
         }
 
-        public IEnumerable<UnitIndex> FindUnitIndices(Expression<Func<UnitIndex, bool>> predicate)
+        public IEnumerable<UnitIndex> FindUnitIndices(IEnumerable<AbstractUnitIndexId> unitIndexIds)
         {
-            return rep.Find(predicate).ToList();
+            var res = new List<UnitIndex>();
+            foreach (var unitIndexId in unitIndexIds)
+            {
+                res.Add((UnitIndex)GetById(unitIndexId));
+
+            }
+            return res;
         }
 
         public List<AbstractUnitIndex> GetAllAbstractUnitIndexByParentId(AbstractUnitIndexId id)

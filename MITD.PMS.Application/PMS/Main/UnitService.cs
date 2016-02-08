@@ -60,7 +60,7 @@ namespace MITD.PMS.Application
                 }
                 unit.UpdateCustomFields(unitCustomFields, periodChecker);
                 var unitindexIdList = unitIndexList.Select(jj => jj.UnitIndexId).ToList();
-                var unitIndices = unitIndexRep.FindUnitIndices(j => unitindexIdList.Contains(j.Id));
+                var unitIndices = unitIndexRep.FindUnitIndices(unitindexIdList);
 
                 var unitUnitIndices = new List<UnitUnitIndex>();
                 foreach (var unitIndex in unitIndices)
@@ -94,7 +94,7 @@ namespace MITD.PMS.Application
                 }
 
                 var unitIndexIds = unitIndexList.Select(jj => jj.UnitIndexId).ToList();
-                var unitIndices = unitIndexRep.FindUnitIndices(j =>unitIndexIds.Contains(j.Id));
+                var unitIndices = unitIndexRep.FindUnitIndices(unitIndexIds);
                 //unit.UpdateUnitIndices(unitIndices.ToList());
                 var unitUnitInddices = new List<UnitUnitIndex>();
                 foreach (var unitIndex in unitIndices)

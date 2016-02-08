@@ -73,7 +73,13 @@ namespace MITD.PMSAdmin.Persistence.NH
         public List<CustomFieldType> GetAllCustomField(AbstractJobIndexId jobIndexId)
         {
             var jobIndex = Session.Query<JobIndex>().Single(j => j.Id == jobIndexId);
-            return Session.Query<CustomFieldType>().Where(c => jobIndex.CustomFieldTypeIdList.Contains(c.Id)).ToList();
+            var res = new List<CustomFieldType>();
+            foreach (var customFieldTypeId in jobIndex.CustomFieldTypeIdList)
+            {
+                res.Add(GetById(customFieldTypeId));
+
+            }
+            return res;
         }
 
         public List<CustomFieldType> GetAllCustomField(AbstractUnitIndexId unitIndexId)
@@ -112,9 +118,15 @@ namespace MITD.PMSAdmin.Persistence.NH
            return rep.Find(c => c.EntityId == entityType).ToList();
         }
 
-        public IList<CustomFieldType> Find(System.Linq.Expressions.Expression<Func<CustomFieldType, bool>> predicate)
+        public IList<CustomFieldType> Find(IEnumerable<CustomFieldTypeId> customFieldIdList)
         {
-            return rep.Find(predicate);
+            var res = new List<CustomFieldType>(); //customFieldRep.Find(c => customFieldTypeIds.Contains(c.Id));
+            foreach (var customFieldTypeId in customFieldIdList)
+            {
+                res.Add(GetById(customFieldTypeId));
+
+            }
+            return res;
         }
 
         public void DeleteCustomField(CustomFieldType customField)
