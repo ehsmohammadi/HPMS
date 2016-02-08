@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MITD.PMS.Integration.Data.Contract.DataProvider;
 using MITD.PMS.Integration.Data.Contract.DTO;
 using MITD.PMS.Integration.Data.EF.DBModel;
@@ -39,20 +37,21 @@ namespace MITD.PMS.Integration.Data.EF
             return Result;
         }
 
-        JobTitleDto IJobDataProvider.GetJobDetails(long id)
+        JobIntegrationDto IJobDataProvider.GetJobDetails(long id)
         {
-            JobTitleDto Result = new JobTitleDto();
+            JobIntegrationDto Result = new JobIntegrationDto();
             try
             {
 
                 var Temp = (from c in DB.PMS_JobTitle
-                            where c.ID == id
-                            select new JobTitleDto()
-                            {
-                                JobTitleID=c.ID, 
-                                JobTitle = c.Title,
-                                JobDecscription =c.Description                                
-                            }).FirstOrDefault();
+                    where c.ID == id
+                    select new JobIntegrationDto()
+                           {
+                               Id = c.ID,
+                               Title = c.Title,
+                               Decscription = c.Description,
+                               TransferId = c.TransferId.Value
+                           }).FirstOrDefault();
                 Result = Temp;
             }
             catch (Exception e)

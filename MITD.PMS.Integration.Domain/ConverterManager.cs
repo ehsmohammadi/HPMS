@@ -19,9 +19,11 @@ namespace MITD.PMS.Integration.Domain
         private DelegateHandler<UnitIndexConverted> unitIndexConvertedHandler;
         private DelegateHandler<UnitConverted> unitConvertedHandler;
         private DelegateHandler<JobIndexConverted> jobIndexConvertedHandler;
+        private DelegateHandler<JobConverted> jobConvertedHandler;
         private readonly IUnitIndexConverter unitIndexConverter;
         private readonly IUnitConverter unitConverter;
         private readonly IJobIndexConverter jobIndexConverter;
+        private readonly IJobConverter jobConverter;
         private readonly IEventPublisher publisher;
 
         #endregion
@@ -33,11 +35,12 @@ namespace MITD.PMS.Integration.Domain
         #endregion
 
         #region Constructors
-        public ConverterManager(IUnitIndexConverter unitIndexConverter, IUnitConverter unitConverter, IJobIndexConverter jobIndexConverter, IEventPublisher publisher)
+        public ConverterManager(IUnitIndexConverter unitIndexConverter, IUnitConverter unitConverter, IJobIndexConverter jobIndexConverter,IJobConverter jobConverter, IEventPublisher publisher)
         {
             this.unitIndexConverter = unitIndexConverter;
             this.unitConverter = unitConverter;
             this.jobIndexConverter = jobIndexConverter;
+            this.jobConverter = jobConverter;
             this.publisher = publisher;
         }
 
@@ -60,29 +63,38 @@ namespace MITD.PMS.Integration.Domain
 
         private void RegisterHandler()
         {
-            jobIndexConvertedHandler = new DelegateHandler<JobIndexConverted>(e =>
-            {
-                jobIndexInperiodList = e.JobIndexInperiodList;
-                Console.WriteLine("{0} Converted , Job index Progress finished", jobIndexInperiodList.Count);
-                //jobConverter.ConvertJobs(period, jobIndexInperiodList);
-            });
-            publisher.RegisterHandler(jobIndexConvertedHandler);
-
             unitIndexConvertedHandler = new DelegateHandler<UnitIndexConverted>(e =>
             {
                 unitIndexInperiodList = e.UnitIndexInperiodList;
-                Console.WriteLine("{0} Converted , Unit index Progress finished", unitIndexInperiodList.Count);
-                jobIndexConverter.ConvertJobIndex(period);
-                //unitConverter.ConvertUnits(period, unitIndexInperiodList);
+                Console.WriteLine("{0} Converted , Unit index progress finished", unitIndexInperiodList.Count);
+                unitConverter.ConvertUnits(period, unitIndexInperiodList);
             });
             publisher.RegisterHandler(unitIndexConvertedHandler);
 
             unitConvertedHandler = new DelegateHandler<UnitConverted>(e =>
             {
-                Console.WriteLine("{0} Units Converted , Unit Progress finished",e.UnitInperiodList.Count);
-                
+                Console.WriteLine("{0} Units converted , Unit progress finished",e.UnitInperiodList.Count);
             });
             publisher.RegisterHandler(unitConvertedHandler);
+
+            jobIndexConvertedHandler = new DelegateHandler<JobIndexConverted>(e =>
+            {
+                jobIndexInperiodList = e.JobIndexInperiodList;
+                Console.WriteLine("{0} Job index converted , Job index progress finished", jobIndexInperiodList.Count);
+                jobConverter.ConvertJobs(period, jobIndexInperiodList);
+            });
+            publisher.RegisterHandler(jobIndexConvertedHandler);
+
+            jobConvertedHandler = new DelegateHandler<JobConverted>(e =>
+            {
+                Console.WriteLine("{0} Jobs Converted , Job progress finished", e.JobInperiodList.Count);
+
+            });
+            publisher.RegisterHandler(jobIndexConvertedHandler);
+
+
+
+            
         }
 
         public void Init(Period preiodParam)
