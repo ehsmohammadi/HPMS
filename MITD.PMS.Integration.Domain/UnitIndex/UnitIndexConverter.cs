@@ -18,7 +18,6 @@ namespace MITD.PMS.Integration.Domain
         private readonly IUnitIndexServiceWrapper unitIndexService;
         private readonly IUnitIndexInPeriodServiceWrapper unitIndexAssignmentService;
         private readonly IEventPublisher publisher;
-        private Object lockThis = new Object();
 
         #endregion
 
@@ -46,42 +45,49 @@ namespace MITD.PMS.Integration.Domain
 
                 var sourceUnitIndexDTO = unitIndexDataProvider.GetBy(sourceUnitIndexId);
                 var desUnitIndexDTO = createDestinationUnitIndex(sourceUnitIndexDTO);
-                unitIndexService.AddUnitIndex((unitIndexWithOutCf, addUnitIndexExp) =>
-                {
-                    if (addUnitIndexExp != null)
-                    {
-                        handleException(addUnitIndexExp);
-                    }
-                    else
-                    {
-                        unitIndexService.GetUnitIndex((unitIndexWithCf, getUnitIndexExp) =>
-                        {
-                            if (getUnitIndexExp != null)
-                                handleException(getUnitIndexExp);
-                            else
-                            {
-                                var periodUnitIndexDTO = createPeriodUnitIndexDTO(unitIndexWithCf, period);
-                                unitIndexAssignmentService.AddUnitIndexInPeriod((res, exp) =>
-                                {
-                                    if (exp != null)
-                                    {
-                                        handleException(exp);
-                                    }
-                                    else
-                                    {
-                                        unitIndexInperiodList.Add(res);
-                                        if (unitIndexInperiodList.Count == sourceUnitIndexListId.Count)
-                                            publisher.Publish(new UnitIndexConverted(unitIndexInperiodList));
-                                    }
+                var unitIndexWithOutCf=unitIndexService.AddUnitIndex(desUnitIndexDTO);
+                var unitIndexWithCf = unitIndexService.GetUnitIndex(unitIndexWithOutCf.Id);
+                var periodUnitIndexDTO = createPeriodUnitIndexDTO(unitIndexWithCf, period);
+                var res = unitIndexAssignmentService.AddUnitIndexInPeriod(periodUnitIndexDTO);
+                unitIndexInperiodList.Add(res);
 
-                                }, periodUnitIndexDTO);
-                            }
-                        }, unitIndexWithOutCf.Id);
-                    }
+                //unitIndexService.AddUnitIndex((unitIndexWithOutCf, addUnitIndexExp) =>
+                //{
+                //    if (addUnitIndexExp != null)
+                //    {
+                //        handleException(addUnitIndexExp);
+                //    }
+                //    else
+                //    {
+                //        unitIndexService.GetUnitIndex((unitIndexWithCf, getUnitIndexExp) =>
+                //        {
+                //            if (getUnitIndexExp != null)
+                //                handleException(getUnitIndexExp);
+                //            else
+                //            {
+                //                var periodUnitIndexDTO = createPeriodUnitIndexDTO(unitIndexWithCf, period);
+                //                unitIndexAssignmentService.AddUnitIndexInPeriod((res, exp) =>
+                //                {
+                //                    if (exp != null)
+                //                    {
+                //                        handleException(exp);
+                //                    }
+                //                    else
+                //                    {
+                //                        unitIndexInperiodList.Add(res);
+                //                        if (unitIndexInperiodList.Count == sourceUnitIndexListId.Count)
+                //                            publisher.Publish(new UnitIndexConverted(unitIndexInperiodList));
+                //                    }
 
-                }, desUnitIndexDTO);
+                //                }, periodUnitIndexDTO);
+                //            }
+                //        }, unitIndexWithOutCf.Id);
+                //    }
+
+                //}, desUnitIndexDTO);
 
             }
+            publisher.Publish(new UnitIndexConverted(unitIndexInperiodList));
         }
 
         #endregion
@@ -141,6 +147,7 @@ namespace MITD.PMS.Integration.Domain
         {
             throw exception;
         }
+
         #endregion
 
     }

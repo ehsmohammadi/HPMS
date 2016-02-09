@@ -65,14 +65,15 @@
     <Compile Include="Job\IJobConverter.cs" />
     <Compile Include="Job\JobConverted.cs" />
     <Compile Include="Job\JobConverter.cs" />
+    <Compile Include="JobPosition\IJobPositionConverter.cs" />
+    <Compile Include="JobPosition\JobPositionConverted.cs" />
+    <Compile Include="JobPosition\JobPositionConverter.cs" />
     <Compile Include="Unit\IUnitConverter.cs" />
     <Compile Include="JobIndex\IJobIndexConverter.cs" />
     <Compile Include="UnitIndex\IUnitIndexConverter.cs" />
     <Compile Include="ConverterManager.cs" />
     <Compile Include="EmployeeConverter.cs" />
     <Compile Include="Periods\EntityEnum.cs" />
-    <Compile Include="JobConverter.cs" />
-    <Compile Include="JobIndexConverter_OLD.cs" />
     <Compile Include="Periods\PeriodDataProvider.cs" />
     <Compile Include="Periods\Period.cs" />
     <Compile Include="Periods\PeriodState.cs" />

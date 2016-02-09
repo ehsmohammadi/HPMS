@@ -45,20 +45,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ICustomFieldServiceWrapper.cs" />
-    <Compile Include="IEmployeeServiceWrapper.cs" />
-    <Compile Include="IJobIndexCategoryServiceWrapper.cs" />
-    <Compile Include="IJobIndexInPeriodServiceWrapper.cs" />
-    <Compile Include="IJobIndexServiceWrapper.cs" />
-    <Compile Include="IJobInPeriodServiceWrapper.cs" />
-    <Compile Include="IJobPositionInPeriodServiceWrapper.cs" />
-    <Compile Include="IJobPositionServiceWrapper.cs" />
-    <Compile Include="IJobServiceWrapper.cs" />
+    <Compile Include="Employee\IEmployeeServiceWrapper.cs" />
+    <Compile Include="JobIndex\IJobIndexCategoryServiceWrapper.cs" />
+    <Compile Include="JobIndex\IJobIndexInPeriodServiceWrapper.cs" />
+    <Compile Include="JobIndex\IJobIndexServiceWrapper.cs" />
+    <Compile Include="Job\IJobInPeriodServiceWrapper.cs" />
+    <Compile Include="JobPosition\IJobPositionInPeriodServiceWrapper.cs" />
+    <Compile Include="JobPosition\IJobPositionServiceWrapper.cs" />
+    <Compile Include="Job\IJobServiceWrapper.cs" />
     <Compile Include="IPeriodServiceWrapper.cs" />
-    <Compile Include="IUnitIndexCategoryServiceWrapper.cs" />
-    <Compile Include="IUnitIndexInPeriodServiceWrapper.cs" />
-    <Compile Include="IUnitIndexServiceWrapper.cs" />
-    <Compile Include="IUnitInPeriodServiceWrapper.cs" />
-    <Compile Include="Unit\IUnitAssignmentService.cs" />
+    <Compile Include="UnitIndex\IUnitIndexCategoryServiceWrapper.cs" />
+    <Compile Include="UnitIndex\IUnitIndexInPeriodServiceWrapper.cs" />
+    <Compile Include="UnitIndex\IUnitIndexServiceWrapper.cs" />
+    <Compile Include="Unit\IUnitInPeriodServiceWrapper.cs" />
     <Compile Include="Unit\IUnitService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

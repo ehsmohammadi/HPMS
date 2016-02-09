@@ -12,6 +12,10 @@ namespace MITD.PMS.Integration.Data.Contract.DTO
 
         public string JobPositionName { get; set; }
 
+        public Guid TransferId { get; set; }
 
+        public UnitIntegrationDTO UnitIntegrationDTO { get; set; }
+
+        public JobIntegrationDto JobIntegrationDto { get; set; }
     }
 }

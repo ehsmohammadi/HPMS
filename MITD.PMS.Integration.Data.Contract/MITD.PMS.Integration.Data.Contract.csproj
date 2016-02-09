@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="DataProvider\IJobDataProvider.cs" />
     <Compile Include="DataProvider\IJobIndexDataProvider.cs" />
+    <Compile Include="DataProvider\IJobPositionDataProvider.cs" />
     <Compile Include="DataProvider\IUnitIndexDataProvider.cs" />
     <Compile Include="DTO\ExclusiveJobIndexDto.cs" />
     <Compile Include="DTO\GeneralJobIndexDto.cs" />
@@ -62,6 +63,9 @@
       <Project>{5BC98324-6E74-4475-A917-CAB0AC10D0B4}</Project>
       <Name>MITD.PMS.Integration.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -2,11 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using MITD.Core;
 using MITD.PMS.Integration.Data.Contract.DataProvider;
 using MITD.PMS.Integration.Data.Contract.DTO;
-using MITD.PMS.Integration.PMS.API;
 using MITD.PMS.Integration.PMS.Contract;
 using MITD.PMS.Presentation.Contracts;
 
@@ -21,8 +19,6 @@ namespace MITD.PMS.Integration.Domain
         private List<JobIndexInPeriodDTO> jobIndexInperiodList;
         private JobIntegrationDto root;
         private List<JobInPeriodDTO> jobInPeriodList = new List<JobInPeriodDTO>();
-        //private JobInPeriodServiceWrapper jobAssignmentService;
-        //private JobServiceWrapper jobService;
         private int totalJobsCount;
         private readonly IEventPublisher publisher;
         #endregion
@@ -38,46 +34,25 @@ namespace MITD.PMS.Integration.Domain
 
         #endregion
 
-
         #region public methods
         public void ConvertJobs(Period period, List<JobIndexInPeriodDTO> jobIndexInperiodListParam)
         {
             Console.WriteLine("Starting jobs convert progress...");
             jobIndexInperiodList = jobIndexInperiodListParam;
-            //root = jobDataProvider.GetRoot();
-            //convertJob_Rec(root, period.Id, null);
-            var JobIdList = jobDataProvider.GetJobIds();
-            totalJobsCount = JobIdList.Count;
-            foreach (var JobId in JobIdList)
+            var jobIdList = jobDataProvider.GetJobIds();
+            totalJobsCount = jobIdList.Count;
+            foreach (var jobId in jobIdList)
             {
-                var sourceJobDTO = jobDataProvider.GetJobDetails(JobId);
+                var sourceJobDTO = jobDataProvider.GetJobDetails(jobId);
                 var desJobDTO = createDestinationJob(sourceJobDTO);
-                jobService.AddJob((job, addJobExp) =>
-                {
-                    if (addJobExp != null)
-                        handleException(addJobExp);
-
-                    var jobInPriodAssignment = createDestinationJobInPeriod(job);
-
-                    jobInPeriodServiceWrapper.AddJobInPeriod((res, exp) =>
-                    {
-                        if (exp != null)
-                            handleException(exp);
-                        jobInPeriodList.Add(res);
-                        //var jobDataChildIdList = jobDataProvider.GetChildIDs(sourceJobDTO.Id);
-                        //foreach (var jobDataChildId in jobDataChildIdList)
-                        //{
-                            //var jobdataChid = jobDataProvider.GetJobDetails(jobDataChildId);
-                            //convertJob_Rec(jobdataChid, periodId, res.JobId);
-                        //}
-                        Console.WriteLine("Jobs Convert progress state: " + jobInPeriodList.Count + " From " + totalJobsCount.ToString());
-                        if (jobInPeriodList.Count == totalJobsCount)
-                        {
-                            publisher.Publish(new JobConverted(jobInPeriodList));
-                        }
-                    },period.Id, jobInPriodAssignment);
-                }, desJobDTO);
+                var job = jobService.AddJob(desJobDTO);
+                var jobInPriodAssignment = createDestinationJobInPeriod(job);
+                var res = jobInPeriodServiceWrapper.AddJobInPeriod(period.Id, jobInPriodAssignment);
+                jobInPeriodList.Add(res);
+                Console.WriteLine("Jobs Convert progress state: " + jobInPeriodList.Count + " From " + totalJobsCount.ToString());
+                
             }
+            publisher.Publish(new JobConverted(jobInPeriodList));
         }
 
       
@@ -165,5 +140,3 @@ namespace MITD.PMS.Integration.Domain
 
 
 }
-
-
