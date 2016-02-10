@@ -13,6 +13,7 @@ namespace MITD.PMSSecurity.Domain
         public SuperAdminUser(PartyId userId, string fName, string lName, string email)
             : base(userId, fName, lName, email)
         {
+            Actions = new List<ActionType>();
             foreach (ActionType action in Enum.GetValues(typeof(ActionType)))
             {
                 Actions.Add(action);
