@@ -1,79 +1,71 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MITD.PMS.Integration.Core;
+using MITD.PMS.Integration.PMS.Contract;
 using MITD.PMS.Presentation.Contracts;
 
 namespace MITD.PMS.Integration.PMS.API
 {
     public class JobServiceWrapper : IJobServiceWrapper
     {
+
         private readonly IUserProvider userProvider;
-        private readonly string apiAddress = PMSClientConfig.BaseApiAddress + "Jobs";
+
+        private Uri apiUri = new Uri(PMSClientConfig.BaseApiAddress);
+
+        private string endpoint = "Jobs";
 
         public JobServiceWrapper(IUserProvider userProvider)
         {
             this.userProvider = userProvider;
         }
 
-        public void GetAllJobs(Action<PageResultDTO<JobDTOWithActions>, Exception> action, int pageSize, int pageIndex, Dictionary<string, string> sortBy)
-        {
 
-            var url = string.Format(apiAddress + "?PageSize=" + pageSize + "&PageIndex=" + pageIndex);
-            IntegrationWebClient.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+        public JobDTO GetJob(long id)
+        {
+            return IntegrationHttpClient.Get<JobDTO>(apiUri, endpoint + "?Id=" + id);
+            //var url = string.Format(baseAddress + "?Id=" + id);
+            //IntegrationWebClient.Get(new Uri(url, UriKind.Absolute),
+            //    action, IntegrationWebClient.MessageFormat.Json, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 
-        public void GetAllJobs(Action<IList<JobDTO>, Exception> action)
+        public JobDTO AddJob(JobDTO job)
         {
-            var url = string.Format(apiAddress);
-            IntegrationWebClient.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+            return IntegrationHttpClient.Post<JobDTO, JobDTO>(apiUri, endpoint, job);
+            //var url = string.Format(baseAddress);
+            //IntegrationWebClient.Post(new Uri(url, UriKind.Absolute),
+            //    action, job, IntegrationWebClient.MessageFormat.Json, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 
-        public void DeleteJob(Action<string, Exception> action, long id)
-        {
-            var url = string.Format(apiAddress + "?Id=" + id);
-            IntegrationWebClient.Delete(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.CreateHeaderDic(userProvider.Token));
-        }
+        //public void GetAllJobs(Action<PageResultDTO<JobDTOWithActions>, Exception> action, int pageSize, int pageIndex)
+        //{
 
-        public void GetJobCustomFields(Action<List<CustomFieldDTO>, Exception> action, List<long> fieldIdList)
-        {
+        //    var url = string.Format(baseAddress + "?PageSize=" + pageSize + "&PageIndex=" + pageIndex);
+        //    IntegrationWebClient.Get(new Uri(url, UriKind.Absolute),
+        //        action, IntegrationWebClient.MessageFormat.Json, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+        //}
 
-            var url = string.Format(apiAddress);
-            IntegrationWebClient.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+        //public void DeleteJob(Action<string, Exception> action, long id)
+        //{
+        //    var url = string.Format(baseAddress + "?Id=" + id);
+        //    IntegrationWebClient.Delete(new Uri(url, UriKind.Absolute), action, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+        //}
 
-        }
-
-        public void GetJobCustomFields(Action<List<AbstractCustomFieldDescriptionDTO>, Exception> action, long id)
-        {
-            var url = string.Format(apiAddress);
-            IntegrationWebClient.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
-
-        }
+        //public void GetAllJobs(Action<List<JobDTO>, Exception> action)
+        //{
+        //    var url = string.Format(baseAddress);
+        //    IntegrationWebClient.Get(new Uri(url, UriKind.Absolute),
+        //        action, IntegrationWebClient.MessageFormat.Json, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+        //}
 
 
-        public void GetJob(Action<JobDTO, Exception> action, long id)
-        {
-            var url = string.Format(apiAddress + "?Id=" + id);
-            IntegrationWebClient.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
-        }
 
-        public void GetJob(Action<JobDTO, Exception> action, string transferId)
-        {
-
-        }
-
-        public void AddJob(Action<JobDTO, Exception> action, JobDTO job)
-        {
-            IntegrationWebClient.Post(new Uri(apiAddress, PMSClientConfig.UriKind), action, job, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
-        }
-
-        public void UpdateJob(Action<JobDTO, Exception> action, JobDTO job)
-        {
-            var url = string.Format(apiAddress + "?Id=" + job.Id);
-            IntegrationWebClient.Put(new Uri(url, PMSClientConfig.UriKind), action, job, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
-        }
+        //public void UpdateJob(Action<JobDTO, Exception> action, JobDTO job)
+        //{
+        //    var url = string.Format(baseAddress);
+        //    IntegrationWebClient.Put(new Uri(url, UriKind.Absolute),
+        //        action, job,
+        //        IntegrationWebClient.MessageFormat.Json, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+        //}
 
     }
 }

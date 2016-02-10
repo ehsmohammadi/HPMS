@@ -60,7 +60,7 @@ namespace MITD.PMS.Interface
             jobIndexRep.GetAllJobIndex(fs);
             var res = new PageResultDTO<AbstractJobIndexDTOWithActions>();
             res.InjectFrom(fs.PageCriteria.PageResult);
-            res.Result = fs.PageCriteria.PageResult.Result.Select(r => jobIndexWithActionsMapper.MapToModel(r));
+            res.Result = fs.PageCriteria.PageResult.Result.Select(r => jobIndexWithActionsMapper.MapToModel(r)).ToList();
             return res;
         }
 
@@ -81,7 +81,7 @@ namespace MITD.PMS.Interface
             jobIndexRep.GetAllJobIndexCategory(fs);
             var res = new PageResultDTO<AbstractJobIndexDTOWithActions>();
             res.InjectFrom(fs.PageCriteria.PageResult);
-            res.Result = fs.PageCriteria.PageResult.Result.Select(r => jobIndexWithActionsMapper.MapToModel(r));
+            res.Result = fs.PageCriteria.PageResult.Result.Select(r => jobIndexWithActionsMapper.MapToModel(r)).ToList();
             return res;
         }
 

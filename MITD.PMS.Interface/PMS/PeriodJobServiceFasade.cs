@@ -51,32 +51,22 @@ namespace MITD.PMS.Interface
         [RequiredPermission(ActionType.ShowJobInPeriod)]
         public PageResultDTO<JobInPeriodDTOWithActions> GetAllJobs(long periodId,int pageSize, int pageIndex, QueryStringConditions queryStringConditions, string selectedColumns)
         {
-            //var fs = new ListFetchStrategy<Job>(Enums.FetchInUnitOfWorkOption.NoTracking);
-            //var sortBy = QueryConditionHelper.GetSortByDictionary(queryStringConditions.SortBy);
-            //foreach (var item in sortBy)
-            //{
-            //    fs.SortCriterias.Add(new StringSortCriteria<Job>(item.Key,
-            //                                                                 (item.Value.ToUpper() == "ASC")
-            //                                                                     ? Enums.SortOrder.Ascending
-            //                                                                   : Enums.SortOrder.Descending));
-            //}
-            //fs.OrderBy(x => x.Id);
-            //fs.WithPaging(pageSize, pageIndex);
-            //jobRep.GetAllJob(fs);
-            //var res = new PageResultDTO<JobInPeriodDTOWithActions>();
-            //res.InjectFrom(fs.PageCriteria.PageResult);
-            //res.Result = fs.PageCriteria.PageResult.Result.Select(r => jobInPeriodDTOWithActionsMapper.MapToModel(r, selectedColumns.Split(',')));
-            //return res;
-            var result = GetAllJobWithActions(periodId, "");
-            var pResDto = new PageResultDTO<JobInPeriodDTOWithActions>
-                {
-                    CurrentPage = 0,
-                    PageSize = 10,
-                    Result = result,
-                    TotalCount = result.Count,
-                    TotalPages = 1
-                };
-            return pResDto ;
+            var fs = new ListFetchStrategy<Job>(Enums.FetchInUnitOfWorkOption.NoTracking);
+            var sortBy = QueryConditionHelper.GetSortByDictionary(queryStringConditions.SortBy);
+            foreach (var item in sortBy)
+            {
+                fs.SortCriterias.Add(new StringSortCriteria<Job>(item.Key,
+                                                                             (item.Value.ToUpper() == "ASC")
+                                                                                 ? Enums.SortOrder.Ascending
+                                                                               : Enums.SortOrder.Descending));
+            }
+            fs.OrderBy(x => x.Id);
+            fs.WithPaging(pageSize, pageIndex);
+            jobRep.GetAllJob(fs);
+            var res = new PageResultDTO<JobInPeriodDTOWithActions>();
+            res.InjectFrom(fs.PageCriteria.PageResult);
+            res.Result = fs.PageCriteria.PageResult.Result.Select(r => jobInPeriodDTOWithActionsMapper.MapToModel(r, selectedColumns.Split(','))).ToList();
+            return res;
         }
 
         [RequiredPermission(ActionType.AddJobInPeriod)]
@@ -116,7 +106,7 @@ namespace MITD.PMS.Interface
             jobDto.CustomFields = job.CustomFields.Select(c => jobCustomFieldMapper.MapToModel(c)).ToList();
             var jobindexIdList = job.JobIndexList.Select(j => j.JobIndexId).ToList();
             var jobIndices = jobIndexService.FindJobIndices(jobindexIdList);
-            //todo change this mapping to valid mapping need som work !!!!!!
+            //todo:(LOW) change this mapping to valid mapping need som work !!!!!!
             var jobInPeriodJobIndexDTOList = new List<JobInPeriodJobIndexDTO>();
             foreach (var jobIndex in jobIndices)
             {

@@ -74,7 +74,7 @@
             </sdk:DataGrid>
 
             <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
-                <pr:CustomDataPager Height="26" FontFamily="Tahoma" FontSize="11" PageSize="30" Width="200" 
+                <pr:CustomDataPager Height="26" FontFamily="Tahoma" FontSize="11" PageSize="20" Width="200" 
                                     Source="{Binding Path=Logs, Mode=TwoWay}" />
             </StackPanel>
 

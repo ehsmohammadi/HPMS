@@ -100,7 +100,7 @@ namespace MITD.PMS.Presentation.Logic
         void init()
         {
             DisplayName = PeriodMgtAppLocalizedResources.CalculationListViewTitle;
-            calculations = new PagedSortableCollectionView<CalculationBriefDTOWithAction>();
+            calculations = new PagedSortableCollectionView<CalculationBriefDTOWithAction>{PageSize = 20};
             calculations.OnRefresh += (s, args) => refresh();
             CalculationCommands = new List<DataGridCommandViewModel>
             {

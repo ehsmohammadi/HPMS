@@ -1,90 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Runtime.Serialization.Formatters;
 using System.Text;
 using System.Threading.Tasks;
+using MITD.PMS.Integration.Core;
 using MITD.PMS.Integration.Data.EF;
 using MITD.PMS.Integration.Domain;
 using MITD.PMS.Integration.PMS.API;
 using MITD.PMS.Presentation.Contracts;
+using Newtonsoft.Json;
 
 namespace ConsoleApplication1
 {
     class Program
     {
+        //static PeriodDTO period=new PeriodDTO();
         static void Main(string[] args)
         {
 
-            var res = Console.ReadLine();
-            Console.ReadLine();
 
-            //var empConverter = new EmployeeConverter(new EmployeeDataProvider(), new EmployeeServiceWrapper(new UserProvider()));
-            //var jobConverter = new JobConverter(new JobDataProvider(), new JobServiceWrapper(new UserProvider()), new JobInPeriodServiceWrapper(new UserProvider()), new PeriodServiceWrapper(new UserProvider()));
-            //var periodService = new PeriodDataProvider(new PeriodServiceWrapper(new UserProvider()));//new PeriodServiceWrapper(new UserProvider()));
-            //var CnManager = new ConverterManager(new CustomFieldServiceWrapper(new UserProvider()));
+            var period = IntegrationHttpClient.Post<PeriodDTO, PeriodDTO>(new Uri("http://localhost:10653/"),
+                "api/periods",
+                new PeriodDTO
+                {
+                    Name = "دوره مهر",
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now
+                });
 
-
-
-            var period = new Period
-            {
-                Id = 10,
-                Name = "name"
-            };
+            Console.WriteLine(period.Id);
+            //}
 
 
 
-
-            //CnManager.Run(period);
-
-            int convertedEmployee = 0;
-            int convertedJob=0;
-
-            //string res = "";
-
-            //var ShowProgressTask = new Task(act =>
-            //{
-            //    while (string.IsNullOrEmpty(res))
-            //    {
-            //        if (convertedEmployee != empConverter.Result)
-            //            Console.WriteLine(empConverter.Result + "employee converted");
-            //        convertedEmployee = empConverter.Result;
-
-            //        if (convertedJob != jobConverter.ProgressCount)
-            //            Console.WriteLine(jobConverter.ProgressCount + "Job Converted");
-            //        convertedJob = jobConverter.ProgressCount;
-            //    }
-            //}, null);
-
-            //ShowProgressTask.Start();
-
-            //var employeeConvertTask = new Task(act2 =>
-            //{
-            //    empConverter.ConvertEmployee(period);
-            //}, null);
-
-            ////employeeConvertTask.Start();
-
-            //var jobConvertTask = new Task(act =>
-            //{
-            //    jobConverter.ConvertJob(period);
-            //}, null);
-            ////jobConvertTask.Start();
-
-
-            //var GetAllPeriodsTask = new Task(act =>
-            //{
-            //    periodService.GetAllPeriods(
-                    
-            //        );
-            //}, null);
-            //GetAllPeriodsTask.Start();
-
-
-
-            res = Console.ReadLine();
             Console.ReadLine();
 
 
         }
+
+        //public void AddPeriod(Action<PeriodDTO, Exception> action, PeriodDTO period)
+        //{
+        //    var url = string.Format(baseAddress);
+        //    IntegrationWebClient.Post(new Uri(url, UriKind.Absolute), action, period, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+        //}
     }
 }

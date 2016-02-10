@@ -211,17 +211,15 @@ namespace MITD.PMS.Application
             try
             {
                 var jobService = srvManagerJob.GetService();
-                Job sourcejob = jobService.GetJobById(jobId);
-                //todo : I changed this section check for error 
+                var sourcejob = jobService.GetJobById(jobId);
+                //todo :(LOW) Copy from one period to another mist be check and debuge ( here must  
                 var newJobJobIndices = new List<JobIndexForJob>();
                 foreach (var jobJobIndex in sourcejob.JobIndexList)
                 {
                     var newJobIndexId = getJobIndexIdForCopy(currentPeriod, jobJobIndex.JobIndexId);
-                    newJobJobIndices.Add(new JobIndexForJob(newJobIndexId, jobJobIndex.ShowforTopLevel, jobJobIndex.ShowforSameLevel, jobJobIndex.ShowforLowLevel));
-                    
+                    newJobJobIndices.Add(new JobIndexForJob(newJobIndexId, jobJobIndex.ShowforTopLevel, jobJobIndex.ShowforSameLevel, jobJobIndex.ShowforLowLevel)); 
                 }
                 //List<AbstractJobIndexId> newJobIndexIds = getJobIndexIdsForCopy(currentPeriod, sourcejob.JobIndexList);
-                
                 jobService.AssignJob(new JobId(currentPeriod.Id, sourcejob.SharedJob.Id),
                     sourcejob.CustomFields.Select(c => c.SharedJobCustomField.Id).ToList(), newJobJobIndices);
 

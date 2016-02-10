@@ -70,7 +70,7 @@ namespace MITD.PMS.Interface
             var fs = new ListFetchStrategy<Employee>(Enums.FetchInUnitOfWorkOption.NoTracking);
             fs.WithPaging(pageSize, pageIndex);
             fs.OrderBy(e => e.Id);
-            //todo: Must be code in better way
+            //todo:(LOW) Must be code in better way
             var criterias = filter.Split(';');
             var predicate = getEmployeePredicate(criterias, periodId);
             employeeRep.Find(predicate, fs);
@@ -199,7 +199,7 @@ namespace MITD.PMS.Interface
 
         private EmployeeJobPositionsDTO mapToEmployeeJobPositionDTO(Employee employee)
         {
-            //todo:Must convert to Mapper
+            //todo:(LOW)Must convert to Mapper
             var employeeJobPosition = new EmployeeJobPositionsDTO
             {
                 EmployeeNo = employee.Id.EmployeeNo,

@@ -45,17 +45,8 @@ namespace MITD.PMS.Application
 
         public List<InquirySubjectWithUnit> GetInquirySubjects(EmployeeId inquirerEmployeeId)
         {
-            //var inquirer = employeeRep.GetBy(inquirerEmployeeId);
-            //periodChecker.CheckShowingInquirySubject(inquirer);
-            //var configurationItems = configurator.GetUnitInquiryConfigurationItemBy(inquirer);
-            //return employeeRep.GetEmployeeByWithUnit(configurationItems.Select(c => c.Id),inquirer.Id.PeriodId);
-
-
             var res = new List<InquirySubjectWithUnit>();
             var inquirer = employeeRep.GetBy(inquirerEmployeeId);
-
-            //todo bz
-            // periodChecker.CheckShowingInquirySubject(inquirer);
             var configurationItems = configurator.GetUnitInquiryConfigurationItemBy(inquirer);
             foreach (var item in configurationItems)
             {
@@ -75,26 +66,7 @@ namespace MITD.PMS.Application
         //  public List<InquiryUnitIndexPoint> GetAllInquiryUnitIndexPointBy(UnitInquiryConfigurationItemId configurationItemId)
         public List<InquiryUnitIndexPoint> GetAllInquiryUnitIndexPointBy(EmployeeId employeeId, UnitId id)
         {
-            #region comment
 
-            //var unitPosition = unitPositionRep.GetBy(configurationItemId.InquirySubjectUnitId);
-            //periodChecker.CheckShowingInquiryUnitIndexPoint(unitPosition);
-            //var itm = unitPosition.ConfigurationItemList.Single(c => c.Id.Equals(configurationItemId));
-            //CreateAllInquiryUnitIndexPoint(itm);
-            //return inquiryUnitIndexPointRep.GetAllBy(itm.Id);
-
-            //var unit = unitRep.GetBy(configurationItemId.InquirySubjectUnitId);
-
-            ////todo bz question from mh
-            //// periodChecker.CheckShowingInquiryUnitIndexPoint(unit);
-            //var itm = unit.ConfigurationItemList.Single(c => c.Id.Equals(configurationItemId));
-            //CreateAllInquiryUnitIndexPoint(itm);
-            //return inquiryUnitIndexPointRep.GetAllBy(itm.Id);
-
-            #endregion
-
-            ////todo bz question from mh
-            //// periodChecker.CheckShowingInquiryUnitIndexPoint(unit);
             var inquirer = employeeRep.GetBy(employeeId);
             var configurationItems = configurator.GetUnitInquiryConfigurationItemBy(inquirer);
             var itm = configurationItems.Where(c => c.Id.InquirySubjectUnitId == id).ToList();
@@ -125,25 +97,6 @@ namespace MITD.PMS.Application
 
         private void create(UnitInquiryConfigurationItem configurationItem)
         {
-           // var unit = unitRep.GetBy(configurationItem.Id.InquirySubjectUnitId);
-            //foreach (var unitUnitIndex in unit.UnitIndexList)
-            //{
-            //    //todo check for no error
-            //    var unitIndex = unitIndexRep.GetById(unitUnitIndex.UnitIndexId);
-            //    if ((unitIndex as UnitIndex).IsInquireable)
-            //    {
-            //        //if ((configurationItem.InquirerUnitLevel == UnitLevel.Childs &&
-            //        //     unitUnitIndex.ShowforLowLevel) ||
-            //        //    (configurationItem.InquirerUnitLevel == UnitLevel.Parents &&
-            //        //     unitUnitIndex.ShowforTopLevel) ||
-            //        //    (configurationItem.InquirerUnitLevel == UnitLevel.Siblings &&
-            //        //     unitUnitIndex.ShowforSameLevel) || configurationItem.InquirerUnitLevel == UnitLevel.None)
-            //            inquiryUnitIndexPointService.Add(configurationItem, unitIndex as UnitIndex, string.Empty);
-
-            //    }
-
-            //todo bz question for check IsInquireable
-            //   var unitIndex = unit.UnitIndexList.Single(c => c.UnitIndexId == configurationItem.Id.UnitIndexIdUintPeriod);
             inquiryUnitIndexPointService.Add(configurationItem, string.Empty);
         }
 

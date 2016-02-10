@@ -89,7 +89,7 @@ namespace MITD.PMS.Presentation.Logic
 
         void init()
         {
-            Units = new PagedSortableCollectionView<UnitDTOWithActions>();
+            Units = new PagedSortableCollectionView<UnitDTOWithActions> { PageSize = 20 };
             Units.OnRefresh += (s, args) => Load();
             UnitCommands = new List<DataGridCommandViewModel>
             {

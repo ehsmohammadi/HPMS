@@ -4,7 +4,7 @@ using System.Linq;
 using MITD.Core;
 using MITD.PMS.Integration.Data.Contract.DataProvider;
 using MITD.PMS.Integration.Data.Contract.DTO;
-using MITD.PMS.Integration.PMS.API;
+using MITD.PMS.Integration.PMS.Contract;
 using MITD.PMS.Presentation.Contracts;
 
 namespace MITD.PMS.Integration.Domain
@@ -48,43 +48,15 @@ namespace MITD.PMS.Integration.Domain
 
                 var sourceJobIndexDTO = jobIndexDataProvider.GetBy(sourceJobIndexId);
                 var desJobIndexDTO = createDestinationJobIndex(sourceJobIndexDTO);
-                jobIndexService.AddJobIndex((jobIndexWithOutCf, addJobIndexExp) =>
-                {
-                    if (addJobIndexExp != null)
-                    {
-                        handleException(addJobIndexExp);
-                    }
-                    else
-                    {
-                        jobIndexService.GetJobIndex((jobIndexWithCf, getJobIndexExp) =>
-                        {
-                            if (getJobIndexExp != null)
-                                handleException(getJobIndexExp);
-                            else
-                            {
-                                var periodJobIndexDTO = createPeriodJobIndexDTO(jobIndexWithCf, period, sourceJobIndexDTO);
-                                jobIndexAssignmentService.AddJobIndexInPeriod((res, exp) =>
-                                {
-                                    if (exp != null)
-                                    {
-                                        handleException(exp);
-                                    }
-                                    else
-                                    {
-                                        jobIndexInperiodList.Add(res);
-                                        Console.WriteLine("Job index convert progress state: " + jobIndexInperiodList.Count + " From " + sourceJobIndexListId.Count.ToString());
-                                        if (jobIndexInperiodList.Count == sourceJobIndexListId.Count)
-                                            publisher.Publish(new JobIndexConverted(jobIndexInperiodList));
-                                    }
-
-                                }, periodJobIndexDTO);
-                            }
-                        }, jobIndexWithOutCf.Id);
-                    }
-
-                }, desJobIndexDTO);
+                var jobIndexWithOutCf = jobIndexService.AddJobIndex(desJobIndexDTO);
+                var jobIndexWithCf = jobIndexService.GetJobIndex(jobIndexWithOutCf.Id);
+                var periodJobIndexDTO = createPeriodJobIndexDTO(jobIndexWithCf, period, sourceJobIndexDTO);
+                var res = jobIndexAssignmentService.AddJobIndexInPeriod(periodJobIndexDTO);
+                jobIndexInperiodList.Add(res);
+                Console.WriteLine("Job index convert progress state: " + jobIndexInperiodList.Count + " From " + sourceJobIndexListId.Count);
 
             }
+            publisher.Publish(new JobIndexConverted(jobIndexInperiodList));
         }
 
         #endregion

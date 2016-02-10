@@ -103,7 +103,7 @@ namespace MITD.PMS.Presentation.Logic
         void init()
         {
             DisplayName = "مدیریت شغل در دوره";
-            JobList = new PagedSortableCollectionView<JobInPeriodDTOWithActions>();
+            JobList = new PagedSortableCollectionView<JobInPeriodDTOWithActions> { PageSize = 20 };
             JobList.OnRefresh += (s, args) => Load(Period);
             JobInPeriodCommands = new List<DataGridCommandViewModel>
             {

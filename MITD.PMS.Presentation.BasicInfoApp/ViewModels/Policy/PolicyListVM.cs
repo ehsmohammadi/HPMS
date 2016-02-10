@@ -85,7 +85,7 @@ namespace MITD.PMS.Presentation.Logic
 
         void init()
         {
-            Policys = new PagedSortableCollectionView<PolicyDTOWithActions>();
+            Policys = new PagedSortableCollectionView<PolicyDTOWithActions> { PageSize = 20 };
             Policys.OnRefresh += (s, args) => Load();
             PolicyCommands = new List<DataGridCommandViewModel>
             {

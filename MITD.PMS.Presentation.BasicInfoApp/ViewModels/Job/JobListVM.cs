@@ -94,7 +94,7 @@ namespace MITD.PMS.Presentation.Logic
         void init()
         {
             DisplayName = BasicInfoAppLocalizedResources.JobListViewTitle;
-            Jobs = new PagedSortableCollectionView<JobDTOWithActions>();
+            Jobs = new PagedSortableCollectionView<JobDTOWithActions> {PageSize = 20};
             Jobs.OnRefresh += (s, args) => Load();
             JobCommands = new List<DataGridCommandViewModel>
             {

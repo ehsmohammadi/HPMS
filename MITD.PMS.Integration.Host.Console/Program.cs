@@ -17,6 +17,7 @@ namespace ConsoleApplication1
 
             Console.ReadLine();
             Console.WriteLine("Progress started");
+            Console.WriteLine("***********************************************************************");
             #endregion
 
             #region Bootsrapper
@@ -45,11 +46,9 @@ namespace ConsoleApplication1
             //AsyncContext.Run(
             //    () => mainAsync(args));
 
-
-
             #region End
-
-            Console.WriteLine("Progress started");
+            Console.WriteLine("***********************************************************************");
+            Console.WriteLine("Progress finished");
             Console.ReadLine();
 
             #endregion
