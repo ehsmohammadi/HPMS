@@ -3,64 +3,50 @@ using System.Collections.Generic;
 using System.Linq;
 using Castle.Core;
 using MITD.Core;
-using MITD.Domain.Model;
 using MITD.Domain.Repository;
 using MITD.PMS.Presentation.Contracts;
 using MITD.PMSAdmin.Application.Contracts;
 using MITD.PMSAdmin.Domain.Model.CustomFieldTypes;
 using MITD.PMSSecurity.Domain;
-using MITD.PMSSecurity.Domain.Model;
 using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
 {
 
-    //  [Interceptor(typeof(Interception))]
-
+    [Interceptor(typeof(Interception))]
     public class CustomFieldFacadeService : ICustomFieldFacadeService
-    { 
+    {
+        #region Fields
+
         private readonly IMapper<CustomFieldType, CustomFieldDTOWithActions> customFieldWithActionMapper;
         private readonly IMapper<CustomFieldType, CustomFieldDTO> customFieldMapper;
-        //private readonly IMapper<CustomFieldType, CustomFieldDTO> abstractCustomFieldDTOMapper;
         private readonly IMapper<CustomFieldType, AbstractCustomFieldDescriptionDTO> abstractCustomFieldDescriptionDTOMapper;
         private readonly ICustomFieldService customFieldService;
-        private readonly ICustomFieldRepository customFieldRep;
+        private readonly ICustomFieldRepository customFieldRep; 
 
+        #endregion
+
+        #region Constructors
         public CustomFieldFacadeService(IMapper<CustomFieldType, CustomFieldDTOWithActions> customFieldWithActionMapper,
-                                        IMapper<CustomFieldType,CustomFieldDTO> customFieldMapper,
-                                        //IMapper<CustomFieldType, CustomFieldDTO> abstractCustomFieldDTOMapper,
+                                        IMapper<CustomFieldType, CustomFieldDTO> customFieldMapper,
+            //IMapper<CustomFieldType, CustomFieldDTO> abstractCustomFieldDTOMapper,
                                         IMapper<CustomFieldType, AbstractCustomFieldDescriptionDTO> abstractCustomFieldDescriptionDTOMapper,
                                         ICustomFieldService customFieldService,
                                         ICustomFieldRepository customFieldRep)
         {
             this.customFieldWithActionMapper = customFieldWithActionMapper;
             this.customFieldMapper = customFieldMapper;
-            //this.abstractCustomFieldDTOMapper = abstractCustomFieldDTOMapper;
             this.abstractCustomFieldDescriptionDTOMapper = abstractCustomFieldDescriptionDTOMapper;
             this.customFieldService = customFieldService;
             this.customFieldRep = customFieldRep;
-            
-        }
 
-        [RequiredPermission(ActionType.ShowCustomField)]
-        public List<CustomFieldEntity> GetAllCustomFieldEntityType()
-        {
-            var res = new List<CustomFieldEntity>();
-            foreach (var entityTypeEnum in EntityTypeEnum.GetAll<EntityTypeEnum>())
-            {
-                res.Add(new CustomFieldEntity
-                    {
-                        Id = Convert.ToInt32(entityTypeEnum.Value),
-                        Title = entityTypeEnum.DisplayName
-                    });
-            }
-            return res;
-        }
+        } 
+        #endregion
 
         [RequiredPermission(ActionType.ShowCustomField)]
         public PageResultDTO<CustomFieldDTOWithActions> GetAllCustomFieldes(int pageSize, int pageIndex, QueryStringConditions queryStringConditions)
         {
-            
+
             var fs = new ListFetchStrategy<CustomFieldType>(Enums.FetchInUnitOfWorkOption.NoTracking);
             var sortBy = QueryConditionHelper.GetSortByDictionary(queryStringConditions.SortBy);
             foreach (var item in sortBy)
@@ -72,7 +58,7 @@ namespace MITD.PMS.Interface
             }
             fs.OrderBy(x => x.Id);
             fs.WithPaging(pageSize, pageIndex);
-            var entityId = GetEntityIdFromQueryString(queryStringConditions.Filter);
+            var entityId = getEntityIdFromQueryString(queryStringConditions.Filter);
             customFieldRep.GetAll(
                 entityId != null ? EntityTypeEnum.FromValue<EntityTypeEnum>(entityId.ToString()) : null, fs);
             var res = new PageResultDTO<CustomFieldDTOWithActions>();
@@ -114,6 +100,21 @@ namespace MITD.PMS.Interface
         }
 
         [RequiredPermission(ActionType.ShowCustomField)]
+        public List<CustomFieldEntity> GetAllCustomFieldEntityType()
+        {
+            var res = new List<CustomFieldEntity>();
+            foreach (var entityTypeEnum in Enumeration.GetAll<EntityTypeEnum>())
+            {
+                res.Add(new CustomFieldEntity
+                    {
+                        Id = Convert.ToInt32(entityTypeEnum.Value),
+                        Title = entityTypeEnum.DisplayName
+                    });
+            }
+            return res;
+        }
+
+        [RequiredPermission(ActionType.ShowCustomField)]
         public List<CustomFieldDTO> GetAllCustomFields(string entityType)
         {
             var entityCustomFieldList = customFieldRep.GetAll(Enumeration.FromDisplayName<EntityTypeEnum>(entityType));
@@ -132,7 +133,7 @@ namespace MITD.PMS.Interface
                   .ToList();
         }
 
-        public static int? GetEntityIdFromQueryString(string filter)
+        private static int? getEntityIdFromQueryString(string filter)
         {
             if (string.IsNullOrWhiteSpace(filter))
                 return null;

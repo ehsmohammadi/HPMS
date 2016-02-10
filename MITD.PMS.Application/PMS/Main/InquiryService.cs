@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using MITD.Domain.Repository;
 using MITD.PMS.Application.Contracts;
@@ -89,8 +90,7 @@ namespace MITD.PMS.Application
             var job = jobRep.GetById(configurationItem.JobPosition.JobId);
             foreach (var jobJobIndex in job.JobIndexList)
             {
-                //todo check for no error
-                var jobIndex = jobIndexRep.GetById(jobJobIndex.JobIndexId);
+                var jobIndex = jobIndexRep.GetById(jobJobIndex.JobIndexId);  
                 if ((jobIndex as JobIndex).IsInquireable)
                 {
                     if ((configurationItem.InquirerJobPositionLevel == JobPositionLevel.Childs &&

@@ -1,8 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MITD.Core;
 
 namespace MITD.PMS.Presentation.Contracts
@@ -20,7 +16,6 @@ namespace MITD.PMS.Presentation.Contracts
         AbstractIndex UpdateJobIndex(JobIndexDTO abstractjobIndex);
         AbstractIndex UpdateJobIndexCategory(JobIndexCategoryDTO abstractjobIndex);
         string DeleteAbstractJobIndex(long id);
-
 
         IList<AbstractIndex> GetAllJobIndices();
         IList<AbstractIndex> GetAllJobIndexCategories();

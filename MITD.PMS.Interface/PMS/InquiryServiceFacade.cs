@@ -51,7 +51,7 @@ namespace MITD.PMS.Interface
                     new JobPositionId(new PeriodId(periodId), new SharedJobPositionId(jobPositionId)),
                     new EmployeeId(inquirySubjectEmployeeNo, new PeriodId(periodId))));
 
-            // TODO:  Mapper and Domain Report Needed
+            // TODO:(LOW)Mapper and Domain Report Needed
             var inquiryForm = new InquiryFormDTO
                 {
                     InquirerEmployeeNo = inquirerEmployeeNo,

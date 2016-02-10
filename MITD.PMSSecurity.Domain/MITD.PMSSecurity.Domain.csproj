@@ -56,11 +56,11 @@
     <Compile Include="Model\Parties\PartyCustomAction.cs" />
     <Compile Include="Model\Parties\AdminUser.cs" />
     <Compile Include="Model\ActionTypeEnum.cs" />
-    <Compile Include="Model\Exception\PartyArgumentException.cs" />
-    <Compile Include="Model\Exception\PartyDuplicateException.cs" />
-    <Compile Include="Model\Exception\PartyDeleteException.cs" />
-    <Compile Include="Model\Exception\PartyException.cs" />
-    <Compile Include="Model\Exception\PartyModifyException.cs" />
+    <Compile Include="Model\Parties\Exception\PartyArgumentException.cs" />
+    <Compile Include="Model\Parties\Exception\PartyDuplicateException.cs" />
+    <Compile Include="Model\Parties\Exception\PartyDeleteException.cs" />
+    <Compile Include="Model\Parties\Exception\PartyException.cs" />
+    <Compile Include="Model\Parties\Exception\PartyModifyException.cs" />
     <Compile Include="Model\Logs\ExceptionLog.cs" />
     <Compile Include="Model\Logs\EventLog.cs" />
     <Compile Include="Model\Logs\LogLevel.cs" />

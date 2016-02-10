@@ -90,7 +90,6 @@
     <Compile Include="PMS\PeriodClaimServiceFasade.cs" />
     <Compile Include="PMS\InquiryServiceFacade.cs" />
     <Compile Include="PMS\JobIndexPointFacadeService.cs" />
-    <Compile Include="IMapper3Type.cs" />
     <Compile Include="PMSAdmin\Mapper\Function\FunctionMapper.cs" />
     <Compile Include="PMSAdmin\Mapper\Function\FunctionWithActionMapper.cs" />
     <Compile Include="PMSAdmin\Mapper\Policy\PolicyMapper.cs" />

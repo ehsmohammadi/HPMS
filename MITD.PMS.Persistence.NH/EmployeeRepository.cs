@@ -80,7 +80,7 @@ namespace MITD.PMS.Persistence.NH
                     //&& ep.CalculatePathNo == firstLevel
                         ).Select(ep => ep.EmployeeId).ToFuture();
             }
-            //todo : query for data 
+            //todo :(LOW) query for data 
             var dummy = employeeJobs.Select(empJob => empJob.jo).Fetch(j => j.JobIndexList).ToFuture();
             var employeeJobindexes = session.Query<Domain.Model.JobIndices.JobIndex>()
                                             .Where(j => employeeJobs.Select(empJob => empJob.jo)
@@ -179,7 +179,7 @@ namespace MITD.PMS.Persistence.NH
                 if (calculation.CalculationResult != null && calculation.CalculationResult.LastCalculatedPath.HasValue)
                     firstLevel = calculation.CalculationResult.LastCalculatedPath.Value;
             }
-            // todo : query for caculation data 
+            // todo :(LOW) query for caculation data 
             var dummy = employeeJobs.Select(empJob => empJob.jo).Fetch(j => j.JobIndexList).ToFuture();
             var employeeJobindexes = session.Query<Domain.Model.JobIndices.JobIndex>()
                                             .Where(j => employeeJobs.Select(empJob => empJob.jo)

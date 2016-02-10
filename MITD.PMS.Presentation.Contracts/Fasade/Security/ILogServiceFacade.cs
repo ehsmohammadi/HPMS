@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MITD.Core;
-using MITD.PMS.Presentation.Contracts;
 
-namespace MITD.PMS.Interface
+namespace MITD.PMS.Presentation.Contracts
 {
     public interface ILogServiceFacade : IFacadeService
     {

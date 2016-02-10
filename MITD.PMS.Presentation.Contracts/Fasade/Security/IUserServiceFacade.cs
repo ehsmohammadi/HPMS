@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 using MITD.Core;
-using MITD.PMS.Presentation.Contracts;
 using MITD.PMSSecurity.Domain;
 
-namespace MITD.PMS.Interface
+namespace MITD.PMS.Presentation.Contracts
 {
     public interface IUserServiceFacade : IFacadeService
     {

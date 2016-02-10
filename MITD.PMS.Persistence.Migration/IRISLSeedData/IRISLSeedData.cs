@@ -567,7 +567,7 @@ namespace MITD.PMS.Persistence
                 var unitIndexRep = new UnitIndexRepository(uow);
 
                 #region UnitIndex Creation
-                //todo : meghdar zarib ahmiyat ha eshtebah ast 
+                //todo :(LOW) meghdar zarib ahmiyat ha eshtebah ast 
                 var unitGroup = PMSMigrationUtility.CreateUnitIndexGroup(unitIndexRep, "گروه شاخص های سازمانی", "OrganizationUnitGroup");
 
                 foreach (var unitIndex in AdminMigrationUtility.UnitIndices)

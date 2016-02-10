@@ -57,7 +57,7 @@ namespace MITD.PMS.Interface
                     new UnitId(new PeriodId(periodId), new SharedUnitId(unitId))
                    );
 
-            // TODO:  Mapper and Domain Report Needed
+            // TODO:(LOW)  Mapper and Domain Report Needed
             var inquiryForm = new InquiryUnitFormDTO
                 {
                     InquirerEmployeeNo = inquirerEmployeeNo,
@@ -90,13 +90,6 @@ namespace MITD.PMS.Interface
 
         public InquiryUnitFormDTO UpdateInquirySubjectForm(InquiryUnitFormDTO inquiryForm)
         {
-            //inquiryService.UpdateInquiryUnitIndexPoints(
-            //    new InquiryUnitIndexPoinItem(
-            //        new UnitInquiryConfigurationItemId(null,
-            //            new EmployeeId(inquiryForm.InquirerEmployeeNo, new PeriodId(inquiryForm.PeriodId)),
-            //            new UnitId(new PeriodId(inquiryForm.PeriodId), new SharedUnitId(inquiryForm.InquiryUnitId)),null
-            //           // new AbstractUnitIndexId(inquiryForm.UnitIndexId)
-            //            ), inquiryForm.UnitIndexValueList));//todo bz  //inquiryForm.UnitIndexValueDTO.IndexValue));
 
             var res = inquiryForm.UnitIndexValueList.Select(item => new InquiryUnitIndexPoinItem(new UnitInquiryConfigurationItemId(null, 
                 new EmployeeId(inquiryForm.InquirerEmployeeNo,
