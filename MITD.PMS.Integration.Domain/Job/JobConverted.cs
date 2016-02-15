@@ -6,16 +6,16 @@ namespace MITD.PMS.Integration.Domain
 {
     public class JobConverted : IDomainEvent<JobConverted>
     {
-        private readonly List<JobInPeriodDTO> jobInperiodList;
+        private readonly List<JobDTO> jobList;
 
-        public List<JobInPeriodDTO> JobInperiodList
+        public List<JobDTO> JobList
         {
-            get { return jobInperiodList; }
+            get { return jobList; }
         }
 
-        public JobConverted(List<JobInPeriodDTO> jobInperiodList)
+        public JobConverted(List<JobDTO> jobInperiodList)
         {
-            this.jobInperiodList = jobInperiodList;
+            this.jobList = jobInperiodList;
         }
 
         public bool SameEventAs(JobConverted other)

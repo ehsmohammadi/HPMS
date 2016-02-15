@@ -18,7 +18,7 @@ namespace MITD.PMS.Integration.Domain
         private readonly IJobInPeriodServiceWrapper jobInPeriodServiceWrapper;
         private List<JobIndexInPeriodDTO> jobIndexInperiodList;
         private JobIntegrationDto root;
-        private List<JobInPeriodDTO> jobInPeriodList = new List<JobInPeriodDTO>();
+        private List<JobDTO> jobList = new List<JobDTO>();
         private int totalJobsCount;
         private readonly IEventPublisher publisher;
         #endregion
@@ -48,11 +48,11 @@ namespace MITD.PMS.Integration.Domain
                 var job = jobService.AddJob(desJobDTO);
                 var jobInPriodAssignment = createDestinationJobInPeriod(job);
                 var res = jobInPeriodServiceWrapper.AddJobInPeriod(period.Id, jobInPriodAssignment);
-                jobInPeriodList.Add(res);
-                Console.WriteLine("Jobs Convert progress state: " + jobInPeriodList.Count + " From " + totalJobsCount.ToString());
+                jobList.Add(job);
+                Console.WriteLine("Jobs Convert progress state: " + jobList.Count + " From " + totalJobsCount.ToString());
                 
             }
-            publisher.Publish(new JobConverted(jobInPeriodList));
+            publisher.Publish(new JobConverted(jobList));
         }
 
       

@@ -19,7 +19,7 @@ namespace MITD.PMS.Integration.Domain
         private readonly IUnitInPeriodServiceWrapper unitInPeriodServiceWrapper;
         private List<UnitIndexInPeriodDTO> unitIndexInperiodList;
         private UnitIntegrationDTO root;
-        private List<UnitInPeriodDTO> unitInPeriodList = new List<UnitInPeriodDTO>();
+        private List<UnitDTO> unitList = new List<UnitDTO>();
         private int totalUnitsCount;
         private readonly IEventPublisher publisher;
         #endregion
@@ -43,7 +43,7 @@ namespace MITD.PMS.Integration.Domain
             root = unitDataProvider.GetRoot();
             totalUnitsCount = unitDataProvider.GetCount();
             convertUnit_Rec(root, period.Id, null);
-            publisher.Publish(new UnitConverted(unitInPeriodList));
+            publisher.Publish(new UnitConverted(unitList));
         }
 
       
@@ -58,14 +58,14 @@ namespace MITD.PMS.Integration.Domain
             var unit = unitService.AddUnit(desUnitDTO);
             var unitInPriodAssignment = createDestinationUnitInPeriod(unit, unitParentIdParam);
             var res = unitInPeriodServiceWrapper.AddUnitInPeriod(periodId, unitInPriodAssignment);
-            unitInPeriodList.Add(res);
+            unitList.Add(unit);
             var unitDataChildIdList = unitDataProvider.GetChildIDs(sourceUnitDTO.ID);
             foreach (var unitDataChildId in unitDataChildIdList)
             {
                 var unitdataChid = unitDataProvider.GetUnitDetail(unitDataChildId);
                 convertUnit_Rec(unitdataChid, periodId, res.UnitId);
             }
-            Console.WriteLine("Unit convert progress state: " + unitInPeriodList.Count + " From " + totalUnitsCount.ToString());
+            Console.WriteLine("Unit convert progress state: " + unitList.Count + " From " + totalUnitsCount.ToString());
 
         }
 

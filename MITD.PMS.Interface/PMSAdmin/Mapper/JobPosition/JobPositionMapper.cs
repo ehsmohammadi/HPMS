@@ -15,7 +15,8 @@ namespace MITD.PMS.Interface
                 {
                     Id = entity.Id.Id,
                     Name = entity.Name,
-                    DictionaryName = entity.DictionaryName
+                    DictionaryName = entity.DictionaryName,
+                    TransferId = entity.TransferId 
                 };
             return res;
 

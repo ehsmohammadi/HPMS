@@ -12,16 +12,19 @@ namespace MITD.PMS.Interface
  
         public override UnitDTOWithActions MapToModel(Unit entity)
         {
-            var res = new UnitDTOWithActions();
-            res.Id = entity.Id.Id;
-            res.Name = entity.Name;
-            res.DictionaryName = entity.DictionaryName;
-            res.ActionCodes = new List<int>
-            {
-                (int) ActionType.AddUnit,
-                (int) ActionType.ModifyUnit,
-                (int) ActionType.DeleteUnit
-            };
+            var res = new UnitDTOWithActions
+                      {
+                          Id = entity.Id.Id,
+                          Name = entity.Name,
+                          DictionaryName = entity.DictionaryName,
+                          TransferId = entity.TransferId,
+                          ActionCodes = new List<int>
+                                        {
+                                            (int) ActionType.AddUnit,
+                                            (int) ActionType.ModifyUnit,
+                                            (int) ActionType.DeleteUnit
+                                        }
+                      };
             return res;
 
         }

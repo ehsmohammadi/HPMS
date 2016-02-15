@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Threading.Tasks;
 using MITD.Core;
-using MITD.PMS.Integration.Data.Contract;
 using MITD.PMS.Integration.Domain;
 using MITD.PMS.Integration.Host.Console;
-using MITD.PMS.Integration.PMS.API;
-using Nito.AsyncEx;
 
 namespace ConsoleApplication1
 {

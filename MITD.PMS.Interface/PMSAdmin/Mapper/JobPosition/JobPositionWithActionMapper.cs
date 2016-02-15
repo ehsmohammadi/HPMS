@@ -12,16 +12,19 @@ namespace MITD.PMS.Interface
 
         public override JobPositionDTOWithActions MapToModel(JobPosition entity)
         {
-            var res = new JobPositionDTOWithActions();
-            res.Id = entity.Id.Id;
-            res.Name = entity.Name;
-            res.DictionaryName = entity.DictionaryName;
-            res.ActionCodes = new List<int>
-            {
-                (int) ActionType.AddJobPosition,
-                (int) ActionType.ModifyJobPosition,
-                (int) ActionType.DeleteJobPosition
-            };
+            var res = new JobPositionDTOWithActions
+                      {
+                          Id = entity.Id.Id,
+                          Name = entity.Name,
+                          DictionaryName = entity.DictionaryName,
+                          TransferId = entity.TransferId,
+                          ActionCodes = new List<int>
+                                        {
+                                            (int) ActionType.AddJobPosition,
+                                            (int) ActionType.ModifyJobPosition,
+                                            (int) ActionType.DeleteJobPosition
+                                        }
+                      };
             return res;
 
         }
