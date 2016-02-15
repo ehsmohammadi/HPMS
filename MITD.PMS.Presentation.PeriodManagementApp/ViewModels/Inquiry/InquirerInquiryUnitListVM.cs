@@ -39,7 +39,7 @@ namespace MITD.PMS.Presentation.Logic
                 this.SetField(p => p.SelectedInquirySubject, ref selectedInquirySubject, value);
                 if (selectedInquirySubject == null) return;
                 InquirySubjectCommands = createCommands();
-              //todo bz
+                //todo bz
                 if (View != null)
                     ((IUnitsInquiryListView)View).CreateContextMenu(new ReadOnlyCollection<DataGridCommandViewModel>(InquirySubjectCommands));
             }
@@ -64,7 +64,7 @@ namespace MITD.PMS.Presentation.Logic
             set { this.SetField(p => p.SelectedCommand, ref selectedCommand, value); }
         }
 
-        
+
         #endregion
 
         #region Constructors
@@ -109,15 +109,22 @@ namespace MITD.PMS.Presentation.Logic
         public void Load(string inquirerEmployeeNoParam, long periodIdParam)
         {
             periodId = periodIdParam;
-            inquirerEmployeeNo = inquirerEmployeeNoParam;
-            refresh();
+            if(!string.IsNullOrWhiteSpace(inquirerEmployeeNoParam))
+            {
+                inquirerEmployeeNo = inquirerEmployeeNoParam;
+                refresh();
+            }
+            else
+            {
+                appController.ShowMessage("شماره پرسنلی شما در سستم موجود نمی باشد");
+            }
         }
 
         private void refresh()
         {
             ShowBusyIndicator("در حال دریافت اطلاعات...");
             inquiryService.GetInquirerInquirySubjects(
-                (res, exp) =>  appController.BeginInvokeOnDispatcher(() =>
+                (res, exp) => appController.BeginInvokeOnDispatcher(() =>
                 {
                     HideBusyIndicator();
                     if (exp == null)

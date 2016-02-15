@@ -107,7 +107,7 @@ namespace MITD.PMS.Interface
         public IEnumerable<AbstractJobIndexDTOWithActions> GetAllAbstractJobIndices()
         {
             var abstractList = jobIndexRep.GetAll();
-            return abstractList.Select(r => jobIndexWithActionsMapper.MapToModel(r));
+            return abstractList.Select(r => jobIndexWithActionsMapper.MapToModel(r)).ToList();
         }
 
 

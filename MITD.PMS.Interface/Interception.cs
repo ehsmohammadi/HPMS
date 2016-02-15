@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
 using Castle.DynamicProxy;
+using Castle.DynamicProxy.Internal;
 using MITD.PMS.Presentation.Contracts;
 using MITD.PMSSecurity.Domain;
 using MITD.PMSSecurity.Domain.Model;
@@ -55,21 +56,30 @@ namespace MITD.PMS.Interface
             return requiredActions;
         }
 
-        private void FilterActionsFromPageResultDtosBasedOnUserPermissions(object pageResult, List<ActionType> authorizedActionsForUser)
+        private void FilterActionsFromPageResultDtosBasedOnUserPermissions(object res, List<ActionType> authorizedActionsForUser)
         {
-            if (pageResult != null && pageResult.GetType().IsGenericType &&
-                        pageResult.GetType().GetGenericTypeDefinition() == typeof(PageResultDTO<>))
+            if (res != null && res.GetType().IsGenericType &&
+                        res.GetType().GetGenericTypeDefinition() == typeof(PageResultDTO<>))
             {
-                Type pageResultDtoType = pageResult.GetType().GetGenericTypeDefinition();
-                Type dtoWithActionType = pageResult.GetType().GetGenericArguments()[0];
+                Type pageResultDtoType = res.GetType().GetGenericTypeDefinition();
+                Type dtoWithActionType = res.GetType().GetGenericArguments()[0];
                 Type finalType = pageResultDtoType.MakeGenericType(dtoWithActionType);
 
-                var result = finalType.GetProperty("Result").GetValue(pageResult);
+                var result = finalType.GetProperty("Result").GetValue(res);
                 foreach (IActionDTO item in (IEnumerable)result)
                 {
                     item.ActionCodes = item.ActionCodes.Where(a => authorizedActionsForUser.Contains((ActionType)a)).ToList();
                 }
             }
+            else if (res != null && res.GetType().GetGenericArguments().Any() &&
+                     res.GetType().GetGenericArguments()[0].GetInterfaces().Contains(typeof (IActionDTO)))
+            {
+                foreach (IActionDTO item in (IEnumerable)res)
+                {
+                    item.ActionCodes = item.ActionCodes.Where(a => authorizedActionsForUser.Contains((ActionType)a)).ToList();
+                }
+            }
+
         }
 
         private void logServicesAccess(IInvocation invocation, ClaimsPrincipal user)

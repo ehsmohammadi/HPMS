@@ -81,8 +81,9 @@ namespace MITD.PMS.Interface
         [RequiredPermission(ActionType.ModifyCustomField)]
         public CustomFieldDTO UpdateCustomField(CustomFieldDTO customField)
         {
-            var customFieldType = customFieldMapper.MapToEntity(customField);
-            var res = customFieldService.UppdateCustomFieldType(customFieldType);
+            var res = customFieldService.UpdateCustomFieldType(new CustomFieldTypeId(customField.Id), customField.Name,
+                customField.DictionaryName, customField.MinValue, customField.MaxValue, customField.EntityId,
+                customField.TypeId);
             return customFieldMapper.MapToModel(res);
         }
 

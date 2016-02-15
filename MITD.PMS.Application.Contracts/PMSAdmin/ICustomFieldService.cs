@@ -8,7 +8,8 @@ namespace MITD.PMSAdmin.Application.Contracts
     { 
         CustomFieldType AddCustomFieldType(string name, string dictionaryName,
                              long minValue, long maxValue, int entityId, string typeId);
-        CustomFieldType UppdateCustomFieldType(CustomFieldType customFieldType);
+        CustomFieldType UpdateCustomFieldType(CustomFieldTypeId id, string name, string dictionaryName,
+                             long minValue, long maxValue, int entityId, string typeId);
         List<CustomFieldType> GetBy(List<CustomFieldTypeId> customFieldIdList);
 
         void DeleteCustomField(CustomFieldType customFieldType);

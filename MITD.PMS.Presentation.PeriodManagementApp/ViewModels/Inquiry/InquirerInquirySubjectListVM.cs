@@ -108,8 +108,15 @@ namespace MITD.PMS.Presentation.Logic
         public void Load(string inquirerEmployeeNoParam, long periodIdParam)
         {
             periodId = periodIdParam;
-            inquirerEmployeeNo = inquirerEmployeeNoParam;
-            refresh();
+            if (!string.IsNullOrWhiteSpace(inquirerEmployeeNoParam))
+            {
+                inquirerEmployeeNo = inquirerEmployeeNoParam;
+                refresh();
+            }
+            else
+            {
+                appController.ShowMessage("شماره پرسنلی شما در سستم موجود نمی باشد");
+            }
         }
 
         private void refresh()

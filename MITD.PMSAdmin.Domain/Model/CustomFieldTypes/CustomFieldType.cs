@@ -16,12 +16,12 @@ namespace MITD.PMSAdmin.Domain.Model.CustomFieldTypes
         #region Properties
 
         private readonly CustomFieldTypeId id;
-        private readonly string name;
-        private readonly string dictionaryName;
-        private readonly long minValue;
-        private readonly long maxValue;
-        private readonly EntityTypeEnum entityId;
-        private readonly string typeId;
+        private  string name;
+        private  string dictionaryName;
+        private  long minValue;
+        private  long maxValue;
+        private  EntityTypeEnum entityId;
+        private  string typeId;
 
         public virtual CustomFieldTypeId Id
         {
@@ -128,5 +128,22 @@ namespace MITD.PMSAdmin.Domain.Model.CustomFieldTypes
         }
 
         #endregion
+
+        public virtual void Update(string nameParam, string dictionaryNameParam, long minValueParam, long maxValueParam, EntityTypeEnum entityIdParam, string typeIdParam)
+        {
+            if (string.IsNullOrWhiteSpace(nameParam))
+                throw new CustomFieldTypeArgumentException("CustomFieldType", "Name");
+            this.name = nameParam;
+            if (string.IsNullOrWhiteSpace(dictionaryNameParam))
+                throw new CustomFieldTypeArgumentException("CustomFieldType", "DictionaryName");
+            this.dictionaryName = dictionaryNameParam;
+            if (minValueParam > maxValueParam)
+                throw new CustomFieldTypeCompareException("CustomFieldType", "MinValue", "MaxValue");
+            this.minValue = minValueParam;
+            this.maxValue = maxValueParam;
+
+            this.entityId = entityIdParam;
+            this.typeId = typeIdParam;
+        }
     }
 }
