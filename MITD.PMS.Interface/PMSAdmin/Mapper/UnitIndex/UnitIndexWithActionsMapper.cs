@@ -23,6 +23,7 @@ namespace MITD.PMS.Interface.Mappers
                     Name = entity.Name,
                     DictionaryName = entity.DictionaryName,
                     ParentId = ((UnitIndex) entity).Category.Id.Id,
+                    TransferId=entity.TransferId ,
                     ActionCodes = new List<int> {(int) ActionType.ModifyUnitIndex, (int) ActionType.DeleteUnitIndex}
                 };
                 return res;

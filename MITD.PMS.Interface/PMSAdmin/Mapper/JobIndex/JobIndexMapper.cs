@@ -21,6 +21,7 @@ namespace MITD.PMS.Interface.Mappers
                         Id = entity.Id.Id,
                         Name = entity.Name,
                         DictionaryName = entity.DictionaryName,
+                        TransferId=entity.TransferId ,
                         ParentId = ((JobIndex)entity).Category.Id.Id,
                     };
                 return res;

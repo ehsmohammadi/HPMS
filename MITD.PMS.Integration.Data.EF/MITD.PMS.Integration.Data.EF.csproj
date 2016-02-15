@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataProviders\JobPositionProvider.cs" />
     <Compile Include="DBModel\PersonnelDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -84,11 +85,11 @@
     <Compile Include="DBModel\VW_OrganTree.cs">
       <DependentUpon>PersonnelDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="EmployeeDataProvider.cs" />
-    <Compile Include="JobDataProvider.cs" />
-    <Compile Include="UnitIndexDataProvider.cs" />
-    <Compile Include="JobIndexDataProvider.cs" />
-    <Compile Include="UnitDataPrivider.cs" />
+    <Compile Include="DataProviders\EmployeeDataProvider.cs" />
+    <Compile Include="DataProviders\JobDataProvider.cs" />
+    <Compile Include="DataProviders\UnitIndexDataProvider.cs" />
+    <Compile Include="DataProviders\JobIndexDataProvider.cs" />
+    <Compile Include="DataProviders\UnitDataPrivider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
