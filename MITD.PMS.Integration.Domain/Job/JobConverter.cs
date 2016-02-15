@@ -61,6 +61,7 @@ namespace MITD.PMS.Integration.Domain
         #region Private methods
 
 
+        #region Comment
         private void convertJob_Rec(JobIntegrationDto sourceJobDTO, long periodId, long? jobParentIdParam)
         {
             //var jobInPeriodList = new List<JobInPeriodDTO>();
@@ -92,6 +93,8 @@ namespace MITD.PMS.Integration.Domain
 
         }
 
+        #endregion 
+
         private void handleException(Exception exception)
         {
             throw new Exception("Error In Add Job", exception);
@@ -101,14 +104,14 @@ namespace MITD.PMS.Integration.Domain
         private JobDTO createDestinationJob(JobIntegrationDto sourceJob)
         {
             var res = new JobDTO
-            {
-                Name = sourceJob.Title,
+                      {
+                          Name = sourceJob.Title,
 
-                CustomFields = new List<CustomFieldDTO>(),
-                DictionaryName = sourceJob.Id.ToString(),
-                TransferId = sourceJob.TransferId
-                
-            };
+                          CustomFields = new List<CustomFieldDTO>(),
+                          DictionaryName = "j" + sourceJob.Id,
+                          TransferId = sourceJob.TransferId
+
+                      };
             return res;
         }
 

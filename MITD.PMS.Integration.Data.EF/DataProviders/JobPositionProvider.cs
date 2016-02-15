@@ -13,11 +13,13 @@ namespace MITD.PMS.Integration.Data.EF
 
         private PersonnelSoft2005Entities db;
 
+
+        #region GetRoot
         public JobPositionIntegrationDTO GetRoot()
         {
             db = new PersonnelSoft2005Entities();
 
-            var parentId = 4334;
+            var parentId = 4334; //4340;
             return (from c in db.VW_OrganTree
                     where c.PID == parentId && c.IsManager == true
                                       select new JobPositionIntegrationDTO
@@ -59,6 +61,10 @@ namespace MITD.PMS.Integration.Data.EF
             return new JobPositionIntegrationDTO();
         }
 
+        #endregion
+
+
+        #region GetCount
         public int GetCount()
         {
             db = new PersonnelSoft2005Entities();
@@ -72,6 +78,7 @@ namespace MITD.PMS.Integration.Data.EF
                 return (from c in db.VW_OrganTree
                         where c.NodeType == 1
                               && c.NodeType != 6
+                              && c.ID_F != null
                               && c.FullPath.StartsWith(RootFullPath)
                         select c.ID).Count();
             }
@@ -82,6 +89,10 @@ namespace MITD.PMS.Integration.Data.EF
             }
         }
 
+        #endregion
+
+
+        #region GetChildIds
         public IEnumerable<int> GetChildIDs(int id)
         {
             db = new PersonnelSoft2005Entities();
@@ -99,7 +110,7 @@ namespace MITD.PMS.Integration.Data.EF
                     isManager = false;
                 }
 
-                if (!isManager )
+                if (!isManager)
                 {
                     return new List<int>();
                 }
@@ -107,16 +118,46 @@ namespace MITD.PMS.Integration.Data.EF
                 brotherJobPositionsIds = (from c in db.VW_OrganTree
                     where c.PID == parentId && c.ID != id
                           && c.NodeType == 1
-                          && c.NodeType != 6
+                          && c.ID_F != null
                     orderby c.ID
                     select c.ID).ToList();
                 var parentFullPath = (from c in db.VW_OrganTree where c.ID == parentId select c.FullPath).Single();
                 childJobPositionsIds =
-                    (from c in db.VW_OrganTree where c.FullPath.StartsWith(parentFullPath) && c.PID!=parentId && c.IsManager == true select c.ID)
+                    (from c in db.VW_OrganTree
+                     where
+                         c.FullPath.StartsWith(parentFullPath) && c.PID != parentId && c.IsManager == true &&
+                         c.ID_F != null
+                     select c.ID)
                         .ToList();
+                var subManagerIds = new List<int>();
+                foreach (var childJobPositionsId in childJobPositionsIds)
+                {
+
+                    var parentNodeId = (from c in db.VW_OrganTree where c.ID == childJobPositionsId select c.PID)
+                            .Single();
+                    var
+                    IdSubManager =
+                        (from c in db.VW_OrganTree where c.ID == parentNodeId && c.PID == parentId select c.ID)
+                            .Any();
+                    if (IdSubManager)
+                    {
+                        subManagerIds.Add(childJobPositionsId);
+                    }
+
+                }
+
+
+
+
+                    //(from c in db.VW_OrganTree
+                    //    where
+                    //        c.FullPath.StartsWith(parentFullPath) && c.PID != parentId && c.IsManager == true &&
+                    //        c.ID_F != null
+                    //    select c.ID)
+                    //    .ToList();
 
                 var finalIds = brotherJobPositionsIds;
-                foreach (var childJobPositionsId in childJobPositionsIds)
+                foreach (var childJobPositionsId in subManagerIds)
                 {
                     finalIds.Add(childJobPositionsId);
                 }
@@ -129,6 +170,10 @@ namespace MITD.PMS.Integration.Data.EF
             }
         }
 
+        #endregion
+
+
+        #region GetJobPositionDetail
         public JobPositionIntegrationDTO GetJobPositionDetail(int id)
         {
             db = new PersonnelSoft2005Entities();
@@ -164,5 +209,6 @@ namespace MITD.PMS.Integration.Data.EF
                 throw e;
             }
         }
+        #endregion 
     }
 }

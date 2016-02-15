@@ -18,7 +18,6 @@ namespace MITD.PMS.Integration.Domain
         private readonly IJobIndexServiceWrapper jobIndexService;
         private readonly IJobIndexInPeriodServiceWrapper jobIndexAssignmentService;
         private readonly IEventPublisher publisher;
-        private Object lockThis = new Object();
 
         #endregion
 
@@ -66,25 +65,25 @@ namespace MITD.PMS.Integration.Domain
         private JobIndexDTO createDestinationJobIndex(JobIndexIntegrationDTO sourceJobIndex)
         {
             var res = new JobIndexDTO
-            {
-                Name = sourceJobIndex.Title,
-                ParentId = PMSCostantData.JobIndexCategoryId,
-                CustomFields = new List<CustomFieldDTO>
-                {
-                    new CustomFieldDTO
-                    {
-                        Id = PMSCostantData.JobIndexFieldId,
-                        Name = "sdfsdfsd",
-                        DictionaryName = "ksdkfhjskdfjs",
-                        EntityId = 1,
-                        MaxValue = 10,
-                        MinValue = 1,
-                        TypeId = "string",
-                    }
-                },
-                DictionaryName = sourceJobIndex.ID.ToString(),
-                TransferId = sourceJobIndex.TransferId
-            };
+                      {
+                          Name = sourceJobIndex.Title,
+                          ParentId = PMSCostantData.JobIndexCategoryId,
+                          CustomFields = new List<CustomFieldDTO>
+                                         {
+                                             new CustomFieldDTO
+                                             {
+                                                 Id = PMSCostantData.JobIndexFieldId,
+                                                 Name = "JobIndexCustomField",
+                                                 DictionaryName = "JobIndexCustomFieldDicName",
+                                                 EntityId = 1,
+                                                 MaxValue = 10,
+                                                 MinValue = 1,
+                                                 TypeId = "string",
+                                             }
+                                         },
+                          DictionaryName = "ji" + sourceJobIndex.ID,
+                          TransferId = sourceJobIndex.TransferId
+                      };
             return res;
         }
 

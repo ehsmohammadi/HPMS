@@ -105,16 +105,16 @@ namespace MITD.PMS.Integration.Data.EF
         public JobIndexIntegrationDTO GetBy(Guid? id)
         {
             return (from c in db.PMS_IndexList
-                where c.IndexId==id
+                where c.IndexId == id
                 select new JobIndexIntegrationDTO
-                {
-                    ID = c.IndexId,
-                    TransferId = Guid.NewGuid(),
-                    Title = c.Title,
-                    JobIndexId = c.IndexTypeID,
-                    JobId = c.ID_Job,
-                    IndexType = c.IndexTypeID
-                }).Single();
+                       {
+                           ID = c.IndexId,
+                           TransferId = c.IndexId.Value,
+                           Title = c.Title,
+                           JobIndexId = c.IndexTypeID,
+                           JobId = c.ID_Job,
+                           IndexType = c.IndexTypeID
+                       }).Single();
         }
 
         private IList<long> GetExclusiveJobIndexIds()

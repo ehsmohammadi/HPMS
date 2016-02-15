@@ -97,25 +97,25 @@ namespace MITD.PMS.Integration.Domain
         private UnitIndexDTO createDestinationUnitIndex(UnitIndexIntegrationDTO sourceUnitIndex)
         {
             var res = new UnitIndexDTO
-            {
-                Name = sourceUnitIndex.Title,
-                ParentId = PMSCostantData.UnitIndexCategoryId,
-                CustomFields = new List<CustomFieldDTO>
-                {
-                    new CustomFieldDTO
-                    {
-                        Id = PMSCostantData.UnitIndexFieldId,
-                        Name = "sdfsdfsd",
-                        DictionaryName = "ksdkfhjskdfjs",
-                        EntityId = 1,
-                        MaxValue = 10,
-                        MinValue = 1,
-                        TypeId = "string",
-                    }
-                },
-                DictionaryName = sourceUnitIndex.ID.ToString(),
-                TransferId = sourceUnitIndex.TransferId
-            };
+                      {
+                          Name = sourceUnitIndex.Title,
+                          ParentId = PMSCostantData.UnitIndexCategoryId,
+                          CustomFields = new List<CustomFieldDTO>
+                                         {
+                                             new CustomFieldDTO
+                                             {
+                                                 Id = PMSCostantData.UnitIndexFieldId,
+                                                 Name = "UnitIndexCustomField",
+                                                 DictionaryName = "UnitIndexCustomFieldDicName",
+                                                 EntityId = 1,
+                                                 MaxValue = 10,
+                                                 MinValue = 1,
+                                                 TypeId = "string",
+                                             }
+                                         },
+                          DictionaryName = "ui" + sourceUnitIndex.ID,
+                          TransferId = sourceUnitIndex.TransferId
+                      };
             return res;
         }
 
