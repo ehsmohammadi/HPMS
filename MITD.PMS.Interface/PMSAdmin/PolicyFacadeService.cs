@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Castle.Core;
 using MITD.Core;
@@ -8,21 +7,25 @@ using MITD.PMS.Presentation.Contracts;
 using MITD.PMSAdmin.Application.Contracts;
 using MITD.PMSAdmin.Domain.Model.Policies;
 using MITD.PMSSecurity.Domain;
-using MITD.PMSSecurity.Domain.Model;
 using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
 {
-   //  [Interceptor(typeof(Interception))]
+   [Interceptor(typeof(Interception))]
     public class PolicyFacadeService : IPolicyFacadeService
-    { 
+    {
+        #region Fields
+
         private readonly IMapper<Policy, PolicyDTOWithActions> policyWithActionMapper;
         private readonly IMapper<Policy, PolicyDTO> policyMapper;
         private readonly IPolicyService policyService;
-        private readonly IPolicyRepository policyRep;
+        private readonly IPolicyRepository policyRep; 
 
+        #endregion
+
+        #region Ctor
         public PolicyFacadeService(IMapper<Policy, PolicyDTOWithActions> policyWithActionMapper,
-                                        IMapper<Policy,PolicyDTO> policyMapper, 
+                                        IMapper<Policy, PolicyDTO> policyMapper,
                                         IPolicyService policyService,
                                         IPolicyRepository policyRep)
         {
@@ -30,12 +33,15 @@ namespace MITD.PMS.Interface
             this.policyMapper = policyMapper;
             this.policyService = policyService;
             this.policyRep = policyRep;
-        }
+        } 
+        #endregion
 
-        [RequiredPermission(ActionType.ShowPolicies)]
+        #region Public methods
+
+        [RequiredPermission(ActionType.ManagePolicies)]
         public PageResultDTO<PolicyDTOWithActions> GetAllPolicies(int pageSize, int pageIndex)
         {
-            
+
             var fs = new ListFetchStrategy<Policy>(Enums.FetchInUnitOfWorkOption.NoTracking);
             fs.OrderBy(x => x.Id);
             fs.WithPaging(pageSize, pageIndex);
@@ -46,38 +52,41 @@ namespace MITD.PMS.Interface
             return res;
         }
 
+        [RequiredPermission(ActionType.ManagePolicies)]
+        public List<PolicyDTOWithActions> GetAllPolicies()
+        {
+            return policyRep.GetAll().Select(r => policyWithActionMapper.MapToModel(r)).ToList();
+        }
+
         [RequiredPermission(ActionType.AddPolicy)]
         public PolicyDTO AddPolicy(PolicyDTO dto)
         {
-            var res = policyService.AddPolicy(dto.Name,dto.DictionaryName);
+            var res = policyService.AddPolicy(dto.Name, dto.DictionaryName);
             return policyMapper.MapToModel(res);
         }
 
         [RequiredPermission(ActionType.ModifyPolicy)]
         public PolicyDTO UpdatePolicy(PolicyDTO dto)
         {
-            
-            var res = policyService.UpdatePolicy(new PolicyId(dto.Id),dto.Name,dto.DictionaryName);
-            return policyMapper.MapToModel(res);
-        }
 
-        public PolicyDTO GetPolicyById(long id)
-        {
-            var policy = policyRep.GetById(new PolicyId(id));
-            return policyMapper.MapToModel(policy);
+            var res = policyService.UpdatePolicy(new PolicyId(dto.Id), dto.Name, dto.DictionaryName);
+            return policyMapper.MapToModel(res);
         }
 
         [RequiredPermission(ActionType.DeletePolicy)]
         public string DeletePolicy(long id)
         {
             policyService.DeletePolicy(new PolicyId(id));
-            return "Policy with" +" "+id+"Deleted";
+            return "Policy with" + " " + id + "Deleted";
         }
 
-        [RequiredPermission(ActionType.ShowPolicies)]
-        public List<PolicyDTOWithActions> GetAllPolicies()
+        public PolicyDTO GetPolicyById(long id)
         {
-            return policyRep.GetAll().Select(r => policyWithActionMapper.MapToModel(r)).ToList();
-        }
+            var policy = policyRep.GetById(new PolicyId(id));
+            return policyMapper.MapToModel(policy);
+        } 
+
+        #endregion
+
     }
 }

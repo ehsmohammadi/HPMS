@@ -21,7 +21,7 @@ namespace MITD.PMS.Interface.Mappers
                     Name = entity.Name,
                     DictionaryName = entity.DictionaryName,
                     TransferId = entity.TransferId,
-                    ActionCodes = new List<int> { (int)ActionType.AddJob, (int)ActionType.ModifyJob, (int)ActionType.DeleteJob }
+                    ActionCodes = new List<int> { (int)ActionType.CreateJob, (int)ActionType.ModifyJob, (int)ActionType.DeleteJob }
                 };
             return res;
         }

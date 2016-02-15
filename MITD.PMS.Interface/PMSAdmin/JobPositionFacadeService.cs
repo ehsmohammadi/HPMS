@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Castle.Core;
 using MITD.Core;
@@ -8,21 +7,25 @@ using MITD.PMS.Presentation.Contracts;
 using MITD.PMSAdmin.Application.Contracts;
 using MITD.PMSAdmin.Domain.Model.JobPositions;
 using MITD.PMSSecurity.Domain;
-using MITD.PMSSecurity.Domain.Model;
 using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
 {
-    //  [Interceptor(typeof(Interception))]
+    [Interceptor(typeof(Interception))]
     public class JobPositionFacadeService : IJobPositionFacadeService
-    { 
+    {
+        #region Fields
+
         private readonly IMapper<JobPosition, JobPositionDTOWithActions> jobPositionWithActionMapper;
         private readonly IMapper<JobPosition, JobPositionDTO> jobPositionMapper;
         private readonly IJobPositionService jobPositionService;
-        private readonly IJobPositionRepository jobPositionRep;
+        private readonly IJobPositionRepository jobPositionRep; 
 
+        #endregion
+
+        #region Ctor
         public JobPositionFacadeService(IMapper<JobPosition, JobPositionDTOWithActions> jobPositionWithActionMapper,
-                                        IMapper<JobPosition,JobPositionDTO> jobPositionMapper, 
+                                        IMapper<JobPosition, JobPositionDTO> jobPositionMapper,
                                         IJobPositionService jobPositionService,
                                         IJobPositionRepository jobPositionRep)
         {
@@ -30,12 +33,14 @@ namespace MITD.PMS.Interface
             this.jobPositionMapper = jobPositionMapper;
             this.jobPositionService = jobPositionService;
             this.jobPositionRep = jobPositionRep;
-        }
+        } 
+        #endregion
 
-        [RequiredPermission(ActionType.ShowJobPosition)]
+        #region Public methods
+        [RequiredPermission(ActionType.ManageJobPositions)]
         public PageResultDTO<JobPositionDTOWithActions> GetAllJobPositions(int pageSize, int pageIndex, QueryStringConditions queryStringConditions)
         {
-            
+
             var fs = new ListFetchStrategy<JobPosition>(Enums.FetchInUnitOfWorkOption.NoTracking);
             var sortBy = QueryConditionHelper.GetSortByDictionary(queryStringConditions.SortBy);
             foreach (var item in sortBy)
@@ -54,10 +59,17 @@ namespace MITD.PMS.Interface
             return res;
         }
 
+        [RequiredPermission(ActionType.ManageJobPositions)]
+        public List<JobPositionDTO> GetAllJobPositions()
+        {
+            List<JobPosition> jobPositions = jobPositionRep.GetAll();
+            return jobPositions.Select(j => jobPositionMapper.MapToModel(j)).ToList();
+        }
+
         [RequiredPermission(ActionType.AddJobPosition)]
         public JobPositionDTO AddJobPosition(JobPositionDTO dto)
         {
-            var res=jobPositionService.AddJobPosition(dto.Name,dto.DictionaryName, dto.TransferId);
+            var res = jobPositionService.AddJobPosition(dto.Name, dto.DictionaryName, dto.TransferId);
             return jobPositionMapper.MapToModel(res);
         }
 
@@ -65,15 +77,8 @@ namespace MITD.PMS.Interface
         public JobPositionDTO UpdateJobPosition(JobPositionDTO dto)
         {
             //var jobPosition = jobPositionMapper.MapToEntity(dto);
-            var res = jobPositionService.UppdateJobPosition(new JobPositionId(dto.Id),dto.Name,dto.DictionaryName);
+            var res = jobPositionService.UppdateJobPosition(new JobPositionId(dto.Id), dto.Name, dto.DictionaryName);
             return jobPositionMapper.MapToModel(res);
-        }
-
-        [RequiredPermission(ActionType.ShowJobPosition)]
-        public JobPositionDTO GetJobPositionById(long id)
-        {
-            var jobPosition = jobPositionRep.GetById(new JobPositionId(id));
-            return jobPositionMapper.MapToModel(jobPosition);
         }
 
         [RequiredPermission(ActionType.DeleteJobPosition)]
@@ -83,11 +88,12 @@ namespace MITD.PMS.Interface
             return "JobPosition With Id " + id + " delted";
         }
 
-        [RequiredPermission(ActionType.ShowJobPosition)]
-        public List<JobPositionDTO> GetAllJobPositions()
+        public JobPositionDTO GetJobPositionById(long id)
         {
-            List<JobPosition> jobPositions= jobPositionRep.GetAll();
-            return jobPositions.Select(j => jobPositionMapper.MapToModel(j)).ToList();
-        }
+            var jobPosition = jobPositionRep.GetById(new JobPositionId(id));
+            return jobPositionMapper.MapToModel(jobPosition);
+        } 
+        #endregion
+
     }
 }

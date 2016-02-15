@@ -16,7 +16,7 @@ namespace MITD.PMS.Presentation.BasicInfoApp
         public void DoAction(FunctionListVM vm)
         {
             var function = new FunctionDTO(){PolicyId=vm.PolicyFunctions.PolicyId};
-            basicInfoController.ShowFunctionView(function, ActionType.AddFunction);
+            basicInfoController.ShowFunctionView(function, ActionType.CreateFunction);
         }
 
 

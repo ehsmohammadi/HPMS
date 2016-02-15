@@ -18,7 +18,6 @@ namespace MITD.PMSSecurity.Domain
                     //ActionType.AddPolicy,
                     //ActionType.DeletePolicy,
                     //ActionType.ModifyPolicy,
-                    ActionType.ShowPolicies,
                     ActionType.ManagePolicies,
 
                     ActionType.ManageRules,
@@ -36,15 +35,15 @@ namespace MITD.PMSSecurity.Domain
 	                #endregion
 
                     #region CustomField
-                    ActionType.ShowCustomField,
-		            ActionType.AddCustomField,
+                    ActionType.ManageCustomFields,
+		            ActionType.CreateCustomField,
                     ActionType.DeleteCustomField,
                     ActionType.ModifyCustomField, 
 	                #endregion
 
                     #region Job
-                    ActionType.ShowJobs,
-		            ActionType.AddJob,
+                    ActionType.ManageJobs,
+		            ActionType.CreateJob,
                     ActionType.DeleteJob,
                     ActionType.ModifyJob,
                     ActionType.ManageJobCustomFields, 
@@ -55,7 +54,7 @@ namespace MITD.PMSSecurity.Domain
                     ActionType.ModifyJobIndex,
                     ActionType.DeleteJobIndex,
                     ActionType.ManageJobIndexCustomFields,
-                    ActionType.ShowJobIndex,
+                    ActionType.ManageJobIndices,
 
 
                     ActionType.AddJobIndexCategory,
@@ -64,7 +63,7 @@ namespace MITD.PMSSecurity.Domain
 	                #endregion
 
                     #region Unit
-                    ActionType.ShowUnit,
+                    ActionType.ManageUnits,
 		            ActionType.AddUnit,
                     ActionType.DeleteUnit,
                     ActionType.ModifyUnit,
@@ -72,7 +71,7 @@ namespace MITD.PMSSecurity.Domain
 	                #endregion
 
                     #region UnitIndex
-                    ActionType.ShowUnitIndex,
+                    ActionType.ManageUnitIndices,
                     ActionType.AddUnitIndex,
                     ActionType.ModifyUnitIndex,
                     ActionType.DeleteUnitIndex,
@@ -85,7 +84,7 @@ namespace MITD.PMSSecurity.Domain
 	                #endregion
 
                     #region JobPosition
-                    ActionType.ShowJobPosition,
+                    ActionType.ManageJobPositions,
 		            ActionType.AddJobPosition,
                     ActionType.DeleteJobPosition,
                     ActionType.ModifyJobPosition, 
@@ -126,11 +125,11 @@ namespace MITD.PMSSecurity.Domain
 		            ActionType.AddPeriod,
                     ActionType.ModifyPeriod,
                     ActionType.DeletePeriod,
-                    ActionType.ManageUnits,
-                    ActionType.ManageUnitIndices,
-                    ActionType.ManageJobPositions,
-                    ActionType.ManageJobIndices,
-                    ActionType.ManageJobs,
+                    ActionType.ManageUnitInPeriod,
+                    ActionType.ManageUnitIndexInPeriod,
+                    ActionType.ManageJobPositionInPeriod,
+                    ActionType.ManageJobIndexInPeriod,
+                    ActionType.ManageJobInPeriod,
                     ActionType.ManageCalculations,
                     ActionType.ShowEmployees,
                     ActionType.ManageEmployees,

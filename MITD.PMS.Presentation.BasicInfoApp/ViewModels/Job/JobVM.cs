@@ -112,7 +112,7 @@ namespace MITD.PMS.Presentation.Logic
             ShowBusyIndicator();
 
             job.TransferId = Guid.NewGuid();
-            if (actionType==ActionType.AddJob)
+            if (actionType == ActionType.CreateJob)
             {
                 jobService.AddJob((res, exp) => appController.BeginInvokeOnDispatcher(() =>
                     {

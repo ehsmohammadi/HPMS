@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Castle.Core;
 using MITD.Core;
 using MITD.Domain.Repository;
 using MITD.PMS.Presentation.Contracts;
-using MITD.PMS.Presentation.Contracts.Fasade;
 using MITD.PMSAdmin.Application.Contracts;
 using MITD.PMSAdmin.Domain.Model.CustomFieldTypes;
 using MITD.PMSAdmin.Domain.Model.UnitIndices;
@@ -15,15 +13,19 @@ using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
 {
-    //  [Interceptor(typeof(Interception))]
+    [Interceptor(typeof(Interception))]
     public class UnitIndexFacadeService : IUnitIndexFacadeService
     {
+        #region Fields
         private readonly IUnitIndexService unitIndexService;
         private readonly ICustomFieldRepository customFieldRep;
         private readonly IMapper<AbstractUnitIndex, AbstractIndex> unitIndexMapper;
         private readonly IMapper<AbstractUnitIndex, AbstractUnitIndexDTOWithActions> unitIndexWithActionsMapper;
         private readonly IMapper<CustomFieldType, CustomFieldDTO> customFieldDtoMapper;
-        private readonly IUnitIndexRepository unitIndexRep;
+        private readonly IUnitIndexRepository unitIndexRep; 
+        #endregion
+
+        #region Ctor
 
         public UnitIndexFacadeService(
             IUnitIndexService unitIndexService,
@@ -42,8 +44,10 @@ namespace MITD.PMS.Interface
             this.unitIndexRep = unitIndexRep;
         }
 
+        #endregion
 
-        [RequiredPermission(ActionType.ShowUnitIndex)]
+        #region Public Methods
+        [RequiredPermission(ActionType.ManageUnitIndices)]
         public PageResultDTO<AbstractUnitIndexDTOWithActions> GetAllUnitIndicesWithPagination(int pageSize, int pageIndex, QueryStringConditions queryStringConditions)
         {
             var fs = new ListFetchStrategy<UnitIndex>(Enums.FetchInUnitOfWorkOption.NoTracking);
@@ -64,7 +68,7 @@ namespace MITD.PMS.Interface
             return res;
         }
 
-        [RequiredPermission(ActionType.ShowUnitIndex)]
+        [RequiredPermission(ActionType.ManageUnitIndices)]
         public PageResultDTO<AbstractUnitIndexDTOWithActions> GetAllUnitIndexCategoriesWithPagination(int pageSize, int pageIndex, QueryStringConditions queryStringConditions)
         {
             var fs = new ListFetchStrategy<UnitIndexCategory>(Enums.FetchInUnitOfWorkOption.NoTracking);
@@ -85,11 +89,79 @@ namespace MITD.PMS.Interface
             return res;
         }
 
-        [RequiredPermission(ActionType.ShowUnitIndex)]
+        [RequiredPermission(ActionType.ManageUnitIndices)]
+        public IList<AbstractIndex> GetAllUnitIndices()
+        {
+            var unitIndexList = unitIndexRep.GetAllUnitIndex();
+            return unitIndexList.Select(j => unitIndexMapper.MapToModel(j)).ToList();
+        }
+
+        [RequiredPermission(ActionType.ManageUnitIndices)]
+        public IList<AbstractIndex> GetAllUnitIndexCategories()
+        {
+            var unitIndexList = unitIndexRep.GetAllUnitIndexCategory();
+            return unitIndexList.Select(j => unitIndexMapper.MapToModel(j)).ToList();
+        }
+
+        [RequiredPermission(ActionType.ManageUnitIndices)]
         public IEnumerable<AbstractUnitIndexDTOWithActions> GetAllAbstractUnitIndices()
         {
             var abstractList = unitIndexRep.GetAll();
             return abstractList.Select(r => unitIndexWithActionsMapper.MapToModel(r));
+        }
+
+        [RequiredPermission(ActionType.AddUnitIndex)]
+        public AbstractIndex AddUnitIndex(UnitIndexDTO unitIndexDto)
+        {
+            if (unitIndexDto.ParentId != null)
+            {
+                var unitIndex = unitIndexService.AddUnitIndex(new AbstractUnitIndexId(unitIndexDto.ParentId.Value),
+                    unitIndexDto.Name, unitIndexDto.DictionaryName
+                    , unitIndexDto.CustomFields.Select(c => new CustomFieldTypeId(c.Id)).ToList()
+                    , unitIndexDto.TransferId);
+                return unitIndexMapper.MapToModel(unitIndex);
+            }
+            throw new Exception("UnitIndex ParentId is null");
+        }
+
+        [RequiredPermission(ActionType.AddUnitIndexCategory)]
+        public AbstractIndex AddUnitIndexCategory(UnitIndexCategoryDTO unitIndexCategoryDto)
+        {
+            var unitIndexCat = unitIndexService.AddUnitIndexCategory(
+                (unitIndexCategoryDto.ParentId == null) ? null : new AbstractUnitIndexId(unitIndexCategoryDto.ParentId.Value),
+                                                unitIndexCategoryDto.Name, unitIndexCategoryDto.DictionaryName);
+            return unitIndexMapper.MapToModel(unitIndexCat);
+        }
+
+        [RequiredPermission(ActionType.ModifyUnitIndex)]
+        public AbstractIndex UpdateUnitIndex(UnitIndexDTO unitIndexDto)
+        {
+            if (unitIndexDto.ParentId != null)
+            {
+                var unitIndex = unitIndexService.UpdateUnitIndex(new AbstractUnitIndexId(unitIndexDto.Id)
+                    , new AbstractUnitIndexId(unitIndexDto.ParentId.Value), unitIndexDto.Name, unitIndexDto.DictionaryName
+                    , unitIndexDto.CustomFields.Select(c => new CustomFieldTypeId(c.Id)).ToList()
+                    );
+                return unitIndexMapper.MapToModel(unitIndex);
+            }
+            throw new Exception("UnitIndex ParentId is null");
+        }
+
+        [RequiredPermission(ActionType.ModifyUnitIndexCategory)]
+        public AbstractIndex UpdateUnitIndexCategory(UnitIndexCategoryDTO unitIndexCatDto)
+        {
+            var unitIndexCat = unitIndexService.UpdateUnitIndexCategory(new AbstractUnitIndexId(unitIndexCatDto.Id)
+                , (unitIndexCatDto.ParentId.HasValue) ? new AbstractUnitIndexId(unitIndexCatDto.ParentId.Value) : null
+                , unitIndexCatDto.Name, unitIndexCatDto.DictionaryName);
+            return unitIndexMapper.MapToModel(unitIndexCat);
+        }
+
+        [RequiredPermission(ActionType.DeleteUnitIndex)]
+        [RequiredPermission(ActionType.DeleteUnitIndexCategory)]
+        public string DeleteAbstractUnitIndex(long id)
+        {
+            unitIndexService.DeleteAbstractUnitIndex(new AbstractUnitIndexId(id));
+            return "UnitIndex deleted successfully";
         }
 
         public AbstractIndex GetAbstarctUnitIndexById(long id)
@@ -103,63 +175,9 @@ namespace MITD.PMS.Interface
             }
 
             return abstractIndexDto;
-        }
+        } 
 
+        #endregion
 
-
-        public AbstractIndex AddUnitIndex(UnitIndexDTO unitIndexDto)
-        {
-            var unitIndex = unitIndexService.AddUnitIndex(new AbstractUnitIndexId(unitIndexDto.ParentId.Value),
-                                                unitIndexDto.Name, unitIndexDto.DictionaryName
-                                                , unitIndexDto.CustomFields.Select(c => new CustomFieldTypeId(c.Id)).ToList()
-                                                ,unitIndexDto.TransferId);
-            return unitIndexMapper.MapToModel(unitIndex);
-        }
-
-        public AbstractIndex AddUnitIndexCategory(UnitIndexCategoryDTO unitIndexCategoryDto)
-        {
-            var unitIndexCat = unitIndexService.AddUnitIndexCategory(
-                (unitIndexCategoryDto.ParentId == null) ? null : new AbstractUnitIndexId(unitIndexCategoryDto.ParentId.Value),
-                                                unitIndexCategoryDto.Name, unitIndexCategoryDto.DictionaryName);
-            return unitIndexMapper.MapToModel(unitIndexCat);
-        }
-
-
-        public AbstractIndex UpdateUnitIndex(UnitIndexDTO unitIndexDto)
-        {
-            var unitIndex = unitIndexService.UpdateUnitIndex(new AbstractUnitIndexId(unitIndexDto.Id)
-                , new AbstractUnitIndexId(unitIndexDto.ParentId.Value), unitIndexDto.Name, unitIndexDto.DictionaryName
-                , unitIndexDto.CustomFields.Select(c => new CustomFieldTypeId(c.Id)).ToList()
-                );
-            return unitIndexMapper.MapToModel(unitIndex);
-        }
-
-        public AbstractIndex UpdateUnitIndexCategory(UnitIndexCategoryDTO unitIndexCatDto)
-        {
-            var unitIndexCat = unitIndexService.UpdateUnitIndexCategory(new AbstractUnitIndexId(unitIndexCatDto.Id)
-                , (unitIndexCatDto.ParentId.HasValue) ? new AbstractUnitIndexId(unitIndexCatDto.ParentId.Value) : null
-                , unitIndexCatDto.Name, unitIndexCatDto.DictionaryName);
-            return unitIndexMapper.MapToModel(unitIndexCat);
-        }
-
-        public string DeleteAbstractUnitIndex(long id)
-        {
-            unitIndexService.DeleteAbstractUnitIndex(new AbstractUnitIndexId(id));
-            return "UnitIndex deleted successfully";
-        }
-
-        [RequiredPermission(ActionType.ShowUnitIndex)]
-        public IList<AbstractIndex> GetAllUnitIndices()
-        {
-            var unitIndexList = unitIndexRep.GetAllUnitIndex();
-            return unitIndexList.Select(j => unitIndexMapper.MapToModel(j)).ToList();
-        }
-
-        [RequiredPermission(ActionType.ShowUnitIndex)]
-        public IList<AbstractIndex> GetAllUnitIndexCategories()
-        {
-            var unitIndexList = unitIndexRep.GetAllUnitIndexCategory();
-            return unitIndexList.Select(j => unitIndexMapper.MapToModel(j)).ToList();
-        }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Castle.Core;
 using MITD.Core;
@@ -9,22 +8,27 @@ using MITD.PMSAdmin.Application.Contracts;
 using MITD.PMSAdmin.Domain.Model.CustomFieldTypes;
 using MITD.PMSAdmin.Domain.Model.Units;
 using MITD.PMSSecurity.Domain;
-using MITD.PMSSecurity.Domain.Model;
 using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
 {
-    //  [Interceptor(typeof(Interception))]
+    [Interceptor(typeof(Interception))]
     public class UnitFacadeService : IUnitFacadeService
-    { 
+    {
+        #region Fields
+
         private readonly IMapper<Unit, UnitDTOWithActions> unitWithActionMapper;
         private readonly IMapper<Unit, UnitDTO> unitMapper;
         private readonly IUnitService unitService;
         private readonly IUnitRepository unitRep;
         private readonly ICustomFieldRepository customFieldRep;
-        private readonly IMapper<CustomFieldType, CustomFieldDTO> ctcustomFieldDtoMapper;
+        private readonly IMapper<CustomFieldType, CustomFieldDTO> ctcustomFieldDtoMapper; 
+
+        #endregion
+
+        #region Ctor
         public UnitFacadeService(IMapper<Unit, UnitDTOWithActions> unitWithActionMapper,
-                                        IMapper<Unit,UnitDTO> unitMapper, 
+                                        IMapper<Unit, UnitDTO> unitMapper,
                                         IUnitService unitService,
                                         IUnitRepository unitRep,
                                         ICustomFieldRepository customFieldRep,
@@ -36,12 +40,15 @@ namespace MITD.PMS.Interface
             this.unitRep = unitRep;
             this.customFieldRep = customFieldRep;
             this.ctcustomFieldDtoMapper = ctcustomFieldDtoMapper;
-        }
+        } 
+        #endregion
 
-        [RequiredPermission(ActionType.ShowUnit)]
+        #region Public methods
+
+        [RequiredPermission(ActionType.ManageUnits)]
         public PageResultDTO<UnitDTOWithActions> GetAllUnits(int pageSize, int pageIndex, QueryStringConditions queryStringConditions)
         {
-            
+
             var fs = new ListFetchStrategy<Unit>(Enums.FetchInUnitOfWorkOption.NoTracking);
             var sortBy = QueryConditionHelper.GetSortByDictionary(queryStringConditions.SortBy);
             foreach (var item in sortBy)
@@ -60,6 +67,13 @@ namespace MITD.PMS.Interface
             return res;
         }
 
+        [RequiredPermission(ActionType.ManageUnits)]
+        public List<UnitDTO> GetAllUnits()
+        {
+            var units = unitRep.GetAll();
+            return units.Select(u => unitMapper.MapToModel(u)).ToList();
+        }
+
         [RequiredPermission(ActionType.AddUnit)]
         public UnitDTO AddUnit(UnitDTO dto)
         {
@@ -76,7 +90,13 @@ namespace MITD.PMS.Interface
 
         }
 
-        [RequiredPermission(ActionType.ShowUnit)]
+        [RequiredPermission(ActionType.DeleteUnit)]
+        public string DeleteUnit(long unitId)
+        {
+            unitService.DeleteUnit(new UnitId(unitId));
+            return "عملیات با موفقیت انجام شد";
+        }
+
         public UnitDTO GetUnitById(long id)
         {
             var unit = unitRep.GetById(new UnitId(id));
@@ -85,20 +105,9 @@ namespace MITD.PMS.Interface
             dto.CustomFields = customFieldList.Select(c => ctcustomFieldDtoMapper.MapToModel(c)).ToList();
             return dto;
 
-        }
+        } 
 
-        [RequiredPermission(ActionType.DeleteUnit)]
-        public string DeleteUnit(long unitId)
-        {
-            unitService.DeleteUnit(new UnitId(unitId));
-            return "عملیات با موفقیت انجام شد";
-        }
+        #endregion
 
-        [RequiredPermission(ActionType.ShowUnit)]
-        public List<UnitDTO> GetAllUnits()
-        {
-            var units = unitRep.GetAll();
-            return units.Select(u => unitMapper.MapToModel(u)).ToList();
-        }
     }
 }

@@ -103,7 +103,7 @@ namespace MITD.PMS.Presentation.Logic
             if (!function.Validate()) return;
 
             ShowBusyIndicator();
-            if (actionType==ActionType.AddFunction)
+            if (actionType == ActionType.CreateFunction)
             {
                 functionService.AddFunction((res, exp) => appController.BeginInvokeOnDispatcher(() =>
                     {

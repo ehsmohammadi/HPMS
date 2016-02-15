@@ -101,7 +101,7 @@ namespace MITD.PMS.Presentation.Logic
             customField.TypeId = "string";
             if (!customField.Validate()) return;
             ShowBusyIndicator();
-            if (actionType==ActionType.AddCustomField)
+            if (actionType == ActionType.CreateCustomField)
             {
                 customFieldService.AddCustomField((res, exp) => appController.BeginInvokeOnDispatcher(() =>
                     {
