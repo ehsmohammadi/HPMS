@@ -16,7 +16,7 @@ namespace MITD.PMS.Presentation.BasicInfoApp
         public void DoAction(CustomFieldListVM vm)
         {
             var customField = new CustomFieldDTO();
-            basicInfoController.ShowCustomFieldView(customField, ActionType.AddCustomField);
+            basicInfoController.ShowCustomFieldView(customField, ActionType.CreateCustomField);
         }
 
 

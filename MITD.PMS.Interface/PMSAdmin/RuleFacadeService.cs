@@ -3,35 +3,35 @@ using Castle.Core;
 using MITD.Core;
 using MITD.Core.RuleEngine;
 using MITD.Core.RuleEngine.Model;
-using MITD.Domain.Model;
 using MITD.Domain.Repository;
 using MITD.PMS.Presentation.Contracts;
 using MITD.PMSAdmin.Application.Contracts;
 using MITD.PMSAdmin.Domain.Model.Policies;
 using MITD.PMSAdminReport.Domain.Model;
 using MITD.PMSSecurity.Domain;
-using MITD.PMSSecurity.Domain.Model;
-using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
 {
-    //  [Interceptor(typeof(Interception))]
+    [Interceptor(typeof(Interception))]
     public class RuleFacadeService : IRuleFacadeService
     {
+        #region Fields
         private readonly IMapper<RuleBase, RuleDTOWithAction> ruleWithActionMapper;
         private readonly IMapper<RuleWithPolicyData, RuleDTO> ruleMapper;
         private readonly IMapper<RuleTrail, RuleTrailDTO> ruleTrailMapper;
         private readonly IMapper<RuleTrail, RuleTrailDTOWithAction> ruleTrailWithActionsMapper;
         private readonly IPMSRuleService pmsRuleService;
         private readonly IRuleService ruleService;
-        private readonly IPolicyRepository policyRep;
+        private readonly IPolicyRepository policyRep; 
+        #endregion
 
+        #region Ctor
         public RuleFacadeService(IMapper<RuleBase, RuleDTOWithAction> ruleWithActionMapper,
-                                        IMapper<RuleWithPolicyData, RuleDTO> ruleMapper,
-                                        IMapper<RuleTrail,RuleTrailDTOWithAction> ruleTrailWithActionsMapper,
-                                        IMapper<RuleTrail, RuleTrailDTO> ruleTrailMapper,
-                                        IPMSRuleService pmsRuleService,
-                                        IPolicyRepository policyRep,IRuleService ruleService)
+                                IMapper<RuleWithPolicyData, RuleDTO> ruleMapper,
+                                IMapper<RuleTrail, RuleTrailDTOWithAction> ruleTrailWithActionsMapper,
+                                IMapper<RuleTrail, RuleTrailDTO> ruleTrailMapper,
+                                IPMSRuleService pmsRuleService,
+                                IPolicyRepository policyRep, IRuleService ruleService)
         {
             this.ruleWithActionMapper = ruleWithActionMapper;
             this.ruleTrailWithActionsMapper = ruleTrailWithActionsMapper;
@@ -40,11 +40,16 @@ namespace MITD.PMS.Interface
             this.pmsRuleService = pmsRuleService;
             this.policyRep = policyRep;
             this.ruleService = ruleService;
-        }
+        } 
+        #endregion
+
+        #region Public methods
 
         [RequiredPermission(ActionType.ManageRules)]
         public PolicyRules GetPolicyRulesWithPagination(long policyId)
         {
+
+            //todo:(LOW) check for correctness
             var ruleBasePolicy = policyRep.GetRuleBasePolicyById(new PolicyId(policyId));
             var res = ruleService.FindWithPagingBy(ruleBasePolicy.Rules.ToList());
             return new PolicyRules
@@ -57,30 +62,11 @@ namespace MITD.PMS.Interface
 
         }
 
-        [RequiredPermission(ActionType.AddRule)]
-        public RuleDTO AddRule(RuleDTO dto)
-        {
-            var res = pmsRuleService.AddRule(dto.Name, dto.RuleText,Enumeration.FromValue<RuleType>(dto.ExcuteTime.ToString()), new PolicyId(dto.PolicyId),dto.ExcuteOrder);
-            return ruleMapper.MapToModel(res);
-        }
-
-        [RequiredPermission(ActionType.ModifyRule)]
-        public RuleDTO UpdateRule(RuleDTO dto)
-        {
-
-            var res = pmsRuleService.UpdateRule(new PolicyId(dto.PolicyId),new RuleId(dto.Id), dto.Name, dto.RuleText,Enumeration.FromValue<RuleType>(dto.ExcuteTime.ToString()),dto.ExcuteOrder );
-            return ruleMapper.MapToModel(res);
-        }
-
-        public RuleDTO GetRuleById(long policyId, long id)
-        {
-            var rule= pmsRuleService.GetRuleById(new PolicyId(policyId), new RuleId(id));
-            return ruleMapper.MapToModel(rule);
-        }
-        
+        [RequiredPermission(ActionType.ManageRules)]
+        [RequiredPermission(ActionType.ShowAllRuleTrails)]
         public PageResultDTO<RuleTrailDTOWithAction> GetRuleTrailsWithPagination(long ruleId, int pageSize, int pageIndex)
         {
-
+            //todo:(LOW) check for correctness
             //var fs = new ListFetchStrategy<RuleTrail>();
             //fs.OrderByDescending(f => f.EffectiveDate).WithPaging(pageSize, pageIndex);
             //ruleService.GetRuleTrails(new RuleId(ruleId), fs);
@@ -90,17 +76,26 @@ namespace MITD.PMS.Interface
             //return res;
 
             var res = new PageResultDTO<RuleTrailDTOWithAction>();
-            var ruleTrailList = ruleService.GetRuleTrails(new RuleId(ruleId),new ListFetchStrategy<RuleTrail>()).OrderByDescending(r=>r.EffectiveDate);
+            var ruleTrailList = ruleService.GetRuleTrails(new RuleId(ruleId), new ListFetchStrategy<RuleTrail>()).OrderByDescending(r => r.EffectiveDate);
             res.PageSize = 100;
             res.CurrentPage = 1;
             res.Result = ruleTrailList.Select(r => ruleTrailWithActionsMapper.MapToModel(r)).ToList();
             return res;
         }
 
-        public RuleTrailDTO GetRuleTrail(long ruleTrailId)
+        [RequiredPermission(ActionType.AddRule)]
+        public RuleDTO AddRule(RuleDTO dto)
         {
-            var ruleTrail = (RuleTrail)ruleService.GetById(new RuleId(ruleTrailId));
-            return ruleTrailMapper.MapToModel(ruleTrail); 
+            var res = pmsRuleService.AddRule(dto.Name, dto.RuleText, Enumeration.FromValue<RuleType>(dto.ExcuteTime.ToString()), new PolicyId(dto.PolicyId), dto.ExcuteOrder);
+            return ruleMapper.MapToModel(res);
+        }
+
+        [RequiredPermission(ActionType.ModifyRule)]
+        public RuleDTO UpdateRule(RuleDTO dto)
+        {
+
+            var res = pmsRuleService.UpdateRule(new PolicyId(dto.PolicyId), new RuleId(dto.Id), dto.Name, dto.RuleText, Enumeration.FromValue<RuleType>(dto.ExcuteTime.ToString()), dto.ExcuteOrder);
+            return ruleMapper.MapToModel(res);
         }
 
         [RequiredPermission(ActionType.DeleteRule)]
@@ -110,11 +105,26 @@ namespace MITD.PMS.Interface
             return "Rule with " + id + "Deleted";
         }
 
+        public RuleDTO GetRuleById(long policyId, long id)
+        {
+            var rule = pmsRuleService.GetRuleById(new PolicyId(policyId), new RuleId(id));
+            return ruleMapper.MapToModel(rule);
+        }
+
+        public RuleTrailDTO GetRuleTrail(long ruleTrailId)
+        {
+            var ruleTrail = (RuleTrail)ruleService.GetById(new RuleId(ruleTrailId));
+            return ruleTrailMapper.MapToModel(ruleTrail);
+        }
+
+        [RequiredPermission(ActionType.ManageRules)]
         public string CompileRule(long policyId, string ruleContent)
         {
             pmsRuleService.CompileRule(new PolicyId(policyId), ruleContent);
             return "compiled successfully";
-        }
+        } 
+
+        #endregion
 
        
     }

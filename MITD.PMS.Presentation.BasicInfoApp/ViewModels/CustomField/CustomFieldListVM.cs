@@ -123,7 +123,7 @@ namespace MITD.PMS.Presentation.Logic
             CustomFieldes.OnRefresh += (s, args) => refresh();
             CustomFieldCommands = new List<DataGridCommandViewModel>
             {
-                   CommandHelper.GetControlCommands(this, appController, new List<int>{ (int) ActionType.AddCustomField }).FirstOrDefault()
+                   CommandHelper.GetControlCommands(this, appController, new List<int>{ (int) ActionType.CreateCustomField }).FirstOrDefault()
             };
             
 

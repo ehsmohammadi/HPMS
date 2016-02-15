@@ -40,7 +40,7 @@ namespace MITD.PMS.Interface
             this.jobIndexRep = jobIndexRep;
         }
 
-        [RequiredPermission(ActionType.ManageJobIndices)]
+        [RequiredPermission(ActionType.ManageJobIndexInPeriod)]
         public IEnumerable<AbstractIndexInPeriodDTOWithActions> GetAllAbstractJobIndices(long periodId)
         {
             var abstractList = jobIndexRep.GetAll(new PeriodId(periodId));

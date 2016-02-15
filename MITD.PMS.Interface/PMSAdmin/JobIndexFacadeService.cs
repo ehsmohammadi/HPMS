@@ -1,29 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Castle.Core;
 using MITD.Core;
 using MITD.Domain.Repository;
 using MITD.PMS.Presentation.Contracts;
-using MITD.PMS.Presentation.Contracts.Fasade;
 using MITD.PMSAdmin.Application.Contracts;
 using MITD.PMSAdmin.Domain.Model.CustomFieldTypes;
 using MITD.PMSAdmin.Domain.Model.JobIndices;
 using MITD.PMSSecurity.Domain;
-using MITD.PMSSecurity.Domain.Model;
 using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
 {
-   // //  [Interceptor(typeof(Interception))]
+    [Interceptor(typeof(Interception))]
     public class JobIndexFacadeService : IJobIndexFacadeService
-    { 
+    {
+        #region Fields
         private readonly IJobIndexService jobIndexService;
         private readonly ICustomFieldRepository customFieldRep;
         private readonly IMapper<AbstractJobIndex, AbstractIndex> jobIndexMapper;
         private readonly IMapper<AbstractJobIndex, AbstractJobIndexDTOWithActions> jobIndexWithActionsMapper;
         private readonly IMapper<CustomFieldType, CustomFieldDTO> customFieldDtoMapper;
         private readonly IJobIndexRepository jobIndexRep;
+        #endregion
+
+        #region Ctor
 
         public JobIndexFacadeService(
             IJobIndexService jobIndexService,
@@ -42,8 +43,11 @@ namespace MITD.PMS.Interface
             this.jobIndexRep = jobIndexRep;
         }
 
+        #endregion
 
-        [RequiredPermission(ActionType.ShowJobIndex)]
+        #region Public methods
+
+        [RequiredPermission(ActionType.ManageJobIndices)]
         public PageResultDTO<AbstractJobIndexDTOWithActions> GetAllJobIndicesWithPagination(int pageSize, int pageIndex, QueryStringConditions queryStringConditions)
         {
             var fs = new ListFetchStrategy<JobIndex>(Enums.FetchInUnitOfWorkOption.NoTracking);
@@ -64,7 +68,7 @@ namespace MITD.PMS.Interface
             return res;
         }
 
-        [RequiredPermission(ActionType.ShowJobIndex)]
+        [RequiredPermission(ActionType.ManageJobIndices)]
         public PageResultDTO<AbstractJobIndexDTOWithActions> GetAllJobIndexCategoriesWithPagination(int pageSize, int pageIndex, QueryStringConditions queryStringConditions)
         {
             var fs = new ListFetchStrategy<JobIndexCategory>(Enums.FetchInUnitOfWorkOption.NoTracking);
@@ -85,33 +89,35 @@ namespace MITD.PMS.Interface
             return res;
         }
 
-        [RequiredPermission(ActionType.ShowJobIndex)]
+        [RequiredPermission(ActionType.ManageJobIndices)]
+        public IList<AbstractIndex> GetAllJobIndices()
+        {
+            var jobIndexList = jobIndexRep.GetAllJobIndex();
+            return jobIndexList.Select(j => jobIndexMapper.MapToModel(j)).ToList();
+        }
+
+        [RequiredPermission(ActionType.ManageJobIndices)]
+        public IList<AbstractIndex> GetAllJobIndexCategories()
+        {
+            var jobIndexList = jobIndexRep.GetAllJobIndexCategory();
+            return jobIndexList.Select(j => jobIndexMapper.MapToModel(j)).ToList();
+        }
+
+        [RequiredPermission(ActionType.ManageJobIndices)]
         public IEnumerable<AbstractJobIndexDTOWithActions> GetAllAbstractJobIndices()
         {
             var abstractList = jobIndexRep.GetAll();
             return abstractList.Select(r => jobIndexWithActionsMapper.MapToModel(r));
         }
 
-        public AbstractIndex GetAbstarctJobIndexById(long id)
-        {
-            var jobIndex = jobIndexRep.GetById(new AbstractJobIndexId(id));
-            var abstractIndexDto = jobIndexMapper.MapToModel(jobIndex);
-            if (abstractIndexDto is JobIndexDTO)
-            {
-                var customFieldList = customFieldRep.GetAllCustomField(new AbstractJobIndexId(id));
-                ((JobIndexDTO)abstractIndexDto).CustomFields = customFieldList.Select(c => customFieldDtoMapper.MapToModel(c)).ToList();
-            }
-
-            return abstractIndexDto;
-        }
 
         [RequiredPermission(ActionType.AddJobIndex)]
         public AbstractIndex AddJobIndex(JobIndexDTO jobIndexDto)
         {
             var jobIndex = jobIndexService.AddJobIndex(new AbstractJobIndexId(jobIndexDto.ParentId.Value),
                                                 jobIndexDto.Name, jobIndexDto.DictionaryName
-                                                ,jobIndexDto.CustomFields.Select(c => new CustomFieldTypeId(c.Id)).ToList()
-                                                ,jobIndexDto.TransferId);
+                                                , jobIndexDto.CustomFields.Select(c => new CustomFieldTypeId(c.Id)).ToList()
+                                                , jobIndexDto.TransferId);
             return jobIndexMapper.MapToModel(jobIndex);
         }
 
@@ -119,7 +125,7 @@ namespace MITD.PMS.Interface
         public AbstractIndex AddJobIndexCategory(JobIndexCategoryDTO jobIndexCategoryDto)
         {
             var jobIndexCat = jobIndexService.AddJobIndexCategory(
-                (jobIndexCategoryDto.ParentId == null) ? null:new AbstractJobIndexId(jobIndexCategoryDto.ParentId.Value),
+                (jobIndexCategoryDto.ParentId == null) ? null : new AbstractJobIndexId(jobIndexCategoryDto.ParentId.Value),
                                                 jobIndexCategoryDto.Name, jobIndexCategoryDto.DictionaryName);
             return jobIndexMapper.MapToModel(jobIndexCat);
         }
@@ -130,7 +136,7 @@ namespace MITD.PMS.Interface
         {
             var jobIndex = jobIndexService.UpdateJobIndex(new AbstractJobIndexId(jobIndexDto.Id)
                 , new AbstractJobIndexId(jobIndexDto.ParentId.Value), jobIndexDto.Name, jobIndexDto.DictionaryName
-                ,jobIndexDto.CustomFields.Select(c => new CustomFieldTypeId(c.Id)).ToList()
+                , jobIndexDto.CustomFields.Select(c => new CustomFieldTypeId(c.Id)).ToList()
                 );
             return jobIndexMapper.MapToModel(jobIndex);
         }
@@ -152,18 +158,20 @@ namespace MITD.PMS.Interface
             return "JobIndex deleted successfully";
         }
 
-        [RequiredPermission(ActionType.ShowJobIndex)]
-        public IList<AbstractIndex> GetAllJobIndices()
+        public AbstractIndex GetAbstarctJobIndexById(long id)
         {
-            var jobIndexList =  jobIndexRep.GetAllJobIndex();
-            return jobIndexList.Select(j => jobIndexMapper.MapToModel(j)).ToList();
-        }
+            var jobIndex = jobIndexRep.GetById(new AbstractJobIndexId(id));
+            var abstractIndexDto = jobIndexMapper.MapToModel(jobIndex);
+            if (abstractIndexDto is JobIndexDTO)
+            {
+                var customFieldList = customFieldRep.GetAllCustomField(new AbstractJobIndexId(id));
+                ((JobIndexDTO)abstractIndexDto).CustomFields = customFieldList.Select(c => customFieldDtoMapper.MapToModel(c)).ToList();
+            }
 
-        [RequiredPermission(ActionType.ShowJobIndex)]
-        public IList<AbstractIndex> GetAllJobIndexCategories()
-        {
-            var jobIndexList = jobIndexRep.GetAllJobIndexCategory();
-            return jobIndexList.Select(j => jobIndexMapper.MapToModel(j)).ToList();
-        }
+            return abstractIndexDto;
+        } 
+
+        #endregion
+
     }
 }
