@@ -18,7 +18,7 @@ namespace MITD.PMS.Interface
                 Name = entity.Name,
                 ActionCodes = new List<int>
                 {
-                    (int) ActionType.AddFunction,
+                    (int) ActionType.CreateFunction,
                     (int) ActionType.ModifyFunction,
                     (int) ActionType.DeleteFunction,
                 }

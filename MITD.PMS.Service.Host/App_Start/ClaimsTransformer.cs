@@ -32,7 +32,7 @@ namespace MITD.PMS.Service.Host.App_Start
     {
         public override ClaimsPrincipal Authenticate(string resourceName, ClaimsPrincipal incomingPrincipal)
         {
-            // if you want sst security comment this line 
+            // if you want sso security comment this line 
 #if(DEBUG)
             incomingPrincipal = CreateIncomingPrincipalDefault();
 #endif
@@ -55,8 +55,8 @@ namespace MITD.PMS.Service.Host.App_Start
             var incomingPrincipal = new ClaimsPrincipal(identity);
             incomingPrincipal.Identities.First().AddClaims(new List<Claim>
             {
-                new Claim(ClaimTypes.Role, "Admin"),
-                new Claim(ClaimTypes.Role, "Employee"),
+                new Claim(ClaimTypes.Role, "SuperAdmin"),
+                //new Claim(ClaimTypes.Role, "Employee"),
                 new Claim("http://identityserver.thinktecture.com/claims/profileclaims/employeeno", "30000"),
                 new Claim("http://identityserver.thinktecture.com/claims/profileclaims/firstname", "احسان"),
                 new Claim("http://identityserver.thinktecture.com/claims/profileclaims/lastname", "محمدی"),

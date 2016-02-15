@@ -7,34 +7,38 @@ using MITD.PMS.Presentation.Contracts;
 using MITD.PMSAdmin.Application.Contracts;
 using MITD.PMSAdmin.Domain.Model.Policies;
 using MITD.PMSSecurity.Domain;
-using MITD.PMSSecurity.Domain.Model;
-using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
 {
 
-    //  [Interceptor(typeof(Interception))]
-
+    [Interceptor(typeof(Interception))]
     public class FunctionFacadeService : IFunctionFacadeService
     {
+        #region Fields
+
         private readonly IMapper<RuleFunctionBase, FunctionDTODescriptionWithActions> functionWithActionMapper;
         private readonly IMapper<RuleFunctionBase, FunctionDTO> functionMapper;
         private readonly IFunctionService functionService;
         private readonly IPolicyRepository policyRep;
-        private readonly IRuleService ruleService;
+        private readonly IRuleService ruleService; 
 
+        #endregion
+
+        #region Ctor
         public FunctionFacadeService(IMapper<RuleFunctionBase, FunctionDTODescriptionWithActions> functionWithActionMapper,
                                         IMapper<RuleFunctionBase, FunctionDTO> functionMapper,
                                         IFunctionService functionService,
-                                        IPolicyRepository policyRep,IRuleService ruleService)
+                                        IPolicyRepository policyRep, IRuleService ruleService)
         {
             this.functionWithActionMapper = functionWithActionMapper;
             this.functionMapper = functionMapper;
             this.functionService = functionService;
             this.policyRep = policyRep;
             this.ruleService = ruleService;
-        }
+        } 
+        #endregion
 
+        #region Public Methods
         [RequiredPermission(ActionType.ManageFunctions)]
         public PolicyFunctions GetPolicyFunctionsWithPagination(long policyId)
         {
@@ -50,7 +54,7 @@ namespace MITD.PMS.Interface
 
         }
 
-        [RequiredPermission(ActionType.AddFunction)]
+        [RequiredPermission(ActionType.CreateFunction)]
         public FunctionDTO AddFunction(FunctionDTO dto)
         {
             var res = functionService.AddFunction(dto.Name, dto.Content, new PolicyId(dto.PolicyId));
@@ -65,17 +69,19 @@ namespace MITD.PMS.Interface
             return functionMapper.MapToModel(res);
         }
 
+        [RequiredPermission(ActionType.DeleteFunction)]
+        public string DeleteFunction(long policyId, long id)
+        {
+            functionService.DeleteFunction(new PolicyId(policyId), new RuleFunctionId(id));
+            return "Function with " + id + "Deleted";
+        }
+
         public FunctionDTO GetFunctionById(long id)
         {
             RuleFunctionBase function = ruleService.GetById(new RuleFunctionId(id));
             return functionMapper.MapToModel(function);
-        }
+        } 
+        #endregion
 
-        [RequiredPermission(ActionType.DeleteFunction)]
-        public string DeleteFunction(long policyId, long id)
-        {
-            functionService.DeleteFunction(new PolicyId(policyId),new RuleFunctionId(id));
-            return "Function with " + id + "Deleted";
-        }
     }
 }

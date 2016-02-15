@@ -23,7 +23,7 @@ namespace MITD.PMS.Interface
             res.DictionaryName = entity.DictionaryName;
             res.ActionCodes = new List<int>
             {
-                (int) ActionType.AddCustomField,
+                (int) ActionType.CreateCustomField,
                 (int) ActionType.ModifyCustomField,
                 (int) ActionType.DeleteCustomField
             };

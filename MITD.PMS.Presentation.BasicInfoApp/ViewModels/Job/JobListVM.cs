@@ -98,7 +98,7 @@ namespace MITD.PMS.Presentation.Logic
             Jobs.OnRefresh += (s, args) => Load();
             JobCommands = new List<DataGridCommandViewModel>
             {
-                   CommandHelper.GetControlCommands(this, appController, new List<int>{ (int) ActionType.AddJob}).FirstOrDefault()
+                   CommandHelper.GetControlCommands(this, appController, new List<int>{ (int) ActionType.CreateJob}).FirstOrDefault()
             };
         }
 

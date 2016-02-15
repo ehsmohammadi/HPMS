@@ -49,6 +49,7 @@ namespace MITD.PMS.Service.Host.Controllers
 
         }
 
+
         public void Put([FromBody] Dictionary<int, bool> entity, string username)
         {
             this.userServiceFacade.UpdateUserAccess(username, entity);

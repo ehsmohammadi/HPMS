@@ -107,7 +107,7 @@ namespace MITD.PMS.Presentation.Logic
             Functions.OnRefresh += (s, args) => Load(PolicyFunctions.PolicyId);
             FunctionCommands = new List<DataGridCommandViewModel>
             {
-                   CommandHelper.GetControlCommands(this, appController, new List<int>{ (int) ActionType.AddFunction}).FirstOrDefault()
+                   CommandHelper.GetControlCommands(this, appController, new List<int>{ (int) ActionType.CreateFunction}).FirstOrDefault()
             };
         }
       

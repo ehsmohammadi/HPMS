@@ -17,13 +17,13 @@ namespace MITD.PMS.Presentation.BasicInfoApp
             this.jobService = jobService;
         }
 
-
+        //todo:(LOW) Set correct action type for modify and add custom fields
         public void DoAction(JobVM vm)
         {
             if (vm.Job.Id != 0)
                 basicInfoController.ShowJobCustomFieldManageView(vm.Job, ActionType.ManageJobCustomFields);
             else
-                basicInfoController.ShowJobCustomFieldManageView(vm.Job, ActionType.AddJobCustomFields);
+                basicInfoController.ShowJobCustomFieldManageView(vm.Job, ActionType.AssignJobCustomFields);
         }
 
 
@@ -32,7 +32,7 @@ namespace MITD.PMS.Presentation.BasicInfoApp
             if (vm.SelectedJob.Id != 0)
                 basicInfoController.ShowJobCustomFieldManageView(vm.SelectedJob, ActionType.ManageJobCustomFields);
             else
-                basicInfoController.ShowJobCustomFieldManageView(vm.SelectedJob, ActionType.AddJobCustomFields);
+                basicInfoController.ShowJobCustomFieldManageView(vm.SelectedJob, ActionType.AssignJobCustomFields);
         }
     }
 

@@ -71,7 +71,7 @@ namespace MITD.PMS.Interface
             return "Unit with Id " + unitId + " removed";
         }
 
-        [RequiredPermission(ActionType.ManageUnits)]
+        [RequiredPermission(ActionType.ManageUnitInPeriod)]
         public IEnumerable<UnitInPeriodDTOWithActions> GetUnitsWithActions(long periodId)
         {
             var res = new List<UnitInPeriodDTOWithActions>();

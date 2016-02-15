@@ -1,10 +1,8 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using MITD.Core;
 
-
-namespace MITD.PMSSecurity.Domain.Model
+namespace MITD.PMSSecurity.Domain
 {
     public sealed class SuperAdminUser:User
     {
@@ -13,6 +11,7 @@ namespace MITD.PMSSecurity.Domain.Model
         public SuperAdminUser(PartyId userId, string fName, string lName, string email)
             : base(userId, fName, lName, email)
         {
+            Actions = new List<ActionType>();
             foreach (ActionType action in Enum.GetValues(typeof(ActionType)))
             {
                 Actions.Add(action);

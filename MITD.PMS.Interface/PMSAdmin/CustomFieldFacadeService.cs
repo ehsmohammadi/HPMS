@@ -22,7 +22,7 @@ namespace MITD.PMS.Interface
         private readonly IMapper<CustomFieldType, CustomFieldDTO> customFieldMapper;
         private readonly IMapper<CustomFieldType, AbstractCustomFieldDescriptionDTO> abstractCustomFieldDescriptionDTOMapper;
         private readonly ICustomFieldService customFieldService;
-        private readonly ICustomFieldRepository customFieldRep; 
+        private readonly ICustomFieldRepository customFieldRep;
 
         #endregion
 
@@ -40,10 +40,12 @@ namespace MITD.PMS.Interface
             this.customFieldService = customFieldService;
             this.customFieldRep = customFieldRep;
 
-        } 
+        }
         #endregion
 
-        [RequiredPermission(ActionType.ShowCustomField)]
+        #region Public methods
+
+        [RequiredPermission(ActionType.ManageCustomFields)]
         public PageResultDTO<CustomFieldDTOWithActions> GetAllCustomFieldes(int pageSize, int pageIndex, QueryStringConditions queryStringConditions)
         {
 
@@ -60,14 +62,14 @@ namespace MITD.PMS.Interface
             fs.WithPaging(pageSize, pageIndex);
             var entityId = getEntityIdFromQueryString(queryStringConditions.Filter);
             customFieldRep.GetAll(
-                entityId != null ? EntityTypeEnum.FromValue<EntityTypeEnum>(entityId.ToString()) : null, fs);
+                entityId != null ? Enumeration.FromValue<EntityTypeEnum>(entityId.ToString()) : null, fs);
             var res = new PageResultDTO<CustomFieldDTOWithActions>();
             res.InjectFrom(fs.PageCriteria.PageResult);
             res.Result = fs.PageCriteria.PageResult.Result.Select(r => customFieldWithActionMapper.MapToModel(r)).ToList();
             return res;
         }
 
-        [RequiredPermission(ActionType.AddCustomField)]
+        [RequiredPermission(ActionType.CreateCustomField)]
         public CustomFieldDTO AddCustomField(CustomFieldDTO customField)
         {
             var res = customFieldService.AddCustomFieldType(customField.Name, customField.DictionaryName,
@@ -92,14 +94,14 @@ namespace MITD.PMS.Interface
             return "customField deleted";
         }
 
-        [RequiredPermission(ActionType.ShowCustomField)]
+        //[RequiredPermission(ActionType.ShowCustomField)]
         public CustomFieldDTO GetCustomFieldById(long id)
         {
             var customFieldType = customFieldRep.GetById(new CustomFieldTypeId(id));
             return customFieldMapper.MapToModel(customFieldType);
         }
 
-        [RequiredPermission(ActionType.ShowCustomField)]
+        //[RequiredPermission(ActionType.ShowCustomField)]
         public List<CustomFieldEntity> GetAllCustomFieldEntityType()
         {
             var res = new List<CustomFieldEntity>();
@@ -114,7 +116,7 @@ namespace MITD.PMS.Interface
             return res;
         }
 
-        [RequiredPermission(ActionType.ShowCustomField)]
+        //[RequiredPermission(ActionType.ShowCustomField)]
         public List<CustomFieldDTO> GetAllCustomFields(string entityType)
         {
             var entityCustomFieldList = customFieldRep.GetAll(Enumeration.FromDisplayName<EntityTypeEnum>(entityType));
@@ -123,7 +125,7 @@ namespace MITD.PMS.Interface
                   .ToList();
         }
 
-        [RequiredPermission(ActionType.ShowCustomField)]
+        //[RequiredPermission(ActionType.ShowCustomField)]
         public List<AbstractCustomFieldDescriptionDTO> GetAllCustomFieldsDescription(string entityType)
         {
             //var fs = new ListFetchStrategy<CustomFieldType>(Enums.FetchInUnitOfWorkOption.NoTracking);
@@ -133,6 +135,9 @@ namespace MITD.PMS.Interface
                   .ToList();
         }
 
+        #endregion
+
+        #region Private methods
         private static int? getEntityIdFromQueryString(string filter)
         {
             if (string.IsNullOrWhiteSpace(filter))
@@ -140,5 +145,6 @@ namespace MITD.PMS.Interface
             var res = filter.Split('=');
             return Convert.ToInt32(res[1]);
         }
+        #endregion
     }
 }

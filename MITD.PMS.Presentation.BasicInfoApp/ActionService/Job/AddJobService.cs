@@ -16,7 +16,7 @@ namespace MITD.PMS.Presentation.BasicInfoApp
         public void DoAction(JobListVM vm)
         {
             var job = new JobDTO();
-            basicInfoController.ShowJobView(job, ActionType.AddJob);
+            basicInfoController.ShowJobView(job, ActionType.CreateJob);
         }
 
 

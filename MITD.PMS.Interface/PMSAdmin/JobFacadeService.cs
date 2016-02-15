@@ -4,12 +4,10 @@ using Castle.Core;
 using MITD.Core;
 using MITD.Domain.Repository;
 using MITD.PMS.Presentation.Contracts;
-using MITD.PMS.Presentation.Contracts.Fasade;
 using MITD.PMSAdmin.Application.Contracts;
 using MITD.PMSAdmin.Domain.Model.CustomFieldTypes;
 using MITD.PMSAdmin.Domain.Model.Jobs;
 using MITD.PMSSecurity.Domain;
-using MITD.PMSSecurity.Domain.Model;
 using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
@@ -19,13 +17,16 @@ namespace MITD.PMS.Interface
 
     public class JobFacadeService : IJobFacadeService
     {
+        #region Fields
         private readonly IJobRepository jobRep;
         private readonly ICustomFieldRepository customFieldRep;
         private readonly IMapper<Job, JobDTO> jobMapper;
         private readonly IMapper<Job, JobDTOWithActions> jobWithActionsMapper;
         private readonly IMapper<CustomFieldType, CustomFieldDTO> ctcustomFieldDtoMapper;
-        private readonly IJobService jobService;
+        private readonly IJobService jobService; 
+        #endregion
 
+        #region Ctor
         public JobFacadeService(IJobRepository jobRep, ICustomFieldRepository customFieldRep, IMapper<Job, JobDTO> jobMapper,
             IMapper<Job, JobDTOWithActions> jobWithActionsMapper,
              IMapper<CustomFieldType, CustomFieldDTO> customFieldDtoMapper,
@@ -37,9 +38,11 @@ namespace MITD.PMS.Interface
             this.jobWithActionsMapper = jobWithActionsMapper;
             this.ctcustomFieldDtoMapper = customFieldDtoMapper;
             this.jobService = jobService;
-        }
+        } 
+        #endregion
 
-        [RequiredPermission(ActionType.ShowJobs)]
+        #region Public methods
+        [RequiredPermission(ActionType.ManageJobs)]
         public PageResultDTO<JobDTOWithActions> GetAllJobs(int pageSize, int pageIndex, QueryStringConditions queryStringConditions)
         {
             var fs = new ListFetchStrategy<Job>(Enums.FetchInUnitOfWorkOption.NoTracking);
@@ -60,13 +63,14 @@ namespace MITD.PMS.Interface
             return res;
         }
 
+        [RequiredPermission(ActionType.ManageJobs)]
         public IList<JobDTO> GetAllJobs()
         {
             var res = jobRep.GetAllJob();
             return res.Select(r => jobMapper.MapToModel(r)).ToList();
         }
 
-        [RequiredPermission(ActionType.AddJob)]
+        [RequiredPermission(ActionType.CreateJob)]
         public JobDTO AddJob(JobDTO jobDto)
         {
             var res = jobService.AddJob(jobDto.Name, jobDto.DictionaryName, jobDto.CustomFields.Select(c => new CustomFieldTypeId(c.Id)).ToList(), jobDto.TransferId);
@@ -74,7 +78,6 @@ namespace MITD.PMS.Interface
         }
 
         [RequiredPermission(ActionType.ModifyJob)]
-        [RequiredPermission(ActionType.ManageJobCustomFields)]
         public JobDTO UpdateJob(JobDTO jobDto)
         {
             var job = jobMapper.MapToEntity(jobDto);
@@ -89,7 +92,6 @@ namespace MITD.PMS.Interface
             return "Job with Id:" + id + " deleted";
         }
 
-        [RequiredPermission(ActionType.ShowJobs)]
         public JobDTO GetJobById(long id)
         {
             Job job = jobRep.GetById(new JobId(id));
@@ -97,6 +99,7 @@ namespace MITD.PMS.Interface
             var jobDto = jobMapper.MapToModel(job);
             jobDto.CustomFields = customFieldList.Select(c => ctcustomFieldDtoMapper.MapToModel(c)).ToList();
             return jobDto;
-        }
+        } 
+        #endregion
     }
 }

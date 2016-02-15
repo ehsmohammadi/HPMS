@@ -13,7 +13,7 @@ namespace MITD.PMS.Interface
         private readonly ISecurityService securityService;
         private readonly IMapper<List<User>, ClaimsPrincipal> pmsUsersMapper;
         private readonly IMapper<List<ActionType>, ClaimsPrincipal> userActionMapper;
-        private IUserRepository _userRepository;
+        private readonly IUserRepository userRepository;
 
         public SecurityServiceFacade(ISecurityService securityService,
             IMapper<List<User>, ClaimsPrincipal> pmsUsersMapper,
@@ -23,7 +23,7 @@ namespace MITD.PMS.Interface
             this.securityService = securityService;
             this.pmsUsersMapper = pmsUsersMapper;
             this.userActionMapper = userActionMapper;
-            this._userRepository = userRepository;
+            this.userRepository = userRepository;
 
         }
 
@@ -39,16 +39,10 @@ namespace MITD.PMS.Interface
             return securityService.GetAllAuthorizedActions(pmsUsers);
         }
 
-
-        public List<ActionType> GetAllAuthorizedActions(List<User> users)
-        {
-            return securityService.GetAllAuthorizedActions(users);
-        }
-
         public List<ActionType> GetUserAuthorizedActions(string userName)
         {
             var result = new List<ActionType>();
-            var user = _userRepository.GetUserById(new PartyId(userName));
+            var user = userRepository.GetUserById(new PartyId(userName));
             ServicePointManager.ServerCertificateValidationCallback
                    += (sender, certificate, chain, errors) => true;
 

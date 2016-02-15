@@ -7,14 +7,14 @@ namespace MITD.PMS.Presentation.Logic
         #region Job
         void ShowJobView(JobDTO job, ActionType actionEnum);
 
-        [RequiredPermission(ActionType.ShowJobs)]
+        [RequiredPermission(ActionType.ManageJobs)]
         void ShowJobListView(bool isShiftPressed); 
         #endregion
 
         #region JobIndex
         void ShowJobIndexView(JobIndexDTO jobIndex, ActionType actionType);
 
-        [RequiredPermission(ActionType.ShowJobIndex)]
+        [RequiredPermission(ActionType.ManageJobIndices)]
         void ShowJobIndexTreeView(bool isShiftPressed);
 
         void ShowJobIndexCategoryView(JobIndexCategoryDTO jobIndexCategory, ActionType addJobIndexCategory);
@@ -25,7 +25,7 @@ namespace MITD.PMS.Presentation.Logic
         #region UnitIndex
         void ShowUnitIndexView(UnitIndexDTO unitIndex, ActionType actionType);
 
-        [RequiredPermission(ActionType.ShowUnitIndex)]
+        [RequiredPermission(ActionType.ManageUnitIndices)]
         void ShowUnitIndexTreeView(bool isShiftPressed);
 
         void ShowUnitIndexCategoryView(UnitIndexCategoryDTO unitIndexCategory, ActionType addUnitIndexCategory);
@@ -35,7 +35,7 @@ namespace MITD.PMS.Presentation.Logic
 
         void ShowJobPositionView(JobPositionDTO jobPosition, ActionType actionType);
 
-        [RequiredPermission(ActionType.ShowJobPosition)]
+        [RequiredPermission(ActionType.ManageJobPositions)]
         void ShowJobPositionList(bool isShiftPressed);
 
         void ShowRuleView(RuleDTO jobRule, ActionType actionType);
@@ -46,22 +46,21 @@ namespace MITD.PMS.Presentation.Logic
 
         void ShowCustomFieldView(CustomFieldDTO jobIndex, ActionType addCustomField);
 
-        [RequiredPermission(ActionType.ShowCustomField)]
+        [RequiredPermission(ActionType.ManageCustomFields)]
         void ShowCustomFieldListView(bool isShiftPressed);
 
-        [RequiredPermission(ActionType.ManageJobCustomFields)]
         void ShowJobCustomFieldManageView(JobDTO job, ActionType modifyJobFields);
         
 
         void ShowUnitView(UnitDTO unit, ActionType actionType);
 
-        [RequiredPermission(ActionType.ShowUnit)]
+        [RequiredPermission(ActionType.ManageUnits)]
         void ShowUnitList(bool isShiftPressed);
         void ShowUnitCustomFieldManageView(UnitDTO unitDto, ActionType action);
 
         void ShowPolicyView(PolicyDTO policy, ActionType actionType);
 
-        [RequiredPermission(ActionType.ShowPolicies)]
+        [RequiredPermission(ActionType.ManagePolicies)]
         void ShowPolicyListView(bool isShiftPressed);
         
 

@@ -15,14 +15,15 @@ namespace MITD.PMS.Presentation.BasicInfoApp
             ApplicationConfigHelper.ConfigureModule<IBasicInfoController, BasicInfoController>(resourceDic);
             ModuleConfigHelper.ConfigureActionModule<IActionService>(new Dictionary<int, Type>
                 {
-                    {(int) ActionType.AddCustomField,typeof(AddCustomFieldService)},
+                    {(int) ActionType.CreateCustomField,typeof(AddCustomFieldService)},
                     {(int) ActionType.ModifyCustomField,typeof(ModifyCustomFieldService)},
                     {(int) ActionType.DeleteCustomField,typeof(DeleteCustomFieldService)},
 
-                    {(int) ActionType.AddJob,typeof(AddJobService)},
+                    {(int) ActionType.CreateJob,typeof(AddJobService)},
                     {(int) ActionType.ModifyJob,typeof(ModifyJobService)},
                     {(int) ActionType.DeleteJob,typeof(DeleteJobService)},
                     {(int) ActionType.ManageJobCustomFields,typeof(ManageJobCustomFieldsService)},
+
 
                     {(int) ActionType.ModifyJobIndex,typeof(ModifyJobIndexService)},
                     {(int) ActionType.DeleteJobIndex,typeof(DeleteJobIndexService)},
@@ -63,7 +64,7 @@ namespace MITD.PMS.Presentation.BasicInfoApp
                     //{(int) ActionType.DeleteLastRuleVersion,typeof(DeleteLastRuleVersionService)},
                     //{(int) ActionType.ViewRuleVersions,typeof(ViewRuleVersionsService)},
 
-                    {(int) ActionType.AddFunction,typeof(AddFunctionService)},
+                    {(int) ActionType.CreateFunction,typeof(AddFunctionService)},
                     {(int) ActionType.ModifyFunction,typeof(ModifyFunctionService)},
                     {(int) ActionType.DeleteFunction,typeof(DeleteFunctionService)},
 

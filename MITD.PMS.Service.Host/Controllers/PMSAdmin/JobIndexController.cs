@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using MITD.PMS.Presentation.Contracts;
-using MITD.PMS.Presentation.Contracts.Fasade;
 using System.Web.Http;
+using MITD.PMS.Presentation.Contracts;
 
 namespace MITD.PMS.Service.Host.Controllers
 {
@@ -12,10 +10,9 @@ namespace MITD.PMS.Service.Host.Controllers
     {
         private const string jobIndexClassType = "JobIndex";
         private const string jobIndexCategoryClassType = "JobIndexCategory";
-
         private readonly IJobIndexFacadeService jobIndexFacadeService;
 
-       
+
 
         public JobIndexController(IJobIndexFacadeService jobIndexService)
         {
@@ -33,7 +30,6 @@ namespace MITD.PMS.Service.Host.Controllers
 
         }
 
-
         public IList<AbstractIndex> GetAllJobIndex(string typeOf)
         {
             if (typeOf.ToLower() == jobIndexClassType.ToLower())
@@ -41,7 +37,6 @@ namespace MITD.PMS.Service.Host.Controllers
             else
                 return jobIndexFacadeService.GetAllJobIndexCategories();
         }
-
 
         public IEnumerable<AbstractJobIndexDTOWithActions> GetAllAbstractJobIndices()
         {
@@ -69,8 +64,6 @@ namespace MITD.PMS.Service.Host.Controllers
             else
                 return jobIndexFacadeService.UpdateJobIndexCategory((JobIndexCategoryDTO)abstractIndex);
         }
-
-       
 
         public string DeleteAbstarctJobIndex(long id)
         {
