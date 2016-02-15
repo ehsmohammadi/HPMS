@@ -12,8 +12,8 @@ namespace MITD.PMS.Integration.Domain
         #region Fields
         private List<UnitIndexInPeriodDTO> unitIndexInperiodList = new List<UnitIndexInPeriodDTO>();
         private List<JobIndexInPeriodDTO> jobIndexInperiodList = new List<JobIndexInPeriodDTO>();
-        private List<JobInPeriodDTO> jobInperiodList = new List<JobInPeriodDTO>();
-        private List<UnitInPeriodDTO> unitInperiodList = new List<UnitInPeriodDTO>();
+        private List<JobDTO> jobList = new List<JobDTO>();
+        private List<UnitDTO> unitList = new List<UnitDTO>();
         private Period period;
         private bool isInitialized = false;
         private DelegateHandler<UnitIndexConverted> unitIndexConvertedHandler;
@@ -24,7 +24,9 @@ namespace MITD.PMS.Integration.Domain
         private readonly IUnitConverter unitConverter;
         private readonly IJobIndexConverter jobIndexConverter;
         private readonly IJobConverter jobConverter;
+        private readonly IJobPositionConverter jobPositionConverter;
         private readonly IEventPublisher publisher;
+        private readonly IJobPositionConverter _jobPositionConverter;
 
         #endregion
 
@@ -35,13 +37,14 @@ namespace MITD.PMS.Integration.Domain
         #endregion
 
         #region Constructors
-        public ConverterManager(IUnitIndexConverter unitIndexConverter, IUnitConverter unitConverter, IJobIndexConverter jobIndexConverter, IJobConverter jobConverter, IEventPublisher publisher)
+        public ConverterManager(IUnitIndexConverter unitIndexConverter, IUnitConverter unitConverter, IJobIndexConverter jobIndexConverter, IJobConverter jobConverter, IEventPublisher publisher, IJobPositionConverter jobPositionConverter)
         {
             this.unitIndexConverter = unitIndexConverter;
             this.unitConverter = unitConverter;
             this.jobIndexConverter = jobIndexConverter;
             this.jobConverter = jobConverter;
             this.publisher = publisher;
+            this.jobPositionConverter = jobPositionConverter;
         }
 
         #endregion
@@ -61,6 +64,7 @@ namespace MITD.PMS.Integration.Domain
             if (isInitialized)
             {
                 RegisterHandler();
+                
                 unitIndexConverter.ConvertUnitIndex(period);
             }
             else
@@ -87,8 +91,8 @@ namespace MITD.PMS.Integration.Domain
 
             unitConvertedHandler = new DelegateHandler<UnitConverted>(e =>
             {
-                unitInperiodList = e.UnitInperiodList;
-                Console.WriteLine("{0} Units converted , Unit progress finished", e.UnitInperiodList.Count);
+                unitList = e.UnitList;
+                Console.WriteLine("{0} Units converted , Unit progress finished", e.UnitList.Count);
                 jobIndexConverter.ConvertJobIndex(period);
             });
             publisher.RegisterHandler(unitConvertedHandler);
@@ -111,8 +115,9 @@ namespace MITD.PMS.Integration.Domain
 
             jobConvertedHandler = new DelegateHandler<JobConverted>(e =>
             {
-                jobInperiodList = e.JobInperiodList;
-                Console.WriteLine("{0} Jobs Converted , Job progress finished", e.JobInperiodList.Count);
+                jobList = e.JobList;
+                Console.WriteLine("{0} Jobs Converted , Job progress finished", e.JobList.Count);
+                jobPositionConverter.ConvertJobPositions(period, unitList, jobList);
 
             });
             publisher.RegisterHandler(jobConvertedHandler);

@@ -18,12 +18,16 @@ namespace MITD.PMS.Integration.Data.EF
         public UnitIntegrationDTO GetRoot()
         {
             db = new PersonnelSoft2005Entities();
-            return new UnitIntegrationDTO
-                   {
-                       ID = 4334,
-                       TransferId = Guid.NewGuid(),
-                       UnitName = "شرکت مديريت کشتي"
-                   };
+
+            return (from c in db.VW_OrganTree
+                where c.ID == 4334
+                select new UnitIntegrationDTO
+                       {
+                           TransferId = c.TranferId.Value,
+                           ID = c.ID,
+                           UnitName = c.NodeName,
+                       }).SingleOrDefault();
+
             return (from c in db.VW_OrganTree
                     where c.ID == c.PID
                     select new UnitIntegrationDTO
@@ -74,7 +78,8 @@ namespace MITD.PMS.Integration.Data.EF
                                 {
                                     ID = c.ID,
                                     UnitName = c.NodeName,
-                                    ParentID = c.PID
+                                    ParentID = c.PID,
+                                    TransferId = c.TranferId.Value
                                 }).FirstOrDefault();
                 }
                 catch (Exception e)

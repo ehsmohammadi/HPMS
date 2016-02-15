@@ -16,7 +16,7 @@ namespace MITD.PMS.Integration.Domain
         private readonly IJobPositionDataProvider jobPositionDataProvider;
         private readonly IJobPositionServiceWrapper jobPositionService;
         private readonly IJobPositionInPeriodServiceWrapper jobPositionInPeriodServiceWrapper;
-        private List<UnitDTO> unitInPeriodList;
+        private List<UnitDTO> unitList;
         private List<JobDTO> jobInPeriodList;
         private JobPositionIntegrationDTO root;
         private List<JobPositionInPeriodAssignmentDTO> jobPositionInPeriodList = new List<JobPositionInPeriodAssignmentDTO>();
@@ -39,7 +39,7 @@ namespace MITD.PMS.Integration.Domain
         public void ConvertJobPositions(Period period, List<UnitDTO> unitList, List<JobDTO> jobList)
         {
             Console.WriteLine("Starting jobPositions Convert progress...");
-            unitInPeriodList = unitList;
+            this.unitList = unitList;
             jobInPeriodList = jobList;
             root = jobPositionDataProvider.GetRoot();
             totalJobPositionsCount = jobPositionDataProvider.GetCount();
@@ -57,8 +57,11 @@ namespace MITD.PMS.Integration.Domain
         {
             var desJobPositionDTO = createDestinationJobPosition(sourceJobPositionDTO);
             var jobPosition = jobPositionService.AddJobPosition(desJobPositionDTO);
-            var unit = unitInPeriodList.Single(u => sourceJobPositionDTO.UnitIntegrationDTO.TransferId == u.TransferId);
-            var job = jobInPeriodList.Single(u => sourceJobPositionDTO.UnitIntegrationDTO.TransferId == u.TransferId);
+            var unit = unitList.Single(u => sourceJobPositionDTO.UnitIntegrationDTO.TransferId == u.TransferId);
+            //var unit =
+            //    (from c in unitList where c.TransferId == sourceJobPositionDTO.UnitIntegrationDTO.TransferId select c)
+            //        .Single();
+            var job = jobInPeriodList.Single(u => sourceJobPositionDTO.JobIntegrationDto.TransferId == u.TransferId);
             var jobPositionInPriodAssignment = createDestinationJobPositionInPeriod(jobPosition,periodId,unit.Id,job.Id, jobPositionParentIdParam);
             var res = jobPositionInPeriodServiceWrapper.AddJobPositionInPeriod(jobPositionInPriodAssignment);
             jobPositionInPeriodList.Add(res);

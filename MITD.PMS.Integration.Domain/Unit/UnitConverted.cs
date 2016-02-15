@@ -6,16 +6,16 @@ namespace MITD.PMS.Integration.Domain
 {
     public class UnitConverted : IDomainEvent<UnitConverted>
     {
-        private readonly List<UnitInPeriodDTO> unitInperiodList;
+        private readonly List<UnitDTO> unitList;
 
-        public List<UnitInPeriodDTO> UnitInperiodList
+        public List<UnitDTO> UnitList
         {
-            get { return unitInperiodList; }
+            get { return unitList; }
         }
 
-        public UnitConverted(List<UnitInPeriodDTO> unitInperiodList)
+        public UnitConverted(List<UnitDTO> unitList)
         {
-            this.unitInperiodList = unitInperiodList;
+            this.unitList = unitList;
         }
 
         public bool SameEventAs(UnitConverted other)

@@ -170,7 +170,7 @@ namespace MITD.PMS.Integration.Core
                     serializer.TypeNameHandling = TypeNameHandling.Auto;
                     serializer.TypeNameAssemblyFormat = FormatterAssemblyStyle.Simple;
                     var writer = new StreamWriter(stream);
-                    serializer.Serialize(writer, obj, typeof(T));
+                    //serializer.Serialize(writer, obj, typeof(T));
                     writer.Flush();
                     break;
                 case MessageFormat.Xml:
