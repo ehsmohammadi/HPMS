@@ -10,26 +10,6 @@ using MITD.PMSSecurity.Domain;
 
 namespace MITD.PMS.Interface
 {
-    //public class ActionTypeDtoMapper // : BaseMapper<ActionType, ActionTypeDTO>, IMapper<ActionType, ActionTypeDTO>
-    //{
-
-    //    public ActionTypeDTO MapToModel(ActionType entity)
-    //    {
-    //        var res = new ActionTypeDTO
-    //        {
-    //            Id =(int)entity,
-    //            ActionName = entity.GetAttribute<ActionInfoAttribute>().DisplayName,
-    //            Description = entity.GetAttribute<ActionInfoAttribute>().Description,
-    //        };
-    //        return res;
-    //    }
-
-    //    public  ActionType MapToEntity(ActionTypeDTO model)
-    //    {
-    //        return (ActionType) model.Id;
-    //    }
-    //}
-
     public class UserGroupDtoWithActionsMapper : BaseMapper<Group, UserGroupDTOWithActions>, IMapper<Group, UserGroupDTOWithActions>
     {
 

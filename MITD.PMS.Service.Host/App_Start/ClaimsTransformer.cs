@@ -28,8 +28,11 @@ namespace MITD.PMS.Service.Host.App_Start
             IsAuthenticated = isAuthenticated;
         }
     }
+
+
     public class ClaimsTransformer : ClaimsAuthenticationManager
     {
+        private static FakeIdentity identity = new FakeIdentity("ehsan", AuthenticationTypes.Basic, true);
         public override ClaimsPrincipal Authenticate(string resourceName, ClaimsPrincipal incomingPrincipal)
         {
             // if you want sst security comment this line 
@@ -50,7 +53,7 @@ namespace MITD.PMS.Service.Host.App_Start
 
         public static ClaimsPrincipal CreateIncomingPrincipalDefault()
         {
-            var identity = new FakeIdentity("ehsan", AuthenticationTypes.Basic, true);
+           
 
             var incomingPrincipal = new ClaimsPrincipal(identity);
             incomingPrincipal.Identities.First().AddClaims(new List<Claim>
@@ -67,8 +70,6 @@ namespace MITD.PMS.Service.Host.App_Start
 
         private ClaimsPrincipal createIncomingPrincipalSupportManager()
         {
-            var identity = new FakeIdentity("ehsan", AuthenticationTypes.Basic, true);
-
             var incomingPrincipal = new ClaimsPrincipal(identity);
             incomingPrincipal.Identities.First().AddClaims(new List<Claim>
             {

@@ -145,11 +145,10 @@
     <Compile Include="Security\Mapper\UserActionsMapper.cs" />
     <Compile Include="Security\UserServiceFacade.cs" />
     <Compile Include="Security\LogServiceFacade.cs" />
-    <Compile Include="Security\Mapper\ActionTypeMapper.cs" />
+    <Compile Include="Security\Mapper\UserGroupWithActionsMapper.cs" />
     <Compile Include="Security\Mapper\LogMapper.cs" />
     <Compile Include="Security\Mapper\UserGroupMapper.cs" />
     <Compile Include="Security\Mapper\UserMapper.cs" />
-    <Compile Include="Security\Mapper\MethodMapper.cs" />
     <Compile Include="Security\SecurityServiceFacade.cs" />
     <Compile Include="Security\ISecurityServiceFacade.cs" />
   </ItemGroup>
