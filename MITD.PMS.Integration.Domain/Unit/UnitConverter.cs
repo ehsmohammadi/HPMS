@@ -78,14 +78,14 @@ namespace MITD.PMS.Integration.Domain
         private UnitDTO createDestinationUnit(UnitIntegrationDTO sourceUnit)
         {
             var res = new UnitDTO
-            {
-                Name = sourceUnit.UnitName,
+                      {
+                          Name = sourceUnit.UnitName,
 
-                CustomFields = new List<CustomFieldDTO>(),
-                DictionaryName = sourceUnit.ID.ToString(),
-                TransferId = sourceUnit.TransferId
-                
-            };
+                          CustomFields = new List<CustomFieldDTO>(),
+                          DictionaryName = "u" + sourceUnit.ID,
+                          TransferId = sourceUnit.TransferId
+
+                      };
             return res;
         }
 

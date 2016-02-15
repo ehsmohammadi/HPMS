@@ -25,7 +25,7 @@ namespace MITD.PMS.Integration.Data.EF
                 var fullPath = (from c in DB.VW_OrganTree where c.ID == parentId select c.FullPath).Single();
                 var idList =
                     (from c in DB.VW_OrganTree
-                        where c.FullPath.StartsWith(fullPath) && c.NodeType == 1
+                        where c.FullPath.StartsWith(fullPath) && c.NodeType == 1 && c.ID_PMS_JobTitle != null
                         select c.ID_PMS_JobTitle).Distinct().ToList();
 
                 var temp = (from C in DB.PMS_JobTitle select C.ID).ToList();

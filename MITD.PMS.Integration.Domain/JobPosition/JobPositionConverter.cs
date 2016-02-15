@@ -84,12 +84,12 @@ namespace MITD.PMS.Integration.Domain
         private JobPositionDTO createDestinationJobPosition(JobPositionIntegrationDTO sourceJobPosition)
         {
             var res = new JobPositionDTO
-            {
-                Name = sourceJobPosition.JobPositionName,
-                DictionaryName = sourceJobPosition.ID.ToString(),
-                TransferId = sourceJobPosition.TransferId
-                
-            };
+                      {
+                          Name = sourceJobPosition.JobPositionName,
+                          DictionaryName = "jp" + sourceJobPosition.ID,
+                          TransferId = sourceJobPosition.TransferId
+
+                      };
             return res;
         }
 
