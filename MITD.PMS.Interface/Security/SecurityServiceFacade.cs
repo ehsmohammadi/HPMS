@@ -49,8 +49,9 @@ namespace MITD.PMS.Interface
         {
             var result = new List<ActionType>();
             var user = _userRepository.GetUserById(new PartyId(userName));
-            ServicePointManager.ServerCertificateValidationCallback
-                   += (sender, certificate, chain, errors) => true;
+            
+            //ServicePointManager.ServerCertificateValidationCallback
+            //       += (sender, certificate, chain, errors) => true;
 
             // Fake User
             User fakeUser = new AdminUser(new PartyId(userName), "", "", "");

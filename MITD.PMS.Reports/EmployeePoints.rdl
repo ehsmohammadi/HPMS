@@ -887,7 +887,7 @@
     <DataSource Name="HPMS">
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=.\sqlexpress;Initial Catalog=PmsDb</ConnectString>
+        <ConnectString>Data Source=.\mssqlserver2014;Initial Catalog=PMSDB</ConnectString>
         <IntegratedSecurity>true</IntegratedSecurity>
       </ConnectionProperties>
       <rd:SecurityType>Integrated</rd:SecurityType>
