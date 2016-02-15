@@ -119,6 +119,8 @@ namespace MITD.PMS.Interface
             var res = new List<User>();
             foreach (var role in claimRoles)
             {
+                if (role == "SuperAdmin")
+                    res.Add(new SuperAdminUser(new PartyId(username), fName, lName, email));
                 if (role == "Admin")
                     res.Add(new AdminUser(new PartyId(username), fName, lName, email));
                 if (role == "Employee")
