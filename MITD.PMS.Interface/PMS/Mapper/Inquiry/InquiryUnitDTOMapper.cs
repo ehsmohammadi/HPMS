@@ -18,12 +18,11 @@ namespace MITD.PMS.Interface
                 EmployeeNo = entity.InquirerUnit.Id.EmployeeNo,
                 IndexName = entity.UnitIndex.UnitIndexId.Id.ToString(),
                 UnitName=entity.InquirySubject.Name,
-                UnitId = entity.InquirySubject.Id.SharedUnitId.Id
-                //ActionCodes = new List<int>
-                //{
-                //    (int) ActionType.FillInquiryForm
-                //},
-                //IsInquired = false
+                UnitId = entity.InquirySubject.Id.SharedUnitId.Id,
+                ActionCodes = new List<int>
+                {
+                    (int) ActionType.FillInquiryUnitForm
+                },
                
             };
             return res;

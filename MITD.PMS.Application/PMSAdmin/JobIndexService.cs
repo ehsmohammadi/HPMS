@@ -81,6 +81,7 @@ namespace MITD.PMSAdmin.Application
 
         public JobIndexCategory UpdateJobIndexCategory(AbstractJobIndexId jobIndexCatId, AbstractJobIndexId parentId, string name, string dictionaryName)
         {
+            //todo:(medium)Update not working 
             try
             {
                 using (var scope = new TransactionScope())

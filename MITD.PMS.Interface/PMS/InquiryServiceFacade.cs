@@ -15,7 +15,7 @@ using MITD.PMSSecurity.Domain.Model;
 
 namespace MITD.PMS.Interface
 {
-    //  [Interceptor(typeof(Interception))]
+    [Interceptor(typeof(Interception))]
     public class InquiryServiceFacade : IInquiryServiceFacade
     {
         private readonly IInquiryService inquiryService;

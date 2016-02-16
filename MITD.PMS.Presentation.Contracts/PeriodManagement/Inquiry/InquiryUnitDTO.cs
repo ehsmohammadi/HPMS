@@ -4,7 +4,7 @@ using MITD.Presentation;
 
 namespace MITD.PMS.Presentation.Contracts
 {
-    public partial class InquiryUnitDTO  
+    public partial class InquiryUnitDTO  :IActionDTO
     {
         private string employeeNo;
         public string EmployeeNo
@@ -43,6 +43,12 @@ namespace MITD.PMS.Presentation.Contracts
         {
             get { return fullName; }
             set { this.SetField(p => p.FullName, ref fullName, value); }
+        }
+
+        public List<int> ActionCodes
+        {
+            get;
+            set;
         }
     
     }

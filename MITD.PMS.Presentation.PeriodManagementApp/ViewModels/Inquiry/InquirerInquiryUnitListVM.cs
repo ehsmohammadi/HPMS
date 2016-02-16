@@ -102,7 +102,7 @@ namespace MITD.PMS.Presentation.Logic
         private List<DataGridCommandViewModel> createCommands()
         {
             if (SelectedInquirySubject != null)
-                return CommandHelper.GetControlCommands(this, appController, new List<int>() { 342 });//SelectedInquirySubject.ActionCodes);
+                return CommandHelper.GetControlCommands(this, appController, SelectedInquirySubject.ActionCodes);
             return new List<DataGridCommandViewModel>();
         }
 

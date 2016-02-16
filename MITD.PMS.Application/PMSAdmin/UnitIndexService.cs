@@ -78,6 +78,7 @@ namespace MITD.PMSAdmin.Application
 
         public UnitIndexCategory UpdateUnitIndexCategory(AbstractUnitIndexId unitIndexCatId, AbstractUnitIndexId parentId, string name, string dictionaryName)
         {
+            //todo:(medium)Update not working 
             try
             {
                 using (var scope = new TransactionScope())

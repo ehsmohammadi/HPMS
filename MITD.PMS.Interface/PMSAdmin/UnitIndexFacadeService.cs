@@ -107,7 +107,7 @@ namespace MITD.PMS.Interface
         public IEnumerable<AbstractUnitIndexDTOWithActions> GetAllAbstractUnitIndices()
         {
             var abstractList = unitIndexRep.GetAll();
-            return abstractList.Select(r => unitIndexWithActionsMapper.MapToModel(r));
+            return abstractList.Select(r => unitIndexWithActionsMapper.MapToModel(r)).ToList();
         }
 
         [RequiredPermission(ActionType.AddUnitIndex)]

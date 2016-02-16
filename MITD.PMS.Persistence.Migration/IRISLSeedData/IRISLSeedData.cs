@@ -1039,6 +1039,7 @@ namespace MITD.PMS.Persistence
                 var periodRep = new PeriodRepository(uow);
                 foreach (var jobPosition in PMSMigrationUtility.JobPositions)
                 {
+                    
                     PMSMigrationUtility.CreateJobIndexPointWithValuesFromMatrix(jobPosition, jobRep, jobIndexRep, inquiryRep, jobPositionRep);
                 }
 
