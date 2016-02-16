@@ -75,7 +75,6 @@
     <Compile Include="JobIndex\IJobIndexConverter.cs" />
     <Compile Include="UnitIndex\IUnitIndexConverter.cs" />
     <Compile Include="ConverterManager.cs" />
-    <Compile Include="EmployeeConverter_Old.cs" />
     <Compile Include="Periods\EntityEnum.cs" />
     <Compile Include="Periods\PeriodDataProvider.cs" />
     <Compile Include="Periods\Period.cs" />
