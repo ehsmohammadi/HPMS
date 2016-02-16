@@ -119,18 +119,7 @@ namespace MITD.PMS.Presentation.Logic
             periodId = inquiryFormDTOParam.PeriodId;
             actionType = actionTypeParam;
             InquiryForm = inquiryFormDTOParam;
-            DisplayName = "فرم نظرسنجی" + " "; //+ InquiryForm.FullName;
-            //ShowBusyIndicator("در حال دریافت اطلاعات...");
-            //inquiryService.GetInquirySubjectSubEmployeesInquiryFormList((res, exp) =>
-            //     appController.BeginInvokeOnDispatcher(() =>
-            //    {
-            //        //HideBusyIndicator();
-            //        if (exp == null)
-            //            InquirySubjectInquirers = res;
-            //        else
-            //            appController.HandleException(exp);
-
-            //    }), periodId, InquiryForm.InquirySubjectEmployeeNo, InquiryForm.JobPositionId, inquiryForm.InquirerEmployeeNo, inquiryForm.InquirerJobPositionId);
+            DisplayName = "فرم نظرسنجی" + " "; 
         }
 
        
