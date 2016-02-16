@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MITD.PMS.Integration.Data.Contract.DTO
 {
-    public class EmployeeDTO
+    public class EmployeeIntegrationDTO
     {
         public String Name { get; set; }
 
@@ -14,6 +10,6 @@ namespace MITD.PMS.Integration.Data.Contract.DTO
 
         public String PersonnelCode { get; set; }
 
-        public long OrganID { get; set; }
+        public Guid JobPositionTransferId { get; set; }
     }
 }

@@ -25,8 +25,9 @@ namespace MITD.PMS.Integration.Domain
         private readonly IJobIndexConverter jobIndexConverter;
         private readonly IJobConverter jobConverter;
         private readonly IJobPositionConverter jobPositionConverter;
+        private readonly IEmployeeConverter employeeConverter;
         private readonly IEventPublisher publisher;
-        private readonly IJobPositionConverter _jobPositionConverter;
+
 
         #endregion
 
@@ -37,7 +38,10 @@ namespace MITD.PMS.Integration.Domain
         #endregion
 
         #region Constructors
-        public ConverterManager(IUnitIndexConverter unitIndexConverter, IUnitConverter unitConverter, IJobIndexConverter jobIndexConverter, IJobConverter jobConverter, IEventPublisher publisher, IJobPositionConverter jobPositionConverter)
+
+        public ConverterManager(IUnitIndexConverter unitIndexConverter, IUnitConverter unitConverter,
+            IJobIndexConverter jobIndexConverter, IJobConverter jobConverter, IEventPublisher publisher,
+            IJobPositionConverter jobPositionConverter,IEmployeeConverter employeeConverter)
         {
             this.unitIndexConverter = unitIndexConverter;
             this.unitConverter = unitConverter;
@@ -45,6 +49,7 @@ namespace MITD.PMS.Integration.Domain
             this.jobConverter = jobConverter;
             this.publisher = publisher;
             this.jobPositionConverter = jobPositionConverter;
+            this.employeeConverter = employeeConverter;
         }
 
         #endregion
@@ -64,8 +69,9 @@ namespace MITD.PMS.Integration.Domain
             if (isInitialized)
             {
                 RegisterHandler();
-                
-                unitIndexConverter.ConvertUnitIndex(period);
+                employeeConverter.ConvertEmployees(period, null);
+                //unitIndexConverter.ConvertUnitIndex(period);
+
             }
             else
             {

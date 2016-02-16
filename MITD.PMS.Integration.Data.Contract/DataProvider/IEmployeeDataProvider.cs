@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using MITD.PMS.Integration.Core;
 using MITD.PMS.Integration.Data.Contract.DTO;
 
 namespace MITD.PMS.Integration.Data.Contract.DataProvider
 {
-    public interface IEmployeeDataProvider
+    public interface IEmployeeDataProvider:IDataProvider
     {
 
-        IList<long> GetEmployeeIds();
-        EmployeeDTO GetEmployeeDetails(long id);
+        IList<long> GetIds();
+        EmployeeIntegrationDTO GetEmployeeDetails(long id);
 
 
     }

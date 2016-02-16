@@ -46,6 +46,7 @@ namespace MITD.PMS.Integration.Domain
                 var sourceJobDTO = jobDataProvider.GetJobDetails(jobId);
                 var desJobDTO = createDestinationJob(sourceJobDTO);
                 var job = jobService.AddJob(desJobDTO);
+                var fillteredJobIndexList = jobDataProvider.GetJobIndecesByJobId(jobId);
                 var jobInPriodAssignment = createDestinationJobInPeriod(job);
                 var res = jobInPeriodServiceWrapper.AddJobInPeriod(period.Id, jobInPriodAssignment);
                 jobList.Add(job);
