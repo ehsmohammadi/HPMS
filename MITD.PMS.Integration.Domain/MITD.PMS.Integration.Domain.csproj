@@ -62,6 +62,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Employee\IEmployeeConverter.cs" />
+    <Compile Include="Employee\EmployeeConverted.cs" />
+    <Compile Include="Employee\EmployeeConverter.cs" />
     <Compile Include="Job\IJobConverter.cs" />
     <Compile Include="Job\JobConverted.cs" />
     <Compile Include="Job\JobConverter.cs" />
@@ -72,7 +75,6 @@
     <Compile Include="JobIndex\IJobIndexConverter.cs" />
     <Compile Include="UnitIndex\IUnitIndexConverter.cs" />
     <Compile Include="ConverterManager.cs" />
-    <Compile Include="EmployeeConverter.cs" />
     <Compile Include="Periods\EntityEnum.cs" />
     <Compile Include="Periods\PeriodDataProvider.cs" />
     <Compile Include="Periods\Period.cs" />

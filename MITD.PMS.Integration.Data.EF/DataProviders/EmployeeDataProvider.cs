@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MITD.PMS.Integration.Data.Contract.DataProvider;
 using MITD.PMS.Integration.Data.Contract.DTO;
 using MITD.PMS.Integration.Data.EF.DBModel;
@@ -11,33 +9,18 @@ namespace MITD.PMS.Integration.Data.EF
 {
     public class EmployeeDataProvider : IEmployeeDataProvider
     {
-        private PersonnelSoft2005Entities DB = new PersonnelSoft2005Entities();
+        private PersonnelSoft2005Entities db;
 
         #region GetEmployeeListIdentifier
 
-        public IList<long> GetEmployeeIds()
+        public IList<long> GetIds()
         {
+            db = new PersonnelSoft2005Entities();
 
-            List<long> Result = new List<long>();
+            var idList = (from c in db.VW_OrganTree where c.ID_F != null && c.Company_F == 25 select c.ID_F).ToList();
 
-            try
-            {
+            return idList.Select(c => Convert.ToInt64(c.Value)).ToList();
 
-                var temp = (from C in DB.VW_OrganTree where C.ID_F > 0 select C.ID_F).ToList();
-                foreach (var item in temp)
-                {
-                    Result.Add(Convert.ToInt64(item));
-                }
-
-            }
-
-            catch (Exception e)
-            {
-
-                throw e;
-
-            }
-            return Result;
 
         }
 
@@ -47,29 +30,22 @@ namespace MITD.PMS.Integration.Data.EF
         #region GetEmployeeDetails
 
 
-        public EmployeeDTO GetEmployeeDetails(long id)
+        public EmployeeIntegrationDTO GetEmployeeDetails(long id)
         {
-            EmployeeDTO Result = new EmployeeDTO();
-            try
-            {
+            db = new PersonnelSoft2005Entities();
+            EmployeeIntegrationDTO result;
+            var temp = (from c in db.VW_OrganTree
+                where c.ID_F == id
+                select new EmployeeIntegrationDTO()
+                       {
+                           Name = c.Name,
+                           Family = c.FamilyName,
+                           JobPositionTransferId = c.TranferId.Value,
+                           PersonnelCode = c.PersonnelCode.ToString()
+                       }).FirstOrDefault();
+            result = temp;
 
-                var Temp = (from c in DB.VW_OrganTree
-                            where c.ID_F == id
-                            select new EmployeeDTO()
-                            {
-                                Name = c.Name,
-                                Family = c.FamilyName,
-                                OrganID = c.ID,
-                                PersonnelCode = c.PersonnelCode.ToString()
-                            }).FirstOrDefault();
-                Result = Temp;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return Result;
+            return result;
         }
 
 

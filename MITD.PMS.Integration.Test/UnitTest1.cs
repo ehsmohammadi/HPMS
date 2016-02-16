@@ -14,14 +14,14 @@ namespace MITD.PMS.Integration.Test
         [TestMethod]
         public void ConvertEmployeeTest()
         {
-            var empConverter =new EmployeeConverter(new EmployeeDataProvider(),new EmployeeServiceWrapper(new UserProvider()));
+            //var empConverter =new EmployeeConverter(new EmployeeDataProvider(),new EmployeeServiceWrapper(new UserProvider()));
 
-            var period = new PeriodDTO();
-            period.Id = 10;
-            period.Name = "name";
+            //var period = new PeriodDTO();
+            //period.Id = 10;
+            //period.Name = "name";
 
 
-            empConverter.ConvertEmployee(period);
+            //empConverter.ConvertEmployee(period);
 
         }
     }

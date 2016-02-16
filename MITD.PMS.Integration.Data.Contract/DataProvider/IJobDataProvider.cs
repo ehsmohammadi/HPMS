@@ -12,5 +12,6 @@ namespace MITD.PMS.Integration.Data.Contract.DataProvider
 
         JobIntegrationDto GetJobDetails(long id);
 
+        List<JobIndexIntegrationDTO> GetJobIndecesByJobId(long id);
     }
 }
