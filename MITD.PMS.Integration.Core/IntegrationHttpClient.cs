@@ -65,6 +65,31 @@ namespace MITD.PMS.Integration.Core
 
         #endregion
 
+
+        #region Put To API
+
+        public static T1 Put<T1, T2>(Uri baseAddress, string endpoint, T2 sendData)
+        {
+            return putAsync<T1, T2>(baseAddress, endpoint, sendData).Result;
+        }
+
+        private static async Task<T1> putAsync<T1, T2>(Uri baseAddress, string endpoint, T2 sendData)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = baseAddress;
+                setAcceptHeader(client);
+                var response = await client.PutAsJsonAsync(endpoint, sendData);
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<T1>();
+                }
+                throw new Exception();
+            }
+        }
+
+        #endregion
+
         #region Private Methods
         private static void setAcceptHeader(HttpClient client)
         {

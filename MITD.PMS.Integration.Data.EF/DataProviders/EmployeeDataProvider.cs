@@ -17,7 +17,7 @@ namespace MITD.PMS.Integration.Data.EF
         {
             db = new PersonnelSoft2005Entities();
 
-            var idList = (from c in db.VW_OrganTree where c.ID_F != null select c.ID_F).ToList();
+            var idList = (from c in db.VW_OrganTree where c.ID_F != null && c.Company_F == 25 select c.ID_F).ToList();
 
             return idList.Select(c => Convert.ToInt64(c.Value)).ToList();
 

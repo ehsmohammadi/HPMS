@@ -46,6 +46,10 @@ namespace MITD.PMS.Integration.Domain
                 var sourceEmployeeDTO = employeeDataProvider.GetEmployeeDetails(id);
                 var desEmployeeDTO = createDestinationEmployee(sourceEmployeeDTO, period);
                 var employee = employeeService.AddEmployee(desEmployeeDTO);
+                var jobPosition = jobPositionList.Single(c=>c.TransferId==sourceEmployeeDTO.JobPositionTransferId);
+                var employeeJobPositionDTO = createEmployeeJobPositionDTO(period, employee, jobPosition);//Selected jobPosition 
+                var res = employeeService.AssignJobPositionsToEmployee(period.Id, employee.PersonnelNo,
+                    employeeJobPositionDTO);
                 employeeList.Add(employee);
                 Console.WriteLine("Employee convert progress state: " + employeeList.Count + " From " +
                                   totalEmployeesCount);
@@ -54,6 +58,30 @@ namespace MITD.PMS.Integration.Domain
             publisher.Publish(new EmployeeConverted(employeeList));
         }
 
+        private EmployeeJobPositionsDTO createEmployeeJobPositionDTO(Period period, EmployeeDTO employee, JobPositionDTO jobPosition)
+        {
+            var res = new EmployeeJobPositionsDTO
+                      {
+                          PeriodId = period.Id,
+                          EmployeeNo = employee.PersonnelNo,
+                          EmployeeJobPositionAssignmentList = new List<EmployeeJobPositionAssignmentDTO>
+                                                              {
+                                                                  new EmployeeJobPositionAssignmentDTO
+                                                                  {
+                                                                      JobPositionId = jobPosition.Id,
+                                                                      JobPositionName = jobPosition.Name,
+                                                                      FromDate = DateTime.Now,
+                                                                      ToDate = DateTime.Now.AddDays(3),
+                                                                      WorkTimePercent = 100,
+                                                                      JobPositionWeight = 1
+
+
+                                                                  }
+                                                              }
+                      };
+                    return res;
+                    
+        }
 
         #endregion
 

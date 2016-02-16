@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MITD.PMS.Integration.Core;
 using MITD.PMS.Integration.PMS.Contract;
 using MITD.PMS.Presentation.Contracts;
@@ -26,7 +22,10 @@ namespace MITD.PMS.Integration.PMS.API
         {
             return "Periods/" + periodId + "/Employees";
         }
-
+        private string makeEmployeeJobPositionsApiAdress(long periodId, string employeeNo)
+        {
+            return "Periods/" + periodId + "/Employees/" + employeeNo + "/JobPositions";
+        }
 
         public EmployeeDTO AddEmployee(EmployeeDTO employee)
         {
@@ -34,9 +33,13 @@ namespace MITD.PMS.Integration.PMS.API
             return IntegrationHttpClient.Post<EmployeeDTO, EmployeeDTO>(apiUri, endpoint, employee);
         }
 
-        public void AssignJobPositionsToEmployee(long periodId, string employeeNo, EmployeeJobPositionsDTO employeeJobPositions)
+        public EmployeeJobPositionsDTO AssignJobPositionsToEmployee(long periodId, string employeeNo,
+            EmployeeJobPositionsDTO employeeJobPositions)
         {
-            throw new NotImplementedException();
+            endpoint = makeEmployeeJobPositionsApiAdress(periodId, employeeNo);
+            return IntegrationHttpClient.Put<EmployeeJobPositionsDTO, EmployeeJobPositionsDTO>(apiUri, endpoint, employeeJobPositions);
+            //var url = string.Format(baseAddress + makeEmployeeJobPositionsApiAdress(periodId, employeeNo));
+            //IntegrationWebClient.Put(new Uri(url, PMSClientConfig.UriKind), action, employeeJobPositions, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 
 
@@ -57,10 +60,7 @@ namespace MITD.PMS.Integration.PMS.API
 
 
 
-        //private string makeApiAdress(long periodId)
-        //{
-        //    return "Periods/" + periodId + "/Employees";
-        //}
+
         //private string makeEmployeeJobPositionsApiAdress(long periodId, string employeeNo)
         //{
         //    return "Periods/" + periodId + "/Employees/" + employeeNo + "/JobPositions";
@@ -179,12 +179,7 @@ namespace MITD.PMS.Integration.PMS.API
         //    IntegrationWebClient.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         //}
 
-        //public void AssignJobPositionsToEmployee(Action<EmployeeJobPositionsDTO, Exception> action, long periodId, string employeeNo,
-        //    EmployeeJobPositionsDTO employeeJobPositions)
-        //{
-        //    var url = string.Format(baseAddress + makeEmployeeJobPositionsApiAdress(periodId, employeeNo));
-        //    IntegrationWebClient.Put(new Uri(url, PMSClientConfig.UriKind), action, employeeJobPositions, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
-        //}
+
 
 
     }

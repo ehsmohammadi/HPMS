@@ -19,7 +19,7 @@ namespace MITD.PMS.Integration.Domain
         private List<UnitDTO> unitList;
         private List<JobDTO> jobInPeriodList;
         private JobPositionIntegrationDTO root;
-        private List<JobPositionInPeriodAssignmentDTO> jobPositionInPeriodList = new List<JobPositionInPeriodAssignmentDTO>();
+        private List<JobPositionDTO> jobPositionList = new List<JobPositionDTO>();
         private int totalJobPositionsCount;
         private readonly IEventPublisher publisher;
         #endregion
@@ -44,7 +44,7 @@ namespace MITD.PMS.Integration.Domain
             root = jobPositionDataProvider.GetRoot();
             totalJobPositionsCount = jobPositionDataProvider.GetCount();
             convertJobPosition_Rec(root, period.Id, null);
-            publisher.Publish(new JobPositionConverted(jobPositionInPeriodList));
+            publisher.Publish(new JobPositionConverted(jobPositionList));
         }
 
       
@@ -64,14 +64,14 @@ namespace MITD.PMS.Integration.Domain
             var job = jobInPeriodList.Single(u => sourceJobPositionDTO.JobIntegrationDto.TransferId == u.TransferId);
             var jobPositionInPriodAssignment = createDestinationJobPositionInPeriod(jobPosition,periodId,unit.Id,job.Id, jobPositionParentIdParam);
             var res = jobPositionInPeriodServiceWrapper.AddJobPositionInPeriod(jobPositionInPriodAssignment);
-            jobPositionInPeriodList.Add(res);
+            jobPositionList.Add(jobPosition);
             var jobPositionDataChildIdList = jobPositionDataProvider.GetChildIDs(sourceJobPositionDTO.ID);
             foreach (var jobPositionDataChildId in jobPositionDataChildIdList)
             {
                 var jobPositiondataChid = jobPositionDataProvider.GetJobPositionDetail(jobPositionDataChildId);
                 convertJobPosition_Rec(jobPositiondataChid, periodId, res.JobPositionId);
             }
-            Console.WriteLine("JobPosition convert progress state: " + jobPositionInPeriodList.Count + " From " + totalJobPositionsCount.ToString());
+            Console.WriteLine("JobPosition convert progress state: " + jobPositionList.Count + " From " + totalJobPositionsCount.ToString());
 
         }
 

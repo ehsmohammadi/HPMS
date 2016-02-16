@@ -8,7 +8,9 @@ namespace MITD.PMS.Integration.PMS.Contract
     public interface IEmployeeServiceWrapper : IServiceWrapper
     {
         EmployeeDTO AddEmployee(EmployeeDTO employee);
-        void AssignJobPositionsToEmployee(long periodId, string employeeNo, EmployeeJobPositionsDTO employeeJobPositions);
+
+        EmployeeJobPositionsDTO AssignJobPositionsToEmployee(long periodId, string employeeNo,
+            EmployeeJobPositionsDTO employeeJobPositions);
 
         //void GetEmployee(Action<EmployeeDTO, Exception> action, long periodId, string employeeNo);
         //void AddEmployee(Action<EmployeeDTO, Exception> action, EmployeeDTO employee);
