@@ -45,13 +45,15 @@ namespace MITD.PMSAdmin.Application
             }
         }
 
-        public CustomFieldType UppdateCustomFieldType(CustomFieldType customFieldType)
+        public CustomFieldType UpdateCustomFieldType(CustomFieldTypeId id,string name, string dictionaryName,
+                             long minValue, long maxValue, int entityId, string typeId)
         {
             try
             {
                 using (var scope = new TransactionScope())
                 {
-                    customFieldRep.UpdateCustomFieldType(customFieldType);
+                    var customFieldType = customFieldRep.GetById(id);
+                    customFieldType.Update(name, dictionaryName, minValue, maxValue, Enumeration.FromValue<EntityTypeEnum>(entityId.ToString()), typeId);
                     scope.Complete();
                     return customFieldType;
                 }

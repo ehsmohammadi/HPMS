@@ -43,7 +43,7 @@ namespace MITD.PMS.Presentation.Logic
         private readonly IUserServiceWrapper userService;
         private readonly IInquiryServiceWrapper inquiryService;
         private List<ActionType> userAuthorizedActions;
-        private bool userHasInquirerRoleInActivePeriod;
+        private bool userHasInquirerRoleInActivePeriod=true;
 
         #endregion
 
@@ -218,13 +218,13 @@ namespace MITD.PMS.Presentation.Logic
         {
 
             var cmdList = new ObservableCollection<TreeElementViewModel<ReportCommandVM>>();
-            ReportVM.IsBusy = true;
-            ReportVM.BusyMessage = "در حال دریافت اطلاعات...";
-            controller.GetReportsTree(res =>
-            {
-                buildTree("/", res, cmdList);
-                ReportVM.IsBusy = false;
-            });
+            //ReportVM.IsBusy = true;
+            //ReportVM.BusyMessage = "در حال دریافت اطلاعات...";
+            //controller.GetReportsTree(res =>
+            //{
+            //    buildTree("/", res, cmdList);
+            //    ReportVM.IsBusy = false;
+            //});
             return cmdList;
         }
 
@@ -907,45 +907,45 @@ namespace MITD.PMS.Presentation.Logic
         #region Methods
         public void Handle(MainWindowUpdateArgs eventData)
         {
-            long currentPeriodId = controller.CurrentPriod != null ? controller.CurrentPriod.Id : -1;
-            inquiryService.GetInquirerInquirySubjects(
-                (res, exp) => controller.BeginInvokeOnDispatcher(() =>
-                {
-
-                    if (exp != null)
-                    {
-                        //appController.HandleException(exp);
-                    }
-                    else
-                    {
-                        userHasInquirerRoleInActivePeriod = (res.Count > 0);
-
-                        CurrentPeriod = controller.CurrentPriod;
-                        LogonUser = controller.LoggedInUserState;
-                        userAuthorizedActions = logonUser.PermittedActions;
-                        if (CurrentWorkListUser == null)
-                            CurrentWorkListUser = LogonUser.PermittedUsersOnMyWorkList.First();
-                        WorkListCommands = new ObservableCollection<CommandViewModel>(createWorkListCommands());
-                        BasicInfoCommands = new ObservableCollection<CommandViewModel>(createBasicInfoCommands());
-                        PeriodCommands = new ObservableCollection<CommandViewModel>(createPeriodCommands());
-                        HideBusyIndicator();
-                    }
-                    ;
-                }), currentPeriodId, CurrentUser.EmployeeNo);
-
-            //controller.BeginInvokeOnDispatcher(() =>
+            //long currentPeriodId = controller.CurrentPriod != null ? controller.CurrentPriod.Id : -1;
+            //inquiryService.GetInquirerInquirySubjects(
+            //    (res, exp) => controller.BeginInvokeOnDispatcher(() =>
             //    {
 
-            //        CurrentPeriod = controller.CurrentPriod;
-            //        LogonUser = controller.LoggedInUserState;
-            //        userAuthorizedActions = logonUser.PermittedActions;
-            //        if (CurrentWorkListUser == null)
-            //            CurrentWorkListUser = LogonUser.PermittedUsersOnMyWorkList.First();
-            //        WorkListCommands = new ObservableCollection<CommandViewModel>(createWorkListCommands());
-            //        BasicInfoCommands = new ObservableCollection<CommandViewModel>(createBasicInfoCommands());
-            //        PeriodCommands = new ObservableCollection<CommandViewModel>(createPeriodCommands());
-            //        HideBusyIndicator();
-            //    });
+            //        if (exp != null)
+            //        {
+            //            //appController.HandleException(exp);
+            //        }
+            //        else
+            //        {
+            //            userHasInquirerRoleInActivePeriod = (res.Count > 0);
+
+            //            CurrentPeriod = controller.CurrentPriod;
+            //            LogonUser = controller.LoggedInUserState;
+            //            userAuthorizedActions = logonUser.PermittedActions;
+            //            if (CurrentWorkListUser == null)
+            //                CurrentWorkListUser = LogonUser.PermittedUsersOnMyWorkList.First();
+            //            WorkListCommands = new ObservableCollection<CommandViewModel>(createWorkListCommands());
+            //            BasicInfoCommands = new ObservableCollection<CommandViewModel>(createBasicInfoCommands());
+            //            PeriodCommands = new ObservableCollection<CommandViewModel>(createPeriodCommands());
+            //            HideBusyIndicator();
+            //        }
+            //        ;
+            //    }), currentPeriodId, CurrentUser.EmployeeNo);
+
+            controller.BeginInvokeOnDispatcher(() =>
+                {
+
+                    CurrentPeriod = controller.CurrentPriod;
+                    LogonUser = controller.LoggedInUserState;
+                    userAuthorizedActions = logonUser.PermittedActions;
+                    if (CurrentWorkListUser == null)
+                        CurrentWorkListUser = LogonUser.PermittedUsersOnMyWorkList.First();
+                    WorkListCommands = new ObservableCollection<CommandViewModel>(createWorkListCommands());
+                    BasicInfoCommands = new ObservableCollection<CommandViewModel>(createBasicInfoCommands());
+                    PeriodCommands = new ObservableCollection<CommandViewModel>(createPeriodCommands());
+                    HideBusyIndicator();
+                });
         }
 
         private void signOut()

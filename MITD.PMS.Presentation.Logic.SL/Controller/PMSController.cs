@@ -200,11 +200,12 @@ namespace MITD.PMS.Presentation.Logic
                        {
                            CurrentUserState = res;
                            LoggedInUserState = res;
+                           GetCurrentPeriod();
+                           createCustomFieldEntityList();
                            Publish(new MainWindowUpdateArgs());
 
                        });
-                        GetCurrentPeriod();
-                        createCustomFieldEntityList();
+
                     }
                     else
                     {

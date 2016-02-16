@@ -28,8 +28,11 @@ namespace MITD.PMS.Service.Host.App_Start
             IsAuthenticated = isAuthenticated;
         }
     }
+
+
     public class ClaimsTransformer : ClaimsAuthenticationManager
     {
+        private static FakeIdentity identity = new FakeIdentity("ehsan", AuthenticationTypes.Basic, true);
         public override ClaimsPrincipal Authenticate(string resourceName, ClaimsPrincipal incomingPrincipal)
         {
             // if you want sso security comment this line 
@@ -50,13 +53,13 @@ namespace MITD.PMS.Service.Host.App_Start
 
         public static ClaimsPrincipal CreateIncomingPrincipalDefault()
         {
-            var identity = new FakeIdentity("ehsan", AuthenticationTypes.Basic, true);
+           
 
             var incomingPrincipal = new ClaimsPrincipal(identity);
             incomingPrincipal.Identities.First().AddClaims(new List<Claim>
             {
                 new Claim(ClaimTypes.Role, "SuperAdmin"),
-                //new Claim(ClaimTypes.Role, "Employee"),
+                new Claim(ClaimTypes.Role, "Employee"),
                 new Claim("http://identityserver.thinktecture.com/claims/profileclaims/employeeno", "30000"),
                 new Claim("http://identityserver.thinktecture.com/claims/profileclaims/firstname", "احسان"),
                 new Claim("http://identityserver.thinktecture.com/claims/profileclaims/lastname", "محمدی"),
@@ -67,8 +70,6 @@ namespace MITD.PMS.Service.Host.App_Start
 
         private ClaimsPrincipal createIncomingPrincipalSupportManager()
         {
-            var identity = new FakeIdentity("ehsan", AuthenticationTypes.Basic, true);
-
             var incomingPrincipal = new ClaimsPrincipal(identity);
             incomingPrincipal.Identities.First().AddClaims(new List<Claim>
             {

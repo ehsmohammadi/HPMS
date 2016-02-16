@@ -142,6 +142,7 @@ namespace MITD.PMS.Presentation.Logic
 
         private void preload()
         {
+            CustomFieldEntities = new ObservableCollection<CustomFieldEntity>();
             foreach (var cfe in appController.CustomFieldEntityList)
             {
                 CustomFieldEntities.Add(cfe);

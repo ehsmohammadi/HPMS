@@ -32,8 +32,8 @@
                 </Grid.ColumnDefinitions>
                 
                 <sdk:Label Grid.Row="1" Grid.Column="0" Content="نام"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=JobIndex.Name, Mode=TwoWay}" HorizontalAlignment="Left"/>
-
+                <TextBox Grid.Row="1" Grid.Column="1" AllowDrop="True" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=JobIndex.Name, Mode=TwoWay}" HorizontalAlignment="Left"/>
+                <!--Text="{Binding Path=JobIndex.Name, Mode=TwoWay}"-->
                 <sdk:Label Grid.Row="2" Grid.Column="0" Content="نام در لغتنامه"/>
                 <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=JobIndex.DictionaryName, Mode=TwoWay}" HorizontalAlignment="Left"/>
 
