@@ -10,6 +10,8 @@ namespace MITD.PMSSecurity.Domain
             {
                 return new List<ActionType>
                 {
+                    #region PMSAdmin
+
                     #region CustomFieldType
 
                     ActionType.ManageCustomFields,
@@ -55,6 +57,54 @@ namespace MITD.PMSSecurity.Domain
                     //ActionType.AddUnitIndexCategory,
                     //ActionType.DeleteUnitIndexCategory,
                     //ActionType.ModifyUnitIndexCategory,
+
+                    #endregion
+
+                    #region Unit 
+
+                    ActionType.ManageUnits,
+                    //ActionType.AddUnit,
+                    //ActionType.ModifyUnit,
+                    //ActionType.DeleteUnit,
+                    //ActionType.ManageUnitCustomFields,
+                    //ActionType.AddUnitCustomFields,
+
+                    #endregion
+
+                    #region JobPosition 
+
+                    ActionType.ManageJobPositions,
+                    //ActionType.AddJobPosition,
+                    //ActionType.ModifyJobPosition,
+                    //ActionType.DeleteJobPosition,
+
+                    #endregion
+
+                    #region Users
+
+                    //ActionType.AddPermittedUserToMyTasks,
+                    //ActionType.RemovePermittedUserFromMyTasks,
+                    //ActionType.SettingPermittedUserToMyTasks,
+                    //ActionType.AddUser,
+                    //ActionType.ModifyUser,
+                    //ActionType.DeleteUser,
+                    //ActionType.ManageUserCustomActions,
+                    //ActionType.ManageUserWorkListUsers,
+                    //ActionType.ShowUser,
+                    //ActionType.AddUserGroup,
+                    //ActionType.ModifyUserGroup,
+                    //ActionType.DeleteUserGroup,
+                    //ActionType.ManageGroupCustomActions,
+                    //ActionType.ShowUserGroup,
+
+                    #endregion
+
+                    #region Log
+
+                    ActionType.ShowLog,
+                    ActionType.DeleteLog,
+
+                    #endregion 
 
                     #endregion
                 };
