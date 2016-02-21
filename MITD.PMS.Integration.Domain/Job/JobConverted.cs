@@ -15,7 +15,7 @@ namespace MITD.PMS.Integration.Domain
 
         public JobConverted(List<JobDTO> jobInperiodList)
         {
-            this.jobList = jobInperiodList;
+            jobList = jobInperiodList;
         }
 
         public bool SameEventAs(JobConverted other)

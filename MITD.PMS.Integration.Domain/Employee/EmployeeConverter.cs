@@ -15,7 +15,6 @@ namespace MITD.PMS.Integration.Domain
         #region Fields
         private readonly IEmployeeDataProvider employeeDataProvider;
         private readonly IEmployeeServiceWrapper employeeService;
-        private List<UnitDTO> unitList;
         private List<JobPositionDTO> jobPositionList = new List<JobPositionDTO>();
         private int totalEmployeesCount;
         private List<EmployeeDTO> employeeList=new List<EmployeeDTO>();
@@ -37,7 +36,7 @@ namespace MITD.PMS.Integration.Domain
         public void ConvertEmployees(Period period, List<JobPositionDTO> jobPositionInPeriodList)
         {
             Console.WriteLine("Starting employees Convert progress...");
-            this.jobPositionList = jobPositionInPeriodList;
+            jobPositionList = jobPositionInPeriodList;
             var employeeIdList = employeeDataProvider.GetIds();
             totalEmployeesCount = employeeIdList.Count;
 
@@ -48,7 +47,7 @@ namespace MITD.PMS.Integration.Domain
                 var employee = employeeService.AddEmployee(desEmployeeDTO);
                 var jobPosition = jobPositionList.Single(c=>c.TransferId==sourceEmployeeDTO.JobPositionTransferId);
                 var employeeJobPositionDTO = createEmployeeJobPositionDTO(period, employee, jobPosition);//Selected jobPosition 
-                var res = employeeService.AssignJobPositionsToEmployee(period.Id, employee.PersonnelNo,
+                employeeService.AssignJobPositionsToEmployee(period.Id, employee.PersonnelNo,
                     employeeJobPositionDTO);
                 employeeList.Add(employee);
                 Console.WriteLine("Employee convert progress state: " + employeeList.Count + " From " +
@@ -88,19 +87,6 @@ namespace MITD.PMS.Integration.Domain
         #region Private methods
 
 
-        private void convertEmployee_Rec(EmployeeIntegrationDTO sourceEmployeeDTO, long periodId, long? employeeParentIdParam)
-        {
-            
-            
-            //var unit = unitList.Single(u => sourceEmployeeDTO.UnitIntegrationDTO.TransferId == u.TransferId);
-            //var job = jobInPeriodList.Single(u => sourceEmployeeDTO.JobIntegrationDto.TransferId == u.TransferId);
-            //var employeeInPriodAssignment = createDestinationEmployeeInPeriod(employee, periodId, unit.Id, job.Id, employeeParentIdParam);
-            //var res = employeeInPeriodServiceWrapper.AddEmployeeInPeriod(employeeInPriodAssignment);
-            
-            
-
-        }
-
         private void handleException(Exception exception)
         {
             throw new Exception("Error In Add Employee", exception);
@@ -120,19 +106,6 @@ namespace MITD.PMS.Integration.Domain
             };
             return res;
         }
-
-
-        private EmployeeJobPositionAssignmentDTO createDestinationEmployeeJobPositionAssignment(EmployeeIntegrationDTO sourceEmployee, Period period, JobPositionDTO jobPosition)
-        {
-            var res = new EmployeeJobPositionAssignmentDTO
-            {
-                JobPositionName = jobPosition.Name,
-                JobPositionId = jobPosition.Id,
-                
-            };
-            return res;
-        }
-
 
         #endregion
 

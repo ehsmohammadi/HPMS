@@ -17,7 +17,6 @@ namespace MITD.PMS.Integration.Domain
         private readonly IJobServiceWrapper jobService;
         private readonly IJobInPeriodServiceWrapper jobInPeriodServiceWrapper;
         private List<JobIndexInPeriodDTO> jobIndexInperiodList;
-        private JobIntegrationDto root;
         private List<JobDTO> jobList = new List<JobDTO>();
         private int totalJobsCount;
         private readonly IEventPublisher publisher;
@@ -46,9 +45,9 @@ namespace MITD.PMS.Integration.Domain
                 var sourceJobDTO = jobDataProvider.GetJobDetails(jobId);
                 var desJobDTO = createDestinationJob(sourceJobDTO);
                 var job = jobService.AddJob(desJobDTO);
-                var fillteredJobIndexList = jobDataProvider.GetJobIndecesByJobId(jobId);
+                jobDataProvider.GetJobIndecesByJobId(jobId);
                 var jobInPriodAssignment = createDestinationJobInPeriod(job);
-                var res = jobInPeriodServiceWrapper.AddJobInPeriod(period.Id, jobInPriodAssignment);
+                jobInPeriodServiceWrapper.AddJobInPeriod(period.Id, jobInPriodAssignment);
                 jobList.Add(job);
                 Console.WriteLine("Jobs Convert progress state: " + jobList.Count + " From " + totalJobsCount.ToString());
                 
@@ -61,40 +60,6 @@ namespace MITD.PMS.Integration.Domain
 
         #region Private methods
 
-
-        #region Comment
-        private void convertJob_Rec(JobIntegrationDto sourceJobDTO, long periodId, long? jobParentIdParam)
-        {
-            //var jobInPeriodList = new List<JobInPeriodDTO>();
-            //var desJobDTO = createDestinationJob(sourceJobDTO);
-            //jobService.AddJob((job, addJobExp) =>
-            //{
-            //    if (addJobExp != null)
-            //        handleException(addJobExp);
-
-            //    var jobInPriodAssignment = createDestinationJobInPeriod(job, jobParentIdParam);
-
-            //    jobInPeriodServiceWrapper.AddJobInPeriod((res, exp) =>
-            //    {
-            //        if (exp != null)
-            //            handleException(exp);
-            //        jobInPeriodList.Add(res);
-            //        var jobDataChildIdList = jobDataProvider.GetChildIDs(sourceJobDTO.Id);
-            //        foreach (var jobDataChildId in jobDataChildIdList)
-            //        {
-            //            var jobdataChid = jobDataProvider.GetJobDetail(jobDataChildId);
-            //            convertJob_Rec(jobdataChid, periodId, res.JobId);
-            //        }
-            //        if (jobInPeriodList.Count==totalJobsCount)
-            //        {
-            //            publisher.Publish(new JobConverted(jobInPeriodList));
-            //        }
-            //    }, periodId, jobInPriodAssignment);
-            //}, desJobDTO);
-
-        }
-
-        #endregion 
 
         private void handleException(Exception exception)
         {

@@ -1,9 +1,7 @@
-﻿using System;
-using MITD.Core;
+﻿using MITD.Core;
 using MITD.PMS.Integration.Domain;
-using MITD.PMS.Integration.Host.Console;
 
-namespace ConsoleApplication1
+namespace MITD.PMS.Integration.Host.Console
 {
     class Program
     {
@@ -11,9 +9,9 @@ namespace ConsoleApplication1
         {
             #region Entrance
 
-            Console.ReadLine();
-            Console.WriteLine("Progress started");
-            Console.WriteLine("***********************************************************************");
+            System.Console.ReadLine();
+            System.Console.WriteLine("Progress started");
+            System.Console.WriteLine("***********************************************************************");
             #endregion
 
             #region Bootsrapper
@@ -43,17 +41,12 @@ namespace ConsoleApplication1
             //    () => mainAsync(args));
 
             #region End
-            Console.WriteLine("***********************************************************************");
-            Console.WriteLine("Progress finished");
-            Console.ReadLine();
+            System.Console.WriteLine("***********************************************************************");
+            System.Console.WriteLine("Progress finished");
+            System.Console.ReadLine();
 
             #endregion
         }
 
-        static async void mainAsync(string[] args)
-        {
-
-            
-        }
     }
 }

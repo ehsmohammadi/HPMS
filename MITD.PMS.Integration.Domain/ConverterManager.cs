@@ -1,7 +1,6 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using MITD.Core;
 using MITD.PMS.Presentation.Contracts;
 
@@ -15,8 +14,8 @@ namespace MITD.PMS.Integration.Domain
         private List<JobDTO> jobList = new List<JobDTO>();
         private List<UnitDTO> unitList = new List<UnitDTO>();
         private Period period;
-        private bool isInitialized = false;
-        private List<JobPositionDTO> JobPositionList=new List<JobPositionDTO>(); 
+        private bool isInitialized;
+        private List<JobPositionDTO> jobPositionList=new List<JobPositionDTO>(); 
         private DelegateHandler<UnitIndexConverted> unitIndexConvertedHandler;
         private DelegateHandler<UnitConverted> unitConvertedHandler;
         private DelegateHandler<JobIndexConverted> jobIndexConvertedHandler;
@@ -61,8 +60,8 @@ namespace MITD.PMS.Integration.Domain
         public void Init(Period preiodParam)
         {
             if (preiodParam == null)
-                throw new ArgumentNullException("period", "Period can not be null");
-            this.period = preiodParam;
+                throw new ArgumentNullException("preiodParam", "Period can not be null");
+            period = preiodParam;
             isInitialized = true;
         }
 
@@ -136,9 +135,9 @@ namespace MITD.PMS.Integration.Domain
 
             jobPositionConvertedHandler = new DelegateHandler<JobPositionConverted>(e =>
             {
-                JobPositionList = e.JobPositionList;
+                jobPositionList = e.JobPositionList;
                 Console.WriteLine("{0} JobPositions Converted , JobPosition progress finished", e.JobPositionList.Count);
-                employeeConverter.ConvertEmployees(period, JobPositionList);
+                employeeConverter.ConvertEmployees(period, jobPositionList);
 
             });
             publisher.RegisterHandler(jobPositionConvertedHandler);
@@ -149,70 +148,5 @@ namespace MITD.PMS.Integration.Domain
 
         #endregion
 
-        #region Temp
-
-        public void CreateCustomFields()
-        {
-            // create customfield for Jobindex
-            //var PmsCustomField = new CustomFieldDTO 
-            //{
-            //    Name = "اهمیت",
-            //    TypeId="string",
-            //    DictionaryName = "JobIndexImportance",
-            //    MinValue=0,
-            //    MaxValue=10,
-            //    EntityId=(int)EntityTypeEnum.JobIndex,
-            //};
-            ////CustomFieldService.GetAllCustomFields((res, exp) => 
-            ////{
-            ////    string s = ";";
-            ////}, "Job");
-            //CustomFieldService.AddCustomField((res, exp) =>
-            //{
-            //}, PmsCustomField);
-
-            // //create customfield for Unitindex 
-            //var PmsCustomFieldu = new CustomFieldDTO
-            //{
-            //    Name = "اهمیت",
-            //    TypeId = "string",
-            //    DictionaryName = "UnitIndexImportance",
-            //    MinValue = 0,
-            //    MaxValue = 10,
-            //    EntityId = (int)EntityTypeEnum.UnitIndex,
-            //};
-
-            //CustomFieldService.AddCustomField((resu, expu) =>
-            //{
-            //}, PmsCustomFieldu);
-        }
-
-
-
-        public void CreateUnitIndexCategory()
-        {
-            // Create Unit Index Category
-            //var PmsUnitIndexCategory = new UnitIndexCategoryDTO
-            //{
-            //    Name = "گروه شاخص های سازمانی",
-            //    DictionaryName = "UnitIndexCategoryDicName"
-            //};
-
-            //UnitIndexService.AddUnitIndexCategory((res, exp) =>
-            //{
-            //    if (exp != null)
-            //    {
-            //        throw new Exception("Error in Add Unit Index Category!");
-            //    }
-            //}, PmsUnitIndexCategory);
-
-        }
-
-        public void ConvertUnit(long PeriodID)
-        {
-            // unitConverter.ConvertUnits(PeriodID);
-        }
-
-        #endregion
     }
 }

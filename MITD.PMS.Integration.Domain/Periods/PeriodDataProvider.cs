@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using MITD.PMS.Integration.Data.Contract.DataProvider;
 using MITD.PMS.Integration.PMS.API;
 using MITD.PMS.Presentation.Contracts;
-using MITD.PMS.Integration.Data.Contract.DTO;
 using System.Threading.Tasks;
 
 namespace MITD.PMS.Integration.Domain
@@ -13,6 +11,18 @@ namespace MITD.PMS.Integration.Domain
         private readonly IPeriodServiceWrapper periodService;
 
 
+
+        #region Public Methods
+
+
+
+        public PageResultDTO<PeriodDTOWithAction> GetAllPeriods()
+        {
+            return GetAllPeriodsSync().Result;
+
+        }
+
+
         public PeriodDataProvider(IPeriodServiceWrapper periodService)
         {
             this.periodService = periodService;
@@ -20,35 +30,35 @@ namespace MITD.PMS.Integration.Domain
 
         public Period GetPeriodInformationMain(long id)
         {
-            var Result = new Period();
-            var TemResult=new PeriodDTO();
+            var result = new Period();
+            var temResult=new PeriodDTO();
             periodService.GetPeriod((res, exp) =>
             {
                 if (exp != null)
                 {
                     throw new Exception("Error In Get Period Info From HPMS!");
                 }
-                TemResult = res;
+                temResult = res;
             }, id);
 
-            Result.Id=TemResult.Id;
-            Result.State = new PeriodState { Name = TemResult.StateName }; ;
-            Result.Name = TemResult.Name;
+            result.Id=temResult.Id;
+            result.State = new PeriodState { Name = temResult.StateName };
+            result.Name = temResult.Name;
 
-            return Result;
+            return result;
         }
 
 
         public Period GetPeriodInformation(long id)
         {
-            var Result = new Period();
+            var result = new Period();
             //Result.ID = id;
             //Result.StateName = id.ToString();
             //Result.PeriodName = "Period " + id.ToString();
 
-            var PeriodList = GetPeriodsList();
+            var periodList = GetPeriodsList();
 
-            foreach (var item in PeriodList)
+            foreach (var item in periodList)
             {
                 if (item.Id==id)
                 {
@@ -56,87 +66,58 @@ namespace MITD.PMS.Integration.Domain
                 }
             }
 
-            return Result;
+            return result;
         }
 
 
         #region Get Periods
 
-        //private async Task<List<Period>> GetPeriodsSync()
-        //{
-        //    Task<List<Period>> GetPeriods = GetPeriodsAsync();
-
-        //    List<Period> PeriodList = await GetPeriods;
-        //    return PeriodList;
-        //}
-
-        //private async Task<List<Period>> GetPeriodsAsync()
-        //{
-        //    PageResultDTO<PeriodDTOWithAction> PeriodList = new PageResultDTO<PeriodDTOWithAction>();
-
-        //    PeriodList = GetAllPeriods();
-        //    //System.Threading.Thread.Sleep(300);
-        //    List<Period> Result = new List<Period>();
-
-        //    if (PeriodList.Result != null)
-        //    {
-        //        foreach (var item in PeriodList.Result)
-        //        {
-        //            Period tempPeriod = new Period();
-        //            tempPeriod.ID = item.Id;
-        //            tempPeriod.PeriodName = item.Name;
-        //            tempPeriod.StateName = item.StateName;
-        //            Result.Add(tempPeriod);
-        //        }
-        //    }
-
-        //    return Result;
-        //}
-
 
         public List<Period> GetPeriodsList()
         {
 
-            //return GetPeriodsSync().Result;
-            PageResultDTO<PeriodDTOWithAction> PeriodList = new PageResultDTO<PeriodDTOWithAction>();
+            var periodList = GetAllPeriods();
 
-            PeriodList = GetAllPeriods();
-            //System.Threading.Thread.Sleep(300);
-            List<Period> Result = new List<Period>();
+            var result = new List<Period>();
 
-            if (PeriodList.Result != null)
+            if (periodList.Result != null)
             {
-                foreach (var item in PeriodList.Result)
+                foreach (var item in periodList.Result)
                 {
                     Period tempPeriod = new Period();
                     tempPeriod.Id = item.Id;
                     tempPeriod.Name = item.Name;
                     tempPeriod.State = new PeriodState { Name = item.StateName };
-                    Result.Add(tempPeriod);
+                    result.Add(tempPeriod);
                 }
             }
             else
-                throw new Exception("jlkjlkjlkjlkjl");
+                throw new Exception("Error in Get Period List!");
 
-            return Result;
+            return result;
 
         }
 
         #endregion
 
+        #endregion
+
+
+        #region Private Methods
 
         #region Get All Periods
         private async Task<PageResultDTO<PeriodDTOWithAction>> GetAllPeriodsSync()
         {
-            Task<PageResultDTO<PeriodDTOWithAction>> GetAllPeriods = GetAllPeriodsAsync();
+            var getAllPeriods = GetAllPeriodsAsync();
 
-            return await GetAllPeriods;
-            //return AllPeriodList;
+            return await getAllPeriods;
+
         }
 
         private async Task<PageResultDTO<PeriodDTOWithAction>> GetAllPeriodsAsync()
         {
-            PageResultDTO<PeriodDTOWithAction> Result = new PageResultDTO<PeriodDTOWithAction>();
+            PageResultDTO<PeriodDTOWithAction> result;
+            result = new PageResultDTO<PeriodDTOWithAction>();
 
             periodService.GetAllPeriods((res, exp) =>
             {
@@ -144,28 +125,14 @@ namespace MITD.PMS.Integration.Domain
                 {
                     throw new Exception("Error In Get All Jobs From HPMS!");
                 }
-                Result = res;
+                result = res;
             }, 10, 1);
-            //System.Threading.Thread.Sleep(2000);
-            return Result;
+
+            return result;
         }
 
-        public PageResultDTO<PeriodDTOWithAction> GetAllPeriods()
-        {
-            return GetAllPeriodsSync().Result;
-            //PageResultDTO<PeriodDTOWithAction> Result = new PageResultDTO<PeriodDTOWithAction>();
 
-            //periodService.GetAllPeriods((res, exp) =>
-            //    {
-            //        if (exp != null)
-            //        {
-            //            throw new Exception("Error In Get All Jobs From HPMS!");
-            //        }
-            //        Result = res;
-            //    }, 10, 1);
-            //System.Threading.Thread.Sleep(10000);
-            //return Result;
-        }
+        #endregion
 
         #endregion
 
