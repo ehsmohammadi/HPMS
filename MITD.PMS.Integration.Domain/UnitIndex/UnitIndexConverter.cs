@@ -113,7 +113,7 @@ namespace MITD.PMS.Integration.Domain
                                                  TypeId = "string",
                                              }
                                          },
-                          DictionaryName = "ui" + sourceUnitIndex.ID,
+                          DictionaryName = sourceUnitIndex.ID.ToString(),
                           TransferId = sourceUnitIndex.TransferId
                       };
             return res;

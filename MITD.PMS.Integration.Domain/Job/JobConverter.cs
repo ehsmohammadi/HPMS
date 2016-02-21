@@ -109,7 +109,7 @@ namespace MITD.PMS.Integration.Domain
                           Name = sourceJob.Title,
 
                           CustomFields = new List<CustomFieldDTO>(),
-                          DictionaryName = "j" + sourceJob.Id,
+                          DictionaryName = sourceJob.Id.ToString(),
                           TransferId = sourceJob.TransferId
 
                       };

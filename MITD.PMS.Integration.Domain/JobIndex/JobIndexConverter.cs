@@ -81,7 +81,7 @@ namespace MITD.PMS.Integration.Domain
                                                  TypeId = "string",
                                              }
                                          },
-                          DictionaryName = "ji" + sourceJobIndex.ID,
+                          DictionaryName = sourceJobIndex.ID.ToString(),
                           TransferId = sourceJobIndex.TransferId
                       };
             return res;

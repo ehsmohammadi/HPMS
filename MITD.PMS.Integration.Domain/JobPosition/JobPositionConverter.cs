@@ -86,7 +86,7 @@ namespace MITD.PMS.Integration.Domain
             var res = new JobPositionDTO
                       {
                           Name = sourceJobPosition.JobPositionName,
-                          DictionaryName = "jp" + sourceJobPosition.ID,
+                          DictionaryName = sourceJobPosition.ID.ToString(),
                           TransferId = sourceJobPosition.TransferId
 
                       };

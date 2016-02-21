@@ -82,7 +82,7 @@ namespace MITD.PMS.Integration.Domain
                           Name = sourceUnit.UnitName,
 
                           CustomFields = new List<CustomFieldDTO>(),
-                          DictionaryName = "u" + sourceUnit.ID,
+                          DictionaryName = sourceUnit.ID.ToString(),
                           TransferId = sourceUnit.TransferId
 
                       };
