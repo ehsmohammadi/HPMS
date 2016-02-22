@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataEFConfig.cs" />
     <Compile Include="DataProviders\JobPositionProvider.cs" />
     <Compile Include="DBModel\PersonnelDB.Context.cs">
       <AutoGen>True</AutoGen>

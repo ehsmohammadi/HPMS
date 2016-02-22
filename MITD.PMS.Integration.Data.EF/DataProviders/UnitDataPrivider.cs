@@ -20,7 +20,7 @@ namespace MITD.PMS.Integration.Data.EF
             db = new PersonnelSoft2005Entities();
 
             return (from c in db.VW_OrganTree
-                where c.ID == 4334
+                    where c.ID == DataEFConfig.RootUnitId
                 select new UnitIntegrationDTO
                        {
                            TransferId = c.TranferId.Value,
@@ -50,7 +50,6 @@ namespace MITD.PMS.Integration.Data.EF
                         where c.PID == ParentID && c.ID != ParentID
                             && c.NodeType != 1
                             && c.NodeType!=6
-                            //todo: Add Not Used Node Condition
                         orderby c.ID
                         select c.ID).ToList();
             }
@@ -89,12 +88,17 @@ namespace MITD.PMS.Integration.Data.EF
             
         }
 
+        #endregion
+
+
+        #region GetCount
+
         public int GetCount()
         {
             db = new PersonnelSoft2005Entities();
             //todo: Predicate
             var RootFullPath= (from c in db.VW_OrganTree
-                    where c.ID == 4334
+                    where c.ID == DataEFConfig.RootUnitId
                     select c.FullPath
                     ).FirstOrDefault();
             try

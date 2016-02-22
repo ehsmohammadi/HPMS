@@ -21,8 +21,7 @@ namespace MITD.PMS.Integration.Data.EF
 
             try
             {
-                //todo: Must change for get all jobs
-                var parentId = 4334;
+                var parentId = DataEFConfig.RootUnitId;
                 var fullPath = (from c in db.VW_OrganTree where c.ID == parentId select c.FullPath).Single();
                 var idList =
                     (from c in db.VW_OrganTree

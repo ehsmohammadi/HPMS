@@ -19,7 +19,7 @@ namespace MITD.PMS.Integration.Data.EF
         {
             db = new PersonnelSoft2005Entities();
 
-            var parentId = 4334; //4340;
+            var parentId = DataEFConfig.RootUnitId;
             return (from c in db.VW_OrganTree
                     where c.PID == parentId && c.IsManager == true
                                       select new JobPositionIntegrationDTO
@@ -70,7 +70,7 @@ namespace MITD.PMS.Integration.Data.EF
             db = new PersonnelSoft2005Entities();
             //todo: Predicate
             var RootFullPath = (from c in db.VW_OrganTree
-                                where c.ID == 4334
+                                where c.ID == DataEFConfig.RootUnitId
                                 select c.FullPath
                     ).FirstOrDefault();
             try
