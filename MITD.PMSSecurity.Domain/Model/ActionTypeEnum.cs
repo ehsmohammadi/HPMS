@@ -21,23 +21,13 @@ namespace MITD.PMSSecurity.Domain
         [ActionInfoAttribute("ShowUnitIndexInPeriod", "نمایش شاخص")]
         ShowUnitIndexInPeriod = 10001,
 
-
-
-
-
         [ActionInfoAttribute("ShowPeriod", "نمایش دوره")]
         ShowPeriod = 10004,
 
         [ActionInfoAttribute("ShowJobInPeriod", "نمایش شغل در دوره")]
         ShowJobInPeriod = 10005,
 
-        [ActionInfoAttribute("ShowEmployees", "نمایش کارمندان دوره")]
-        ShowEmployees = 10006,
-
-        [ActionInfoAttribute("ShowCalculations", "نمایش محاسبات دوره")]
-        ShowCalculations = 10007,
-
-
+        
 
         [ActionInfoAttribute("FillInquiryForm", "پر کردن فرم نظر سنجی")]
         FillInquiryForm = 10009,
@@ -310,10 +300,8 @@ namespace MITD.PMSSecurity.Domain
         ManageJobInPeriod = 217,
         [ActionInfoAttribute("ManageJobPositions", "مدیریت پست های سازمانی دوره")]
         ManageJobPositionInPeriod = 218,
-        [ActionInfoAttribute("ManageEmployees", "مدیریت کارمندان دوره")]
-        ManageEmployees = 219,
-        [ActionInfoAttribute("ManageCalculations", "مدیریت محاسبات دوره")]
-        ManageCalculations = 2110,
+
+
         [ActionInfoAttribute("ActivatePeriod", "فعال سازی دوره")]
         ActivatePeriod = 2111,
         [ActionInfoAttribute("InitializePeriodForInquiry", "آماده سازی دوره برای نظرسنجی")]
@@ -415,50 +403,71 @@ namespace MITD.PMSSecurity.Domain
 
         #region Employee 7 
 
+        [ActionInfoAttribute("ManageEmployees", "مدیریت کارمندان دوره")]
+        ManageEmployees = 271,
+
         [ActionInfoAttribute("AddEmployee", "ایجاد کارمند")]
-        AddEmployee = 271,
+        AddEmployee = 272,
+
         [ActionInfoAttribute("ModifyEmployee", "ویزایش کارمند")]
-        ModifyEmployee = 272,
+        ModifyEmployee = 273,
+
         [ActionInfoAttribute("DeleteEmployee", "حذف کارمند")]
-        DeleteEmployee = 273,
-        [ActionInfoAttribute("ManageEmployeeJobPositions", "مدیریت پست های سازمانی کارمند")]
-        ManageEmployeeJobPositions = 274,
+        DeleteEmployee = 274,
+
         [ActionInfoAttribute("AddEmployeeJobCustomFields", "ایجاد فیلدهای دلخواه کارمند")]
         AddEmployeeJobCustomFields = 275,
 
         [ActionInfoAttribute("ModifyEmployeeJobCustomFields", "ویرایش فیلدهای دلخواه کارمند")]
         ModifyEmployeeJobCustomFields = 276,
+
+
+        [ActionInfoAttribute("ManageEmployeeJobPositions", "مدیریت پست های سازمانی کارمند")]
+        ManageEmployeeJobPositions = 277,
         // GetEmployeeJobPositions , [ActionInfoAttribute("166", "GetEmployeeJobPositions","")]
         [ActionInfoAttribute("ShowEmployeeInquiery", "نمایش نظر سنجی کارمند")]
-        ShowEmployeeInquiry = 277,
+        ShowEmployeeInquiry = 278,
 
         #endregion
 
-        #region Calculation 8 
+        #region Calculation 8
+
+        [ActionInfoAttribute("ManageCalculations", "مدیریت محاسبات دوره")]
+        ManageCalculations = 281,
 
         [ActionInfoAttribute("AddCalculation", "ایجاد محاسبه")]
-        AddCalculation = 281,
-        [ActionInfoAttribute("DeleteCalculation", "حذف محاسبه")]
-        DeleteCalculation = 282,
+        AddCalculation = 282,
+
         [ActionInfoAttribute("ModifyCalculation", "ویرایش محاسبه")]
         ModifyCalculation = 283,
-        [ActionInfoAttribute("ShowCalculationState", "مشاهده وضعیت محاسبه")]
-        ShowCalculationState = 284,
-        [ActionInfoAttribute("SetDeterministicCalculation", "قطعی کردن محاسبه")]
-        SetDeterministicCalculation = 285,
-        [ActionInfoAttribute("ShowCalculationResult", "مشاهده نتایج محاسبه")]
-        ShowCalculationResult = 286,
+
+        [ActionInfoAttribute("DeleteCalculation", "حذف محاسبه")]
+        DeleteCalculation = 284,
+
         [ActionInfoAttribute("RunCalculation", "اجرای محاسبه")]
-        RunCalculation = 287,
+        RunCalculation = 285,
+
         [ActionInfoAttribute("StopCalculation", "توقف محاسبه")]
-        StopCalculation = 288,
+        StopCalculation = 286,
+
+        [ActionInfoAttribute("SetDeterministicCalculation", "قطعی کردن محاسبه")]
+        SetDeterministicCalculation = 287,
+
         [ActionInfoAttribute("UnsetDeterministicCalculation", "غیر قعطی کردن محاسبه")]
-        UnsetDeterministicCalculation = 289,
-        [ActionInfoAttribute("ShowAllCalculationException", "مشاهده فهرست خطاهای محاسبه")]
-        ShowAllCalculationException = 2810,
+        UnsetDeterministicCalculation = 288,
+
+        [ActionInfoAttribute("ShowCalculationState", "مشاهده وضعیت محاسبه")]
+        ShowCalculationState = 289,
+
+        [ActionInfoAttribute("ShowCalculationResult", "مشاهده نتایج محاسبه")]
+        ShowCalculationResult = 2810,
+
         [ActionInfoAttribute("ShowCalculationException", "مشاهده خطای محاسبه")]
         ShowCalculationException = 2811,
 
+        [ActionInfoAttribute("ShowAllCalculationException", "مشاهده فهرست خطاهای محاسبه")]
+        ShowAllCalculationException = 2812,
+        
         #endregion
 
         #region Claim 9 

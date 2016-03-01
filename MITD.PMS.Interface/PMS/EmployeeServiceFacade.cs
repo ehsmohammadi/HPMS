@@ -13,14 +13,15 @@ using MITD.PMS.Domain.Model.Periods;
 using MITD.PMS.Domain.Service;
 using MITD.PMS.Presentation.Contracts;
 using MITD.PMSSecurity.Domain;
-using MITD.PMSSecurity.Domain.Model;
 using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
 {
-    //  [Interceptor(typeof(Interception))]
+    [Interceptor(typeof(Interception))]
     public class EmployeeServiceFacade : IEmployeeServiceFacade
     {
+        #region Fields
+
         private readonly IEmployeeRepository employeeRep;
         private readonly IMapper<Employee, EmployeeDTOWithActions> employeeDTOWithActionsMapper;
         private readonly IMapper<Employee, EmployeeDTO> employeeDTOMapper;
@@ -28,8 +29,11 @@ namespace MITD.PMS.Interface
         private readonly IPeriodRepository periodRep;
         private readonly IJobPositionRepository jobPositionRep;
         private readonly IJobRepository jobRep;
-        private readonly IPMSAdminService converter;
+        private readonly IPMSAdminService converter; 
 
+        #endregion
+
+        #region Constructors
         public EmployeeServiceFacade(IEmployeeRepository employeeRep,
             IMapper<Employee, EmployeeDTOWithActions> employeeDTOWithActionsMapper,
             IMapper<Employee, EmployeeDTO> employeeDTOMapper,
@@ -47,9 +51,12 @@ namespace MITD.PMS.Interface
             this.jobPositionRep = jobPositionRep;
             this.jobRep = jobRep;
             this.converter = converter;
-        }
+        } 
+        #endregion
 
-        [RequiredPermission(ActionType.ShowEmployees)]
+        #region Public methods
+
+        [RequiredPermission(ActionType.ManageEmployees)]
         public PageResultDTO<EmployeeDTOWithActions> GetAllEmployees(long periodId, int pageSize, int pageIndex)
         {
             var fs = new ListFetchStrategy<Employee>(Enums.FetchInUnitOfWorkOption.NoTracking);
@@ -63,7 +70,7 @@ namespace MITD.PMS.Interface
             return res;
         }
 
-        [RequiredPermission(ActionType.ShowEmployees)]
+        [RequiredPermission(ActionType.ManageEmployees)]
         public PageResultDTO<EmployeeDTOWithActions> GetAllEmployees(long periodId, int pageSize, int pageIndex,
             string filter)
         {
@@ -81,7 +88,7 @@ namespace MITD.PMS.Interface
             return res;
         }
 
-        [RequiredPermission(ActionType.ShowEmployees)]
+        [RequiredPermission(ActionType.ManageEmployees)]
         public List<string> GetAllEmployeeNo(long periodId, string filter)
         {
             var criterias = filter.Split(';');
@@ -89,30 +96,9 @@ namespace MITD.PMS.Interface
             return employeeRep.GetAllEmployeeNo(predicate);
         }
 
-        private Expression<Func<Employee, bool>> getEmployeePredicate(IEnumerable<string> criterias, long periodId)
-        {
-            Expression<Func<Employee, bool>> res = e => e.Id.PeriodId == new PeriodId(periodId);
 
-            foreach (var criteria in criterias)
-            {
-                var sp = criteria.Split(':');
-                if (sp[0] == "FirstName")
-                {
-                    res = res.And(e => e.FirstName.Contains(sp[1]));
-                }
-                if (sp[0] == "LastName")
-                {
-                    res = res.And(e => e.LastName.Contains(sp[1]));
-                }
-                if (sp[0] == "EmployeeNo")
-                {
-                    res = res.And(e => e.Id.EmployeeNo.Contains(sp[1]));
-                }
-            }
-            return res;
-        }
 
-        [RequiredPermission(ActionType.ShowEmployees)]
+        [RequiredPermission(ActionType.ManageEmployees)]
         public List<EmployeeDTO> GetAllEmployees(long periodId)
         {
             return employeeRep.Find(e => e.Id.PeriodId == new PeriodId(periodId)).Select(p => employeeDTOMapper.MapToModel(p)).ToList();
@@ -172,26 +158,52 @@ namespace MITD.PMS.Interface
         {
             var employee = employeeService.AssignJobPositions(new EmployeeId(employeeNo, new PeriodId(periodId)),
                 employeeJobPositions.EmployeeJobPositionAssignmentList.Select(
-                    jp => GetJobPositionDurationWithCustomFields(periodId,jp)));
+                    jp => GetJobPositionDurationWithCustomFields(periodId, jp)));
             return mapToEmployeeJobPositionDTO(employee);
+        } 
+
+        #endregion
+
+        #region Private methods
+        private Expression<Func<Employee, bool>> getEmployeePredicate(IEnumerable<string> criterias, long periodId)
+        {
+            Expression<Func<Employee, bool>> res = e => e.Id.PeriodId == new PeriodId(periodId);
+
+            foreach (var criteria in criterias)
+            {
+                var sp = criteria.Split(':');
+                if (sp[0] == "FirstName")
+                {
+                    res = res.And(e => e.FirstName.Contains(sp[1]));
+                }
+                if (sp[0] == "LastName")
+                {
+                    res = res.And(e => e.LastName.Contains(sp[1]));
+                }
+                if (sp[0] == "EmployeeNo")
+                {
+                    res = res.And(e => e.Id.EmployeeNo.Contains(sp[1]));
+                }
+            }
+            return res;
         }
 
-        private JobPositionDuration GetJobPositionDurationWithCustomFields(long periodId,EmployeeJobPositionAssignmentDTO jp)
+        private JobPositionDuration GetJobPositionDurationWithCustomFields(long periodId, EmployeeJobPositionAssignmentDTO jp)
         {
             var jobPositionInPeriod = jobPositionRep.GetBy(new JobPositionId(new PeriodId(periodId), new SharedJobPositionId(jp.JobPositionId)));
             var job = jobRep.GetById(jobPositionInPeriod.JobId);
 
-             var employeeJobCustomFieldValueList = job.CustomFields.Select(r =>
-                new EmployeeJobCustomFieldValue(r.Id
-                    ,jp.CustomFieldValueList.Single(j => j.Id == r.SharedJobCustomField.Id.Id).Value)).ToList();
-                
+            var employeeJobCustomFieldValueList = job.CustomFields.Select(r =>
+               new EmployeeJobCustomFieldValue(r.Id
+                   , jp.CustomFieldValueList.Single(j => j.Id == r.SharedJobCustomField.Id.Id).Value)).ToList();
+
             var jpDuration = new JobPositionDuration
                 {
                     FromDate = jp.FromDate,
                     ToDate = jp.ToDate,
                     JobPositionId = new JobPositionId(new PeriodId(periodId), new SharedJobPositionId(jp.JobPositionId)),
                     WorkTimePercent = jp.WorkTimePercent,
-                    JobPositionWeight=jp.JobPositionWeight,
+                    JobPositionWeight = jp.JobPositionWeight,
                     EmployeeJobCustomFieldValues = employeeJobCustomFieldValueList
                 };
             return jpDuration;
@@ -228,13 +240,15 @@ namespace MITD.PMS.Interface
                 {
                     employeeJobPositionAssignmentDTO.CustomFieldValueList.Add(new CustomFieldValueDTO
                     {
-                        Id=employeeJobCustomFieldValue.JobCustomFieldId.SharedJobCustomFieldId.Id,
+                        Id = employeeJobCustomFieldValue.JobCustomFieldId.SharedJobCustomFieldId.Id,
                         Value = employeeJobCustomFieldValue.JobCustomFieldValue
                     });
                 }
                 employeeJobPosition.EmployeeJobPositionAssignmentList.Add(employeeJobPositionAssignmentDTO);
             }
             return employeeJobPosition;
-        }
+        } 
+
+        #endregion
     }
 }

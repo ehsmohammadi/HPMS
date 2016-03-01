@@ -1,46 +1,49 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Castle.Core;
 using MITD.Core;
 using MITD.Domain.Repository;
-using MITD.PMS.Application.Contracts;
-using MITD.PMS.Common;
 using MITD.PMS.Domain.Model.Calculations;
 using MITD.PMS.Domain.Model.Employees;
-using MITD.PMS.Exceptions;
-using MITD.PMS.Presentation.Contracts;
 using MITD.PMS.Domain.Model.JobIndexPoints;
-using Omu.ValueInjecter;
 using MITD.PMS.Domain.Model.Periods;
+using MITD.PMS.Presentation.Contracts;
 using MITD.PMSReport.Domain.Model;
-using MITD.PMS.Domain.Model.JobIndexPoints;
-using System;
 using MITD.PMSSecurity.Domain;
-using MITD.PMSSecurity.Domain.Model;
-
+using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
 {
-  //  [Interceptor(typeof(Interception))]
+    [Interceptor(typeof(Interception))]
     public class JobIndexPointFacadeService : IJobIndexPointFacadeService
     {
+        #region Fields
+
         private IJobIndexPointRepository repository;
         private ICalculationRepository calculationRep;
-       
         private IMapper<JobIndexPointWithEmployee, JobIndexPointSummaryDTOWithAction> jobIndexPointMapper;
         private readonly IEmployeeRepository employeeRep;
 
+        #endregion
+
+        #region Constructors
+
         public JobIndexPointFacadeService(IJobIndexPointRepository repository,
-            ICalculationRepository calculationRep, IMapper<JobIndexPointWithEmployee, 
-            JobIndexPointSummaryDTOWithAction>  jobIndexPointMapper,
-            IEmployeeRepository  employeeRep
+            ICalculationRepository calculationRep, IMapper<JobIndexPointWithEmployee,
+            JobIndexPointSummaryDTOWithAction> jobIndexPointMapper,
+            IEmployeeRepository employeeRep
             )
         {
             this.repository = repository;
             this.calculationRep = calculationRep;
             this.jobIndexPointMapper = jobIndexPointMapper;
             this.employeeRep = employeeRep;
-        }
+        } 
+
+        #endregion
+
+        #region Public methods
 
         [RequiredPermission(ActionType.ShowCalculationResult)]
         public PageResultDTO<JobIndexPointSummaryDTOWithAction> GetAllJobIndexPoints(long periodId, long calculationId, int pageSize, int pageIndex)
@@ -49,7 +52,7 @@ namespace MITD.PMS.Interface
             var cal = calculationRep.GetById(new CalculationId(calculationId));
             if (cal.PeriodId.Id != periodId)
                 throw new Exception("چنین محاسبه ای در دوره ذکر شده نداریم.");
-            fs.WithPaging(pageSize, pageIndex).OrderByDescending(c=>c.JobIndexPoint.Value);
+            fs.WithPaging(pageSize, pageIndex).OrderByDescending(c => c.JobIndexPoint.Value);
 
             repository.Find<SummaryEmployeePoint>(c => c.CalculationId == cal.Id && c.IsFinal, fs);
 
@@ -60,7 +63,7 @@ namespace MITD.PMS.Interface
                 {
                     i++;
                     var m = jobIndexPointMapper.MapToModel(p);
-                    m.EmployeeRankInPeriod =  i;
+                    m.EmployeeRankInPeriod = i;
                     return m;
                 }).ToList();
             res.Result = lst;
@@ -71,18 +74,18 @@ namespace MITD.PMS.Interface
         public JobIndexPointSummaryDTOWithAction GetEmployeeSummaryCalculationResult(long periodId, long calculationId, string employeeNo)
         {
             var fs = new ListFetchStrategy<JobIndexPointWithEmployee>(Enums.FetchInUnitOfWorkOption.NoTracking);
-            
+
             var cal = calculationRep.GetById(new CalculationId(calculationId));
             if (cal.PeriodId.Id != periodId)
                 throw new Exception("چنین محاسبه ای در دوره ذکر شده نداریم.");
             var empId = new EmployeeId(employeeNo, new PeriodId(periodId));
             fs.WithPaging(1, 0).OrderByDescending(c => c.JobIndexPoint.Value);
 
-             repository.Find<SummaryEmployeePoint>(c => c.CalculationId == cal.Id && c.IsFinal && c.EmployeeId.EmployeeNo == empId.EmployeeNo
-                 ,fs);
+            repository.Find<SummaryEmployeePoint>(c => c.CalculationId == cal.Id && c.IsFinal && c.EmployeeId.EmployeeNo == empId.EmployeeNo
+                , fs);
             if (!fs.PageCriteria.PageResult.Result.Any())
                 throw new JobIndexPointException((int)ApiExceptionCode.DoesNotExistEvaluationForEmployee, ApiExceptionCode.DoesNotExistEvaluationForEmployee.DisplayName);
-             var sumaryPoints = fs.PageCriteria.PageResult.Result.Single();
+            var sumaryPoints = fs.PageCriteria.PageResult.Result.Single();
             return jobIndexPointMapper.MapToModel(sumaryPoints);
         }
 
@@ -108,6 +111,8 @@ namespace MITD.PMS.Interface
                     });
             }
             return res;
-        }
+        } 
+
+        #endregion
     }
 }

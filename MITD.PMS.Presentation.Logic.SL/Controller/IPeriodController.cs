@@ -75,7 +75,7 @@ namespace MITD.PMS.Presentation.Logic
         
         void ShowInquiryFormView(InquiryFormDTO inquiryForm, ActionType action);
 
-        [RequiredPermission(ActionType.ShowCalculations)]
+        [RequiredPermission(ActionType.ManageCalculations)]
         void ShowCalculationListView(PeriodDTOWithAction periodId, bool showInNewTab = false);
         void ShowCalculationExceptionView(CalculationExceptionDTO calculationExceptionDto);
         void ShowCalculationResultListView(long calcId, bool showInNewTab = false);

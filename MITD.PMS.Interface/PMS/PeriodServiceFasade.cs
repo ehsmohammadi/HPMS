@@ -9,7 +9,6 @@ using MITD.PMS.Domain.Service;
 using MITD.PMS.Presentation.Contracts;
 using MITD.PMS.Presentation.Contracts.Fasade;
 using MITD.PMSSecurity.Domain;
-using MITD.PMSSecurity.Domain.Model;
 using Omu.ValueInjecter;
 
 namespace MITD.PMS.Interface
