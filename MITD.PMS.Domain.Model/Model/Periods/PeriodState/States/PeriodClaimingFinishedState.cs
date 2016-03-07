@@ -1,10 +1,5 @@
-﻿using System.Runtime.InteropServices;
-using MITD.Core;
-using MITD.PMS.Common;
-using MITD.PMS.Domain.Model.Claims;
-using MITD.PMS.Domain.Model.Jobs;
+﻿using MITD.Core;
 using MITD.PMS.Domain.Service;
-using MITD.PMS.Exceptions;
 
 namespace MITD.PMS.Domain.Model.Periods
 {

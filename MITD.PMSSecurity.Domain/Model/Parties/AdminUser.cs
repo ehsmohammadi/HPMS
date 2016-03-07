@@ -80,6 +80,15 @@ namespace MITD.PMSSecurity.Domain
 
                     #endregion
 
+                    #region Policy 
+                    
+                    ActionType.ManagePolicies,//for calculation -> manage calculation use it
+                    //ActionType.AddPolicy,
+                    //ActionType.ModifyPolicy,
+                    //ActionType.DeletePolicy,
+
+                    #endregion
+
                     #region Users
 
                     //ActionType.AddPermittedUserToMyTasks,
@@ -107,6 +116,38 @@ namespace MITD.PMSSecurity.Domain
                     #endregion 
 
                     #endregion
+
+                    #region Employee 7 
+                    
+                    ActionType.ManageEmployees,//for calculation -> manage calculation use it 
+                    //ActionType.AddEmployee,
+                    //ActionType.ModifyEmployee,
+                    //ActionType.DeleteEmployee,
+                    //ActionType.AddEmployeeJobCustomFields,
+                    //ActionType.ModifyEmployeeJobCustomFields,
+                    ActionType.ManageEmployeeJobPositions,
+                    //ActionType.ShowEmployeeInquiry,
+
+                    #endregion
+
+                    #region Calculation 8
+                    
+                    ActionType.ManageCalculations,
+                    ActionType.AddCalculation,
+                    ActionType.ModifyCalculation,
+                    ActionType.DeleteCalculation,
+                    ActionType.RunCalculation,
+                    ActionType.StopCalculation,
+                    ActionType.SetDeterministicCalculation,
+                    ActionType.UnsetDeterministicCalculation,
+                    ActionType.ShowCalculationState,
+                    ActionType.ShowCalculationResult,
+                    ActionType.ShowCalculationException,
+                    ActionType.ShowAllCalculationException,
+
+                    #endregion
+
+
                 };
             }
         }

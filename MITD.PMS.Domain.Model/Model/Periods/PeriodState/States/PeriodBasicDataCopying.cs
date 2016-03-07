@@ -1,20 +1,21 @@
 ﻿using MITD.PMS.Domain.Service;
-using MITD.PMS.Exceptions;
 
 namespace MITD.PMS.Domain.Model.Periods
 {
     public class PeriodBasicDataCopying : PeriodState 
     {
+        #region Constructors
         public PeriodBasicDataCopying()
             : base("2", "PeriodBasicDataCopying")
         {
 
-        }
-
-
+        } 
+        #endregion
+        
+        #region State methods
         internal override void CompleteCopyingBasicData(Period period, IPeriodManagerService periodManagerService, PeriodState preState)
         {
-           // if(preState is 
+            // if(preState is 
             period.State = new PeriodInitState();
         }
 
@@ -28,29 +29,33 @@ namespace MITD.PMS.Domain.Model.Periods
             periodManagerService.DeleteBasicData(period);
             period.State = new PeriodInitState();
         }
+        
+        #endregion
 
-        internal override  void CheckAssigningUnit()
+        #region Checker methods
+        internal override void CheckAssigningUnit()
         {
         }
 
-        internal override  void CheckRemovingUnit()
+        internal override void CheckRemovingUnit()
         {
         }
 
-        internal override  void CheckAssigningJobIndex()
+        internal override void CheckAssigningJobIndex()
         {
         }
         internal override void CheckAssigningUnitIndex()
         {
         }
-        internal override  void CheckAssigningJob()
+        internal override void CheckAssigningJob()
         {
         }
 
-        internal override  void CheckAssigningJobPosition()
+        internal override void CheckAssigningJobPosition()
         {
         }
-       
+        
+        #endregion       
         
     }
 }

@@ -11,22 +11,27 @@ namespace MITD.PMS.Domain.Model.Periods
 {
     public abstract class PeriodState : Enumeration, IValueObject<PeriodState>, IPeriodState
     {
+        #region Properties
 
         public static readonly PeriodState Init = new PeriodInitState();
         public static readonly PeriodState BasicDataCopying = new PeriodBasicDataCopying();
         public static readonly PeriodState InitializingForInquiry = new PeriodInitializingForInquiryState();
         public static readonly PeriodState InitializingForInquiryCompleted = new PeriodInitializeInquiryCompletedState();
         public static readonly PeriodState InquiryStarted = new PeriodInquiryStartedState();
-        public static readonly PeriodState InquiryCompleted = new PeriodInquiryCompletedState();    
+        public static readonly PeriodState InquiryCompleted = new PeriodInquiryCompletedState();
         public static readonly PeriodState ClaimingStarted = new PeriodClaimingStartedState();
         public static readonly PeriodState ClaimingFinished = new PeriodClaimingFinishedState();
-        public static readonly PeriodState Closed = new PeriodClosedState();
-
+        public static readonly PeriodState Closed = new PeriodClosedState(); 
+        
         private readonly string description;
         public virtual string Description
         {
             get { return description; }
         }
+
+        #endregion
+
+        #region Constructors
 
         protected PeriodState(string value, string name)
             : base(value, name)
@@ -38,7 +43,11 @@ namespace MITD.PMS.Domain.Model.Periods
             : base(value, displayName)
         {
             this.description = description;
-        }
+        } 
+
+        #endregion
+
+        #region IValueObject member
 
         public bool SameValueAs(PeriodState other)
         {
@@ -65,11 +74,13 @@ namespace MITD.PMS.Domain.Model.Periods
 
         }
 
-       
+        #endregion
+
+        #region State methods
 
         internal virtual void InitializeInquiry(Period period, IPeriodManagerService periodManagerService)
         {
-            throw new PeriodInvalidStateOperationException("Period",DisplayName, "InitializeInquiry");
+            throw new PeriodInvalidStateOperationException("Period", DisplayName, "InitializeInquiry");
         }
 
         internal virtual void CompleteIntializingForInquiry(Period period, IPeriodManagerService periodManagerService)
@@ -83,7 +94,7 @@ namespace MITD.PMS.Domain.Model.Periods
         }
 
 
-        internal virtual void CopyPeriodBasicData(Period currentPeriod,Period sourcePeriods, IPeriodManagerService periodManagerService)
+        internal virtual void CopyPeriodBasicData(Period currentPeriod, Period sourcePeriods, IPeriodManagerService periodManagerService)
         {
             throw new PeriodInvalidStateOperationException("Period", DisplayName, "CopyPeriodBasicData");
         }
@@ -126,10 +137,14 @@ namespace MITD.PMS.Domain.Model.Periods
             throw new PeriodInvalidStateOperationException("Period", DisplayName, "RollBack");
         }
 
-        internal virtual void ChangeActiveStatus(Period period,IPeriodManagerService periodManagerService,bool activeStatus)
+        internal virtual void ChangeActiveStatus(Period period, IPeriodManagerService periodManagerService, bool activeStatus)
         {
             throw new PeriodInvalidStateOperationException("Period", DisplayName, "ChangeActiveStatus");
         }
+
+        #endregion
+
+        #region Checker methods
 
         internal virtual void CheckAssigningUnit()
         {
@@ -208,7 +223,7 @@ namespace MITD.PMS.Domain.Model.Periods
         internal virtual void CheckModifyingEmployeeJobPositions()
         {
             throw new PeriodInvalidStateOperationException("Period", DisplayName, "CheckModifyingEmployeeJobPositions");
-        } 
+        }
 
         internal virtual void CheckCreatingCalculation()
         {
@@ -244,18 +259,16 @@ namespace MITD.PMS.Domain.Model.Periods
             throw new PeriodInvalidStateOperationException("Period", DisplayName, "CheckCancelClaim");
         }
 
-        internal virtual void  CheckChangeCalculationDeterministicStatus()
+        internal virtual void CheckChangeCalculationDeterministicStatus()
         {
             throw new PeriodInvalidStateOperationException("Period", DisplayName, "CheckChangeCalculationDeterministicStatus");
         }
 
-
-
-
-
         internal virtual void CheckModifyingUnitIndices(Unit unit)
         {
             throw new PeriodInvalidStateOperationException("Period", DisplayName, "CheckModifyingUnitIndices");
-        }
+        } 
+
+        #endregion
     }
 }

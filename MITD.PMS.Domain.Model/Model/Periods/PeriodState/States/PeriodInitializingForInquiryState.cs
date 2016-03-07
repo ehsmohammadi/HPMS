@@ -21,8 +21,5 @@ namespace MITD.PMS.Domain.Model.Periods
             return periodManagerService.GetInitializeInquiryProgress(period);
         }
 
-       
-
-        
     }
 }
