@@ -65,6 +65,7 @@ namespace MITD.PMS.Presentation.UI.SL
                 if (controller != null)
                 {
                     controller.ShowMessage("خطای داخلی در سطح کاربری رخ داده است لطفا با راهبران سیستم تماس حاصل فرمایید ");
+                    //controller.ShowMessage(e.ExceptionObject.ToString());
                 }
                 e.Handled = true;
                 Deployment.Current.Dispatcher.BeginInvoke(delegate { ReportErrorToDOM(e); });

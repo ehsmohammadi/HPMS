@@ -20,7 +20,8 @@ namespace MITD.PMS.Interface
             { 
                 EmployeeNo = entity.Employee.Id.EmployeeNo,
                 EmployeeName = entity.Employee.FullName,
-                TotalScore =   entity.JobIndexPoint.Value
+                TotalScore =   entity.JobIndexPoint.Value,
+                ActionCodes = new List<int>()
             };
 
             return res;

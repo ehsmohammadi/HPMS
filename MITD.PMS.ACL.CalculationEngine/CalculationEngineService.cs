@@ -31,9 +31,10 @@ namespace MITD.PMS.ACL.CalculationEngine
         {
             var client = new CalculationEngineRef.CalculationEngineServiceClient();
             var progress = WcfClientHelper.CallMethod((c, id) => c.CheckStatus(id.Id), client, calculationId, errorAdapter);
+            var msgList = progress.MessageList.ToList();
             return new CalculationEngineState
              {
-                 MessageList = progress.MessageList.ToList(),
+                 MessageList = msgList,
                  Percent = progress.Percent,
                  StateName = progress.StateName
              };
