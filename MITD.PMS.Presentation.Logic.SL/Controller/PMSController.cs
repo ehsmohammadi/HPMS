@@ -302,6 +302,7 @@ namespace MITD.PMS.Presentation.Logic
                 }
                 return;
             }
+
             var exption = ExceptionAdapter.Convert(exp, localizedResources);
             BeginInvokeOnDispatcher(() => viewManager.ShowMessage(exption.Message));
         }

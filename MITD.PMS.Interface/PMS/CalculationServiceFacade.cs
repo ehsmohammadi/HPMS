@@ -139,9 +139,10 @@ namespace MITD.PMS.Interface
         public CalculationStateWithRunSummaryDTO GetCalculationState(long id)
         {
             var progress = calcEngineService.GetCalculationState(new CalculationId(id));
+            var messageList = progress.MessageList.ToList();
             return new CalculationStateWithRunSummaryDTO
             {
-                MessageList = progress.MessageList.ToList(),
+                MessageList = messageList,
                 Percent = progress.Percent,
                 StateName = progress.StateName
             };

@@ -66,6 +66,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -243,7 +245,6 @@
     <Content Include="ClientBin\System.Xml.Linq.zip" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ClientBin\System.Windows.Controls.Toolkit.Internals.zip" />
     <Content Include="PMS_Help.pdf" />
     <Content Include="ClientBin\System.ComponentModel.DataAnnotations.zip" />
     <Content Include="Properties\Settings.settings">
