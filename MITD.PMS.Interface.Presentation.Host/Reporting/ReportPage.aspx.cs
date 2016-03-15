@@ -7,26 +7,40 @@ using System.Web.UI.WebControls;
 using System.Net;
 using Microsoft.Reporting.WebForms;
 using System.Configuration;
+using MITD.PMS.Interface.Presentation.Host.Helper;
 
 namespace MITD.PMS.Interface.Presentation.Host
 {
-    public partial class Report : System.Web.UI.Page
+    public partial class ReportPage : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
         }
         protected void Page_Init(object sender, EventArgs e)
         {
-            var url = ConfigurationManager.AppSettings["ReportServerUrl"];
-            ReportViewer1.ServerReport.ReportServerUrl = new Uri(url, UriKind.Absolute); ;
-            //var rvc = new ReportViewerCredentials("Administrator", "P@ssw0rd", "");
-            //rvc.ReportServerUrl = ReportViewer1.ServerReport.ReportServerUrl;
-            //ReportViewer1.ServerReport.ReportServerCredentials = rvc;
-
+            // Uncomment for local report
             var reportPath = Request["ReportPath"];
-            reportPath = "/MITD.PMS.Reports/" + reportPath;
-            ReportViewer1.ServerReport.ReportPath = reportPath;
+            //reportPath = "Reporting/Files/" + reportPath;
+            //ReportViewer1.LocalReport.ReportPath = reportPath;
+            //return;
+
+            // Uncomment for server report
+           var url = ConfigurationManager.AppSettings["ReportServerUrl"];
+           ReportViewer1.ServerReport.ReportServerUrl = new Uri(url, UriKind.Absolute); 
             
+            // 
+
+           //var rvc = new ReportViewerCredentials("Administrator", "P@ssw0rd", "");
+           //rvc.ReportServerUrl = ReportViewer1.ServerReport.ReportServerUrl;
+           //ReportViewer1.ServerReport.ReportServerCredentials = rvc;
+
+           // Uncomment for server report
+           reportPath = Request["ReportPath"];
+           reportPath = "/MITD.PMS.Reports/" + reportPath;
+           ReportViewer1.ServerReport.ReportPath = reportPath;
+            //
+
+            #region Transaction
             //var transactionId = Request["TransactionId"];
             //var enUS = new System.Globalization.CultureInfo("en-US");
             ////if (transactionId.Length > 19)
@@ -38,7 +52,14 @@ namespace MITD.PMS.Interface.Presentation.Host
             //var employeeId = Request["EmployeeId"];
             //ReportViewer1.ServerReport.SetParameters(
             //    new ReportParameter[2] { new ReportParameter("TransactionId", resultingDate), new ReportParameter("EmployeeId", employeeId) });
+            #endregion
 
+        }
+
+        protected void btnPrint_Click(object sender, EventArgs e)
+        {
+            ReportPrintDocument rp = new ReportPrintDocument(ReportViewer1.ServerReport);
+            rp.Print();  
         }
     }
 }

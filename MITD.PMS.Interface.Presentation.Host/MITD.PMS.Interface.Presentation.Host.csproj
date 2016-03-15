@@ -131,18 +131,31 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="PMSDBDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PMSDBDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="PMSDBDataSet2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PMSDBDataSet2.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Reporting\Report.aspx.cs">
-      <DependentUpon>Report.aspx</DependentUpon>
+    <Compile Include="Reporting\Helper\ReportPrintDocument.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reporting\ReportPage.aspx.cs">
+      <DependentUpon>ReportPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Reporting\Report.aspx.designer.cs">
-      <DependentUpon>Report.aspx</DependentUpon>
+    <Compile Include="Reporting\ReportPage.aspx.designer.cs">
+      <DependentUpon>ReportPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reporting\ReportServerCredentials.cs" />
     <Compile Include="SilverlightLogin.aspx.cs">
@@ -165,7 +178,10 @@
     <Content Include="ClientBin\MITD.PMS.Presentation.UI.SL.xap" />
     <Content Include="Global.asax" />
     <Content Include="HPMS.aspx" />
-    <Content Include="Reporting\Report.aspx" />
+    <Content Include="Reporting\ReportPage.aspx" />
+    <None Include="Scripts\jquery-2.2.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-2.2.1.js" />
+    <Content Include="Scripts\jquery-2.2.1.min.js" />
     <Content Include="Silverlight.js" />
     <Content Include="SilverlightLogin.aspx" />
     <!--<Content Include="Web.config">
@@ -333,7 +349,30 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Configuration\Web.Debug.config" />
+    <Content Include="PMSDBDataSet.xsc">
+      <DependentUpon>PMSDBDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="PMSDBDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PMSDBDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="PMSDBDataSet.xss">
+      <DependentUpon>PMSDBDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="PMSDBDataSet2.xsc">
+      <DependentUpon>PMSDBDataSet2.xsd</DependentUpon>
+    </Content>
+    <None Include="PMSDBDataSet2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PMSDBDataSet2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="PMSDBDataSet2.xss">
+      <DependentUpon>PMSDBDataSet2.xsd</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\HPMS-Presentation.pubxml" />
+    <Content Include="Scripts\jquery-2.2.1.min.map" />
     <None Include="Web.base.config" />
     <Content Include="Web.config" />
     <None Include="Web.Debug.config">
@@ -350,10 +389,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://win-s3h5t2vs75r/ReportServer_SE/ReportService2010.asmx%3fwsdl">
+    <WebReferenceUrl Include="http://sharif-pc/ReportServer_MSSQLSERVER2014/ReportService2010.asmx%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\ReportingService2010\</RelPath>
-      <UpdateFromURL>http://win-s3h5t2vs75r/ReportServer_SE/ReportService2010.asmx%3fwsdl</UpdateFromURL>
+      <UpdateFromURL>http://sharif-pc/ReportServer_MSSQLSERVER2014/ReportService2010.asmx%3fwsdl</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -367,6 +406,10 @@
       <Project>{c2c01d60-617d-4a38-af22-091a1c3ae365}</Project>
       <Name>MITD.PMS.Presentation.Contracts</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reporting\Files\گزارش تستی.rdlc" />
+    <EmbeddedResource Include="Reporting\Files\TestReport.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

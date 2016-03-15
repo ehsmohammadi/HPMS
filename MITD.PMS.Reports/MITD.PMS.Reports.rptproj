@@ -8,6 +8,10 @@
       <Name>EmployeePoints.rdl</Name>
       <FullPath>EmployeePoints.rdl</FullPath>
     </ProjectItem>
+    <ProjectItem>
+      <Name>UsersTestReport.rdl</Name>
+      <FullPath>UsersTestReport.rdl</FullPath>
+    </ProjectItem>
   </Reports>
   <Configurations>
     <Configuration>
