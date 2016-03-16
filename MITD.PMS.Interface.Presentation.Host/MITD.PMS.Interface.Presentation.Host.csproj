@@ -133,16 +133,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="PMSDBDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PMSDBDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="PMSDBDataSet2.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PMSDBDataSet2.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -350,35 +340,10 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Configuration\Web.Debug.config" />
-    <Content Include="PMSDBDataSet.xsc">
-      <DependentUpon>PMSDBDataSet.xsd</DependentUpon>
-    </Content>
-    <None Include="PMSDBDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>PMSDBDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <Content Include="PMSDBDataSet.xss">
-      <DependentUpon>PMSDBDataSet.xsd</DependentUpon>
-    </Content>
-    <Content Include="PMSDBDataSet2.xsc">
-      <DependentUpon>PMSDBDataSet2.xsd</DependentUpon>
-    </Content>
-    <None Include="PMSDBDataSet2.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>PMSDBDataSet2.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <Content Include="PMSDBDataSet2.xss">
-      <DependentUpon>PMSDBDataSet2.xsd</DependentUpon>
-    </Content>
     <None Include="Properties\PublishProfiles\HPMS-Presentation.pubxml" />
     <Content Include="Scripts\jquery-2.2.1.min.map" />
     <None Include="Web.base.config" />
     <Content Include="Web.config" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
