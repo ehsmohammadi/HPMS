@@ -458,7 +458,7 @@
     <DataSource Name="HPMS_Private">
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=.\mssqlserver2014;Initial Catalog=PMSDB</ConnectString>
+        <ConnectString>Data Source=.;Initial Catalog=PMSDB</ConnectString>
         <IntegratedSecurity>true</IntegratedSecurity>
       </ConnectionProperties>
       <rd:SecurityType>Integrated</rd:SecurityType>
