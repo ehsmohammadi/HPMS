@@ -126,6 +126,8 @@ namespace MITD.PMS.Presentation.Logic
 
         public void Logout()
         {
+            userProvider.SamlToken = null;
+            userProvider.Token = null;
             HtmlPage.Window.Navigate(new Uri("Security/LogOut", UriKind.Relative));
         }
 
@@ -302,7 +304,7 @@ namespace MITD.PMS.Presentation.Logic
                 }
                 return;
             }
-
+            ShowMessage(exp.ToString());
             var exption = ExceptionAdapter.Convert(exp, localizedResources);
             BeginInvokeOnDispatcher(() => viewManager.ShowMessage(exption.Message));
         }

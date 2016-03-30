@@ -31,12 +31,14 @@ namespace MITD.PMS.Presentation.UI.SL
             new BootStrapper().Execute();
             var controller = ServiceLocator.Current.GetInstance<IPMSController>();
 
-
+#if(DEBUG)
             // Uncomment NOT to use SSO
-             controller.getLogonUser();
-
+            //controller.getLogonUser();
+            controller.Login(() => { });
+#else
             // Uncomment to use SSO
-            //controller.Login(() => { });
+            controller.Login(() => { });
+#endif
 
         }
 

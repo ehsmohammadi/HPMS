@@ -229,7 +229,7 @@ namespace MITD.PMSSecurity.Application
             using (var scope = new TransactionScope())
             {
                 User user = userRep.GetUserById(id);
-                user.Actions = new AdminUser(id, "", "", "").Actions;
+                user.Actions = new SuperAdminUser(id, "", "", "").Actions;
                 var actionsFromRole = user.Actions;
                 user.UpdateCustomActions(customActions, user.Id, actionsFromRole);
                 scope.Complete();
