@@ -48,8 +48,9 @@ namespace MITD.PMS.Integration.Data.EF
             {
                 return (from c in db.VW_OrganTree
                         where c.PID == ParentID && c.ID != ParentID
-                            && c.NodeType != 1
-                            && c.NodeType!=6
+                            && c.NodeType != 1 // پست
+                          && c.NodeType != 6 //بلا استفاده
+                          && c.NodeType != 2 // بخش
                         orderby c.ID
                         select c.ID).ToList();
             }
@@ -104,8 +105,9 @@ namespace MITD.PMS.Integration.Data.EF
             try
             {
                 return (from c in db.VW_OrganTree
-                    where c.NodeType != 1
-                          && c.NodeType != 6
+                    where c.NodeType != 1 // پست
+                          && c.NodeType != 6 //بلا استفاده
+                          && c.NodeType != 2 // بخش
                           && c.FullPath.StartsWith(RootFullPath)
                     select c.ID).Count();
             }
