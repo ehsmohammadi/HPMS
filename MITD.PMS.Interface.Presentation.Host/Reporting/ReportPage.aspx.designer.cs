@@ -10,7 +10,7 @@
 namespace MITD.PMS.Interface.Presentation.Host {
     
     
-    public partial class Report {
+    public partial class ReportPage {
         
         /// <summary>
         /// form1 control.
@@ -38,5 +38,14 @@ namespace MITD.PMS.Interface.Presentation.Host {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Microsoft.Reporting.WebForms.ReportViewer ReportViewer1;
+        
+        /// <summary>
+        /// btnPrint control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPrint;
     }
 }

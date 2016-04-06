@@ -216,15 +216,14 @@ namespace MITD.PMS.Presentation.Logic
 
         private ObservableCollection<TreeElementViewModel<ReportCommandVM>> createReportCommands()
         {
-
             var cmdList = new ObservableCollection<TreeElementViewModel<ReportCommandVM>>();
-            //ReportVM.IsBusy = true;
-            //ReportVM.BusyMessage = "در حال دریافت اطلاعات...";
-            //controller.GetReportsTree(res =>
-            //{
-            //    buildTree("/", res, cmdList);
-            //    ReportVM.IsBusy = false;
-            //});
+            ReportVM.IsBusy = true;
+            ReportVM.BusyMessage = "در حال دریافت اطلاعات...";
+            controller.GetReportsTree(res =>
+            {
+                buildTree("/", res, cmdList);
+                ReportVM.IsBusy = false;
+            });
             return cmdList;
         }
 

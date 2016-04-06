@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<access-policy xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+<access-policy  xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
   <cross-domain-access  xdt:Transform="Replace">
     <policy>
       <allow-from http-request-headers="*" http-methods="*">
-        <domain uri="http://localhost:3011"/>
+        <domain uri="http://EPMS:47937"/>
       </allow-from>
       <grant-to>
         <resource path="/" include-subpaths="true"/>

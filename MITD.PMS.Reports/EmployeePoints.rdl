@@ -22,7 +22,6 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>textbox1</rd:DefaultName>
-        <Top>0in</Top>
         <Height>0.36in</Height>
         <Width>6.13542in</Width>
         <Style>
@@ -864,7 +863,7 @@
         <DataSetName>DataSet1</DataSetName>
         <Top>0.36in</Top>
         <Height>0.85in</Height>
-        <Width>6.13542in</Width>
+        <Width>6.13541in</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <TextAlign>Right</TextAlign>
@@ -874,7 +873,7 @@
     <Height>1.21in</Height>
     <Style />
   </Body>
-  <Width>6.13542in</Width>
+  <Width>8.375in</Width>
   <Page>
     <LeftMargin>1in</LeftMargin>
     <RightMargin>1in</RightMargin>
@@ -887,7 +886,7 @@
     <DataSource Name="HPMS">
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=.\mssqlserver2014;Initial Catalog=PMSDB</ConnectString>
+        <ConnectString>Data Source=.;Initial Catalog=PMSDB</ConnectString>
         <IntegratedSecurity>true</IntegratedSecurity>
       </ConnectionProperties>
       <rd:SecurityType>Integrated</rd:SecurityType>
@@ -923,6 +922,34 @@ FROM            JobPositionPoints INNER JOIN
         </Field>
         <Field Name="IsFinal">
           <DataField>IsFinal</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="DataSet2">
+      <Query>
+        <DataSourceName>HPMS</DataSourceName>
+        <CommandText>select * from users</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="شناسه">
+          <DataField>Id</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="نام">
+          <DataField>FirstName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="نامخانوادگی">
+          <DataField>LastName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ایمیل">
+          <DataField>Email</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="اکتیو">
+          <DataField>Active</DataField>
           <rd:TypeName>System.Boolean</rd:TypeName>
         </Field>
       </Fields>

@@ -31,12 +31,14 @@ namespace MITD.PMS.Presentation.UI.SL
             new BootStrapper().Execute();
             var controller = ServiceLocator.Current.GetInstance<IPMSController>();
 
-
+#if(DEBUG)
             // Uncomment NOT to use SSO
-             controller.getLogonUser();
-
-            // Uncomment to use SSO
+            controller.getLogonUser();
             //controller.Login(() => { });
+#else
+            // Uncomment to use SSO
+            controller.Login(() => { });
+#endif
 
         }
 
@@ -65,6 +67,7 @@ namespace MITD.PMS.Presentation.UI.SL
                 if (controller != null)
                 {
                     controller.ShowMessage("خطای داخلی در سطح کاربری رخ داده است لطفا با راهبران سیستم تماس حاصل فرمایید ");
+                    //controller.ShowMessage(e.ExceptionObject.ToString());
                 }
                 e.Handled = true;
                 Deployment.Current.Dispatcher.BeginInvoke(delegate { ReportErrorToDOM(e); });

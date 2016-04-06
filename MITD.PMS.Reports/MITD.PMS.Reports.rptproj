@@ -8,6 +8,10 @@
       <Name>EmployeePoints.rdl</Name>
       <FullPath>EmployeePoints.rdl</FullPath>
     </ProjectItem>
+    <ProjectItem>
+      <Name>UsersTestReport.rdl</Name>
+      <FullPath>UsersTestReport.rdl</FullPath>
+    </ProjectItem>
   </Reports>
   <Configurations>
     <Configuration>
@@ -16,10 +20,8 @@
       <Options>
         <OutputPath>bin\Debug</OutputPath>
         <TargetServerVersion>SSRS2008R2</TargetServerVersion>
-        <TargetServerURL>http://localhost/ReportServer_SE</TargetServerURL>
+        <TargetServerURL>http://epms/ReportServer</TargetServerURL>
         <TargetFolder>MITD.PMS.Reports</TargetFolder>
-        <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
-        <TargetDatasetFolder>Datasets/HPMS</TargetDatasetFolder>
         <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
         <StartItem>EmployeePoints.rdl</StartItem>
       </Options>

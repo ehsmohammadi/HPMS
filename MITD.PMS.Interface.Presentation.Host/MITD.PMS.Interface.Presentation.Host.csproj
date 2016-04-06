@@ -42,7 +42,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\assembly\GAC_MSIL\Microsoft.ReportViewer.WebForms\11.0.0.0__89845dcd8080cc91\Microsoft.ReportViewer.WebForms.DLL</HintPath>
+    </Reference>
     <Reference Include="MITD.Presentation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependency\MITD.Presentation.dll</HintPath>
@@ -66,6 +69,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -137,12 +142,15 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Reporting\Report.aspx.cs">
-      <DependentUpon>Report.aspx</DependentUpon>
+    <Compile Include="Reporting\Helper\ReportPrintDocument.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reporting\ReportPage.aspx.cs">
+      <DependentUpon>ReportPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Reporting\Report.aspx.designer.cs">
-      <DependentUpon>Report.aspx</DependentUpon>
+    <Compile Include="Reporting\ReportPage.aspx.designer.cs">
+      <DependentUpon>ReportPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reporting\ReportServerCredentials.cs" />
     <Compile Include="SilverlightLogin.aspx.cs">
@@ -165,7 +173,11 @@
     <Content Include="ClientBin\MITD.PMS.Presentation.UI.SL.xap" />
     <Content Include="Global.asax" />
     <Content Include="HPMS.aspx" />
-    <Content Include="Reporting\Report.aspx" />
+    <Content Include="Reporting\ReportPage.aspx" />
+    <Content Include="ClientBin\System.ComponentModel.DataAnnotations.zip" />
+    <None Include="Scripts\jquery-2.2.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-2.2.1.js" />
+    <Content Include="Scripts\jquery-2.2.1.min.js" />
     <Content Include="Silverlight.js" />
     <Content Include="SilverlightLogin.aspx" />
     <!--<Content Include="Web.config">
@@ -227,9 +239,7 @@
     <Content Include="ClientBin\System.Xml.Linq.zip" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ClientBin\System.Windows.Controls.Toolkit.Internals.zip" />
     <Content Include="PMS_Help.pdf" />
-    <Content Include="ClientBin\System.ComponentModel.DataAnnotations.zip" />
     <Content Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -334,6 +344,7 @@
     </Content>
     <None Include="Configuration\Web.Debug.config" />
     <None Include="Properties\PublishProfiles\HPMS-Presentation.pubxml" />
+    <Content Include="Scripts\jquery-2.2.1.min.map" />
     <None Include="Web.base.config" />
     <Content Include="Web.config" />
     <None Include="Web.Debug.config">
@@ -350,10 +361,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://win-s3h5t2vs75r/ReportServer_SE/ReportService2010.asmx%3fwsdl">
+    <WebReferenceUrl Include="http://sharif-pc/ReportServer_MSSQLSERVER2014/ReportService2010.asmx%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\ReportingService2010\</RelPath>
-      <UpdateFromURL>http://win-s3h5t2vs75r/ReportServer_SE/ReportService2010.asmx%3fwsdl</UpdateFromURL>
+      <UpdateFromURL>http://sharif-pc/ReportServer_MSSQLSERVER2014/ReportService2010.asmx%3fwsdl</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -367,6 +378,10 @@
       <Project>{c2c01d60-617d-4a38-af22-091a1c3ae365}</Project>
       <Name>MITD.PMS.Presentation.Contracts</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reporting\Files\گزارش تستی.rdlc" />
+    <EmbeddedResource Include="Reporting\Files\TestReport.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

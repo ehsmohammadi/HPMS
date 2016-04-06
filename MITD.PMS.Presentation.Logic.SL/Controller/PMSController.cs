@@ -126,6 +126,8 @@ namespace MITD.PMS.Presentation.Logic
 
         public void Logout()
         {
+            userProvider.SamlToken = null;
+            userProvider.Token = null;
             HtmlPage.Window.Navigate(new Uri("Security/LogOut", UriKind.Relative));
         }
 
@@ -302,6 +304,7 @@ namespace MITD.PMS.Presentation.Logic
                 }
                 return;
             }
+            ShowMessage(exp.ToString());
             var exption = ExceptionAdapter.Convert(exp, localizedResources);
             BeginInvokeOnDispatcher(() => viewManager.ShowMessage(exption.Message));
         }
@@ -339,7 +342,12 @@ namespace MITD.PMS.Presentation.Logic
 
         public void OpenReport(ReportDTO parentElement)
         {
-            var url = new Uri("/Reporting/Report.aspx?ReportPath=" + Path.Combine(parentElement.Path, parentElement.Name).TrimStart(new[] { '/' }), UriKind.Relative);
+            // RDL
+            // var url = new Uri("/Reporting/Report.aspx?ReportPath=" + Path.Combine(parentElement.Path, parentElement.Name).TrimStart(new[] { '/' }), UriKind.Relative);
+            
+            // RDLC
+            var url = new Uri("/Reporting/ReportPage.aspx?ReportPath=" + parentElement.Name, UriKind.Relative);
+
             //var options = new HtmlPopupWindowOptions { Left = 0, Top = 0, Width = 800, Height = 600 };
             //HtmlPage.PopupWindow(url , "new", options);
             HtmlPage.Window.Navigate(url, "_blank");
