@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="PersonnelSoft2005Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="PersonnelSoft2005Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="PMS_GeneralIndex">
           <Key>
             <PropertyRef Name="ID" />
@@ -14,6 +14,7 @@
           <Property Name="Title" Type="nvarchar" MaxLength="4000" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="4000" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="coefficient" Type="smallint" Nullable="false" />
           <Property Name="TransferId" Type="uniqueidentifier" />
           <Property Name="LogUserID" Type="int" />
           <Property Name="LogActionType" Type="char" MaxLength="1" />
@@ -43,8 +44,9 @@
           <Property Name="Title" Type="nvarchar" MaxLength="4000" Nullable="false" />
           <Property Name="Discription" Type="nvarchar" MaxLength="4000" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="LogUserID" Type="int" />
+          <Property Name="coefficient" Type="smallint" Nullable="false" />
           <Property Name="TransferId" Type="uniqueidentifier" />
+          <Property Name="LogUserID" Type="int" />
           <Property Name="LogActionType" Type="char" MaxLength="1" />
           <Property Name="LogActionDate" Type="datetime" />
           <Property Name="LogComputerName" Type="nvarchar" MaxLength="100" />
@@ -63,39 +65,32 @@
           <Property Name="LogComputerName" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Pers1108.dbo.PMS_IndexList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="PMS_IndexList">
-          <Key>
-            <PropertyRef Name="IndexTypeID" />
-            <PropertyRef Name="IndexTypeTitle" />
-            <PropertyRef Name="Title" />
-            <PropertyRef Name="IsActive" />
-          </Key>
-          <Property Name="IndexTypeID" Type="bigint" Nullable="false" />
-          <Property Name="IndexTypeTitle" Type="nvarchar" MaxLength="300" Nullable="false" />
-          <Property Name="IndexId" Type="uniqueidentifier" />
-          <Property Name="Title" Type="nvarchar" MaxLength="4000" Nullable="false" />
-          <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="ID_Job" Type="bigint" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Pers1108.dbo.PMS_JobIndexList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'Pers1224.dbo.PMS_JobIndexList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PMS_JobIndexList">
           <Key>
             <PropertyRef Name="JobID" />
             <PropertyRef Name="JobTitle" />
             <PropertyRef Name="IndexTitle" />
             <PropertyRef Name="IndexTypeTitle" />
+            <PropertyRef Name="IndexTypeID" />
             <PropertyRef Name="ItemState" />
+            <PropertyRef Name="coefficient" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="IndexId" />
           </Key>
           <Property Name="JobID" Type="bigint" Nullable="false" />
           <Property Name="JobTitle" Type="nvarchar" MaxLength="1000" Nullable="false" />
           <Property Name="IndexTitle" Type="nvarchar" MaxLength="4000" Nullable="false" />
           <Property Name="IndexTypeTitle" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="IndexTypeID" Type="bigint" Nullable="false" />
           <Property Name="ItemState" Type="bit" Nullable="false" />
+          <Property Name="coefficient" Type="smallint" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="TransferId" Type="uniqueidentifier" />
+          <Property Name="IndexId" Type="bigint" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Pers1108.dbo.VW_OrganTree' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'Pers1224.dbo.VW_OrganTree' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VW_OrganTree">
           <Key>
             <PropertyRef Name="ID" />
@@ -175,23 +170,18 @@ warning 6002: The table/view 'Pers1108.dbo.VW_OrganTree' does not have a primary
           <EntitySet Name="PMS_IndexType" EntityType="Self.PMS_IndexType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PMS_JobIndex" EntityType="Self.PMS_JobIndex" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PMS_JobTitle" EntityType="Self.PMS_JobTitle" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PMS_IndexList" EntityType="Self.PMS_IndexList" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [PMS_IndexList].[IndexTypeID] AS [IndexTypeID], 
-    [PMS_IndexList].[IndexTypeTitle] AS [IndexTypeTitle], 
-    [PMS_IndexList].[IndexId] AS [IndexId], 
-    [PMS_IndexList].[Title] AS [Title], 
-    [PMS_IndexList].[IsActive] AS [IsActive], 
-    [PMS_IndexList].[ID_Job] AS [ID_Job]
-    FROM [dbo].[PMS_IndexList] AS [PMS_IndexList]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="PMS_JobIndexList" EntityType="Self.PMS_JobIndexList" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [PMS_JobIndexList].[JobID] AS [JobID], 
     [PMS_JobIndexList].[JobTitle] AS [JobTitle], 
     [PMS_JobIndexList].[IndexTitle] AS [IndexTitle], 
     [PMS_JobIndexList].[IndexTypeTitle] AS [IndexTypeTitle], 
-    [PMS_JobIndexList].[ItemState] AS [ItemState]
+    [PMS_JobIndexList].[IndexTypeID] AS [IndexTypeID], 
+    [PMS_JobIndexList].[ItemState] AS [ItemState], 
+    [PMS_JobIndexList].[coefficient] AS [coefficient], 
+    [PMS_JobIndexList].[IsActive] AS [IsActive], 
+    [PMS_JobIndexList].[TransferId] AS [TransferId], 
+    [PMS_JobIndexList].[IndexId] AS [IndexId]
     FROM [dbo].[PMS_JobIndexList] AS [PMS_JobIndexList]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VW_OrganTree" EntityType="Self.VW_OrganTree" store:Type="Views" store:Schema="dbo">
@@ -250,7 +240,6 @@ warning 6002: The table/view 'Pers1108.dbo.VW_OrganTree' does not have a primary
           <EntitySet Name="PMS_IndexType" EntityType="PersonnelSoft2005Model.PMS_IndexType" />
           <EntitySet Name="PMS_JobIndex" EntityType="PersonnelSoft2005Model.PMS_JobIndex" />
           <EntitySet Name="PMS_JobTitle" EntityType="PersonnelSoft2005Model.PMS_JobTitle" />
-          <EntitySet Name="PMS_JobIndexList" EntityType="PersonnelSoft2005Model.PMS_JobIndexList" />
           <AssociationSet Name="FK_PMS_GeneralIndex_PMS_GeneralIndex" Association="PersonnelSoft2005Model.FK_PMS_GeneralIndex_PMS_GeneralIndex">
             <End Role="PMS_IndexType" EntitySet="PMS_IndexType" />
             <End Role="PMS_GeneralIndex" EntitySet="PMS_GeneralIndex" />
@@ -264,7 +253,7 @@ warning 6002: The table/view 'Pers1108.dbo.VW_OrganTree' does not have a primary
             <End Role="PMS_JobIndex" EntitySet="PMS_JobIndex" />
           </AssociationSet>
           <EntitySet Name="VW_OrganTree" EntityType="PersonnelSoft2005Model.VW_OrganTree" />
-          <EntitySet Name="PMS_IndexList" EntityType="PersonnelSoft2005Model.PMS_IndexList" />
+          <EntitySet Name="PMS_JobIndexList" EntityType="PersonnelSoft2005Model.PMS_JobIndexList" />
         </EntityContainer>
         <EntityType Name="PMS_GeneralIndex">
           <Key>
@@ -275,6 +264,7 @@ warning 6002: The table/view 'Pers1108.dbo.VW_OrganTree' does not have a primary
           <Property Name="Title" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="coefficient" Type="Int16" Nullable="false" />
           <Property Name="TransferId" Type="Guid" />
           <Property Name="LogUserID" Type="Int32" />
           <Property Name="LogActionType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
@@ -307,8 +297,9 @@ warning 6002: The table/view 'Pers1108.dbo.VW_OrganTree' does not have a primary
           <Property Name="Title" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
           <Property Name="Discription" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="LogUserID" Type="Int32" />
+          <Property Name="coefficient" Type="Int16" Nullable="false" />
           <Property Name="TransferId" Type="Guid" />
+          <Property Name="LogUserID" Type="Int32" />
           <Property Name="LogActionType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="LogActionDate" Type="DateTime" Precision="3" />
           <Property Name="LogComputerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -328,20 +319,6 @@ warning 6002: The table/view 'Pers1108.dbo.VW_OrganTree' does not have a primary
           <Property Name="LogActionDate" Type="DateTime" Precision="3" />
           <Property Name="LogComputerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PMS_JobIndex" Relationship="PersonnelSoft2005Model.FK_PMS_JobIndex_PMS_JobTitle" FromRole="PMS_JobTitle" ToRole="PMS_JobIndex" />
-        </EntityType>
-        <EntityType Name="PMS_JobIndexList">
-          <Key>
-            <PropertyRef Name="JobID" />
-            <PropertyRef Name="JobTitle" />
-            <PropertyRef Name="IndexTitle" />
-            <PropertyRef Name="IndexTypeTitle" />
-            <PropertyRef Name="ItemState" />
-          </Key>
-          <Property Name="JobID" Type="Int64" Nullable="false" />
-          <Property Name="JobTitle" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="IndexTitle" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
-          <Property Name="IndexTypeTitle" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="ItemState" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_PMS_GeneralIndex_PMS_GeneralIndex">
           <End Type="PersonnelSoft2005Model.PMS_IndexType" Role="PMS_IndexType" Multiplicity="1" />
@@ -417,21 +394,30 @@ warning 6002: The table/view 'Pers1108.dbo.VW_OrganTree' does not have a primary
           <Property Name="ID_PMS_JobTitle" Type="Int64" />
           <Property Name="TranferId" Type="Guid" />
         </EntityType>
-        <EntityType Name="PMS_IndexList">
+        <EntityType Name="PMS_JobIndexList">
           <Key>
-            <PropertyRef Name="IndexTypeID" />
+            <PropertyRef Name="JobID" />
+            <PropertyRef Name="JobTitle" />
+            <PropertyRef Name="IndexTitle" />
             <PropertyRef Name="IndexTypeTitle" />
-            <PropertyRef Name="Title" />
+            <PropertyRef Name="IndexTypeID" />
+            <PropertyRef Name="ItemState" />
+            <PropertyRef Name="coefficient" />
             <PropertyRef Name="IsActive" />
+            <PropertyRef Name="IndexId" />
           </Key>
-          <Property Name="IndexTypeID" Type="Int64" Nullable="false" />
+          <Property Name="JobID" Type="Int64" Nullable="false" />
+          <Property Name="JobTitle" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="IndexTitle" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
           <Property Name="IndexTypeTitle" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="IndexId" Type="Guid" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="IndexTypeID" Type="Int64" Nullable="false" />
+          <Property Name="ItemState" Type="Boolean" Nullable="false" />
+          <Property Name="coefficient" Type="Int16" Nullable="false" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="ID_Job" Type="Int64" />
+          <Property Name="TransferId" Type="Guid" />
+          <Property Name="IndexId" Type="Int64" Nullable="false" />
         </EntityType>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -445,6 +431,7 @@ warning 6002: The table/view 'Pers1108.dbo.VW_OrganTree' does not have a primary
                 <ScalarProperty Name="LogActionType" ColumnName="LogActionType" />
                 <ScalarProperty Name="LogUserID" ColumnName="LogUserID" />
                 <ScalarProperty Name="TransferId" ColumnName="TransferId" />
+                <ScalarProperty Name="coefficient" ColumnName="coefficient" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
@@ -473,8 +460,9 @@ warning 6002: The table/view 'Pers1108.dbo.VW_OrganTree' does not have a primary
                 <ScalarProperty Name="LogComputerName" ColumnName="LogComputerName" />
                 <ScalarProperty Name="LogActionDate" ColumnName="LogActionDate" />
                 <ScalarProperty Name="LogActionType" ColumnName="LogActionType" />
-                <ScalarProperty Name="TransferId" ColumnName="TransferId" />
                 <ScalarProperty Name="LogUserID" ColumnName="LogUserID" />
+                <ScalarProperty Name="TransferId" ColumnName="TransferId" />
+                <ScalarProperty Name="coefficient" ColumnName="coefficient" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Discription" ColumnName="Discription" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
@@ -495,17 +483,6 @@ warning 6002: The table/view 'Pers1108.dbo.VW_OrganTree' does not have a primary
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PMS_JobIndexList">
-            <EntityTypeMapping TypeName="PersonnelSoft2005Model.PMS_JobIndexList">
-              <MappingFragment StoreEntitySet="PMS_JobIndexList">
-                <ScalarProperty Name="ItemState" ColumnName="ItemState" />
-                <ScalarProperty Name="IndexTypeTitle" ColumnName="IndexTypeTitle" />
-                <ScalarProperty Name="IndexTitle" ColumnName="IndexTitle" />
-                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
-                <ScalarProperty Name="JobID" ColumnName="JobID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -545,15 +522,19 @@ warning 6002: The table/view 'Pers1108.dbo.VW_OrganTree' does not have a primary
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PMS_IndexList">
-            <EntityTypeMapping TypeName="PersonnelSoft2005Model.PMS_IndexList">
-              <MappingFragment StoreEntitySet="PMS_IndexList">
-                <ScalarProperty Name="ID_Job" ColumnName="ID_Job" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
+          <EntitySetMapping Name="PMS_JobIndexList">
+            <EntityTypeMapping TypeName="PersonnelSoft2005Model.PMS_JobIndexList">
+              <MappingFragment StoreEntitySet="PMS_JobIndexList">
                 <ScalarProperty Name="IndexId" ColumnName="IndexId" />
-                <ScalarProperty Name="IndexTypeTitle" ColumnName="IndexTypeTitle" />
+                <ScalarProperty Name="TransferId" ColumnName="TransferId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="coefficient" ColumnName="coefficient" />
+                <ScalarProperty Name="ItemState" ColumnName="ItemState" />
                 <ScalarProperty Name="IndexTypeID" ColumnName="IndexTypeID" />
+                <ScalarProperty Name="IndexTypeTitle" ColumnName="IndexTypeTitle" />
+                <ScalarProperty Name="IndexTitle" ColumnName="IndexTitle" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="JobID" ColumnName="JobID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

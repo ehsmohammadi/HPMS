@@ -17,6 +17,7 @@ namespace MITD.PMS.Integration.Domain
         private readonly IJobServiceWrapper jobService;
         private readonly IJobInPeriodServiceWrapper jobInPeriodServiceWrapper;
         private List<JobIndexInPeriodDTO> jobIndexInperiodList;
+        private List<JobIndexDTO> jobIndexList;
         private List<JobDTO> jobList = new List<JobDTO>();
         private int totalJobsCount;
         private readonly IEventPublisher publisher;
@@ -34,10 +35,11 @@ namespace MITD.PMS.Integration.Domain
         #endregion
 
         #region public methods
-        public void ConvertJobs(Period period, List<JobIndexInPeriodDTO> jobIndexInperiodListParam)
+        public void ConvertJobs(Period period, List<JobIndexInPeriodDTO> jobIndexInperiodListParam, List<JobIndexDTO> jobIndexListParam)
         {
             Console.WriteLine("Starting jobs convert progress...");
             jobIndexInperiodList = jobIndexInperiodListParam;
+            jobIndexList = jobIndexListParam;
             var jobIdList = jobDataProvider.GetJobIds();
             totalJobsCount = jobIdList.Count;
             foreach (var jobId in jobIdList)
@@ -45,8 +47,8 @@ namespace MITD.PMS.Integration.Domain
                 var sourceJobDTO = jobDataProvider.GetJobDetails(jobId);
                 var desJobDTO = createDestinationJob(sourceJobDTO);
                 var job = jobService.AddJob(desJobDTO);
-                jobDataProvider.GetJobIndecesByJobId(jobId);
-                var jobInPriodAssignment = createDestinationJobInPeriod(job);
+                var sourceJobIndicesForAssignment=jobDataProvider.GetJobIndecesByJobId(jobId);
+                var jobInPriodAssignment = createDestinationJobInPeriod(job, sourceJobIndicesForAssignment);
                 jobInPeriodServiceWrapper.AddJobInPeriod(period.Id, jobInPriodAssignment);
                 jobList.Add(job);
                 Console.WriteLine("Jobs Convert progress state: " + jobList.Count + " From " + totalJobsCount.ToString());
@@ -82,15 +84,24 @@ namespace MITD.PMS.Integration.Domain
         }
 
 
-        private JobInPeriodDTO createDestinationJobInPeriod(JobDTO job)
+        private JobInPeriodDTO createDestinationJobInPeriod(JobDTO job,List<JobIndexIntegrationDTO> selectedSourceJobindices)
         {
+            var sourceTranferIdList=selectedSourceJobindices.Select(s=>s.TransferId);
+            var selectedJobIndexIdListLong = new List<long>();
+            foreach (var item in sourceTranferIdList)
+            {
+                var tempJobIndex=jobIndexList.Single(j => j.TransferId == item);
+                selectedJobIndexIdListLong.Add(tempJobIndex.Id);
+
+            }
+            //var selectedJobIndexIdList = jobIndexList.Where(j => sourceTranferIdList.Contains(j.TransferId)).Select(j => j.Id);
             var res = new JobInPeriodDTO
             {
                 Name = job.Name,
                 CustomFields = new List<CustomFieldDTO>(),
                 JobId = job.Id,
                 //ParentId = parentId,
-                JobIndices = jobIndexInperiodList.Select(c => new JobInPeriodJobIndexDTO
+                JobIndices = jobIndexInperiodList.Where(j => selectedJobIndexIdListLong.Contains(j.JobIndexId)).Select(c => new JobInPeriodJobIndexDTO
                 {
                     Id = c.Id,
                     Name = c.Name,

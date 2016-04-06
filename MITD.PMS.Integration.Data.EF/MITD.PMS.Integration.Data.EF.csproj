@@ -68,9 +68,6 @@
     <Compile Include="DBModel\PMS_GeneralIndex.cs">
       <DependentUpon>PersonnelDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBModel\PMS_IndexList.cs">
-      <DependentUpon>PersonnelDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="DBModel\PMS_IndexType.cs">
       <DependentUpon>PersonnelDB.tt</DependentUpon>
     </Compile>
@@ -83,14 +80,14 @@
     <Compile Include="DBModel\PMS_JobTitle.cs">
       <DependentUpon>PersonnelDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBModel\VW_OrganTree.cs">
-      <DependentUpon>PersonnelDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="DataProviders\EmployeeDataProvider.cs" />
     <Compile Include="DataProviders\JobDataProvider.cs" />
     <Compile Include="DataProviders\UnitIndexDataProvider.cs" />
     <Compile Include="DataProviders\JobIndexDataProvider.cs" />
     <Compile Include="DataProviders\UnitDataPrivider.cs" />
+    <Compile Include="DBModel\VW_OrganTree.cs">
+      <DependentUpon>PersonnelDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

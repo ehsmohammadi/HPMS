@@ -75,12 +75,15 @@ namespace MITD.PMS.Integration.Data.EF
         {
             db = new PersonnelSoft2005Entities();
 
-            return (from c in db.PMS_IndexList
-                where c.ID_Job == id || c.ID_Job == null
+            return (from c in db.PMS_JobIndexList
+                where c.JobID == id || c.JobID == null
                     select new JobIndexIntegrationDTO
                        {
-                           TransferId = c.IndexId.Value,
-                           Title = c.Title
+                           TransferId = c.TransferId.Value,
+                           Title = c.IndexTypeTitle,
+                           Coefficient=c.coefficient,
+                           Id=c.IndexId,
+                           JobId=c.JobID
                        }).ToList();
         }
     }

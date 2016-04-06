@@ -41,6 +41,7 @@ namespace MITD.PMS.Integration.Domain
             Console.WriteLine("Starting job index convert progress...");
 
             var jobIndexInperiodList = new List<JobIndexInPeriodDTO>();
+            var jobIndexList = new List<JobIndexDTO>();
             var sourceJobIndexListId = jobIndexDataProvider.GetJobIndexListId();
             foreach (var sourceJobIndexId in sourceJobIndexListId)
             {
@@ -48,14 +49,16 @@ namespace MITD.PMS.Integration.Domain
                 var sourceJobIndexDTO = jobIndexDataProvider.GetBy(sourceJobIndexId);
                 var desJobIndexDTO = createDestinationJobIndex(sourceJobIndexDTO);
                 var jobIndexWithOutCf = jobIndexService.AddJobIndex(desJobIndexDTO);
+                jobIndexList.Add(jobIndexWithOutCf);
                 var jobIndexWithCf = jobIndexService.GetJobIndex(jobIndexWithOutCf.Id);
                 var periodJobIndexDTO = createPeriodJobIndexDTO(jobIndexWithCf, period, sourceJobIndexDTO);
+                periodJobIndexDTO.CustomFields[0].Value = sourceJobIndexDTO.Coefficient.ToString();
                 var res = jobIndexAssignmentService.AddJobIndexInPeriod(periodJobIndexDTO);
                 jobIndexInperiodList.Add(res);
                 Console.WriteLine("Job index convert progress state: " + jobIndexInperiodList.Count + " From " + sourceJobIndexListId.Count);
 
             }
-            publisher.Publish(new JobIndexConverted(jobIndexInperiodList));
+            publisher.Publish(new JobIndexConverted(jobIndexInperiodList,jobIndexList));
         }
 
         #endregion
@@ -73,15 +76,15 @@ namespace MITD.PMS.Integration.Domain
                                              new CustomFieldDTO
                                              {
                                                  Id = PMSCostantData.JobIndexFieldId,
-                                                 Name = "JobIndexCustomField",
-                                                 DictionaryName = "JobIndexCustomFieldDicName",
+                                                 Name = "اهمیت",
+                                                 DictionaryName = "JobIndexCustomFieldCoefficient ",
                                                  EntityId = 1,
                                                  MaxValue = 10,
                                                  MinValue = 1,
                                                  TypeId = "string",
                                              }
                                          },
-                          DictionaryName = sourceJobIndex.ID.ToString(),
+                          DictionaryName = sourceJobIndex.TransferId.ToString(),
                           TransferId = sourceJobIndex.TransferId
                       };
             return res;

@@ -11,6 +11,7 @@ namespace MITD.PMS.Integration.Domain
         #region Fields
         private List<UnitIndexInPeriodDTO> unitIndexInperiodList = new List<UnitIndexInPeriodDTO>();
         private List<JobIndexInPeriodDTO> jobIndexInperiodList = new List<JobIndexInPeriodDTO>();
+        private List<JobIndexDTO> jobIndexList = new List<JobIndexDTO>();
         private List<JobDTO> jobList = new List<JobDTO>();
         private List<UnitDTO> unitList = new List<UnitDTO>();
         private Period period;
@@ -111,8 +112,9 @@ namespace MITD.PMS.Integration.Domain
             jobIndexConvertedHandler = new DelegateHandler<JobIndexConverted>(e =>
                 {
                     jobIndexInperiodList = e.JobIndexInperiodList;
+                    jobIndexList = e.JobIndexList;
                     Console.WriteLine("{0} Job index converted , Job index progress finished", jobIndexInperiodList.Count);
-                    jobConverter.ConvertJobs(period, jobIndexInperiodList);
+                    jobConverter.ConvertJobs(period, jobIndexInperiodList, jobIndexList);
                 });
             publisher.RegisterHandler(jobIndexConvertedHandler);
 

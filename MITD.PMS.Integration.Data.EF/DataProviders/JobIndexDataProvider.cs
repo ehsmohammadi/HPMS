@@ -12,11 +12,12 @@ namespace MITD.PMS.Integration.Data.EF
     public class JobIndexDataProvider:IJobIndexDataProvider
     {
 
-        private PersonnelSoft2005Entities db = new PersonnelSoft2005Entities();
+        private PersonnelSoft2005Entities db;
 
 
         public List<GeneralJobIndexDto> GetGeneralIndexes()
         {
+            db = new PersonnelSoft2005Entities();
             IList<long> ids = GetGeneralJobIndexIds();
             List<GeneralJobIndexDto> GeneralIndexesList = new List<GeneralJobIndexDto>();
 
@@ -30,6 +31,7 @@ namespace MITD.PMS.Integration.Data.EF
                     GeneralIndex.IndexTitle = TempGeneralIndex.Title;
                     GeneralIndex.IndexTypeID = TempGeneralIndex.ID_IndexType;
                     GeneralIndex.Description = TempGeneralIndex.Description;
+                    GeneralIndex.Coefficient = TempGeneralIndex.coefficient;
 
                     GeneralIndexesList.Add(GeneralIndex);
 
@@ -46,6 +48,7 @@ namespace MITD.PMS.Integration.Data.EF
 
         private IList<long> GetGeneralJobIndexIds()
         {
+            db = new PersonnelSoft2005Entities();
             try
             {
                 var ids = (from c in db.PMS_GeneralIndex where c.IsActive == true select c.ID).ToList();
@@ -64,6 +67,7 @@ namespace MITD.PMS.Integration.Data.EF
         
         public List<ExclusiveJobIndexDto> GetExclusiveJobIndexes()
         {
+            db = new PersonnelSoft2005Entities();
             IJobDataProvider JobService = new JobDataProvider();
 
             var JobIds = JobService.GetJobIds();
@@ -82,6 +86,7 @@ namespace MITD.PMS.Integration.Data.EF
                     ExclusiveIndex.IndexTypeID = TempExclusiveIndex.ID_IndexType;
                     ExclusiveIndex.Description = TempExclusiveIndex.Discription;
                     ExclusiveIndex.JobID = TempExclusiveIndex.ID_Job;
+                    ExclusiveIndex.Coefficient = TempExclusiveIndex.coefficient;
 
 
 
@@ -97,28 +102,66 @@ namespace MITD.PMS.Integration.Data.EF
             return ExclusiveIndexesList;
         }
 
-        public List<Nullable<Guid>> GetJobIndexListId()
+        public List<JobIndexIdListItem> GetJobIndexListId()
         {
-            return (from c in db.PMS_IndexList where c.IsActive == true select c.IndexId).ToList();
+            db = new PersonnelSoft2005Entities();
+
+            List<JobIndexIdListItem> Result = new List<JobIndexIdListItem>();
+
+            Result = (from c in db.PMS_GeneralIndex
+                      select new JobIndexIdListItem
+                          {
+                              //todo: Remove JobId From this damn query!
+                              JobId = 0, //c.JobID,
+                              TransferId = c.TransferId.Value
+                          }).ToList();
+
+            var tempJobIndexList = (from c in db.PMS_JobIndex
+                                    select new JobIndexIdListItem
+                                    {
+                                        //todo: Remove JobId From this damn query!
+                                        JobId = 0, //c.JobID,
+                                        TransferId = c.TransferId.Value
+                                    }).ToList();
+
+            foreach (var item in tempJobIndexList)
+            {
+                Result.Add(item);
+            }
+
+            return Result;
+
+            //return (from c in db.PMS_JobIndexList
+            //        where c.ItemState == true
+            //        select
+            //            new JobIndexIdListItem
+            //            {
+            //                //todo: Remove JobId From this damn query!
+            //                JobId = 0, //c.JobID,
+            //                TransferId = c.TransferId.Value
+            //            }).Distinct().ToList();
         }
 
-        public JobIndexIntegrationDTO GetBy(Guid? id)
+        public JobIndexIntegrationDTO GetBy(JobIndexIdListItem id)
         {
-            return (from c in db.PMS_IndexList
-                where c.IndexId == id
-                select new JobIndexIntegrationDTO
-                       {
-                           ID = c.IndexId,
-                           TransferId = c.IndexId.Value,
-                           Title = c.Title,
-                           JobIndexId = c.IndexTypeID,
-                           JobId = c.ID_Job,
-                           IndexType = c.IndexTypeID
-                       }).Single();
+            db = new PersonnelSoft2005Entities();
+            return (from c in db.PMS_JobIndexList
+                    where c.TransferId == id.TransferId //&& c.JobID == id.JobId
+                    select new JobIndexIntegrationDTO
+                           {
+                               Id = c.IndexId,
+                               TransferId = c.TransferId.Value,
+                               Title = c.IndexTitle,
+                               JobIndexId = c.IndexId,
+                               //JobId = c.JobID,
+                               IndexType = c.IndexTypeID,
+                               Coefficient = c.coefficient
+                           }).First();
         }
 
         private IList<long> GetExclusiveJobIndexIds()
         {
+            db = new PersonnelSoft2005Entities();
             try
             {
                 var ids = (from c in db.PMS_JobIndex where c.IsActive == true select c.ID).ToList();

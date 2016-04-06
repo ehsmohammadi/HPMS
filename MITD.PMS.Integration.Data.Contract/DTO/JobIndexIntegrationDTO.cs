@@ -8,7 +8,7 @@ namespace MITD.PMS.Integration.Data.Contract.DTO
 {
     public class JobIndexIntegrationDTO
     {
-        public Guid? ID { get; set; }
+        public long Id { get; set; }
 
         public string Title { get; set; }
 
@@ -21,5 +21,7 @@ namespace MITD.PMS.Integration.Data.Contract.DTO
         public long JobIndexId { get; set; }
 
         public long IndexType { get; set; }
+
+        public int Coefficient { get; set; }
     }
 }

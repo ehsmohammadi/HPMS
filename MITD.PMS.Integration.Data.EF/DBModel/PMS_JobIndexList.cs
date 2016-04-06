@@ -18,6 +18,11 @@ namespace MITD.PMS.Integration.Data.EF.DBModel
         public string JobTitle { get; set; }
         public string IndexTitle { get; set; }
         public string IndexTypeTitle { get; set; }
+        public long IndexTypeID { get; set; }
         public bool ItemState { get; set; }
+        public short coefficient { get; set; }
+        public bool IsActive { get; set; }
+        public Nullable<System.Guid> TransferId { get; set; }
+        public long IndexId { get; set; }
     }
 }

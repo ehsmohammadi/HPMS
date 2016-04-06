@@ -12,5 +12,7 @@ namespace MITD.PMS.Integration.Data.Contract.DTO
         public string Description { get; set; }
 
         public long IndexTypeID { get; set; }
+
+        public int Coefficient { get; set; }
     }
 }

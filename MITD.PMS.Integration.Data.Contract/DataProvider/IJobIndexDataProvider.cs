@@ -11,7 +11,7 @@ namespace MITD.PMS.Integration.Data.Contract.DataProvider
         List<GeneralJobIndexDto> GetGeneralIndexes();
 
         List<ExclusiveJobIndexDto> GetExclusiveJobIndexes();
-        List<Nullable<Guid>> GetJobIndexListId();
-        JobIndexIntegrationDTO GetBy(Guid? id);
+        List<JobIndexIdListItem> GetJobIndexListId();
+        JobIndexIntegrationDTO GetBy(JobIndexIdListItem id);
     }
 }

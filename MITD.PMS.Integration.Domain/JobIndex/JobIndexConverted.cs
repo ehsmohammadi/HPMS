@@ -13,9 +13,12 @@ namespace MITD.PMS.Integration.Domain
             get { return jobIndexInperiodList; }
         }
 
-        public JobIndexConverted(List<JobIndexInPeriodDTO> jobIndexInperiodList)
+        public List<JobIndexDTO> JobIndexList { get; set; }
+
+        public JobIndexConverted(List<JobIndexInPeriodDTO> jobIndexInperiodList,List<JobIndexDTO> jobIndexList)
         {
             this.jobIndexInperiodList = jobIndexInperiodList;
+            this.JobIndexList = jobIndexList;
         }
 
         public bool SameEventAs(JobIndexConverted other)
