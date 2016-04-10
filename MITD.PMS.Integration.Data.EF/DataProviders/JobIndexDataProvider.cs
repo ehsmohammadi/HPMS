@@ -51,7 +51,7 @@ namespace MITD.PMS.Integration.Data.EF
             db = new PersonnelSoft2005Entities();
             try
             {
-                var ids = (from c in db.PMS_GeneralIndex where c.IsActive == true select c.ID).ToList();
+                var ids = (from c in db.PMS_GeneralIndex where c.IsActive == true && c.ID_IndexType!=3 select c.ID).ToList();
                 return ids;
             }
             catch (Exception e)
@@ -79,7 +79,7 @@ namespace MITD.PMS.Integration.Data.EF
             {
                 try
                 {
-                    var TempExclusiveIndex = (from c in db.PMS_JobIndex where c.ID == item && c.IsActive == true select c).FirstOrDefault();
+                    var TempExclusiveIndex = (from c in db.PMS_JobIndex where c.ID == item && c.IsActive == true && c.ID_IndexType != 3 select c).FirstOrDefault();
 
                     ExclusiveJobIndexDto ExclusiveIndex = new ExclusiveJobIndexDto();
                     ExclusiveIndex.IndexTitle = TempExclusiveIndex.Title;
