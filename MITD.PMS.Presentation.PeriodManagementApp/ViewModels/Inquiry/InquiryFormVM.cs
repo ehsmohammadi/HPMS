@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 using MITD.PMS.Presentation.Contracts;
 using MITD.PMS.Presentation.PeriodManagementApp;
@@ -8,6 +9,10 @@ namespace MITD.PMS.Presentation.Logic
 {
     public sealed class InquiryFormVM : PeriodMgtWorkSpaceViewModel 
     {
+        #region Nested Class
+
+        #endregion
+
         #region Fields
 
         private readonly IPMSController appController;
@@ -56,6 +61,7 @@ namespace MITD.PMS.Presentation.Logic
             get { return inquiryForm; }
             set { this.SetField(vm => vm.InquiryForm, ref inquiryForm, value); }
         }
+
 
         private CommandViewModel saveCommand;
         public CommandViewModel SaveCommand
@@ -111,15 +117,35 @@ namespace MITD.PMS.Presentation.Logic
         private void init()
         {
             inquirySubjectInquirers = new InquirySubjectInquiryFormListDTO();
+
             
+
         }
+
 
         public void Load(InquiryFormDTO inquiryFormDTOParam, ActionType actionTypeParam)
         {
             periodId = inquiryFormDTOParam.PeriodId;
             actionType = actionTypeParam;
             InquiryForm = inquiryFormDTOParam;
-            DisplayName = "فرم نظرسنجی" + " "; 
+            DisplayName = "فرم نظرسنجی" + " ";
+            foreach (var jobIndexValueDTO in InquiryForm.JobIndexValueList)
+            {
+                jobIndexValueDTO.Grades = fillGradesList();
+            }
+        }
+
+        private List<Grade> fillGradesList()
+        {
+            return new List<Grade>
+            {
+                new Grade("عالی", "5"),
+                new Grade("خوب", "4"),
+                new Grade("مورد انتظار", "3"),
+                new Grade("نیاز به آموزش و مراقبت", "2"),
+                new Grade("نامطلوب", "1")
+
+            };
         }
 
        
@@ -142,9 +168,7 @@ namespace MITD.PMS.Presentation.Logic
                     }), inquiryForm);
             
         }
-        
-
-
+       
         protected override void OnRequestClose()
         {
             base.OnRequestClose();

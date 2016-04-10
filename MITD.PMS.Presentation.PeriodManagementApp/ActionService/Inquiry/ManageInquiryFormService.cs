@@ -21,12 +21,17 @@ namespace MITD.PMS.Presentation.Logic
 
         public void DoAction(InquirerInquirySubjectListVM vm)
         {
+           
             if (vm.SelectedInquirySubject == null)
                 return;
             inquiryService.GetInquiryForm((res, exp) => pmsController.BeginInvokeOnDispatcher(() =>
                 {
                     if (exp == null)
+                    {
+                        res.FullName = vm.SelectedInquirySubject.FullName;
                         periodController.ShowInquiryFormView(res, ActionType.FillInquiryForm);
+                    }
+                        
                     else
                     {
                         pmsController.HandleException(exp);

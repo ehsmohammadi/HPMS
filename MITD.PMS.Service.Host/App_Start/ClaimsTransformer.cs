@@ -55,8 +55,8 @@ namespace MITD.PMS.Service.Host.App_Start
             incomingPrincipal.Identities.First().AddClaims(new List<Claim>
             {
                 new Claim(ClaimTypes.Role, "SuperAdmin"),
-                //new Claim(ClaimTypes.Role, "Employee"),
-                new Claim("http://identityserver.thinktecture.com/claims/profileclaims/employeeno", "159961"),
+                new Claim(ClaimTypes.Role, "Employee"),
+                new Claim("http://identityserver.thinktecture.com/claims/profileclaims/employeeno", "652547"),
                 new Claim("http://identityserver.thinktecture.com/claims/profileclaims/firstname", "احسان"),
                 new Claim("http://identityserver.thinktecture.com/claims/profileclaims/lastname", "محمدی"),
                 new Claim("http://identityserver.thinktecture.com/claims/profileclaims/jobpositionnames", "مدیر فنی"),

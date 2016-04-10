@@ -16,10 +16,10 @@ namespace MITD.PMS.Domain.Service
         private readonly IEventPublisher publisher;
 
 
-        public InquiryJobIndexPointCreatorService(IJobPositionRepository jobPositionRep, 
+        public InquiryJobIndexPointCreatorService(IJobPositionRepository jobPositionRep,
             IJobRepository jobRep,
-            IJobIndexRepository jobIndexRep, 
-            IInquiryJobIndexPointRepository inquiryJobIndexPointRep,IEventPublisher publisher)
+            IJobIndexRepository jobIndexRep,
+            IInquiryJobIndexPointRepository inquiryJobIndexPointRep, IEventPublisher publisher)
         {
             this.jobPositionRep = jobPositionRep;
             this.jobRep = jobRep;
@@ -40,8 +40,14 @@ namespace MITD.PMS.Domain.Service
                 if ((jobIndex as JobIndex).IsInquireable)
                 {
                     var id = inquiryJobIndexPointRep.GetNextId();
+#if(DEBUG)
                     var inquiryIndexPoint = new InquiryJobIndexPoint(new InquiryJobIndexPointId(id), itm, jobIndex as JobIndex,
+                        "5");
+#else
+                     var inquiryIndexPoint = new InquiryJobIndexPoint(new InquiryJobIndexPointId(id), itm, jobIndex as JobIndex,
                         string.Empty);
+#endif
+
                     publisher.Publish(new InquiryJobIndexPointCreated(inquiryIndexPoint));
 
                 }

@@ -2,7 +2,7 @@
 using MITD.PMS.Presentation.Logic;
 using System;
 using System.Collections.Generic;
-
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Windows;
@@ -17,9 +17,13 @@ namespace MITD.PMS.Presentation.PeriodManagementApp.Views
 {
     public partial class InquiryFormView : ViewBase, IInquiryFormView
     {
+
+
+
+
         public InquiryFormView()
         {
-            InitializeComponent();
+           InitializeComponent();
         }
 
         public InquiryFormView(InquiryFormVM vm)
@@ -28,5 +32,6 @@ namespace MITD.PMS.Presentation.PeriodManagementApp.Views
             ViewModel = vm;
 
         }
+
     }
 }

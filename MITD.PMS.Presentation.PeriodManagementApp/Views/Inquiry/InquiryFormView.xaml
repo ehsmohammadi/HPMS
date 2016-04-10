@@ -40,10 +40,10 @@
                     </pr:ComboBoxEx>
                 </StackPanel>
             </Border>-->
-            
+
             <sdk:DataGrid Grid.Row="2" Name="drgList" AutoGenerateColumns="False" HorizontalAlignment="Stretch" SelectionMode="Single" 
                       ItemsSource="{Binding Path=InquiryForm.JobIndexValueList}" >
-               
+
                 <sdk:DataGrid.Columns>
 
                     <!--<sdk:DataGridTextColumn Header="نام شاخص" CanUserReorder="True" CanUserResize="True"  CanUserSort="True" Width="Auto"
@@ -56,9 +56,19 @@
                         </sdk:DataGridTemplateColumn.CellTemplate>
                     </sdk:DataGridTemplateColumn>
                     <sdk:DataGridTemplateColumn Header="نمره" IsReadOnly="False" Width="130" >
-                        <sdk:DataGridTemplateColumn.CellTemplate >
+                        <sdk:DataGridTemplateColumn.CellTemplate  >
                             <DataTemplate>
-                                <TextBox  HorizontalAlignment="Right" Text="{Binding Path=IndexValue,Mode=TwoWay}" Width="20" MaxWidth="20" MaxLength="1"/>
+                                <pr:ComboBoxEx   Width="100" Margin="5" DisplayMemberPath="Name" 
+                                    ItemsSource="{Binding Grades, Mode=TwoWay}"
+                                    SelectedValueProper="{Binding Mode=TwoWay, Path=IndexValue}" 
+                                    SelectedValuePath="Value">
+                                    <pr:ComboBoxEx.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <VirtualizingStackPanel/>
+                                        </ItemsPanelTemplate>
+                                    </pr:ComboBoxEx.ItemsPanel>
+                                </pr:ComboBoxEx>
+                                <!--<TextBox  HorizontalAlignment="Right" Text="{Binding Path=IndexValue,Mode=TwoWay}" Width="20" MaxWidth="20" MaxLength="1"/>-->
                             </DataTemplate>
                         </sdk:DataGridTemplateColumn.CellTemplate>
                     </sdk:DataGridTemplateColumn>

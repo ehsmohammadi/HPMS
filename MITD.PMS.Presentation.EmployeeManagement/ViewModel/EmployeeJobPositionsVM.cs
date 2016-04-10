@@ -280,9 +280,9 @@ namespace MITD.PMS.Presentation.Logic
                 return;
             if (eventData.Action == ActionType.AddEmployeeJobCustomFields)
             {
-                if (EmployeeJobPositions.EmployeeJobPositionAssignmentList.Count > 0)
-                    appController.ShowMessage("هر کارمند می تواند تنها یک پست سازمانی داشته باشد ");
-                else
+                //if (EmployeeJobPositions.EmployeeJobPositionAssignmentList.Count > 0)
+                //    appController.ShowMessage("هر کارمند می تواند تنها یک پست سازمانی داشته باشد ");
+                //else
                     EmployeeJobPositions.EmployeeJobPositionAssignmentList.Add(eventData.EmployeeJobPositionAssignment);
             }
             else
