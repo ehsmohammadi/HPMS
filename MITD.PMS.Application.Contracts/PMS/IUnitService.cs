@@ -25,5 +25,6 @@ namespace MITD.PMS.Application.Contracts
         List<Unit> GetAllUnitByParentId(UnitId id);
         UnitId GetUnitIdBy(Period period, SharedUnitId sharedUnitId);
         Unit GetUnitBy(UnitId unitId);
+        List<UnitId> GetAllUnitId(Period period);
     }
 }

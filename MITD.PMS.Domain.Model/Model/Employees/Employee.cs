@@ -22,6 +22,7 @@ namespace MITD.PMS.Domain.Model.Employees
         #endregion
 
         #region Properties
+
         public virtual EmployeeId Id
         {
             get { return id; }

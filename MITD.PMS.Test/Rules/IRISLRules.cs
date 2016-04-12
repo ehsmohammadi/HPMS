@@ -213,6 +213,13 @@ namespace MITD.Core.RuleEngine
         {
             try
             {
+                if (level == 3)
+                {
+                    var valueList =
+                        jobIndex.Value.SelectMany(j => j.Value).Where(x => x.JobPosition.JobPositionLevel == level).ToList();
+                    var sum = valueList.Sum(inquiry => Convert.ToDecimal(inquiry.Value));
+                    return sum / valueList.Count();
+                }
                 return Convert.ToDecimal(jobIndex.Value.SelectMany(j => j.Value).SingleOrDefault(x => x.JobPosition.JobPositionLevel == level).Value);
             }
             catch (Exception)

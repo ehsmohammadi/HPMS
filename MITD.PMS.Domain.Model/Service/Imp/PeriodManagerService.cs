@@ -72,9 +72,10 @@ namespace MITD.PMS.Domain.Service
         public InquiryInitializingProgress GetCompletedInitializeInquiryProgress(Period period)
         {
             var inquiryInitializingProgress = new InquiryInitializingProgress { State = period.State };
-            var totalcount = inquiryConfiguratorService.GetNumberOfConfiguredJobPosition(period);
+            var totalcount = inquiryConfiguratorService.GetNumberOfConfiguredJobPosition(period) +
+                             inquiryConfiguratorService.GetNumberOfConfiguredUnit(period);
             inquiryInitializingProgress.Messages.Add("شروع آماده سازی دوره");
-            inquiryInitializingProgress.Messages.Add("تعداد " + totalcount + " پست برای پیکر بندی نظر سنجی آماده می باشد");
+            inquiryInitializingProgress.Messages.Add("تعداد " + totalcount + " پست و واحد برای پیکر بندی نظر سنجی آماده می باشد");
             inquiryInitializingProgress.Messages.Add("اتمام آماده سازی دوره برای نظر سنجی");
             inquiryInitializingProgress.SetProgress(totalcount, totalcount);
             return inquiryInitializingProgress;

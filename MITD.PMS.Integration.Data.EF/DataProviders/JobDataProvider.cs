@@ -76,7 +76,8 @@ namespace MITD.PMS.Integration.Data.EF
             db = new PersonnelSoft2005Entities();
 
             return (from c in db.PMS_JobIndexList
-                where c.JobID == id || c.JobID == null
+                  
+                where c.IndexTypeID!=3 &&(c.JobID == id || c.JobID == null )
                     select new JobIndexIntegrationDTO
                        {
                            TransferId = c.TransferId.Value,

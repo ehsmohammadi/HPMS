@@ -161,7 +161,7 @@ namespace MITD.PMS.Presentation.Logic
         {
             PeriodMgtAppLocalizedResources = new PeriodMgtAppLocalizedResources();
             init();
-           
+
         }
 
         public UnitInPeriodInquiryVM(IPMSController appController,
@@ -188,7 +188,7 @@ namespace MITD.PMS.Presentation.Logic
             employeeCriteria = new EmployeeCriteria();
             Inquirers = new PagedSortableCollectionView<EmployeeDTOWithActions>();
             SelectedCustomInquirer = new InquiryUnitDTO();
-            UnitInPeriodUnitIndexDto=new UnitInPeriodUnitIndexDTO();
+            UnitInPeriodUnitIndexDto = new UnitInPeriodUnitIndexDTO();
             Inquirers.OnRefresh += (s, args) => getSubjectsInquirers();
         }
 
@@ -217,7 +217,7 @@ namespace MITD.PMS.Presentation.Logic
             getSubjectsInquirers();
         }
 
-    
+
         private void getSubjectsInquirers()
         {
             ShowBusyIndicator("در حال بارگذاری اطلاعات");
@@ -278,6 +278,11 @@ namespace MITD.PMS.Presentation.Logic
 
         private void Remove()
         {
+            if (SelectedCustomInquirer == null)
+            {
+                appController.ShowMessage("لطفا برای حذف نظر دهنده آن را انتخاب کنید");
+                return;
+            }
             unitInPeriodService.DeleteInquirer((res, exp) => appController.BeginInvokeOnDispatcher(() =>
             {
                 if (exp == null)
@@ -290,9 +295,21 @@ namespace MITD.PMS.Presentation.Logic
                     appController.HandleException(exp);
                 }
             }), Period.Id, UnitInPeriod.UnitId, SelectedCustomInquirer.EmployeeNo);
+
+
         }
         private void Add()
         {
+            if (UnitInPeriodUnitIndexDto.Id == 0)
+            {
+                appController.ShowMessage("لطفا برای اضافه کرد نظر دهنده شاخص مورد نظر خود را انتخاب کنید");
+                return;
+            }
+            if (Inquirer == null)
+            {
+                appController.ShowMessage("لطفا برای اضافه کرد نظر دهنده فرد مورد نظر خود را انتخاب کنید");
+                return;
+            }
             unitInPeriodService.AddInquirer((res, exp) => appController.BeginInvokeOnDispatcher(() =>
                 {
                     if (exp == null)
@@ -305,9 +322,7 @@ namespace MITD.PMS.Presentation.Logic
                         appController.HandleException(exp);
                     }
 
-
-
-                }), Period.Id, UnitInPeriod.UnitId, Inquirer.PersonnelNo,UnitInPeriodUnitIndexDto.Id);
+                }), Period.Id, UnitInPeriod.UnitId, Inquirer.PersonnelNo, UnitInPeriodUnitIndexDto.Id);
 
         }
 

@@ -72,12 +72,13 @@ namespace MITD.PMS.Test
                             new RuleBasedPolicyEngineService(new LocatorProvider("PMSDbConnection"), publisher)));
                         var provider = new PMS.Application.CalculationDataProvider(rep, pmsAdminService,
                             new PMS.Persistence.NH.JobIndexPointRepository(uow));
-                        var policy = policyRep.GetById(new PolicyId(10));
+                        var policy = policyRep.GetById(new PolicyId(1));
                         var period = periodRep.GetBy(c => c.Active);
-                        var emp = rep.GetBy(new EmployeeId("1", period.Id));
-                        var calculation = new Calculation(calcRep.GetNextId(), period, policy, Guid.NewGuid().ToString(), DateTime.Now, "1");
-                        calcRep.Add(calculation);
-                        uow.Commit();
+                        var emp = rep.GetBy(new EmployeeId("5", period.Id));
+                        //var calculation = new Calculation(calcRep.GetNextId(), period, policy, Guid.NewGuid().ToString(), DateTime.Now, "831181");
+                        var calculation = calcRep.GetById(new CalculationId(1));
+                        //calcRep.Add(calculation);
+                        //uow.Commit();
                         MITD.PMSReport.Domain.Model.CalculationData empData;
                         var pathNo = 1;
                         List<SummaryCalculationPoint> calcList = new List<SummaryCalculationPoint>();

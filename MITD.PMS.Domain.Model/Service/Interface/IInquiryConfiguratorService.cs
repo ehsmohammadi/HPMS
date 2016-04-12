@@ -38,5 +38,6 @@ namespace MITD.PMS.Domain.Service
         InquiryInitializingProgress InquiryInitializingProgress { get; }
         bool IsRunning { get; }
         long GetNumberOfConfiguredJobPosition(Period period);
+        long GetNumberOfConfiguredUnit(Period period);
     }
 }

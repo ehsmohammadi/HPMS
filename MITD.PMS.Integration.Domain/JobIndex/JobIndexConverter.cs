@@ -95,7 +95,7 @@ namespace MITD.PMS.Integration.Domain
             var res = new JobIndexInPeriodDTO
             {
                 //todo: Kharabe
-                CalculationLevel = 1,
+
                 CalculationOrder = 1,
                 IsInquireable = true,
                 Name = jobIndex.Name,
@@ -113,10 +113,12 @@ namespace MITD.PMS.Integration.Domain
             if (sourceJobIndexDTO.IndexType==1)
             {
                 res.ParentId = PMSCostantData.JobIndexGroupBehaviaral;
+                res.CalculationLevel = 1;
             }
             else
             {
                 res.ParentId = PMSCostantData.JobIndexGroupPerformance;
+                res.CalculationLevel = 2;
             }
             return res;
         }

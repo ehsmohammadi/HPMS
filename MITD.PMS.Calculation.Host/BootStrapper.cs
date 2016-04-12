@@ -76,23 +76,23 @@ namespace MITD.PMS.Calculation.Host
             container.Register
                 (
                     Classes.FromAssemblyContaining<MITD.PMS.Application.JobService>()
-                        .BasedOn<IService>().If(c => c.Namespace == typeof (MITD.PMS.Application.JobService).Namespace
-                                                     && c.Name != typeof (MITD.PMS.Application.CalculatorEngine).Name
+                        .BasedOn<IService>().If(c => c.Namespace == typeof(MITD.PMS.Application.JobService).Namespace
+                                                     && c.Name != typeof(MITD.PMS.Application.CalculatorEngine).Name
                                                      &&
                                                      c.Name !=
-                                                     typeof (MITD.PMS.Application.JobIndexPointCalculator).Name
+                                                     typeof(MITD.PMS.Application.JobIndexPointCalculator).Name
                                                      &&
                                                      c.Name !=
-                                                     typeof (MITD.PMS.Application.CalculationDataProvider).Name
+                                                     typeof(MITD.PMS.Application.CalculationDataProvider).Name
                         )
                         .WithService.FromInterface()
                         .LifestyleBoundToNearest<IService>(),
                     Classes.FromAssemblyContaining<FunctionService>()
-                        .BasedOn<IService>().If(c => c.Namespace == typeof (FunctionService).Namespace)
+                        .BasedOn<IService>().If(c => c.Namespace == typeof(FunctionService).Namespace)
                         .WithService.FromInterface()
                         .LifestyleBoundToNearest<IService>(),
                     Classes.FromAssemblyContaining<MITD.PMS.Domain.Service.RuleBasedPolicyEngineService>()
-                        .BasedOn<IService>().OrBasedOn(typeof (IConfigurator))
+                        .BasedOn<IService>().OrBasedOn(typeof(IConfigurator))
                         .WithService.FromInterface()
                         .LifestyleBoundToNearest<IService>(),
 
@@ -100,7 +100,7 @@ namespace MITD.PMS.Calculation.Host
                     Component.For<IRuleService>().ImplementedBy<RuleEngineService>()
                         .LifestyleBoundToNearest<IService>(),
                     Component.For<IServiceLocatorProvider>().ImplementedBy<LocatorProvider>()
-                        .DependsOn(new Hashtable {{"connectionName", "PMSDBConnection"}})
+                        .DependsOn(new Hashtable { { "connectionName", "PMSDBConnection" } })
                         .LifeStyle.BoundTo<IService>()
                     ,
                     Component.For<IEventPublisher>().ImplementedBy<EventPublisher>()
@@ -126,6 +126,11 @@ namespace MITD.PMS.Calculation.Host
                     .LifestyleBoundTo<IService>());
 
             container.Register(
+                Component.For<IUnitInquiryConfiguratorService>()
+                    .ImplementedBy<UnitInquiryConfiguratorService>()
+                    .LifestyleBoundTo<IService>());
+
+            container.Register(
                 Component.For<IJobIndexPointCalculatorProvider>()
                     .ImplementedBy<JobIndexPointCalculatorProvider>()
                     .LifeStyle.Singleton.IsDefault());
@@ -147,7 +152,7 @@ namespace MITD.PMS.Calculation.Host
 
 
             container.Register(
-                Component.For(typeof (IServiceLifeCycleManager<>)).ImplementedBy(typeof (ServiceLifeCycleManager<>))
+                Component.For(typeof(IServiceLifeCycleManager<>)).ImplementedBy(typeof(ServiceLifeCycleManager<>))
                     .LifeStyle.Transient);
 
             container.Register(

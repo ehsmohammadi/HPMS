@@ -22,6 +22,19 @@ namespace MITD.PMS.Application
         }
     }
 
+    public class UnitInquiryServiceFactory : IUnitInquiryServiceFactory
+    {
+        public IServiceLifeCycleManager<IUnitInquiryService> Create()
+        {
+            return ServiceLocator.Current.GetInstance<IServiceLifeCycleManager<IUnitInquiryService>>();
+        }
+
+        public void Release(IServiceLifeCycleManager<IUnitInquiryService> inquiryService)
+        {
+            ServiceLocator.Current.Release(inquiryService);
+        }
+    }
+
     public class JobPositionServiceFactory : IJobPositionServiceFactory
     {
         public IServiceLifeCycleManager<IJobPositionService> Create()

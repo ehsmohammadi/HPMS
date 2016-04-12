@@ -18,5 +18,6 @@ namespace MITD.PMS.Domain.Model.Units
         List<Unit> GetAllInquirySubjectUnits(EmployeeId inquirerId);
         Exception ConvertException(Exception exp);
         Exception TryConvertException(Exception exp);
+        List<UnitId> GetAllUnitId(Period period);
     }
 }

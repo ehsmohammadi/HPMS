@@ -70,7 +70,7 @@ namespace MITD.PMS.Integration.Domain
         {
             if (isInitialized)
             {
-                RegisterHandler();
+                registerHandler();
                 
                 unitIndexConverter.ConvertUnitIndex(period);
                 
@@ -81,7 +81,7 @@ namespace MITD.PMS.Integration.Domain
             }
         }
 
-        private void RegisterHandler()
+        private void registerHandler()
         {
             #region UnitIndex Converter handler
 

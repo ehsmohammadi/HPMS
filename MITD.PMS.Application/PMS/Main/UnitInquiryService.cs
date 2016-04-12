@@ -14,16 +14,18 @@ namespace MITD.PMS.Application
 {
     public class UnitInquiryService : IUnitInquiryService
     {
+        #region Fields
         private readonly IUnitInquiryConfiguratorService configurator;
         private readonly IEmployeeRepository employeeRep;
         private readonly IInquiryUnitIndexPointRepository inquiryUnitIndexPointRep;
-
         private readonly IUnitRepository unitRep;
         private readonly IUnitIndexRepository unitIndexRep;
         private readonly IInquiryUnitIndexPointService inquiryUnitIndexPointService;
-        private readonly IPeriodManagerService periodChecker;
+        private readonly IPeriodManagerService periodChecker; 
+        #endregion
 
 
+        #region Constructors
         public UnitInquiryService(
             IUnitInquiryConfiguratorService configurator,
             IEmployeeRepository employeeRep,
@@ -41,8 +43,10 @@ namespace MITD.PMS.Application
             this.unitIndexRep = unitIndexRep;
             this.inquiryUnitIndexPointService = inquiryUnitIndexPointService;
             this.periodChecker = periodChecker;
-        }
+        } 
+        #endregion
 
+        #region Methods
         public List<InquirySubjectWithUnit> GetInquirySubjects(EmployeeId inquirerEmployeeId)
         {
             var res = new List<InquirySubjectWithUnit>();
@@ -63,7 +67,6 @@ namespace MITD.PMS.Application
 
         }
 
-        //  public List<InquiryUnitIndexPoint> GetAllInquiryUnitIndexPointBy(UnitInquiryConfigurationItemId configurationItemId)
         public List<InquiryUnitIndexPoint> GetAllInquiryUnitIndexPointBy(EmployeeId employeeId, UnitId id)
         {
 
@@ -74,7 +77,7 @@ namespace MITD.PMS.Application
             {
                 CreateAllInquiryUnitIndexPoint(unitInquiryConfigurationItem);
             }
-            return inquiryUnitIndexPointRep.GetAllBy(employeeId,id);
+            return inquiryUnitIndexPointRep.GetAllBy(employeeId, id);
         }
 
         public void UpdateInquiryUnitIndexPoints(List<InquiryUnitIndexPoinItem> inquiryUnitIndexPoinItems)
@@ -89,7 +92,7 @@ namespace MITD.PMS.Application
         public void CreateAllInquiryUnitIndexPoint(UnitInquiryConfigurationItem itm)
         {
             var inquryUnitIndexPoints = inquiryUnitIndexPointRep.GetBy(itm.Id);
-            if (inquryUnitIndexPoints == null)
+            if (inquryUnitIndexPoints == null )
             {
                 create(itm);
             }
@@ -97,11 +100,16 @@ namespace MITD.PMS.Application
 
         private void create(UnitInquiryConfigurationItem configurationItem)
         {
-            inquiryUnitIndexPointService.Add(configurationItem, string.Empty);
-        }
+#if(DEBUG)
+            inquiryUnitIndexPointService.Add(configurationItem, "3");
+#else
+                   inquiryUnitIndexPointService.Add(configurationItem, string.Empty);
+#endif
+        } 
+        #endregion
 
 
-       
+
     }
 
 

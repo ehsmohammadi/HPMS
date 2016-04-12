@@ -192,6 +192,11 @@ namespace MITD.PMS.Application
             return unit;
         }
 
+        public List<UnitId> GetAllUnitId(Period period)
+        {
+            return unitRep.GetAllUnitId(period);
+        }
+
         public List<UnitInquiryConfigurationItem> GetInquirySubjectWithInquirer(UnitId unitId)
         {
             using (var tr = new TransactionScope())

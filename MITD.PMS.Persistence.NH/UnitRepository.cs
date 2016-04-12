@@ -95,5 +95,10 @@ namespace MITD.PMS.Persistence.NH
             }
             return res;
         }
+
+        public List<UnitId> GetAllUnitId(Period period)
+        {
+            return rep.GetQuery().Where(u => u.Id.PeriodId.Id == period.Id.Id).Select(u => u.Id).ToList();
+        }
     }
 }

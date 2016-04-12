@@ -1,27 +1,33 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MITD.Core;
-using MITD.PMS.Application.Contracts;
 using MITD.PMS.Domain.Model.JobPositions;
 using MITD.PMS.Domain.Model.Periods;
+using MITD.PMS.Domain.Model.Units;
 using MITD.PMS.Domain.Service;
-using System;
-
 
 namespace MITD.PMS.Application
 {
     public class InquiryConfiguratorService : IInquiryConfiguratorService
     {
+        #region Fields
+
         private readonly IJobPositionServiceFactory jobPositionServiceFactory;
         private readonly IInquiryServiceFactory inquiryServiceFactory;
+        private readonly IUnitServiceFactory unitServiceFactory;
+        private readonly IUnitInquiryServiceFactory unitInquiryServiceFactory;
         private readonly IPeriodServiceFactory periodServiceFactory;
-        private InquiryInitializingProgress inquiryInitializingProgress = new InquiryInitializingProgress();
+
         private readonly object runningLockObject = new object();
         private readonly object progressLockObject = new object();
 
-        private bool isRunning = false;
+        #endregion
 
+        #region Properties & BackFields
+
+        private InquiryInitializingProgress inquiryInitializingProgress = new InquiryInitializingProgress();
         public InquiryInitializingProgress InquiryInitializingProgress
         {
             get
@@ -33,6 +39,7 @@ namespace MITD.PMS.Application
             }
         }
 
+        private bool isRunning = false;
         public bool IsRunning
         {
             get
@@ -51,6 +58,26 @@ namespace MITD.PMS.Application
                 }
             }
         }
+        #endregion
+
+        #region Constructors
+
+        public InquiryConfiguratorService(IJobPositionServiceFactory jobPositionServiceFactory,
+            IInquiryServiceFactory inquiryServiceFactory, IUnitServiceFactory unitServiceFactory,
+            IUnitInquiryServiceFactory unitInquiryServiceFactory,
+            IPeriodServiceFactory periodServiceFactory)
+        {
+            this.jobPositionServiceFactory = jobPositionServiceFactory;
+            this.inquiryServiceFactory = inquiryServiceFactory;
+            this.unitServiceFactory = unitServiceFactory;
+            this.unitInquiryServiceFactory = unitInquiryServiceFactory;
+            this.periodServiceFactory = periodServiceFactory;
+
+        }
+
+        #endregion
+
+        #region Methods
 
         public long GetNumberOfConfiguredJobPosition(Period period)
         {
@@ -68,24 +95,32 @@ namespace MITD.PMS.Application
             return jobPositionIds.Count();
         }
 
-        public InquiryConfiguratorService(IJobPositionServiceFactory jobPositionServiceFactory,
-                                          IInquiryServiceFactory inquiryServiceFactory,
-                                          IPeriodServiceFactory periodServiceFactory)
+        public long GetNumberOfConfiguredUnit(Period period)
         {
-            this.jobPositionServiceFactory = jobPositionServiceFactory;
-            this.inquiryServiceFactory = inquiryServiceFactory;
-            this.periodServiceFactory = periodServiceFactory;
-
+            var unitIds = new List<UnitId>();
+            var serviceManager = unitServiceFactory.Create();
+            try
+            {
+                var uService = serviceManager.GetService();
+                unitIds = uService.GetAllUnitId(period);
+            }
+            finally
+            {
+                unitServiceFactory.Release(serviceManager);
+            }
+            return unitIds.Count();
         }
 
         public void Configure(Period period, IEventPublisher publisher)
         {
             if (!IsRunning)
             {
-
                 isRunning = true;
                 inquiryInitializingProgress.State = new PeriodInitializingForInquiryState();
                 inquiryInitializingProgress.Messages.Add("شروع آماده سازی دوره");
+
+                #region JobPosition
+
                 var jobPositionIds = new List<JobPositionId>();
                 var srvManagerJob = jobPositionServiceFactory.Create();
                 try
@@ -103,21 +138,47 @@ namespace MITD.PMS.Application
                 {
                     jobPositionServiceFactory.Release(srvManagerJob);
                 }
-                var totalCount = jobPositionIds.Count();
-                inquiryInitializingProgress.Messages.Add("تعداد " + totalCount + " پست برای پیکر بندی نظر سنجی آماده می باشد");
+
+                var jobPositionTotalCount = jobPositionIds.Count();
+
+                #endregion
+
+                #region Unit
+
+                var unitIds = new List<UnitId>();
+                var srvManagerUnit = unitServiceFactory.Create();
+                try
+                {
+                    var uService = srvManagerUnit.GetService();
+                    unitIds = uService.GetAllUnitId(period);
+                }
+                catch (Exception exp)
+                {
+                    isRunning = false;
+                    inquiryInitializingProgress.State = new PeriodInitializingForInquiryState();
+                    throw exp;
+                }
+                finally
+                {
+                    unitServiceFactory.Release(srvManagerUnit);
+                }
+
+                var unitTotalCount = unitIds.Count();
+
+                #endregion
+
+                inquiryInitializingProgress.Messages.Add("تعداد " + jobPositionTotalCount + " پست برای پیکر بندی نظر سنجی آماده می باشد");
+                inquiryInitializingProgress.Messages.Add("تعداد " + unitTotalCount + " واحد برای پیکر بندی نظر سنجی آماده می باشد");
+
+                var totalCount = jobPositionTotalCount + unitTotalCount;
+                
                 Task.Factory.StartNew(() =>
                 {
-
-                    //var sub = new DelegateHandler<InitializeInquiryCompleted>(e =>
-                    //{
-
-
-                    //});
-
-                    //publisher.RegisterHandler(sub);
                     try
                     {
-                        long index = 0;
+                        #region JobPosition
+
+                        long jobPositionIndex = 0;
                         foreach (var jobPositionId in jobPositionIds)
                         {
                             JobPosition jobPosition;
@@ -137,7 +198,7 @@ namespace MITD.PMS.Application
                             foreach (var itm in jobPosition.ConfigurationItemList)
                             {
                                 var srvManagerInquiry = inquiryServiceFactory.Create();
-                               
+
                                 try
                                 {
                                     var iqs = srvManagerInquiry.GetService();
@@ -148,11 +209,55 @@ namespace MITD.PMS.Application
                                     inquiryServiceFactory.Release(srvManagerInquiry);
                                 }
                             }
-                            index++;
-                            inquiryInitializingProgress.SetProgress(totalCount, index);
+                            jobPositionIndex++;
+                            inquiryInitializingProgress.SetProgress(totalCount, jobPositionIndex);
+
+                        } 
+
+                        #endregion
+
+                        #region Unit
+
+                        long unitIndex = 0;
+                        foreach (var unitId in unitIds)
+                        {
+                            Unit unit;
+                            var srvManagerUnitInquiry = unitServiceFactory.Create();
+                            try
+                            {
+                                var us = srvManagerUnitInquiry.GetService();
+                                unit = us.GetUnitBy(unitId);
+                                var dummy = unit.ConfigurationItemList;
+                            }
+                            finally
+                            {
+                                unitServiceFactory.Release(srvManagerUnitInquiry);
+                            }
+
+
+                            foreach (var itm in unit.ConfigurationItemList)
+                            {
+                                var srvManagerUnitInquiry2 = unitInquiryServiceFactory.Create();
+
+                                try
+                                {
+                                    var iqs = srvManagerUnitInquiry2.GetService();
+                                    iqs.CreateAllInquiryUnitIndexPoint(itm);
+                                }
+                                finally
+                                {
+                                    unitInquiryServiceFactory.Release(srvManagerUnitInquiry2);
+                                }
+                            }
+                            unitIndex++;
+                            inquiryInitializingProgress.SetProgress(totalCount, unitIndex);
 
                         }
+
+                        #endregion
+
                         inquiryInitializingProgress.Messages.Add("اتمام آماده سازی دوره برای نظر سنجی");
+
                         var serviceManager = periodServiceFactory.Create();
                         try
                         {
@@ -169,7 +274,7 @@ namespace MITD.PMS.Application
                             inquiryInitializingProgress = new InquiryInitializingProgress();
                             periodServiceFactory.Release(serviceManager);
                         }
-                        //publisher.Publish(new InitializeInquiryCompleted(period));
+                        
                     }
                     catch (Exception exp)
                     {
@@ -181,6 +286,8 @@ namespace MITD.PMS.Application
 
             }
         }
+
+        #endregion
 
     }
 }

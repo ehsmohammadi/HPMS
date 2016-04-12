@@ -109,6 +109,7 @@ namespace MITD.PMS.Integration.Data.EF
             List<JobIndexIdListItem> Result = new List<JobIndexIdListItem>();
 
             Result = (from c in db.PMS_GeneralIndex
+                      where c.ID_IndexType != 3
                       select new JobIndexIdListItem
                           {
                               //todo: Remove JobId From this damn query!

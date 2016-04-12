@@ -10,6 +10,12 @@ namespace MITD.PMS.Application
         void Release(IServiceLifeCycleManager<IInquiryService> inquiryServiceFactory);
     }
 
+    public interface IUnitInquiryServiceFactory : IService
+    {
+        IServiceLifeCycleManager<IUnitInquiryService> Create();
+        void Release(IServiceLifeCycleManager<IUnitInquiryService> inquiryServiceFactory);
+    }
+
     public interface IJobPositionServiceFactory : IService
     {
         IServiceLifeCycleManager<IJobPositionService> Create();

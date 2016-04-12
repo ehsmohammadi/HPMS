@@ -17,28 +17,66 @@ using Newtonsoft.Json;
 
 namespace ConsoleApplication1
 {
+    public class ObjectWithDbId<T>
+    {
+        public virtual ObjectWithDbId<T> BID { get { return this; }}
+
+        public T DbId{ get; set; }    
+    }
+
+    public class EntityWithDbId<T1, T2> : ObjectWithDbId<T1> where T2: ObjectWithDbId<T1>
+    {
+        
+    }
+
+    public class EmployeId: ObjectWithDbId<long>
+    {
+        public EmployeId(string EmpNo, int testID)
+        {
+            
+        }
+        public string EmpNo;
+        public int TestId;
+
+        //public override EmployeId BID { get { return this; } }
+    }
+
+    public class Employe : EntityWithDbId<long, EmployeId>
+    {
+        public Employe(string EmpNo, int testID)
+        {
+            //BID.   
+        }
+        
+    }
+
     class Program
     {
+
         //static PeriodDTO period=new PeriodDTO();
         static void Main(string[] args)
         {
-
-
-            var period = IntegrationHttpClient.Post<PeriodDTO, PeriodDTO>(new Uri("http://localhost:10653/"),
-                "api/periods",
-                new PeriodDTO
-                {
-                    Name = "دوره مهر",
-                    StartDate = DateTime.Now,
-                    EndDate = DateTime.Now
-                });
-
-            Console.WriteLine(period.Id);
-            //}
+            //EntityWithDbId<long, ObjectWithDbId<long>> Emp = new EntityWithDbId<long, ObjectWithDbId<long>>("932074097",7);
+            //Emp.DbId = 5;
+            // Emp.DbId = 10;
 
 
 
-            Console.ReadLine();
+            //var period = IntegrationHttpClient.Post<PeriodDTO, PeriodDTO>(new Uri("http://localhost:10653/"),
+            //    "api/periods",
+            //    new PeriodDTO
+            //    {
+            //        Name = "دوره مهر",
+            //        StartDate = DateTime.Now,
+            //        EndDate = DateTime.Now
+            //    });
+
+            //Console.WriteLine(period.Id);
+            ////}
+
+
+
+            //Console.ReadLine();
 
 
         }

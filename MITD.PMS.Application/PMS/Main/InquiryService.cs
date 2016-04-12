@@ -15,6 +15,7 @@ namespace MITD.PMS.Application
 {
     public class InquiryService : IInquiryService
     {
+        #region Fields
         private readonly IJobPositionInquiryConfiguratorService configurator;
         private readonly IEmployeeRepository employeeRep;
         private readonly IInquiryJobIndexPointRepository inquiryJobIndexPointRep;
@@ -22,9 +23,10 @@ namespace MITD.PMS.Application
         private readonly IJobRepository jobRep;
         private readonly IJobIndexRepository jobIndexRep;
         private readonly IInquiryJobIndexPointService inquiryJobIndexPointService;
-        private readonly IPeriodManagerService periodChecker;
+        private readonly IPeriodManagerService periodChecker; 
+        #endregion
 
-
+        #region Constructors
         public InquiryService(IJobPositionInquiryConfiguratorService configurator,
             IEmployeeRepository employeeRep,
             IInquiryJobIndexPointRepository inquiryJobIndexPointRep,
@@ -43,8 +45,10 @@ namespace MITD.PMS.Application
             this.jobIndexRep = jobIndexRep;
             this.inquiryJobIndexPointService = inquiryJobIndexPointService;
             this.periodChecker = periodChecker;
-        }
+        } 
+        #endregion
 
+        #region Methods
         public List<InquirySubjectWithJobPosition> GetInquirySubjects(EmployeeId inquirerEmployeeId)
         {
             var inquirer = employeeRep.GetBy(inquirerEmployeeId);
@@ -55,7 +59,7 @@ namespace MITD.PMS.Application
 
             periodChecker.CheckShowingInquirySubject(inquirer);
             var configurationItems = configurator.GetJobPositionInquiryConfigurationItemBy(inquirer);
-            return employeeRep.GetEmployeeByWithJobPosition(configurationItems.Select(c => c.Id),inquirer.Id.PeriodId);
+            return employeeRep.GetEmployeeByWithJobPosition(configurationItems.Select(c => c.Id), inquirer.Id.PeriodId);
         }
 
         public List<InquiryJobIndexPoint> GetAllInquiryJobIndexPointBy(JobPositionInquiryConfigurationItemId configurationItemId)
@@ -90,7 +94,7 @@ namespace MITD.PMS.Application
             var job = jobRep.GetById(configurationItem.JobPosition.JobId);
             foreach (var jobJobIndex in job.JobIndexList)
             {
-                var jobIndex = jobIndexRep.GetById(jobJobIndex.JobIndexId);  
+                var jobIndex = jobIndexRep.GetById(jobJobIndex.JobIndexId);
                 if ((jobIndex as JobIndex).IsInquireable)
                 {
                     if ((configurationItem.InquirerJobPositionLevel == JobPositionLevel.Childs &&
@@ -98,13 +102,22 @@ namespace MITD.PMS.Application
                         (configurationItem.InquirerJobPositionLevel == JobPositionLevel.Parents &&
                          jobJobIndex.ShowforTopLevel) ||
                         (configurationItem.InquirerJobPositionLevel == JobPositionLevel.Siblings &&
-                         jobJobIndex.ShowforSameLevel) || configurationItem.InquirerJobPositionLevel == JobPositionLevel.None)
-                        inquiryJobIndexPointService.Add(configurationItem, jobIndex as JobIndex, string.Empty);
+                         jobJobIndex.ShowforSameLevel) ||
+                        configurationItem.InquirerJobPositionLevel == JobPositionLevel.None)
+                    {
+#if(DEBUG)
+                        inquiryJobIndexPointService.Add(configurationItem, jobIndex as JobIndex, "5");
+#else
+                    inquiryJobIndexPointService.Add(configurationItem, jobIndex as JobIndex, string.Empty);
+#endif
+                    }
+
 
                 }
 
             }
-        }
+        } 
+        #endregion
     }
 
   
