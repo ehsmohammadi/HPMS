@@ -96,12 +96,14 @@ namespace MITD.PMS.Persistence.NH
 
             for (int level = firstLevel; level <= jobIndexLevels.Max(); level++)
             {
-                var empJobInexIdsLevel = employeeJobindexes.Where(ji => ji.CalculationLevel == level).Select(ji => ji.Id).ToList();
+                //uncomment this if you want to get employee with its job index level
+                //var empJobInexIdsLevel = employeeJobindexes.Where(ji => ji.CalculationLevel == level).Select(ji => ji.Id).ToList();
+                var empJobInexIdsLevel = employeeJobindexes.Select(ji => ji.Id).ToList();
                 var empLevel = employeeJobs.Where(empj => empj.jo.JobIndexList.Select(j=>j.JobIndexId).Any(i => empJobInexIdsLevel.Contains(i)))
                                 .Select(empj => empj.EmployeeId).ToList();
 
-                if (level == firstLevel)
-                    empLevel = empLevel.Where(emp => !empCompletedInFirstLevel.Contains(emp)).ToList();
+                //if (level == firstLevel)
+                //    empLevel = empLevel.Where(emp => !empCompletedInFirstLevel.Contains(emp)).ToList();
 
                 res.Add(level, empLevel);
             }

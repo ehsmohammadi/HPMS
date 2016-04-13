@@ -110,15 +110,19 @@ namespace MITD.PMS.Integration.Domain
                 }).ToList()
 
             };
-            if (sourceJobIndexDTO.IndexType==1)
+            if (sourceJobIndexDTO.IndexType==2)
             {
                 res.ParentId = PMSCostantData.JobIndexGroupBehaviaral;
                 res.CalculationLevel = 1;
             }
-            else
+            else if (sourceJobIndexDTO.IndexType==1)
             {
                 res.ParentId = PMSCostantData.JobIndexGroupPerformance;
                 res.CalculationLevel = 2;
+            }
+            else
+            {
+                throw new Exception("Invalid index type in source job index (employee management system)");
             }
             return res;
         }

@@ -106,6 +106,15 @@ namespace MITD.PMS.Persistence
         {
             try
             {
+                if (level == 3)
+                {
+                    var valueList =
+                        jobIndex.Value.SelectMany(j => j.Value).Where(x => x.JobPosition.JobPositionLevel == level).ToList();
+                    var sum = valueList.Sum(inquiry => Convert.ToDecimal(inquiry.Value));
+                    if (valueList.Count != 0)
+                        return sum / valueList.Count();
+                    return 0;
+                }
                 return Convert.ToDecimal(jobIndex.Value.SelectMany(j => j.Value).SingleOrDefault(x => x.JobPosition.JobPositionLevel == level).Value);
             }
             catch (Exception)

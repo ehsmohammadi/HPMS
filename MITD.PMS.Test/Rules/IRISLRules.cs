@@ -218,7 +218,9 @@ namespace MITD.Core.RuleEngine
                     var valueList =
                         jobIndex.Value.SelectMany(j => j.Value).Where(x => x.JobPosition.JobPositionLevel == level).ToList();
                     var sum = valueList.Sum(inquiry => Convert.ToDecimal(inquiry.Value));
-                    return sum / valueList.Count();
+                    if (valueList.Count != 0)
+                        return sum / valueList.Count();
+                    return 0;
                 }
                 return Convert.ToDecimal(jobIndex.Value.SelectMany(j => j.Value).SingleOrDefault(x => x.JobPosition.JobPositionLevel == level).Value);
             }
@@ -280,17 +282,19 @@ namespace MITD.Core.RuleEngine
         }
     }
 
-
     public class Rule10 : IRule<CalculationData>
     {
         public void Execute(CalculationData data)
         {
+
             if (data.PathNo != 1) return;
             decimal total = 0;
             decimal performancePoint = 0;
             decimal sumPerformanceGroupImportance = 0;
+
             foreach (var position in data.JobPositions)
             {
+
                 var x = 0m;
                 var y = 0m;
 
@@ -313,6 +317,7 @@ namespace MITD.Core.RuleEngine
                     var parentPoint = Utils.GetInquiryByJobPositionlevel(index, 1);
                     var childPoint = Utils.GetInquiryByJobPositionlevel(index, 3);
                     var selfPoint = Utils.GetInquiryByJobPositionlevel(index, 4);
+
                     var point = (parentPoint * 4 + childPoint * 1 + selfPoint * 1) / ((parentPoint != 0 ? 1 : 0) * 4 + (childPoint != 0 ? 1 : 0) * 1 + (selfPoint != 0 ? 1 : 0) * 1);
                     if (index.Key.Group.DictionaryName == "PerformanceGroup")
                     {
@@ -321,13 +326,20 @@ namespace MITD.Core.RuleEngine
                         performancePoint = performancePoint + point * jobindexImportance;
                     }
                     total = total + point;
-                    Utils.AddEmployeePoint(position, index, "gross", point);
-
+                    Utils.AddEmployeePoint(position, index,
+                        index.Key.Group.DictionaryName == "PerformanceGroup" ? "Performance-gross" : "Behavioural-gross",
+                        point);
                 }
-                var finalPerformancePoint = performancePoint / sumPerformanceGroupImportance;
+                var finalPerformancePoint = 0m;
+                if (sumPerformanceGroupImportance != 0)
+                {
+                    finalPerformancePoint = performancePoint / sumPerformanceGroupImportance;
+                }
                 Utils.AddEmployeePoint(position, "PerformanceIndices", finalPerformancePoint);
-                
+
                 Utils.AddCalculationPoint(data.Employee.EmployeeNo + "/" + position.Unit.Id + "/PerformanceIndex", finalPerformancePoint);
+
+
             }
 
         }
@@ -362,8 +374,6 @@ namespace MITD.Core.RuleEngine
             unitPoints.ForEach(c =>
             {
                 Utils.AddCalculationPoint(c.Item1 + ";" + c.Item2 + "/TotalPointUnit", c.Item3);
-                //data.Points.CalculationPoints.Where(f => f.Name.Contains("TotalPointUnit")).Single(d => d.Name.Contains(string.Concat(c.Item1, ';', c.Item2))).Value = c.Item3;
-                //data.Points.CalculationPoints.Where(f => f.Name.Contains("TotalPointUnit")).Single(d => d.Name.Contains(string.Concat(c.Item1, ';', c.Item2))).Value = 8;
             });
 
             Utils.AddCalculationPoint("UnitCalculationFlag", 1);
@@ -386,6 +396,7 @@ namespace MITD.Core.RuleEngine
                 decimal sumBehaviralPoint = 0;
                 decimal sumIndexImportance = 0;
                 decimal sumPerformanceGroupImportance = 0;
+                decimal unitPerformanceAveragePoint = 0;
                 //////////////////////////////////////////////////////////////
                 var unitPerformancePoints =
                     data.Points.CalculationPoints.Where(c => c.Name.Contains("/" + position.Unit.Id + "/")).ToList();
@@ -393,19 +404,36 @@ namespace MITD.Core.RuleEngine
                 if (!unitPerformancePoints.Any())
                     throw new Exception("unit performance points count is 0");
 
+                var countForAvarage=unitPerformancePoints.Count(u => u.Value!=0);
+                if (countForAvarage != 0)
+                    unitPerformanceAveragePoint = unitPerformancePoints.Sum(up => up.Value)/countForAvarage;
+                                                  
+                decimal unitPoint;
+                try
+                {
+                    unitPoint = Utils.Res.CalculationPoints.Single(
+                   c => c.Name == position.Unit.ParentId + ";" + position.Unit.Id + "/TotalPointUnit").Value;
+                }
+                catch (Exception ex)
+                {
 
-                var unitPerformanceAveragePoint = unitPerformancePoints.Sum(up => up.Value) /
-                                                  unitPerformancePoints.Count();
-
-                if (unitPerformanceAveragePoint == 0)
-                    throw new Exception("unitPerformanceAveragePoint is 0");
-
-                var unitPoint =Utils.Res.CalculationPoints.Single(
-                        c => c.Name == position.Unit.ParentId + ";" + position.Unit.Id + "/TotalPointUnit").Value;
+                    throw new Exception("Total Unit Point is not calculated " + position.Unit.ParentId + "--" + position.Unit.Id);
+                }
                 Utils.AddEmployeePoint(position, "finalunitPoint", unitPoint);
 
-                var totalPerformancePoint =
-                    unitPerformancePoints.Single(up => up.Name.Contains(data.Employee.EmployeeNo)).Value * (unitPoint / unitPerformanceAveragePoint);
+                decimal totalPerformancePoint = 0;
+                try
+                {
+                    if (unitPerformanceAveragePoint != 0)
+                        totalPerformancePoint =
+                                   unitPerformancePoints.Single(up => up.Name.Contains(data.Employee.EmployeeNo)).Value * (unitPoint / unitPerformanceAveragePoint);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Total performance point is not calculated");
+                }
+
+                Utils.AddEmployeePoint(position, "finalPerformancePoint", totalPerformancePoint);
 
                 foreach (var index in position.Indices)
                 {
@@ -430,8 +458,6 @@ namespace MITD.Core.RuleEngine
                     throw new Exception("sumIndexImportance is 0");
                 total = total + ((sumBehaviralPoint + totalPerformancePoint * sumPerformanceGroupImportance) / sumIndexImportance);
                 Utils.AddEmployeePoint(position, "finalJob", (sumBehaviralPoint + totalPerformancePoint * sumPerformanceGroupImportance) / sumIndexImportance);
-
-
             }
 
             Utils.AddEmployeePoint("final", total / data.JobPositions.Count * 10, true);
