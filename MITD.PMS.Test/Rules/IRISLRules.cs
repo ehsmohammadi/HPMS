@@ -347,7 +347,6 @@ namespace MITD.Core.RuleEngine
 
     public class Rule11 : IRule<CalculationData>
     {
-
         public void Execute(CalculationData data)
         {
             if (data.PathNo != 2)
