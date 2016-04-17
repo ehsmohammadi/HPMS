@@ -78,7 +78,7 @@ namespace MITD.PMS.Integration.Data.EF
                 return (from c in db.VW_OrganTree
                         where c.NodeType == 1
                               && c.NodeType != 6
-                              && c.ID_F != null
+                              && (c.ID_F != null || c.IsManager == true)
                               && c.FullPath.StartsWith(RootFullPath)
                         select c.ID).Count();
             }
@@ -146,8 +146,8 @@ namespace MITD.PMS.Integration.Data.EF
                 childJobPositionsIds =
                     (from c in db.VW_OrganTree
                      where
-                         c.FullPath.StartsWith(parentFullPath) && c.PID != parentId && c.IsManager == true &&
-                         c.ID_F != null
+                         c.FullPath.StartsWith(parentFullPath) && c.PID != parentId && c.IsManager == true
+                         // && c.ID_F != null
                      select c.ID)
                         .ToList();
                 var subManagerIds = new List<int>();
