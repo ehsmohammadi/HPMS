@@ -300,7 +300,7 @@ namespace MITD.PMS.Persistence.NH
 
             var jobIndexInquiryPoints = (from inquiryJobIndexPoint in session.Query<InquiryJobIndexPoint>().Where(i => i.ConfigurationItemId.InquirySubjectId == employee.Id)
                                          join emp in session.Query<Employee>() on inquiryJobIndexPoint.ConfigurationItemId.InquirerId equals emp.Id
-                                         join jobPositionEmployee in session.Query<JobPositionEmployee>() on emp.Id equals jobPositionEmployee.EmployeeId
+                                         join jobPositionEmployee in session.Query<JobPositionEmployee>() on inquiryJobIndexPoint.ConfigurationItemId.InquirerJobPositionId equals jobPositionEmployee.JobPosition.Id
                                          select new { inquiryJobIndexPoint = inquiryJobIndexPoint, emp = emp, jobPositionEmployee.JobPosition.SharedJobPosition, inquiryJobIndexPoint.ConfigurationItemId.InquirySubjectJobPositionId.SharedJobPositionId, }
                           ).ToFuture();
 
@@ -337,19 +337,28 @@ namespace MITD.PMS.Persistence.NH
             #endregion
 
             var employeeData = from job in employeeJobsWithSharedJob.ToList()
-                               join employeeJobPositionWithUnit in employeeJobPositionsWithUnitAndSharedData.ToList() 
-                                    on job.Id equals employeeJobPositionWithUnit.JobPositionEmployee.JobPosition.JobId
-                               join c in employeeJobpositionCustomFieldsWithValue.ToList()
-                                    on employeeJobPositionWithUnit.JobPositionEmployee.JobPosition.Id equals c.JobPositionId
-                      select new
-                               {
-                                   JobPosition = employeeJobPositionWithUnit.JobPositionEmployee.JobPosition,
-                                   Unit=employeeJobPositionWithUnit.Unit,
-                                   UnitIndexList = employeeUnitIndexesWithSharedData.ToList().Where(ji => employeeJobPositionWithUnit.Unit.UnitIndexList.Select(x => x.UnitIndexId).Contains(ji.Id)).ToList(),
-                                   Job=job,
-                                   jobIndexList = employeeJobIndexesWithSharedData.ToList().Where(ji => job.JobIndexList.Select(x => x.JobIndexId).Contains(ji.Id)).ToList(),
-                          c.EmployeeJobCustomFieldValues
-                      };
+                join employeeJobPositionWithUnit in employeeJobPositionsWithUnitAndSharedData.ToList()
+                    on job.Id equals employeeJobPositionWithUnit.JobPositionEmployee.JobPosition.JobId
+                join c in employeeJobpositionCustomFieldsWithValue.ToList()
+                    on employeeJobPositionWithUnit.JobPositionEmployee.JobPosition.Id equals c.JobPositionId
+                select new
+                {
+                    JobPosition = employeeJobPositionWithUnit.JobPositionEmployee.JobPosition,
+                    Unit = employeeJobPositionWithUnit.Unit,
+                    UnitIndexList =
+                        employeeUnitIndexesWithSharedData.ToList()
+                            .Where(
+                                ji =>
+                                    employeeJobPositionWithUnit.Unit.UnitIndexList.Select(x => x.UnitIndexId)
+                                        .Contains(ji.Id))
+                            .ToList(),
+                    Job = job,
+                    jobIndexList =
+                        employeeJobIndexesWithSharedData.ToList()
+                            .Where(ji => job.JobIndexList.Select(x => x.JobIndexId).Contains(ji.Id))
+                            .ToList(),
+                    c.EmployeeJobCustomFieldValues
+                };
 
 
             var calculationData = new CalculationData();
@@ -362,29 +371,46 @@ namespace MITD.PMS.Persistence.NH
                 {
                     Job = empData.Job,
                     Indices = (from jobIndex in empData.jobIndexList
-                               join jobIndexWithInquiryValues in jobIndexInquiryPoints.Where(g => g.SharedJobPositionId.Id == empData.JobPosition.SharedJobPosition.Id.Id).GroupBy(g => g.inquiryJobIndexPoint.JobIndexId).ToList() 
-                               on jobIndex.Id equals jobIndexWithInquiryValues.Key into gjii
-                               from k in gjii.DefaultIfEmpty()
-                               select new { ji = jobIndex, k })
-                              .ToDictionary(j => j.ji,
-                                             j => (j.k != null ? j.k.GroupBy(jk => jk.emp)
-                                                   .ToDictionary(g => g.Key, 
-                                                                 g => g.Select(f => new InquiryData { JobPosition = f.SharedJobPosition, Point = f.inquiryJobIndexPoint }).ToList()) : null)),
+                        join jobIndexWithInquiryValues in
+                            jobIndexInquiryPoints.Where(
+                                g => g.SharedJobPositionId.Id == empData.JobPosition.SharedJobPosition.Id.Id)
+                                .GroupBy(g => g.inquiryJobIndexPoint.JobIndexId)
+                                .ToList()
+                            on jobIndex.Id equals jobIndexWithInquiryValues.Key into gjii
+                        from k in gjii.DefaultIfEmpty()
+                        select new {ji = jobIndex, k})
+                        .ToDictionary(j => j.ji,
+                            j => (j.k != null
+                                ? j.k.GroupBy(jk => jk.emp)
+                                    .ToDictionary(g => g.Key,
+                                        g =>
+                                            g.Select(
+                                                f =>
+                                                    new InquiryData
+                                                    {
+                                                        JobPosition = f.SharedJobPosition,
+                                                        Point = f.inquiryJobIndexPoint
+                                                    }).ToList())
+                                : null)),
                     Unit = empData.Unit,
                     UnitIndices = (from unitIndex in empData.UnitIndexList
-                                   join unitIndexWithInquiryValues in unitIndexInquiryPoints.GroupBy(g => g.inquiryUnitIndexPoint.ConfigurationItemId.UnitIndexIdUintPeriod).ToList()
-                                   on unitIndex.Id equals unitIndexWithInquiryValues.Key into gjii
-                                   from k in gjii.DefaultIfEmpty()
-                                   select new { UnitIndex = unitIndex, k })
-                               .ToDictionary(j => j.UnitIndex,
-                                   j => j.k.Select(
-                                       ss =>
-                                           new System.Tuple<Employee, string>(ss.emp,
-                                               ss.inquiryUnitIndexPoint.UnitIndexValue)).First()),
-                                  
+                        join unitIndexWithInquiryValues in
+                            unitIndexInquiryPoints.GroupBy(
+                                g => g.inquiryUnitIndexPoint.ConfigurationItemId.UnitIndexIdUintPeriod).ToList()
+                            on unitIndex.Id equals unitIndexWithInquiryValues.Key into gjii
+                        from k in gjii.DefaultIfEmpty()
+                        select new {UnitIndex = unitIndex, k})
+                        .ToDictionary(j => j.UnitIndex,
+                            j => j.k.Select(
+                                ss =>
+                                    new System.Tuple<Employee, string>(ss.emp,
+                                        ss.inquiryUnitIndexPoint.UnitIndexValue)).First()),
+
                     CustomFields = empData.EmployeeJobCustomFieldValues,
-                    WorkTimePercent = employee.JobPositions.Single(j => j.JobPositionId == empData.JobPosition.Id).WorkTimePercent,
-                    Weight = employee.JobPositions.Single(j => j.JobPositionId == empData.JobPosition.Id).JobPositionWeight
+                    WorkTimePercent =
+                        employee.JobPositions.Single(j => j.JobPositionId == empData.JobPosition.Id).WorkTimePercent,
+                    Weight =
+                        employee.JobPositions.Single(j => j.JobPositionId == empData.JobPosition.Id).JobPositionWeight
 
                 });
             if (withCalculationPoints)
