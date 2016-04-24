@@ -13,10 +13,6 @@
       <Name>EmployeePoints.rdl</Name>
       <FullPath>EmployeePoints.rdl</FullPath>
     </ProjectItem>
-    <ProjectItem>
-      <Name>InquiryNotCompletedList1.rdl</Name>
-      <FullPath>InquiryNotCompletedList1.rdl</FullPath>
-    </ProjectItem>
   </Reports>
   <Configurations>
     <Configuration>
