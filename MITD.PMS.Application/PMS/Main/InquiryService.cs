@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using MITD.Domain.Repository;
@@ -106,7 +107,18 @@ namespace MITD.PMS.Application
                         configurationItem.InquirerJobPositionLevel == JobPositionLevel.None)
                     {
 #if(DEBUG)
-                        inquiryJobIndexPointService.Add(configurationItem, jobIndex as JobIndex, "5");
+                        var pointList = new List<string>()
+                    {
+                        "20",
+                        "40",
+                        "60",
+                        "80",
+                        "100"
+                    };
+                        var selector = new Random();
+                        var index = selector.Next(pointList.Count);
+
+                        inquiryJobIndexPointService.Add(configurationItem, jobIndex as JobIndex,  pointList[index]);
 #else
                     inquiryJobIndexPointService.Add(configurationItem, jobIndex as JobIndex, string.Empty);
 #endif

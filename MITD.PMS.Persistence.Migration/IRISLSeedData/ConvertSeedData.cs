@@ -373,7 +373,7 @@ namespace MITD.PMS.Persistence
                 Utils.AddEmployeePoint(position, ""finalJob"", (sumBehaviralPoint + totalPerformancePoint * sumPerformanceGroupImportance) / sumIndexImportance);
             }
 
-            Utils.AddEmployeePoint(""final"", total / data.JobPositions.Count * 10, true);
+            Utils.AddEmployeePoint(""final"", total / data.JobPositions.Count, true);
             ");
 
 

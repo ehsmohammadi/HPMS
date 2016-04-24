@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using MITD.PMS.Presentation.Contracts;
 using MITD.PMS.Presentation.PeriodManagementApp;
@@ -138,6 +139,8 @@ namespace MITD.PMS.Presentation.Logic
        
         private void save()
         {
+            if(!validate()) return;
+            
             ShowBusyIndicator();
             UserStateDTO userState = appController.CurrentUserState;
             inquiryService.UpdateInquirySubjectForm((res, exp) => appController.BeginInvokeOnDispatcher(() =>
@@ -154,7 +157,16 @@ namespace MITD.PMS.Presentation.Logic
                     }), inquiryForm);
             
         }
-        
+
+        private bool validate()
+        {
+            foreach (var value in InquiryForm.UnitIndexValueList)
+            {
+                if (value.HasErrors) 
+                    return false;
+            }
+            return true;
+        }
 
 
         protected override void OnRequestClose()

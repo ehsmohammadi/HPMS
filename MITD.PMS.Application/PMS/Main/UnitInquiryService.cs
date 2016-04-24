@@ -101,7 +101,7 @@ namespace MITD.PMS.Application
         private void create(UnitInquiryConfigurationItem configurationItem)
         {
 #if(DEBUG)
-            inquiryUnitIndexPointService.Add(configurationItem, "3");
+            inquiryUnitIndexPointService.Add(configurationItem, "80");
 #else
                    inquiryUnitIndexPointService.Add(configurationItem, string.Empty);
 #endif

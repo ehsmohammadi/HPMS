@@ -26,7 +26,10 @@ namespace MITD.PMS.Presentation.Logic
             inquiryService.GetInquiryForm((res, exp) => pmsController.BeginInvokeOnDispatcher(() =>
                 {
                     if (exp == null)
+                    {
+                        res.UnitName = vm.SelectedInquirySubject.UnitName;
                         periodController.ShowInquiryUnitFormView(res, ActionType.FillInquiryUnitForm);
+                    }
                     else
                     {
                         pmsController.HandleException(exp);
