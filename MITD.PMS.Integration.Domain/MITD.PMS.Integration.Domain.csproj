@@ -76,7 +76,6 @@
     <Compile Include="UnitIndex\IUnitIndexConverter.cs" />
     <Compile Include="ConverterManager.cs" />
     <Compile Include="Periods\EntityEnum.cs" />
-    <Compile Include="Periods\PeriodDataProvider.cs" />
     <Compile Include="Periods\Period.cs" />
     <Compile Include="Periods\PeriodState.cs" />
     <Compile Include="PMSCostantData.cs" />

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using MITD.Core;
-using MITD.Domain.Model;
 using MITD.PMS.Domain.Model.Periods;
 using MITD.PMS.Presentation.Contracts;
 
@@ -18,7 +16,8 @@ namespace MITD.PMS.Interface
                     Name = entity.Name,
                     StartDate = entity.StartDate,
                     EndDate = entity.EndDate,
-                    //StateCode = entity.StateCode,
+                    ActiveStatus = entity.Active,
+                    StateName = entity.State.Value
                 };
             return res;
 

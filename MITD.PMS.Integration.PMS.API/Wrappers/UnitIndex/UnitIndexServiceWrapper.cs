@@ -10,13 +10,15 @@ namespace MITD.PMS.Integration.PMS.API
 
         #region Fields
         private readonly string endpoint = "UnitIndex";
-        private readonly Uri apiUri = new Uri(PMSClientConfig.BaseApiAddress); 
+        private readonly Uri apiUri = new Uri(PMSClientConfig.BaseApiAddress);
+        private readonly IUserProvider userProvider;
         #endregion
 
         #region Not Use
-        private readonly IUserProvider userProvider;
+
         private const string unitIndexClassType = "UnitIndex";
         private const string unitIndexCategoryClassType = "UnitIndexCategory"; 
+
         #endregion
 
         #region Constructors

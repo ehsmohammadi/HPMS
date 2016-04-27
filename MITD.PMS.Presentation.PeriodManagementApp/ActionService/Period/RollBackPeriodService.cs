@@ -34,6 +34,7 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
                     else
                     {
                         pmsController.Publish(new UpdatePeriodListArgs());
+                        pmsController.GetCurrentPeriod();
                     }
                 }), period.Id);
             }

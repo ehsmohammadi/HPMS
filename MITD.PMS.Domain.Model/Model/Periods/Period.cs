@@ -47,6 +47,8 @@ namespace MITD.PMS.Domain.Model.Periods
 
         #endregion
 
+        #region Constructors
+
         protected Period()
         {
 
@@ -58,19 +60,21 @@ namespace MITD.PMS.Domain.Model.Periods
                 throw new ArgumentNullException("periodId");
             this.id = periodId;
             if (string.IsNullOrWhiteSpace(name))
-                throw new PeriodArgumentException("Period","Name");
+                throw new PeriodArgumentException("Period", "Name");
             this.name = name;
 
             if (startDate == null)
-                throw new PeriodArgumentException("Period","StartDate");
+                throw new PeriodArgumentException("Period", "StartDate");
             this.startDate = startDate;
 
             if (endDate == null)
-                throw new PeriodArgumentException("Period","EndDate");
+                throw new PeriodArgumentException("Period", "EndDate");
             this.endDate = endDate;
             state = new PeriodInitState();
             active = false;
-        }
+        } 
+
+        #endregion
 
         #region Public Method
 
@@ -159,9 +163,6 @@ namespace MITD.PMS.Domain.Model.Periods
 
 
         #endregion
-
-
-
 
         #region IEntity Member
         public virtual bool SameIdentityAs(Period other)
@@ -280,8 +281,7 @@ namespace MITD.PMS.Domain.Model.Periods
         {
             State.CheckSettingInquiryUnitIndexPointValue();
         }
-
-
+        
         public virtual void RollBack(IPeriodManagerService periodManagerService)
         {
             State.RollBack(this, periodManagerService);

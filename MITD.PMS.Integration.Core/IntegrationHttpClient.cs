@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Security.Policy;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MITD.PMS.Integration.Core
@@ -24,18 +20,12 @@ namespace MITD.PMS.Integration.Core
             {
                 client.BaseAddress = baseAddress;
                 setAcceptHeader(client);
-                try
+                var response = await client.GetAsync(endpoint);
+                if (response.IsSuccessStatusCode)
                 {
-                    var response = await client.GetAsync(endpoint);
-                    response.EnsureSuccessStatusCode();
                     return await response.Content.ReadAsAsync<T>();
-
                 }
-                catch (HttpRequestException e)
-                {
-                    throw convertException(e);
-                }
-               
+                return await handleException<T>(response);
             }
         }
 
@@ -59,12 +49,11 @@ namespace MITD.PMS.Integration.Core
                 {
                     return await response.Content.ReadAsAsync<T1>();
                 }
-                throw new Exception();
+                return await handleException<T1>(response);
             }
-        } 
+        }
 
         #endregion
-
 
         #region Put To API
 
@@ -97,10 +86,16 @@ namespace MITD.PMS.Integration.Core
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        private static Exception convertException(HttpRequestException httpRequestException)
+        private static async Task<T> handleException<T>(HttpResponseMessage response)
         {
-            return new Exception("api error", httpRequestException);
-        } 
+            var messageContent = await response.Content.ReadAsStringAsync();
+            throw new Exception(messageContent);
+        }
+
+        //private static Exception convertException(HttpRequestException httpRequestException)
+        //{
+        //    return new Exception("api error", httpRequestException);
+        //} 
         #endregion
     }
 }

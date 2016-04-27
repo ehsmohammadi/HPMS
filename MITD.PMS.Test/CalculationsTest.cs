@@ -595,7 +595,7 @@ if (it > 0)
             using (var uow = uows.CurrentUnitOfWork as NHUnitOfWork)
             {
                 var periodRep = new PeriodRepository(uow);
-                var periodManagerService = new PeriodManagerService(periodRep, null, null, null, null, null, null, null, null);
+                var periodManagerService = new PeriodManagerService(periodRep, null, null, null, null, null, null, null, null,null);
                 #region Period creation
 
                 period = new Period(new PeriodId(periodRep.GetNextId()), Guid.NewGuid().ToString(), DateTime.Now, DateTime.Now);

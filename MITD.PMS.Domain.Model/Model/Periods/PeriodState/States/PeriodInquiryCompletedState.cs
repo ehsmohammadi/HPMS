@@ -1,8 +1,5 @@
 ﻿using MITD.Core;
-using MITD.PMS.Common;
-using MITD.PMS.Domain.Model.Jobs;
 using MITD.PMS.Domain.Service;
-using MITD.PMS.Exceptions;
 
 namespace MITD.PMS.Domain.Model.Periods
 {
@@ -20,26 +17,38 @@ namespace MITD.PMS.Domain.Model.Periods
             periodManagerService.ResetAllInquiryPoints(period);
             period.State = new PeriodInquiryStartedState();
         }
+        // for removing claim from project 
+        //internal override void StartClaiming(Period period, IPeriodManagerService periodManagerService) 
+        //{
+        //    if (!periodManagerService.HasDeterministicCalculation(period))
+        //        throw new PeriodException((int)ApiExceptionCode.CouldNotStartClaimingWithoutAnyDeterministicCalculation, ApiExceptionCode.CouldNotStartClaimingWithoutAnyDeterministicCalculation.DisplayName);
 
-        internal override void StartClaiming(Period period, IPeriodManagerService periodManagerService)
+        //    period.State = new PeriodClaimingStartedState();
+        //}
+        // After removing claim from project 
+        internal override void Close(Period period, IPeriodManagerService periodManagerService)
         {
             if (!periodManagerService.HasDeterministicCalculation(period))
-                throw new PeriodException((int)ApiExceptionCode.CouldNotStartClaimingWithoutAnyDeterministicCalculation, ApiExceptionCode.CouldNotStartClaimingWithoutAnyDeterministicCalculation.DisplayName);
+                throw new PeriodException((int)ApiExceptionCode.CouldNotClosePeriodWithoutAnyDeterministicCalculation
+                    , ApiExceptionCode.CouldNotClosePeriodWithoutAnyDeterministicCalculation.DisplayName);
 
-            period.State = new PeriodClaimingStartedState();
+            if (periodManagerService.HasOpenClaim(period))
+                throw new PeriodException((int)ApiExceptionCode.CouldNotClosePeriodWithOpenClaims
+                    , ApiExceptionCode.CouldNotClosePeriodWithOpenClaims.DisplayName);
+
+
+            period.State = new PeriodClosedState();
+            period.DeActive();
         }
 
         internal override InquiryInitializingProgress GetInitializeInquiryProgress(Period period, IPeriodManagerService periodManagerService)
         {
             return periodManagerService.GetCompletedInitializeInquiryProgress(period);
         }
-
+        
         internal override void CheckAssigningUnit()
         {
         }
-
-       
-
         internal override void CheckRemovingUnit()
         {
         }

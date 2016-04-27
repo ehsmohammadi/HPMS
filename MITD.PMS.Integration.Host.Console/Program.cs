@@ -1,4 +1,5 @@
-﻿using MITD.Core;
+﻿using System;
+using MITD.Core;
 using MITD.PMS.Integration.Domain;
 
 namespace MITD.PMS.Integration.Host.Console
@@ -7,13 +8,6 @@ namespace MITD.PMS.Integration.Host.Console
     {
         static void Main(string[] args)
         {
-            #region Entrance
-
-            System.Console.ReadLine();
-            System.Console.WriteLine("Progress started");
-            System.Console.WriteLine("***********************************************************************");
-            #endregion
-
             #region Bootsrapper
 
             var bootstrapper = new Bootstrapper();
@@ -21,31 +15,33 @@ namespace MITD.PMS.Integration.Host.Console
 
             #endregion
 
-            var period = new Period
-            {
-                Id = 1
-            };
+            #region Entrance
+
+            System.Console.ReadLine();
+            System.Console.WriteLine("Progress started");
+            System.Console.WriteLine("***********************************************************************");
+
+            #endregion
 
             #region Manager Progress
+            try
+            {
 
-            var manager = ServiceLocator.Current.GetInstance<ConverterManager>();
-            manager.Init(period);
-            manager.Run();
-
-
-
+                var manager = ServiceLocator.Current.GetInstance<ConverterManager>();
+                manager.Init();
+                manager.Run();
+                System.Console.WriteLine("***********************************************************************");
+                System.Console.WriteLine("Progress finished");
+                System.Console.ReadLine();
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine("********************* Exception ****************************************");
+                System.Console.WriteLine(ex.Message+Environment.NewLine+ex.InnerException.Message);
+                System.Console.ReadLine();
+            }
             #endregion
 
-            //Task.Run(() => mainAsync(args)).Wait();
-            //AsyncContext.Run(
-            //    () => mainAsync(args));
-
-            #region End
-            System.Console.WriteLine("***********************************************************************");
-            System.Console.WriteLine("Progress finished");
-            System.Console.ReadLine();
-
-            #endregion
         }
 
     }

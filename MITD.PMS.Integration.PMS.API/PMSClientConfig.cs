@@ -10,7 +10,7 @@ namespace MITD.PMS.Integration.PMS.API
 
         public static string BaseApiSiteAddress = "http://localhost:10653";
         public readonly static UriKind UriKind = UriKind.Absolute;
-        public readonly static IntegrationWebClient.MessageFormat MsgFormat = IntegrationWebClient.MessageFormat.Json;
+        //public readonly static IntegrationWebClient.MessageFormat MsgFormat = IntegrationWebClient.MessageFormat.Json;
 
         public static Dictionary<string, string> CreateHeaderDic(string token)
         {

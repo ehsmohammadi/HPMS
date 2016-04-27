@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using MITD.Core;
+using MITD.PMS.Integration.PMS.API;
 using MITD.PMS.Presentation.Contracts;
 
 namespace MITD.PMS.Integration.Domain
@@ -28,6 +29,7 @@ namespace MITD.PMS.Integration.Domain
         private readonly IJobConverter jobConverter;
         private readonly IJobPositionConverter jobPositionConverter;
         private readonly IEmployeeConverter employeeConverter;
+        private readonly IPeriodServiceWrapper periodService;
         private readonly IEventPublisher publisher;
 
 
@@ -43,7 +45,7 @@ namespace MITD.PMS.Integration.Domain
 
         public ConverterManager(IUnitIndexConverter unitIndexConverter, IUnitConverter unitConverter,
             IJobIndexConverter jobIndexConverter, IJobConverter jobConverter, IEventPublisher publisher,
-            IJobPositionConverter jobPositionConverter,IEmployeeConverter employeeConverter)
+            IJobPositionConverter jobPositionConverter,IEmployeeConverter employeeConverter,IPeriodServiceWrapper periodService)
         {
             this.unitIndexConverter = unitIndexConverter;
             this.unitConverter = unitConverter;
@@ -52,17 +54,19 @@ namespace MITD.PMS.Integration.Domain
             this.publisher = publisher;
             this.jobPositionConverter = jobPositionConverter;
             this.employeeConverter = employeeConverter;
+            this.periodService = periodService;
         }
 
         #endregion
 
         #region Public methods
 
-        public void Init(Period preiodParam)
+        public void Init()
         {
-            if (preiodParam == null)
-                throw new ArgumentNullException("preiodParam", "Period can not be null");
-            period = preiodParam;
+            var activePeriod = periodService.GetActivePeriod();
+            if(activePeriod==null)
+                throw new Exception("There is no active period in 'EPMS' activate atleast one period for continue the operation");
+            period = new Period(activePeriod.Id,activePeriod.Name,new PeriodState());
             isInitialized = true;
         }
 
