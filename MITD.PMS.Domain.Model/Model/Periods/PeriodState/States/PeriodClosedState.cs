@@ -23,7 +23,9 @@ namespace MITD.PMS.Domain.Model.Periods
         }
 
         internal override void CheckShowingInquirySubject()
-        {}
+        {
+            
+        }
 
 
     }

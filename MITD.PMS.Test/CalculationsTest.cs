@@ -74,9 +74,9 @@ namespace MITD.PMS.Test
                             new PMS.Persistence.NH.JobIndexPointRepository(uow));
                         var policy = policyRep.GetById(new PolicyId(1));
                         var period = periodRep.GetBy(c => c.Active);
-                        var emp = rep.GetBy(new EmployeeId("670222", period.Id));
+                        var emp = rep.GetBy(new EmployeeId("792083", period.Id));
                         //var calculation = new Calculation(calcRep.GetNextId(), period, policy, Guid.NewGuid().ToString(), DateTime.Now, "831181");
-                        var calculation = calcRep.GetById(new CalculationId(1));
+                        var calculation = calcRep.GetById(new CalculationId(10));
                         //calcRep.Add(calculation);
                         //uow.Commit();
                         MITD.PMSReport.Domain.Model.CalculationData empData;
@@ -595,7 +595,7 @@ if (it > 0)
             using (var uow = uows.CurrentUnitOfWork as NHUnitOfWork)
             {
                 var periodRep = new PeriodRepository(uow);
-                var periodManagerService = new PeriodManagerService(periodRep, null, null, null, null, null, null, null, null);
+                var periodManagerService = new PeriodManagerService(periodRep, null, null, null, null, null, null, null, null,null);
                 #region Period creation
 
                 period = new Period(new PeriodId(periodRep.GetNextId()), Guid.NewGuid().ToString(), DateTime.Now, DateTime.Now);

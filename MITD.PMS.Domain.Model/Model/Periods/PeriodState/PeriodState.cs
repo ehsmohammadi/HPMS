@@ -19,8 +19,8 @@ namespace MITD.PMS.Domain.Model.Periods
         public static readonly PeriodState InitializingForInquiryCompleted = new PeriodInitializeInquiryCompletedState();
         public static readonly PeriodState InquiryStarted = new PeriodInquiryStartedState();
         public static readonly PeriodState InquiryCompleted = new PeriodInquiryCompletedState();
-        public static readonly PeriodState ClaimingStarted = new PeriodClaimingStartedState();
-        public static readonly PeriodState ClaimingFinished = new PeriodClaimingFinishedState();
+        //public static readonly PeriodState ClaimingStarted = new PeriodClaimingStartedState();
+        //public static readonly PeriodState ClaimingFinished = new PeriodClaimingFinishedState();
         public static readonly PeriodState Closed = new PeriodClosedState(); 
         
         private readonly string description;

@@ -440,6 +440,7 @@ namespace MITD.PMS.Presentation.Logic
 
         private void addCalculation()
         {
+            if (!Calculation.Validate()) return;
             if (CalculationEmployees.Count == 0 && !AllResultSelected)
             {
                 appController.ShowMessage("حداقل یک کارمند انتخاب کنید");

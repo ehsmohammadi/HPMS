@@ -62,7 +62,7 @@ namespace MITD.PMS.Interface
             }
             fs.OrderBy(x => x.Id);
             fs.WithPaging(pageSize, pageIndex);
-            jobRep.GetAllJob(fs);
+            jobRep.Find(e => e.Id.PeriodId == new PeriodId(periodId), fs);
             var res = new PageResultDTO<JobInPeriodDTOWithActions>();
             res.InjectFrom(fs.PageCriteria.PageResult);
             res.Result = fs.PageCriteria.PageResult.Result.Select(r => jobInPeriodDTOWithActionsMapper.MapToModel(r, selectedColumns.Split(','))).ToList();

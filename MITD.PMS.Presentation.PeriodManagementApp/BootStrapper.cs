@@ -30,12 +30,12 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
                 {(int) ActionType.StartInquiry, typeof (StartInquiryService)},
                 {(int) ActionType.CompleteInquiry, typeof (CompleteInquiryService)},
                 {(int) ActionType.ClosePeriod, typeof (ClosePeriodService)},
-                {(int) ActionType.CopyPeriodBasicData, typeof (BasicDataCopyService)},
+               // {(int) ActionType.CopyPeriodBasicData, typeof (BasicDataCopyService)}, for removing copy
                 {(int) ActionType.GetPeriodInitializingInquiryStatus, typeof (GetPeriodInitializingInquiryStatusService)},
                 {(int) ActionType.RollBackPeriodState, typeof (RollBackPeriodService)},
 
-                {(int) ActionType.StartCliaming, typeof (StartClaimingPeriodService)},
-                {(int) ActionType.FinishCliaming, typeof (FinishClaimingPeriodService)},
+                //{(int) ActionType.StartCliaming, typeof (StartClaimingPeriodService)}, for removing claim 
+                //{(int) ActionType.FinishCliaming, typeof (FinishClaimingPeriodService)},for removing claim
 
                 {(int) ActionType.AddUnitInPeriod, typeof (AddUnitInPeriodService)},
                 {(int) ActionType.ModifyUnitInPeriod, typeof (ModifyUnitInPeriodService)},

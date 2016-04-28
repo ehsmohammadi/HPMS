@@ -347,7 +347,6 @@ namespace MITD.Core.RuleEngine
 
     public class Rule11 : IRule<CalculationData>
     {
-
         public void Execute(CalculationData data)
         {
             if (data.PathNo != 2)
@@ -460,7 +459,7 @@ namespace MITD.Core.RuleEngine
                 Utils.AddEmployeePoint(position, "finalJob", (sumBehaviralPoint + totalPerformancePoint * sumPerformanceGroupImportance) / sumIndexImportance);
             }
 
-            Utils.AddEmployeePoint("final", total / data.JobPositions.Count * 10, true);
+            Utils.AddEmployeePoint("final", total / data.JobPositions.Count, true);
 
         }
     }

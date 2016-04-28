@@ -216,6 +216,8 @@ namespace MITD.PMS.Presentation.Logic
 
         private ObservableCollection<TreeElementViewModel<ReportCommandVM>> createReportCommands()
         {
+            if(!LogonUser.IsAdmin)
+                return new ObservableCollection<TreeElementViewModel<ReportCommandVM>>();
             var cmdList = new ObservableCollection<TreeElementViewModel<ReportCommandVM>>();
             ReportVM.IsBusy = true;
             ReportVM.BusyMessage = "در حال دریافت اطلاعات...";

@@ -31,7 +31,7 @@ namespace MITD.PMS.Presentation.Contracts
         }
 
         private string indexValue;
-        [Range(0,10,ErrorMessage="برای فیلد مورد نظر مقدار درست وارد کنید")]
+        [Range(0.0, 100.0, ErrorMessage = "نمره ورودی می بایست عددی بین 1 تا 100 باشد")]
         public string IndexValue
         {
             get { return indexValue; }

@@ -306,20 +306,23 @@ namespace MITD.PMSSecurity.Domain
         ActivatePeriod = 2111,
         [ActionInfoAttribute("InitializePeriodForInquiry", "آماده سازی دوره برای نظرسنجی")]
         InitializePeriodForInquiry = 2112,
+
+        [ActionInfoAttribute("GetPeriodInitializingInquiryStatus", " نمایش وضعیت آماده سازی اجرای نظرسنجی")]
+        GetPeriodInitializingInquiryStatus = 2119,
+
         [ActionInfoAttribute("StartInquiry", "شروع نظرسنجی ")]
         StartInquiry = 2113,
         [ActionInfoAttribute("CompelteInquiry", "اتمام نظرسنجی ")]
         CompleteInquiry = 2114,
-        [ActionInfoAttribute("StartCliaming", "شروع زمان ثبت اعتراض ")]
-        StartCliaming = 2115,
-        [ActionInfoAttribute("FinishCliaming", "پايان زمان ثبت اعتراض ")]
-        FinishCliaming = 2116,
+        //[ActionInfoAttribute("StartCliaming", "شروع زمان ثبت اعتراض ")]
+        //StartCliaming = 2115,
+        //[ActionInfoAttribute("FinishCliaming", "پايان زمان ثبت اعتراض ")]
+        //FinishCliaming = 2116,
         [ActionInfoAttribute("ClosePeriod", "بستن دوره ")]
         ClosePeriod = 2117,
-        [ActionInfoAttribute("CopyPeriodBasicData", "کپی اطلاعات از دوره های قبل ")]
-        CopyPeriodBasicData = 2118,
-        [ActionInfoAttribute("GetPeriodInitializingInquiryStatus", " نمایش وضعیت آماده سازی اجرای نظرسنجی")]
-        GetPeriodInitializingInquiryStatus = 2119,
+        //[ActionInfoAttribute("CopyPeriodBasicData", "کپی اطلاعات از دوره های قبل ")]
+        //CopyPeriodBasicData = 2118,
+
         [ActionInfoAttribute("RollBackPeriodState", " برگشت دوره به وضعیت قبل ")]
         RollBackPeriodState = 2120,
         

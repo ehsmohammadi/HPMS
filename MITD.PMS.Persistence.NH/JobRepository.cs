@@ -6,6 +6,7 @@ using MITD.PMS.Domain.Model.Periods;
 using MITD.PMS.Domain.Model.Jobs;
 using MITD.PMS.Domain.Model.Units;
 using System;
+using System.Linq.Expressions;
 using MITD.PMS.Common;
 
 namespace MITD.PMS.Persistence.NH
@@ -91,5 +92,9 @@ namespace MITD.PMS.Persistence.NH
             return res;
         }
 
+        public void Find(Expression<Func<Job, bool>> func, ListFetchStrategy<Job> fs)
+        {
+            rep.Find(func, fs);
+        }
     }
 }

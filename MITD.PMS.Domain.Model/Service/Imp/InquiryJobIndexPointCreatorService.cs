@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using MITD.Core;
 using MITD.PMS.Domain.Model.InquiryJobIndexPoints;
 using MITD.PMS.Domain.Model.JobIndices;
@@ -41,8 +43,21 @@ namespace MITD.PMS.Domain.Service
                 {
                     var id = inquiryJobIndexPointRep.GetNextId();
 #if(DEBUG)
+                    var pointList = new List<string>()
+                    {
+                        "20",
+                        "40",
+                        "60",
+                        "80",
+                        "100"
+                    };
+                    var selector=new Random();
+                    var index = selector.Next(pointList.Count);
+
                     var inquiryIndexPoint = new InquiryJobIndexPoint(new InquiryJobIndexPointId(id), itm, jobIndex as JobIndex,
-                        "5");
+                        pointList[index]);
+                    
+                    
 #else
                      var inquiryIndexPoint = new InquiryJobIndexPoint(new InquiryJobIndexPointId(id), itm, jobIndex as JobIndex,
                         string.Empty);

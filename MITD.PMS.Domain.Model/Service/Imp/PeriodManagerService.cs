@@ -31,11 +31,12 @@ namespace MITD.PMS.Domain.Service
         private readonly IJobPositionRepository jobPositionRep;
         private readonly IInquiryJobIndexPointRepository inquiryJobIndexPointRep;
         private readonly IClaimRepository claimRep;
+        private readonly IInquiryUnitIndexPointRepository inquiryUnitIndexPointRep;
 
         public PeriodManagerService(IPeriodRepository periodRep, IInquiryConfiguratorService inquiryConfiguratorService,
             IPeriodBasicDataCopierService periodCopierService, IEventPublisher publisher
             , ICalculationRepository calcRep, IJobIndexPointRepository jobIndexPointRep, IJobPositionRepository jobPositionRep, IInquiryJobIndexPointRepository inquiryJobIndexPointRep
-            , IClaimRepository claimRep
+            , IClaimRepository claimRep, IInquiryUnitIndexPointRepository inquiryUnitIndexPointRep
             )
         {
             this.periodRep = periodRep;
@@ -47,6 +48,7 @@ namespace MITD.PMS.Domain.Service
             this.jobPositionRep = jobPositionRep;
             this.inquiryJobIndexPointRep = inquiryJobIndexPointRep;
             this.claimRep = claimRep;
+            this.inquiryUnitIndexPointRep = inquiryUnitIndexPointRep;
         }
 
         public bool CanActivate(Period period)
@@ -129,7 +131,10 @@ namespace MITD.PMS.Domain.Service
 
         public bool CanCompleteInquiry(Period period)
         {
-            return inquiryJobIndexPointRep.IsAllInquiryJobIndexPointsHasValue(period);
+
+            var allJobIndexPointHaveValue = inquiryJobIndexPointRep.IsAllInquiryJobIndexPointsHasValue(period);
+            var allUnitIndexPointHaveValue = inquiryUnitIndexPointRep.IsAllInquiryUnitIndexPointsHasValue(period);
+            return allUnitIndexPointHaveValue && allJobIndexPointHaveValue;
         }
 
         public void CheckUpdatingJobIndex(JobIndex jobIndex)
@@ -173,7 +178,7 @@ namespace MITD.PMS.Domain.Service
             if (inquirer == null)
                 return;
             var period = periodRep.GetById(inquirer.Id.PeriodId);
-        //todo bz
+            //todo bz
             // period.CheckShowingInquirySubject();
         }
 
@@ -263,7 +268,7 @@ namespace MITD.PMS.Domain.Service
         public void CheckSettingInquiryUnitIndexPointValueValue(InquiryUnitIndexPoint inquiryUnitIndexPoint)
         {
             var period = periodRep.GetById(inquiryUnitIndexPoint.ConfigurationItemId.InquirerId.PeriodId);
-          //todo bz
+            //todo bz
             // period.CheckSettingInquiryJobIndexPointValueValue();
         }
     }

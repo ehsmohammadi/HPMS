@@ -139,12 +139,11 @@ namespace MITD.PMS.Presentation.Logic
         {
             return new List<Grade>
             {
-                new Grade("عالی", "5"),
-                new Grade("خوب", "4"),
-                new Grade("مورد انتظار", "3"),
-                new Grade("نیاز به آموزش و مراقبت", "2"),
-                new Grade("نامطلوب", "1")
-
+                new Grade("عالی", "100"),
+                new Grade("خوب", "80"),
+                new Grade("مورد انتظار", "60"),
+                new Grade("نیاز به آموزش و مراقبت", "40"),
+                new Grade("نامطلوب", "20")
             };
         }
 

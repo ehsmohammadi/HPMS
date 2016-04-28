@@ -8,17 +8,16 @@
 <head runat="server">
     <title></title>
 </head>
-<body style="width: auto">
+<body style="width: 100%" dir="rtl">
     <form id="form1" runat="server">
         <div>
             <asp:ScriptManager ID="ScriptManager1" runat="server">
             </asp:ScriptManager>
         </div>
 
-        <rsweb:ReportViewer ID="ReportViewer1" runat="server" ProcessingMode="Remote" SizeToReportContent="true"
-            ZoomMode="PageWidth" ShowPrintButton="False">
+        <rsweb:ReportViewer ID="ReportViewer1" runat="server" ProcessingMode="Remote" Width="100%" ShowPrintButton="True" >
         </rsweb:ReportViewer>
-        <div id="container" class=" " style="display: inline-block; font-family: Verdana; font-size: 8pt; vertical-align: top;">
+<%--        <div id="container" class=" " style="display: inline-block; font-family: Verdana; font-size: 8pt; vertical-align: top;">
             <table cellpadding="0" cellspacing="0" style="display: inline;">
                 <tbody>
                     <tr>
@@ -29,15 +28,15 @@
                 </tbody>
             </table>
         </div>
-        <script src="../Scripts/jquery-2.2.1.js"></script>
-        <script type="text/javascript">
+        <script type="text/javascript" src="../Scripts/jquery-2.2.1.js"></script>--%>
+     <%--   <script type="text/javascript">
             $(document).ready(function () {
                 $($('#ReportViewer1_fixedTable').find('td[colspan=3] div[id^="ReportViewer1"]')[1])
                         .find('div')
                         .first()
                         .append($('#container').detach());
             });
-        </script>
+        </script>--%>
     </form>
 </body>
 </html>

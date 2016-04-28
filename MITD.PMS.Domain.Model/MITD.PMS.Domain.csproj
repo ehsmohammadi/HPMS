@@ -180,10 +180,6 @@
     <Compile Include="Model\Periods\PeriodEngineState.cs" />
     <Compile Include="Model\Periods\EventHandler.cs" />
     <Compile Include="Model\Periods\PeriodState\PeriodStateEnum.cs" />
-    <Compile Include="Model\Periods\PeriodState\States\PeriodClaimingFinishedState.cs" />
-    <Compile Include="Model\Periods\PeriodState\States\PeriodClaimingStartedState.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Model\Periods\PeriodState\States\PeriodBasicDataCopying.cs" />
     <Compile Include="Model\Periods\PeriodState\States\PeriodInitializeInquiryCompletedState.cs" />
     <Compile Include="Model\Periods\PeriodState\States\PeriodInitializingForInquiryState.cs" />

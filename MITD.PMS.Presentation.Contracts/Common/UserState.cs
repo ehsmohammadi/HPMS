@@ -108,7 +108,7 @@ namespace MITD.PMS.Presentation.Contracts
         {
             get
             {
-                if (RoleNames.Contains("Admin"))
+                if (RoleNames.Contains("Admin") || RoleNames.Contains("SuperAdmin"))
                     return true;
                 else
                     return false;

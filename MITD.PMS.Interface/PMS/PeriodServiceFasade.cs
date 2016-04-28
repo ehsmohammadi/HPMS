@@ -121,10 +121,10 @@ namespace MITD.PMS.Interface
                 periodService.CompleteInquiry(new PeriodId(periodId));
             else if (stateDto.State == (int)PeriodState.Closed)
                 periodService.Close(new PeriodId(periodId));
-            else if (stateDto.State == (int)PeriodState.ClaimingStarted)
-                periodService.StartClaiming(new PeriodId(periodId));
-            else if (stateDto.State == (int)PeriodState.ClaimingFinished)
-                periodService.FinishClaiming(new PeriodId(periodId));
+            //else if (stateDto.State == (int)PeriodState.ClaimingStarted)
+            //    periodService.StartClaiming(new PeriodId(periodId));
+            //else if (stateDto.State == (int)PeriodState.ClaimingFinished)
+                //periodService.FinishClaiming(new PeriodId(periodId));
         }
 
         public void CopyBasicData(long sourcePeriodId, long destionationPeriodId, PeriodStateDTO stateDto)
