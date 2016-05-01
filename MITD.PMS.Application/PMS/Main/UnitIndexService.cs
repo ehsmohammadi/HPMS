@@ -41,13 +41,14 @@ namespace MITD.PMS.Application
                 using (var tr = new TransactionScope())
                 {
                     var id = unitIndexRep.GetNextId();
-                    var period = periodRep.GetById(periodId);
+                    //var period = periodRep.GetById(periodId);
+                    var period = new Period(periodId,"temp",DateTime.Now,DateTime.Now );
                     UnitIndexGroup parent = null;
                     if (parentId != null)
                         parent = unitIndexRep.GetUnitIndexGroupById(new AbstractUnitIndexId(parentId.Id));
                     var unitIndexGroup = new UnitIndexGroup(id, period, parent, name, dictionaryName);
                     unitIndexRep.Add(unitIndexGroup);
-                    tr.Complete();
+                    //tr.Complete();
                     return unitIndexGroup;
 
                 }

@@ -101,6 +101,19 @@ namespace MITD.PMS.Application
         }
     }
 
+    public class UnitIndexServiceFactory : IUnitIndexServiceFactory
+    {
+        public IServiceLifeCycleManager<IUnitIndexService> Create()
+        {
+            return ServiceLocator.Current.GetInstance<IServiceLifeCycleManager<IUnitIndexService>>();
+        }
+
+        public void Release(IServiceLifeCycleManager<IUnitIndexService> unitIndexService)
+        {
+            ServiceLocator.Current.Release(unitIndexService);
+        }
+    }
+
 
     public static class LogServiceFactory
     {
