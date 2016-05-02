@@ -46,7 +46,7 @@ namespace MITD.PMS.Application
             //    unitIndexServiceFactory.Release(unitIndexServiceManger);
             //}
 
-            //todo: very bad code for this section 
+            //todo:Damn fu.... very bad code for this section 
             var behaviaralId = jobIndexRepository.GetNextId();
             var behaviaralJobIndexGroup = new JobIndexGroup(behaviaralId, period, null, "شاخص های رفتاری", "BehaviouralGroup");
             jobIndexRepository.Add(behaviaralJobIndexGroup);
