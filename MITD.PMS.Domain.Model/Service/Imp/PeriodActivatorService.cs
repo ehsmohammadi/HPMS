@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MITD.Core;
-using MITD.PMS.Common;
 using MITD.PMS.Domain.Model.Periods;
-using MITD.PMS.Exceptions;
 
 namespace MITD.PMS.Domain.Service
 {

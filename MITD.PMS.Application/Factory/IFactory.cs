@@ -46,6 +46,12 @@ namespace MITD.PMS.Application
         void Release(IServiceLifeCycleManager<IJobIndexService> jobService);
     }
 
+    public interface IUnitIndexServiceFactory : IService
+    {
+        IServiceLifeCycleManager<IUnitIndexService> Create();
+        void Release(IServiceLifeCycleManager<IUnitIndexService> unitService);
+    }
+
     public interface IEmployeeServiceFactory : IService
     {
         IServiceLifeCycleManager<IEmployeeService> Create();

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using MITD.Core;
-using MITD.PMS.Common;
 using MITD.PMS.Domain.Model.Calculations;
 using MITD.PMS.Domain.Model.Claims;
 using MITD.PMS.Domain.Model.Employees;
@@ -15,13 +12,13 @@ using MITD.PMS.Domain.Model.Jobs;
 using MITD.PMS.Domain.Model.Periods;
 using MITD.PMS.Domain.Model.UnitIndices;
 using MITD.PMS.Domain.Model.Units;
-using MITD.PMS.Exceptions;
-
 
 namespace MITD.PMS.Domain.Service
 {
     public class PeriodManagerService : IPeriodManagerService
     {
+        #region Fields
+
         private readonly IPeriodRepository periodRep;
         private readonly IInquiryConfiguratorService inquiryConfiguratorService;
         private readonly IPeriodBasicDataCopierService periodCopierService;
@@ -33,11 +30,15 @@ namespace MITD.PMS.Domain.Service
         private readonly IClaimRepository claimRep;
         private readonly IInquiryUnitIndexPointRepository inquiryUnitIndexPointRep;
 
+
+        #endregion
+
+        #region Constructors
+
         public PeriodManagerService(IPeriodRepository periodRep, IInquiryConfiguratorService inquiryConfiguratorService,
             IPeriodBasicDataCopierService periodCopierService, IEventPublisher publisher
             , ICalculationRepository calcRep, IJobIndexPointRepository jobIndexPointRep, IJobPositionRepository jobPositionRep, IInquiryJobIndexPointRepository inquiryJobIndexPointRep
-            , IClaimRepository claimRep, IInquiryUnitIndexPointRepository inquiryUnitIndexPointRep
-            )
+            , IClaimRepository claimRep, IInquiryUnitIndexPointRepository inquiryUnitIndexPointRep)
         {
             this.periodRep = periodRep;
             this.inquiryConfiguratorService = inquiryConfiguratorService;
@@ -49,7 +50,10 @@ namespace MITD.PMS.Domain.Service
             this.inquiryJobIndexPointRep = inquiryJobIndexPointRep;
             this.claimRep = claimRep;
             this.inquiryUnitIndexPointRep = inquiryUnitIndexPointRep;
-        }
+
+        } 
+
+        #endregion
 
         public bool CanActivate(Period period)
         {

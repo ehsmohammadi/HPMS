@@ -79,12 +79,14 @@ namespace MITD.PMS.Persistence.NH
 
         public AbstractUnitIndexId GetNextId()
         {
-            using (var ctx = Session.SessionFactory.OpenStatelessSession())
-            {
-                ctx.BeginTransaction();
-                var res = ctx.CreateSQLQuery("Select next value for dbo.Periods_AbstractUnitIndexSeq").UniqueResult<long>();
-                return new AbstractUnitIndexId(res);
-            }
+            var res = session.CreateSQLQuery("Select next value for dbo.Periods_AbstractUnitIndexSeq").UniqueResult<long>();
+            return new AbstractUnitIndexId(res);
+            //using (var ctx = Session.SessionFactory.GetCurrentSession())
+            //{
+            //    ctx.BeginTransaction();
+            //    var res = ctx.CreateSQLQuery("Select next value for dbo.Periods_AbstractUnitIndexSeq").UniqueResult<long>();
+            //    return new AbstractUnitIndexId(res);
+            //}
         }
 
         public void Update(AbstractUnitIndex unitIndex)

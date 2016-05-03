@@ -78,12 +78,14 @@ namespace MITD.PMS.Persistence.NH
 
         public AbstractJobIndexId GetNextId()
         {
-            using (var ctx = Session.SessionFactory.OpenStatelessSession())
-            {
-                ctx.BeginTransaction();
-                var res = ctx.CreateSQLQuery("Select next value for dbo.Periods_AbstractJobIndexSeq").UniqueResult<long>();
-                return new AbstractJobIndexId(res);
-            }
+            var res = session.CreateSQLQuery("Select next value for dbo.Periods_AbstractJobIndexSeq").UniqueResult<long>();
+            return new AbstractJobIndexId(res);
+            //using (var ctx = Session.SessionFactory.OpenStatelessSession())
+            //{
+            //    ctx.BeginTransaction();
+            //    var res = ctx.CreateSQLQuery("Select next value for dbo.Periods_AbstractJobIndexSeq").UniqueResult<long>();
+            //    return new AbstractJobIndexId(res);
+            //}
         }
 
         public void Update(AbstractJobIndex jobIndex)
