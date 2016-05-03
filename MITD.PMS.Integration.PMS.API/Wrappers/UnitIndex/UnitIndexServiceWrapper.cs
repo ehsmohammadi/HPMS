@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using MITD.PMS.Integration.Core;
 using MITD.PMS.Integration.PMS.Contract;
 using MITD.PMS.Presentation.Contracts;
@@ -42,6 +43,23 @@ namespace MITD.PMS.Integration.PMS.API
             //var url = string.Format(apiAddress);
             //IntegrationWebClient.Post(new Uri(url, PMSClientConfig.UriKind), action, unitIndex, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         } 
+
+
+        public UnitIndexDTO GetUnitIndexByTransferId(Guid guid)
+        {
+            //todo: Impliment Request
+            return null;
+        }
+
+
+        public List<AbstractUnitIndexInPeriodDTO> GetAllUnitIndexGroup(long periodId)
+        {
+
+            var url = endpoint + string.Format("?typeOf=" + "UnitIndexGroup" + "&periodId=" + periodId);
+            return IntegrationHttpClient.Get<List<AbstractUnitIndexInPeriodDTO>>(apiUri, url);
+
+        }
+
         #endregion
 
         //public void GetAllAbstractUnitIndex(Action<List<AbstractUnitIndexDTOWithActions>, Exception> action)
@@ -69,7 +87,7 @@ namespace MITD.PMS.Integration.PMS.API
         //    IntegrationWebClient.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         //}
 
-        //public void GetAllUnitIndexCategorys(Action<PageResultDTO<UnitIndexCategoryDTOWithActions>, Exception> action, int pageSize, int pageIndex)
+        //public void GetAllUnitIndexGroup(Action<PageResultDTO<UnitIndexCategoryDTOWithActions>, Exception> action, int pageSize, int pageIndex)
         //{
         //    var url = string.Format(apiAddress + "?typeOf=" + unitIndexCategoryClassType + "&PageSize=" + pageSize + "&PageIndex=" + pageIndex);
         //    IntegrationWebClient.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));

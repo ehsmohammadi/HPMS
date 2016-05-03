@@ -19,21 +19,21 @@ namespace MITD.PMS.Integration.Data.EF
         {
             db = new PersonnelSoft2005Entities();
             IList<long> ids = GetGeneralJobIndexIds();
-            List<GeneralJobIndexDto> GeneralIndexesList = new List<GeneralJobIndexDto>();
+            List<GeneralJobIndexDto> generalIndexesList = new List<GeneralJobIndexDto>();
 
             foreach (var item in ids)
             {
                 try
                 {
-                    var TempGeneralIndex = (from c in db.PMS_GeneralIndex where c.ID == item select c).FirstOrDefault();
+                    var tempGeneralIndex = (from c in db.PMS_GeneralIndex where c.ID == item select c).FirstOrDefault();
 
-                    GeneralJobIndexDto GeneralIndex = new GeneralJobIndexDto();
-                    GeneralIndex.IndexTitle = TempGeneralIndex.Title;
-                    GeneralIndex.IndexTypeID = TempGeneralIndex.ID_IndexType;
-                    GeneralIndex.Description = TempGeneralIndex.Description;
-                    GeneralIndex.Coefficient = TempGeneralIndex.coefficient;
+                    GeneralJobIndexDto generalIndex = new GeneralJobIndexDto();
+                    generalIndex.IndexTitle = tempGeneralIndex.Title;
+                    generalIndex.IndexTypeID = tempGeneralIndex.ID_IndexType;
+                    generalIndex.Description = tempGeneralIndex.Description;
+                    generalIndex.Coefficient = tempGeneralIndex.coefficient;
 
-                    GeneralIndexesList.Add(GeneralIndex);
+                    generalIndexesList.Add(generalIndex);
 
                 }
                 catch (Exception e)
@@ -42,7 +42,7 @@ namespace MITD.PMS.Integration.Data.EF
                 }
             }
 
-            return GeneralIndexesList;
+            return generalIndexesList;
 
         }
 
@@ -51,7 +51,7 @@ namespace MITD.PMS.Integration.Data.EF
             db = new PersonnelSoft2005Entities();
             try
             {
-                var ids = (from c in db.PMS_GeneralIndex where c.IsActive == true && c.ID_IndexType!=3 select c.ID).ToList();
+                var ids = (from c in db.PMS_GeneralIndex where c.IsActive == true && c.ID_IndexType != DataEFConfig.IndexType_UnitIndex select c.ID).ToList();
                 return ids;
             }
             catch (Exception e)
@@ -79,7 +79,7 @@ namespace MITD.PMS.Integration.Data.EF
             {
                 try
                 {
-                    var TempExclusiveIndex = (from c in db.PMS_JobIndex where c.ID == item && c.IsActive == true && c.ID_IndexType != 3 select c).FirstOrDefault();
+                    var TempExclusiveIndex = (from c in db.PMS_JobIndex where c.ID == item && c.IsActive == true && c.ID_IndexType != DataEFConfig.IndexType_UnitIndex select c).FirstOrDefault();
 
                     ExclusiveJobIndexDto ExclusiveIndex = new ExclusiveJobIndexDto();
                     ExclusiveIndex.IndexTitle = TempExclusiveIndex.Title;
@@ -109,7 +109,7 @@ namespace MITD.PMS.Integration.Data.EF
             List<JobIndexIdListItem> Result = new List<JobIndexIdListItem>();
 
             Result = (from c in db.PMS_GeneralIndex
-                      where c.ID_IndexType != 3
+                      where c.ID_IndexType != DataEFConfig.IndexType_UnitIndex
                       select new JobIndexIdListItem
                           {
                               //todo: Remove JobId From this damn query!

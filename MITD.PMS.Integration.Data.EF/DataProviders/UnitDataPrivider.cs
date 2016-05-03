@@ -48,9 +48,9 @@ namespace MITD.PMS.Integration.Data.EF
             {
                 return (from c in db.VW_OrganTree
                         where c.PID == ParentID && c.ID != ParentID
-                            && c.NodeType != 1 // پست
-                          && c.NodeType != 6 //بلا استفاده
-                          && c.NodeType != 2 // بخش
+                            && c.NodeType != DataEFConfig.NodeType_Post // پست
+                          && c.NodeType != DataEFConfig.NodeType_Idle //بلا استفاده
+                          && c.NodeType != DataEFConfig.NodeType_Section // بخش
                         orderby c.ID
                         select c.ID).ToList();
             }
@@ -105,9 +105,9 @@ namespace MITD.PMS.Integration.Data.EF
             try
             {
                 return (from c in db.VW_OrganTree
-                    where c.NodeType != 1 // پست
-                          && c.NodeType != 6 //بلا استفاده
-                          && c.NodeType != 2 // بخش
+                    where c.NodeType != DataEFConfig.NodeType_Post // پست
+                          && c.NodeType != DataEFConfig.NodeType_Idle //بلا استفاده
+                          && c.NodeType != DataEFConfig.NodeType_Section // بخش
                           && c.FullPath.StartsWith(RootFullPath)
                     select c.ID).Count();
             }
@@ -126,7 +126,7 @@ namespace MITD.PMS.Integration.Data.EF
         {
             db = new PersonnelSoft2005Entities();
             return (from c in db.VW_OrganTree
-                    where c.NodeType == 1 && c.PID == UnitID
+                    where c.NodeType == DataEFConfig.NodeType_Post && c.PID == UnitID
                     //todo: Add Not Used Job Position Condition
                     orderby c.ID
                     select new JobPositionIntegrationDTO

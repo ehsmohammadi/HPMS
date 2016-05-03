@@ -6,6 +6,7 @@ using MITD.PMS.Integration.Data.Contract.DataProvider;
 using MITD.PMS.Integration.Data.Contract.DTO;
 using MITD.PMS.Integration.PMS.Contract;
 using MITD.PMS.Presentation.Contracts;
+using MITD.PMS.Integration.Core;
 
 namespace MITD.PMS.Integration.Domain
 {
@@ -90,32 +91,33 @@ namespace MITD.PMS.Integration.Domain
             return res;
         }
 
-        private JobIndexInPeriodDTO createPeriodJobIndexDTO(JobIndexDTO jobIndex, Period period, JobIndexIntegrationDTO sourceJobIndexDTO)
+        private JobIndexInPeriodDTO createPeriodJobIndexDTO(JobIndexDTO jobIndex, Period period,
+            JobIndexIntegrationDTO sourceJobIndexDTO)
         {
             var res = new JobIndexInPeriodDTO
-            {
-                //todo: Kharabe
+                      {
+                          //todo: Kharabe
 
-                CalculationOrder = 1,
-                IsInquireable = true,
-                Name = jobIndex.Name,
-                DictionaryName = jobIndex.DictionaryName,
-                JobIndexId = jobIndex.Id,
-                PeriodId = period.Id,
-                CustomFields = jobIndex.CustomFields.Select(c => new AbstractCustomFieldDescriptionDTO
-                {
-                    Id = c.Id,
-                    Name = "fake",
-                    Value = "1"
-                }).ToList()
+                          CalculationOrder = 1,
+                          IsInquireable = true,
+                          Name = jobIndex.Name,
+                          DictionaryName = jobIndex.DictionaryName,
+                          JobIndexId = jobIndex.Id,
+                          PeriodId = period.Id,
+                          CustomFields = jobIndex.CustomFields.Select(c => new AbstractCustomFieldDescriptionDTO
+                                                                           {
+                                                                               Id = c.Id,
+                                                                               Name = "fake",
+                                                                               Value = "1"
+                                                                           }).ToList()
 
-            };
-            if (sourceJobIndexDTO.IndexType==2)
+                      };
+            if (sourceJobIndexDTO.IndexType == PMSIntegrationCoreConstantData.IntegrationBehaviaralJobIndexId)
             {
                 res.ParentId = PMSCostantData.JobIndexGroupBehaviaral;
                 res.CalculationLevel = 1;
             }
-            else if (sourceJobIndexDTO.IndexType==1)
+            else if (sourceJobIndexDTO.IndexType == PMSIntegrationCoreConstantData.IntegrationPerformanceJobIndexId)
             {
                 res.ParentId = PMSCostantData.JobIndexGroupPerformance;
                 res.CalculationLevel = 2;

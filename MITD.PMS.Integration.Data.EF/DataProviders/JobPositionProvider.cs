@@ -76,8 +76,8 @@ namespace MITD.PMS.Integration.Data.EF
             try
             {
                 return (from c in db.VW_OrganTree
-                        where c.NodeType == 1
-                              && c.NodeType != 6
+                        where c.NodeType == DataEFConfig.NodeType_Post
+                              && c.NodeType != DataEFConfig.NodeType_Idle
                               && (c.ID_F != null || c.IsManager == true)
                               && c.FullPath.StartsWith(RootFullPath)
                         select c.ID).Count();
@@ -120,21 +120,21 @@ namespace MITD.PMS.Integration.Data.EF
 
                 brotherJobPositionsIds = (from c in db.VW_OrganTree
                     where c.PID == parentId && c.ID != id
-                          && c.NodeType == 1
+                          && c.NodeType == DataEFConfig.NodeType_Post
                           && c.ID_F != null
                     orderby c.ID
                     select c.ID).ToList();
 
                 var subSectionIds = (from c in db.VW_OrganTree 
                                     where 
-                                        c.PID == parentId 
-                                        && c.NodeType != 6   //بلا استفاده
-                                        && c.NodeType == 2   // بخش
+                                        c.PID == parentId
+                                        && c.NodeType != DataEFConfig.NodeType_Idle   //بلا استفاده
+                                        && c.NodeType == DataEFConfig.NodeType_Section   // بخش
                                  select c.ID).ToList();
 
                 var subSectionJobPositionIds = (from c in db.VW_OrganTree
                                                 where subSectionIds.Contains(c.PID.Value)
-                                                      && c.NodeType == 1
+                                                      && c.NodeType == DataEFConfig.NodeType_Post
                                                       && c.ID_F != null
                                                 orderby c.ID
                                                 select c.ID).ToList();
@@ -211,7 +211,7 @@ namespace MITD.PMS.Integration.Data.EF
                 var job=(from c in db.PMS_JobTitle where c.ID==jobPosition.ID_PMS_JobTitle.Value select c).Single();
 
                 var interMediateUnit=(from c in db.VW_OrganTree where c.ID==jobPosition.PID.Value select c).Single();
-                while (interMediateUnit.NodeType==2)
+                while (interMediateUnit.NodeType == DataEFConfig.NodeType_Section)
                 {
                     interMediateUnit=(from c in db.VW_OrganTree where c.ID==interMediateUnit.PID.Value select c).Single();
                 }

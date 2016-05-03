@@ -10,6 +10,10 @@ namespace MITD.PMS.Integration.PMS.Contract
         UnitIndexDTO GetUnitIndex(long id);
         UnitIndexDTO AddUnitIndex( UnitIndexDTO unitIndex);
 
+        UnitIndexDTO GetUnitIndexByTransferId(Guid guid);
+
+        List<AbstractUnitIndexInPeriodDTO> GetAllUnitIndexGroup(long periodId);
+
         #region Not Use
         //void UpdateUnitIndex(Action<UnitIndexDTO, Exception> action, UnitIndexDTO unitIndex);
         //void DeleteUnitIndex(Action<string, Exception> action, long id);

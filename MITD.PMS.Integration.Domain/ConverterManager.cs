@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using MITD.Core;
 using MITD.PMS.Integration.PMS.API;
 using MITD.PMS.Presentation.Contracts;
+using MITD.PMS.Integration.PMS.Contract;
+using System.Linq;
 
 namespace MITD.PMS.Integration.Domain
 {
@@ -30,6 +32,8 @@ namespace MITD.PMS.Integration.Domain
         private readonly IJobPositionConverter jobPositionConverter;
         private readonly IEmployeeConverter employeeConverter;
         private readonly IPeriodServiceWrapper periodService;
+        private readonly IUnitIndexServiceWrapper unitIndexService;
+        private readonly IJobIndexServiceWrapper jobIndexService;
         private readonly IEventPublisher publisher;
 
 
@@ -45,7 +49,7 @@ namespace MITD.PMS.Integration.Domain
 
         public ConverterManager(IUnitIndexConverter unitIndexConverter, IUnitConverter unitConverter,
             IJobIndexConverter jobIndexConverter, IJobConverter jobConverter, IEventPublisher publisher,
-            IJobPositionConverter jobPositionConverter,IEmployeeConverter employeeConverter,IPeriodServiceWrapper periodService)
+            IJobPositionConverter jobPositionConverter, IEmployeeConverter employeeConverter, IPeriodServiceWrapper periodService, IUnitIndexServiceWrapper unitIndexService, IJobIndexServiceWrapper jobIndexService)
         {
             this.unitIndexConverter = unitIndexConverter;
             this.unitConverter = unitConverter;
@@ -55,6 +59,8 @@ namespace MITD.PMS.Integration.Domain
             this.jobPositionConverter = jobPositionConverter;
             this.employeeConverter = employeeConverter;
             this.periodService = periodService;
+            this.unitIndexService = unitIndexService;
+            this.jobIndexService = jobIndexService;
         }
 
         #endregion
@@ -66,6 +72,37 @@ namespace MITD.PMS.Integration.Domain
             var activePeriod = periodService.GetActivePeriod();
             if(activePeriod==null)
                 throw new Exception("There is no active period in 'EPMS' activate atleast one period for continue the operation");
+            var existUnitIndexGroups = unitIndexService.GetAllUnitIndexGroup(activePeriod.Id);
+            var existUnitIndexGroup = existUnitIndexGroups.FirstOrDefault();
+            if (existUnitIndexGroup != null)
+            {
+                PMSCostantData.UnitIndexGroup = existUnitIndexGroup.Id;
+            }
+            else
+            {
+                //todo: throw Exception
+            }
+
+            var existJobIndexGroups = jobIndexService.GetJobIndexGroups(activePeriod.Id);
+            if (existJobIndexGroups != null)
+            {
+                foreach (var jobIndexGroupInPeriodDTO in existJobIndexGroups)
+                {
+                    if (jobIndexGroupInPeriodDTO.DictionaryName == PMSCostantData.JobIndexGroupBehaviaralDictionaryName)
+                    {
+                        PMSCostantData.JobIndexGroupBehaviaral = jobIndexGroupInPeriodDTO.Id;
+                    }
+                    else if (jobIndexGroupInPeriodDTO.DictionaryName == PMSCostantData.JobIndexGroupPerformanceDictionaryName)
+                    {
+                        PMSCostantData.JobIndexGroupPerformance = jobIndexGroupInPeriodDTO.Id;
+                    }
+                    else
+                    {
+                        //todo:throw Exception
+                    }
+                }
+            }
+
             period = new Period(activePeriod.Id,activePeriod.Name,new PeriodState());
             isInitialized = true;
         }

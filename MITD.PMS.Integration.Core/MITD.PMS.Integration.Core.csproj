@@ -54,6 +54,7 @@
     <Compile Include="IDataProvider.cs" />
     <Compile Include="IntegrationHttpClient.cs" />
     <Compile Include="IntegrationWebClient.cs" />
+    <Compile Include="PMSIntegrationCoreConstantData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using MITD.PMS.Presentation.Contracts;
 using MITD.Presentation;
 
@@ -9,7 +9,10 @@ namespace MITD.PMS.Integration.PMS.Contract
         JobIndexDTO GetJobIndex(long id);
         JobIndexDTO AddJobIndex(JobIndexDTO jobIndex);
 
+        List<JobIndexGroupInPeriodDTO> GetJobIndexGroups(long periodId);
+
         #region Not Used
+
         //void UpdateJobIndex(Action<JobIndexDTO, Exception> action, JobIndexDTO jobIndex);
         //void DeleteJobIndex(Action<string, Exception> action, long id);
         //void GetAllAbstractJobIndex(Action<List<AbstractJobIndexDTOWithActions>, Exception> action);
@@ -19,6 +22,7 @@ namespace MITD.PMS.Integration.PMS.Contract
         //void GetJobIndexEntityCustomFields(Action<List<AbstractCustomFieldDescriptionDTO>, Exception> action);
         //void GetCustomFields(Action<List<AbstractCustomFieldDescriptionDTO>, Exception> action, long jobIndexId);
         //void GetAllJobIndex(Action<List<JobIndexDTO>, Exception> action); 
+
         #endregion
     }
 }

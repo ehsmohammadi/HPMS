@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using MITD.PMS.Integration.Core;
 using MITD.PMS.Integration.PMS.Contract;
 using MITD.PMS.Presentation.Contracts;
@@ -39,6 +40,12 @@ namespace MITD.PMS.Integration.PMS.API
             return IntegrationHttpClient.Post<JobIndexDTO, JobIndexDTO>(apiUri, endpoint, jobIndex);
             //var url = string.Format(apiAddress);
             //IntegrationWebClient.Post(new Uri(url, PMSClientConfig.UriKind), action, jobIndex, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+        }
+
+        public List<JobIndexGroupInPeriodDTO> GetJobIndexGroups(long periodId)
+        {
+            //todo: Must Implement
+            return null;
         }
         #endregion
 

@@ -22,7 +22,7 @@ namespace MITD.PMS.Integration.Data.EF
         public List<long> GetUnitIndexListId()
         {
             return (from c in db.PMS_GeneralIndex
-                where c.ID_IndexType == 3
+                    where c.ID_IndexType ==  DataEFConfig.IndexType_UnitIndex
                 && c.IsActive==true 
                 select c.ID).ToList();
         }
