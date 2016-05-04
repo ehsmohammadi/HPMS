@@ -22,7 +22,7 @@ namespace MITD.PMS.Interface
         private readonly IMapper<AbstractUnitIndex, AbstractIndex> unitIndexMapper;
         private readonly IMapper<AbstractUnitIndex, AbstractUnitIndexDTOWithActions> unitIndexWithActionsMapper;
         private readonly IMapper<CustomFieldType, CustomFieldDTO> customFieldDtoMapper;
-        private readonly IUnitIndexRepository unitIndexRep; 
+        private readonly IUnitIndexRepository unitIndexRep;
         #endregion
 
         #region Ctor
@@ -103,6 +103,7 @@ namespace MITD.PMS.Interface
             return unitIndexList.Select(j => unitIndexMapper.MapToModel(j)).ToList();
         }
 
+
         [RequiredPermission(ActionType.ManageUnitIndices)]
         public IEnumerable<AbstractUnitIndexDTOWithActions> GetAllAbstractUnitIndices()
         {
@@ -175,7 +176,22 @@ namespace MITD.PMS.Interface
             }
 
             return abstractIndexDto;
-        } 
+        }
+
+        public AbstractIndex GetAbstarctUnitIndexByTransferId(Guid transferId)
+        {
+            var unitIndex = unitIndexRep.GetByTransferId(transferId);
+            if (unitIndex == null)
+                return null;
+            var abstractIndexDto = unitIndexMapper.MapToModel(unitIndex);
+            if (abstractIndexDto is UnitIndexDTO)
+            {
+                var customFieldList = customFieldRep.GetAllCustomField(unitIndex.Id);
+                ((UnitIndexDTO)abstractIndexDto).CustomFields = customFieldList.Select(c => customFieldDtoMapper.MapToModel(c)).ToList();
+            }
+
+            return abstractIndexDto;
+        }
 
         #endregion
 

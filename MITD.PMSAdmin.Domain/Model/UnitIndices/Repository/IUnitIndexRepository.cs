@@ -13,6 +13,7 @@ namespace MITD.PMSAdmin.Domain.Model.UnitIndices
         void Update(AbstractUnitIndex unitIndexy);
         IList<AbstractUnitIndex> GetAll();
         AbstractUnitIndex GetById(AbstractUnitIndexId unitIndexId);
+        AbstractUnitIndex GetByTransferId(Guid transferId);
         void Delete(AbstractUnitIndexId unitIndexId);
         UnitIndexCategory GetUnitIndexCategory(AbstractUnitIndexId parentId);
         UnitIndex GetUnitIndex(AbstractUnitIndexId unitIndexId);
@@ -22,5 +23,6 @@ namespace MITD.PMSAdmin.Domain.Model.UnitIndices
 
         UnitIndexException ConvertException(Exception exp);
         UnitIndexException TryConvertException(Exception exp);
+        
     }
 }

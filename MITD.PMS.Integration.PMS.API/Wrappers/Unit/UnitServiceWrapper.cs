@@ -28,6 +28,11 @@ namespace MITD.PMS.Integration.PMS.API
             //    action, IntegrationWebClient.MessageFormat.Json, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 
+        public UnitDTO GetByTransferId(Guid transferId)
+        {
+            return IntegrationHttpClient.Get<UnitDTO>(apiUri, endpoint + "?TransferId=" + transferId);
+        }
+
         public UnitDTO AddUnit(UnitDTO unit)
         {
             return IntegrationHttpClient.Post<UnitDTO, UnitDTO>(apiUri, endpoint, unit);

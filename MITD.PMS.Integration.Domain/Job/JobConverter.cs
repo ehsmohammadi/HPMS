@@ -45,8 +45,12 @@ namespace MITD.PMS.Integration.Domain
             foreach (var jobId in jobIdList)
             {
                 var sourceJobDTO = jobDataProvider.GetJobDetails(jobId);
-                var desJobDTO = createDestinationJob(sourceJobDTO);
-                var job = jobService.AddJob(desJobDTO);
+                var job = jobService.GetByTransferId(sourceJobDTO.TransferId);
+                if (job == null)
+                {
+                    var desJobDTO = createDestinationJob(sourceJobDTO);
+                    job = jobService.AddJob(desJobDTO);    
+                }
                 var sourceJobIndicesForAssignment=jobDataProvider.GetJobIndecesByJobId(jobId);
                 var jobInPriodAssignment = createDestinationJobInPeriod(job, sourceJobIndicesForAssignment);
                 jobInPeriodServiceWrapper.AddJobInPeriod(period.Id, jobInPriodAssignment);

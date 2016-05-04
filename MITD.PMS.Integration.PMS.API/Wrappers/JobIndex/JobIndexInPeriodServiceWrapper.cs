@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using MITD.PMS.Integration.Core;
 using MITD.PMS.Integration.PMS.Contract;
 using MITD.PMS.Presentation.Contracts;
@@ -7,7 +8,7 @@ namespace MITD.PMS.Integration.PMS.API
 {
     public class JobIndexInPeriodServiceWrapper : IJobIndexInPeriodServiceWrapper
     {
-        private readonly Uri apUri = new Uri(PMSClientConfig.BaseApiAddress);
+        private readonly Uri apiUri = new Uri(PMSClientConfig.BaseApiAddress);
 
         private readonly IUserProvider userProvider;
         private readonly string jobIndexClassType = "JobIndex";
@@ -33,7 +34,7 @@ namespace MITD.PMS.Integration.PMS.API
         {
             var endpoint = makeEndPoint(periodId);
             endpoint += !string.IsNullOrWhiteSpace(columnNames) ? "&SelectedColumns=" + columnNames : "";
-            return IntegrationHttpClient.Get<JobIndexInPeriodDTO>(apUri, endpoint + "?abstractId=" + abstractId);
+            return IntegrationHttpClient.Get<JobIndexInPeriodDTO>(apiUri, endpoint + "?abstractId=" + abstractId);
             //var url = string.Format(baseAddress + makeApiAdress(periodId) + "?abstractId=" + abstractId);
             //url += !string.IsNullOrWhiteSpace(columnNames) ? "&SelectedColumns=" + columnNames : "";
             //IntegrationWebClient.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
@@ -42,11 +43,17 @@ namespace MITD.PMS.Integration.PMS.API
 
         public JobIndexInPeriodDTO AddJobIndexInPeriod(JobIndexInPeriodDTO jobIndexInPeriod)
         {
-            return IntegrationHttpClient.Post<JobIndexInPeriodDTO, JobIndexInPeriodDTO>(apUri,
+            return IntegrationHttpClient.Post<JobIndexInPeriodDTO, JobIndexInPeriodDTO>(apiUri,
                 makeEndPoint(jobIndexInPeriod.PeriodId), jobIndexInPeriod);
             //var url = string.Format(baseAddress + makeApiAdress(jobIndexInPeriod.PeriodId));
             //IntegrationWebClient.Post(new Uri(url, PMSClientConfig.UriKind), action, jobIndexInPeriod, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
 
+        }
+
+        public List<AbstractIndexInPeriodDTO> GetJobIndexGroups(long periodId)
+        {
+            var endpoint = makeEndPoint(periodId) + string.Format("?typeOf=" + "JobIndexGroup");
+            return IntegrationHttpClient.Get<List<AbstractIndexInPeriodDTO>>(apiUri, endpoint);
         }
 
         //public void DeleteJobIndexInPeriod(Action<string, Exception> action, long periodId, long jobIndexId)

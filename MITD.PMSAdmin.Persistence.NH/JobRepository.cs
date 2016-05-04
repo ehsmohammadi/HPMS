@@ -60,6 +60,11 @@ namespace MITD.PMSAdmin.Persistence.NH
             
         }
 
+        public Job GetByTransferId(Guid transferId)
+        {
+            return rep.Single(j => j.TransferId == transferId);
+        }
+
         public void DeleteJob(Job job)
         {
             rep.Delete(job);
@@ -99,5 +104,7 @@ namespace MITD.PMSAdmin.Persistence.NH
             }
             return res;
         }
+
+        
     }
 }

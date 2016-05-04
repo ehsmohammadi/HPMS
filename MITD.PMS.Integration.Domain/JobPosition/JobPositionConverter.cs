@@ -55,12 +55,13 @@ namespace MITD.PMS.Integration.Domain
 
         private void convertJobPosition_Rec(JobPositionIntegrationDTO sourceJobPositionDTO, long periodId, long? jobPositionParentIdParam)
         {
-            var desJobPositionDTO = createDestinationJobPosition(sourceJobPositionDTO);
-            var jobPosition = jobPositionService.AddJobPosition(desJobPositionDTO);
+            var jobPosition = jobPositionService.GetByTransferId(sourceJobPositionDTO.TransferId);
+            if (jobPosition == null)
+            {
+                var desJobPositionDTO = createDestinationJobPosition(sourceJobPositionDTO);
+                jobPosition = jobPositionService.AddJobPosition(desJobPositionDTO);    
+            }
             var unit = unitList.Single(u => sourceJobPositionDTO.UnitIntegrationDTO.TransferId == u.TransferId);
-            //var unit =
-            //    (from c in unitList where c.TransferId == sourceJobPositionDTO.UnitIntegrationDTO.TransferId select c)
-            //        .Single();
             var job = jobInPeriodList.Single(u => sourceJobPositionDTO.JobIntegrationDto.TransferId == u.TransferId);
             var jobPositionInPriodAssignment = createDestinationJobPositionInPeriod(jobPosition,periodId,unit.Id,job.Id, jobPositionParentIdParam);
             var res = jobPositionInPeriodServiceWrapper.AddJobPositionInPeriod(jobPositionInPriodAssignment);

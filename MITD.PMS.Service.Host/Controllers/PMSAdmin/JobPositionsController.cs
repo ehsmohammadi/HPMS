@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MITD.PMS.Presentation.Contracts;
 using System.Web.Http;
 
@@ -39,6 +40,11 @@ namespace MITD.PMS.Service.Host.Controllers
         public JobPositionDTO GetJobPosition(long id)
         {
             return jobPositionService.GetJobPositionById(id);
+        }
+
+        public JobPositionDTO GetJobPositionByTransferId(Guid transferId)
+        {
+            return jobPositionService.GetJobPositionByTransferId(transferId);
         }
 
         public string DeleteJobPostion(long id)

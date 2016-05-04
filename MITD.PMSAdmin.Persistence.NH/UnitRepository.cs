@@ -10,7 +10,7 @@ namespace MITD.PMSAdmin.Persistence.NH
 {
     public class UnitRepository : NHRepository, IUnitRepository
     {
-        private NHRepository<Unit> rep; 
+        private NHRepository<Unit> rep;
 
         public UnitRepository(NHUnitOfWork unitOfWork)
             : base(unitOfWork)
@@ -26,13 +26,13 @@ namespace MITD.PMSAdmin.Persistence.NH
 
         private void init()
         {
-            rep=new NHRepository<Unit>(unitOfWork);
+            rep = new NHRepository<Unit>(unitOfWork);
         }
 
 
         public void FindBy(ListFetchStrategy<Unit> fs)
         {
-                rep.GetAll(fs);
+            rep.GetAll(fs);
         }
 
         public void Add(Unit unit)
@@ -48,7 +48,12 @@ namespace MITD.PMSAdmin.Persistence.NH
         public Unit GetById(UnitId unitId)
         {
             return rep.FindByKey(unitId);
-            
+
+        }
+
+        public Unit GetByTransferId(Guid transferId)
+        {
+            return rep.Single(u => u.TransferId == transferId);
         }
 
         public UnitId GetNextId()

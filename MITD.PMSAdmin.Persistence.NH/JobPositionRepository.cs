@@ -52,6 +52,11 @@ namespace MITD.PMSAdmin.Persistence.NH
             
         }
 
+        public JobPosition GetByTransferId(Guid transferId)
+        {
+            return rep.Single(j => j.TransferId == transferId);
+        }
+
         public JobPositionId GetNextId()
         {
             using (var ctx = Session.SessionFactory.OpenStatelessSession())

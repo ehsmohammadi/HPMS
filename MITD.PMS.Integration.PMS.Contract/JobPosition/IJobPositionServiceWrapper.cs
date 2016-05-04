@@ -8,6 +8,7 @@ namespace MITD.PMS.Integration.PMS.Contract
     {
 
         JobPositionDTO GetJobPosition(long id);
+        JobPositionDTO GetByTransferId(Guid transferId);
         JobPositionDTO AddJobPosition(JobPositionDTO jobPosition);
 
         //void UpdateJobPosition(Action<JobPositionDTO, Exception> action, JobPositionDTO jobPosition);
@@ -15,5 +16,6 @@ namespace MITD.PMS.Integration.PMS.Contract
         //void DeleteJobPosition(Action<string, Exception> action, long id);
         //void GetAllJobPositions(Action<List<JobPositionDTO>, Exception> action);
 
+        
     }
 }

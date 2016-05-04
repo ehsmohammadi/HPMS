@@ -25,6 +25,11 @@ namespace MITD.PMS.Integration.PMS.API
             //IntegrationWebClient.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 
+        public JobPositionDTO GetByTransferId(Guid transferId)
+        {
+            return IntegrationHttpClient.Get<JobPositionDTO>(apiUri, endpoint + "?TransferId=" + transferId);
+        }
+
         public JobPositionDTO AddJobPosition(JobPositionDTO jobPosition)
         {
             return IntegrationHttpClient.Post<JobPositionDTO, JobPositionDTO>(apiUri, endpoint, jobPosition);

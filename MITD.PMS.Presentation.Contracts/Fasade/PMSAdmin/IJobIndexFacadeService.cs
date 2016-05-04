@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using MITD.Core;
 
@@ -11,6 +12,7 @@ namespace MITD.PMS.Presentation.Contracts
         
         IEnumerable<AbstractJobIndexDTOWithActions> GetAllAbstractJobIndices();
         AbstractIndex GetAbstarctJobIndexById(long id);
+        AbstractIndex GetAbstarctJobIndexByTransferId(Guid transferId);
         AbstractIndex AddJobIndex(JobIndexDTO abstractjobIndex);
         AbstractIndex AddJobIndexCategory(JobIndexCategoryDTO jobIndexCategory);
         AbstractIndex UpdateJobIndex(JobIndexDTO abstractjobIndex);
@@ -19,5 +21,6 @@ namespace MITD.PMS.Presentation.Contracts
 
         IList<AbstractIndex> GetAllJobIndices();
         IList<AbstractIndex> GetAllJobIndexCategories();
+        
     }
 }

@@ -61,6 +61,11 @@ namespace MITD.PMSAdmin.Persistence.NH
             return  rep.FindByKey(jobIndexId);
         }
 
+        public AbstractJobIndex GetByTransferId(Guid transferId)
+        {
+            return rep.Single(j => j.TransferId == transferId);
+        }
+
         public void Add(AbstractJobIndex jobIndex)
         {
             rep.Add(jobIndex);

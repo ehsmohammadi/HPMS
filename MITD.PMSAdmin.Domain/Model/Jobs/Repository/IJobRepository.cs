@@ -12,10 +12,12 @@ namespace MITD.PMSAdmin.Domain.Model.Jobs
         void AddJob(Job job);
         void UpdateJob(Job job);
         Job GetById(JobId jobId);
+        Job GetByTransferId(Guid transferId);
         void DeleteJob(Job job);
         JobId GetNextId ();
 
         JobException ConvertException(Exception exp);
         JobException TryConvertException(Exception exp);
+        
     }
 }

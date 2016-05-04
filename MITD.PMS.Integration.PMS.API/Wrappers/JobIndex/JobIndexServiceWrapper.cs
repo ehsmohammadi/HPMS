@@ -35,6 +35,11 @@ namespace MITD.PMS.Integration.PMS.API
             //IntegrationWebClient.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 
+        public JobIndexDTO GetByTransferId(Guid transferId)
+        {
+            return IntegrationHttpClient.Get<JobIndexDTO>(apiUri, endpoint + "?TransferId=" + transferId);
+        }
+
         public JobIndexDTO AddJobIndex(JobIndexDTO jobIndex)
         {
             return IntegrationHttpClient.Post<JobIndexDTO, JobIndexDTO>(apiUri, endpoint, jobIndex);
@@ -42,11 +47,6 @@ namespace MITD.PMS.Integration.PMS.API
             //IntegrationWebClient.Post(new Uri(url, PMSClientConfig.UriKind), action, jobIndex, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 
-        public List<JobIndexGroupInPeriodDTO> GetJobIndexGroups(long periodId)
-        {
-            //todo: Must Implement
-            return null;
-        }
         #endregion
 
         //public void GetAllAbstractJobIndex(Action<List<AbstractJobIndexDTOWithActions>, Exception> action)

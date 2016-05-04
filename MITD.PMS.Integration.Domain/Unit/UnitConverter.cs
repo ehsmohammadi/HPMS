@@ -54,8 +54,13 @@ namespace MITD.PMS.Integration.Domain
 
         private void convertUnit_Rec(UnitIntegrationDTO sourceUnitDTO, long periodId, long? unitParentIdParam)
         {
-            var desUnitDTO = createDestinationUnit(sourceUnitDTO);
-            var unit = unitService.AddUnit(desUnitDTO);
+            var unit = unitService.GetByTransferId(sourceUnitDTO.TransferId);
+            if (unit == null)
+            {
+                var desUnitDTO = createDestinationUnit(sourceUnitDTO);
+                unit = unitService.AddUnit(desUnitDTO);
+            }
+
             var unitInPriodAssignment = createDestinationUnitInPeriod(unit, unitParentIdParam);
             var res = unitInPeriodServiceWrapper.AddUnitInPeriod(periodId, unitInPriodAssignment);
             unitList.Add(unit);

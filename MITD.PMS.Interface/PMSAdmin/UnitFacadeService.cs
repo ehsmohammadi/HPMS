@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Castle.Core;
 using MITD.Core;
@@ -105,8 +106,18 @@ namespace MITD.PMS.Interface
             dto.CustomFields = customFieldList.Select(c => ctcustomFieldDtoMapper.MapToModel(c)).ToList();
             return dto;
 
-        } 
+        }
 
+        public UnitDTO GetUnitByTransferId(Guid transferId)
+        {
+            var unit = unitRep.GetByTransferId(transferId);
+            if (unit == null)
+                return null;
+            var customFieldList = customFieldRep.GetAllCustomField(unit.Id);
+            var dto = unitMapper.MapToModel(unit);
+            dto.CustomFields = customFieldList.Select(c => ctcustomFieldDtoMapper.MapToModel(c)).ToList();
+            return dto;
+        }
         #endregion
 
     }

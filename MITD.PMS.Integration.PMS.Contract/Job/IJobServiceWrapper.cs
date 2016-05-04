@@ -9,6 +9,7 @@ namespace MITD.PMS.Integration.PMS.Contract
     {
 
         JobDTO GetJob(long id);
+        JobDTO GetByTransferId(Guid transferId);
         JobDTO AddJob(JobDTO job);
 
         //void UpdateJob(Action<JobDTO, Exception> action, JobDTO job);

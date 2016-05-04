@@ -44,18 +44,17 @@ namespace MITD.PMS.Integration.Domain
             {
 
                 var sourceUnitIndexDTO = unitIndexDataProvider.GetBy(sourceUnitIndexId);
-                var desUnitIndexDTO = createDestinationUnitIndex(sourceUnitIndexDTO);
-
-                var unitIndexWithCf = unitIndexService.GetUnitIndexByTransferId(desUnitIndexDTO.TransferId);
+                var unitIndexWithCf = unitIndexService.GetUnitIndexByTransferId(sourceUnitIndexDTO.TransferId);
                 if (unitIndexWithCf == null)
                 {
+                    var desUnitIndexDTO = createDestinationUnitIndex(sourceUnitIndexDTO);
                     var unitIndexWithOutCf = unitIndexService.AddUnitIndex(desUnitIndexDTO);
                     unitIndexWithCf = unitIndexService.GetUnitIndex(unitIndexWithOutCf.Id);
-                    
+
                 }
                 var periodUnitIndexDTO = createPeriodUnitIndexDTO(unitIndexWithCf, period);
                 var res = unitIndexAssignmentService.AddUnitIndexInPeriod(periodUnitIndexDTO);
-                
+
                 unitIndexInperiodList.Add(res);
 
                 //unitIndexService.AddUnitIndex((unitIndexWithOutCf, addUnitIndexExp) =>

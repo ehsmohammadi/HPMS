@@ -11,7 +11,7 @@ using MITD.PMS.Integration.Data.EF.DBModel;
 
 namespace MITD.PMS.Integration.Data.EF
 {
-    public class UnitIndexDataProvider:IUnitIndexDataProvider
+    public class UnitIndexDataProvider : IUnitIndexDataProvider
     {
         private PersonnelSoft2005Entities db = new PersonnelSoft2005Entities();
         public List<UnitIndexIntegrationDTO> GetUnitIndexList()
@@ -22,24 +22,22 @@ namespace MITD.PMS.Integration.Data.EF
         public List<long> GetUnitIndexListId()
         {
             return (from c in db.PMS_GeneralIndex
-                    where c.ID_IndexType ==  DataEFConfig.IndexType_UnitIndex
-                && c.IsActive==true 
-                select c.ID).ToList();
+                    where c.ID_IndexType == DataEFConfig.IndexType_UnitIndex
+                && c.IsActive == true
+                    select c.ID).ToList();
         }
 
         public UnitIndexIntegrationDTO GetBy(long id)
         {
             return (from c in db.PMS_GeneralIndex
-                where c.ID == id
-                select new UnitIndexIntegrationDTO
-                {
-                    Title = c.Title
-                    ,
-                    Description = c.Description
-                    ,
-                    ID = c.ID
-                    //TranferID
-                }).Single();
+                    where c.ID == id
+                    select new UnitIndexIntegrationDTO
+                    {
+                        Title = c.Title,
+                        Description = c.Description,
+                        ID = c.ID,
+                        TransferId = c.TransferId.Value
+                    }).Single();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Http;
 using MITD.PMS.Presentation.Contracts.Fasade;
 using MITD.PMS.Presentation.Contracts;
@@ -30,6 +31,11 @@ namespace MITD.Homework.Service.Host.Controllers.PMSAdmin
         public JobDTO GetJob(long id)
         {
             return jobFasadeService.GetJobById(id);
+        }
+
+        public JobDTO GetJobByTranferId(Guid transferId)
+        {
+            return jobFasadeService.GetJobByTransferId(transferId);
         }
 
         public JobDTO PostJob(JobDTO job)

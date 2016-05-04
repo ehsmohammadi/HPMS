@@ -32,8 +32,8 @@ namespace MITD.PMS.Integration.Domain
         private readonly IJobPositionConverter jobPositionConverter;
         private readonly IEmployeeConverter employeeConverter;
         private readonly IPeriodServiceWrapper periodService;
-        private readonly IUnitIndexServiceWrapper unitIndexService;
-        private readonly IJobIndexServiceWrapper jobIndexService;
+        private readonly IUnitIndexInPeriodServiceWrapper unitIndexService;
+        private readonly IJobIndexInPeriodServiceWrapper jobIndexService;
         private readonly IEventPublisher publisher;
 
 
@@ -49,7 +49,7 @@ namespace MITD.PMS.Integration.Domain
 
         public ConverterManager(IUnitIndexConverter unitIndexConverter, IUnitConverter unitConverter,
             IJobIndexConverter jobIndexConverter, IJobConverter jobConverter, IEventPublisher publisher,
-            IJobPositionConverter jobPositionConverter, IEmployeeConverter employeeConverter, IPeriodServiceWrapper periodService, IUnitIndexServiceWrapper unitIndexService, IJobIndexServiceWrapper jobIndexService)
+            IJobPositionConverter jobPositionConverter, IEmployeeConverter employeeConverter, IPeriodServiceWrapper periodService, IUnitIndexInPeriodServiceWrapper unitIndexService, IJobIndexInPeriodServiceWrapper jobIndexService)
         {
             this.unitIndexConverter = unitIndexConverter;
             this.unitConverter = unitConverter;

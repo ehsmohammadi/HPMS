@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Castle.Core;
 using MITD.Core;
@@ -99,7 +100,18 @@ namespace MITD.PMS.Interface
             var jobDto = jobMapper.MapToModel(job);
             jobDto.CustomFields = customFieldList.Select(c => ctcustomFieldDtoMapper.MapToModel(c)).ToList();
             return jobDto;
-        } 
+        }
+
+        public JobDTO GetJobByTransferId(Guid transferId)
+        {
+            var job = jobRep.GetByTransferId(transferId);
+            if (job == null)
+                return null;
+            var customFieldList = customFieldRep.GetAllCustomField(job.Id);
+            var jobDto = jobMapper.MapToModel(job);
+            jobDto.CustomFields = customFieldList.Select(c => ctcustomFieldDtoMapper.MapToModel(c)).ToList();
+            return jobDto;
+        }
         #endregion
     }
 }

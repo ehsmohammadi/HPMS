@@ -11,7 +11,7 @@ namespace MITD.PMS.Integration.PMS.API
 {
     public class UnitIndexInPeriodServiceWrapper : IUnitIndexInPeriodServiceWrapper
     {
-        private readonly Uri apUri = new Uri(PMSClientConfig.BaseApiAddress);
+        private readonly Uri apiUri = new Uri(PMSClientConfig.BaseApiAddress);
 
         private readonly IUserProvider userProvider;
         private readonly string unitIndexClassType = "UnitIndex";
@@ -38,7 +38,7 @@ namespace MITD.PMS.Integration.PMS.API
         {
             var endpoint = makeEndPoint(periodId);
             endpoint += !string.IsNullOrWhiteSpace(columnNames) ? "&SelectedColumns=" + columnNames : "";
-            return IntegrationHttpClient.Get<UnitIndexInPeriodDTO>(apUri, endpoint + "?abstractId=" + abstractId);
+            return IntegrationHttpClient.Get<UnitIndexInPeriodDTO>(apiUri, endpoint + "?abstractId=" + abstractId);
             //var url = string.Format(baseAddress + makeApiAdress(periodId) + "?abstractId=" + abstractId);
             //url += !string.IsNullOrWhiteSpace(columnNames) ? "&SelectedColumns=" + columnNames : "";
             //IntegrationWebClient.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
@@ -47,11 +47,17 @@ namespace MITD.PMS.Integration.PMS.API
 
         public UnitIndexInPeriodDTO AddUnitIndexInPeriod( UnitIndexInPeriodDTO unitIndexInPeriod)
         {
-            return IntegrationHttpClient.Post<UnitIndexInPeriodDTO, UnitIndexInPeriodDTO>(apUri,
+            return IntegrationHttpClient.Post<UnitIndexInPeriodDTO, UnitIndexInPeriodDTO>(apiUri,
                 makeEndPoint(unitIndexInPeriod.PeriodId), unitIndexInPeriod);
             //var url = string.Format(baseAddress + makeApiAdress(unitIndexInPeriod.PeriodId));
             //IntegrationWebClient.Post(new Uri(url, PMSClientConfig.UriKind), action, unitIndexInPeriod, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
 
+        }
+
+        public List<AbstractUnitIndexInPeriodDTO> GetAllUnitIndexGroup(long periodId)
+        {
+            var endpoint = makeEndPoint(periodId) + string.Format("?typeOf=" + "UnitIndexGroup" );
+            return IntegrationHttpClient.Get<List<AbstractUnitIndexInPeriodDTO>>(apiUri, endpoint);
         }
 
 

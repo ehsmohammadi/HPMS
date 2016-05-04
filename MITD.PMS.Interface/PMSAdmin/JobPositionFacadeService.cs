@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Castle.Core;
 using MITD.Core;
@@ -92,7 +93,15 @@ namespace MITD.PMS.Interface
         {
             var jobPosition = jobPositionRep.GetById(new JobPositionId(id));
             return jobPositionMapper.MapToModel(jobPosition);
-        } 
+        }
+
+        public JobPositionDTO GetJobPositionByTransferId(Guid transferId)
+        {
+            var jobPosition = jobPositionRep.GetByTransferId(transferId);
+            if (jobPosition == null)
+                return null;
+            return jobPositionMapper.MapToModel(jobPosition);
+        }
         #endregion
 
     }

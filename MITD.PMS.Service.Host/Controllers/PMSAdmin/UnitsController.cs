@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MITD.PMS.Presentation.Contracts;
 using System.Web.Http;
 
@@ -37,6 +38,10 @@ namespace MITD.PMS.Service.Host.Controllers
         public UnitDTO GetUnit(long id)
         {
             return unitService.GetUnitById(id);
+        }
+        public UnitDTO GetByTransferId(Guid transferId)
+        {
+            return unitService.GetUnitByTransferId(transferId);
         }
 
         public string DeleteUnit(long id)

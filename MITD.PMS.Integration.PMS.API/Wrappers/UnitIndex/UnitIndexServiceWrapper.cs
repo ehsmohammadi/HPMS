@@ -45,19 +45,9 @@ namespace MITD.PMS.Integration.PMS.API
         } 
 
 
-        public UnitIndexDTO GetUnitIndexByTransferId(Guid guid)
+        public UnitIndexDTO GetUnitIndexByTransferId(Guid transferId)
         {
-            //todo: Impliment Request
-            return null;
-        }
-
-
-        public List<AbstractUnitIndexInPeriodDTO> GetAllUnitIndexGroup(long periodId)
-        {
-
-            var url = endpoint + string.Format("?typeOf=" + "UnitIndexGroup" + "&periodId=" + periodId);
-            return IntegrationHttpClient.Get<List<AbstractUnitIndexInPeriodDTO>>(apiUri, url);
-
+            return IntegrationHttpClient.Get<UnitIndexDTO>(apiUri, endpoint + "?TransferId=" + transferId);
         }
 
         #endregion

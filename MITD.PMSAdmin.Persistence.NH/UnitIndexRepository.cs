@@ -61,6 +61,11 @@ namespace MITD.PMSAdmin.Persistence.NH
             return  rep.FindByKey(unitIndexId);
         }
 
+        public AbstractUnitIndex GetByTransferId(Guid transferId)
+        {
+            return rep.Single(u => u.TransferId == transferId);
+        }
+
         public void Add(AbstractUnitIndex unitIndex)
         {
             rep.Add(unitIndex);

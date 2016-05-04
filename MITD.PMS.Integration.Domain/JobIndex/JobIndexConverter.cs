@@ -48,10 +48,15 @@ namespace MITD.PMS.Integration.Domain
             {
 
                 var sourceJobIndexDTO = jobIndexDataProvider.GetBy(sourceJobIndexId);
-                var desJobIndexDTO = createDestinationJobIndex(sourceJobIndexDTO);
-                var jobIndexWithOutCf = jobIndexService.AddJobIndex(desJobIndexDTO);
-                jobIndexList.Add(jobIndexWithOutCf);
-                var jobIndexWithCf = jobIndexService.GetJobIndex(jobIndexWithOutCf.Id);
+                var jobIndexWithCf = jobIndexService.GetByTransferId(sourceJobIndexDTO.TransferId);
+                if (jobIndexWithCf==null)
+                {
+                    var desJobIndexDTO = createDestinationJobIndex(sourceJobIndexDTO);
+                    var jobIndexWithOutCf = jobIndexService.AddJobIndex(desJobIndexDTO);
+                    
+                    jobIndexWithCf = jobIndexService.GetJobIndex(jobIndexWithOutCf.Id);
+                }
+                jobIndexList.Add(jobIndexWithCf);
                 var periodJobIndexDTO = createPeriodJobIndexDTO(jobIndexWithCf, period, sourceJobIndexDTO);
                 periodJobIndexDTO.CustomFields[0].Value = sourceJobIndexDTO.Coefficient.ToString();
                 var res = jobIndexAssignmentService.AddJobIndexInPeriod(periodJobIndexDTO);

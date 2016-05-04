@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MITD.PMS.Presentation.Contracts;
 using MITD.Presentation;
 
@@ -7,9 +8,9 @@ namespace MITD.PMS.Integration.PMS.Contract
     public partial interface IJobIndexServiceWrapper : IServiceWrapper
     {
         JobIndexDTO GetJobIndex(long id);
+        JobIndexDTO GetByTransferId(Guid transferId);
         JobIndexDTO AddJobIndex(JobIndexDTO jobIndex);
 
-        List<JobIndexGroupInPeriodDTO> GetJobIndexGroups(long periodId);
 
         #region Not Used
 
@@ -24,5 +25,7 @@ namespace MITD.PMS.Integration.PMS.Contract
         //void GetAllJobIndex(Action<List<JobIndexDTO>, Exception> action); 
 
         #endregion
+
+        
     }
 }

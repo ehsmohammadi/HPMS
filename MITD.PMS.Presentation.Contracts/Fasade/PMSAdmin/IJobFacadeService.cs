@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MITD.Core;
 
 namespace MITD.PMS.Presentation.Contracts
@@ -13,5 +14,6 @@ namespace MITD.PMS.Presentation.Contracts
         string DeleteJob(long jobId);
         JobDTO GetJobById(long id);
 
+        JobDTO GetJobByTransferId(Guid transferId);
     }
 }

@@ -9,6 +9,9 @@ namespace MITD.PMS.Integration.PMS.Contract
     {
 
         UnitDTO GetUnit(long id);
+
+        UnitDTO GetByTransferId(Guid transferId);
+
         UnitDTO AddUnit(UnitDTO unit);
 
         //void UpdateUnit(Action<UnitDTO, Exception> action, UnitDTO unit);
@@ -16,5 +19,6 @@ namespace MITD.PMS.Integration.PMS.Contract
         //void DeleteUnit(Action<string, Exception> action, long id);
         //void GetAllUnits(Action<List<UnitDTO>, Exception> action);
 
+        
     }
 }

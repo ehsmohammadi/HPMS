@@ -10,11 +10,13 @@ namespace MITD.PMSAdmin.Domain.Model.JobPositions
         void Add(JobPosition jobPosition);
         void UpdateJobPosition(JobPosition jobPosition);
         JobPosition GetById(JobPositionId jobPositionId);
+        JobPosition GetByTransferId(Guid transferId);
         JobPositionId GetNextId();
         void Delete(JobPosition jobPostion);
         List<JobPosition> GetAll();
 
         JobPositionException ConvertException(Exception exp);
         JobPositionException TryConvertException(Exception exp);
+        
     }
 }

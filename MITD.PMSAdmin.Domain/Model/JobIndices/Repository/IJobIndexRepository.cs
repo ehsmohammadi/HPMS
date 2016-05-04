@@ -13,6 +13,7 @@ namespace MITD.PMSAdmin.Domain.Model.JobIndices
         void Update(AbstractJobIndex jobIndexy);
         IList<AbstractJobIndex> GetAll();
         AbstractJobIndex GetById(AbstractJobIndexId jobIndexId);
+        AbstractJobIndex GetByTransferId(Guid transferId);
         void Delete(AbstractJobIndexId jobIndexId);
         JobIndexCategory GetJobIndexCategory(AbstractJobIndexId parentId);
         JobIndex GetJobIndex(AbstractJobIndexId jobIndexId);
@@ -22,5 +23,6 @@ namespace MITD.PMSAdmin.Domain.Model.JobIndices
 
         JobIndexException ConvertException(Exception exp);
         JobIndexException TryConvertException(Exception exp);
+        
     }
 }

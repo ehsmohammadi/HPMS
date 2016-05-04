@@ -9,7 +9,7 @@ namespace MITD.PMS.Integration.PMS.Contract
     {
         UnitIndexInPeriodDTO GetUnitIndexInPeriod( long periodId, long abstractId);
         UnitIndexInPeriodDTO AddUnitIndexInPeriod(UnitIndexInPeriodDTO unitIndexInPeriod);
-
+        List<AbstractUnitIndexInPeriodDTO> GetAllUnitIndexGroup(long periodId);
 
         #region Not Use
         //void UpdateUnitIndexInPeriod(Action<UnitIndexInPeriodDTO, Exception> action, UnitIndexInPeriodDTO unitIndexInPeriod);
@@ -26,5 +26,6 @@ namespace MITD.PMS.Integration.PMS.Contract
         //void GetPeriodUnitIndexes(Action<List<UnitIndexGroupInPeriodDTO>, Exception> action, long periodId); 
         #endregion
 
+        
     }
 }

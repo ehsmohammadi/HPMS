@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using MITD.Core;
 
@@ -20,5 +21,6 @@ namespace MITD.PMS.Presentation.Contracts
 
         IList<AbstractIndex> GetAllUnitIndices();
         IList<AbstractIndex> GetAllUnitIndexCategories();
+        AbstractIndex GetAbstarctUnitIndexByTransferId(Guid transferId);
     }
 }

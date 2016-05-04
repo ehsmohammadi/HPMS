@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using MITD.PMS.Presentation.Contracts;
 using MITD.PMS.Presentation.Contracts.Fasade;
@@ -52,6 +53,12 @@ namespace MITD.PMS.Service.Host.Controllers
         {
            return unitIndexFacadeService.GetAbstarctUnitIndexById(id);
            
+        }
+
+        public AbstractIndex GetUnitIndex(Guid transferId)
+        {
+            return unitIndexFacadeService.GetAbstarctUnitIndexByTransferId(transferId);
+
         }
 
         public AbstractIndex PostUnitIndex(AbstractIndex abstractIndex)

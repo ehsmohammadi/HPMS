@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Castle.Core;
 using MITD.Core;
@@ -110,7 +111,7 @@ namespace MITD.PMS.Interface
             return abstractList.Select(r => jobIndexWithActionsMapper.MapToModel(r)).ToList();
         }
 
-
+        
         [RequiredPermission(ActionType.AddJobIndex)]
         public AbstractIndex AddJobIndex(JobIndexDTO jobIndexDto)
         {
@@ -169,7 +170,22 @@ namespace MITD.PMS.Interface
             }
 
             return abstractIndexDto;
-        } 
+        }
+
+        public AbstractIndex GetAbstarctJobIndexByTransferId(Guid transferId)
+        {
+            var jobIndex = jobIndexRep.GetByTransferId(transferId);
+            if (jobIndex == null)
+                return null;
+            var abstractIndexDto = jobIndexMapper.MapToModel(jobIndex);
+            if (abstractIndexDto is JobIndexDTO)
+            {
+                var customFieldList = customFieldRep.GetAllCustomField(jobIndex.Id);
+                ((JobIndexDTO)abstractIndexDto).CustomFields = customFieldList.Select(c => customFieldDtoMapper.MapToModel(c)).ToList();
+            }
+
+            return abstractIndexDto;
+        }
 
         #endregion
 

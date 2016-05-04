@@ -36,6 +36,11 @@ namespace MITD.PMS.Integration.PMS.API
             //    action, job, IntegrationWebClient.MessageFormat.Json, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 
+        public JobDTO GetByTransferId(Guid transferId)
+        {
+            return IntegrationHttpClient.Get<JobDTO>(apiUri, endpoint + "?TransferId=" + transferId);
+        }
+
         //public void GetAllJobs(Action<PageResultDTO<JobDTOWithActions>, Exception> action, int pageSize, int pageIndex)
         //{
 

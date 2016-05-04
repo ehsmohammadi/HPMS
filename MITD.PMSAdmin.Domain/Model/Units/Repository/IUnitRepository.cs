@@ -10,11 +10,13 @@ namespace MITD.PMSAdmin.Domain.Model.Units
         void Add(Unit unit);
         void UpdateUnit(Unit unit);
         Unit GetById(UnitId unitId);
+        Unit GetByTransferId(Guid transferId);
         UnitId GetNextId();
         void DeleteUnit(Unit unit);
         List<Unit> GetAll();
 
         UnitException ConvertException(Exception exp);
         UnitException TryConvertException(Exception exp);
+        
     }
 }

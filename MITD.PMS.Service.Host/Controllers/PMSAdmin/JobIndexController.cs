@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Http;
 using MITD.PMS.Presentation.Contracts;
 
@@ -47,6 +48,11 @@ namespace MITD.PMS.Service.Host.Controllers
         {
            return jobIndexFacadeService.GetAbstarctJobIndexById(id);
            
+        }
+
+        public AbstractIndex GetByJobIndex(Guid transferId)
+        {
+            return jobIndexFacadeService.GetAbstarctJobIndexByTransferId(transferId);
         }
 
         public AbstractIndex PostJobIndex(AbstractIndex abstractIndex)
