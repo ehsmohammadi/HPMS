@@ -1,14 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using MITD.Core;
 using MITD.PMS.Domain.Model.Employees;
 using MITD.PMS.Domain.Model.InquiryJobIndexPoints;
 using MITD.PMS.Domain.Model.InquiryUnitIndexPoints;
-using MITD.PMS.Domain.Model.Jobs;
 using MITD.PMS.Domain.Model.JobIndices;
 using MITD.PMS.Domain.Model.JobPositions;
+using MITD.PMS.Domain.Model.Jobs;
 using MITD.PMS.Domain.Model.Periods;
 using MITD.PMS.Domain.Model.UnitIndices;
 using MITD.PMS.Domain.Model.Units;
-using MITD.Core;
 
 namespace MITD.PMS.Domain.Service
 {
@@ -51,5 +50,7 @@ namespace MITD.PMS.Domain.Service
         void DeleteAllCalims(Period period);
         bool HasDeterministicCalculation(Period period);
         bool HasOpenClaim(Period period);
+        void CopyEmployeePoint(Period period);
+        void DeleteEmployeePoint(Period period, IPeriodManagerService periodManagerService);
     }
 }

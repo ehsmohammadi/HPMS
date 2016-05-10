@@ -21,8 +21,8 @@ namespace MITD.PMS.Domain.Model.Periods
         public static readonly PeriodStateEnum InitializingForInquiryCompleted = new PeriodStateEnum("4", "PeriodInitializeInquiryCompletedState", " آماده سازی برای نظر سنجی پایان یافته");
         public static readonly PeriodStateEnum InquiryStarted = new PeriodStateEnum("5", "PeriodInquiryStartedState", "نظر سنجی آغاز شده");
         public static readonly PeriodStateEnum InquiryCompleted = new PeriodStateEnum("6", "PeriodInquiryCompletedState", "نظر سنجی پایان یافته");
-        public static readonly PeriodStateEnum ClaimingStarted = new PeriodStateEnum("7", "PeriodClaimingStartedState", "زمان اعتراضات آغاز شده");
-        public static readonly PeriodStateEnum ClaimingFinished = new PeriodStateEnum("8", "PeriodClaimingFinishedState", "زمان اعتراضات پایان یافته");
+        public static readonly PeriodStateEnum Confirmation = new PeriodStateEnum("7", "PeriodConfirmationState", "در حال تایید نمرات");
+        public static readonly PeriodStateEnum Confirmed = new PeriodStateEnum("8", "PeriodConfirmedState", "نمرات تایید شده");
         public static readonly PeriodStateEnum Closed = new PeriodStateEnum("9", "PeriodClosedState", "بسته");
         
         private readonly string description;

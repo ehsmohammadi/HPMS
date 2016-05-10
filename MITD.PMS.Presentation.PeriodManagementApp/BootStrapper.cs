@@ -34,6 +34,10 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
                 {(int) ActionType.GetPeriodInitializingInquiryStatus, typeof (GetPeriodInitializingInquiryStatusService)},
                 {(int) ActionType.RollBackPeriodState, typeof (RollBackPeriodService)},
 
+                
+                {(int) ActionType.StartConfirmation, typeof (StartConfirmationPeriodService)}, 
+                {(int) ActionType.Confirm, typeof (ConfirmPeriodService)},
+
                 //{(int) ActionType.StartCliaming, typeof (StartClaimingPeriodService)}, for removing claim 
                 //{(int) ActionType.FinishCliaming, typeof (FinishClaimingPeriodService)},for removing claim
 

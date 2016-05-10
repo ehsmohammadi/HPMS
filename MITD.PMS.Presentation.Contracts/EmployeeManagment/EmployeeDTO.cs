@@ -30,6 +30,13 @@ namespace MITD.PMS.Presentation.Contracts
             set { this.SetField(p => p.PersonnelNo, ref personnelNo, value); }
         }
 
+        private decimal finalPoint;
+        public decimal FinalPoint
+        {
+            get { return finalPoint; }
+            set { this.SetField(p => p.FinalPoint, ref finalPoint, value); }
+        }
+
         private long periodId;
         public long PeriodId
         {

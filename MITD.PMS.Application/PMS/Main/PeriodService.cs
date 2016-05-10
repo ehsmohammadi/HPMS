@@ -1,29 +1,33 @@
 ﻿using System;
-using MITD.Core;
-using MITD.Domain.Repository;
-using MITD.PMS.Application.Contracts;
-using MITD.PMS.Domain.Model.Periods;
-using MITD.PMS.Domain.Service;
 using System.Transactions;
+using MITD.PMS.Application.Contracts;
 using MITD.PMS.Domain.Model.JobIndices;
+using MITD.PMS.Domain.Model.Periods;
 using MITD.PMS.Domain.Model.UnitIndices;
-using MITD.PMS.Exceptions;
-
+using MITD.PMS.Domain.Service;
 
 namespace MITD.PMS.Application
 {
     public class PeriodService : IPeriodService
     {
+        #region Fields
         private readonly IPeriodRepository periodRep;
         private readonly IPeriodManagerService periodManagerService;
         private readonly IJobIndexServiceFactory jobIndexServiceFactory;
         private readonly IUnitIndexServiceFactory unitIndexServiceFactory;
         private readonly IUnitIndexRepository unitIndexRepository;
         private readonly IJobIndexRepository jobIndexRepository;
+        #endregion
 
-
-        public PeriodService(IPeriodRepository periodRep, IPeriodManagerService periodManagerService,
-            IJobIndexServiceFactory jobIndexServiceFactory, IUnitIndexServiceFactory unitIndexServiceFactory, IUnitIndexRepository unitIndexRepository, IJobIndexRepository jobIndexRepository)
+        #region Constructors
+        public PeriodService(
+            IPeriodRepository periodRep,
+            IUnitIndexRepository unitIndexRepository,
+            IJobIndexRepository jobIndexRepository,
+            IPeriodManagerService periodManagerService,
+            IJobIndexServiceFactory jobIndexServiceFactory,
+            IUnitIndexServiceFactory unitIndexServiceFactory
+            )
         {
             this.periodRep = periodRep;
             this.periodManagerService = periodManagerService;
@@ -32,34 +36,9 @@ namespace MITD.PMS.Application
             this.unitIndexRepository = unitIndexRepository;
             this.jobIndexRepository = jobIndexRepository;
         }
+        #endregion
 
-        private void setInitData(Period period)
-        {
-            //var unitIndexServiceManger = unitIndexServiceFactory.Create();
-            //try
-            //{
-            //    var unitIndexService = unitIndexServiceManger.GetService();
-            //    unitIndexService.AddUnitIndexGroup(period.Id, null, "گروه شاخص های سازمانی", "OrganizationUnitGroup");
-            //}
-            //finally
-            //{
-            //    unitIndexServiceFactory.Release(unitIndexServiceManger);
-            //}
-
-            //todo:Damn fu.... very bad code for this section 
-            var behaviaralId = jobIndexRepository.GetNextId();
-            var behaviaralJobIndexGroup = new JobIndexGroup(behaviaralId, period, null, "شاخص های رفتاری", "BehaviouralGroup");
-            jobIndexRepository.Add(behaviaralJobIndexGroup);
-
-            var performanceId = jobIndexRepository.GetNextId();
-            var performanceJobIndexGroup = new JobIndexGroup(performanceId, period, null, "شاخص های عملکردی", "PerformanceGroup");
-            jobIndexRepository.Add(performanceJobIndexGroup);
-
-            var uniGroupId = unitIndexRepository.GetNextId();
-            var unitIndexGroup = new UnitIndexGroup(uniGroupId, period, null, "گروه شاخص های سازمانی", "OrganizationUnitGroup");
-            unitIndexRepository.Add(unitIndexGroup);
-        }
-
+        #region Period Operation
         public void Delete(PeriodId periodId)
         {
             try
@@ -125,34 +104,34 @@ namespace MITD.PMS.Application
             }
         }
 
-        //public void Activate(PeriodId periodId)
-        //{
-        //    using (var scope = new TransactionScope())
-        //    {
-        //        var period = periodRep.GetById(periodId);
-        //        period.Activate(periodManagerService);
-        //        scope.Complete();
-        //    }
-        //}
-
-        public void StartInquiry(PeriodId periodId)
+        public void ChangePeriodActiveStatus(PeriodId periodId, bool active)
         {
             using (var scope = new TransactionScope())
             {
                 var period = periodRep.GetById(periodId);
-                period.StartInquiry(periodManagerService);
+                setInitData(period);
+                period.ChangeActiveStatus(periodManagerService, active);
+
                 scope.Complete();
+
             }
+
         }
 
-        public void CompleteInquiry(PeriodId periodId)
+        private void setInitData(Period period)
         {
-            using (var scope = new TransactionScope())
-            {
-                var period = periodRep.GetById(periodId);
-                period.CompleteInquiry(periodManagerService);
-                scope.Complete();
-            }
+            //todo:Damn fu.... very bad code for this section 
+            var behaviaralId = jobIndexRepository.GetNextId();
+            var behaviaralJobIndexGroup = new JobIndexGroup(behaviaralId, period, null, "شاخص های رفتاری", "BehaviouralGroup");
+            jobIndexRepository.Add(behaviaralJobIndexGroup);
+
+            var performanceId = jobIndexRepository.GetNextId();
+            var performanceJobIndexGroup = new JobIndexGroup(performanceId, period, null, "شاخص های عملکردی", "PerformanceGroup");
+            jobIndexRepository.Add(performanceJobIndexGroup);
+
+            var uniGroupId = unitIndexRepository.GetNextId();
+            var unitIndexGroup = new UnitIndexGroup(uniGroupId, period, null, "گروه شاخص های سازمانی", "OrganizationUnitGroup");
+            unitIndexRepository.Add(unitIndexGroup);
         }
 
         public void Close(PeriodId periodId)
@@ -165,6 +144,18 @@ namespace MITD.PMS.Application
             }
         }
 
+        public void RollBack(PeriodId periodId)
+        {
+            using (var scope = new TransactionScope())
+            {
+                var period = periodRep.GetById(periodId);
+                period.RollBack(periodManagerService);
+                scope.Complete();
+            }
+        }
+        #endregion
+
+        #region Period Inquiry Operation
         public InquiryInitializingProgress GetIntializeInquiryState(PeriodId periodId)
         {
             using (var scope = new TransactionScope())
@@ -173,6 +164,17 @@ namespace MITD.PMS.Application
                 InquiryInitializingProgress initState = period.GetInitializeInquiryProgress(periodManagerService);
                 scope.Complete();
                 return initState;
+            }
+        }
+
+        public InquiryInitializingProgress GetPeriodInitializeInquiryState(PeriodId periodId)
+        {
+            using (var scope = new TransactionScope())
+            {
+                var period = periodRep.GetById(periodId);
+                var res = period.GetInitializeInquiryProgress(periodManagerService);
+                scope.Complete();
+                return res;
             }
         }
 
@@ -196,6 +198,49 @@ namespace MITD.PMS.Application
             }
         }
 
+        public void StartInquiry(PeriodId periodId)
+        {
+            using (var scope = new TransactionScope())
+            {
+                var period = periodRep.GetById(periodId);
+                period.StartInquiry(periodManagerService);
+                scope.Complete();
+            }
+        }
+
+        public void CompleteInquiry(PeriodId periodId)
+        {
+            using (var scope = new TransactionScope())
+            {
+                var period = periodRep.GetById(periodId);
+                period.CompleteInquiry(periodManagerService);
+                scope.Complete();
+            }
+        } 
+        #endregion
+
+        #region Confirmation Operation
+        public void StartConfirmation(PeriodId periodId)
+        {
+            using (var scope = new TransactionScope())
+            {
+                var period = periodRep.GetById(periodId);
+                period.StartConfirmation(periodManagerService);
+                scope.Complete();
+            }
+        }
+
+        public void Confirm(PeriodId periodId)
+        {
+            using (var scope = new TransactionScope())
+            {
+                var period = periodRep.GetById(periodId);
+                period.Confirm(periodManagerService);
+                scope.Complete();
+            }
+        } 
+        #endregion
+
         public void CopyBasicData(long sourcePeriodId, long destionationPeriodId)
         {
             using (var scope = new TransactionScope())
@@ -217,27 +262,6 @@ namespace MITD.PMS.Application
             }
         }
 
-        public InquiryInitializingProgress GetPeriodInitializeInquiryState(PeriodId periodId)
-        {
-            using (var scope = new TransactionScope())
-            {
-                var period = periodRep.GetById(periodId);
-                var res = period.GetInitializeInquiryProgress(periodManagerService);
-                scope.Complete();
-                return res;
-            }
-        }
-
-        public void RollBack(PeriodId periodId)
-        {
-            using (var scope = new TransactionScope())
-            {
-                var period = periodRep.GetById(periodId);
-                period.RollBack(periodManagerService);
-                scope.Complete();
-            }
-        }
-
         public BasicDataCopyingProgress GetPeriodCopyingStateProgress(PeriodId periodId)
         {
             using (var scope = new TransactionScope())
@@ -247,20 +271,6 @@ namespace MITD.PMS.Application
                 scope.Complete();
                 return res;
             }
-        }
-
-        public void ChangePeriodActiveStatus(PeriodId periodId, bool active)
-        {
-            using (var scope = new TransactionScope())
-            {
-                var period = periodRep.GetById(periodId);
-                setInitData(period);
-                period.ChangeActiveStatus(periodManagerService, active);
-
-                scope.Complete();
-
-            }
-
         }
 
         public void StartClaiming(PeriodId periodId)
@@ -282,5 +292,6 @@ namespace MITD.PMS.Application
                 scope.Complete();
             }
         }
+
     }
 }

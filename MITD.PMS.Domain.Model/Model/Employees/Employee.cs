@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Permissions;
 using MITD.Core;
 using MITD.Domain.Model;
 using MITD.PMS.Common;
@@ -45,6 +46,13 @@ namespace MITD.PMS.Domain.Model.Employees
             get { return firstName + " " + LastName; }
         }
 
+        private decimal finalPoint;
+
+        public virtual decimal FinalPoint
+        {
+            get { return finalPoint; }
+        }
+
         private IDictionary<SharedEmployeeCustomFieldId, string> customFieldValues = new Dictionary<SharedEmployeeCustomFieldId, string>();
         public virtual IDictionary<SharedEmployeeCustomFieldId, string> CustomFieldValues
         {
@@ -70,12 +78,14 @@ namespace MITD.PMS.Domain.Model.Employees
             if (period == null)
                 throw new ArgumentNullException("period");
             period.CheckCreatingEmployee();
+
             if (string.IsNullOrWhiteSpace(employeeNo))
-                throw new EmployeeArgumentException("Employee","employeeNo");
+                throw new EmployeeArgumentException("Employee", "employeeNo");
             id = new EmployeeId(employeeNo, period.Id);
+
             this.firstName = firstName;
             if (string.IsNullOrWhiteSpace(lastName))
-                throw new EmployeeArgumentException("Employee","lastName");
+                throw new EmployeeArgumentException("Employee", "lastName");
             this.lastName = lastName;
         }
 
@@ -93,10 +103,59 @@ namespace MITD.PMS.Domain.Model.Employees
         {
             this.firstName = firstName;
             if (string.IsNullOrWhiteSpace(lastName))
-                throw new EmployeeArgumentException("Employee","LastName");
+                throw new EmployeeArgumentException("Employee", "LastName");
             this.lastName = lastName;
         }
 
+        #region Final Point
+
+        public virtual void CreateFinalPoint(decimal point)
+        {
+            setFinalPoint(point);
+        }
+
+        public virtual void UpdateFinalPoint(decimal point)
+        {
+            setFinalPoint(point);
+        }
+
+        private void setFinalPoint(decimal point)
+        {
+            finalPoint = point;
+        } 
+
+        #endregion
+
+        #region JobPosition
+        public virtual void AssignJobPosition(JobPosition jobPosition, DateTime fromDate, DateTime toDate, int workTimePercent, int jobPositionWeight, List<EmployeeJobCustomFieldValue> custumFieldValues)
+        {
+            var employeeJobPosition = jobPositions.SingleOrDefault(j => j.JobPositionId.Equals(jobPosition.Id));
+            if (employeeJobPosition != null)
+                jobPositions.Remove(employeeJobPosition);
+
+            jobPositions.Add(new EmployeeJobPosition(this, jobPosition, fromDate, toDate, workTimePercent, jobPositionWeight, custumFieldValues));
+        }
+
+        public virtual void AssignJobPositions(IEnumerable<EmployeeJobPosition> employeeJobPositions, IPeriodManagerService periodChecker)
+        {
+            if (jobPositions == null)
+                return;
+            periodChecker.CheckModifyingEmployeeJobPositions(this);
+            jobPositions.Clear();
+            if (employeeJobPositions == null || employeeJobPositions.Count() == 0)
+                return;
+            if (employeeJobPositions.Sum(ej => ej.WorkTimePercent) != 100)
+                throw new EmployeeException((int)ApiExceptionCode.InvalidSumEmployeeWorkTimePercents, ApiExceptionCode.InvalidSumEmployeeWorkTimePercents.DisplayName);
+
+            foreach (var employeeJobPosition in employeeJobPositions)
+            {
+                if (employeeJobPosition != null)
+                    jobPositions.Add(employeeJobPosition);
+            }
+        }
+
+        #endregion
+        
         #region CustomFields
 
         public virtual void UpdateCustomFieldsAndValues(Dictionary<SharedEmployeeCustomField, string> customFieldValueItems, IPeriodManagerService periodChecker)
@@ -151,35 +210,7 @@ namespace MITD.PMS.Domain.Model.Employees
             AssignCustomFieldAndValue(customField, value);
         }
         #endregion
-
-        public virtual void AssignJobPosition(JobPosition jobPosition, DateTime fromDate, DateTime toDate, int workTimePercent,int jobPositionWeight, List<EmployeeJobCustomFieldValue> custumFieldValues)
-        {
-            var employeeJobPosition = jobPositions.SingleOrDefault(j => j.JobPositionId.Equals(jobPosition.Id));
-            if (employeeJobPosition != null)
-                jobPositions.Remove(employeeJobPosition);
-
-            jobPositions.Add(new EmployeeJobPosition(this, jobPosition, fromDate, toDate, workTimePercent,jobPositionWeight, custumFieldValues));
-        }
-
-        public virtual void AssignJobPositions(IEnumerable<EmployeeJobPosition> employeeJobPositions, IPeriodManagerService periodChecker)
-        {
-            if (jobPositions == null)
-                return;
-            periodChecker.CheckModifyingEmployeeJobPositions(this);
-            jobPositions.Clear();
-            if (employeeJobPositions == null || employeeJobPositions.Count() == 0)
-                return;
-            if (employeeJobPositions.Sum(ej => ej.WorkTimePercent) != 100)
-                throw new EmployeeException((int)ApiExceptionCode.InvalidSumEmployeeWorkTimePercents, ApiExceptionCode.InvalidSumEmployeeWorkTimePercents.DisplayName); 
-
-            foreach (var employeeJobPosition in employeeJobPositions)
-            {
-                if (employeeJobPosition != null)
-                    jobPositions.Add(employeeJobPosition);
-            }
-        }
-
-
+        
         #endregion
 
         #region IEntity Member
@@ -212,7 +243,6 @@ namespace MITD.PMS.Domain.Model.Employees
         }
 
         #endregion
-
 
     }
 }

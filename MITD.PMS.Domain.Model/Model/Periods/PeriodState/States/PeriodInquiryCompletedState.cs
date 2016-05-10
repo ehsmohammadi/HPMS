@@ -18,34 +18,22 @@ namespace MITD.PMS.Domain.Model.Periods
             period.State = new PeriodInquiryStartedState();
         }
         // for removing claim from project 
-        //internal override void StartClaiming(Period period, IPeriodManagerService periodManagerService) 
-        //{
-        //    if (!periodManagerService.HasDeterministicCalculation(period))
-        //        throw new PeriodException((int)ApiExceptionCode.CouldNotStartClaimingWithoutAnyDeterministicCalculation, ApiExceptionCode.CouldNotStartClaimingWithoutAnyDeterministicCalculation.DisplayName);
 
-        //    period.State = new PeriodClaimingStartedState();
-        //}
-        // After removing claim from project 
-        internal override void Close(Period period, IPeriodManagerService periodManagerService)
+        internal override void StartConfirmation(Period period, IPeriodManagerService periodManagerService)
         {
             if (!periodManagerService.HasDeterministicCalculation(period))
                 throw new PeriodException((int)ApiExceptionCode.CouldNotClosePeriodWithoutAnyDeterministicCalculation
-                    , ApiExceptionCode.CouldNotClosePeriodWithoutAnyDeterministicCalculation.DisplayName);
+                    , ApiExceptionCode.CouldNotStartConfirmationWithoutAnyDeterministicCalculation.DisplayName);
 
-            if (periodManagerService.HasOpenClaim(period))
-                throw new PeriodException((int)ApiExceptionCode.CouldNotClosePeriodWithOpenClaims
-                    , ApiExceptionCode.CouldNotClosePeriodWithOpenClaims.DisplayName);
-
-
-            period.State = new PeriodClosedState();
-            period.DeActive();
+            periodManagerService.CopyEmployeePoint(period);
+            period.State = new PeriodConfirmationState();
         }
 
         internal override InquiryInitializingProgress GetInitializeInquiryProgress(Period period, IPeriodManagerService periodManagerService)
         {
             return periodManagerService.GetCompletedInitializeInquiryProgress(period);
         }
-        
+
         internal override void CheckAssigningUnit()
         {
         }
@@ -87,7 +75,7 @@ namespace MITD.PMS.Domain.Model.Periods
         //{
         //    throw new PMSOperationException("خطا،  ویرایش پست های سازمانی کارمند در این وضعیت دوره امکان پذیر نمی باشد زیرا تغییر در پست سازمانی کارمند باعث تغییر در وضعیت نظر سنجی می شود");
         //} 
-         
+
         internal override void CheckModifyingEmployeeCustomFieldsAndValues()
         {
         }

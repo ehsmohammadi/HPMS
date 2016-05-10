@@ -16,7 +16,7 @@ namespace MITD.Core
 
         public static ApiExceptionCode DoesNotExistEvaluationForEmployee = new ApiExceptionCode("106", "Does not exist evaluation for employee");
         public static ApiExceptionCode CouldNotInitializeInquiryForInactivePeriod = new ApiExceptionCode("107", "Could not initialize inquiry , period must be activated before Initialize Inquiry");
-        public static ApiExceptionCode CouldNotStartClaimingWithoutAnyDeterministicCalculation = new ApiExceptionCode("108", "Could not start claiming  without any deterministic calculation");
+        public static ApiExceptionCode CouldNotStartConfirmationWithoutAnyDeterministicCalculation = new ApiExceptionCode("108", "Could not start claiming  without any deterministic calculation");
         public static ApiExceptionCode CouldNotCompleteInquiryWithNotFilledInquiryForms = new ApiExceptionCode("109", "Could not completeInquiry with not filled inquiry forms");
         public static ApiExceptionCode CouldNotModifyJobIndicesInInquiryStartedState = new ApiExceptionCode("110", "Could not modify jobIndices in inquiryStarted state");
         
@@ -26,7 +26,7 @@ namespace MITD.Core
         public static ApiExceptionCode CouldNotDeleteClaimByAnotherUser = new ApiExceptionCode("113", "could not delete claim by another user, only claim owner can  delete it ");
         public static ApiExceptionCode DoesNotExistAnyActivePeriod = new ApiExceptionCode("114", "Does not exist any active period ");
         public static ApiExceptionCode CouldNotActivatePeriodWhileExistsAnotherActivePeriod = new ApiExceptionCode("115", "Could not activate period while exists another active period");
-        public static ApiExceptionCode CouldNotClosePeriodWithoutAnyDeterministicCalculation = new ApiExceptionCode("116", "Could not close period without any deterministic calculation ");
+        public static ApiExceptionCode CouldNotClosePeriodWithoutAnyDeterministicCalculation = new ApiExceptionCode("116", "Could not Close period without any deterministic calculation ");
         public static ApiExceptionCode CouldNotClosePeriodWithOpenClaims = new ApiExceptionCode("117", "Could not close period with open claims");
 
         public static ApiExceptionCode CouldNotDeleteDeterministicCalculation = new ApiExceptionCode("118", "Could not delete deterministic calculation , you can change calculation state to nonDeterministic and then delete it ");

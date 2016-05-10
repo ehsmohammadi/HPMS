@@ -72,6 +72,7 @@
     <Compile Include="Factory\CalculationDataProviderFactory.cs" />
     <Compile Include="PMS\Domain\CalculationExceptionPersister.cs" />
     <Compile Include="PMS\Domain\InquiryUnitIndexPointService.cs" />
+    <Compile Include="PMS\Domain\EmployeePointCopierService.cs" />
     <Compile Include="PMS\Domain\PeriodBasicDataCopierService.cs" />
     <Compile Include="PMS\Main\CalculationService.cs" />
     <Compile Include="PMS\Domain\CalculatorEngine.cs" />

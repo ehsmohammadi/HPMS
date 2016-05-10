@@ -314,10 +314,10 @@ namespace MITD.PMSSecurity.Domain
         StartInquiry = 2113,
         [ActionInfoAttribute("CompelteInquiry", "اتمام نظرسنجی ")]
         CompleteInquiry = 2114,
-        //[ActionInfoAttribute("StartCliaming", "شروع زمان ثبت اعتراض ")]
-        //StartCliaming = 2115,
-        //[ActionInfoAttribute("FinishCliaming", "پايان زمان ثبت اعتراض ")]
-        //FinishCliaming = 2116,
+        [ActionInfoAttribute("StartConfirmation", "شروع تایید نمرات ")]
+        StartConfirmation = 2115,
+        [ActionInfoAttribute("Confirm", "تایید نمرات کارکنان ")]
+        Confirm = 2116,
         [ActionInfoAttribute("ClosePeriod", "بستن دوره ")]
         ClosePeriod = 2117,
         //[ActionInfoAttribute("CopyPeriodBasicData", "کپی اطلاعات از دوره های قبل ")]

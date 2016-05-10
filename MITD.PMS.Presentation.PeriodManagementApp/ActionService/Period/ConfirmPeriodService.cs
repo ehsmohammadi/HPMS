@@ -3,13 +3,13 @@ using MITD.PMS.Presentation.Logic;
 
 namespace MITD.PMS.Presentation.PeriodManagementApp
 {
-    public class FinishClaimingPeriodService : IActionService<PeriodListVM>
+    public class ConfirmPeriodService : IActionService<PeriodListVM>
     {
       
         private readonly IPMSController pmsController;
         private readonly IPeriodServiceWrapper periodService;
 
-        public FinishClaimingPeriodService(IPMSController pmsController, IPeriodServiceWrapper periodService)
+        public ConfirmPeriodService(IPMSController pmsController, IPeriodServiceWrapper periodService)
         {
             this.pmsController = pmsController;
             this.periodService = periodService;
@@ -25,7 +25,7 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
                 pmsController.ShowMessage("دوره ای انتخاب نشده است");
                 return;
             }
-            if (pmsController.ShowConfirmationBox("آیا می خواهید به زمان ثبت درخواست اعتراض ها پایان دهید ؟", "پايان زمان ثبت درخواست اعتراض"))
+            if (pmsController.ShowConfirmationBox("آیا می خواهید نمرات کارمندان را تایید کنید ؟", "تایید نهایی دوره و نمرات کارمندان"))
             {
                 periodService.ChangePeriodState(exp => pmsController.BeginInvokeOnDispatcher(() =>
                 {
@@ -39,7 +39,7 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
                         //action.DoAction(vm);
                     }
 
-                }), period.Id, new PeriodStateDTO { State = (int)PeriodStateEnum.ClaimingFinished });
+                }), period.Id, new PeriodStateDTO { State = (int)PeriodStateEnum.Confirmed });
             }
 
         }

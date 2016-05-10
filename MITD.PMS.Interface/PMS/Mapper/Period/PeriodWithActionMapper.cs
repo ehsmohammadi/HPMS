@@ -28,6 +28,8 @@ namespace MITD.PMS.Interface
                     (int) ActionType.GetPeriodInitializingInquiryStatus,
                     (int) ActionType.StartInquiry,
                     (int) ActionType.CompleteInquiry,
+                    (int) ActionType.StartConfirmation,
+                    (int)ActionType.Confirm,
                     (int) ActionType.ClosePeriod,
                     (int) ActionType.ManageCalculations,
                     (int) ActionType.RollBackPeriodState,

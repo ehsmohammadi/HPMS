@@ -20,6 +20,7 @@ namespace MITD.PMS.Domain.Service
         #region Fields
 
         private readonly IPeriodRepository periodRep;
+        private readonly IEmployeeRepository employeeRepository;
         private readonly IInquiryConfiguratorService inquiryConfiguratorService;
         private readonly IPeriodBasicDataCopierService periodCopierService;
         private readonly IEventPublisher publisher;
@@ -29,18 +30,28 @@ namespace MITD.PMS.Domain.Service
         private readonly IInquiryJobIndexPointRepository inquiryJobIndexPointRep;
         private readonly IClaimRepository claimRep;
         private readonly IInquiryUnitIndexPointRepository inquiryUnitIndexPointRep;
-
+        private readonly IEmployeePointCopierService employeePointCopierService;
 
         #endregion
 
         #region Constructors
 
-        public PeriodManagerService(IPeriodRepository periodRep, IInquiryConfiguratorService inquiryConfiguratorService,
-            IPeriodBasicDataCopierService periodCopierService, IEventPublisher publisher
-            , ICalculationRepository calcRep, IJobIndexPointRepository jobIndexPointRep, IJobPositionRepository jobPositionRep, IInquiryJobIndexPointRepository inquiryJobIndexPointRep
-            , IClaimRepository claimRep, IInquiryUnitIndexPointRepository inquiryUnitIndexPointRep)
+        public PeriodManagerService(
+            IPeriodRepository periodRep,
+            IEmployeeRepository employeeRepository,
+            ICalculationRepository calcRep,
+            IJobPositionRepository jobPositionRep,
+            IJobIndexPointRepository jobIndexPointRep,
+            IInquiryJobIndexPointRepository inquiryJobIndexPointRep,
+            IInquiryUnitIndexPointRepository inquiryUnitIndexPointRep,
+            IClaimRepository claimRep,
+            IEventPublisher publisher,
+            IInquiryConfiguratorService inquiryConfiguratorService,
+            IPeriodBasicDataCopierService periodCopierService,  
+            IEmployeePointCopierService employeePointCopierService)
         {
             this.periodRep = periodRep;
+            this.employeeRepository = employeeRepository;
             this.inquiryConfiguratorService = inquiryConfiguratorService;
             this.periodCopierService = periodCopierService;
             this.publisher = publisher;
@@ -50,8 +61,8 @@ namespace MITD.PMS.Domain.Service
             this.inquiryJobIndexPointRep = inquiryJobIndexPointRep;
             this.claimRep = claimRep;
             this.inquiryUnitIndexPointRep = inquiryUnitIndexPointRep;
-
-        } 
+            this.employeePointCopierService = employeePointCopierService;
+        }
 
         #endregion
 
@@ -60,6 +71,45 @@ namespace MITD.PMS.Domain.Service
             var periods = periodRep.GetAll();
             return periods.Where(itm => !itm.Id.Equals(period.Id)).All(itm => !itm.Active);
         }
+
+        public Period GetCurrentPeriod()
+        {
+            var res = periodRep.GetBy(c => c.Active);
+            if (res == null)
+                throw new PeriodException((int)ApiExceptionCode.DoesNotExistAnyActivePeriod, ApiExceptionCode.DoesNotExistAnyActivePeriod.DisplayName);
+            return res;
+        }
+
+        public bool HasDeterministicCalculation(Period period)
+        {
+            return calcRep.HasDeterministicCalculation(period);
+        }
+
+        public bool HasOpenClaim(Period period)
+        {
+            return claimRep.HasOpenClaim(period);
+        }
+
+        public bool AllowRollBackToInquiryCompletedState(Period period)
+        {
+            var periods = periodRep.GetAll();
+            return periods.Where(itm => !itm.Id.Equals(period.Id)).All(itm => !itm.Active);
+        }
+        
+        public void ChangeActiveStatus(Period period, bool activeStatus)
+        {
+            if (activeStatus)
+                PeriodActivatorService.Activate(periodRep, period);
+            else
+                period.DeActive();
+        }
+
+        public void DeleteAllCalims(Period period)
+        {
+            claimRep.DeleteAll(period);
+        }
+
+        #region Inquiry JobIndex,Unit
 
         public void InitializeInquiry(Period period)
         {
@@ -86,7 +136,32 @@ namespace MITD.PMS.Domain.Service
             inquiryInitializingProgress.SetProgress(totalcount, totalcount);
             return inquiryInitializingProgress;
         }
+        public bool CanCompleteInquiry(Period period)
+        {
 
+            var allJobIndexPointHaveValue = inquiryJobIndexPointRep.IsAllInquiryJobIndexPointsHasValue(period);
+            var allUnitIndexPointHaveValue = inquiryUnitIndexPointRep.IsAllInquiryUnitIndexPointsHasValue(period);
+            return allUnitIndexPointHaveValue && allJobIndexPointHaveValue;
+        }
+
+        public void DeleteAllCalculations(Period period)
+        {
+            calcRep.DeleteAllCalculation(period);
+        }
+
+        public void ResetAllInquiryPoints(Period period)
+        {
+            jobIndexPointRep.ResetAllInquiryPoints(period);
+        }
+
+        public void DeleteAllInquiryConfigurations(Period period)
+        {
+            jobPositionRep.DeleteAllJobPositionConfigurations(period);
+        }
+
+        #endregion
+
+        #region Basic data copier
         public void CopyBasicData(Period currentPeriod, Period sourcePeriod)
         {
             periodCopierService.CopyBasicData(currentPeriod, sourcePeriod, publisher);
@@ -123,24 +198,22 @@ namespace MITD.PMS.Domain.Service
             }
 
             return new BasicDataCopyingProgress { State = period.State };
-        }
-
-        public Period GetCurrentPeriod()
+        } 
+        #endregion
+        
+        #region Employee Point Copier
+        public void CopyEmployeePoint(Period period)
         {
-            var res = periodRep.GetBy(c => c.Active);
-            if (res == null)
-                throw new PeriodException((int)ApiExceptionCode.DoesNotExistAnyActivePeriod, ApiExceptionCode.DoesNotExistAnyActivePeriod.DisplayName);
-            return res;
+            employeePointCopierService.CopyEmployeePoint(period, publisher);
         }
 
-        public bool CanCompleteInquiry(Period period)
+        public void DeleteEmployeePoint(Period period, IPeriodManagerService periodManagerService)
         {
 
-            var allJobIndexPointHaveValue = inquiryJobIndexPointRep.IsAllInquiryJobIndexPointsHasValue(period);
-            var allUnitIndexPointHaveValue = inquiryUnitIndexPointRep.IsAllInquiryUnitIndexPointsHasValue(period);
-            return allUnitIndexPointHaveValue && allJobIndexPointHaveValue;
-        }
-
+        } 
+        #endregion
+        
+        #region Check methods
         public void CheckUpdatingJobIndex(JobIndex jobIndex)
         {
             var period = periodRep.GetById(jobIndex.PeriodId);
@@ -200,53 +273,6 @@ namespace MITD.PMS.Domain.Service
             period.CheckSettingInquiryJobIndexPointValueValue();
         }
 
-
-
-        public bool AllowRollBackToInquiryCompletedState(Period period)
-        {
-            var periods = periodRep.GetAll();
-            return periods.Where(itm => !itm.Id.Equals(period.Id)).All(itm => !itm.Active);
-        }
-
-        public void DeleteAllCalculations(Period period)
-        {
-            calcRep.DeleteAllCalculation(period);
-        }
-
-        public void ResetAllInquiryPoints(Period period)
-        {
-            jobIndexPointRep.ResetAllInquiryPoints(period);
-        }
-
-        public void DeleteAllInquiryConfigurations(Period period)
-        {
-            jobPositionRep.DeleteAllJobPositionConfigurations(period);
-        }
-
-        public void ChangeActiveStatus(Period period, bool activeStatus)
-        {
-            if (activeStatus)
-                PeriodActivatorService.Activate(periodRep, period);
-            else
-                period.DeActive();
-        }
-
-        public void DeleteAllCalims(Period period)
-        {
-            claimRep.DeleteAll(period);
-        }
-
-        public bool HasDeterministicCalculation(Period period)
-        {
-            return calcRep.HasDeterministicCalculation(period);
-        }
-
-        public bool HasOpenClaim(Period period)
-        {
-            return claimRep.HasOpenClaim(period);
-        }
-
-
         public void CheckUpdatingUnitIndex(UnitIndex unitIndex)
         {
 
@@ -274,6 +300,7 @@ namespace MITD.PMS.Domain.Service
             var period = periodRep.GetById(inquiryUnitIndexPoint.ConfigurationItemId.InquirerId.PeriodId);
             //todo bz
             // period.CheckSettingInquiryJobIndexPointValueValue();
-        }
+        } 
+        #endregion
     }
 }

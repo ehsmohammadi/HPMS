@@ -565,11 +565,11 @@ namespace MITD.PMS.Presentation.UI.SL.Assets.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CouldNotStartClaimingWithoutAnyDeterministicCalculation.
+        ///   Looks up a localized string similar to CouldNotStartConfirmationWithoutAnyDeterministicCalculation.
         /// </summary>
-        public static string CouldNotStartClaimingWithoutAnyDeterministicCalculation {
+        public static string CouldNotStartConfirmationWithoutAnyDeterministicCalculation {
             get {
-                return ResourceManager.GetString("CouldNotStartClaimingWithoutAnyDeterministicCalculation", resourceCulture);
+                return ResourceManager.GetString("CouldNotStartConfirmationWithoutAnyDeterministicCalculation", resourceCulture);
             }
         }
         

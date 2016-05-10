@@ -100,7 +100,7 @@ namespace MITD.PMS.Presentation.Logic
             get;
         }
 
-        string CouldNotStartClaimingWithoutAnyDeterministicCalculation
+        string CouldNotStartConfirmationWithoutAnyDeterministicCalculation
         {
             get;
         }

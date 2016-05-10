@@ -120,6 +120,16 @@ namespace MITD.PMS.Domain.Model.Periods
             State.StartClaiming(this, periodManagerService);
         }
 
+        public virtual void StartConfirmation(IPeriodManagerService periodManagerService)
+        {
+            State.StartConfirmation(this,periodManagerService);
+        }
+
+        public virtual void Confirm(IPeriodManagerService periodManagerService)
+        {
+            State.Confirm(this, periodManagerService);
+        }
+
         public virtual void FinishClaiming(IPeriodManagerService periodManagerService)
         {
             State.FinishClaiming(this,periodManagerService);
@@ -311,7 +321,6 @@ namespace MITD.PMS.Domain.Model.Periods
         {
             State.CheckChangeCalculationDeterministicStatus();
         }
-
         
     }
 }

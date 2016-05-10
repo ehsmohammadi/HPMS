@@ -10,6 +10,7 @@ using MITD.PMS.Domain.Model.JobPositions;
 using MITD.PMS.Domain.Model.Periods;
 using MITD.PMS.Domain.Service;
 using System.Transactions;
+using MITD.PMS.Domain.Model.JobIndexPoints;
 using MITD.PMS.Exceptions;
 using MITD.PMSAdmin.Exceptions;
 
@@ -23,15 +24,17 @@ namespace MITD.PMS.Application
         private readonly IPMSAdminService converter;
         private readonly IJobPositionRepository jobPositionRep;
         private readonly IPeriodManagerService periodChecker;
+        private readonly IJobIndexPointRepository jobIndexPointRepository;
 
         public EmployeeService(IEmployeeRepository employeeRep, IPeriodRepository periodRep, IPMSAdminService converter,
-            IJobPositionRepository jobPositionRep, IPeriodManagerService periodChecker)
+            IJobPositionRepository jobPositionRep, IPeriodManagerService periodChecker, IJobIndexPointRepository jobIndexPointRepository)
         {
             this.employeeRep = employeeRep;
             this.periodRep = periodRep;
             this.converter = converter;
             this.jobPositionRep = jobPositionRep;
             this.periodChecker = periodChecker;
+            this.jobIndexPointRepository = jobIndexPointRepository;
         }
 
         public void Delete(EmployeeId employeeId)
@@ -131,7 +134,22 @@ namespace MITD.PMS.Application
 
         }
 
+        public Employee UpdateFinalPoint(EmployeeId employeeId)
+        {
+            using (var tr = new TransactionScope())
+            {
+                var employee = employeeRep.GetBy(employeeId);
+                var finalEmployeePoint = jobIndexPointRepository.GetEmployeeFinalPointBy(employeeId.PeriodId, employeeId.EmployeeNo);
+                employee.UpdateFinalPoint(finalEmployeePoint);
+                tr.Complete();
+                return employee;
+            }
+        }
 
+        public IEnumerable<string> GetAllEmployeeNo(PeriodId periodId)
+        {
+            return employeeRep.GetAllEmployeeNo(j => true);
+        }
     }
 
 

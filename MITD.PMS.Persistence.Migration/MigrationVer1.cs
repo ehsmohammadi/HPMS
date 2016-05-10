@@ -172,6 +172,142 @@ namespace MITD.PMS.Persistence
 
         }
 
+        public override void Down()
+        {
+            Delete.Table("NH_Hilo");
+
+            Delete.Table("Periods_Claims");
+            Delete.Table("Inquiry_JobIndexPoints");
+            Delete.Table("JobPostion_InquiryConfigurationItems");
+            Delete.Table("JobIndexPoints");
+            Delete.Table("SummaryJobPositionPoints");
+            Delete.Table("JobPositionPoints");
+            Delete.Table("SummaryEmployeePoints");
+            Delete.Table("EmployeePoints");
+            Delete.Table("SummaryCalculationPoints");
+            Delete.Table("CalculationPoints");
+            Delete.Table("Calculations_Exceptions");
+            Delete.Table("Calculations");
+            Delete.Table("Policies_RE_Rules");
+            Delete.Table("Policies_RE_RuleFunctions");
+            Delete.Table("RulesTrail");
+            Delete.Table("Rules");
+            Delete.Table("RulesBase");
+            Delete.Table("RuleFunctionsTrail");
+            Delete.Table("RuleFunctions");
+            Delete.Table("RuleFunctionsBase");
+            Delete.Table("REConfigItems");
+
+            Delete.Table("Periods_Jobs_JobIndices");
+
+            Delete.Table("Periods_JobIndices_CustomFields");
+            Delete.Table("Periods_JobIndices");
+            Delete.Table("Periods_JobIndexGroups");
+            Delete.Table("Periods_AbstractJobIndices");
+            //---------------
+            Delete.Table("Employees_JobCustomField_Values");
+            Delete.Table("Employees_JobPositions");
+
+            Delete.Table("Inquiry_UnitIndexPoints");
+            Delete.Table("Unit_InquiryConfigurationItems");
+            Delete.Table("Employees_UnitCustomField_Values");
+            Delete.Table("Employees_Units");
+
+            Delete.Table("Periods_Jobs_CustomFields");
+
+            Delete.Table("Periods_JobPositions");
+            Delete.Table("Periods_Jobs");
+
+
+
+
+            Delete.Table("Periods_Units_UnitIndices");
+            Delete.Table("Periods_UnitIndices_CustomFields");
+            Delete.Table("Periods_UnitIndices");
+            Delete.Table("Periods_UnitIndexGroups");
+            Delete.Table("Periods_AbstractUnitIndices");
+            Delete.Table("Periods_Units_CustomFields");
+
+
+
+
+            Delete.Table("Periods_Units");
+
+            Delete.Table("Employees_CustomFields");
+            Delete.Table("Employees");
+
+            Delete.Table("Periods");
+
+            Delete.Table("JobIndices_CustomFields");
+            Delete.Table("JobIndices");
+            Delete.Table("JobIndexCategories");
+            Delete.Table("AbstractJobIndices");
+
+            Delete.Table("Units_CustomFields");
+
+
+            Delete.Table("UnitIndices_CustomFields");
+            Delete.Table("UnitIndices");
+            Delete.Table("UnitIndexCategories");
+            Delete.Table("AbstractUnitIndices");
+
+
+            Delete.Table("Jobs_CustomFields");
+
+            Delete.Table("Jobs");
+
+            Delete.Table("Units");
+
+            Delete.Table("Jobpositions");
+
+            Delete.Table("Policies_RE");
+            Delete.Table("Policies");
+
+            Delete.Table("CustomFieldTypes");
+
+
+            Delete.Table("ExceptionLogs");
+            Delete.Table("EventLogs");
+            Delete.Table("Logs");
+
+            Delete.Table("Users_Groups");
+            Delete.Table("Parties_CustomActions");
+            Delete.Table("Users_WorkListUsers");
+            Delete.Table("Users");
+            Delete.Table("Groups");
+            Delete.Table("Parties");
+            Delete.Table("ActionTypes");
+
+
+
+            Execute.Sql("Drop Sequence [dbo].[PeriodSeq] ");
+            Execute.Sql("Drop Sequence [dbo].[PeriodJobCustomFieldsSeq] ");
+            Execute.Sql("Drop Sequence [dbo].[PeriodJobsSeq] ");
+            Execute.Sql("Drop Sequence [dbo].[Jobseq] ");
+            Execute.Sql("Drop Sequence [dbo].[CustomFieldTypeSeq] ");
+            Execute.Sql("Drop Sequence [dbo].[PolicySeq] ");
+            Execute.Sql("Drop Sequence [dbo].[UnitSeq] ");
+            Execute.Sql("Drop sequence [dbo].[JobPositionSeq]");
+            Execute.Sql("Drop sequence [dbo].[RuleSeq]");
+            Execute.Sql("Drop sequence [dbo].[RuleFunctionSeq]");
+            Execute.Sql("Drop sequence [dbo].[REConfigItemSeq]");
+            Execute.Sql("Drop sequence [dbo].[EmployeeSeq]");
+            Execute.Sql("Drop sequence [dbo].[CalculationSeq]");
+            Execute.Sql("Drop sequence [dbo].[AbstractJobIndexSeq]");
+            Execute.Sql("Drop sequence [dbo].[AbstractUnitIndexSeq]");
+            Execute.Sql("Drop sequence [dbo].[Periods_AbstractJobIndexSeq]");
+            Execute.Sql("Drop sequence [dbo].[Periods_AbstractUnitIndexSeq]");
+            Execute.Sql("Drop sequence [dbo].[JobIndexPointSeq]");
+            Execute.Sql("Drop sequence [dbo].[Inquiry_JobIndexPointsSeq]");
+            Execute.Sql("Drop sequence [dbo].[Inquiry_UnitIndexPointsSeq]");
+            Execute.Sql("Drop sequence [dbo].[Periods_ClaimsSeq]");
+            Execute.Sql("Drop sequence [dbo].[Calculations_ExceptionsSeq]");
+
+
+
+
+        }
+
         private void createPeriod_UnitIndex()
         {
             Create.Table("Periods_AbstractUnitIndices")
@@ -251,146 +387,6 @@ namespace MITD.PMS.Persistence
 
 
         }
-
-
-        public override void Down()
-        {
-            Delete.Table("NH_Hilo");
-
-            Delete.Table("Periods_Claims");
-            Delete.Table("Inquiry_JobIndexPoints");
-            Delete.Table("JobPostion_InquiryConfigurationItems");
-            Delete.Table("JobIndexPoints");
-            Delete.Table("SummaryJobPositionPoints");
-            Delete.Table("JobPositionPoints");
-            Delete.Table("SummaryEmployeePoints");
-            Delete.Table("EmployeePoints");
-            Delete.Table("SummaryCalculationPoints");
-            Delete.Table("CalculationPoints");
-            Delete.Table("Calculations_Exceptions");
-            Delete.Table("Calculations");
-            Delete.Table("Policies_RE_Rules");
-            Delete.Table("Policies_RE_RuleFunctions");
-            Delete.Table("RulesTrail");
-            Delete.Table("Rules");
-            Delete.Table("RulesBase");
-            Delete.Table("RuleFunctionsTrail");
-            Delete.Table("RuleFunctions");
-            Delete.Table("RuleFunctionsBase");
-            Delete.Table("REConfigItems");
-
-            Delete.Table("Periods_Jobs_JobIndices");
-
-            Delete.Table("Periods_JobIndices_CustomFields");
-            Delete.Table("Periods_JobIndices");
-            Delete.Table("Periods_JobIndexGroups");
-            Delete.Table("Periods_AbstractJobIndices");
-            //---------------
-            Delete.Table("Employees_JobCustomField_Values");
-            Delete.Table("Employees_JobPositions");
-
-            Delete.Table("Inquiry_UnitIndexPoints");
-            Delete.Table("Unit_InquiryConfigurationItems");
-            Delete.Table("Employees_UnitCustomField_Values");
-            Delete.Table("Employees_Units");
-            
-            Delete.Table("Periods_Jobs_CustomFields");
-
-            Delete.Table("Periods_JobPositions");
-            Delete.Table("Periods_Jobs");
-
-
-           
-
-            Delete.Table("Periods_Units_UnitIndices");
-            Delete.Table("Periods_UnitIndices_CustomFields");
-            Delete.Table("Periods_UnitIndices");
-            Delete.Table("Periods_UnitIndexGroups");
-            Delete.Table("Periods_AbstractUnitIndices");
-            Delete.Table("Periods_Units_CustomFields");
-            
-            
-            
-            
-            Delete.Table("Periods_Units");
-
-            Delete.Table("Employees_CustomFields");
-            Delete.Table("Employees");
-
-            Delete.Table("Periods");
-
-            Delete.Table("JobIndices_CustomFields");
-            Delete.Table("JobIndices");
-            Delete.Table("JobIndexCategories");
-            Delete.Table("AbstractJobIndices");
-            
-            Delete.Table("Units_CustomFields");
-
-
-            Delete.Table("UnitIndices_CustomFields");
-            Delete.Table("UnitIndices");
-            Delete.Table("UnitIndexCategories");
-            Delete.Table("AbstractUnitIndices");
-           
-
-            Delete.Table("Jobs_CustomFields");
-
-            Delete.Table("Jobs");
-
-            Delete.Table("Units");
-                     
-            Delete.Table("Jobpositions");
-
-            Delete.Table("Policies_RE");
-            Delete.Table("Policies");
-            
-            Delete.Table("CustomFieldTypes");  
-            
-
-            Delete.Table("ExceptionLogs");
-            Delete.Table("EventLogs");
-            Delete.Table("Logs");
-
-            Delete.Table("Users_Groups");
-            Delete.Table("Parties_CustomActions");
-            Delete.Table("Users_WorkListUsers");
-            Delete.Table("Users");
-            Delete.Table("Groups");
-            Delete.Table("Parties");
-            Delete.Table("ActionTypes");
-        
-
-
-            Execute.Sql("Drop Sequence [dbo].[PeriodSeq] ");
-            Execute.Sql("Drop Sequence [dbo].[PeriodJobCustomFieldsSeq] ");
-            Execute.Sql("Drop Sequence [dbo].[PeriodJobsSeq] ");
-            Execute.Sql("Drop Sequence [dbo].[Jobseq] ");
-            Execute.Sql("Drop Sequence [dbo].[CustomFieldTypeSeq] ");
-            Execute.Sql("Drop Sequence [dbo].[PolicySeq] ");
-            Execute.Sql("Drop Sequence [dbo].[UnitSeq] ");
-            Execute.Sql("Drop sequence [dbo].[JobPositionSeq]");
-            Execute.Sql("Drop sequence [dbo].[RuleSeq]");
-            Execute.Sql("Drop sequence [dbo].[RuleFunctionSeq]");
-            Execute.Sql("Drop sequence [dbo].[REConfigItemSeq]");
-            Execute.Sql("Drop sequence [dbo].[EmployeeSeq]");
-            Execute.Sql("Drop sequence [dbo].[CalculationSeq]");
-            Execute.Sql("Drop sequence [dbo].[AbstractJobIndexSeq]");
-            Execute.Sql("Drop sequence [dbo].[AbstractUnitIndexSeq]");
-            Execute.Sql("Drop sequence [dbo].[Periods_AbstractJobIndexSeq]");
-            Execute.Sql("Drop sequence [dbo].[Periods_AbstractUnitIndexSeq]");
-            Execute.Sql("Drop sequence [dbo].[JobIndexPointSeq]");
-            Execute.Sql("Drop sequence [dbo].[Inquiry_JobIndexPointsSeq]");
-            Execute.Sql("Drop sequence [dbo].[Inquiry_UnitIndexPointsSeq]");
-            Execute.Sql("Drop sequence [dbo].[Periods_ClaimsSeq]");
-            Execute.Sql("Drop sequence [dbo].[Calculations_ExceptionsSeq]");
-
-
-
-
-        }
-
-
-
 
         private void createInquiryTable()
         {
@@ -634,7 +630,6 @@ namespace MITD.PMS.Persistence
                   .ForeignKey("Logs", "Id");
         }
 
-
         private void createPeriod_JobIndex()
         {
 
@@ -869,7 +864,8 @@ namespace MITD.PMS.Persistence
                 .WithColumn("EmployeeNo").AsString(255).NotNullable()
                 .WithColumn("PeriodId").AsInt64().ForeignKey("Periods", "Id").NotNullable()
                 .WithColumn("FirstName").AsString(512).NotNullable()
-                .WithColumn("LastName").AsString(512).NotNullable();
+                .WithColumn("LastName").AsString(512).NotNullable()
+                .WithColumn("FinalPoint").AsDecimal().Nullable();
 
             Create.UniqueConstraint("Idx_Unique_EmployeeNo_PeriodId").OnTable("Employees").Columns(new string[2] { "EmployeeNo", "PeriodId" });
 
@@ -1357,7 +1353,6 @@ CREATE SEQUENCE [dbo].[Calculations_ExceptionsSeq]
                 .AsString(512).Unique()
                 .NotNullable();
         }
-
 
         private void createUsersTable()
         {

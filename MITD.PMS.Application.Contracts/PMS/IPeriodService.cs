@@ -26,5 +26,7 @@ namespace MITD.PMS.Application.Contracts
         void ChangePeriodActiveStatus(PeriodId periodId, bool active);
         void StartClaiming(PeriodId periodId);
         void FinishClaiming(PeriodId periodId);
+        void StartConfirmation(PeriodId periodId);
+        void Confirm(PeriodId periodId);
     }
 }

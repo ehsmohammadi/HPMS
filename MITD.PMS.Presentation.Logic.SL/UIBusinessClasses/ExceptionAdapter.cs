@@ -151,8 +151,8 @@ namespace MITD.PMS.Presentation.Logic
                 return localizedResources.CouldNotInitializeInquiryForInactivePeriod;
             if (expCode == ApiExceptionCode.CouldNotModifyJobIndicesInInquiryStartedState.Value)
                 return localizedResources.CouldNotModifyJobIndicesInInquiryStartedState;
-            if (expCode == ApiExceptionCode.CouldNotStartClaimingWithoutAnyDeterministicCalculation.Value)
-                return localizedResources.CouldNotStartClaimingWithoutAnyDeterministicCalculation;
+            if (expCode == ApiExceptionCode.CouldNotStartConfirmationWithoutAnyDeterministicCalculation.Value)
+                return localizedResources.CouldNotStartConfirmationWithoutAnyDeterministicCalculation;
             if (expCode == ApiExceptionCode.DoesNotExistAnyActivePeriod.Value)
                 return localizedResources.DoesNotExistAnyActivePeriod;
             if (expCode == ApiExceptionCode.DoesNotExistAnyDeterministicCalculationInPeriod.Value)

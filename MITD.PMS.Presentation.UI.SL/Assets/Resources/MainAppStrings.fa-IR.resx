@@ -282,8 +282,8 @@
   <data name="CouldNotModifyJobIndicesInInquiryStartedState" xml:space="preserve">
     <value>ویرایش شاخص های شغل باعث تغییر در وضعیت نظر سنجی می شود</value>
   </data>
-  <data name="CouldNotStartClaimingWithoutAnyDeterministicCalculation" xml:space="preserve">
-    <value>برای رفتن به وضعیت شروع ثبت  درخواست اعتراض باید یک محاسبه قطعی وجود داشته باشد</value>
+  <data name="CouldNotStartConfirmationWithoutAnyDeterministicCalculation" xml:space="preserve">
+    <value>برای رفتن به وضعیت تایید باید یک محاسبه قطعی وجود داشته باشد</value>
   </data>
   <data name="CustomFieldType" xml:space="preserve">
     <value>فیلد دلخواه</value>

@@ -1,14 +1,4 @@
-﻿using System;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using MITD.PMS.Presentation.Logic;
+﻿using MITD.PMS.Presentation.Logic;
 using MITD.PMS.Presentation.UI.SL.Assets.Resources;
 
 namespace MITD.PMS.Presentation.UI
@@ -357,11 +347,11 @@ namespace MITD.PMS.Presentation.UI
             }
         }
 
-        public string CouldNotStartClaimingWithoutAnyDeterministicCalculation
+        public string CouldNotStartConfirmationWithoutAnyDeterministicCalculation
         {
             get
             {
-                return MainAppStrings.CouldNotStartClaimingWithoutAnyDeterministicCalculation ;
+                return MainAppStrings.CouldNotStartConfirmationWithoutAnyDeterministicCalculation;
             }
         }
 

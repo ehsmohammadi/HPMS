@@ -179,12 +179,16 @@
     <Compile Include="Model\Periods\Exception\PeriodModifyException.cs" />
     <Compile Include="Model\Periods\PeriodEngineState.cs" />
     <Compile Include="Model\Periods\EventHandler.cs" />
-    <Compile Include="Model\Periods\PeriodState\PeriodStateEnum.cs" />
+    <Compile Include="Model\Periods\PeriodState\PeriodStateEnum.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Model\Periods\PeriodState\States\PeriodBasicDataCopying.cs" />
+    <Compile Include="Model\Periods\PeriodState\States\PeriodConfirmedState.cs" />
     <Compile Include="Model\Periods\PeriodState\States\PeriodInitializeInquiryCompletedState.cs" />
     <Compile Include="Model\Periods\PeriodState\States\PeriodInitializingForInquiryState.cs" />
     <Compile Include="Model\Periods\PeriodState\States\PeriodClosedState.cs" />
     <Compile Include="Model\Periods\PeriodState\States\PeriodInitState.cs" />
+    <Compile Include="Model\Periods\PeriodState\States\PeriodConfirmationState.cs" />
     <Compile Include="Model\Periods\PeriodState\States\PeriodInquiryStartedState.cs" />
     <Compile Include="Model\Periods\PeriodState\States\PeriodInquiryCompletedState.cs" />
     <Compile Include="Model\Periods\PeriodState\PeriodState.cs" />
@@ -246,6 +250,7 @@
     <Compile Include="Service\Imp\PeriodActivatorService.cs" />
     <Compile Include="Service\Imp\PeriodManagerService.cs" />
     <Compile Include="Service\Interface\ICalculationEngineService.cs" />
+    <Compile Include="Service\Interface\IEmployeePointCopierService.cs" />
     <Compile Include="Service\Interface\IUnitInquiryConfiguratorService.cs" />
     <Compile Include="Service\Interface\IPeriodBasicDataCopierService.cs" />
     <Compile Include="Service\Interface\IInquiryConfiguratorService.cs" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using MITD.Core;
 using MITD.PMS.Domain.Model.Employees;
 using MITD.PMS.Presentation.Contracts;
@@ -18,6 +19,8 @@ namespace MITD.PMS.Interface
                 LastName = entity.LastName,
                 PeriodId = entity.Id.PeriodId.Id,
                 PersonnelNo = entity.Id.EmployeeNo,
+                FinalPoint = entity.FinalPoint,
+                
                 ActionCodes = new List<int>
                 {
                     (int) ActionType.AddEmployee,

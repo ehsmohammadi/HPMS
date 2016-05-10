@@ -311,10 +311,10 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
             ((CalculationListVM)view.ViewModel).Load(period);
         }
 
-        public void ShowCalculationResultListView(long calculationId, bool showInNewTab = false)
+        public void ShowCalculationResultListView(long calculationId,long periodId, bool showInNewTab = false)
         {
             var view = viewManager.ShowInTabControl<ICalculationResultListView>(showInNewTab);
-            ((CalculationResultListVM)view.ViewModel).Load(calculationId);
+            ((CalculationResultListVM)view.ViewModel).Load(calculationId, periodId);
         }
 
         public void ShowPeriodCalculationExecView(CalculationDTO calculation,ActionType action)

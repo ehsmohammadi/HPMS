@@ -55,8 +55,10 @@ namespace MITD.PMS.Domain.Model.JobPositions
         #region IValueObject Member
         public bool SameValueAs(JobPositionInquiryConfigurationItemId other)
         {
-            return new EqualsBuilder().Append(this.InquirerId, other.InquirerId)
-                .Append(this.InquirySubjectJobPositionId, other.InquirySubjectJobPositionId)
+            return new EqualsBuilder()
+                .Append(this.InquirerId, other.InquirerId)
+                .Append(this.InquirerJobPositionId, other.InquirerJobPositionId)
+                .Append(this.InquirySubjectJobPositionId, other.InquirySubjectJobPositionId)              
                 .Append(this.InquirySubjectId, other.InquirySubjectId).IsEquals();
         }
         #endregion
@@ -78,8 +80,9 @@ namespace MITD.PMS.Domain.Model.JobPositions
 
         public override string ToString()
         {
-            return "InquirerId:" + InquirerId 
-                + ";JobPositionId:" + InquirySubjectJobPositionId 
+            return "InquirerId:" + InquirerId
+                + ";InquirerJobPositionId:" + InquirerJobPositionId
+                + ";InquirySubjectJobPositionId:" + InquirySubjectJobPositionId 
                 + ";InquirySubjectId" + InquirySubjectId;
         }
 

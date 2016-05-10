@@ -16,7 +16,7 @@ namespace MITD.PMS.Presentation.Logic
 
         public void DoAction(CalculationListVM vm)
         {
-            periodController.ShowCalculationResultListView(vm.SelectedCalculation.Id);
+            periodController.ShowCalculationResultListView(vm.SelectedCalculation.Id,vm.Period.Id);
         }
 
 

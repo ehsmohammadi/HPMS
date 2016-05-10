@@ -66,6 +66,12 @@ namespace MITD.PMS.Persistence.NH
                 m.NotNullable(true);
             });
 
+            Property(p => p.FinalPoint, m =>
+            {
+                m.Access(Accessor.Field);
+                m.NotNullable(false);
+            });
+
             Map<SharedEmployeeCustomFieldId, string>(c => c.CustomFieldValues, dMapper =>
             {
                 dMapper.Table("Employees_CustomFields");

@@ -6,6 +6,7 @@ using MITD.Presentation;
 using MITD.PMS.Presentation.Contracts;
 using System.Threading;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Reflection;
 
 namespace MITD.PMS.Presentation.Logic
@@ -301,9 +302,10 @@ namespace MITD.PMS.Presentation.Logic
                                     controller.HideBusyIndicator();
                                     if (res != null)
                                     {
-                                        res.ShowUnitInPeriodTreeView(
-                                            new PeriodDTOWithAction { Id = CurrentPeriod.Id, Name = CurrentPeriod.Name },
-                                            isShiftPressed);
+                                        var activePeriod = createActivePeriodDTOWithAction();
+                                        if (activePeriod == null)
+                                            return;
+                                        res.ShowUnitInPeriodTreeView(activePeriod,isShiftPressed);
                                     }
                                     else if (exp != null)
                                     {
@@ -328,9 +330,10 @@ namespace MITD.PMS.Presentation.Logic
                                     controller.HideBusyIndicator();
                                     if (res != null)
                                     {
-                                        res.ShowUnitIndexInPeriodTreeView(
-                                            new PeriodDTOWithAction { Id = CurrentPeriod.Id, Name = CurrentPeriod.Name },
-                                            isShiftPressed);
+                                        var activePeriod = createActivePeriodDTOWithAction();
+                                        if (activePeriod == null)
+                                            return;
+                                        res.ShowUnitIndexInPeriodTreeView(activePeriod,isShiftPressed);
                                     }
                                     else if (exp != null)
                                     {
@@ -355,9 +358,10 @@ namespace MITD.PMS.Presentation.Logic
                                     controller.HideBusyIndicator();
                                     if (res != null)
                                     {
-                                        res.ShowJobInPeriodListView(
-                                            new PeriodDTO { Id = CurrentPeriod.Id, Name = CurrentPeriod.Name },
-                                            isShiftPressed);
+                                        var activePeriod = createActivePeriodDTOWithAction();
+                                        if (activePeriod == null)
+                                            return;
+                                        res.ShowJobInPeriodListView(activePeriod,isShiftPressed);
                                     }
                                     else if (exp != null)
                                     {
@@ -382,9 +386,10 @@ namespace MITD.PMS.Presentation.Logic
                                     controller.HideBusyIndicator();
                                     if (res != null)
                                     {
-                                        res.ShowJobIndexInPeriodTreeView(
-                                            new PeriodDTOWithAction { Id = CurrentPeriod.Id, Name = CurrentPeriod.Name },
-                                            isShiftPressed);
+                                        var activePeriod = createActivePeriodDTOWithAction();
+                                        if (activePeriod == null)
+                                            return;
+                                        res.ShowJobIndexInPeriodTreeView(activePeriod,isShiftPressed);
                                     }
                                     else if (exp != null)
                                     {
@@ -409,9 +414,10 @@ namespace MITD.PMS.Presentation.Logic
                                     controller.HideBusyIndicator();
                                     if (res != null)
                                     {
-                                        res.ShowJobPositionInPeriodTreeView(
-                                            new PeriodDTOWithAction { Id = CurrentPeriod.Id, Name = CurrentPeriod.Name },
-                                            isShiftPressed);
+                                        var activePeriod = createActivePeriodDTOWithAction();
+                                        if (activePeriod == null)
+                                            return;
+                                        res.ShowJobPositionInPeriodTreeView(activePeriod,isShiftPressed);
                                     }
                                     else if (exp != null)
                                     {
@@ -436,6 +442,9 @@ namespace MITD.PMS.Presentation.Logic
                                     controller.HideBusyIndicator();
                                     if (res != null)
                                     {
+                                        var activePeriod = createActivePeriodDTOWithAction();
+                                        if (activePeriod == null)
+                                            return;
                                         res.ShowEmployeeListView(CurrentPeriod, isShiftPressed);
                                     }
                                     else if (exp != null)
@@ -461,9 +470,10 @@ namespace MITD.PMS.Presentation.Logic
                                     controller.HideBusyIndicator();
                                     if (res != null)
                                     {
-                                        res.ShowCalculationListView(
-                                            new PeriodDTOWithAction { Id = CurrentPeriod.Id, Name = CurrentPeriod.Name },
-                                            isShiftPressed);
+                                        var activePeriod = createActivePeriodDTOWithAction();
+                                        if (activePeriod == null)
+                                            return;
+                                        res.ShowCalculationListView(activePeriod,isShiftPressed);
                                     }
                                     else if (exp != null)
                                     {
@@ -475,6 +485,14 @@ namespace MITD.PMS.Presentation.Logic
             }
             return cmdList;
 
+        }
+
+        private PeriodDTOWithAction createActivePeriodDTOWithAction()
+        {
+            if (CurrentPeriod != null && CurrentPeriod.Id != 0)
+                return new PeriodDTOWithAction {Id = CurrentPeriod.Id, Name = CurrentPeriod.Name};
+            controller.ShowMessage("در سیستم ارزسیابی دوره فعالی تعریف نشده است");
+            return null;
         }
 
         private ObservableCollection<CommandViewModel> createBasicInfoCommands()

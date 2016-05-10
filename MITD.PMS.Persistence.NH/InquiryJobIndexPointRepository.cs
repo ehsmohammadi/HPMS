@@ -57,6 +57,7 @@ namespace MITD.PMS.Persistence.NH
         public InquiryJobIndexPoint GetBy(JobPositionInquiryConfigurationItemId configurationItemId, AbstractJobIndexId jobIndexId)
         {
             return  rep.Find(i => i.ConfigurationItemId.InquirerId.EmployeeNo == configurationItemId.InquirerId.EmployeeNo &&
+                i.ConfigurationItemId.InquirerJobPositionId.SharedJobPositionId.Id == configurationItemId.InquirerJobPositionId.SharedJobPositionId.Id &&
                  i.ConfigurationItemId.InquirySubjectId.EmployeeNo == configurationItemId.InquirySubjectId.EmployeeNo &&
                  i.ConfigurationItemId.InquirySubjectJobPositionId.SharedJobPositionId.Id == configurationItemId.InquirySubjectJobPositionId.SharedJobPositionId.Id &&
                  i.ConfigurationItemId.InquirerId.PeriodId == configurationItemId.InquirerId.PeriodId &&

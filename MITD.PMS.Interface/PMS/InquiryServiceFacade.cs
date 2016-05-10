@@ -55,7 +55,9 @@ namespace MITD.PMS.Interface
             var inquiryForm = new InquiryFormDTO
                 {
                     InquirerEmployeeNo = inquirerEmployeeNo,
+                    InquirerJobPositionId = inquirerJobPositionId,
                     JobPositionId = jobPositionId,
+
                     PeriodId = periodId,
                     InquirySubjectEmployeeNo = inquirySubjectEmployeeNo,
                 };

@@ -72,6 +72,8 @@
                     Binding="{Binding Path=LastName}"  />
                     <sdk:DataGridTextColumn Header="شماره پرسنلی" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto"
                     Binding="{Binding Path=PersonnelNo}" />
+                    <sdk:DataGridTextColumn Header="نمره در دوره " CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto"
+                    Binding="{Binding Path=FinalPoint}" />
                 </sdk:DataGrid.Columns>
             </sdk:DataGrid>
             <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">

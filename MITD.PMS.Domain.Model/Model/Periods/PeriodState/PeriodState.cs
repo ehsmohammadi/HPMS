@@ -19,6 +19,8 @@ namespace MITD.PMS.Domain.Model.Periods
         public static readonly PeriodState InitializingForInquiryCompleted = new PeriodInitializeInquiryCompletedState();
         public static readonly PeriodState InquiryStarted = new PeriodInquiryStartedState();
         public static readonly PeriodState InquiryCompleted = new PeriodInquiryCompletedState();
+        public static readonly PeriodState Confirmation=new PeriodConfirmationState();
+        public static readonly PeriodState Confirmed = new PeriodConfirmedState();
         //public static readonly PeriodState ClaimingStarted = new PeriodClaimingStartedState();
         //public static readonly PeriodState ClaimingFinished = new PeriodClaimingFinishedState();
         public static readonly PeriodState Closed = new PeriodClosedState(); 
@@ -93,7 +95,6 @@ namespace MITD.PMS.Domain.Model.Periods
             throw new PeriodInvalidStateOperationException("Period", DisplayName, "CompleteCopyingBasicData");
         }
 
-
         internal virtual void CopyPeriodBasicData(Period currentPeriod, Period sourcePeriods, IPeriodManagerService periodManagerService)
         {
             throw new PeriodInvalidStateOperationException("Period", DisplayName, "CopyPeriodBasicData");
@@ -103,9 +104,20 @@ namespace MITD.PMS.Domain.Model.Periods
         {
             throw new PeriodInvalidStateOperationException("Period", DisplayName, "StartInquiry");
         }
+
         internal virtual void CompleteInquiry(Period period, IPeriodManagerService periodManagerService)
         {
             throw new PeriodInvalidStateOperationException("Period", DisplayName, "CompleteInquiry");
+        }
+
+        internal virtual void StartConfirmation(Period period, IPeriodManagerService periodManagerService)
+        {
+            throw new PeriodInvalidStateOperationException("Period", DisplayName, "StartConfirmation");
+        }
+
+        internal virtual void Confirm(Period period, IPeriodManagerService periodManagerService)
+        {
+            throw new PeriodInvalidStateOperationException("Period", DisplayName, "Confirm");
         }
 
         internal virtual void StartClaiming(Period period, IPeriodManagerService periodManagerService)
@@ -122,6 +134,7 @@ namespace MITD.PMS.Domain.Model.Periods
         {
             throw new PeriodInvalidStateOperationException("Period", DisplayName, "Close");
         }
+
         internal virtual InquiryInitializingProgress GetInitializeInquiryProgress(Period period, IPeriodManagerService periodManagerService)
         {
             throw new PeriodInvalidStateOperationException("Period", DisplayName, "GetInitializeInquiryProgress");
@@ -166,7 +179,6 @@ namespace MITD.PMS.Domain.Model.Periods
             throw new PeriodInvalidStateOperationException("Period", DisplayName, "CheckModifingUnitIndex");
         }
 
-
         internal virtual void CheckAssigningJobIndex()
         {
             throw new PeriodInvalidStateOperationException("Period", DisplayName, "CheckAssigningJobIndex");
@@ -192,13 +204,10 @@ namespace MITD.PMS.Domain.Model.Periods
             throw new PeriodInvalidStateOperationException("Period", DisplayName, "CheckModifyingUnitCustomFields");
         }
 
-
         internal virtual void CheckModifyingJobIndices(Job job)
         {
             throw new PeriodInvalidStateOperationException("Period", DisplayName, "CheckModifyingJobIndices");
         }
-
-
 
         internal virtual void CheckAssigningJobPosition()
         {

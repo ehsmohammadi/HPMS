@@ -18,6 +18,7 @@ namespace MITD.PMS.Presentation.Logic
         private readonly IPeriodServiceWrapper periodService;
         private readonly ICalculationServiceWrapper calculationService;
         private long calculationId;
+        private long periodId;
 
         #endregion
 
@@ -27,10 +28,10 @@ namespace MITD.PMS.Presentation.Logic
         public PagedSortableCollectionView<JobIndexPointSummaryDTOWithAction> EmployeeCalcTotalScores
         {
             get { return employeeCalcTotalScores; }
-            set { this.SetField(p => p.EmployeeCalcTotalScores, ref employeeCalcTotalScores, value);}
+            set { this.SetField(p => p.EmployeeCalcTotalScores, ref employeeCalcTotalScores, value); }
         }
 
-        private EmployeeCalculationResultDTO  employeeCalculationResult;
+        private EmployeeCalculationResultDTO employeeCalculationResult;
         public EmployeeCalculationResultDTO EmployeeCalculationResult
         {
             get { return employeeCalculationResult; }
@@ -41,7 +42,8 @@ namespace MITD.PMS.Presentation.Logic
         public JobIndexPointSummaryDTOWithAction SelectedEmployeeCalculation
         {
             get { return selectedEmployeeCalculation; }
-            set { 
+            set
+            {
                 this.SetField(p => p.SelectedEmployeeCalculation, ref selectedEmployeeCalculation, value);
                 //if (value != null)
                 //    loadEmployeeJobPoints();
@@ -91,16 +93,16 @@ namespace MITD.PMS.Presentation.Logic
 
         public CalculationResultListVM()
         {
-            PeriodMgtAppLocalizedResources=new PeriodMgtAppLocalizedResources();
+            PeriodMgtAppLocalizedResources = new PeriodMgtAppLocalizedResources();
             init();
             //EmployeeCalculationResults.Add(new EmployeeCalculationResultDTO { Id = 4, Name = "Test" });           
         }
 
         public CalculationResultListVM(IPMSController appController,
-                            ICalculationServiceWrapper calculationService ,
+                            ICalculationServiceWrapper calculationService,
                             IPeriodMgtAppLocalizedResources periodMgtAppLocalizedResources)
         {
-            
+
             this.appController = appController;
             this.calculationService = calculationService;
             PeriodMgtAppLocalizedResources = periodMgtAppLocalizedResources;
@@ -125,21 +127,21 @@ namespace MITD.PMS.Presentation.Logic
             return CommandHelper.GetControlCommands(this, appController, SelectedEmployeeCalculation.ActionCodes);
         }
 
-        public void Load(long calculationIdParam)
+        public void Load(long calculationIdParam, long periodIdParam)
         {
             DisplayName = "نمرات عملکرد کارکنان در دوره";
             calculationId = calculationIdParam;
+            periodId = periodIdParam;
             refresh();
         }
 
-
-        private  void loadEmployeeJobPoints()
+        private void loadEmployeeJobPoints()
         {
             if (SelectedEmployeeCalculation.JobPositionValues != null)
                 return;
 
             ShowBusyIndicator("در حال دریافت اطلاعات...");
-            calculationService.GetEmployeeJobPositionsCalculationResult(  (res, exp) => appController.BeginInvokeOnDispatcher(() =>
+            calculationService.GetEmployeeJobPositionsCalculationResult((res, exp) => appController.BeginInvokeOnDispatcher(() =>
                 {
                     HideBusyIndicator();
                     if (exp == null)
@@ -149,7 +151,7 @@ namespace MITD.PMS.Presentation.Logic
                     else
                         appController.HandleException(exp);
                 })
-                , appController.CurrentPriod.Id, calculationId, SelectedEmployeeCalculation.EmployeeNo);
+                , periodId, calculationId, SelectedEmployeeCalculation.EmployeeNo);
         }
 
         private void refresh()
@@ -161,16 +163,14 @@ namespace MITD.PMS.Presentation.Logic
                     HideBusyIndicator();
                     if (exp == null)
                     {
-                      
+
                         EmployeeCalcTotalScores.SourceCollection = res.Result;
                         EmployeeCalcTotalScores.TotalItemCount = res.TotalCount;
                         EmployeeCalcTotalScores.PageIndex = Math.Max(0, res.CurrentPage - 1);
                     }
                     else appController.HandleException(exp);
-                }), appController.CurrentPriod.Id, calculationId, EmployeeCalcTotalScores.PageSize, EmployeeCalcTotalScores.PageIndex + 1);
+                }),periodId, calculationId, EmployeeCalcTotalScores.PageSize, EmployeeCalcTotalScores.PageIndex + 1);
         }
-
-
 
         protected override void OnPropertyChanged(string propertyName)
         {
@@ -189,7 +189,7 @@ namespace MITD.PMS.Presentation.Logic
             appController.Close(this);
         }
 
-        
+
         public void Handle(UpdateCalculationResultListArgs eventData)
         {
             refresh();

@@ -62,12 +62,12 @@
                 <sdk:Label  Content="رتبه در دوره:" Margin="5"/>
                 <sdk:Label  Content="{Binding Path=EmployeeCalcTotalScore.EmployeeRankInPeriod}" />
 
-                <Button Style="{StaticResource CustomButtonStyle}"
+                <!--<Button Style="{StaticResource CustomButtonStyle}"
                         Command="{Binding Path=ClaimRequest.Command}" 
                         Content="{Binding Path=ClaimRequest.DisplayName}"
                         Visibility="{Binding Path=VisibleRequestClaim,Converter={StaticResource VisibilityConverter}}" 
                         >
-                </Button>
+                </Button>-->
             </StackPanel>
 
 

@@ -151,8 +151,8 @@
     <Compile Include="ActionService\Period\ClosePeriodService.cs" />
     <Compile Include="ActionService\Period\BasicDataCopyService.cs" />
     <Compile Include="ActionService\Period\ManageUnitIndexInPeriodService.cs" />
-    <Compile Include="ActionService\Period\StartClaimingPeriodService.cs" />
-    <Compile Include="ActionService\Period\FinishClaimingPeriodService.cs" />
+    <Compile Include="ActionService\Period\StartConfirmationPeriodService.cs" />
+    <Compile Include="ActionService\Period\ConfirmPeriodService.cs" />
     <Compile Include="ActionService\Period\RollBackPeriodService.cs" />
     <Compile Include="ActionService\Period\GetPeriodInitializingInquiryStatusService.cs" />
     <Compile Include="ActionService\Period\StartInquiaryService.cs" />

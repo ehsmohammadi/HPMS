@@ -78,7 +78,7 @@ namespace MITD.PMS.Presentation.Logic
         [RequiredPermission(ActionType.ManageCalculations)]
         void ShowCalculationListView(PeriodDTOWithAction periodId, bool showInNewTab = false);
         void ShowCalculationExceptionView(CalculationExceptionDTO calculationExceptionDto);
-        void ShowCalculationResultListView(long calcId, bool showInNewTab = false);
+        void ShowCalculationResultListView(long calcId,long periodId, bool showInNewTab = false);
         //void AddPeriodCalculationView(CalculationDTO calculation);
 
         void ShowPeriodCalculationExecView(CalculationDTO calculation, ActionType action);

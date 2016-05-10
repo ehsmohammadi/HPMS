@@ -1,28 +1,27 @@
-﻿using System.Linq.Expressions;
-using MITD.Data.NH;
-using MITD.Domain.Repository;
-using MITD.PMS.Common;
-using MITD.PMS.Domain.Model.Calculations;
-using MITD.PMS.Domain.Model.JobIndexPoints;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MITD.PMS.Domain.Model.Periods;
-using NHibernate.Linq;
+using System.Linq.Expressions;
+using MITD.Data.NH;
+using MITD.Domain.Repository;
+using MITD.PMS.Domain.Model.Calculations;
 using MITD.PMS.Domain.Model.Employees;
+using MITD.PMS.Domain.Model.JobIndexPoints;
+using MITD.PMS.Domain.Model.Periods;
 using MITD.PMSReport.Domain.Model;
+using NHibernate.Linq;
 
 namespace MITD.PMS.Persistence.NH
 {
     public class JobIndexPointRepository : NHRepository, IJobIndexPointRepository
     {
         private NHRepository<CalculationPoint> rep;
+        private NHRepository<EmployeePoint> repEmp;
         
         private void init()
         {
             rep = new NHRepository<CalculationPoint>(unitOfWork);
+            repEmp=new NHRepository<EmployeePoint>(unitOfWork);
         }
         public JobIndexPointRepository(NHUnitOfWork unitOfWork):base(unitOfWork)
         {
@@ -40,13 +39,13 @@ namespace MITD.PMS.Persistence.NH
             rep.Add(point);
         }
 
-        public IList<CalculationPoint> Find(System.Linq.Expressions.Expression<Func<CalculationPoint, bool>> predicate, 
+        public IList<CalculationPoint> Find(Expression<Func<CalculationPoint, bool>> predicate, 
             IListFetchStrategy<CalculationPoint> fetchStrategy)
         {
             return rep.Find(predicate, fetchStrategy);
         }
 
-        public IList<JobIndexPointWithEmployee> Find<T>(System.Linq.Expressions.Expression<Func<T, bool>> predicate,
+        public IList<JobIndexPointWithEmployee> Find<T>(Expression<Func<T, bool>> predicate,
             IListFetchStrategy<JobIndexPointWithEmployee> fetchStrategy) where T:EmployeePoint
         {
             var q = from j in session.Query<T>().Where(predicate)
@@ -83,8 +82,9 @@ namespace MITD.PMS.Persistence.NH
 
         }
 
-        
-
-        
+        public decimal GetEmployeeFinalPointBy(PeriodId id, string employeeNo)
+        {
+            return repEmp.Find(e => e.IsFinal && e.PeriodId == id && e.EmployeeId.EmployeeNo == employeeNo).Single().Value;
+        }
     }
 }

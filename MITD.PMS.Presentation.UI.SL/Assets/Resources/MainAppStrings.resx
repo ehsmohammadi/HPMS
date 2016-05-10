@@ -282,8 +282,8 @@
   <data name="CouldNotModifyJobIndicesInInquiryStartedState" xml:space="preserve">
     <value>CouldNotModifyJobIndicesInInquiryStartedState</value>
   </data>
-  <data name="CouldNotStartClaimingWithoutAnyDeterministicCalculation" xml:space="preserve">
-    <value>CouldNotStartClaimingWithoutAnyDeterministicCalculation</value>
+  <data name="CouldNotStartConfirmationWithoutAnyDeterministicCalculation" xml:space="preserve">
+    <value>CouldNotStartConfirmationWithoutAnyDeterministicCalculation</value>
   </data>
   <data name="CustomFieldType" xml:space="preserve">
     <value>CustomFieldType</value>
