@@ -68,8 +68,8 @@ namespace MITD.PMS.Application
         public CalculationPointPersistanceHolder CalculateIndices(Calculation calculation, Policy policy, Period period, Employee employee, IEventPublisher publisher, CalculatorSession calculationSession)
         {
             CalculationPointPersistanceHolder pointsHolder;
-            using (var transaction = new TransactionScope())
-            {
+            //using (var transaction = new TransactionScope())
+            //{
                 var provider = calculationDataProviderFactory.Create();
                 try
                 {
@@ -79,8 +79,8 @@ namespace MITD.PMS.Application
                 {
                     calculationDataProviderFactory.Release(provider);
                 }
-                transaction.Complete();
-            }
+            //    transaction.Complete();
+            //}
             return pointsHolder;
         }
 

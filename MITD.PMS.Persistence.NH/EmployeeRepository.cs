@@ -393,18 +393,19 @@ namespace MITD.PMS.Persistence.NH
                                                     }).ToList())
                                 : null)),
                     Unit = empData.Unit,
-                    UnitIndices = (from unitIndex in empData.UnitIndexList
-                        join unitIndexWithInquiryValues in
-                            unitIndexInquiryPoints.GroupBy(
-                                g => g.inquiryUnitIndexPoint.ConfigurationItemId.UnitIndexIdUintPeriod).ToList()
-                            on unitIndex.Id equals unitIndexWithInquiryValues.Key into gjii
-                        from k in gjii.DefaultIfEmpty()
-                        select new {UnitIndex = unitIndex, k})
-                        .ToDictionary(j => j.UnitIndex,
-                            j => j.k.Select(
-                                ss =>
-                                    new System.Tuple<Employee, string>(ss.emp,
-                                        ss.inquiryUnitIndexPoint.UnitIndexValue)).First()),
+                    //UnitIndices = (from unitIndex in empData.UnitIndexList
+                    //    join unitIndexWithInquiryValues in
+                    //        unitIndexInquiryPoints
+                    //        .GroupBy(
+                    //            g => g.inquiryUnitIndexPoint.ConfigurationItemId.UnitIndexIdUintPeriod).ToList()
+                    //        on unitIndex.Id equals unitIndexWithInquiryValues.Key into gjii
+                    //    from k in gjii.DefaultIfEmpty()
+                    //    select new {UnitIndex = unitIndex, k})
+                    //    .ToDictionary(j => j.UnitIndex,
+                    //        j => j.k.Select(
+                    //            ss =>
+                    //                new System.Tuple<Employee, string>(ss.emp,
+                    //                    ss.inquiryUnitIndexPoint.UnitIndexValue)).First()),
 
                     CustomFields = empData.EmployeeJobCustomFieldValues,
                     WorkTimePercent =
@@ -413,6 +414,21 @@ namespace MITD.PMS.Persistence.NH
                         employee.JobPositions.Single(j => j.JobPositionId == empData.JobPosition.Id).JobPositionWeight
 
                 });
+            foreach (var jobPositionData in calculationData.JobPositions)
+            {
+                jobPositionData.Value.UnitIndices=new Dictionary<UnitIndex, System.Tuple<Employee, string>>();
+                foreach (var unitIndex in employeeData.Single(e=>e.JobPosition.DictionaryName==jobPositionData.Key.DictionaryName).UnitIndexList)
+                {
+                    var inquiryunitIndexPoint = unitIndexInquiryPoints.Single(
+                        ui =>
+                            ui.inquiryUnitIndexPoint.ConfigurationItemId.UnitIndexIdUintPeriod == unitIndex.Id &&
+                            ui.inquiryUnitIndexPoint.ConfigurationItemId.InquirySubjectUnitId.SharedUnitId ==
+                            jobPositionData.Value.Unit.SharedUnit.Id);
+                    jobPositionData.Value.UnitIndices.Add(unitIndex,
+                        new System.Tuple<Employee, string>(inquiryunitIndexPoint.emp,
+                            inquiryunitIndexPoint.inquiryUnitIndexPoint.UnitIndexValue));
+                }
+            }
             if (withCalculationPoints)
             {
                 calculationData.CalculationPoints = allPoints.ToList();

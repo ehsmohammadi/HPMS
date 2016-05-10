@@ -223,7 +223,7 @@ namespace MITD.PMS.Persistence
                 var x = 0m;
                 var y = 0m;
 
-                if (Utils.GetCalculationPoint(data, position.Unit.Id + ""/TotalPointUnitIndex"") == null)
+                if (Utils.GetCalculationPoint(data, position.Unit.ParentId + "";"" + position.Unit.Id + ""/UnitPoint"") == null)
                 {
                     foreach (var index in position.Unit.Indices)
                     {
@@ -233,7 +233,6 @@ namespace MITD.PMS.Persistence
                     }
                     var res = x / y;
                     Utils.AddCalculationPoint(position.Unit.ParentId + "";"" + position.Unit.Id + ""/UnitPoint"", res);
-                    Utils.AddEmployeePoint(position, ""UnitPoint"", res);
                 }
 
 
