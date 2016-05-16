@@ -29,7 +29,7 @@ namespace MITD.PMS.Application
             IPeriodRepository periodRep,
             ICalculationRepository calcRep,
             IJobIndexPointRepository jipRep,
-            IEmployeeRepository empRep, ICalculationDataProviderFactory calculationDataProviderFactory,ICalculationExceptionRepository calcExpRep)
+            IEmployeeRepository empRep, ICalculationDataProviderFactory calculationDataProviderFactory, ICalculationExceptionRepository calcExpRep)
         {
             this.policyRep = policyRep;
             this.periodRep = periodRep;
@@ -68,19 +68,20 @@ namespace MITD.PMS.Application
         public CalculationPointPersistanceHolder CalculateIndices(Calculation calculation, Policy policy, Period period, Employee employee, IEventPublisher publisher, CalculatorSession calculationSession)
         {
             CalculationPointPersistanceHolder pointsHolder;
-            //using (var transaction = new TransactionScope())
-            //{
+            using (var transaction = new TransactionScope())
+            {
                 var provider = calculationDataProviderFactory.Create();
                 try
                 {
                     pointsHolder = policy.CalculateFor(DateTime.Now, employee, period, calculation, provider, publisher, calculationSession);
+
                 }
                 finally
                 {
                     calculationDataProviderFactory.Release(provider);
                 }
-            //    transaction.Complete();
-            //}
+                transaction.Complete();
+            }
             return pointsHolder;
         }
 
@@ -163,10 +164,10 @@ namespace MITD.PMS.Application
         {
             using (var transaction = new TransactionScope())
             {
-                var clac=calcRep.GetById(calculationId);
+                var clac = calcRep.GetById(calculationId);
                 var empCalcExp = new EmployeeCalculationException(calcExpRep.GetNextId(), clac, employeeId,
                     calculationPathNo, messages);
-                calcExpRep.Add(empCalcExp);             
+                calcExpRep.Add(empCalcExp);
                 transaction.Complete();
             }
         }

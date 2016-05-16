@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using MITD.Core;
 using MITD.PMS.Domain.Model.Employees;
 using MITD.PMS.Domain.Model.Periods;
@@ -12,6 +13,7 @@ namespace MITD.PMS.Application
         #region Fields
 
         private readonly IEmployeeServiceFactory employeeServiceFactory;
+        private readonly IEmployeeRepository employeeRepository;
         //private readonly IJobPositionServiceFactory jobPositionServiceFactory;
         //private readonly IUnitServiceFactory unitServiceFactory;
         //private readonly IJobServiceFactory jobServiceFactory;
@@ -61,9 +63,10 @@ namespace MITD.PMS.Application
 
         #region Constructors
 
-        public EmployeePointCopierService( IEmployeeServiceFactory employeeServiceFactory)
+        public EmployeePointCopierService( IEmployeeServiceFactory employeeServiceFactory,IEmployeeRepository employeeRepository)
         {
             this.employeeServiceFactory = employeeServiceFactory;
+            this.employeeRepository = employeeRepository;
         }
 
         #endregion
@@ -74,13 +77,12 @@ namespace MITD.PMS.Application
             if (!IsCopying)
             {
                 IsCopying = true;
-                start(period, publisher);
-                //Task.Factory.StartNew(() =>
-                //{
+                //start(period, publisher);
+                Task.Factory.StartNew(() =>
+                {
+                    start(period, publisher);
 
-                //    start(currentPeriod, sourcePeriod, publisher);
-
-                //});
+                });
 
             }
         } 
@@ -95,7 +97,8 @@ namespace MITD.PMS.Application
                 employeePointCopyingProgress.State = new PeriodConfirmationState();
                 employeePointCopyingProgress.Messages.Add("شروع کپی نمرات");
 
-                var employeeIdList = getAllEmployeeNo(period);//employeeRepository.GetAllEmployeeNo(a => true);
+                var employeeIdList = getAllEmployeeNo(period);
+                //var employeeIdList = employeeRepository.GetAllEmployeeNo(a => true);
                 foreach (var employeeNo in employeeIdList)
                 {
                     var srvManagerEmployeeService = employeeServiceFactory.Create();

@@ -183,10 +183,10 @@ namespace MITD.PMS.Service.Host
                     .ImplementedBy<PeriodBasicDataCopierService>()
                     .LifeStyle.Singleton.IsDefault());
 
-            container.Register(
-                Component.For<IEmployeePointCopierService>()
-                    .ImplementedBy<EmployeePointCopierService>()
-                    .LifeStyle.Singleton.IsDefault());
+            //container.Register(
+            //    Component.For<IEmployeePointCopierService>()
+            //        .ImplementedBy<EmployeePointCopierService>()
+            //        .LifestyleBoundToNearest<IService>());
 
             container.Register(
                 Component.For<ICalculatorEngine>().ImplementedBy<CalculatorEngine>()

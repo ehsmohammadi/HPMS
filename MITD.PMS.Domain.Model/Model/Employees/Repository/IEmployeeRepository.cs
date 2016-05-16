@@ -25,7 +25,6 @@ namespace MITD.PMS.Domain.Model.Employees
         List<InquirySubjectWithJobPosition> GetEmployeeByWithJobPosition(IEnumerable<JobPositionInquiryConfigurationItemId> configurationIds, PeriodId inquirerPeriodId);
         CalculationData ProvideDataForRule(Employee emp, CalculationId calculationId, bool withCalculationPoints = false);
         EmployeePointData GetPoints(Employee emp, CalculationId calcId);
-        void Attach(Employee employee);
         List<string> GetAllEmployeeNo(Expression<Func<Employee, bool>> predicate);
 
         Exception ConvertException(Exception exp);

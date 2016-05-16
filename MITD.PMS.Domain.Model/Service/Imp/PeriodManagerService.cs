@@ -47,8 +47,10 @@ namespace MITD.PMS.Domain.Service
             IClaimRepository claimRep,
             IEventPublisher publisher,
             IInquiryConfiguratorService inquiryConfiguratorService,
-            IPeriodBasicDataCopierService periodCopierService,  
-            IEmployeePointCopierService employeePointCopierService)
+            IPeriodBasicDataCopierService periodCopierService
+            ,
+            IEmployeePointCopierService employeePointCopierService
+            )
         {
             this.periodRep = periodRep;
             this.employeeRepository = employeeRepository;

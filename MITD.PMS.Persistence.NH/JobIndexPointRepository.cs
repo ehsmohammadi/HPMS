@@ -84,7 +84,12 @@ namespace MITD.PMS.Persistence.NH
 
         public decimal GetEmployeeFinalPointBy(PeriodId id, string employeeNo)
         {
-            return repEmp.Find(e => e.IsFinal && e.PeriodId == id && e.EmployeeId.EmployeeNo == employeeNo).Single().Value;
+            var employeePoint =
+                repEmp.Find(e => e.IsFinal && e.PeriodId == id && e.EmployeeId.EmployeeNo == employeeNo)
+                    .SingleOrDefault();
+            if (employeePoint == null)
+                return 0;
+            return employeePoint.Value;
         }
     }
 }

@@ -224,5 +224,10 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
 
             return result;
         }
+
+        public void ChangePassWord(Action<string, Exception> action, string newPass, string oldPass)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

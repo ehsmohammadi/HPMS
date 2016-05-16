@@ -241,6 +241,7 @@ namespace MITD.PMS.Application
         } 
         #endregion
 
+        #region Not Use
         public void CopyBasicData(long sourcePeriodId, long destionationPeriodId)
         {
             using (var scope = new TransactionScope())
@@ -291,7 +292,8 @@ namespace MITD.PMS.Application
                 period.FinishClaiming(periodManagerService);
                 scope.Complete();
             }
-        }
+        } 
+        #endregion
 
     }
 }

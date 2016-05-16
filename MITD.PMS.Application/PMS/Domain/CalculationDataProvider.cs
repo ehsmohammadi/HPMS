@@ -28,9 +28,10 @@ namespace MITD.PMS.Application
             this.jipRep = jipRep;
         }
 
-        public RuleContracts.CalculationData Provide(Employee employee, out CalculationData calculationData, Calculation calculation, bool withCalculationPoint, CalculatorSession calculationSession)
+        public RuleContracts.CalculationData Provide(Employee emp, out CalculationData calculationData, Calculation calculation, bool withCalculationPoint, CalculatorSession calculationSession)
         {
-            empRep.Attach(employee);
+            //empRep.Attach(employee);
+            var employee = empRep.GetBy(emp.Id);
             calculationData = empRep.ProvideDataForRule(employee, calculation.Id, withCalculationPoint);
             if (calculationSession.CalculationPoints != null && calculationSession.CalculationPoints.Any())
                 calculationData.CalculationPoints.AddRange(calculationSession.CalculationPoints);

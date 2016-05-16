@@ -126,7 +126,7 @@ namespace MITD.PMS.Application
                 {
                     var calculation = calculationRep.GetById(calculationId);
                     if (calculation.IsDeterministic )
-                        throw new CalculationException((int)ApiExceptionCode.CouldNotDeleteDeterministicCalculation, ApiExceptionCode.CouldNotDeleteDeterministicCalculation.DisplayName); 
+                        throw new CalculationException((int)ApiExceptionCode.CouldNotDeleteDeterministicCalculation, ApiExceptionCode.CouldNotDeleteDeterministicCalculation.DisplayName);
                     if (calculation.State == CalculationState.Running)
                         throw new CalculationInvalidStateOperationException(typeof(Calculation).Name, CalculationState.Running.DisplayName, System.Reflection.MethodBase.GetCurrentMethod().Name);
                     

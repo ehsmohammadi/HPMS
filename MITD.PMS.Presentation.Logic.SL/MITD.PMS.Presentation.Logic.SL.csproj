@@ -114,6 +114,7 @@
     <Compile Include="Views\BasicInfo\UnitIndex\IUnitIndexListView.cs" />
     <Compile Include="Views\BasicInfo\UnitIndex\IUnitIndexTreeView.cs" />
     <Compile Include="Views\BasicInfo\UnitIndex\IUnitIndexView.cs" />
+    <Compile Include="Views\BasicInfo\User\IChangePasswordView.cs" />
     <Compile Include="Views\ICalculationExceptionListView.cs" />
     <Compile Include="Views\ICalculationExceptionView.cs" />
     <Compile Include="Views\IRuleTrailView.cs" />
@@ -127,10 +128,10 @@
     <Compile Include="Views\IPartyCustomActionsView.cs" />
     <Compile Include="Views\IUnitInPeriodUnitIndicesView.cs" />
     <Compile Include="Views\IUnitInPrdFieldView.cs" />
-    <Compile Include="Views\IUserView.cs" />
-    <Compile Include="Views\IUserGroupView.cs" />
-    <Compile Include="Views\IUserGroupListView.cs" />
-    <Compile Include="Views\IUserListView.cs" />
+    <Compile Include="Views\BasicInfo\User\IUserView.cs" />
+    <Compile Include="Views\BasicInfo\User\IUserGroupView.cs" />
+    <Compile Include="Views\BasicInfo\User\IUserGroupListView.cs" />
+    <Compile Include="Views\BasicInfo\User\IUserListView.cs" />
     <Compile Include="Views\ILoginView.cs" />
     <Compile Include="Views\Employee\IEmployeeJobCustomFieldsView.cs" />
     <Compile Include="Views\IGridRuleListView.cs" />

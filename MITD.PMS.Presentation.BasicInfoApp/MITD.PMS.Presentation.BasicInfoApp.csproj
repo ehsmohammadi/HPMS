@@ -232,6 +232,7 @@
     <Compile Include="ViewModels\Rule\RuleTrailVM.cs" />
     <Compile Include="ViewModels\Rule\RuleTrailListVM.cs" />
     <Compile Include="ViewModels\Unit\UnitCustomFieldManageVM.cs" />
+    <Compile Include="ViewModels\User\ChangePasswordVM.cs" />
     <Compile Include="ViewModels\User\ManageWorkListUsersVM.cs" />
     <Compile Include="ViewModels\User\PartyCustomActionsVM.cs" />
     <Compile Include="ViewModels\User\UserGroupListVM.cs" />
@@ -345,6 +346,9 @@
     </Compile>
     <Compile Include="Views\Unit\UnitView.xaml.cs">
       <DependentUpon>UnitView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\User\ChangePassword.xaml.cs">
+      <DependentUpon>ChangePassword.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\User\ManageWorkListUsersView.xaml.cs">
       <DependentUpon>ManageWorkListUsersView.xaml</DependentUpon>
@@ -493,6 +497,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Unit\UnitView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\User\ChangePassword.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
