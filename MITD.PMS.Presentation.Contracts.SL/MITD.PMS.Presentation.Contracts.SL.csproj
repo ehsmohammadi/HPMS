@@ -198,6 +198,9 @@
     <Compile Include="..\MITD.PMS.Presentation.Contracts\BasicInfoManagement\User\ActionTypeDTO.cs">
       <Link>BasicInfoManagement\User\ActionTypeDTO.cs</Link>
     </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\BasicInfoManagement\User\ChangePasswordDTO.cs">
+      <Link>BasicInfoManagement\User\ChangePasswordDTO.cs</Link>
+    </Compile>
     <Compile Include="..\MITD.PMS.Presentation.Contracts\BasicInfoManagement\User\PartyDTO.cs">
       <Link>BasicInfoManagement\User\PartyDTO.cs</Link>
     </Compile>
@@ -484,6 +487,7 @@
     <Compile Include="BasicInfoManagement\Rule\RuleExcuteTimeDTO_Client.cs" />
     <Compile Include="BasicInfoManagement\Unit\UnitDTO_Client.cs" />
     <Compile Include="BasicInfoManagement\User\ActionTypeDTO_Client.cs" />
+    <Compile Include="BasicInfoManagement\User\ChangePasswordDTO_Client.cs" />
     <Compile Include="BasicInfoManagement\User\UserDescriptionDTO_Client.cs" />
     <Compile Include="BasicInfoManagement\User\Privilege.cs" />
     <Compile Include="BasicInfoManagement\User\UserGroupDescriptionDTO_Client.cs" />

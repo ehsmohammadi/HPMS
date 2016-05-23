@@ -91,10 +91,12 @@ namespace MITD.PMS.Service.Host.Controllers
         {
             return userServiceFacade.AddUser(user);
         }
-        public UserDTO PutUser(UserDTO user)
-        {
-            return userServiceFacade.UpdateUser(user);
-        }
+        //public UserDTO PutUser(UserDTO user)
+        //{
+        //    return userServiceFacade.UpdateUser(user);
+        //}
+
+
         public string DeleteUser(string partyName)
         {
             return userServiceFacade.DeleteUser(partyName);

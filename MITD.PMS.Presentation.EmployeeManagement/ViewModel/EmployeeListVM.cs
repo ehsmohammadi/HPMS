@@ -96,7 +96,7 @@ namespace MITD.PMS.Presentation.Logic
         void init()
         {
             period=new PeriodDTO();
-            Employees = new PagedSortableCollectionView<EmployeeDTOWithActions>();
+            Employees = new PagedSortableCollectionView<EmployeeDTOWithActions>(){PageSize = 20};
             Employees.OnRefresh += (s, args) => Load(period);
             DisplayName = EmployeeMgtAppLocalizedResources.EmployeeListPageTitle+" "+"دوره";
             EmployeeCommands = new List<DataGridCommandViewModel>

@@ -20,6 +20,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition  Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -33,18 +34,24 @@
                      NotifyOnValidationError=true}"/>
 
                 <sdk:Label Grid.Row="1" Grid.Column="0" Content="نام خانوادگی:" />
-
-                <TextBox Grid.Row="1" Grid.Column="3"   
+                <TextBox Grid.Row="1" Grid.Column="1"   
                             Text="{Binding Path=Employee.LastName, Mode=TwoWay,
                      ValidatesOnDataErrors=true,
                      NotifyOnValidationError=true}"/>
 
                 <sdk:Label Grid.Row="2" Grid.Column="0" Content="شماره پرسنلی:"  />
-                <TextBox Grid.Row="2" Grid.Column="3" IsReadOnly="{Binding Path=IsModifying}"    
+                <TextBox Grid.Row="2" Grid.Column="1" IsReadOnly="{Binding Path=IsModifying}"    
                             Text="{Binding Path=Employee.PersonnelNo, Mode=TwoWay,
                      ValidatesOnDataErrors=true,
                      NotifyOnValidationError=true}"/>
-             
+
+                <sdk:Label Grid.Row="3" Grid.Column="0" Content="نمره نهایی:"  />
+                <TextBox Grid.Row="3" Grid.Column="1" IsReadOnly="{Binding Path=IsModifying}"    
+                            Text="{Binding Path=Employee.FinalPoint, Mode=TwoWay,
+                     ValidatesOnDataErrors=true,
+                     NotifyOnValidationError=true}"/>
+
+
             </Grid>
 
             <sdk:DataGrid Grid.Row="1" AutoGenerateColumns="False" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Stretch"

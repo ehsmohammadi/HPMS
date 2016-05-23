@@ -1,16 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 using Castle.Core.Internal;
 using MITD.PMS.Presentation.Contracts;
 using MITD.Presentation;
@@ -19,15 +9,22 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
 {
     public partial class UserServiceWrapper : IUserServiceWrapper
     {
+        #region Fields
         private readonly IUserProvider userProvider;
         private readonly string baseAddressUsers = PMSClientConfig.BaseApiAddress + "Users";
         private readonly string baseAddressUserGroups = PMSClientConfig.BaseApiAddress + "UserGroups";
         private readonly string baseAddressActionTypes = PMSClientConfig.BaseApiAddress + "ActionTypes";
+        private readonly string baseAddressUserSecurity = PMSClientConfig.BaseApiAddress + "UserSecurity";
+        #endregion
 
+        #region Constructors
         public UserServiceWrapper(IUserProvider userProvider)
         {
             this.userProvider = userProvider;
-        }
+        } 
+        #endregion
+
+        #region Methods
 
         public void GetAllUsers(Action<PageResultDTO<UserDTOWithActions>, Exception> action, int pageSize, int pageIndex, Dictionary<string, string> sortBy, UserCriteria criteria)
         {
@@ -225,9 +222,13 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
             return result;
         }
 
-        public void ChangePassWord(Action<string, Exception> action, string newPass, string oldPass)
+        public void ChangePassword(Action<string, Exception> action, ChangePasswordDTO changePassword)
         {
-            throw new NotImplementedException();
-        }
+            var url = string.Format(baseAddressUserSecurity);
+            WebClientHelper.Put(new Uri(url, UriKind.Absolute), action, changePassword, WebClientHelper.MessageFormat.Json
+               , PMSClientConfig.CreateHeaderDic(userProvider.Token));
+        } 
+        #endregion
+
     }
 }

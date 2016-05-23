@@ -107,8 +107,10 @@
     <Compile Include="BasicInfoManagement\Unit\UnitDTO_Server.cs" />
     <Compile Include="BasicInfoManagement\User\ActionTypeDTO.cs" />
     <Compile Include="BasicInfoManagement\User\ActionTypeDTO_Server.cs" />
+    <Compile Include="BasicInfoManagement\User\ChangePasswordDTO_Server.cs" />
     <Compile Include="BasicInfoManagement\User\UserDescriptionDTO.cs" />
     <Compile Include="BasicInfoManagement\User\UserDescriptionDTO_Server.cs" />
+    <Compile Include="BasicInfoManagement\User\ChangePasswordDTO.cs" />
     <Compile Include="BasicInfoManagement\User\UserGroupDescriptionDTO_Server.cs" />
     <Compile Include="BasicInfoManagement\User\UserGroupDescriptionDTO.cs" />
     <Compile Include="BasicInfoManagement\User\PartyDTO.cs" />

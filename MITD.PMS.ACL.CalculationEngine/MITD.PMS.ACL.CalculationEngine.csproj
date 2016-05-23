@@ -60,7 +60,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="WcfClientHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -92,6 +91,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MITD.FrameWork\MITD.FrameWork.csproj">
+      <Project>{0b6ed571-0fc4-4c9d-9ae0-b7ae10f5552e}</Project>
+      <Name>MITD.FrameWork</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MITD.PMS.Domain.Model\MITD.PMS.Domain.csproj">
       <Project>{1b85ac19-27df-43bb-91b7-9a2aecddb9d1}</Project>
       <Name>MITD.PMS.Domain</Name>

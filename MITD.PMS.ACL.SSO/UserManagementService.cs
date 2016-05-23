@@ -1,56 +1,41 @@
-﻿using MITD.PMS.Application.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using MITD.PMS.ACL.SSO.UserManagement;
+using MITD.Services;
+using IUserManagementService = MITD.PMS.Application.Contracts.IUserManagementService;
 
 namespace MITD.PMS.ACL.SSO
 {
     public class UserManagementService : IUserManagementService
     {
+        #region Fields
+        private readonly IFaultExceptionAdapter errorAdapter;
+        
+        #endregion
+
+        #region Constructors
+        public UserManagementService(IFaultExceptionAdapter errorAdapter)
+        {
+            this.errorAdapter = errorAdapter;
+        } 
+        #endregion
+
+        #region Methods
 
         public IList<string> GetRolesForUser(string userName)
         {
-            var client = new UserManagement.UserManagementServiceClient();
-            try
-            {
-                return client.GetRolesForUser(userName);
-            }
-            catch (CommunicationException)
-            {
-                client.Abort();
-                throw;
-            }
-            catch (TimeoutException)
-            {
-                client.Abort();
-                throw;
-            }
-            catch
-            {
-                if (client.State == CommunicationState.Faulted)
-                {
-                    client.Abort();
-                }
+            var client = new UserManagementServiceClient();
+            return WcfClientHelper.CallMethod((c, u) => c.GetRolesForUser(userName), client,userName, errorAdapter);
 
-                throw;
-            }
-            finally
-            {
-                try
-                {
-                    if (client.State != CommunicationState.Faulted)
-                    {
-                        client.Close();
-                    }
-                }
-                catch
-                {
-                    client.Abort();
-                }
-            }
         }
+
+        public void ChangePassword(string username, string newPassword, string oldPassword)
+        {
+            var client = new UserManagementServiceClient();
+            WcfClientHelper.CallMethod((c, u, n, o) => c.SetPassword(username, newPassword, oldPassword), client,
+                username, newPassword, oldPassword, errorAdapter);
+        }
+
+        #endregion
+
     }
 }

@@ -43,9 +43,9 @@
   </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="https://win-s3h5t2vs75r:2012/services/UserManagement.svc?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="https://win-s3h5t2vs75r:2012/services/UserManagement.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="https://win-s3h5t2vs75r:2012/services/UserManagement.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="https://localhost:2012/services/UserManagement.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="https://localhost:2012/services/UserManagement.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="https://localhost:2012/services/UserManagement.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IUserManagementService_GetRolesForUser_InputMessage">
@@ -54,10 +54,20 @@
   <wsdl:message name="IUserManagementService_GetRolesForUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetRolesForUserResponse" />
   </wsdl:message>
+  <wsdl:message name="IUserManagementService_SetPassword_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetPassword" />
+  </wsdl:message>
+  <wsdl:message name="IUserManagementService_SetPassword_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetPasswordResponse" />
+  </wsdl:message>
   <wsdl:portType name="IUserManagementService">
     <wsdl:operation name="GetRolesForUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserManagementService/GetRolesForUser" message="tns:IUserManagementService_GetRolesForUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserManagementService/GetRolesForUserResponse" message="tns:IUserManagementService_GetRolesForUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetPassword">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserManagementService/SetPassword" message="tns:IUserManagementService_SetPassword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserManagementService/SetPasswordResponse" message="tns:IUserManagementService_SetPassword_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IUserManagementService" type="tns:IUserManagementService">
@@ -72,10 +82,19 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SetPassword">
+      <soap:operation soapAction="http://tempuri.org/IUserManagementService/SetPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="UserManagementService">
     <wsdl:port name="BasicHttpBinding_IUserManagementService" binding="tns:BasicHttpBinding_IUserManagementService">
-      <soap:address location="https://win-s3h5t2vs75r:2012/services/UserManagement.svc" />
+      <soap:address location="https://localhost:2012/services/UserManagement.svc" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

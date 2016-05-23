@@ -9,5 +9,6 @@ namespace MITD.PMS.Application.Contracts
     public interface IUserManagementService
     {
         IList<string> GetRolesForUser(string userName);
+        void ChangePassword(string name, string newPassword, string oldPassword);
     }
 }

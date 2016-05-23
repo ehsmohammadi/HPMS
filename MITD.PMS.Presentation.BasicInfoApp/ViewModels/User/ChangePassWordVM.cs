@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using MITD.PMS.Presentation.Contracts;
 using MITD.Presentation;
 
 namespace MITD.PMS.Presentation.Logic
@@ -14,29 +15,20 @@ namespace MITD.PMS.Presentation.Logic
 
         #region Properties & BackField
 
-        private string rnewPass;
-        public string RNewPass
+        private ChangePasswordDTO  changePassword;
+        public ChangePasswordDTO ChangePassword
         {
-            get { return rnewPass; }
-            set { this.SetField(vm => vm.RNewPass, ref rnewPass, value); }
+            get { return changePassword; }
+            set { this.SetField(vm => vm.ChangePassword, ref changePassword, value); }
         }
 
-
-        private string newPass;
-        public string NewPass
+        private string reEnterNewPassword;
+        public string ReEnterNewPassword
         {
-            get { return newPass; }
-            set { this.SetField(vm => vm.NewPass, ref newPass, value); }
+            get { return reEnterNewPassword; }
+            set { this.SetField(vm => vm.ReEnterNewPassword, ref reEnterNewPassword, value); }
         }
-
-        private string oldPass;
-        public string OldPass
-        {
-            get { return oldPass; }
-            set { this.SetField(vm => vm.OldPass, ref oldPass, value); }
-        }
-
-
+          
 
         private CommandViewModel saveCommand;
         public CommandViewModel SaveCommand
@@ -71,7 +63,7 @@ namespace MITD.PMS.Presentation.Logic
 
         public ChangePasswordVM()
         {
-
+            init();
         }
 
         public ChangePasswordVM(IUserServiceWrapper userService,
@@ -80,6 +72,7 @@ namespace MITD.PMS.Presentation.Logic
 
             this.userService = userService;
             this.appController = appController;
+            init();
 
         }
 
@@ -87,53 +80,47 @@ namespace MITD.PMS.Presentation.Logic
 
         #region Methods
 
+        private void init()
+        {
+            ChangePassword=new ChangePasswordDTO();
+            ReEnterNewPassword=string.Empty;
+        }
+
         private void save()
         {
-            if (string.IsNullOrEmpty(NewPass) || string.IsNullOrEmpty(RNewPass) || string.IsNullOrEmpty(OldPass))
+            if(!ChangePassword.Validate())
+                return;
+            if (ChangePassword.NewPassword != ReEnterNewPassword)
             {
-                this.appController.ShowMessage("لطفا تمامی فیلدها را پرنمایید");
+                appController.ShowMessage("رمز عبور و تکرار رمزعبور می بایست یکسان باشد");
+                return;
             }
-            else
+            ShowBusyIndicator();
+            userService.ChangePassword((res, exp) => appController.BeginInvokeOnDispatcher(() =>
             {
-                if (NewPass != RNewPass)
+                HideBusyIndicator();
+                if (exp != null)
                 {
-                    this.appController.ShowMessage("رمز عبور و تکرار رمزعبور می بایست یکسان باشد");
+                    appController.HandleException(exp);
                 }
                 else
                 {
-                    ShowBusyIndicator();
-                    userService.ChangePassWord((res, exp) => appController.BeginInvokeOnDispatcher(() =>
+                    if (appController.ShowMessage("تغییر رمز با موفقیت انجام شد", "پیام", MessageBoxButton.OK) == MessageBoxResult.OK)
                     {
-                        if (exp != null)
-                        {
-                            this.appController.HandleException(exp);
-                        }
-                        else
-                        {
-                            if (this.appController.ShowMessage("تغییر رمز با موفقیت انجام شد", "پیام", MessageBoxButton.OK) == MessageBoxResult.OK)
-                            {
-                                OnRequestClose();
-                            }
+                        OnRequestClose();
+                    }
 
-                        }
-
-                    }), NewPass, OldPass);
                 }
-            }
+
+            }), ChangePassword);
         }
-
-
-
+        
         protected override void OnRequestClose()
         {
             base.OnRequestClose();
             appController.Close(this);
         }
-
-
-
-
-
+        
         #endregion
     }
 }

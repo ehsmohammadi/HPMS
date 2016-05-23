@@ -19,13 +19,13 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="https://win-s3h5t2vs75r:2012/services/usermanagement.svc?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="https://localhost:2012/services/usermanagement.svc?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="UserManagement.xsd" MetadataType="Schema" ID="2926efcd-ad38-47b6-a4c3-fdca0c9b5187" SourceId="1" SourceUrl="https://win-s3h5t2vs75r:2012/services/UserManagement.svc?xsd=xsd0" />
-    <MetadataFile FileName="UserManagement1.xsd" MetadataType="Schema" ID="c919de2c-3e0d-49a9-b579-3e31cef665be" SourceId="1" SourceUrl="https://win-s3h5t2vs75r:2012/services/UserManagement.svc?xsd=xsd1" />
-    <MetadataFile FileName="UserManagement2.xsd" MetadataType="Schema" ID="37e12f9b-c452-4911-ac10-dd971d0166d1" SourceId="1" SourceUrl="https://win-s3h5t2vs75r:2012/services/UserManagement.svc?xsd=xsd2" />
-    <MetadataFile FileName="UserManagementService.wsdl" MetadataType="Wsdl" ID="af393493-d7b8-4b46-96e3-e61a9101f4c9" SourceId="1" SourceUrl="https://win-s3h5t2vs75r:2012/services/usermanagement.svc?wsdl" />
+    <MetadataFile FileName="UserManagement3.xsd" MetadataType="Schema" ID="429773bd-d428-410e-b753-edd859be6eac" SourceId="1" SourceUrl="https://localhost:2012/services/UserManagement.svc?xsd=xsd1" />
+    <MetadataFile FileName="UserManagement31.xsd" MetadataType="Schema" ID="7bff4a60-8dfd-48ce-ba57-7b92fdecd432" SourceId="1" SourceUrl="https://localhost:2012/services/UserManagement.svc?xsd=xsd2" />
+    <MetadataFile FileName="UserManagement32.xsd" MetadataType="Schema" ID="dcd917e9-1c5c-40d2-993e-bc21b62e112f" SourceId="1" SourceUrl="https://localhost:2012/services/UserManagement.svc?xsd=xsd0" />
+    <MetadataFile FileName="UserManagementService1.wsdl" MetadataType="Wsdl" ID="fb10aec0-7ff1-46c9-b656-d681ff8eddab" SourceId="1" SourceUrl="https://localhost:2012/services/usermanagement.svc?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

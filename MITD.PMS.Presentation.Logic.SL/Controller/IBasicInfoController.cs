@@ -81,5 +81,6 @@ namespace MITD.PMS.Presentation.Logic
         void ShowLogList(bool isShiftPressed);
         void ShowLogView(LogDTO log);
 
+        void ShowChangePasswordView(bool isShiftPressed);
     }
 }

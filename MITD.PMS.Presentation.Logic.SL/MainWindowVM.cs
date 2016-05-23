@@ -834,6 +834,27 @@ namespace MITD.PMS.Presentation.Logic
                         )));
             }
 
+            cmdList.Add(
+                    new CommandViewModel("تغییر کلمه عبور", new DelegateCommand(
+                        () =>
+                        {
+                            controller.ShowBusyIndicator("در حال بارگذاری ماجول...");
+                            controller.GetRemoteInstance<IBasicInfoController>(
+                                (res, exp) =>
+                                {
+                                    controller.HideBusyIndicator();
+                                    if (res != null)
+                                    {
+                                        res.ShowChangePasswordView(isShiftPressed);
+                                    }
+                                    else if (exp != null)
+                                    {
+                                        controller.HandleException(exp);
+                                    }
+                                });
+                        }
+                        )));
+
             //cmdList.Add(
             //  new CommandViewModel(LocalizedResources.ClaimSubMenu, new DelegateCommand(
             //      () =>

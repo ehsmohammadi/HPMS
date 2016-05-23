@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MITD.Services, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependency\MITD.Services.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -50,6 +54,10 @@
     <Compile Include="UserManagementService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MITD.FrameWork\MITD.FrameWork.csproj">
+      <Project>{0B6ED571-0FC4-4C9D-9AE0-B7AE10F5552E}</Project>
+      <Name>MITD.FrameWork</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MITD.PMS.Application.Contracts\MITD.PMS.Application.Contracts.csproj">
       <Project>{946ec2e6-5998-4852-8c57-ad77f3bbdce6}</Project>
       <Name>MITD.PMS.Application.Contracts</Name>
@@ -59,17 +67,19 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="Service References\UserManagement\UserManagement.xsd">
+    <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\UserManagement\UserManagement1.xsd">
+    <None Include="Service References\UserManagement\UserManagement3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\UserManagement\UserManagement2.xsd">
+    <None Include="Service References\UserManagement\UserManagement31.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\UserManagement\UserManagementService.wsdl" />
+    <None Include="Service References\UserManagement\UserManagement32.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UserManagement\UserManagementService1.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\UserManagement\" />

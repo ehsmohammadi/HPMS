@@ -15,7 +15,8 @@ namespace MITD.PMS.Interface
                     FirstName = entity.FirstName,
                     LastName = entity.LastName,
                     PeriodId = entity.Id.PeriodId.Id,
-                    PersonnelNo = entity.Id.EmployeeNo                    
+                    PersonnelNo = entity.Id.EmployeeNo,
+                    FinalPoint = entity.FinalPoint,
                 };
             return res;
 

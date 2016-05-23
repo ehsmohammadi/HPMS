@@ -241,6 +241,7 @@
     <Compile Include="Controllers\Security\ActionTypesController.cs" />
     <Compile Include="Controllers\Security\UsersCurrentPermittedUserController.cs" />
     <Compile Include="Controllers\Security\LogsController.cs" />
+    <Compile Include="Controllers\Security\UserSecurityController.cs" />
     <Compile Include="FaultExceptionAdapter.cs" />
     <Compile Include="ExceptionAdapter.cs" />
     <Compile Include="Controllers\Security\UserGroupsController.cs" />

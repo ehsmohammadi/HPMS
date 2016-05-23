@@ -39,7 +39,8 @@ namespace MITD.PMS.Presentation.Contracts
 
         //FuelUserDTO GetCurrentFuelUser();
 
-        
+
+        string ChangePassword(ChangePasswordDTO changePassword);
     }
 }
 

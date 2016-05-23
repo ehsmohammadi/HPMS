@@ -273,6 +273,12 @@ namespace MITD.PMS.Presentation.BasicInfoApp
             viewManager.ShowInDialog(view);
         }
 
+        public void ShowChangePasswordView(bool isShiftPressed)
+        {
+            var view = ServiceLocator.Current.GetInstance<IChangePasswordView>();
+            viewManager.ShowInDialog(view);
+        }
+
         #endregion
 
 

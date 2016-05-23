@@ -34,6 +34,7 @@ namespace MITD.PMS.Interface
         private IMapper<Group, UserGroupDescriptionDTO> userGroupDescriptionDTOMapper;
         private IMapper<User, UserDescriptionDTO> userDescriptionDTOMapper;
         private ISecurityService _securityApplicationService;
+        private readonly IUserManagementService userManagementService;
         private readonly ISecurityServiceFacade securityServiceFacade;
 
         public UserServiceFacade(ISecurityService securityService,
@@ -49,7 +50,7 @@ namespace MITD.PMS.Interface
             IMapper<User, UserDescriptionDTO> userDescriptionDTOMapper,
 
             ISecurityServiceFacade securityServiceFacade,
-            ISecurityService _securityApplicationService
+            ISecurityService _securityApplicationService,IUserManagementService userManagementService
             )
         {
             this.securityService = securityService;
@@ -66,6 +67,7 @@ namespace MITD.PMS.Interface
 
             this.securityServiceFacade = securityServiceFacade;
             this._securityApplicationService = _securityApplicationService;
+            this.userManagementService = userManagementService;
         }
 
         //[RequiredPermission(ActionType.ShowUser)]
@@ -434,5 +436,11 @@ namespace MITD.PMS.Interface
             return res;
         }
 
+        public string ChangePassword(ChangePasswordDTO changePassword)
+        {
+            userManagementService.ChangePassword(ClaimsPrincipal.Current.Identity.Name, changePassword.NewPassword,
+                changePassword.OldPassword);
+            return "Change password have done successfully";
+        }
     }
 }
