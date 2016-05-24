@@ -335,7 +335,7 @@ namespace MITD.PMS.Persistence.Test
             {
                 var policy2 = session.Get<MITD.PMS.Domain.Model.Policies.RuleEngineBasedPolicy>(
                     new MITD.PMS.Domain.Model.Policies.PolicyId(policy.Id.Id));
-                var period = new Period(new PeriodId(y),Guid.NewGuid().ToString(),DateTime.Now,DateTime.Now);
+                var period = new Period(new PeriodId(y),Guid.NewGuid().ToString(),DateTime.Now,DateTime.Now,91);
                 
                 //period.Activate(null);
                 session.Save(period);

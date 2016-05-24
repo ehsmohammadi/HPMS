@@ -45,6 +45,13 @@ namespace MITD.PMS.Domain.Model.Periods
             set { state = value; }
         }
 
+        private decimal maxFinalPoint;
+        public virtual decimal MaxFinalPoint
+        {
+            get { return maxFinalPoint; }
+            set { maxFinalPoint = value; }
+        }
+
         #endregion
 
         #region Constructors
@@ -54,7 +61,7 @@ namespace MITD.PMS.Domain.Model.Periods
 
         }
 
-        public Period(PeriodId periodId, string name, DateTime startDate, DateTime endDate)
+        public Period(PeriodId periodId, string name, DateTime startDate, DateTime endDate,decimal maxFinalPoint)
         {
             if (periodId == null)
                 throw new ArgumentNullException("periodId");
@@ -71,6 +78,9 @@ namespace MITD.PMS.Domain.Model.Periods
                 throw new PeriodArgumentException("Period", "EndDate");
             this.endDate = endDate;
             state = new PeriodInitState();
+            if (maxFinalPoint == 0)
+                throw new PeriodArgumentException("Period", "MaxFinalPoint");
+            this.maxFinalPoint = maxFinalPoint;
             active = false;
         } 
 

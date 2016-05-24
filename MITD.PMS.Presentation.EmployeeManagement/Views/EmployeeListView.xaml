@@ -15,6 +15,7 @@
         <Grid Name="LayoutRoot"  Background="Transparent"  >
             <Grid.RowDefinitions >
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
@@ -34,7 +35,7 @@
                     <TextBlock Grid.Column="1" Grid.Row="0"  TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="11"
                            LineHeight="15" Text =" فهرست کارمندانی را که عملکرد آنها در این دوره ارزیابی خواهند شد را در این قسمت تعیین کنید. در هنگام ایجاد کاربر فلیدهای اطلاعاتی مربوط به وی را بدقت تکمیل نمایید " ></TextBlock>
 
-                    <StackPanel Grid.Row="1" Grid.ColumnSpan="2"  Orientation="Horizontal" HorizontalAlignment="Right">
+                    <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right">
                         <ComboBox   Width="150" Margin="5" HorizontalAlignment="Left" 
                              DisplayMemberPath="CommandViewModel.DisplayName" 
                              ItemsSource="{Binding Path=EmployeeCommands, Mode=TwoWay}"
@@ -58,8 +59,39 @@
                 </Grid>
             </Border>
 
+            <Grid Grid.Row="1" HorizontalAlignment="Stretch">
+                <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" Height="40" HorizontalAlignment="Stretch">
+                    <sdk:Label>نام:</sdk:Label>
+                    <TextBox Height="30" Text="{Binding Path=EmployeeCriteria.FirstName,Mode=TwoWay}"/>
+                    <sdk:Label>نام خانوادگی:</sdk:Label>
+                    <TextBox Height="30" Text="{Binding Path=EmployeeCriteria.LastName,Mode=TwoWay}"/>
+                    <sdk:Label>کد پرسنلی:</sdk:Label>
+                    <TextBox Height="30" Text="{Binding Path=EmployeeCriteria.EmployeeNo,Mode=TwoWay}"/>
+                    <sdk:Label  Visibility="Collapsed">نام واحد:</sdk:Label>
+                    <pr:ComboBoxEx Margin="2" Visibility="Collapsed"
+                                    ItemsSource="{Binding Path=UnitList }"
+                                    DisplayMemberPath="Name" 
+                                    SelectedValueProper="{Binding Mode=TwoWay, Path=EmployeeCriteria.UnitId,
+                                    ValidatesOnExceptions=true,
+                                    ValidatesOnDataErrors=true,
+                                    NotifyOnValidationError=true}" 
+                                    SelectedValuePath="UnitId"/>
 
-            <sdk:DataGrid Grid.Row="1" Name="drgEmployeeList" AutoGenerateColumns="False" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" SelectionMode="Single" IsReadOnly="True"
+                    <sdk:Label  Visibility="Collapsed">نام پست:</sdk:Label>
+                    <pr:ComboBoxEx  Margin="2"  Visibility="Collapsed"
+                                    ItemsSource="{Binding Path=JobPositionList }"
+                                    DisplayMemberPath="Name" 
+                                    SelectedValueProper="{Binding Mode=TwoWay, Path=EmployeeCriteria.JobPositionId,
+                                     ValidatesOnExceptions=true,
+                                     ValidatesOnDataErrors=true,
+                                     NotifyOnValidationError=true}" 
+                                     SelectedValuePath="JobPositionId"/>
+
+                    <Button Content="جستجو" Command="{Binding Path=SearchCommand.Command}" Style="{StaticResource CustomButtonStyle}"  />
+                </StackPanel>
+            </Grid>
+            
+            <sdk:DataGrid Grid.Row="2" Name="drgEmployeeList" AutoGenerateColumns="False" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" SelectionMode="Single" IsReadOnly="True"
                       ItemsSource="{Binding Path=Employees}" 
                       SelectedItem="{Binding Path=SelectedEmployee, Mode=TwoWay}" MouseRightButtonDown="drgEmployeeList_MouseRightButtonDown" >
                 <toolkit:ContextMenuService.ContextMenu >
@@ -76,7 +108,7 @@
                     Binding="{Binding Path=FinalPoint}" />
                 </sdk:DataGrid.Columns>
             </sdk:DataGrid>
-            <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
+            <StackPanel Grid.Row="3" HorizontalAlignment="Center" Orientation="Horizontal">
                 <pr:CustomDataPager Height="26" FontFamily="Tahoma" FontSize="11" PageSize="20" Width="200" 
                                     Source="{Binding Path=Employees, Mode=TwoWay}" />
             </StackPanel>

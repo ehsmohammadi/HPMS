@@ -87,7 +87,7 @@ namespace MITD.PMS.Interface
         [RequiredPermission(ActionType.AddPeriod)]
         public PeriodDTO AddPeriod(PeriodDTO dto)
         {
-            var period = periodService.AddPeriod(dto.Name, dto.StartDate, dto.EndDate);
+            var period = periodService.AddPeriod(dto.Name, dto.StartDate, dto.EndDate,dto.MaxFinalPoint);
             return periodDTOMapper.MapToModel(period);
         }
 

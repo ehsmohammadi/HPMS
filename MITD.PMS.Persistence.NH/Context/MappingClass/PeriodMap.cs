@@ -53,6 +53,10 @@ namespace MITD.PMS.Persistence.NH
                 m.NotNullable(true);
                 m.Type<EnumerationTypeConverter<PeriodState>>();
             });
+            Property(p => p.MaxFinalPoint, m =>
+            {
+                m.Access(Accessor.Field);
+            });
             
         }
     }

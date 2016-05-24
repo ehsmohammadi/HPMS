@@ -29,7 +29,7 @@ namespace MITD.PMS.Test
                 var periodRep = new PeriodRepository(uow);
                 for (int i = 0; i < 5; i++)
                 {
-                    var period = new Period(new PeriodId(periodRep.GetNextId()), "Test", DateTime.Now, DateTime.Now);
+                    var period = new Period(new PeriodId(periodRep.GetNextId()), "Test", DateTime.Now, DateTime.Now,91);
                     periodRep.Add(period);
 
                 }

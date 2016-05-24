@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" FlowDirection="RightToLeft"
-    d:DesignHeight="300" d:DesignWidth="400" 
+    d:DesignHeight="400" d:DesignWidth="600" 
     xmlns:pr="clr-namespace:MITD.Presentation.UI;assembly=MITD.Presentation.UI.SL"
     xmlns:views="clr-namespace:MITD.Presentation.UI.DateTimePicker.Views;assembly=MITD.Presentation.UI.SL"
     d:DataContext="{StaticResource pViewModel}">
@@ -21,6 +21,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition  Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -32,16 +33,20 @@
 
                 <sdk:Label Grid.Row="1" Grid.Column="0" Content="{Binding Path=PeriodMgtAppLocalizedResources.PeriodViewLabelStartDateTitle}" />
                 
-                <views:PDatePicker Grid.Row="1" Grid.Column="3"  Width="150" Margin="5" Height="Auto" 
+                <views:PDatePicker Grid.Row="1" Grid.Column="1"  Width="150" Margin="5" Height="Auto" 
                             SelectedDate="{Binding Path=Period.StartDate, Mode=TwoWay,
                             
                      ValidatesOnDataErrors=true,
                      NotifyOnValidationError=true}"/>
 
                 <sdk:Label Grid.Row="2" Grid.Column="0" Content="{Binding Path=PeriodMgtAppLocalizedResources.PeriodViewLabelEndDateTitle}" />
-                <views:PDatePicker Grid.Row="2" Grid.Column="3"  Width="150" Margin="5" Height="Auto" 
+                <views:PDatePicker Grid.Row="2" Grid.Column="1"  Width="150" Margin="5" Height="Auto" 
                                    SelectedDate="{Binding Path=Period.EndDate,Mode=TwoWay}"/>
-             
+                
+                <sdk:Label Grid.Row="3" Grid.Column="0" Content="حداکثر نمره کارمندان در دوره:" />
+                <TextBox Grid.Row="3" Grid.Column="1"
+                     Text="{Binding Path=Period.MaxFinalPoint, Mode=TwoWay}"/>
+
             </Grid>
             <StackPanel Grid.Row="2" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Style="{StaticResource CustomButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"

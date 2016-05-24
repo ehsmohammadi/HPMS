@@ -60,12 +60,12 @@ namespace MITD.PMS.Application
 
         }
 
-        public Period AddPeriod(string name, DateTime startDate, DateTime endDate)
+        public Period AddPeriod(string name, DateTime startDate, DateTime endDate, decimal maxFinalPoint)
         {
             using (var scope = new TransactionScope())
             {
                 var id = periodRep.GetNextId();
-                var period = new Period(new PeriodId(id), name, startDate, endDate);
+                var period = new Period(new PeriodId(id), name, startDate, endDate,maxFinalPoint);
                 periodRep.Add(period);
                 scope.Complete();
                 return period;

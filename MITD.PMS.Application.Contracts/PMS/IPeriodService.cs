@@ -9,7 +9,7 @@ namespace MITD.PMS.Application.Contracts
     public interface IPeriodService : IService
     {
         void Delete(PeriodId periodId);
-        Period AddPeriod(string name, DateTime startDate, DateTime endDate);
+        Period AddPeriod(string name, DateTime startDate, DateTime endDate, decimal maxFinalPoint);
         Period UpdatePeriod(PeriodId periodId, string name, DateTime startDate, DateTime endDate);
         Period GetCurrentPeriod();
         void StartInquiry(PeriodId periodId);

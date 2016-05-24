@@ -1035,7 +1035,7 @@ public static decimal GetInquiryByJobPositionName( KeyValuePair<JobIndex, Dictio
 
                 #region Period creation
                 var periodManagerService = new PeriodManagerService(periodRep, null, null, null, null, null, null, null, null, null, null, null);
-                period = new Period(new PeriodId(periodRep.GetNextId()), Guid.NewGuid().ToString(), DateTime.Now, DateTime.Now);
+                period = new Period(new PeriodId(periodRep.GetNextId()), Guid.NewGuid().ToString(), DateTime.Now, DateTime.Now,91);
                 period.ChangeActiveStatus(periodManagerService,true);
                 periodRep.Add(period);
                 #endregion

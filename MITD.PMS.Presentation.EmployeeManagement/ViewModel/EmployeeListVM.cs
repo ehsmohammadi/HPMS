@@ -27,6 +27,15 @@ namespace MITD.PMS.Presentation.Logic
         {
             get { return period; }
         }
+
+        private EmployeeCriteria employeeCriteria;
+        public EmployeeCriteria EmployeeCriteria
+        {
+            get { return employeeCriteria; }
+            set { this.SetField(p => p.EmployeeCriteria, ref employeeCriteria, value); }
+        }
+
+
         private PagedSortableCollectionView<EmployeeDTOWithActions> employees;
         public PagedSortableCollectionView<EmployeeDTOWithActions> Employees
         {
@@ -41,6 +50,8 @@ namespace MITD.PMS.Presentation.Logic
             set
             {
                 this.SetField(p => p.SelectedEmployee, ref selectedEmployee, value);
+                if(value==null)
+                    return;
                 EmployeeCommands = createCommands();
                 if (View != null)
                     ((IEmployeeListView)View).CreateContextMenu(new ReadOnlyCollection<DataGridCommandViewModel>(EmployeeCommands));
@@ -65,6 +76,20 @@ namespace MITD.PMS.Presentation.Logic
             get { return selectedCommand; }
             set { this.SetField(p => p.SelectedCommand, ref selectedCommand, value); }
         }
+
+        private CommandViewModel searchCommand;
+        public CommandViewModel SearchCommand
+        {
+            get
+            {
+                if (searchCommand == null)
+                {
+                    searchCommand = new CommandViewModel("ایجاد محاسبه", new DelegateCommand(searchEmployee));
+                }
+                return searchCommand;
+            }
+        }
+
         
 
         #endregion
@@ -99,6 +124,7 @@ namespace MITD.PMS.Presentation.Logic
             Employees = new PagedSortableCollectionView<EmployeeDTOWithActions>(){PageSize = 20};
             Employees.OnRefresh += (s, args) => Load(period);
             DisplayName = EmployeeMgtAppLocalizedResources.EmployeeListPageTitle+" "+"دوره";
+            EmployeeCriteria = new EmployeeCriteria();
             EmployeeCommands = new List<DataGridCommandViewModel>
             {
                    CommandHelper.GetControlCommands(this, appController, new List<int>{ (int) ActionType.AddEmployee}).FirstOrDefault()
@@ -127,6 +153,27 @@ namespace MITD.PMS.Presentation.Logic
                     }
                     else appController.HandleException(exp);
                 }),period.Id, employees.PageSize, employees.PageIndex + 1);
+        }
+
+        private void searchEmployee()
+        {
+            ShowBusyIndicator("در حال دریافت اطلاعات...");
+            employeeService.GetAllEmployees(
+                (res, exp) => appController.BeginInvokeOnDispatcher(() =>
+                {
+                    HideBusyIndicator();
+                    if (exp == null)
+                    {
+                        appController.BeginInvokeOnDispatcher(() =>
+                        {
+                            Employees.TotalItemCount = res.TotalCount;
+                            Employees.PageIndex = Math.Max(0, res.CurrentPage - 1);
+
+                            Employees.SourceCollection = res.Result.ToList();
+                        });
+                    }
+                    else appController.HandleException(exp);
+                }), Period.Id, EmployeeCriteria, employees.PageSize, employees.PageIndex + 1);
         }
 
         protected override void OnRequestClose()

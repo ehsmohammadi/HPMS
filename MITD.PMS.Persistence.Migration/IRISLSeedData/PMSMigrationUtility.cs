@@ -35,7 +35,7 @@ namespace MITD.PMS.Persistence
         public static void CreatePeriod(IPeriodRepository periodRepository, string name, DateTime from, DateTime to)
         {
             var periodManagerService = new PeriodManagerService(periodRepository, null, null, null, null, null, null, null, null,null,null,null);
-            Period = new Period(new PeriodId(periodRepository.GetNextId()), name, from, to);
+            Period = new Period(new PeriodId(periodRepository.GetNextId()), name, from, to,91);
             Period.ChangeActiveStatus(periodManagerService, true);
             periodRepository.Add(Period);
 

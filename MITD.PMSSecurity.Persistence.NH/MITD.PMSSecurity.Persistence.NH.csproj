@@ -58,13 +58,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PartyCustomActionRepository.cs" />
+    <Compile Include="Repository\PartyCustomActionRepository.cs" />
     <Compile Include="Context\MappingClass\LogMap.cs" />
     <Compile Include="Context\MappingClass\UserMap.cs" />
     <Compile Include="Context\PMSSecuritySession.cs" />
-    <Compile Include="LogRepository.cs" />
+    <Compile Include="Repository\LogRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserRepository.cs" />
+    <Compile Include="Repository\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

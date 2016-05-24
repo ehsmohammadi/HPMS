@@ -94,7 +94,11 @@ namespace MITD.PMS.Presentation.Logic
                     {
                         HideBusyIndicator();
                         if (exp == null)
+                        {
                             Period = res;
+                            Period.StartDate = res.StartDate;
+                        }
+
                         else
                             appController.HandleException(exp);
                     }),

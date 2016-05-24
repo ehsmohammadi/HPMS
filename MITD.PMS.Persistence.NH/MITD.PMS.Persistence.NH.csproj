@@ -67,7 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalculationRepository.cs" />
+    <Compile Include="Repository\CalculationRepository.cs" />
     <Compile Include="Context\MappingClass\ClaimMap.cs" />
     <Compile Include="Context\MappingClass\CalculationExceptionMap.cs" />
     <Compile Include="Context\MappingClass\InquiryUnitIndexPointMap.cs" />
@@ -80,22 +80,20 @@
     <Compile Include="Context\MappingClass\JobPositionInPeriodMap.cs" />
     <Compile Include="Context\MappingClass\PeriodMap.cs" />
     <Compile Include="Context\MappingClass\UnitInPeriodMap.cs" />
-    <Compile Include="ClaimRpository.cs" />
-    <Compile Include="CalculationExceptionRepository.cs" />
-    <Compile Include="DataAccess.NH\NHDataAccessExceptionAdapter.cs" />
-    <Compile Include="IListFetchStrategy.cs" />
-    <Compile Include="IInquiryUnitIndexPointRepository.cs" />
-    <Compile Include="InquiryJobIndexPointRepository.cs" />
-    <Compile Include="UnitIndexRepository.cs" />
-    <Compile Include="JobPositionRepository.cs" />
-    <Compile Include="JobIndexRepository.cs" />
-    <Compile Include="EmployeeRepository.cs" />
-    <Compile Include="JobRepository.cs" />
-    <Compile Include="PeriodRepository.cs" />
-    <Compile Include="PMSSession.cs" />
-    <Compile Include="PolicyRepository.cs" />
-    <Compile Include="JobIndexPointRepository.cs" />
-    <Compile Include="UnitRepository.cs" />
+    <Compile Include="Repository\ClaimRpository.cs" />
+    <Compile Include="Repository\CalculationExceptionRepository.cs" />
+    <Compile Include="Repository\InquiryUnitIndexPointRepository.cs" />
+    <Compile Include="Repository\InquiryJobIndexPointRepository.cs" />
+    <Compile Include="Repository\UnitIndexRepository.cs" />
+    <Compile Include="Repository\JobPositionRepository.cs" />
+    <Compile Include="Repository\JobIndexRepository.cs" />
+    <Compile Include="Repository\EmployeeRepository.cs" />
+    <Compile Include="Repository\JobRepository.cs" />
+    <Compile Include="Repository\PeriodRepository.cs" />
+    <Compile Include="Context\PMSSession.cs" />
+    <Compile Include="Repository\PolicyRepository.cs" />
+    <Compile Include="Repository\JobIndexPointRepository.cs" />
+    <Compile Include="Repository\UnitRepository.cs" />
     <Compile Include="Context\MappingClass\JobInPeriodMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -112,6 +110,7 @@
       <Name>MITD.PMS.Domain</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

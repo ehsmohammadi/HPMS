@@ -671,7 +671,7 @@ if (it > 0)
                 var periodManagerService = new PeriodManagerService(periodRep, null, null, null, null, null, null, null, null, null,null,null);
                 #region Period creation
 
-                period = new Period(new PeriodId(periodRep.GetNextId()), Guid.NewGuid().ToString(), DateTime.Now, DateTime.Now);
+                period = new Period(new PeriodId(periodRep.GetNextId()), Guid.NewGuid().ToString(), DateTime.Now, DateTime.Now,91);
                 period.ChangeActiveStatus(periodManagerService,true);
                 periodRep.Add(period);
                 #endregion

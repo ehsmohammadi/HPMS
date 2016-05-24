@@ -17,7 +17,9 @@ namespace MITD.PMS.Interface
                     StartDate = entity.StartDate,
                     EndDate = entity.EndDate,
                     ActiveStatus = entity.Active,
-                    StateName = entity.State.Value
+                    StateName = entity.State.Value,
+                    MaxFinalPoint = entity.MaxFinalPoint
+                   
                 };
             return res;
 
