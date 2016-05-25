@@ -72,14 +72,14 @@ namespace MITD.PMS.Application
             }
         }
 
-        public Period UpdatePeriod(PeriodId periodId, string name, DateTime startDate, DateTime endDate)
+        public Period UpdatePeriod(PeriodId periodId, string name, DateTime startDate, DateTime endDate, decimal maxFinalPoint)
         {
             try
             {
                 using (var scope = new TransactionScope())
                 {
                     var period = periodRep.GetById(periodId);
-                    period.Update(name, startDate, endDate);
+                    period.Update(name, startDate, endDate,maxFinalPoint);
                     scope.Complete();
                     return period;
                 }

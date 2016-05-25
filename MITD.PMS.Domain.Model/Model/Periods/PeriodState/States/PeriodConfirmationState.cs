@@ -18,7 +18,7 @@ namespace MITD.PMS.Domain.Model.Periods
 
         internal override void RollBack(Period period, IPeriodManagerService periodManagerService)
         {
-            periodManagerService.DeleteEmployeePoint(period, periodManagerService);
+            periodManagerService.DeleteEmployeePoint(period);
             period.State=new PeriodInquiryCompletedState();
 
         }

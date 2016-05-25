@@ -5,6 +5,7 @@ namespace MITD.PMS.Presentation.Contracts
     public partial class EmployeeDTOWithActions:EmployeeDTO,IActionDTO
     {
         public List<int> ActionCodes { get; set; }
+        public string StateName { get; set; }
     }
 
 }

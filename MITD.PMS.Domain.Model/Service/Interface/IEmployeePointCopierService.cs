@@ -34,5 +34,6 @@ namespace MITD.PMS.Domain.Service
         void CopyEmployeePoint(Period period,IEventPublisher publisher);
         bool IsCopying { get; }
         EmployeePointCopyingProgress EmployeePointCopyingProgress { get; }
+        void DeleteEmployeePoint(Period period, IEventPublisher periodManagerService);
     }
 }

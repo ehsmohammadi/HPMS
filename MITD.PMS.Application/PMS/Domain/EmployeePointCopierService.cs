@@ -59,6 +59,8 @@ namespace MITD.PMS.Application
             }
         }
 
+        
+
         #endregion
 
         #region Constructors
@@ -85,7 +87,43 @@ namespace MITD.PMS.Application
                 });
 
             }
-        } 
+        }
+
+        public void DeleteEmployeePoint(Period period, IEventPublisher publisher)
+        {
+            if (!IsCopying)
+            {
+                IsCopying = true;
+                //start(period, publisher);
+                Task.Factory.StartNew(() =>
+                {
+                    startDelete(period, publisher);
+
+                });
+
+            }
+        }
+
+        private void startDelete(Period period, IEventPublisher publisher)
+        {
+            var employeeIdList = getAllEmployeeNo(period);
+            //var employeeIdList = employeeRepository.GetAllEmployeeNo(a => true);
+            foreach (var employeeNo in employeeIdList)
+            {
+                var srvManagerEmployeeService = employeeServiceFactory.Create();
+                try
+                {
+                    var empService = srvManagerEmployeeService.GetService();
+                    empService.DeleteFinalPoint(new EmployeeId(employeeNo, period.Id));
+                }
+                finally
+                {
+                    employeeServiceFactory.Release(srvManagerEmployeeService);
+                }
+
+            }
+        }
+
         #endregion
 
         #region private methods

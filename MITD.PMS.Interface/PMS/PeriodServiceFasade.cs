@@ -95,7 +95,7 @@ namespace MITD.PMS.Interface
         public PeriodDTO UpdatePeriod(PeriodDTO dto)
         {
 
-            Period period = periodService.UpdatePeriod(new PeriodId(dto.Id), dto.Name, dto.StartDate, dto.EndDate);
+            Period period = periodService.UpdatePeriod(new PeriodId(dto.Id), dto.Name, dto.StartDate, dto.EndDate,dto.MaxFinalPoint);
             return periodDTOMapper.MapToModel(period);
         }
 

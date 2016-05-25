@@ -53,6 +53,13 @@ namespace MITD.PMS.Domain.Model.Employees
             get { return finalPoint; }
         }
 
+        private EmployeePointState employeePointState;
+        public virtual EmployeePointState EmployeePointState
+        {
+            get { return employeePointState; }
+            set { employeePointState = value; }
+        }
+
         private IDictionary<SharedEmployeeCustomFieldId, string> customFieldValues = new Dictionary<SharedEmployeeCustomFieldId, string>();
         public virtual IDictionary<SharedEmployeeCustomFieldId, string> CustomFieldValues
         {
@@ -60,6 +67,8 @@ namespace MITD.PMS.Domain.Model.Employees
         }
 
         private IList<EmployeeJobPosition> jobPositions = new List<EmployeeJobPosition>();
+        
+
         public virtual IReadOnlyList<EmployeeJobPosition> JobPositions
         {
             get { return jobPositions.ToList().AsReadOnly(); }
@@ -87,6 +96,8 @@ namespace MITD.PMS.Domain.Model.Employees
             if (string.IsNullOrWhiteSpace(lastName))
                 throw new EmployeeArgumentException("Employee", "lastName");
             this.lastName = lastName;
+
+            employeePointState=EmployeePointState.UnCalculated;
         }
 
         public Employee(string employeeNo, Period period, string firstName, string lastName, Dictionary<SharedEmployeeCustomField, string> customFieldValueItems)
@@ -109,20 +120,20 @@ namespace MITD.PMS.Domain.Model.Employees
 
         #region Final Point
 
-        public virtual void CreateFinalPoint(decimal point)
+        public virtual void SetFinalPoint(Period period, decimal finalEmployeePoint)
         {
-            setFinalPoint(point);
+            EmployeePointState.SetPoint(this, period, finalEmployeePoint);
         }
 
         public virtual void UpdateFinalPoint(decimal point)
         {
-            setFinalPoint(point);
-        }
-
-        private void setFinalPoint(decimal point)
-        {
             finalPoint = point;
-        } 
+        }
+        public virtual void DeleteFinalPoint()
+        {
+            UpdateFinalPoint(0);
+            EmployeePointState=new EmployeePointUnCalculatedState();
+        }
 
         #endregion
 
@@ -155,7 +166,7 @@ namespace MITD.PMS.Domain.Model.Employees
         }
 
         #endregion
-        
+
         #region CustomFields
 
         public virtual void UpdateCustomFieldsAndValues(Dictionary<SharedEmployeeCustomField, string> customFieldValueItems, IPeriodManagerService periodChecker)
@@ -210,7 +221,7 @@ namespace MITD.PMS.Domain.Model.Employees
             AssignCustomFieldAndValue(customField, value);
         }
         #endregion
-        
+
         #endregion
 
         #region IEntity Member
@@ -243,6 +254,7 @@ namespace MITD.PMS.Domain.Model.Employees
         }
 
         #endregion
+
 
     }
 }

@@ -11,7 +11,6 @@ namespace MITD.PMS.Persistence
     {
         public override void Up()
         {
-            alterPeriodsTable();
             #region ActionTypes
             //Insert.IntoTable("ActionTypes").Row(new
             //{
@@ -22,17 +21,15 @@ namespace MITD.PMS.Persistence
 
             #endregion
 
+            Alter.Table("Periods").AddColumn("MaxFinalPoint").AsDecimal().NotNullable().WithDefaultValue(0);
+            Alter.Table("Employees").AddColumn("PointState").AsInt32().NotNullable().WithDefaultValue(1);
+
         }
 
         public override void Down()
         {
             Delete.Column("MaxFinalPoint").FromTable("Periods");
-        }
-
-
-        private void alterPeriodsTable()
-        {
-            Alter.Table("Periods").AddColumn("MaxFinalPoint").AsDecimal().NotNullable().WithDefaultValue(0);
+            Delete.Column("PointState").FromTable("Employees");
         }
 
 

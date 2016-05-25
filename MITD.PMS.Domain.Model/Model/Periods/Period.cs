@@ -88,11 +88,12 @@ namespace MITD.PMS.Domain.Model.Periods
 
         #region Public Method
 
-        public virtual void Update(string name, DateTime startDate, DateTime endDate)
+        public virtual void Update(string name, DateTime startDate, DateTime endDate, decimal maxFinalPoint)
         {
             this.name = name;
             this.startDate = startDate;
             this.endDate = endDate;
+            this.maxFinalPoint = maxFinalPoint;
         }
 
         protected internal virtual void Activate()

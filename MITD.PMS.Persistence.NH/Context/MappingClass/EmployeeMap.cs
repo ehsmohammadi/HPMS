@@ -65,7 +65,13 @@ namespace MITD.PMS.Persistence.NH
                 m.Length(512);
                 m.NotNullable(true);
             });
-
+            Property(c => c.EmployeePointState, m =>
+            {
+                m.Access(Accessor.Field);
+                m.Column("PointState");
+                m.NotNullable(true);
+                m.Type<EnumerationTypeConverter<EmployeePointState>>();
+            });
             Property(p => p.FinalPoint, m =>
             {
                 m.Access(Accessor.Field);

@@ -14,5 +14,6 @@ namespace MITD.PMS.Application.Contracts
         Employee AssignJobPositions(EmployeeId employeeId, IEnumerable<JobPositionDuration> jonPositionDurations);
         Employee UpdateFinalPoint(EmployeeId employeeId);
         IEnumerable<string> GetAllEmployeeNo(PeriodId periodId);
+        void DeleteFinalPoint(EmployeeId employeeId);
     }
 }

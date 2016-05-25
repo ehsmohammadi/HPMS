@@ -139,10 +139,22 @@ namespace MITD.PMS.Application
             using (var tr = new TransactionScope())
             {
                 var employee = employeeRep.GetBy(employeeId);
+                var period = periodRep.GetById(employeeId.PeriodId);
                 var finalEmployeePoint = jobIndexPointRepository.GetEmployeeFinalPointBy(employeeId.PeriodId, employeeId.EmployeeNo);
-                employee.UpdateFinalPoint(finalEmployeePoint);
+                employee.SetFinalPoint(period, finalEmployeePoint);
                 tr.Complete();
                 return employee;
+            }
+        }
+
+        public void DeleteFinalPoint(EmployeeId employeeId)
+        {
+            using (var tr = new TransactionScope())
+            {
+                var employee = employeeRep.GetBy(employeeId);
+                employee.DeleteFinalPoint();
+                tr.Complete();
+
             }
         }
 
@@ -150,6 +162,8 @@ namespace MITD.PMS.Application
         {
             return employeeRep.GetAllEmployeeNo(j => true);
         }
+
+
     }
 
 

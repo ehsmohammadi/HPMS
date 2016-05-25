@@ -51,6 +51,6 @@ namespace MITD.PMS.Domain.Service
         bool HasDeterministicCalculation(Period period);
         bool HasOpenClaim(Period period);
         void CopyEmployeePoint(Period period);
-        void DeleteEmployeePoint(Period period, IPeriodManagerService periodManagerService);
+        void DeleteEmployeePoint(Period period);
     }
 }

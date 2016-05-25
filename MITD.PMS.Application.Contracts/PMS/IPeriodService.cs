@@ -10,7 +10,7 @@ namespace MITD.PMS.Application.Contracts
     {
         void Delete(PeriodId periodId);
         Period AddPeriod(string name, DateTime startDate, DateTime endDate, decimal maxFinalPoint);
-        Period UpdatePeriod(PeriodId periodId, string name, DateTime startDate, DateTime endDate);
+        Period UpdatePeriod(PeriodId periodId, string name, DateTime startDate, DateTime endDate, decimal maxFinalPoint);
         Period GetCurrentPeriod();
         void StartInquiry(PeriodId periodId);
         void CompleteInquiry(PeriodId periodId);

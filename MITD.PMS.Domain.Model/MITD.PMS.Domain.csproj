@@ -89,6 +89,16 @@
     <Compile Include="Model\Claims\Exception\ClaimModifyException.cs" />
     <Compile Include="Model\Claims\Exception\ClaimInvalidStateOperationException.cs" />
     <Compile Include="Model\Claims\Repository\IClaimRepository.cs" />
+    <Compile Include="Model\Employees\EmployeePointState\EmployeePointCalculatedWithAboveMaxPointState.cs" />
+    <Compile Include="Model\Employees\EmployeePointState\EmployeePointCalculatedWithNormalPointState.cs" />
+    <Compile Include="Model\Employees\EmployeePointState\EmployeePointConfirmedWithNormalPointState.cs" />
+    <Compile Include="Model\Employees\EmployeePointState\EmployeePointConfirmedWithChangedPointState.cs" />
+    <Compile Include="Model\Employees\EmployeePointState\EmployeePointConfirmedWithMaxPointState.cs" />
+    <Compile Include="Model\Employees\EmployeePointState\EmployeePointConfirmedWithAboveMaxPointState.cs" />
+    <Compile Include="Model\Employees\EmployeePointState\EmployeePointUnCalculatedState.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\Employees\EmployeePointState\EmployeePointState.cs" />
     <Compile Include="Model\Employees\EmployeeUnitCustomFieldValue.cs" />
     <Compile Include="Model\Employees\EmployeeJobCutomFieldValue.cs" />
     <Compile Include="Model\Employees\EmployeeUnit.cs" />
@@ -97,6 +107,7 @@
     <Compile Include="Model\Employees\Exception\EmployeeDuplicateException.cs" />
     <Compile Include="Model\Employees\Exception\EmployeeException.cs" />
     <Compile Include="Model\Employees\Exception\EmployeeModifyException.cs" />
+    <Compile Include="Model\Employees\Exception\EmployeeInvalidStateOperationException.cs" />
     <Compile Include="Model\InquiryJobIndexPoints\Exception\InquiryJobIndexPointArgumentException.cs" />
     <Compile Include="Model\InquiryJobIndexPoints\Exception\InquiryJobIndexPointDeleteException.cs" />
     <Compile Include="Model\InquiryJobIndexPoints\Exception\InquiryJobIndexPointDuplicateException.cs" />

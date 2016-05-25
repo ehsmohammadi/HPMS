@@ -106,6 +106,8 @@
                     Binding="{Binding Path=PersonnelNo}" />
                     <sdk:DataGridTextColumn Header="نمره در دوره " CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto"
                     Binding="{Binding Path=FinalPoint}" />
+                    <sdk:DataGridTextColumn Header="وضعیت" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto"
+                        Binding="{Binding Path=StateName}" />
                 </sdk:DataGrid.Columns>
             </sdk:DataGrid>
             <StackPanel Grid.Row="3" HorizontalAlignment="Center" Orientation="Horizontal">

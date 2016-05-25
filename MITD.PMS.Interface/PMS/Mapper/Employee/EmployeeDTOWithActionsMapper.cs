@@ -20,6 +20,7 @@ namespace MITD.PMS.Interface
                 PeriodId = entity.Id.PeriodId.Id,
                 PersonnelNo = entity.Id.EmployeeNo,
                 FinalPoint = entity.FinalPoint,
+                StateName = entity.EmployeePointState.Description,
                 
                 ActionCodes = new List<int>
                 {

@@ -209,9 +209,9 @@ namespace MITD.PMS.Domain.Service
             employeePointCopierService.CopyEmployeePoint(period, publisher);
         }
 
-        public void DeleteEmployeePoint(Period period, IPeriodManagerService periodManagerService)
+        public void DeleteEmployeePoint(Period period)
         {
-
+            employeePointCopierService.DeleteEmployeePoint(period,publisher);
         } 
         #endregion
         
