@@ -96,6 +96,15 @@ namespace MITD.PMS.Interface
             return employeeRep.GetAllEmployeeNo(predicate);
         }
 
+        public void ConfirmAboveMaxEmployeePoint(long periodId, string employeeNo)
+        {
+            employeeService.ConfirmAboveMaxEmployeePoint(new EmployeeId(employeeNo, new PeriodId(periodId)));
+        }
+
+        public void ChangeEmployeePoint(long periodId, string employeeNo, decimal point)
+        {
+            employeeService.ChangeEmployeePoint(new EmployeeId(employeeNo, new PeriodId(periodId)),point);
+        }
 
 
         [RequiredPermission(ActionType.ManageEmployees)]

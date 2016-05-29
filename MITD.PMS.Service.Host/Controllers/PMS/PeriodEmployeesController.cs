@@ -54,5 +54,17 @@ namespace MITD.PMS.Service.Host.Controllers
         {
             return employeeService.UpdateEmployee(periodId, employee);
         }
+
+        public string PutEmployeeConfirmAboveMaxPoint(long periodId, string employeeNo)
+        {
+            employeeService.ConfirmAboveMaxEmployeePoint(periodId, employeeNo);
+            return "employee point confirmed";
+        }
+
+        public string PutEmployeeChangePoint(long periodId, string employeeNo,decimal point)
+        {
+            employeeService.ChangeEmployeePoint(periodId, employeeNo,point);
+            return "employee point confirmed";
+        }
     }
 }

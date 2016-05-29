@@ -158,6 +158,30 @@ namespace MITD.PMS.Application
             }
         }
 
+        public void ConfirmAboveMaxEmployeePoint(EmployeeId employeeId)
+        {
+            using (var tr = new TransactionScope())
+            {
+                var employee = employeeRep.GetBy(employeeId);
+                var period = periodRep.GetById(employeeId.PeriodId);
+                employee.ConfirmAboveMaxEmployeePoint(period);
+                tr.Complete();
+
+            }
+        }
+
+        public void ChangeEmployeePoint(EmployeeId employeeId, decimal point)
+        {
+            using (var tr = new TransactionScope())
+            {
+                var employee = employeeRep.GetBy(employeeId);
+                var period = periodRep.GetById(employeeId.PeriodId);
+                employee.ChangeFinalPoint(point, period);
+                tr.Complete();
+
+            }
+        }
+
         public IEnumerable<string> GetAllEmployeeNo(PeriodId periodId)
         {
             return employeeRep.GetAllEmployeeNo(j => true);

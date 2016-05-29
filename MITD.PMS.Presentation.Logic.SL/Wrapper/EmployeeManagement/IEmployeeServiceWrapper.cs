@@ -23,5 +23,7 @@ namespace MITD.PMS.Presentation.Logic
         void AssignJobPositionsToEmployee(Action<EmployeeJobPositionsDTO, Exception> action, long periodId, string employeeNo, EmployeeJobPositionsDTO employeeJobPositions);
         void GetAllEmployees(Action<PageResultDTO<EmployeeDTOWithActions>, Exception> action, long periodId, EmployeeCriteria employeeCriteria, int pageSize, int pageIndex);
         void GetAllEmployeeNo(Action<List<String>, Exception> action, long periodId, EmployeeCriteria employeeCriteria);
+        void ConfirmEmployeeAboveMaxPoint(Action<Exception> action, string personnelNo, long periodId);
+        void ChangeEmployeePoint(Action< Exception> action, EmployeeDTO employee);
     }
 }

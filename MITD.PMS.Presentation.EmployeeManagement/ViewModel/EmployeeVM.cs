@@ -34,6 +34,13 @@ namespace MITD.PMS.Presentation.Logic
             set { this.SetField(vm => vm.IsModifying, ref isModifying, value); }
         }
 
+        private bool isModifyingFinalPoint;
+        public bool IsModifyingFinalPoint
+        {
+            get { return isModifyingFinalPoint; }
+            set { this.SetField(vm => vm.IsModifyingFinalPoint, ref isModifyingFinalPoint, value); }
+        }
+
         private ObservableCollection<CheckBoxListViewModel<CustomFieldValueDTO>> customFieldValueList;
         public ObservableCollection<CheckBoxListViewModel<CustomFieldValueDTO>> CustomFieldValueList
         {
@@ -99,6 +106,7 @@ namespace MITD.PMS.Presentation.Logic
             Employee = new EmployeeDTO();
             DisplayName = EmployeeMgtAppLocalizedResources.EmployeeViewTitle;
             IsModifying = false;
+            IsModifyingFinalPoint = false;
         }
 
         public void Load(EmployeeDTO employeeParam, ActionType actionTypeParam)
@@ -107,6 +115,8 @@ namespace MITD.PMS.Presentation.Logic
             Employee = employeeParam;
             if (actionType.Equals(ActionType.ModifyEmployee))
                 IsModifying = true;
+            if (actionType.Equals(ActionType.ChangeEmployeePoint))
+                IsModifyingFinalPoint = true;
             getEmployeeCustomFields();
 
 
@@ -169,6 +179,17 @@ namespace MITD.PMS.Presentation.Logic
                         else
                             FinalizeAction();
                     }), employee);
+            }
+            else if (actionType == ActionType.ChangeEmployeePoint)
+            {
+                employeeService.ChangeEmployeePoint((exp) => appController.BeginInvokeOnDispatcher(() =>
+                {
+                    HideBusyIndicator();
+                    if (exp != null)
+                        appController.HandleException(exp);
+                    else
+                        FinalizeAction();
+                }), employee);
             }
         }
 

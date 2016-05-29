@@ -11,8 +11,8 @@ namespace MITD.PMS.Domain.Model.Employees
 
         public static readonly EmployeePointState UnCalculated = new EmployeePointUnCalculatedState();
         public static readonly EmployeePointState CalculatedWithNormalPoint = new EmployeePointCalculatedWithNormalPointState();
-        public static readonly EmployeePointState CalculatedWithAboveMaxPoint=new EmployeePointCalculatedWithAboveMaxPointState();
-        public static readonly EmployeePointState ConfirmedWithAboveMaxPoint = new EmployeePointCalculatedWithAboveMaxPointState();
+        public static readonly EmployeePointState CalculatedWithAboveMaxPoint = new EmployeePointCalculatedWithAboveMaxPointState();
+        public static readonly EmployeePointState ConfirmedWithAboveMaxPoint = new EmployeePointConfirmedWithAboveMaxPointState();
         public static readonly EmployeePointState ConfirmedWithMaxPointState = new EmployeePointConfirmedWithMaxPointState();
         public static readonly EmployeePointState ConfirmedWithChangedPointState = new EmployeePointConfirmedWithChangedPointState();
         public static readonly EmployeePointState ConfirmedWithNormalPointState = new EmployeePointConfirmedWithNormalPointState();
@@ -37,7 +37,7 @@ namespace MITD.PMS.Domain.Model.Employees
             : base(value, displayName)
         {
             this.description = description;
-        } 
+        }
 
         #endregion
 
@@ -77,14 +77,23 @@ namespace MITD.PMS.Domain.Model.Employees
             throw new EmployeeInvalidStateOperationException("Employee", DisplayName, "SetPoint");
         }
 
+        public virtual void ConfirmAboveMaxEmployeePoint(Employee employee, Period period)
+        {
+            throw new EmployeeInvalidStateOperationException("Employee", DisplayName, "ConfirmAboveMaxEmployeePoint");
+        }
+
+        public virtual void ChangeFinalPoint(Employee employee, Period period, decimal point)
+        {
+            throw new EmployeeInvalidStateOperationException("Employee", DisplayName, "ChangeFinalPoint");
+        }
+
+        public virtual void Rollback(Employee employee)
+        {
+            throw new EmployeeInvalidStateOperationException("Employee", DisplayName, "Rollback");
+        }
+
         #endregion
 
-        #region Checker methods
 
-         
-
-        #endregion
-
-        
     }
 }

@@ -431,6 +431,19 @@ namespace MITD.PMSSecurity.Domain
         [ActionInfoAttribute("ShowEmployeeInquiery", "نمایش نظر سنجی کارمند")]
         ShowEmployeeInquiry = 278,
 
+        [ActionInfoAttribute("ConfirmAboveMaxPoint", "تایید نمره بالاتر از حد نصاب")]
+        ConfirmAboveMaxPoint = 279,
+
+        [ActionInfoAttribute("ConfirmEmployeePoint", "تایید نمره ")]
+        ConfirmEmployeePoint = 2710,
+
+        [ActionInfoAttribute("ChangeEmployeePoint", "تغییر نمره ")]
+        ChangeEmployeePoint = 2711,
+
+
+
+
+
         #endregion
 
         #region Calculation 8

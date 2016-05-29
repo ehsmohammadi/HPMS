@@ -15,5 +15,7 @@ namespace MITD.PMS.Application.Contracts
         Employee UpdateFinalPoint(EmployeeId employeeId);
         IEnumerable<string> GetAllEmployeeNo(PeriodId periodId);
         void DeleteFinalPoint(EmployeeId employeeId);
+        void ConfirmAboveMaxEmployeePoint(EmployeeId employeeId);
+        void ChangeEmployeePoint(EmployeeId employeeId, decimal point);
     }
 }

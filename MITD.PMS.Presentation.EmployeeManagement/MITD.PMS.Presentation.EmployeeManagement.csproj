@@ -124,7 +124,9 @@
     <Compile Include="ActionServices\ModifyEmployeeJobCustomFieldsService.cs" />
     <Compile Include="ActionServices\ManageJobPostionSevice.cs" />
     <Compile Include="ActionServices\DeleteEmployeeService.cs" />
+    <Compile Include="ActionServices\ChangeEmployeepointService.cs" />
     <Compile Include="ActionServices\ModifyEmployeeService.cs" />
+    <Compile Include="ActionServices\ConfirmEmployeeAboveMaxPointService.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>

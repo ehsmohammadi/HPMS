@@ -51,6 +51,20 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
             WebClientHelper.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 
+        public void ConfirmEmployeeAboveMaxPoint(Action<Exception> action, string personnelNo, long periodId)
+        {
+            var url = string.Format(baseAddress + makeApiAdress(periodId) + "?employeeNo=" + personnelNo);
+            WebClientHelper.Put<string, string>(new Uri(url, PMSClientConfig.UriKind), (res,exp)=>action(exp), "ConfirmEmployeeAboveMaxPoint", PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+
+        }
+
+        public void ChangeEmployeePoint(Action<Exception> action, EmployeeDTO employee)
+        {
+            var url = string.Format(baseAddress + makeApiAdress(employee.PeriodId) + "?employeeNo=" + employee.PersonnelNo + "?point=" + employee.FinalPoint);
+            WebClientHelper.Put<string, string>(new Uri(url, PMSClientConfig.UriKind), (res, exp) => action(exp), "ChangeEmployeePoint", PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+
+        }
+
         private string getFilterEmployee(EmployeeCriteria employeeCriteria,string x)
         {
             var qs = string.Empty;

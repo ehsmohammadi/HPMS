@@ -27,7 +27,11 @@ namespace MITD.PMS.Interface
                     (int) ActionType.AddEmployee,
                     (int) ActionType.DeleteEmployee,
                     (int)ActionType.ModifyEmployee,
-                    (int)ActionType.ManageEmployeeJobPositions
+                    (int)ActionType.ManageEmployeeJobPositions,
+                    (int)ActionType.ConfirmAboveMaxPoint,
+                    (int)ActionType.ChangeEmployeePoint,
+                    
+
                 }
             };
             return res;

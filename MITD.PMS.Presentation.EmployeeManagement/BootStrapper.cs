@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using MITD.PMS.Presentation.Contracts;
 using MITD.PMS.Presentation.Logic;
+using MITD.PMS.Presentation.PeriodManagementApp;
 using MITD.Presentation.Config;
 using MITD.Presentation;
 
@@ -15,14 +16,16 @@ namespace MITD.PMS.Presentation.EmployeeManagement
             var resourceDic = Application.GetResourceStream(new Uri("MITD.PMS.Presentation.EmployeeManagement;component/Assets/LocalResource.xaml", UriKind.Relative));
             ApplicationConfigHelper.ConfigureModule<IEmployeeController, EmployeeController>(resourceDic);
             ModuleConfigHelper.ConfigureActionModule<IActionService>(new Dictionary<int, Type>
-                {
-                     {(int) ActionType.AddEmployee,typeof(AddEmployeeService)},
-                    {(int) ActionType.ModifyEmployee,typeof(ModifyEmployeeService)},
-                    {(int) ActionType.DeleteEmployee,typeof(DeleteEmployeeService)},
-                    {(int) ActionType.ManageEmployeeJobPositions,typeof(ManageJobPostionSevice)},
-                    {(int) ActionType.ModifyEmployeeJobCustomFields,typeof(ModifyEmployeeJobCustomFieldsSevice)},
-                    
-                });
+            {
+                {(int) ActionType.AddEmployee, typeof (AddEmployeeService)},
+                {(int) ActionType.ModifyEmployee, typeof (ModifyEmployeeService)},
+                {(int) ActionType.DeleteEmployee, typeof (DeleteEmployeeService)},
+                {(int) ActionType.ManageEmployeeJobPositions, typeof (ManageJobPostionSevice)},
+                {(int) ActionType.ModifyEmployeeJobCustomFields, typeof (ModifyEmployeeJobCustomFieldsSevice)},
+                {(int) ActionType.ConfirmAboveMaxPoint, typeof (ConfirmEmployeeAboveMaxPointService)},
+                {(int) ActionType.ChangeEmployeePoint, typeof (ChangeEmployeepointService)},
+
+            });
             //var serviceLocator=ServiceLocator.Current.GetInstance<ICastleWindsor>()
 
 

@@ -8,6 +8,10 @@
             
         }
 
+        public override void Rollback(Employee employee)
+        {
+            employee.EmployeePointState=new EmployeePointCalculatedWithAboveMaxPointState();
+        }
     }
 
 

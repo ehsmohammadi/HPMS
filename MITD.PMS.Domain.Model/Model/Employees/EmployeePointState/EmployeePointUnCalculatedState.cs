@@ -5,7 +5,7 @@ namespace MITD.PMS.Domain.Model.Employees
     public class EmployeePointUnCalculatedState : EmployeePointState
     {
         public EmployeePointUnCalculatedState()
-            : base("1", "EmployeePointUnCalculatedState")
+            : base("1", "EmployeePointUnCalculatedState","محاسبه نشده")
         {
 
         }

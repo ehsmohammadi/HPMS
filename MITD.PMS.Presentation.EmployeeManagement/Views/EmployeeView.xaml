@@ -28,25 +28,25 @@
                 </Grid.ColumnDefinitions>
 
                 <sdk:Label Grid.Row="0" Grid.Column="0" Content="نام :" />
-                <TextBox Grid.Row="0" Grid.Column="1"  
+                <TextBox Grid.Row="0" Grid.Column="1" IsEnabled="{Binding Path=IsModifying}"
                      Text="{Binding Path=Employee.FirstName, Mode=TwoWay,
                      ValidatesOnDataErrors=true,
                      NotifyOnValidationError=true}"/>
 
                 <sdk:Label Grid.Row="1" Grid.Column="0" Content="نام خانوادگی:" />
-                <TextBox Grid.Row="1" Grid.Column="1"   
+                <TextBox Grid.Row="1" Grid.Column="1" IsEnabled="{Binding Path=IsModifying}" 
                             Text="{Binding Path=Employee.LastName, Mode=TwoWay,
                      ValidatesOnDataErrors=true,
                      NotifyOnValidationError=true}"/>
 
                 <sdk:Label Grid.Row="2" Grid.Column="0" Content="شماره پرسنلی:"  />
-                <TextBox Grid.Row="2" Grid.Column="1" IsReadOnly="{Binding Path=IsModifying}"    
+                <TextBox Grid.Row="2" Grid.Column="1" IsEnabled="{Binding Path=IsModifying}"    
                             Text="{Binding Path=Employee.PersonnelNo, Mode=TwoWay,
                      ValidatesOnDataErrors=true,
                      NotifyOnValidationError=true}"/>
 
                 <sdk:Label Grid.Row="3" Grid.Column="0" Content="نمره نهایی:"  />
-                <TextBox Grid.Row="3" Grid.Column="1" IsReadOnly="{Binding Path=IsModifying}"    
+                <TextBox Grid.Row="3" Grid.Column="1" IsEnabled="{Binding Path=IsModifyingFinalPoint}"    
                             Text="{Binding Path=Employee.FinalPoint, Mode=TwoWay,
                      ValidatesOnDataErrors=true,
                      NotifyOnValidationError=true}"/>

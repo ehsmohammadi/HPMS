@@ -1,7 +1,5 @@
 ﻿using System;
 using FluentMigrator;
-using MITD.Core;
-using MITD.Domain.Model;
 using MITD.PMSSecurity.Domain;
 
 namespace MITD.PMS.Persistence

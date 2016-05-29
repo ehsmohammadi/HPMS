@@ -125,6 +125,11 @@ namespace MITD.PMS.Domain.Model.Employees
             EmployeePointState.SetPoint(this, period, finalEmployeePoint);
         }
 
+        public virtual void ConfirmAboveMaxEmployeePoint(Period period)
+        {
+            EmployeePointState.ConfirmAboveMaxEmployeePoint(this,period);
+        }
+
         public virtual void UpdateFinalPoint(decimal point)
         {
             finalPoint = point;
@@ -133,6 +138,11 @@ namespace MITD.PMS.Domain.Model.Employees
         {
             UpdateFinalPoint(0);
             EmployeePointState=new EmployeePointUnCalculatedState();
+        }
+
+        public void ChangeFinalPoint(decimal point,Period period)
+        {
+            EmployeePointState.ChangeFinalPoint(this, period,point);
         }
 
         #endregion
@@ -255,6 +265,6 @@ namespace MITD.PMS.Domain.Model.Employees
 
         #endregion
 
-
+        
     }
 }
