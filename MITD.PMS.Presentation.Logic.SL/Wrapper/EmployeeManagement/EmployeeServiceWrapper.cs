@@ -60,7 +60,7 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
 
         public void ChangeEmployeePoint(Action<Exception> action, EmployeeDTO employee)
         {
-            var url = string.Format(baseAddress + makeApiAdress(employee.PeriodId) + "?employeeNo=" + employee.PersonnelNo + "?point=" + employee.FinalPoint);
+            var url = string.Format(baseAddress + makeApiAdress(employee.PeriodId) + "?employeeNo=" + employee.PersonnelNo + "&point=" + employee.FinalPoint);
             WebClientHelper.Put<string, string>(new Uri(url, PMSClientConfig.UriKind), (res, exp) => action(exp), "ChangeEmployeePoint", PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
 
         }

@@ -140,7 +140,7 @@ namespace MITD.PMS.Domain.Model.Employees
             EmployeePointState=new EmployeePointUnCalculatedState();
         }
 
-        public void ChangeFinalPoint(decimal point,Period period)
+        public virtual void ChangeFinalPoint(decimal point,Period period)
         {
             EmployeePointState.ChangeFinalPoint(this, period,point);
         }
