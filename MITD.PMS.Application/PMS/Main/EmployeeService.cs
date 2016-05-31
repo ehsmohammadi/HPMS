@@ -182,6 +182,19 @@ namespace MITD.PMS.Application
             }
         }
 
+        public void ConfirmFinalPoint(EmployeeId employeeId)
+        {
+            using (var tr = new TransactionScope())
+            {
+                var employee = employeeRep.GetBy(employeeId);
+                var period = periodRep.GetById(employeeId.PeriodId);
+                employee.ConfirmFinalPoint(period);
+                tr.Complete();
+
+            }
+
+        }
+
         public IEnumerable<string> GetAllEmployeeNo(PeriodId periodId)
         {
             return employeeRep.GetAllEmployeeNo(j => true);

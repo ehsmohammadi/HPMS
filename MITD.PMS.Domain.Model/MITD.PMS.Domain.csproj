@@ -92,7 +92,6 @@
     <Compile Include="Model\Employees\EmployeePointState\EmployeePointCalculatedWithAboveMaxPointState.cs" />
     <Compile Include="Model\Employees\EmployeePointState\EmployeePointCalculatedWithNormalPointState.cs" />
     <Compile Include="Model\Employees\EmployeePointState\EmployeePointConfirmedWithNormalPointState.cs" />
-    <Compile Include="Model\Employees\EmployeePointState\EmployeePointConfirmedWithChangedPointState.cs" />
     <Compile Include="Model\Employees\EmployeePointState\EmployeePointConfirmedWithMaxPointState.cs" />
     <Compile Include="Model\Employees\EmployeePointState\EmployeePointConfirmedWithAboveMaxPointState.cs" />
     <Compile Include="Model\Employees\EmployeePointState\EmployeePointUnCalculatedState.cs">
@@ -261,7 +260,7 @@
     <Compile Include="Service\Imp\PeriodActivatorService.cs" />
     <Compile Include="Service\Imp\PeriodManagerService.cs" />
     <Compile Include="Service\Interface\ICalculationEngineService.cs" />
-    <Compile Include="Service\Interface\IEmployeePointCopierService.cs" />
+    <Compile Include="Service\Interface\IEmployeePointManagerService.cs" />
     <Compile Include="Service\Interface\IUnitInquiryConfiguratorService.cs" />
     <Compile Include="Service\Interface\IPeriodBasicDataCopierService.cs" />
     <Compile Include="Service\Interface\IInquiryConfiguratorService.cs" />

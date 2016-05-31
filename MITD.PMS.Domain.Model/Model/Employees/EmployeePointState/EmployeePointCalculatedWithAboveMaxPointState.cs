@@ -25,6 +25,12 @@ namespace MITD.PMS.Domain.Model.Employees
             else if (0 < finalPoint && finalPoint < period.MaxFinalPoint)
                 employee.EmployeePointState = new EmployeePointCalculatedWithNormalPointState();
         }
+
+        public override void ConfirmFinalPoint(Employee employee, Period period)
+        {
+            employee.UpdateFinalPoint(period.MaxFinalPoint);
+            employee.EmployeePointState = new EmployeePointConfirmedWithMaxPointState();
+        }
     }
 
 

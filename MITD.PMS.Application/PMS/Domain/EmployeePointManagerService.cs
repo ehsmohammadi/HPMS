@@ -8,43 +8,33 @@ using MITD.PMS.Domain.Service;
 
 namespace MITD.PMS.Application
 {
-    public class EmployeePointCopierService : IEmployeePointCopierService
+    public class EmployeePointManagerService : IEmployeePointManagerService
     {
         #region Fields
 
         private readonly IEmployeeServiceFactory employeeServiceFactory;
         private readonly IEmployeeRepository employeeRepository;
-        //private readonly IJobPositionServiceFactory jobPositionServiceFactory;
-        //private readonly IUnitServiceFactory unitServiceFactory;
-        //private readonly IJobServiceFactory jobServiceFactory;
-        //private readonly IJobIndexServiceFactory jobIndexServiceFactory;
-
-        //private readonly IPeriodServiceFactory periodServiceFactory;
-
         private readonly object lockFlag = new object();
-        //private readonly object lockLastPeriod = new object();
-        //private KeyValuePair<PeriodId, List<string>> lastPeriod;
-        //private DelegateHandler<CopyBasicDataCompleted> copyCompletedSub;
 
         #endregion
 
         #region Properties
 
-        private bool isCopying = false;
-        public bool IsCopying
+        private bool isBusy = false;
+        public bool IsBusy
         {
             get
             {
                 lock (lockFlag)
                 {
-                    return isCopying;
+                    return isBusy;
                 }
             }
             private set
             {
                 lock (lockFlag)
                 {
-                    isCopying = value;
+                    isBusy = value;
                 }
             }
         }
@@ -59,84 +49,91 @@ namespace MITD.PMS.Application
             }
         }
 
-        
-
         #endregion
 
         #region Constructors
 
-        public EmployeePointCopierService( IEmployeeServiceFactory employeeServiceFactory,IEmployeeRepository employeeRepository)
+        public EmployeePointManagerService(IEmployeeServiceFactory employeeServiceFactory, IEmployeeRepository employeeRepository)
         {
             this.employeeServiceFactory = employeeServiceFactory;
             this.employeeRepository = employeeRepository;
         }
 
         #endregion
-        
+
         #region Public Methods
         public void CopyEmployeePoint(Period period, IEventPublisher publisher)
         {
-            if (!IsCopying)
+            if (IsBusy) return;
+            IsBusy = true;
+            Task.Factory.StartNew(() =>
             {
-                IsCopying = true;
-                //start(period, publisher);
-                Task.Factory.StartNew(() =>
-                {
-                    start(period, publisher);
+                startCopying(period, publisher);
 
-                });
-
-            }
+            });
         }
 
         public void DeleteEmployeePoint(Period period, IEventPublisher publisher)
         {
-            if (!IsCopying)
+            if (IsBusy) return;
+            IsBusy = true;
+            Task.Factory.StartNew(() =>
             {
-                IsCopying = true;
-                //start(period, publisher);
-                Task.Factory.StartNew(() =>
-                {
-                    startDelete(period, publisher);
+                startDeleting(period, publisher);
 
-                });
-
-            }
+            });
         }
 
-        private void startDelete(Period period, IEventPublisher publisher)
+        public void ConfirmEmployeePoint(Period period, IEventPublisher publisher)
         {
-            var employeeIdList = getAllEmployeeNo(period);
-            //var employeeIdList = employeeRepository.GetAllEmployeeNo(a => true);
-            foreach (var employeeNo in employeeIdList)
+            if (IsBusy) return;
+            IsBusy = true;
+            Task.Factory.StartNew(() =>
             {
-                var srvManagerEmployeeService = employeeServiceFactory.Create();
-                try
-                {
-                    var empService = srvManagerEmployeeService.GetService();
-                    empService.DeleteFinalPoint(new EmployeeId(employeeNo, period.Id));
-                }
-                finally
-                {
-                    employeeServiceFactory.Release(srvManagerEmployeeService);
-                }
+                startConfirming(period, publisher);
 
-            }
+            });
         }
+
+
 
         #endregion
 
         #region private methods
 
-        private void start(Period period, IEventPublisher publisher)
+        private void startDeleting(Period period, IEventPublisher publisher)
         {
             try
             {
-                employeePointCopyingProgress.State = new PeriodConfirmationState();
-                employeePointCopyingProgress.Messages.Add("شروع کپی نمرات");
-
                 var employeeIdList = getAllEmployeeNo(period);
-                //var employeeIdList = employeeRepository.GetAllEmployeeNo(a => true);
+                foreach (var employeeNo in employeeIdList)
+                {
+                    var srvManagerEmployeeService = employeeServiceFactory.Create();
+                    try
+                    {
+                        var empService = srvManagerEmployeeService.GetService();
+                        empService.DeleteFinalPoint(new EmployeeId(employeeNo, period.Id));
+                    }
+                    finally
+                    {
+                        employeeServiceFactory.Release(srvManagerEmployeeService);
+                    }
+
+                }
+                IsBusy = false;
+            }
+            catch (Exception)
+            {
+
+                IsBusy = false;
+            }
+        }
+
+        private void startCopying(Period period, IEventPublisher publisher)
+        {
+            try
+            {
+                var employeeIdList = getAllEmployeeNo(period);
                 foreach (var employeeNo in employeeIdList)
                 {
                     var srvManagerEmployeeService = employeeServiceFactory.Create();
@@ -152,17 +149,43 @@ namespace MITD.PMS.Application
 
                 }
 
-                IsCopying = false;
-                employeePointCopyingProgress = new EmployeePointCopyingProgress();
+                IsBusy = false;
             }
 
             catch (Exception)
             {
 
-                IsCopying = false;
-                employeePointCopyingProgress = new EmployeePointCopyingProgress();
+                IsBusy = false;
             }
 
+        }
+
+        private void startConfirming(Period period, IEventPublisher publisher)
+        {
+            try
+            {
+                var employeeIdList = getAllEmployeeNo(period);
+                foreach (var employeeNo in employeeIdList)
+                {
+                    var srvManagerEmployeeService = employeeServiceFactory.Create();
+                    try
+                    {
+                        var empService = srvManagerEmployeeService.GetService();
+                        empService.ConfirmFinalPoint(new EmployeeId(employeeNo, period.Id));
+                    }
+                    finally
+                    {
+                        employeeServiceFactory.Release(srvManagerEmployeeService);
+                    }
+
+                }
+                IsBusy = false;
+            }
+            catch (Exception)
+            {
+
+                IsBusy = false;
+            }
         }
 
         private IEnumerable<string> getAllEmployeeNo(Period period)
@@ -178,7 +201,7 @@ namespace MITD.PMS.Application
                 employeeServiceFactory.Release(srvManagerEmployeeService);
             }
 
-        } 
+        }
         #endregion
 
         //private void start(Period currentPeriod, Period sourcePeriod, IEventPublisher publisher)

@@ -29,11 +29,12 @@ namespace MITD.PMS.Domain.Service
         }
     }
 
-    public interface IEmployeePointCopierService : IService
+    public interface IEmployeePointManagerService : IService
     {
         void CopyEmployeePoint(Period period,IEventPublisher publisher);
-        bool IsCopying { get; }
+        bool IsBusy { get; }
         EmployeePointCopyingProgress EmployeePointCopyingProgress { get; }
         void DeleteEmployeePoint(Period period, IEventPublisher periodManagerService);
+        void ConfirmEmployeePoint(Period period, IEventPublisher publisher);
     }
 }

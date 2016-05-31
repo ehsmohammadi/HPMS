@@ -13,9 +13,8 @@ namespace MITD.PMS.Domain.Model.Employees
         public static readonly EmployeePointState CalculatedWithNormalPoint = new EmployeePointCalculatedWithNormalPointState();
         public static readonly EmployeePointState CalculatedWithAboveMaxPoint = new EmployeePointCalculatedWithAboveMaxPointState();
         public static readonly EmployeePointState ConfirmedWithAboveMaxPoint = new EmployeePointConfirmedWithAboveMaxPointState();
-        public static readonly EmployeePointState ConfirmedWithMaxPointState = new EmployeePointConfirmedWithMaxPointState();
-        public static readonly EmployeePointState ConfirmedWithChangedPointState = new EmployeePointConfirmedWithChangedPointState();
-        public static readonly EmployeePointState ConfirmedWithNormalPointState = new EmployeePointConfirmedWithNormalPointState();
+        public static readonly EmployeePointState ConfirmedWithMaxPoint = new EmployeePointConfirmedWithMaxPointState();
+        public static readonly EmployeePointState ConfirmedWithNormalPoint = new EmployeePointConfirmedWithNormalPointState();
 
         private readonly string description;
         public virtual string Description
@@ -87,9 +86,14 @@ namespace MITD.PMS.Domain.Model.Employees
             throw new EmployeeInvalidStateOperationException("Employee", DisplayName, "ChangeFinalPoint");
         }
 
-        public virtual void Rollback(Employee employee)
+        public virtual void Rollback(Employee employee,Period period)
         {
             throw new EmployeeInvalidStateOperationException("Employee", DisplayName, "Rollback");
+        }
+
+        public virtual void ConfirmFinalPoint(Employee employee, Period period)
+        {
+            throw new EmployeeInvalidStateOperationException("Employee", DisplayName, "ConfirmFinalPoint");
         }
 
         #endregion

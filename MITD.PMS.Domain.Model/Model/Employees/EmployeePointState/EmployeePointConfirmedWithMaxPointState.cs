@@ -1,4 +1,6 @@
-﻿namespace MITD.PMS.Domain.Model.Employees
+﻿using MITD.PMS.Domain.Model.Periods;
+
+namespace MITD.PMS.Domain.Model.Employees
 {
     public class EmployeePointConfirmedWithMaxPointState : EmployeePointState
     {
@@ -8,6 +10,10 @@
             
         }
 
+        public override void ConfirmFinalPoint(Employee employee, Period period)
+        {
+            employee.EmployeePointState=new EmployeePointConfirmedWithMaxPointState();
+        }
     }
 
 

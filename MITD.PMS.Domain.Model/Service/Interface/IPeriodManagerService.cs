@@ -52,5 +52,6 @@ namespace MITD.PMS.Domain.Service
         bool HasOpenClaim(Period period);
         void CopyEmployeePoint(Period period);
         void DeleteEmployeePoint(Period period);
+        void ConfirmEmployeePoint(Period period);
     }
 }

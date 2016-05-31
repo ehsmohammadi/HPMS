@@ -30,7 +30,7 @@ namespace MITD.PMS.Domain.Service
         private readonly IInquiryJobIndexPointRepository inquiryJobIndexPointRep;
         private readonly IClaimRepository claimRep;
         private readonly IInquiryUnitIndexPointRepository inquiryUnitIndexPointRep;
-        private readonly IEmployeePointCopierService employeePointCopierService;
+        private readonly IEmployeePointManagerService employeePointManagerService;
 
         #endregion
 
@@ -49,7 +49,7 @@ namespace MITD.PMS.Domain.Service
             IInquiryConfiguratorService inquiryConfiguratorService,
             IPeriodBasicDataCopierService periodCopierService
             ,
-            IEmployeePointCopierService employeePointCopierService
+            IEmployeePointManagerService employeePointManagerService
             )
         {
             this.periodRep = periodRep;
@@ -63,7 +63,7 @@ namespace MITD.PMS.Domain.Service
             this.inquiryJobIndexPointRep = inquiryJobIndexPointRep;
             this.claimRep = claimRep;
             this.inquiryUnitIndexPointRep = inquiryUnitIndexPointRep;
-            this.employeePointCopierService = employeePointCopierService;
+            this.employeePointManagerService = employeePointManagerService;
         }
 
         #endregion
@@ -206,13 +206,19 @@ namespace MITD.PMS.Domain.Service
         #region Employee Point Copier
         public void CopyEmployeePoint(Period period)
         {
-            employeePointCopierService.CopyEmployeePoint(period, publisher);
+            employeePointManagerService.CopyEmployeePoint(period, publisher);
         }
 
         public void DeleteEmployeePoint(Period period)
         {
-            employeePointCopierService.DeleteEmployeePoint(period,publisher);
-        } 
+            employeePointManagerService.DeleteEmployeePoint(period,publisher);
+        }
+
+        public void ConfirmEmployeePoint(Period period)
+        {
+            employeePointManagerService.ConfirmEmployeePoint(period, publisher);
+        }
+
         #endregion
         
         #region Check methods

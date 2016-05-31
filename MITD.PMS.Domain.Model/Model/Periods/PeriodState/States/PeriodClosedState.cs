@@ -19,7 +19,7 @@ namespace MITD.PMS.Domain.Model.Periods
         internal override void RollBack(Period period, IPeriodManagerService periodManagerService)
         {
             periodManagerService.ChangeActiveStatus(period, true);
-            period.State = new PeriodInquiryCompletedState();
+            period.State = new PeriodConfirmedState();
         }
 
         internal override void CheckShowingInquirySubject()

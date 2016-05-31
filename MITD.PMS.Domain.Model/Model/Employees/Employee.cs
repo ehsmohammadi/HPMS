@@ -145,6 +145,11 @@ namespace MITD.PMS.Domain.Model.Employees
             EmployeePointState.ChangeFinalPoint(this, period,point);
         }
 
+        public virtual void ConfirmFinalPoint(Period period)
+        {
+            EmployeePointState.ConfirmFinalPoint(this, period);
+        }
+
         #endregion
 
         #region JobPosition

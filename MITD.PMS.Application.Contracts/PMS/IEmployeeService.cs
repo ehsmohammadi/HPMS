@@ -17,5 +17,6 @@ namespace MITD.PMS.Application.Contracts
         void DeleteFinalPoint(EmployeeId employeeId);
         void ConfirmAboveMaxEmployeePoint(EmployeeId employeeId);
         void ChangeEmployeePoint(EmployeeId employeeId, decimal point);
+        void ConfirmFinalPoint(EmployeeId employeeId);
     }
 }
