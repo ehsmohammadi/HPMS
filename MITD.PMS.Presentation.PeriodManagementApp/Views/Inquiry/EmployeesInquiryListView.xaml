@@ -58,6 +58,9 @@
                     <sdk:DataGridTextColumn Header="پست شما " CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto"
                     Binding="{Binding Path=InquirerJobPositionName}"  />
 
+                    <sdk:DataGridTextColumn Header="وضعیت " CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto"
+                    Binding="{Binding Path=Status}"  />
+
 
 
                 </sdk:DataGrid.Columns>

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using MITD.Domain.Repository;
 using MITD.PMS.Application.Contracts;
 using MITD.PMS.Domain.Model.Employees;
 using MITD.PMS.Domain.Model.InquiryJobIndexPoints;

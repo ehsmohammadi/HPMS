@@ -8,5 +8,6 @@ namespace MITD.PMSReport.Domain.Model
         public JobPosition InquirerJobPosition { get; set; }
         public Employee InquirySubject { get; set; }
         public JobPosition InquirySubjectJobPosition { get; set; }
+        public bool IsCompleted { get; set; }
     }
 }

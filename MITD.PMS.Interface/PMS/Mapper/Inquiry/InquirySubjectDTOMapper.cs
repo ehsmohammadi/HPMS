@@ -20,11 +20,12 @@ namespace MITD.PMS.Interface
                 JobPositionName = entity.InquirySubjectJobPosition.Name,
                 InquirerJobPositionId=entity.InquirerJobPosition.Id.SharedJobPositionId.Id,
                 InquirerJobPositionName=entity.InquirerJobPosition.Name,
+                Status = entity.IsCompleted?"کامل شده":"ناقص",
+                IsInquired = entity.IsCompleted,
                 ActionCodes = new List<int>
                 {
                     (int) ActionType.FillInquiryForm
-                },
-                IsInquired = false
+                }
                
             };
             return res;

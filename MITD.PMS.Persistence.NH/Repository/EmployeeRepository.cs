@@ -255,12 +255,15 @@ namespace MITD.PMS.Persistence.NH
                         .Distinct()
                         .ToList();
 
+
                 var res = configurationIds.Select(c => new InquirySubjectWithJobPosition
                 {
                     InquirerJobPosition = inquirerJobpositions.Single(ij => ij.Id == c.InquirerJobPositionId),
                     InquirySubject = inquirySubjects.Single(e => e.Id == c.InquirySubjectId),
                     InquirySubjectJobPosition =
-                        inquirySubjectJobpositions.Single(ij => ij.Id == c.InquirySubjectJobPositionId)
+                    inquirySubjectJobpositions.Single(ij => ij.Id == c.InquirySubjectJobPositionId),
+                    IsCompleted = session.Query<InquiryJobIndexPoint>().Count(i => i.ConfigurationItemId==c&&i.JobIndexValue=="")==0
+
                 }).ToList();
                 return res;
             }

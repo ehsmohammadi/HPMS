@@ -49,7 +49,12 @@ namespace MITD.PMS.Presentation.Contracts
             set { this.SetField(p => p.InquirerJobPositionName, ref inquirerJobPositionName, value); }
         }
 
-
+        private string status;
+        public string Status
+        {
+            get { return status; }
+            set { this.SetField(p => p.Status, ref status, value); }
+        }
 
         private bool isInquired;
         public bool IsInquired
