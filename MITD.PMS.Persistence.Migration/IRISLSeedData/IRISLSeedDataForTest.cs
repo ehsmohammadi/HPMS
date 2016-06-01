@@ -106,11 +106,28 @@ namespace MITD.PMS.Persistence
             return res;
         }
 
-        public static decimal GetInquiryByJobPositionlevel(KeyValuePair<JobIndex, Dictionary<Employee, List<Inquiry>>> jobIndex, int level)
+         public static List<decimal> GetSubordinatesInquiryPointBy(KeyValuePair<JobIndex, Dictionary<Employee, List<Inquiry>>> jobIndex)
         {
             try
             {
-                return Convert.ToDecimal(jobIndex.Value.SelectMany(j => j.Value).SingleOrDefault(x => x.JobPosition.JobPositionLevel == level).Value);
+                var valueList =jobIndex.Value.SelectMany(j => j.Value)
+                    .Where(x => x.JobPosition.JobPositionLevel == 3).ToList();
+                return valueList.Select(v => Convert.ToDecimal(v.Value)).ToList();
+
+            }
+            catch (Exception)
+            {
+
+                return new List<decimal>();
+            }
+        }
+
+        public static decimal GetParentInquiryPointBy(KeyValuePair<JobIndex, Dictionary<Employee, List<Inquiry>>> jobIndex)
+        {
+            try
+            {
+                var point=jobIndex.Value.SelectMany(j => j.Value).SingleOrDefault(x => x.JobPosition.JobPositionLevel == 1);
+                return point == null ? 0 : Convert.ToDecimal(point.Value);
             }
             catch (Exception)
             {
@@ -118,6 +135,55 @@ namespace MITD.PMS.Persistence
                 return 0;
             }
         }
+
+        public static decimal GetSelfInquiryPointBy(KeyValuePair<JobIndex, Dictionary<Employee, List<Inquiry>>> jobIndex)
+        {
+            try
+            {
+                var point = jobIndex.Value.SelectMany(j => j.Value).SingleOrDefault(x => x.JobPosition.JobPositionLevel == 4);
+                return point == null ? 0 : Convert.ToDecimal(point.Value);
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public static decimal GetPoint(KeyValuePair<JobIndex, Dictionary<Employee, List<Inquiry>>> index)
+        {
+            var parentPoint = Utils.GetParentInquiryPointBy(index);
+            var selfPoint = Utils.GetSelfInquiryPointBy(index);
+            var subordinates = Utils.GetSubordinatesInquiryPointBy(index);
+            decimal subordinatesPoint = 0;
+            //point validation rule difference of 40
+            if (parentPoint != 0)
+            {
+                selfPoint = Math.Abs(selfPoint - parentPoint) < 40 ? selfPoint : 0;
+                if (subordinates.Count > 0)
+                {
+                    decimal sumSubordinatePoint = 0;
+                    decimal subordinateCount = 0;
+                    foreach (var subordinatePoint in subordinates)
+                    {
+                        if (Math.Abs(subordinatePoint - parentPoint) < 40)
+                        {
+                            sumSubordinatePoint += subordinatePoint;
+                            subordinateCount++;
+                        }
+                    }
+                    subordinatesPoint = subordinateCount == 0 ? 0 : sumSubordinatePoint / subordinateCount;
+                }
+            }
+            else
+            {
+                subordinatesPoint = !subordinates.Any() ? 0 : subordinates.Sum() / subordinates.Count;
+            }
+
+            var point = (parentPoint * 4 + subordinatesPoint * 1 + selfPoint * 1) /
+                        ((parentPoint != 0 ? 1 : 0) * 4 + (subordinatesPoint != 0 ? 1 : 0) * 1 + (selfPoint != 0 ? 1 : 0) * 1);
+            return point;
+        }
+
 
         public static RulePoint AddEmployeePoint(string name, decimal value, bool final = false)
         {
@@ -206,14 +272,15 @@ namespace MITD.PMS.Persistence
                 #region Rules
 
                 var ruleRep = new RuleRepository(uow);
-                AdminMigrationUtility.CreateRule(ruleRep, "محاسبه شاخص های کارمندان در دور اول", RuleType.PerCalculation,
-                    1, @"
-           if (data.PathNo != 1) return;
+                AdminMigrationUtility.CreateRule(ruleRep, "محاسبه شاخص های کارمندان در دور اول", RuleType.PerCalculation, 1, @"
+            if (data.PathNo != 1) return;
             decimal total = 0;
             decimal performancePoint = 0;
             decimal sumPerformanceGroupImportance = 0;
+
             foreach (var position in data.JobPositions)
             {
+
                 var x = 0m;
                 var y = 0m;
 
@@ -232,10 +299,7 @@ namespace MITD.PMS.Persistence
 
                 foreach (var index in position.Indices)
                 {
-                    var parentPoint = Utils.GetInquiryByJobPositionlevel(index, 1);
-                    var childPoint = Utils.GetInquiryByJobPositionlevel(index, 3);
-                    var selfPoint = Utils.GetInquiryByJobPositionlevel(index, 4);
-                    var point = (parentPoint * 4 + childPoint * 1 + selfPoint * 1) / ((parentPoint != 0 ? 1 : 0) * 4 + (childPoint != 0 ? 1 : 0) * 1 + (selfPoint != 0 ? 1 : 0) * 1);
+                    var point = Utils.GetPoint(index);
                     if (index.Key.Group.DictionaryName == ""PerformanceGroup"")
                     {
                         var jobindexImportance = Convert.ToDecimal(index.Key.CustomFields[""JobIndexImportance""]);
@@ -243,13 +307,20 @@ namespace MITD.PMS.Persistence
                         performancePoint = performancePoint + point * jobindexImportance;
                     }
                     total = total + point;
-                    Utils.AddEmployeePoint(position, index, ""gross"", point);
-
+                    Utils.AddEmployeePoint(position, index,
+                        index.Key.Group.DictionaryName == ""PerformanceGroup"" ? ""Performance-gross"" : ""Behavioural-gross"",
+                        point);
                 }
-                var finalPerformancePoint = performancePoint / sumPerformanceGroupImportance;
+                var finalPerformancePoint = 0m;
+                if (sumPerformanceGroupImportance != 0)
+                {
+                    finalPerformancePoint = performancePoint / sumPerformanceGroupImportance;
+                }
                 Utils.AddEmployeePoint(position, ""PerformanceIndices"", finalPerformancePoint);
-                
+
                 Utils.AddCalculationPoint(data.Employee.EmployeeNo + ""/"" + position.Unit.Id + ""/PerformanceIndex"", finalPerformancePoint);
+
+
             }");
 
                 AdminMigrationUtility.CreateRule(ruleRep, "محاسبه واحد ها  در دور دوم", RuleType.PerCalculation, 2, @"
@@ -284,9 +355,8 @@ namespace MITD.PMS.Persistence
             Utils.AddCalculationPoint(""UnitCalculationFlag"", 1);
             ");
 
-                AdminMigrationUtility.CreateRule(ruleRep, "محاسبه شاخص های کارمندان در دور دوم", RuleType.PerCalculation,
-                    3, @"
-           if (data.PathNo != 2) return;
+                AdminMigrationUtility.CreateRule(ruleRep, "محاسبه شاخص های کارمندان در دور دوم", RuleType.PerCalculation, 3, @"
+          if (data.PathNo != 2) return;
             decimal total = 0;
 
 
@@ -295,6 +365,7 @@ namespace MITD.PMS.Persistence
                 decimal sumBehaviralPoint = 0;
                 decimal sumIndexImportance = 0;
                 decimal sumPerformanceGroupImportance = 0;
+                decimal unitPerformanceAveragePoint = 0;
                 //////////////////////////////////////////////////////////////
                 var unitPerformancePoints =
                     data.Points.CalculationPoints.Where(c => c.Name.Contains(""/"" + position.Unit.Id + ""/"")).ToList();
@@ -302,19 +373,36 @@ namespace MITD.PMS.Persistence
                 if (!unitPerformancePoints.Any())
                     throw new Exception(""unit performance points count is 0"");
 
+                var countForAvarage=unitPerformancePoints.Count(u => u.Value!=0);
+                if (countForAvarage != 0)
+                    unitPerformanceAveragePoint = unitPerformancePoints.Sum(up => up.Value)/countForAvarage;
+                                                  
+                decimal unitPoint;
+                try
+                {
+                    unitPoint = Utils.Res.CalculationPoints.Single(
+                   c => c.Name == position.Unit.ParentId + "";"" + position.Unit.Id + ""/TotalPointUnit"").Value;
+                }
+                catch (Exception ex)
+                {
 
-                var unitPerformanceAveragePoint = unitPerformancePoints.Sum(up => up.Value) /
-                                                  unitPerformancePoints.Count();
-
-                if (unitPerformanceAveragePoint == 0)
-                    throw new Exception(""unitPerformanceAveragePoint is 0"");
-
-                var unitPoint =Utils.Res.CalculationPoints.Single(
-                        c => c.Name == position.Unit.ParentId + "";"" + position.Unit.Id + ""/TotalPointUnit"").Value;
+                    throw new Exception(""Total Unit Point is not calculated "" + position.Unit.ParentId + ""--"" + position.Unit.Id);
+                }
                 Utils.AddEmployeePoint(position, ""finalunitPoint"", unitPoint);
 
-                var totalPerformancePoint =
-                    unitPerformancePoints.Single(up => up.Name.Contains(data.Employee.EmployeeNo)).Value * (unitPoint / unitPerformanceAveragePoint);
+                decimal totalPerformancePoint = 0;
+                try
+                {
+                    if (unitPerformanceAveragePoint != 0)
+                        totalPerformancePoint =
+                                   unitPerformancePoints.Single(up => up.Name.Contains(data.Employee.EmployeeNo)).Value * (unitPoint / unitPerformanceAveragePoint);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(""Total performance point is not calculated"");
+                }
+
+                Utils.AddEmployeePoint(position, ""finalPerformancePoint"", totalPerformancePoint);
 
                 foreach (var index in position.Indices)
                 {
@@ -323,11 +411,8 @@ namespace MITD.PMS.Persistence
                     sumIndexImportance += jobindexImportance;
                     if (index.Key.Group.DictionaryName == ""BehaviouralGroup"")
                     {
-                        var parentPoint = Utils.GetInquiryByJobPositionlevel(index, 1);
-                        var childPoint = Utils.GetInquiryByJobPositionlevel(index, 3);
-                        var selfPoint = Utils.GetInquiryByJobPositionlevel(index, 4);
-                        var point = (parentPoint * 4 + childPoint * 1 + selfPoint * 1) / ((parentPoint != 0 ? 1 : 0) * 4 + (childPoint != 0 ? 1 : 0) * 1 + (selfPoint != 0 ? 1 : 0) * 1);
-                        sumBehaviralPoint = sumBehaviralPoint + point * jobindexImportance;
+                      var point = Utils.GetPoint(index);                  
+                      sumBehaviralPoint = sumBehaviralPoint + point * jobindexImportance;
                     }
                     if (index.Key.Group.DictionaryName == ""PerformanceGroup"")
                     {
@@ -339,11 +424,9 @@ namespace MITD.PMS.Persistence
                     throw new Exception(""sumIndexImportance is 0"");
                 total = total + ((sumBehaviralPoint + totalPerformancePoint * sumPerformanceGroupImportance) / sumIndexImportance);
                 Utils.AddEmployeePoint(position, ""finalJob"", (sumBehaviralPoint + totalPerformancePoint * sumPerformanceGroupImportance) / sumIndexImportance);
-
-
             }
 
-            Utils.AddEmployeePoint(""final"", total / data.JobPositions.Count * 10, true);
+            Utils.AddEmployeePoint(""final"", total / data.JobPositions.Count, true);
             ");
 
 
