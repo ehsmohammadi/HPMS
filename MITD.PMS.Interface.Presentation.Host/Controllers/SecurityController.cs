@@ -11,6 +11,7 @@ using System.Xml;
 
 namespace MITD.PMS.Interface.Presentation.Host.Controllers
 {
+    [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
     public class SecurityController : Controller
     {
         //
@@ -45,14 +46,13 @@ namespace MITD.PMS.Interface.Presentation.Host.Controllers
         
         public ActionResult LogOut()
         {
-            if (this.User.Identity.IsAuthenticated)
-            {
-                WSFederationAuthenticationModule authModule = FederatedAuthentication.WSFederationAuthenticationModule;
-                string signoutUrl = (WSFederationAuthenticationModule.GetFederationPassiveSignOutUrl(authModule.Issuer, authModule.Realm, null));
-                var baseUrl = VirtualPathUtility.AppendTrailingSlash( Request.Url.GetLeftPart(UriPartial.Authority) + Request.ApplicationPath);
-                WSFederationAuthenticationModule.FederatedSignOut(new Uri(authModule.Issuer),new Uri(baseUrl+"HPMS.aspx") );
-            }
-
+            if (!this.User.Identity.IsAuthenticated) return new EmptyResult();
+            var authModule = FederatedAuthentication.WSFederationAuthenticationModule;
+            authModule.SignOut();
+            // string signoutUrl = (WSFederationAuthenticationModule.GetFederationPassiveSignOutUrl(authModule.Issuer, authModule.Realm, null));
+            var baseUrl = VirtualPathUtility.AppendTrailingSlash( Request.Url.GetLeftPart(UriPartial.Authority) + Request.ApplicationPath);
+            FederatedAuthentication.SessionAuthenticationModule.SignOut();
+            WSFederationAuthenticationModule.FederatedSignOut(new Uri(authModule.Issuer),new Uri(baseUrl+"HPMS.aspx") );
             return new EmptyResult();
 
         }
