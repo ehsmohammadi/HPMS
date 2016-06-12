@@ -129,7 +129,9 @@ namespace MITD.PMS.Integration.Data.EF
                                     where 
                                         c.PID == parentId
                                         && c.NodeType != DataEFConfig.NodeType_Idle   //بلا استفاده
-                                        && c.NodeType == DataEFConfig.NodeType_Section   // بخش
+                                        && (c.NodeType == DataEFConfig.NodeType_Section   // بخش
+                                            //|| c.NodeType == DataEFConfig.NodeType_Company   // شرکت
+                                           )
                                  select c.ID).ToList();
 
                 var subSectionJobPositionIds = (from c in db.VW_OrganTree

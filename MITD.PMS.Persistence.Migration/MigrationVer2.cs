@@ -17,6 +17,7 @@ namespace MITD.PMS.Persistence
             Alter.Table("Employees").AddColumn("PointState").AsInt32().NotNullable().WithDefaultValue(1);
 
             #region ActionTypes
+            /*
             Insert.IntoTable("ActionTypes").Row(new
             {
                 Id = (int)ActionType.ConfirmAboveMaxPoint,
@@ -37,7 +38,7 @@ namespace MITD.PMS.Persistence
                 Name = ActionType.ChangeEmployeePoint.GetAttribute<ActionInfoAttribute>().DisplayName,
 
             });
-
+            */
             #endregion
 
         }
@@ -45,7 +46,7 @@ namespace MITD.PMS.Persistence
         public override void Down()
         {
             #region ActionTypes
-
+            /*
             Delete.FromTable("ActionTypes").Row(new
             {
                 Id = (int)ActionType.ConfirmAboveMaxPoint,
@@ -66,7 +67,7 @@ namespace MITD.PMS.Persistence
                 Name = ActionType.ChangeEmployeePoint.GetAttribute<ActionInfoAttribute>().DisplayName,
 
             });
-
+            */
             #endregion
 
             Delete.Column("MaxFinalPoint").FromTable("Periods");
