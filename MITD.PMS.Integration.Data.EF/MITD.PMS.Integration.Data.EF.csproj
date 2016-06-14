@@ -85,6 +85,9 @@
     <Compile Include="DataProviders\UnitIndexDataProvider.cs" />
     <Compile Include="DataProviders\JobIndexDataProvider.cs" />
     <Compile Include="DataProviders\UnitDataPrivider.cs" />
+    <Compile Include="DBModel\PMS_Job_Index.cs">
+      <DependentUpon>PersonnelDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBModel\VW_OrganTree.cs">
       <DependentUpon>PersonnelDB.tt</DependentUpon>
     </Compile>

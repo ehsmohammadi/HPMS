@@ -14,8 +14,12 @@ namespace MITD.PMS.Integration.Data.EF.DBModel
     
     public partial class PMS_JobIndex
     {
+        public PMS_JobIndex()
+        {
+            this.PMS_Job_Index = new HashSet<PMS_Job_Index>();
+        }
+    
         public long ID { get; set; }
-        public long ID_Job { get; set; }
         public long ID_IndexType { get; set; }
         public string Title { get; set; }
         public string Discription { get; set; }
@@ -28,6 +32,6 @@ namespace MITD.PMS.Integration.Data.EF.DBModel
         public string LogComputerName { get; set; }
     
         public virtual PMS_IndexType PMS_IndexType { get; set; }
-        public virtual PMS_JobTitle PMS_JobTitle { get; set; }
+        public virtual ICollection<PMS_Job_Index> PMS_Job_Index { get; set; }
     }
 }

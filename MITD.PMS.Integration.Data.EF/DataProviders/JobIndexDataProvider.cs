@@ -79,13 +79,13 @@ namespace MITD.PMS.Integration.Data.EF
             {
                 try
                 {
-                    var TempExclusiveIndex = (from c in db.PMS_JobIndex where c.ID == item && c.IsActive == true && c.ID_IndexType != DataEFConfig.IndexType_UnitIndex select c).FirstOrDefault();
+                    var TempExclusiveIndex = (from c in db.PMS_JobIndexList where c.IndexId == item && c.IsActive == true && c.IndexTypeID != DataEFConfig.IndexType_UnitIndex select c).FirstOrDefault();
 
                     ExclusiveJobIndexDto ExclusiveIndex = new ExclusiveJobIndexDto();
-                    ExclusiveIndex.IndexTitle = TempExclusiveIndex.Title;
-                    ExclusiveIndex.IndexTypeID = TempExclusiveIndex.ID_IndexType;
-                    ExclusiveIndex.Description = TempExclusiveIndex.Discription;
-                    ExclusiveIndex.JobID = TempExclusiveIndex.ID_Job;
+                    ExclusiveIndex.IndexTitle = TempExclusiveIndex.IndexTitle;
+                    ExclusiveIndex.IndexTypeID = TempExclusiveIndex.IndexTypeID;
+                    ExclusiveIndex.Description = ""; //TempExclusiveIndex.Discription;
+                    ExclusiveIndex.JobID = TempExclusiveIndex.JobID;
                     ExclusiveIndex.Coefficient = TempExclusiveIndex.coefficient;
 
 
@@ -108,6 +108,13 @@ namespace MITD.PMS.Integration.Data.EF
 
             List<JobIndexIdListItem> Result = new List<JobIndexIdListItem>();
 
+            return (from c in db.PMS_JobIndexList
+                select new JobIndexIdListItem
+                       {
+                           JobId = c.JobID,
+                           TransferId = c.TransferId.Value
+                       }).ToList();
+
             Result = (from c in db.PMS_GeneralIndex
                       where c.ID_IndexType != DataEFConfig.IndexType_UnitIndex
                       select new JobIndexIdListItem
@@ -117,11 +124,11 @@ namespace MITD.PMS.Integration.Data.EF
                               TransferId = c.TransferId.Value
                           }).ToList();
 
-            var tempJobIndexList = (from c in db.PMS_JobIndex
+            var tempJobIndexList = (from c in db.PMS_JobIndexList
                                     select new JobIndexIdListItem
                                     {
                                         //todo: Remove JobId From this damn query!
-                                        JobId = 0, //c.JobID,
+                                        JobId = c.JobID, //c.JobID,
                                         TransferId = c.TransferId.Value
                                     }).ToList();
 

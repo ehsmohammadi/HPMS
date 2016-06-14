@@ -46,13 +46,13 @@ namespace MITD.PMS.Integration.Data.EF
             db = new PersonnelSoft2005Entities();
             try
             {
-                var tempVar = (from c in db.VW_OrganTree
-                               where c.PID == ParentID && c.ID != ParentID
-                                   && c.NodeType != DataEFConfig.NodeType_Post // پست
-                                 && c.NodeType != DataEFConfig.NodeType_Idle //بلا استفاده
-                                 && c.NodeType != DataEFConfig.NodeType_Section // بخش
-                               orderby c.ID
-                               select c.ID).ToList();
+                //var tempVar = (from c in db.VW_OrganTree
+                //               where c.PID == ParentID && c.ID != ParentID
+                //                   && c.NodeType != DataEFConfig.NodeType_Post // پست
+                //                 && c.NodeType != DataEFConfig.NodeType_Idle //بلا استفاده
+                //                 && c.NodeType != DataEFConfig.NodeType_Section // بخش
+                //               orderby c.ID
+                //               select c.ID).ToList();
                 return (from c in db.VW_OrganTree
                         where c.PID == ParentID && c.ID != ParentID
                             && c.NodeType != DataEFConfig.NodeType_Post // پست
