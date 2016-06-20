@@ -25,11 +25,12 @@ namespace MITD.PMS.Integration.Data.EF.DBModel
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<VW_OrganTree> VW_OrganTree { get; set; }
         public virtual DbSet<PMS_GeneralIndex> PMS_GeneralIndex { get; set; }
         public virtual DbSet<PMS_IndexType> PMS_IndexType { get; set; }
+        public virtual DbSet<PMS_Job_Index> PMS_Job_Index { get; set; }
         public virtual DbSet<PMS_JobIndex> PMS_JobIndex { get; set; }
         public virtual DbSet<PMS_JobTitle> PMS_JobTitle { get; set; }
-        public virtual DbSet<VW_OrganTree> VW_OrganTree { get; set; }
         public virtual DbSet<PMS_JobIndexList> PMS_JobIndexList { get; set; }
     }
 }

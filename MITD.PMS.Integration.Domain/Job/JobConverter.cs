@@ -90,11 +90,11 @@ namespace MITD.PMS.Integration.Domain
 
         private JobInPeriodDTO createDestinationJobInPeriod(JobDTO job,List<JobIndexIntegrationDTO> selectedSourceJobindices)
         {
-            var sourceTranferIdList=selectedSourceJobindices.Select(s=>s.TransferId);
+            //var sourceTranferIdList=selectedSourceJobindices.Select(s=>s.TransferId);
             var selectedJobIndexIdListLong = new List<long>();
-            foreach (var item in sourceTranferIdList)
+            foreach (var item in selectedSourceJobindices)
             {
-                var tempJobIndex=jobIndexList.Single(j => j.TransferId == item);
+                var tempJobIndex=jobIndexList.First(j => j.TransferId == item.TransferId);
                 selectedJobIndexIdListLong.Add(tempJobIndex.Id);
 
             }

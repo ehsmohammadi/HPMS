@@ -12,22 +12,18 @@ namespace MITD.PMS.Integration.Data.EF.DBModel
     using System;
     using System.Collections.Generic;
     
-    public partial class PMS_JobTitle
+    public partial class PMS_Job_Index
     {
-        public PMS_JobTitle()
-        {
-            this.PMS_Job_Index = new HashSet<PMS_Job_Index>();
-        }
-    
         public long ID { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
+        public long JobID { get; set; }
+        public long IndexID { get; set; }
         public Nullable<System.Guid> TransferId { get; set; }
         public Nullable<int> LogUserID { get; set; }
         public string LogActionType { get; set; }
         public Nullable<System.DateTime> LogActionDate { get; set; }
         public string LogComputerName { get; set; }
     
-        public virtual ICollection<PMS_Job_Index> PMS_Job_Index { get; set; }
+        public virtual PMS_JobIndex PMS_JobIndex { get; set; }
+        public virtual PMS_JobTitle PMS_JobTitle { get; set; }
     }
 }

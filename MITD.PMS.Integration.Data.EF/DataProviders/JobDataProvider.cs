@@ -21,18 +21,21 @@ namespace MITD.PMS.Integration.Data.EF
 
             try
             {
-                var parentId = DataEFConfig.RootUnitId;
-                var fullPath = (from c in db.VW_OrganTree where c.ID == parentId select c.FullPath).Single();
-                var idList =
-                    (from c in db.VW_OrganTree
-                        where c.FullPath.StartsWith(fullPath) && c.NodeType == 1 && c.ID_PMS_JobTitle != null
-                        select c.ID_PMS_JobTitle).Distinct().ToList();
 
-                var temp = (from C in db.PMS_JobTitle select C.ID).ToList();
-                foreach (var item in idList)
-                {
-                    Result.Add(item.Value);
-                }
+                Result = (from c in db.PMS_JobTitle select c.ID).ToList();
+
+                //var parentId = DataEFConfig.RootUnitId;
+                //var fullPath = (from c in db.VW_OrganTree where c.ID == parentId select c.FullPath).Single();
+                //var idList =
+                //    (from c in db.VW_OrganTree
+                //        where c.FullPath.StartsWith(fullPath) && c.NodeType == 1 && c.ID_PMS_JobTitle != null
+                //        select c.ID_PMS_JobTitle).Distinct().ToList();
+
+                //var temp = (from C in db.PMS_JobTitle select C.ID).ToList();
+                //foreach (var item in idList)
+                //{
+                //    Result.Add(item.Value);
+                //}
 
             }
 

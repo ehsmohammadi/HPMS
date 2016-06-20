@@ -25,7 +25,10 @@ namespace MITD.PMS.Integration.Data.EF
                     ).FirstOrDefault();
 
             var idList =
-                (from c in db.VW_OrganTree where c.ID_F != null && c.Company_F == DataEFConfig.CompanyId && c.FullPath.StartsWith(RootFullPath) select c.ID_F)
+                (from c in db.VW_OrganTree where c.ID_F != null
+                    && c.NodeType != DataEFConfig.NodeType_Idle
+                     //&& c.Company_F == DataEFConfig.CompanyId 
+                     && c.FullPath.StartsWith(RootFullPath) select c.ID_F)
                     .ToList();
 
             return idList.Select(c => Convert.ToInt64(c.Value)).ToList();

@@ -5,16 +5,18 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="1a938b75fdf742aa98d5da9b562c8461" Name="Diagram1">
-        <EntityTypeShape EntityType="PersonnelSoft2005Model.PMS_GeneralIndex" Width="1.5" PointX="3" PointY="8.875" />
-        <EntityTypeShape EntityType="PersonnelSoft2005Model.PMS_IndexType" Width="1.5" PointX="0.75" PointY="4.625" />
-        <EntityTypeShape EntityType="PersonnelSoft2005Model.PMS_JobIndex" Width="1.5" PointX="3" PointY="4.25" />
+        <EntityTypeShape EntityType="PersonnelSoft2005Model.VW_OrganTree" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="PersonnelSoft2005Model.PMS_Job_Index" Width="1.5" PointX="12.25" PointY="1.5" />
+        <AssociationConnector Association="PersonnelSoft2005Model.FK_PMS_Job_Index_PMS_JobIndex" />
+        <AssociationConnector Association="PersonnelSoft2005Model.FK_PMS_Job_Index_PMS_JobTitle" />
+        <EntityTypeShape EntityType="PersonnelSoft2005Model.PMS_GeneralIndex" Width="1.5" PointX="10" PointY="1.25" />
+        <EntityTypeShape EntityType="PersonnelSoft2005Model.PMS_IndexType" Width="1.5" PointX="7.75" PointY="3.5" />
+        <EntityTypeShape EntityType="PersonnelSoft2005Model.PMS_JobIndex" Width="1.5" PointX="10" PointY="5.25" />
         <EntityTypeShape EntityType="PersonnelSoft2005Model.PMS_JobTitle" Width="1.5" PointX="0.75" PointY="0.75" />
         <AssociationConnector Association="PersonnelSoft2005Model.FK_PMS_GeneralIndex_PMS_GeneralIndex" />
         <AssociationConnector Association="PersonnelSoft2005Model.FK_PMS_JobIndex_PMS_IndexType" />
-        <AssociationConnector Association="PersonnelSoft2005Model.FK_PMS_JobIndex_PMS_JobTitle" />
-        <EntityTypeShape EntityType="PersonnelSoft2005Model.VW_OrganTree" Width="1.5" PointX="5.375" PointY="0.75" />
-        <EntityTypeShape EntityType="PersonnelSoft2005Model.PMS_JobIndexList" Width="1.5" PointX="3.5" PointY="0.5" />
-      </Diagram>
+        <EntityTypeShape EntityType="PersonnelSoft2005Model.PMS_JobIndexList" Width="1.5" PointX="0.75" PointY="4.75" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
