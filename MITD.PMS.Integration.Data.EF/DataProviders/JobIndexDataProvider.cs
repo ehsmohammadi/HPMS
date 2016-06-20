@@ -108,34 +108,39 @@ namespace MITD.PMS.Integration.Data.EF
 
             List<JobIndexIdListItem> Result = new List<JobIndexIdListItem>();
 
-            return (from c in db.PMS_JobIndexList
-                select new JobIndexIdListItem
-                       {
-                           JobId = c.JobID,
-                           TransferId = c.TransferId.Value
-                       }).ToList();
+            //return (from c in db.PMS_JobIndexList
+            //    select new JobIndexIdListItem
+            //           {
+            //               JobId = c.JobID,
+            //               TransferId = c.TransferId.Value
+            //           }).ToList();
 
-            Result = (from c in db.PMS_GeneralIndex
-                      where c.ID_IndexType != DataEFConfig.IndexType_UnitIndex
-                      select new JobIndexIdListItem
-                          {
-                              //todo: Remove JobId From this damn query!
-                              JobId = 0, //c.JobID,
-                              TransferId = c.TransferId.Value
-                          }).ToList();
+            //Result = (from c in db.PMS_GeneralIndex
+            //          where c.ID_IndexType != DataEFConfig.IndexType_UnitIndex
+            //          select new JobIndexIdListItem
+            //              {
+            //                  //todo: Remove JobId From this damn query!
+            //                  JobId = 0, //c.JobID,
+            //                  TransferId = c.TransferId.Value
+            //              }).ToList();
 
             var tempJobIndexList = (from c in db.PMS_JobIndexList
                                     select new JobIndexIdListItem
                                     {
                                         //todo: Remove JobId From this damn query!
-                                        JobId = c.JobID, //c.JobID,
+                                        JobId = 0, //c.JobID, //c.JobID,
                                         TransferId = c.TransferId.Value
                                     }).ToList();
+            Result = db.PMS_JobIndexList.GroupBy(c => c.TransferId).Select(r => new JobIndexIdListItem
+                                                                                  {
+                                                                                      JobId = 0, //c.JobID, //c.JobID,
+                                                                                      TransferId =  r.Key.Value
+                                                                                  }).ToList();
 
-            foreach (var item in tempJobIndexList)
-            {
-                Result.Add(item);
-            }
+            //foreach (JobIndexIdListItem item in tempJobIndexList)
+            //{
+            //    Result.Add(item);
+            //}
 
             return Result;
 
