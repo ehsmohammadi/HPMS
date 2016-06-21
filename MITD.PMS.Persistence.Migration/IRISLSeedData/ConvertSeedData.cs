@@ -531,7 +531,7 @@ namespace MITD.PMS.Persistence
 
                 #region Period creation
 
-                PMSMigrationUtility.CreatePeriod(periodRep, "دوره آزمایشی فروردین", new DateTime(2016, 3, 20), new DateTime(2016, 4, 20));
+                PMSMigrationUtility.CreatePeriod(periodRep, "دوره خرداد 95", new DateTime(2016, 12, 21), new DateTime(2016, 6, 20));
 
                 #endregion
 
