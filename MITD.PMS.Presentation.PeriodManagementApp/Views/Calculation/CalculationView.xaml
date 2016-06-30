@@ -29,7 +29,7 @@
                     <TextBox Text="{Binding Path=EmployeeCriteria.LastName,Mode=TwoWay}"/>
                     <sdk:Label>کد پرسنلی:</sdk:Label>
                     <TextBox Text="{Binding Path=EmployeeCriteria.EmployeeNo,Mode=TwoWay}"/>
-                    <sdk:Label  Visibility="Collapsed">نام واحد:</sdk:Label>
+                    <!--<sdk:Label  Visibility="Collapsed">نام واحد:</sdk:Label>
                     <pr:ComboBoxEx Margin="2" Visibility="Collapsed"
                     ItemsSource="{Binding Path=UnitList }"
                      DisplayMemberPath="Name" 
@@ -47,7 +47,7 @@
                      ValidatesOnExceptions=true,
                      ValidatesOnDataErrors=true,
                      NotifyOnValidationError=true}" 
-                     SelectedValuePath="JobPositionId"/>
+                     SelectedValuePath="JobPositionId"/>-->
 
                     <Button 
                     Command="{Binding Path=SearchCommand.Command}" >

@@ -25,9 +25,10 @@ namespace MITD.PMS.Application
         private readonly IJobPositionRepository jobPositionRep;
         private readonly IPeriodManagerService periodChecker;
         private readonly IJobIndexPointRepository jobIndexPointRepository;
+        private readonly ICalculationRepository calculationRepository;
 
         public EmployeeService(IEmployeeRepository employeeRep, IPeriodRepository periodRep, IPMSAdminService converter,
-            IJobPositionRepository jobPositionRep, IPeriodManagerService periodChecker, IJobIndexPointRepository jobIndexPointRepository)
+            IJobPositionRepository jobPositionRep, IPeriodManagerService periodChecker, IJobIndexPointRepository jobIndexPointRepository,ICalculationRepository calculationRepository)
         {
             this.employeeRep = employeeRep;
             this.periodRep = periodRep;
@@ -35,6 +36,7 @@ namespace MITD.PMS.Application
             this.jobPositionRep = jobPositionRep;
             this.periodChecker = periodChecker;
             this.jobIndexPointRepository = jobIndexPointRepository;
+            this.calculationRepository = calculationRepository;
         }
 
         public void Delete(EmployeeId employeeId)
@@ -140,7 +142,10 @@ namespace MITD.PMS.Application
             {
                 var employee = employeeRep.GetBy(employeeId);
                 var period = periodRep.GetById(employeeId.PeriodId);
-                var finalEmployeePoint = jobIndexPointRepository.GetEmployeeFinalPointBy(employeeId.PeriodId, employeeId.EmployeeNo);
+                var deterministicCalculation = calculationRepository.GetDeterministicCalculation(period);
+                if(deterministicCalculation==null)
+                    throw new CalculationArgumentException("Calculation", "IsDeterministic");
+                var finalEmployeePoint = jobIndexPointRepository.GetEmployeeFinalPointBy(employeeId.PeriodId, employeeId.EmployeeNo,deterministicCalculation.Id);
                 employee.SetFinalPoint(period, finalEmployeePoint);
                 tr.Complete();
                 return employee;

@@ -102,7 +102,8 @@ namespace MITD.PMS.Persistence.NH
 
         public bool HasDeterministicCalculation(Period period)
         {
-            return rep.GetQuery().Any(p => p.PeriodId == period.Id && p.IsDeterministic);
+            var calc = GetDeterministicCalculation(period);
+            return calc != null;
         }
 
         public IList<Calculation> GetAll(PeriodId periodId)

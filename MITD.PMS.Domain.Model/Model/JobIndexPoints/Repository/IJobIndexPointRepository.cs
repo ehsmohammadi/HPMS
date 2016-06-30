@@ -25,6 +25,6 @@ namespace MITD.PMS.Domain.Model.JobIndexPoints
         List<SummaryCalculationPoint> GetCalculationPointBy(CalculationId calcId);
         void ResetAllInquiryPoints(Period period);
 
-        decimal GetEmployeeFinalPointBy(PeriodId id, string employeeNo);
+        decimal GetEmployeeFinalPointBy(PeriodId periodId, string employeeNo, CalculationId calculationId);
     }
 }

@@ -16,7 +16,7 @@ namespace MITD.PMS.Domain.Model.Employees
             employee.UpdateFinalPoint(finalPoint);
             if (finalPoint > period.MaxFinalPoint)
                 employee.EmployeePointState = new EmployeePointCalculatedWithAboveMaxPointState();
-            else if (0 < finalPoint && finalPoint < period.MaxFinalPoint)
+            else if (0 <= finalPoint && finalPoint < period.MaxFinalPoint)
                 employee.EmployeePointState = new EmployeePointCalculatedWithNormalPointState();
         }
     }

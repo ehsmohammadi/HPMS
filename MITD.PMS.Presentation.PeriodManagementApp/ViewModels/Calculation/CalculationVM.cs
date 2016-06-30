@@ -318,18 +318,18 @@ namespace MITD.PMS.Presentation.Logic
         {
             var trigger1 = new AutoResetEvent(false);
             var trigger2 = new AutoResetEvent(false);
-            var trigger3 = new AutoResetEvent(false);
-            var trigger4 = new AutoResetEvent(false);
+            //var trigger3 = new AutoResetEvent(false);
+            //var trigger4 = new AutoResetEvent(false);
             ThreadPool.QueueUserWorkItem(s =>
             {
                 appController.BeginInvokeOnDispatcher(() => ShowBusyIndicator("در حال دریافت اطلاعات..."));
                 getPolicies(trigger1);
-                getUnits(trigger3);
-                getJobPositions(trigger4);
+                //getUnits(trigger3);
+                //getJobPositions(trigger4);
                 getEmployees(trigger2);
                 trigger1.WaitOne();
-                trigger3.WaitOne();
-                trigger4.WaitOne();
+                //trigger3.WaitOne();
+                //trigger4.WaitOne();
                 trigger2.WaitOne();
                 appController.BeginInvokeOnDispatcher(HideBusyIndicator);
             });

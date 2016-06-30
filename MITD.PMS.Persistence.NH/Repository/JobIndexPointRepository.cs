@@ -17,13 +17,14 @@ namespace MITD.PMS.Persistence.NH
     {
         private NHRepository<CalculationPoint> rep;
         private NHRepository<EmployeePoint> repEmp;
-        
+
         private void init()
         {
             rep = new NHRepository<CalculationPoint>(unitOfWork);
-            repEmp=new NHRepository<EmployeePoint>(unitOfWork);
+            repEmp = new NHRepository<EmployeePoint>(unitOfWork);
         }
-        public JobIndexPointRepository(NHUnitOfWork unitOfWork):base(unitOfWork)
+        public JobIndexPointRepository(NHUnitOfWork unitOfWork)
+            : base(unitOfWork)
         {
             init();
         }
@@ -39,24 +40,24 @@ namespace MITD.PMS.Persistence.NH
             rep.Add(point);
         }
 
-        public IList<CalculationPoint> Find(Expression<Func<CalculationPoint, bool>> predicate, 
+        public IList<CalculationPoint> Find(Expression<Func<CalculationPoint, bool>> predicate,
             IListFetchStrategy<CalculationPoint> fetchStrategy)
         {
             return rep.Find(predicate, fetchStrategy);
         }
 
         public IList<JobIndexPointWithEmployee> Find<T>(Expression<Func<T, bool>> predicate,
-            IListFetchStrategy<JobIndexPointWithEmployee> fetchStrategy) where T:EmployeePoint
+            IListFetchStrategy<JobIndexPointWithEmployee> fetchStrategy) where T : EmployeePoint
         {
             var q = from j in session.Query<T>().Where(predicate)
                     join e in session.Query<Employee>() on j.EmployeeId equals e.Id
-                    select new JobIndexPointWithEmployee{ JobIndexPoint =j, Employee= e };
+                    select new JobIndexPointWithEmployee { JobIndexPoint = j, Employee = e };
             var res = FetchStrategyHelper.ExecuteQuery(q2 => q2.ToList(), q, fetchStrategy);
             fetchStrategy.PageCriteria.PageResult.Result = res;
             return res;
         }
 
-        
+
 
         public CalculationPointId GetNextId()
         {
@@ -71,7 +72,7 @@ namespace MITD.PMS.Persistence.NH
 
         public List<SummaryCalculationPoint> GetCalculationPointBy(CalculationId calcId)
         {
-            return rep.Find<SummaryCalculationPoint>(s=>s.CalculationId==calcId).ToList();
+            return rep.Find<SummaryCalculationPoint>(s => s.CalculationId == calcId).ToList();
         }
 
         public void ResetAllInquiryPoints(Period period)
@@ -82,14 +83,12 @@ namespace MITD.PMS.Persistence.NH
 
         }
 
-        public decimal GetEmployeeFinalPointBy(PeriodId id, string employeeNo)
+        public decimal GetEmployeeFinalPointBy(PeriodId periodId, string employeeNo, CalculationId calculationId)
         {
             var employeePoint =
-                repEmp.Find(e => e.IsFinal && e.PeriodId == id && e.EmployeeId.EmployeeNo == employeeNo)
+                repEmp.Find(e => e.PeriodId == periodId && e.CalculationId == calculationId && e.IsFinal && e.EmployeeId.EmployeeNo == employeeNo)
                     .SingleOrDefault();
-            if (employeePoint == null)
-                return 0;
-            return employeePoint.Value;
+            return employeePoint == null ? 0 : employeePoint.Value;
         }
     }
 }
