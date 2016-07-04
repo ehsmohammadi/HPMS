@@ -7,6 +7,7 @@ using MITD.PMS.Domain.Model.JobIndices;
 using MITD.PMS.Domain.Model.Periods;
 using System.Linq.Expressions;
 using MITD.PMS.Common;
+using MITD.PMS.Domain.Model.JobPositions;
 
 
 namespace MITD.PMS.Persistence.NH
@@ -154,6 +155,7 @@ namespace MITD.PMS.Persistence.NH
             }
             return res;
         }
+
 
     }
 }

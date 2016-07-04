@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using MITD.PMS.Common;
+using MITD.PMS.Domain.Model.Employees;
 using MITD.PMS.Domain.Model.InquiryJobIndexPoints;
 using MITD.PMS.Domain.Model.JobIndices;
 using MITD.PMS.Domain.Model.JobPositions;
@@ -68,6 +69,14 @@ namespace MITD.PMS.Persistence.NH
         {
             return rep.GetQuery()
                 .Count(p => p.ConfigurationItemId.InquirerId.PeriodId == period.Id && (p.JobIndexValue.Trim() == "" || p.JobIndexValue.Trim() == string.Empty || p.JobIndexValue.Trim()==null)) == 0;
+        }
+
+        public List<AbstractJobIndexId> GetAllJobIndexIdByInquirer(EmployeeId inquirerEmployeeId)
+        {
+            return
+                rep.Find(i => i.ConfigurationItemId.InquirerId.EmployeeNo == inquirerEmployeeId.EmployeeNo)
+                    .Select(i => i.JobIndexId).Distinct()
+                    .ToList();
         }
 
         public void Delete(InquiryJobIndexPoint inquiryJobIndexPoint)

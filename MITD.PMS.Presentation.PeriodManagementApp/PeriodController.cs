@@ -277,12 +277,6 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
             ((InquirerInquiryUnitListVM)view.ViewModel).Load(employeeNo, periodId);
         }
 
-
-        public void ShowEmployeesInquiryListView()
-        {
-
-        }
-
         public void ShowPrepareToExcuteInquiryView(long periodId)
         {
             var view = ServiceLocator.Current.GetInstance<IPrepareToExecInquiryView>();
@@ -294,6 +288,12 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
         {
             var view = viewManager.ShowInTabControl<IEmployeesInquiryListView>(showInNewTab);
             ((InquirerInquirySubjectListVM)view.ViewModel).Load(employeeNo,periodId);
+        }
+
+        public void ShowJobIndexInquiryListView(string employeeNo, long periodId, bool isShiftPressed = false)
+        {
+            var view = viewManager.ShowInTabControl<IJobIndexInquiryListView>(isShiftPressed);
+            ((JobIndexInquiryListVM)view.ViewModel).Load(employeeNo, periodId);
         }
 
         public void ShowInquiryFormView(InquiryFormDTO inquiryForm, ActionType action)

@@ -17,6 +17,7 @@
             
             <vm:PrepareToExecInquiryVM x:Key="prepareToExecInquiryViewModel" />
             <vm:InquirerInquirySubjectListVM x:Key="employeesInquiryListViewModel" />
+            <vm:JobIndexInquiryListVM x:Key="jobIndexInquiryListVM" />
             <vm:InquiryFormVM  x:Key="inquiryFormViewModel" />
             
             <vm:EmployeeClaimListVM  x:Key="EmployeeClaimListViewModel" />

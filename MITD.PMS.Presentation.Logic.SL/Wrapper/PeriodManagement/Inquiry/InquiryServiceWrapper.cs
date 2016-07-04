@@ -16,9 +16,16 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
             this.userProvider = userProvider;
         }
 
+        //By employeee
         private string makeInquirerInquirySubjectApiAdress(long periodId, string inquirerEmployeeNo)
         {
             return "Periods/" + periodId + "/Inquirers/" + inquirerEmployeeNo + "/InquirySubjects";
+        }
+
+        //By index
+        private string makeInquirerInquiryIndexApiAdress(long periodId, string inquirerEmployeeNo)
+        {
+            return "Periods/" + periodId + "/Inquirers/" + inquirerEmployeeNo + "/InquiryIndices";
         }
 
         private string makeInquirySubjectJobIndexPointApiAdress(long periodId, string inquirerEmployeeNo,
@@ -29,6 +36,7 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
         }
 
 
+        //By employeee
         public void GetInquirerInquirySubjects(Action<List<InquirySubjectDTO>, Exception> action, long periodId, string inquirerEmployeeNo)
         {
             if (periodId == -1)
@@ -36,9 +44,23 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
                 action(new List<InquirySubjectDTO>(), null);
             }
 
-            var url = string.Format(baseAddress + makeInquirerInquirySubjectApiAdress(periodId, inquirerEmployeeNo ));
+            var url = string.Format(baseAddress + makeInquirerInquirySubjectApiAdress(periodId, inquirerEmployeeNo));
             WebClientHelper.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
+
+        //By index
+        public void GetInquirerInquiryIndices(Action<List<InquiryIndexDTO>, Exception> action, long periodId, string inquirerEmployeeNo)
+        {
+            if (periodId == -1)
+            {
+                action(new List<InquiryIndexDTO>(), null);
+            }
+
+            var url = string.Format(baseAddress + makeInquirerInquiryIndexApiAdress(periodId, inquirerEmployeeNo));
+            WebClientHelper.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         public void GetInquiryForm(Action<InquiryFormDTO, Exception> action, long periodId, string inquirerEmployeeNo, long inquirerJobPositionId, string inquirySubjectEmployeeNo, long jobPositionId)
         {

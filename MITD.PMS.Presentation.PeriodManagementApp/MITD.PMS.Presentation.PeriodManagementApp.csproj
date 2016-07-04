@@ -224,13 +224,15 @@
     <Compile Include="ViewModels\Claim\EmployeeClaimListVM.cs" />
     <Compile Include="ViewModels\Claim\ClaimVM.cs" />
     <Compile Include="ViewModels\Claim\ShowClaimVM.cs" />
-    <Compile Include="ViewModels\Inquiry\InquirerInquiryUnitListVM.cs" />
-    <Compile Include="ViewModels\Inquiry\InquiryUnitFormVM.cs" />
-    <Compile Include="ViewModels\Inquiry\InquiryFormVM.cs" />
+    <Compile Include="ViewModels\Inquiry\IndexByJobIndex\JobIndexInquiryListVM.cs" />
+    <Compile Include="ViewModels\Inquiry\IndexByJobIndex\JobIndexInquiryFormVM.cs" />
+    <Compile Include="ViewModels\Inquiry\Unit\InquirerInquiryUnitListVM.cs" />
+    <Compile Include="ViewModels\Inquiry\Unit\InquiryUnitFormVM.cs" />
+    <Compile Include="ViewModels\Inquiry\IndexByEmployee\InquiryFormVM.cs" />
     <Compile Include="ViewModels\Calculation\CalculationStatusVM.cs" />
     <Compile Include="ViewModels\JobPosition\InquirySubjectInquirersVM.cs" />
     <Compile Include="ViewModels\JobPosition\JobPositionInPeriodInquiryVM.cs" />
-    <Compile Include="ViewModels\Inquiry\InquirerInquirySubjectListVM.cs" />
+    <Compile Include="ViewModels\Inquiry\IndexByEmployee\InquirerInquirySubjectListVM.cs" />
     <Compile Include="ViewModels\Inquiry\PrepareToExecInquiryVM.cs" />
     <Compile Include="ViewModels\JobIndex\JobIndexInPeriodTreeVM.cs" />
     <Compile Include="ViewModels\JobIndex\JobIndexInPeriodVM.cs" />
@@ -316,16 +318,22 @@
     <Compile Include="Views\Claim\ClaimView.xaml.cs">
       <DependentUpon>ClaimView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Inquiry\InquiryUnitFormView.xaml.cs">
+    <Compile Include="Views\Inquiry\IndexByJobIndex\JobIndexInquiryListView.xaml.cs">
+      <DependentUpon>JobIndexInquiryListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inquiry\IndexByJobIndex\JobIndexInquiryFormView.xaml.cs">
+      <DependentUpon>JobIndexInquiryFormView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inquiry\Unit\InquiryUnitFormView.xaml.cs">
       <DependentUpon>InquiryUnitFormView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Inquiry\UnitsInquiryListView.xaml.cs">
+    <Compile Include="Views\Inquiry\Unit\UnitsInquiryListView.xaml.cs">
       <DependentUpon>UnitsInquiryListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Inquiry\EmployeesInquiryListView.xaml.cs">
+    <Compile Include="Views\Inquiry\IndexByEmployee\EmployeesInquiryListView.xaml.cs">
       <DependentUpon>EmployeesInquiryListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Inquiry\InquiryFormView.xaml.cs">
+    <Compile Include="Views\Inquiry\IndexByEmployee\InquiryFormView.xaml.cs">
       <DependentUpon>InquiryFormView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\JobPosition\JobPositionInPeriodInquiryView.xaml.cs">
@@ -468,19 +476,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Inquiry\InquiryUnitFormView.xaml">
+    <Page Include="Views\Inquiry\IndexByJobIndex\JobIndexInquiryListView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Inquiry\UnitsInquiryListView.xaml">
+    <Page Include="Views\Inquiry\IndexByJobIndex\JobIndexInquiryFormView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Inquiry\EmployeesInquiryListView.xaml">
+    <Page Include="Views\Inquiry\Unit\InquiryUnitFormView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Inquiry\Unit\UnitsInquiryListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Inquiry\IndexByEmployee\EmployeesInquiryListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Inquiry\InquiryFormView.xaml">
+    <Page Include="Views\Inquiry\IndexByEmployee\InquiryFormView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

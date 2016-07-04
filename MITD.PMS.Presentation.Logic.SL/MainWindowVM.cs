@@ -44,7 +44,7 @@ namespace MITD.PMS.Presentation.Logic
         private readonly IUserServiceWrapper userService;
         private readonly IInquiryServiceWrapper inquiryService;
         private List<ActionType> userAuthorizedActions;
-        private bool userHasInquirerRoleInActivePeriod=true;
+        private bool userHasInquirerRoleInActivePeriod = true;
 
         #endregion
 
@@ -217,7 +217,7 @@ namespace MITD.PMS.Presentation.Logic
 
         private ObservableCollection<TreeElementViewModel<ReportCommandVM>> createReportCommands()
         {
-            if(!LogonUser.IsAdmin)
+            if (!LogonUser.IsAdmin)
                 return new ObservableCollection<TreeElementViewModel<ReportCommandVM>>();
             var cmdList = new ObservableCollection<TreeElementViewModel<ReportCommandVM>>();
             ReportVM.IsBusy = true;
@@ -305,7 +305,7 @@ namespace MITD.PMS.Presentation.Logic
                                         var activePeriod = createActivePeriodDTOWithAction();
                                         if (activePeriod == null)
                                             return;
-                                        res.ShowUnitInPeriodTreeView(activePeriod,isShiftPressed);
+                                        res.ShowUnitInPeriodTreeView(activePeriod, isShiftPressed);
                                     }
                                     else if (exp != null)
                                     {
@@ -333,7 +333,7 @@ namespace MITD.PMS.Presentation.Logic
                                         var activePeriod = createActivePeriodDTOWithAction();
                                         if (activePeriod == null)
                                             return;
-                                        res.ShowUnitIndexInPeriodTreeView(activePeriod,isShiftPressed);
+                                        res.ShowUnitIndexInPeriodTreeView(activePeriod, isShiftPressed);
                                     }
                                     else if (exp != null)
                                     {
@@ -361,7 +361,7 @@ namespace MITD.PMS.Presentation.Logic
                                         var activePeriod = createActivePeriodDTOWithAction();
                                         if (activePeriod == null)
                                             return;
-                                        res.ShowJobInPeriodListView(activePeriod,isShiftPressed);
+                                        res.ShowJobInPeriodListView(activePeriod, isShiftPressed);
                                     }
                                     else if (exp != null)
                                     {
@@ -389,7 +389,7 @@ namespace MITD.PMS.Presentation.Logic
                                         var activePeriod = createActivePeriodDTOWithAction();
                                         if (activePeriod == null)
                                             return;
-                                        res.ShowJobIndexInPeriodTreeView(activePeriod,isShiftPressed);
+                                        res.ShowJobIndexInPeriodTreeView(activePeriod, isShiftPressed);
                                     }
                                     else if (exp != null)
                                     {
@@ -417,7 +417,7 @@ namespace MITD.PMS.Presentation.Logic
                                         var activePeriod = createActivePeriodDTOWithAction();
                                         if (activePeriod == null)
                                             return;
-                                        res.ShowJobPositionInPeriodTreeView(activePeriod,isShiftPressed);
+                                        res.ShowJobPositionInPeriodTreeView(activePeriod, isShiftPressed);
                                     }
                                     else if (exp != null)
                                     {
@@ -473,7 +473,7 @@ namespace MITD.PMS.Presentation.Logic
                                         var activePeriod = createActivePeriodDTOWithAction();
                                         if (activePeriod == null)
                                             return;
-                                        res.ShowCalculationListView(activePeriod,isShiftPressed);
+                                        res.ShowCalculationListView(activePeriod, isShiftPressed);
                                     }
                                     else if (exp != null)
                                     {
@@ -490,7 +490,7 @@ namespace MITD.PMS.Presentation.Logic
         private PeriodDTOWithAction createActivePeriodDTOWithAction()
         {
             if (CurrentPeriod != null && CurrentPeriod.Id != 0)
-                return new PeriodDTOWithAction {Id = CurrentPeriod.Id, Name = CurrentPeriod.Name};
+                return new PeriodDTOWithAction { Id = CurrentPeriod.Id, Name = CurrentPeriod.Name };
             controller.ShowMessage("در سیستم ارزسیابی دوره فعالی تعریف نشده است");
             return null;
         }
@@ -771,7 +771,8 @@ namespace MITD.PMS.Presentation.Logic
                                     controller.HideBusyIndicator();
                                     if (res != null)
                                     {
-                                        res.ShowUnitsInquiryListView(CurrentUser.EmployeeNo, CurrentPeriod.Id);
+                                        if (CurrentPeriod != null && CurrentPeriod.Id != 0)
+                                            res.ShowUnitsInquiryListView(CurrentUser.EmployeeNo, CurrentPeriod.Id);
                                     }
                                     else if (exp != null)
                                     {
@@ -781,6 +782,29 @@ namespace MITD.PMS.Presentation.Logic
                         }
                         )));
             }
+
+            cmdList.Add(
+                    new CommandViewModel("فهرست شاخص های نظرسنجی شونده", new DelegateCommand(
+                        () =>
+                        {
+                            controller.ShowBusyIndicator("در حال بارگذاری ماجول...");
+                            controller.GetRemoteInstance<IPeriodController>(
+                                (res, exp) =>
+                                {
+                                    controller.HideBusyIndicator();
+                                    if (res != null)
+                                    {
+                                        if (CurrentPeriod != null && CurrentPeriod.Id != 0)
+                                            res.ShowJobIndexInquiryListView(CurrentUser.EmployeeNo, CurrentPeriod.Id,
+                                                isShiftPressed);
+                                    }
+                                    else if (exp != null)
+                                    {
+                                        controller.HandleException(exp);
+                                    }
+                                });
+                        }
+                        )));
 
             if (userService.IsUserPermissionGranted(typeof(IPeriodController), "ShowEmployeesInquiryListView",
                 userAuthorizedActions) && userHasInquirerRoleInActivePeriod)
@@ -796,8 +820,9 @@ namespace MITD.PMS.Presentation.Logic
                                     controller.HideBusyIndicator();
                                     if (res != null)
                                     {
-                                        res.ShowEmployeesInquiryListView(CurrentUser.EmployeeNo, CurrentPeriod.Id,
-                                            isShiftPressed);
+                                        if (CurrentPeriod != null && CurrentPeriod.Id != 0)
+                                            res.ShowEmployeesInquiryListView(CurrentUser.EmployeeNo, CurrentPeriod.Id,
+                                                isShiftPressed);
                                     }
                                     else if (exp != null)
                                     {
@@ -822,8 +847,9 @@ namespace MITD.PMS.Presentation.Logic
                                     controller.HideBusyIndicator();
                                     if (res != null)
                                     {
-                                        res.ShowPeriodCalculationResultView(currentPriod, CurrentUser.EmployeeNo,
-                                            isShiftPressed);
+                                        if (CurrentPeriod != null && CurrentPeriod.Id != 0)
+                                            res.ShowPeriodCalculationResultView(currentPriod, CurrentUser.EmployeeNo,
+                                                isShiftPressed);
                                     }
                                     else if (exp != null)
                                     {

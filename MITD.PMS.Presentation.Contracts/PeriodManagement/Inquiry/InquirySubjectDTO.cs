@@ -68,4 +68,45 @@ namespace MITD.PMS.Presentation.Contracts
             get; set;
         }
     }
+
+
+    public partial class InquiryIndexDTO : IActionDTO
+    {
+        
+        private long jobIndexId;
+        public long JobIndexId
+        {
+            get { return jobIndexId; }
+            set { this.SetField(p => p.JobIndexId, ref jobIndexId, value); }
+        }
+
+       
+
+        private string jobIndexName;
+        public string JobIndexName
+        {
+            get { return jobIndexName; }
+            set { this.SetField(p => p.JobIndexName, ref jobIndexName, value); }
+        }
+
+        private string status;
+        public string Status
+        {
+            get { return status; }
+            set { this.SetField(p => p.Status, ref status, value); }
+        }
+
+        private bool isInquired;
+        public bool IsInquired
+        {
+            get { return isInquired; }
+            set { this.SetField(p => p.IsInquired, ref isInquired, value); }
+        }
+
+        public List<int> ActionCodes
+        {
+            get;
+            set;
+        }
+    }
 }

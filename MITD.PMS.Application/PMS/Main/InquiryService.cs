@@ -22,6 +22,7 @@ namespace MITD.PMS.Application
         private readonly IJobRepository jobRep;
         private readonly IJobIndexRepository jobIndexRep;
         private readonly IInquiryJobIndexPointService inquiryJobIndexPointService;
+        private readonly IInquiryJobIndexPointRepository inquiryJobIndexPointRepository;
         private readonly IPeriodManagerService periodChecker; 
         #endregion
 
@@ -33,6 +34,7 @@ namespace MITD.PMS.Application
             IJobRepository jobRep,
             IJobIndexRepository jobIndexRep,
             IInquiryJobIndexPointService inquiryJobIndexPointService,
+            IInquiryJobIndexPointRepository inquiryJobIndexPointRepository,
             IPeriodManagerService periodChecker
             )
         {
@@ -43,6 +45,7 @@ namespace MITD.PMS.Application
             this.jobRep = jobRep;
             this.jobIndexRep = jobIndexRep;
             this.inquiryJobIndexPointService = inquiryJobIndexPointService;
+            this.inquiryJobIndexPointRepository = inquiryJobIndexPointRepository;
             this.periodChecker = periodChecker;
         } 
         #endregion
@@ -59,6 +62,20 @@ namespace MITD.PMS.Application
             periodChecker.CheckShowingInquirySubject(inquirer);
             var configurationItems = configurator.GetJobPositionInquiryConfigurationItemBy(inquirer);
             return employeeRep.GetEmployeeByWithJobPosition(configurationItems.Select(c => c.Id), inquirer.Id.PeriodId);
+        }
+
+        public List<JobIndex> GetInquiryIndices(EmployeeId inquirerEmployeeId)
+        {
+            var inquirer = employeeRep.GetBy(inquirerEmployeeId);
+
+            // Return a list with 0 elements indicating that the given employee has no inquiry subjects
+            if (inquirer == null)
+                return new List<JobIndex>();
+
+            periodChecker.CheckShowingInquirySubject(inquirer);
+            var inquiryJobIndexIds = inquiryJobIndexPointRepository.GetAllJobIndexIdByInquirer(inquirerEmployeeId);
+            return jobIndexRep.FindJobIndices(inquiryJobIndexIds).ToList();
+
         }
 
         public List<InquiryJobIndexPoint> GetAllInquiryJobIndexPointBy(JobPositionInquiryConfigurationItemId configurationItemId)

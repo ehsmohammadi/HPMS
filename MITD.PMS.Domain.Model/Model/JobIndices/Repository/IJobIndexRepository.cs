@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using MITD.Domain.Repository;
+using MITD.PMS.Domain.Model.JobPositions;
 using MITD.PMS.Domain.Model.Periods;
 
 namespace MITD.PMS.Domain.Model.JobIndices

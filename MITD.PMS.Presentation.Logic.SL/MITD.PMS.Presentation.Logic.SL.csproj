@@ -115,19 +115,21 @@
     <Compile Include="Views\BasicInfo\UnitIndex\IUnitIndexTreeView.cs" />
     <Compile Include="Views\BasicInfo\UnitIndex\IUnitIndexView.cs" />
     <Compile Include="Views\BasicInfo\User\IChangePasswordView.cs" />
-    <Compile Include="Views\ICalculationExceptionListView.cs" />
-    <Compile Include="Views\ICalculationExceptionView.cs" />
+    <Compile Include="Views\PeriodManagement\Calculation\ICalculationExceptionListView.cs" />
+    <Compile Include="Views\PeriodManagement\Calculation\ICalculationExceptionView.cs" />
     <Compile Include="Views\IRuleTrailView.cs" />
     <Compile Include="Views\IRuleTrailListView.cs" />
     <Compile Include="Views\IManageWorkListUsersView.cs" />
-    <Compile Include="Views\IPeriodBasicDataCopyStatusView.cs" />
-    <Compile Include="Views\IPeriodStatusView.cs" />
-    <Compile Include="Views\IPeriodBasicDataCopyView.cs" />
+    <Compile Include="Views\PeriodManagement\Inquiry\IJobIndexInquiryListView.cs" />
+    <Compile Include="Views\PeriodManagement\Inquiry\IJobIndexInquiryFormView.cs" />
+    <Compile Include="Views\PeriodManagement\Period\IPeriodBasicDataCopyStatusView.cs" />
+    <Compile Include="Views\PeriodManagement\Period\IPeriodStatusView.cs" />
+    <Compile Include="Views\PeriodManagement\Period\IPeriodBasicDataCopyView.cs" />
     <Compile Include="Views\ILogListView.cs" />
     <Compile Include="Views\ILogView.cs" />
     <Compile Include="Views\IPartyCustomActionsView.cs" />
-    <Compile Include="Views\IUnitInPeriodUnitIndicesView.cs" />
-    <Compile Include="Views\IUnitInPrdFieldView.cs" />
+    <Compile Include="Views\PeriodManagement\Unit\IUnitInPeriodUnitIndicesView.cs" />
+    <Compile Include="Views\PeriodManagement\Unit\IUnitInPrdFieldView.cs" />
     <Compile Include="Views\BasicInfo\User\IUserView.cs" />
     <Compile Include="Views\BasicInfo\User\IUserGroupView.cs" />
     <Compile Include="Views\BasicInfo\User\IUserGroupListView.cs" />
@@ -140,21 +142,17 @@
     <Compile Include="Views\BasicInfo\CustomField\ICustomFieldView.cs" />
     <Compile Include="Views\BasicInfo\JobIndex\IJobIndexCategoryListView.cs" />
     <Compile Include="Views\BasicInfo\JobIndex\IJobIndexCategoryView.cs" />
-    <Compile Include="Views\IEmployeeView.cs" />
+    <Compile Include="Views\Employee\IEmployeeView.cs" />
     <Compile Include="Views\Employee\IEmployeeListView.cs" />
-    <Compile Include="Views\IIndexGroupInPeriodView.cs" />
-    <Compile Include="Views\IIndexInPrdFieldView.cs" />
-    <Compile Include="Views\IIndexInPeriodView.cs" />
-    <Compile Include="Views\IIndexInPeriodTreeView.cs" />
     <Compile Include="Views\BasicInfo\Function\IFunctionView.cs" />
     <Compile Include="Views\BasicInfo\Function\IFunctionListView.cs" />
     <Compile Include="Views\BasicInfo\JobIndex\IJobIndexListView.cs" />
     <Compile Include="Views\BasicInfo\JobIndex\IJobIndexView.cs" />
-    <Compile Include="Views\IJobInPeriodJobIndicesView.cs" />
-    <Compile Include="Views\IJobListView.cs" />
-    <Compile Include="Views\IJobPostListView.cs" />
-    <Compile Include="Views\IJobPostView.cs" />
-    <Compile Include="Views\IJobView.cs" />
+    <Compile Include="Views\PeriodManagement\Job\IJobInPeriodJobIndicesView.cs" />
+    <Compile Include="Views\BasicInfo\Job\IJobListView.cs" />
+    <Compile Include="Views\BasicInfo\JobPosition\IJobPostListView.cs" />
+    <Compile Include="Views\BasicInfo\JobPosition\IJobPostView.cs" />
+    <Compile Include="Views\BasicInfo\Job\IJobView.cs" />
     <Compile Include="Views\BasicInfo\Rule\IRuleVersionView.cs" />
     <Compile Include="Views\BasicInfo\Rule\IRuleListView.cs" />
     <Compile Include="Views\BasicInfo\Rule\IRuleView.cs" />
@@ -201,14 +199,10 @@
     <Compile Include="ComboBoxTreeView\SilverLightComboBoxTreeView.cs" />
     <Compile Include="UIBusinessClasses\SilverLightTreeViewHelper.cs" />
     <Compile Include="UIBusinessClasses\DataGridCommandViewModel.cs" />
-    <Compile Include="Views\IOrgElementJobPositionView.cs" />
-    <Compile Include="Views\IJobInPrdFieldView.cs" />
-    <Compile Include="Views\IJobPositionChartTreeView.cs" />
-    <Compile Include="Views\IUnitChartTreeView.cs" />
-    <Compile Include="Views\IOrgElementUnitView.cs" />
-    <Compile Include="Views\IJobInPeriodView.cs" />
-    <Compile Include="Views\IOrganizationChartTreeView.cs" />
-    <Compile Include="Views\IJobInPeriodListView.cs" />
+    <Compile Include="Views\PeriodManagement\Job\IJobInPrdFieldView.cs" />
+    <Compile Include="Views\BasicInfo\JobPosition\IJobPositionChartTreeView.cs" />
+    <Compile Include="Views\PeriodManagement\Job\IJobInPeriodView.cs" />
+    <Compile Include="Views\PeriodManagement\Job\IJobInPeriodListView.cs" />
     <Compile Include="Wrapper\IReportServiceWrapper.cs" />
     <Compile Include="Wrapper\PeriodManagement\Inquiry\UnitInquiryServiceWrapper.cs" />
     <Compile Include="Wrapper\PeriodManagement\Inquiry\IUnitInquiryServiceWrapper.cs" />
@@ -238,16 +232,14 @@
     <Compile Include="Controller\PMSController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Wrapper\BasicInfoManagement\Rule\IRuleServiceWrapper.cs" />
-    <Compile Include="Views\IPeriodView.cs" />
-    <Compile Include="Views\IPeriodListView.cs" />
+    <Compile Include="Views\PeriodManagement\Period\IPeriodView.cs" />
+    <Compile Include="Views\PeriodManagement\Period\IPeriodListView.cs" />
     <Compile Include="Wrapper\BasicInfoManagement\Job\JobServiceWrapper.cs" />
     <Compile Include="Wrapper\PeriodManagement\Period\PeriodServiceWrapper.cs" />
     <Compile Include="Wrapper\PeriodManagement\Unit\IUnitInPeriodServiceWrapper.cs" />
     <Compile Include="Wrapper\PeriodManagement\Unit\UnitInPeriodServiceWrapper.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\BasicInfo\JobPosition\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

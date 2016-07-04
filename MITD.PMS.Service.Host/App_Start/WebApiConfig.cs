@@ -185,6 +185,11 @@ namespace MITD.PMS.Service.Host
                defaults: new { Controller = "InquirerInquirySubjects", id = RouteParameter.Optional });
 
             config.Routes.MapHttpRoute(
+               name: "InquirerInquiryIndices",
+               routeTemplate: "api/Periods/{PeriodId}/Inquirers/{InquirerEmployeeNo}/InquiryIndices",
+               defaults: new { Controller = "InquirerInquiryIndices", id = RouteParameter.Optional });
+
+            config.Routes.MapHttpRoute(
                 name: "InquirySubjectJobPositionInquiryJobIndexPoints",
                 routeTemplate:
                     "api/Periods/{PeriodId}/Inquirers/{InquirerEmployeeNo}/InquirySubjects/{InquirySubjectEmployeeNo}/JobPositions/{JobPositionId}/InquiryJobIndexPoints",

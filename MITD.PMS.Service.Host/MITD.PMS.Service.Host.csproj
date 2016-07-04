@@ -232,6 +232,7 @@
     <Compile Include="Controllers\PMSAdmin\PolicyRuleTrailsController.cs" />
     <Compile Include="Controllers\PMS\CalculationsExceptionsController.cs" />
     <Compile Include="Controllers\PMS\EmployeeUnitsController.cs" />
+    <Compile Include="Controllers\PMS\InquirerInquiryIndicesController.cs" />
     <Compile Include="Controllers\PMS\InquirerInquiryUnitsController.cs" />
     <Compile Include="Controllers\PMS\InquiryUnitInquiryUnitIndexPointsController.cs" />
     <Compile Include="Controllers\PMS\UnitInquirySubjectsController.cs" />

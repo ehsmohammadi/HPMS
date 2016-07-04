@@ -40,6 +40,21 @@ namespace MITD.PMS.Interface
             return inquirySubjects.Select(i => inquiySubjectMapper.MapToModel(i)).ToList();
         }
 
+        public List<InquiryIndexDTO> GetInquirerInquiryIndices(long periodId, string inquirerEmployeeNo)
+        {
+            List<JobIndex> inquiryIndices =
+                 inquiryService.GetInquiryIndices(new EmployeeId(inquirerEmployeeNo, new PeriodId(periodId)));
+            return inquiryIndices.Select(i => new InquiryIndexDTO
+            {
+                JobIndexId = i.Id.Id,
+                JobIndexName = i.Name,
+                ActionCodes = new List<int>
+                {
+                    (int) ActionType.FillInquiryForm
+                }
+            }).ToList();
+        }
+
         [RequiredPermission(ActionType.FillInquiryForm)]
         public InquiryFormDTO GetInquiryForm(long periodId,long inquirerJobPositionId, string inquirerEmployeeNo, string inquirySubjectEmployeeNo,
             long jobPositionId)
