@@ -19,7 +19,8 @@
             <vm:InquirerInquirySubjectListVM x:Key="employeesInquiryListViewModel" />
             <vm:JobIndexInquiryListVM x:Key="jobIndexInquiryListVM" />
             <vm:InquiryFormVM  x:Key="inquiryFormViewModel" />
-            
+            <vm:JobIndexInquiryFormVM  x:Key="jobIndexInquiryFormViewModel" />
+
             <vm:EmployeeClaimListVM  x:Key="EmployeeClaimListViewModel" />
             <vm:ManagerClaimListVM  x:Key="ManagerClaimListViewModel" />
             <vm:ClaimVM  x:Key="claimViewModel" />

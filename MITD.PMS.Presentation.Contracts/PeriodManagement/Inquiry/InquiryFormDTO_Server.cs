@@ -8,4 +8,9 @@ namespace MITD.PMS.Presentation.Contracts
     {
        
     }
+
+    public partial class InquiryFormByIndexDTO : DTOBase
+    {
+
+    }
 }

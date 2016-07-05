@@ -20,16 +20,6 @@ namespace MITD.PMS.Presentation.Logic
 
         #region Properties
 
-        public Visibility SubInquirerEmployeesVisibilityMode
-        {
-            get
-            {
-                //var visibile = InquirySubjectInquirers.InquirerList.Count>1 ? Visibility.Visible : Visibility.Collapsed;
-                //return visibile;
-                return Visibility.Collapsed;
-            }
-        }
-
         private PeriodDTO period;
         public PeriodDTO Period
         {
@@ -51,8 +41,8 @@ namespace MITD.PMS.Presentation.Logic
             set { this.SetField(vm => vm.SelectedInquirer, ref selectedInquirer, value); }
         }
 
-        private InquiryFormDTO inquiryForm;
-        public InquiryFormDTO InquiryForm
+        private InquiryFormByIndexDTO inquiryForm;
+        public InquiryFormByIndexDTO InquiryForm
         {
             get { return inquiryForm; }
             set { this.SetField(vm => vm.InquiryForm, ref inquiryForm, value); }
@@ -113,19 +103,16 @@ namespace MITD.PMS.Presentation.Logic
         private void init()
         {
             inquirySubjectInquirers = new InquirySubjectInquiryFormListDTO();
-
-            
-
         }
 
 
-        public void Load(InquiryFormDTO inquiryFormDTOParam, ActionType actionTypeParam)
+        public void Load(InquiryFormByIndexDTO inquiryFormDTOParam, ActionType actionTypeParam)
         {
             periodId = inquiryFormDTOParam.PeriodId;
             actionType = actionTypeParam;
             InquiryForm = inquiryFormDTOParam;
             DisplayName = "فرم نظرسنجی" + " ";
-            foreach (var jobIndexValueDTO in InquiryForm.JobIndexValueList)
+            foreach (var jobIndexValueDTO in InquiryForm.EmployeeValueList)
             {
                 jobIndexValueDTO.Grades = fillGradesList();
             }
@@ -149,18 +136,18 @@ namespace MITD.PMS.Presentation.Logic
             ShowBusyIndicator();
             UserStateDTO userState = appController.CurrentUserState;
             //InquiryForm.JobIndexValueList = SelectedInquirer.JobIndexValueList;
-            inquiryService.UpdateInquirySubjectForm((res, exp) => appController.BeginInvokeOnDispatcher(() =>
-                    {
-                        HideBusyIndicator();
-                        if (exp != null)
-                            appController.HandleException(exp);
-                        else
-                        {
-                            OnRequestClose();
-                            appController.ShowMessage("فرم نظرسنجی ثبت شد");
-                        }
+            //inquiryService.UpdateInquirySubjectForm((res, exp) => appController.BeginInvokeOnDispatcher(() =>
+            //        {
+            //            HideBusyIndicator();
+            //            if (exp != null)
+            //                appController.HandleException(exp);
+            //            else
+            //            {
+            //                OnRequestClose();
+            //                appController.ShowMessage("فرم نظرسنجی ثبت شد");
+            //            }
 
-                    }), inquiryForm);
+            //        }), inquiryForm);
             
         }
        

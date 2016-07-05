@@ -4,7 +4,7 @@ using MITD.Presentation;
 
 namespace MITD.PMS.Presentation.Logic
 {
-    public class ManageInquiryFormService : IActionService<InquirerInquirySubjectListVM>
+    public class ManageInquiryFormService : IActionService<InquirerInquirySubjectListVM>,IActionService<JobIndexInquiryListVM>
     {
         private readonly IPeriodController periodController;
         private readonly IPMSController pmsController;
@@ -42,6 +42,25 @@ namespace MITD.PMS.Presentation.Logic
         }
 
 
+        public void DoAction(JobIndexInquiryListVM vm)
+        {
+            if (vm.SelectedInquiryIndex == null)
+                return;
+            inquiryService.GetInquiryFormByJobIndex((res, exp) => pmsController.BeginInvokeOnDispatcher(() =>
+            {
+                if (exp == null)
+                {
+                    res.FullName = vm.SelectedInquiryIndex.JobIndexName;
+                    periodController.ShowJobIndexInquiryFormView(res, ActionType.FillInquiryForm);
+                }
+
+                else
+                {
+                    pmsController.HandleException(exp);
+                }
+            }), vm.PeriodId, vm.InquirerEmployeeNo, vm.SelectedInquiryIndex.JobIndexId);
+
+        }
     }
 }
 

@@ -32,7 +32,8 @@ namespace MITD.PMS.Presentation.Logic
         #endregion
 
         void ShowInquiryUnitFormView(InquiryUnitFormDTO inquiryForm, ActionType action);
-
+        void ShowInquiryFormView(InquiryFormDTO inquiryForm, ActionType action);
+        void ShowJobIndexInquiryFormView(InquiryFormByIndexDTO inquiryForm, ActionType fillInquiryForm);
 
         void ShowUnitInPeriodInquiryView(PeriodDTO period, UnitInPeriodDTO unitInPeriodDto, ActionType action);
         void ShowPeriodView(PeriodDTO period, ActionType actionType);
@@ -76,7 +77,7 @@ namespace MITD.PMS.Presentation.Logic
         void ShowPrepareToExcuteInquiryView(long id);
 
 
-        void ShowInquiryFormView(InquiryFormDTO inquiryForm, ActionType action);
+
 
         [RequiredPermission(ActionType.ManageCalculations)]
         void ShowCalculationListView(PeriodDTOWithAction periodId, bool showInNewTab = false);
@@ -99,5 +100,6 @@ namespace MITD.PMS.Presentation.Logic
         void ShowManagerClaimListView(PeriodDTO periodDTO, bool showInNewTab = false);
         void ShowCalculationExceptionListView(CalculationDTO calculation);
 
+        
     }
 }

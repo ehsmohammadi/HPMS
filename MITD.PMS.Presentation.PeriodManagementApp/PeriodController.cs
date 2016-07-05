@@ -303,6 +303,13 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
             viewManager.ShowInDialog(view);
         }
 
+        public void ShowJobIndexInquiryFormView(InquiryFormByIndexDTO inquiryForm, ActionType action)
+        {
+            var view = ServiceLocator.Current.GetInstance<IJobIndexInquiryFormView>();
+            ((JobIndexInquiryFormVM)view.ViewModel).Load(inquiryForm, action);
+            viewManager.ShowInDialog(view);
+        }
+
         #endregion
 
         public void ShowCalculationListView(PeriodDTOWithAction period, bool showInNewTab = false)

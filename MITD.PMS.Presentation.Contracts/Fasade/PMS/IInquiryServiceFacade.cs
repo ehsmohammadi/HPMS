@@ -14,7 +14,10 @@ namespace MITD.PMS.Presentation.Contracts
         InquiryFormDTO GetInquiryForm(long periodId,long inquirerJobPositionId, string inquirerEmployeeNo, string inquirySubjectEmployeeNo,
             long jobPositionId);
 
+        InquiryFormByIndexDTO GetInquiryFormByIndex(long periodId, string inquirerEmployeeNo, long jobIndexId);
+
         InquiryFormDTO UpdateInquirySubjectForm(InquiryFormDTO inquiryForm);
+
         
     }
 }

@@ -52,4 +52,32 @@ namespace MITD.PMS.Presentation.Contracts
 
        
     }
+
+    public partial class InquiryFormByIndexDTO
+    {
+
+        private long periodId;
+        public long PeriodId
+        {
+            get { return periodId; }
+            set { this.SetField(p => p.PeriodId, ref periodId, value); }
+        }
+
+        private long jobIndexId;
+        public long JobIndexId
+        {
+            get { return jobIndexId; }
+            set { this.SetField(p => p.JobIndexId, ref jobIndexId, value); }
+        }
+
+
+        private List<EmployeeValueDTO> employeeValueList;
+        public List<EmployeeValueDTO> EmployeeValueList
+        {
+            get { return employeeValueList; }
+            set { this.SetField(p => p.EmployeeValueList, ref employeeValueList, value); }
+        }
+
+
+    }
 }

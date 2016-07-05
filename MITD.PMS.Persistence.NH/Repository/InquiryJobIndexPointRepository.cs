@@ -41,7 +41,7 @@ namespace MITD.PMS.Persistence.NH
 
         public void Find(Expression<Func<InquiryJobIndexPoint, bool>> predicate, ListFetchStrategy<InquiryJobIndexPoint> fs)
         {
-            rep.Find(predicate,fs);
+            rep.Find(predicate, fs);
         }
 
 
@@ -57,7 +57,7 @@ namespace MITD.PMS.Persistence.NH
 
         public InquiryJobIndexPoint GetBy(JobPositionInquiryConfigurationItemId configurationItemId, AbstractJobIndexId jobIndexId)
         {
-            return  rep.Find(i => i.ConfigurationItemId.InquirerId.EmployeeNo == configurationItemId.InquirerId.EmployeeNo &&
+            return rep.Find(i => i.ConfigurationItemId.InquirerId.EmployeeNo == configurationItemId.InquirerId.EmployeeNo &&
                 i.ConfigurationItemId.InquirerJobPositionId.SharedJobPositionId.Id == configurationItemId.InquirerJobPositionId.SharedJobPositionId.Id &&
                  i.ConfigurationItemId.InquirySubjectId.EmployeeNo == configurationItemId.InquirySubjectId.EmployeeNo &&
                  i.ConfigurationItemId.InquirySubjectJobPositionId.SharedJobPositionId.Id == configurationItemId.InquirySubjectJobPositionId.SharedJobPositionId.Id &&
@@ -68,14 +68,25 @@ namespace MITD.PMS.Persistence.NH
         public bool IsAllInquiryJobIndexPointsHasValue(Period period)
         {
             return rep.GetQuery()
-                .Count(p => p.ConfigurationItemId.InquirerId.PeriodId == period.Id && (p.JobIndexValue.Trim() == "" || p.JobIndexValue.Trim() == string.Empty || p.JobIndexValue.Trim()==null)) == 0;
+                .Count(p => p.ConfigurationItemId.InquirerId.PeriodId == period.Id && (p.JobIndexValue.Trim() == "" || p.JobIndexValue.Trim() == string.Empty || p.JobIndexValue.Trim() == null)) == 0;
         }
 
         public List<AbstractJobIndexId> GetAllJobIndexIdByInquirer(EmployeeId inquirerEmployeeId)
         {
             return
-                rep.Find(i => i.ConfigurationItemId.InquirerId.EmployeeNo == inquirerEmployeeId.EmployeeNo)
+                rep.Find(i => i.ConfigurationItemId.InquirerId.PeriodId == inquirerEmployeeId.PeriodId && i.ConfigurationItemId.InquirerId.EmployeeNo == inquirerEmployeeId.EmployeeNo)
                     .Select(i => i.JobIndexId).Distinct()
+                    .ToList();
+        }
+
+        public List<InquiryJobIndexPoint> GetAllBy(PeriodId periodId, EmployeeId inquirerEmployeeId, AbstractJobIndexId jobIndexId)
+        {
+            return
+                rep.Find(
+                    i =>
+                        i.ConfigurationItemId.InquirerId.PeriodId == periodId &&
+                        i.ConfigurationItemId.InquirerId.EmployeeNo == inquirerEmployeeId.EmployeeNo &&
+                        i.JobIndexId == jobIndexId)
                     .ToList();
         }
 

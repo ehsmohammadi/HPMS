@@ -234,6 +234,7 @@
     <Compile Include="Controllers\PMS\EmployeeUnitsController.cs" />
     <Compile Include="Controllers\PMS\InquirerInquiryIndicesController.cs" />
     <Compile Include="Controllers\PMS\InquirerInquiryUnitsController.cs" />
+    <Compile Include="Controllers\PMS\InquiryIndexInquiryJobIndexPointsController.cs" />
     <Compile Include="Controllers\PMS\InquiryUnitInquiryUnitIndexPointsController.cs" />
     <Compile Include="Controllers\PMS\UnitInquirySubjectsController.cs" />
     <Compile Include="Controllers\PMS\PeriodUnitIndexController.cs" />

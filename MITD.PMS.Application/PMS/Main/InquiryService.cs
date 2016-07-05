@@ -7,6 +7,7 @@ using MITD.PMS.Domain.Model.InquiryJobIndexPoints;
 using MITD.PMS.Domain.Model.JobIndices;
 using MITD.PMS.Domain.Model.JobPositions;
 using MITD.PMS.Domain.Model.Jobs;
+using MITD.PMS.Domain.Model.Periods;
 using MITD.PMS.Domain.Service;
 using MITD.PMSReport.Domain.Model;
 
@@ -85,6 +86,11 @@ namespace MITD.PMS.Application
             var itm = jobPosition.ConfigurationItemList.Single(c => c.Id.Equals(configurationItemId));
             CreateAllInquiryJobIndexPoint(itm);
             return inquiryJobIndexPointRep.GetAllBy(itm.Id);
+        }
+
+        public List<InquiryJobIndexPoint> GetAllInquiryJobIndexPointByIndex(PeriodId periodId, EmployeeId inquirerEmployeeId, AbstractJobIndexId jobIndexId)
+        {
+            return inquiryJobIndexPointRep.GetAllBy(periodId, inquirerEmployeeId, jobIndexId);
         }
 
         public void UpdateInquiryJobIndexPoints(IEnumerable<InquiryJobIndexPoinItem> inquiryJobIndexPoinItems)

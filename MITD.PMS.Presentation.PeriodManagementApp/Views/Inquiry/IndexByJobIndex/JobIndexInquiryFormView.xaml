@@ -9,7 +9,7 @@
     xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
     mc:Ignorable="d"
     d:DesignHeight="500" d:DesignWidth="600"
-    d:DataContext="{Binding Source={StaticResource inquiryFormViewModel}}"
+    d:DataContext="{Binding Source={StaticResource jobIndexInquiryFormViewModel}}"
     FlowDirection="RightToLeft">
     <ScrollViewer BorderThickness="0"  VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
         <Grid Name="LayoutRoot"  Background="Transparent" Height="500" Width="600"  >
@@ -42,19 +42,21 @@
             </Border>-->
 
             <sdk:DataGrid Grid.Row="2" Name="drgList" AutoGenerateColumns="False" HorizontalAlignment="Stretch" SelectionMode="Single" 
-                      ItemsSource="{Binding Path=InquiryForm.JobIndexValueList}" >
+                      ItemsSource="{Binding Path=InquiryForm.EmployeeValueList}" >
 
                 <sdk:DataGrid.Columns>
 
                     <!--<sdk:DataGridTextColumn Header="نام شاخص" CanUserReorder="True" CanUserResize="True"  CanUserSort="True" Width="Auto"
                     Binding="{Binding Path=JobIndexName}"  IsReadOnly="True" />-->
-                    <sdk:DataGridTemplateColumn Header=" شاخص" IsReadOnly="True" Width="*" >
-                        <sdk:DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock  TextWrapping="Wrap"   Text="{Binding Path=JobIndexName,Mode=TwoWay}"/>
-                            </DataTemplate>
-                        </sdk:DataGridTemplateColumn.CellTemplate>
-                    </sdk:DataGridTemplateColumn>
+                    <sdk:DataGridTextColumn Header="نام و نام خانوادگی " CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto"
+                    Binding="{Binding Path=FullName}"  />
+
+                    <sdk:DataGridTextColumn Header="پست " CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto"
+                    Binding="{Binding Path=JobPositionName}"  />
+
+                    <sdk:DataGridTextColumn Header="پست شما " CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto"
+                    Binding="{Binding Path=InquirerJobPositionName}"  />
+
                     <sdk:DataGridTemplateColumn Header="نمره" IsReadOnly="False" Width="130" >
                         <sdk:DataGridTemplateColumn.CellTemplate  >
                             <DataTemplate>

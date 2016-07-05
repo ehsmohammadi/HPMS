@@ -7,5 +7,12 @@ namespace MITD.PMS.Presentation.Contracts
         public string FullName { get; set; }
     }
 
+    public partial class InquiryFormByIndexDTO : ViewModelBase
+    {
+        public string FullName { get; set; }
+    }
+
+    
+
 
 }

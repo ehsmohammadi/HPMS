@@ -17,9 +17,11 @@ namespace MITD.PMS.Domain.Model.InquiryJobIndexPoints
         bool IsAllInquiryJobIndexPointsHasValue(Period period);
 
         List<AbstractJobIndexId> GetAllJobIndexIdByInquirer(EmployeeId inquirerEmployeeId);
+        List<InquiryJobIndexPoint> GetAllBy(PeriodId periodId, EmployeeId inquirerEmployeeId, AbstractJobIndexId jobIndexId);
 
         Exception ConvertException(Exception exp);
         Exception TryConvertException(Exception exp);
-        
+
+
     }
 }

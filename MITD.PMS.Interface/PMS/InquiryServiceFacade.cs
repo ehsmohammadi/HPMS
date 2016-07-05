@@ -21,15 +21,19 @@ namespace MITD.PMS.Interface
         private readonly IInquiryService inquiryService;
         private readonly IMapper<InquirySubjectWithJobPosition, InquirySubjectDTO> inquiySubjectMapper;
         private readonly IJobIndexRepository jobIndexRep;
+        private readonly IJobPositionRepository jobPositionRepository;
+        private readonly IEmployeeRepository employeeRepository;
 
 
         public InquiryServiceFacade(IInquiryService inquiryService,
             IMapper<InquirySubjectWithJobPosition, InquirySubjectDTO> inquiySubjectMapper,
-            IJobIndexRepository jobIndexRep)
+            IJobIndexRepository jobIndexRep,IJobPositionRepository jobPositionRepository,IEmployeeRepository employeeRepository)
         {
             this.inquiryService = inquiryService;
             this.inquiySubjectMapper = inquiySubjectMapper;
             this.jobIndexRep = jobIndexRep;
+            this.jobPositionRepository = jobPositionRepository;
+            this.employeeRepository = employeeRepository;
         }
 
         [RequiredPermission(ActionType.ShowEmployeeInquiry)]
@@ -95,6 +99,39 @@ namespace MITD.PMS.Interface
 
             inquiryForm.JobIndexValueList = inquiryJobIndexValueList;
 
+            return inquiryForm;
+        }
+
+        public InquiryFormByIndexDTO GetInquiryFormByIndex(long periodId, string inquirerEmployeeNo, long jobIndexId)
+        {
+            List<InquiryJobIndexPoint> inquryJobIndexPoints =
+                inquiryService.GetAllInquiryJobIndexPointByIndex(new PeriodId(periodId), new EmployeeId(inquirerEmployeeNo, new PeriodId(periodId)),new AbstractJobIndexId(jobIndexId));
+            var inquiryForm = new InquiryFormByIndexDTO
+            {
+                PeriodId = periodId,
+                JobIndexId = jobIndexId,
+            };
+            inquiryForm.EmployeeValueList=new List<EmployeeValueDTO>();
+            foreach (var inquiryJobIndexPoint in inquryJobIndexPoints)
+            {
+                var inquirerJobPositionId = inquiryJobIndexPoint.ConfigurationItemId.InquirerJobPositionId;
+                var inquirerJobposition = jobPositionRepository.GetBy(inquirerJobPositionId);
+                var inquirySubjectId = inquiryJobIndexPoint.ConfigurationItemId.InquirySubjectId;
+                var inquirySubject = employeeRepository.GetBy(inquirySubjectId);
+                var inquirySubjectJobpositionId = inquiryJobIndexPoint.ConfigurationItemId.InquirySubjectJobPositionId;
+                var inquirySubjectJobposition=jobPositionRepository.GetBy(inquirySubjectJobpositionId);
+                inquiryForm.EmployeeValueList.Add(new EmployeeValueDTO
+                {
+                     InquireEmployeeNo = inquiryJobIndexPoint.ConfigurationItemId.InquirerId.EmployeeNo,
+                     InquirerJobPositionId = inquirerJobPositionId.SharedJobPositionId.Id,
+                     InquirerJobPositionName = inquirerJobposition.Name,
+                     EmployeeNo = inquirySubject.Id.EmployeeNo,
+                     FullName = inquirySubject.FirstName+" "+inquirySubject.LastName,
+                     JobPositionId = inquirySubjectJobpositionId.SharedJobPositionId.Id,
+                     JobPositionName =inquirySubjectJobposition.Name,
+                     IndexValue = inquiryJobIndexPoint.JobIndexValue
+                });
+            }
             return inquiryForm;
         }
 

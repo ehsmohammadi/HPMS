@@ -35,6 +35,12 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
                    inquirySubjectEmployeeNo + "/JobPositions/" + jobPositionId + "/InquiryJobIndexPoints";
         }
 
+        private string makeJobIndexPointByIndexApiAdress(long periodId, string inquirerEmployeeNo, long jobIndexId)
+        {
+            return "Periods/" + periodId + "/Inquirers/" + inquirerEmployeeNo + "/InquiryIndices/" +
+                   jobIndexId + "/InquiryJobIndexPoints";
+        }
+
 
         //By employeee
         public void GetInquirerInquirySubjects(Action<List<InquirySubjectDTO>, Exception> action, long periodId, string inquirerEmployeeNo)
@@ -66,6 +72,13 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
         {
             var url = string.Format(baseAddress + makeInquirySubjectJobIndexPointApiAdress(periodId, inquirerEmployeeNo, inquirySubjectEmployeeNo, jobPositionId) + "?InquirerJobPositionId=" + inquirerJobPositionId);
             WebClientHelper.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+        }
+
+        public void GetInquiryFormByJobIndex(Action<InquiryFormByIndexDTO, Exception> action, long periodId, string inquirerEmployeeNo, long jobIndexId)
+        {
+            var url = string.Format(baseAddress + makeJobIndexPointByIndexApiAdress(periodId, inquirerEmployeeNo, jobIndexId));
+            WebClientHelper.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+
         }
 
         public void UpdateInquirySubjectForm(Action<InquiryFormDTO, Exception> action, InquiryFormDTO inquiryForm)
