@@ -12,10 +12,10 @@ using MITD.PMS.Presentation.Contracts;
 
 namespace MITD.PMS.Presentation.PeriodManagementApp
 {
-    public class UpdateEmployeesInquiryListArgs
+    public class UpdateInquiryListArgs
     {
 
-        public UpdateEmployeesInquiryListArgs()
+        public UpdateInquiryListArgs()
         {
         }
     }

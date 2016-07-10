@@ -19,7 +19,7 @@ namespace MITD.PMS.Presentation.Logic
 
         void UpdateInquirySubjectForm(Action<InquiryFormDTO, Exception> action, InquiryFormDTO inquiryForm);
 
-
+        void UpdateJobIndexInquiryForm(Action<InquiryFormByIndexDTO, Exception> action, InquiryFormByIndexDTO inquiryForm);
 
         
         void GetInquirySubjectSubEmployeesInquiryFormList(Action<InquirySubjectInquiryFormListDTO, Exception> action, long periodId,

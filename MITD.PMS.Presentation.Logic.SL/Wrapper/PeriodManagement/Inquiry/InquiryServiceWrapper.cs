@@ -90,7 +90,15 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
             WebClientHelper.Put(new Uri(url, PMSClientConfig.UriKind), action, inquiryForm, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 
-        
+        public void UpdateJobIndexInquiryForm(Action<InquiryFormByIndexDTO, Exception> action, InquiryFormByIndexDTO inquiryForm)
+        {
+            var url =
+                string.Format(baseAddress +
+                              makeJobIndexPointByIndexApiAdress(inquiryForm.PeriodId,inquiryForm.InquirerEmployeeNo,inquiryForm.JobIndexId) + "?Batch=1");
+            WebClientHelper.Put(new Uri(url, PMSClientConfig.UriKind), action, inquiryForm, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+        }
+
+
         public void GetInquirySubjectSubEmployeesInquiryFormList(Action<InquirySubjectInquiryFormListDTO, Exception> action,
                                                           long periodId,string inquirySubjectEmployeeNo,long inquirySubjectJobPositionId,
                                                           string managerInquirerEmployeeNo,long managerInquirerJobPositionId)

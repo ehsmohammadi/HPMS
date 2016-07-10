@@ -4,10 +4,11 @@ using System.Linq;
 using MITD.PMS.Presentation.Contracts;
 using MITD.PMS.Presentation.PeriodManagementApp;
 using MITD.Presentation;
+using MITD.Core;
 
 namespace MITD.PMS.Presentation.Logic
 {
-    public class JobIndexInquiryListVM : PeriodMgtWorkSpaceViewModel
+    public class JobIndexInquiryListVM : PeriodMgtWorkSpaceViewModel,IEventHandler<UpdateInquiryListArgs>
     {
         #region Fields
 
@@ -95,7 +96,7 @@ namespace MITD.PMS.Presentation.Logic
 
         void init()
         {
-            DisplayName = "لیست شاخص ها برای نظر سنجی";
+            DisplayName = "لیست شاخص ها برای ارزیابی";
             InquiryIndices = new ObservableCollection<InquiryIndexDTO>();
             SelectedInquiryIndex = new InquiryIndexDTO();
         }
@@ -144,6 +145,11 @@ namespace MITD.PMS.Presentation.Logic
         }
 
         #endregion
+
+        public void Handle(UpdateInquiryListArgs eventData)
+        {
+            refresh();
+        }
     }
 
 }

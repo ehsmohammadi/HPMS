@@ -122,7 +122,7 @@ namespace MITD.PMS.Presentation.Logic
            
             //todo bz
             InquiryForm = inquiryFormDTOParam;
-            //DisplayName = "فرم نظرسنجی" + " "; //+ InquiryForm.FullName;
+            DisplayName = "فرم ارزیابی" + " "; //+ InquiryForm.FullName;
             //ShowBusyIndicator("در حال دریافت اطلاعات...");
             //inquiryService.GetInquirySubjectSubEmployeesInquiryFormList((res, exp) =>
             //     appController.BeginInvokeOnDispatcher(() =>
@@ -151,7 +151,7 @@ namespace MITD.PMS.Presentation.Logic
                         else
                         {
                             OnRequestClose();
-                            appController.ShowMessage("فرم نظرسنجی ثبت شد");
+                            appController.ShowMessage("فرم ارزیابی ثبت شد");
                         }
 
                     }), inquiryForm);

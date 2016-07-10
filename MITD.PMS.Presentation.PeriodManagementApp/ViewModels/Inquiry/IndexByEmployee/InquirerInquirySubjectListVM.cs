@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using MITD.Core;
 using MITD.PMS.Presentation.Contracts;
 using MITD.PMS.Presentation.PeriodManagementApp;
 using MITD.PMS.Presentation.PeriodManagementApp.Views;
@@ -8,7 +9,8 @@ using MITD.Presentation;
 
 namespace MITD.PMS.Presentation.Logic
 {
-    public class InquirerInquirySubjectListVM : PeriodMgtWorkSpaceViewModel
+    public class InquirerInquirySubjectListVM : PeriodMgtWorkSpaceViewModel,IEventHandler<UpdateInquiryListArgs>
+
     {
         #region Fields
 
@@ -93,7 +95,7 @@ namespace MITD.PMS.Presentation.Logic
 
         void init()
         {
-            DisplayName = "لیست افراد آماده برای نظر سنجی";
+            DisplayName = "لیست افراد آماده برای ارزیابی";
             InquirySubjects = new ObservableCollection<InquirySubjectDTO>();
             SelectedInquirySubject = new InquirySubjectDTO();
         }
@@ -142,6 +144,11 @@ namespace MITD.PMS.Presentation.Logic
         }
 
         #endregion
+
+        public void Handle(UpdateInquiryListArgs eventData)
+        {
+            refresh();
+        }
     }
 
 }

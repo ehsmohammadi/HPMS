@@ -761,7 +761,7 @@ namespace MITD.PMS.Presentation.Logic
                 userAuthorizedActions))
             {
                 cmdList.Add(
-                    new CommandViewModel("نظر سنجی واحد های سازمانی", new DelegateCommand(
+                    new CommandViewModel("ارزیابی واحد های سازمانی", new DelegateCommand(
                         () =>
                         {
                             controller.ShowBusyIndicator("در حال بارگذاری ماجول...");
@@ -784,7 +784,7 @@ namespace MITD.PMS.Presentation.Logic
             }
 
             cmdList.Add(
-                    new CommandViewModel("نظر سنجی بر اساس شاخص", new DelegateCommand(
+                    new CommandViewModel("ارزیابی بر اساس شاخص", new DelegateCommand(
                         () =>
                         {
                             controller.ShowBusyIndicator("در حال بارگذاری ماجول...");
@@ -810,7 +810,7 @@ namespace MITD.PMS.Presentation.Logic
                 userAuthorizedActions) && userHasInquirerRoleInActivePeriod)
             {
                 cmdList.Add(
-                    new CommandViewModel("نظر سنجی بر اساس افراد", new DelegateCommand(
+                    new CommandViewModel("ارزیابی بر اساس افراد", new DelegateCommand(
                         () =>
                         {
                             controller.ShowBusyIndicator("در حال بارگذاری ماجول...");

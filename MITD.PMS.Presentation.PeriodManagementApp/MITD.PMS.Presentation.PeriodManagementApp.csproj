@@ -188,7 +188,7 @@
     <Compile Include="EventArgs\Calculation\UpdateCalculationResultArgs.cs" />
     <Compile Include="EventArgs\Calculation\UpdateCalculationListArgs.cs" />
     <Compile Include="EventArgs\MyTasks\UpdatePermittedEmployeeListArgs.cs" />
-    <Compile Include="EventArgs\Inquiry\UpdateEmployeesInquiryListArgs.cs" />
+    <Compile Include="EventArgs\Inquiry\UpdateInquiryListArgs.cs" />
     <Compile Include="EventArgs\JobIndex\UpdateJobIndexInPeriodTreeArgs.cs" />
     <Compile Include="EventArgs\JobPosition\UpdateJobPositionInPeriodTreeArgs.cs" />
     <Compile Include="EventArgs\Job\UpdateJobInPeriodJobIndexListArgs.cs" />

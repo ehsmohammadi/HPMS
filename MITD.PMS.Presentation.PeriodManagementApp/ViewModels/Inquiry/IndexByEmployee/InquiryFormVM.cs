@@ -128,7 +128,7 @@ namespace MITD.PMS.Presentation.Logic
             periodId = inquiryFormDTOParam.PeriodId;
             actionType = actionTypeParam;
             InquiryForm = inquiryFormDTOParam;
-            DisplayName = "فرم نظرسنجی" + " ";
+            DisplayName = "فرم ارزیابی" + " ";
             foreach (var jobIndexValueDTO in InquiryForm.JobIndexValueList)
             {
                 jobIndexValueDTO.Grades = fillGradesList();
@@ -160,8 +160,9 @@ namespace MITD.PMS.Presentation.Logic
                             appController.HandleException(exp);
                         else
                         {
-                            OnRequestClose();
-                            appController.ShowMessage("فرم نظرسنجی ثبت شد");
+                            appController.Publish(new UpdateInquiryListArgs());
+                            OnRequestClose();                           
+                            appController.ShowMessage("فرم ارزیابی ثبت شد");
                         }
 
                     }), inquiryForm);

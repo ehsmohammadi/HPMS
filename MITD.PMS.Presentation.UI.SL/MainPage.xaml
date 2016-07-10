@@ -57,7 +57,7 @@
             <ItemsControl ItemsSource="{Binding}" >
                 <ItemsControl.ItemTemplate >
                     <DataTemplate >
-                        <Border BorderThickness="0,0,0,1" Margin="5,0,0,0" Padding="0,0,3,3" BorderBrush="#add8e6">
+                        <Border BorderThickness="0,0,0,1" Margin="5,0,0,0" Padding="0,0,3,3" BorderBrush="#add8e6" HorizontalAlignment="Stretch">
                             <HyperlinkButton Command="{Binding Path=Command,Mode=TwoWay}" FontSize="11"  Click="HyperlinkButton_Click" > 
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -172,7 +172,7 @@
                                                Header="کارتابل من"  >
 
                             <StackPanel Background="White">
-                                <ContentControl Background="White" Content="{Binding Path=WorkListCommands,Mode=TwoWay}" ContentTemplate="{StaticResource CommandViewModelTemplate}" />
+                                <ContentControl Background="White" HorizontalAlignment="Stretch" Content="{Binding Path=WorkListCommands,Mode=TwoWay}" ContentTemplate="{StaticResource CommandViewModelTemplate}" />
                             </StackPanel>
 
 

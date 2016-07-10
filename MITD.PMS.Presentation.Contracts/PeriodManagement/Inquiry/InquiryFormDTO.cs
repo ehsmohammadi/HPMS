@@ -70,6 +70,13 @@ namespace MITD.PMS.Presentation.Contracts
             set { this.SetField(p => p.JobIndexId, ref jobIndexId, value); }
         }
 
+        private string inquirerEmployeeNo;
+        public string InquirerEmployeeNo
+        {
+            get { return inquirerEmployeeNo; }
+            set { this.SetField(p => p.InquirerEmployeeNo, ref inquirerEmployeeNo, value); }
+        }
+
 
         private List<EmployeeValueDTO> employeeValueList;
         public List<EmployeeValueDTO> EmployeeValueList

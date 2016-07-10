@@ -94,7 +94,7 @@ namespace MITD.PMS.Presentation.Logic
 
         void init()
         {
-            DisplayName = "لیست واحد های آماده برای نظر سنجی";
+            DisplayName = "لیست واحد های آماده برای ارزیابی";
             InquirySubjects = new ObservableCollection<InquiryUnitDTO>();
             SelectedInquirySubject = new InquiryUnitDTO();
         }

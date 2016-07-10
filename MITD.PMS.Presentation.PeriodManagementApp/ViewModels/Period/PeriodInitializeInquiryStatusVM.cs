@@ -101,7 +101,7 @@ namespace MITD.PMS.Presentation.Logic
 
         private void init()
         {
-            DisplayName = "وضعیت اجرای آماده سازی نظرسنجی";
+            DisplayName = "وضعیت اجرای آماده سازی ارزیابی";
         }
 
         public void Load(PeriodDTO periodParam, ActionType type)

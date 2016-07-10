@@ -25,7 +25,7 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
                 pmsController.ShowMessage("دوره ای انتخاب نشده است");
                 return;
             }
-            if (pmsController.ShowConfirmationBox("آیا می خواهید دوره انتخاب شده را برای نظرسنجی آماده کنید ؟", "آماده سازی برای نظرسنجی"))
+            if (pmsController.ShowConfirmationBox("آیا می خواهید دوره انتخاب شده را برای ارزیابی آماده کنید ؟", "آماده سازی برای ارزیابی"))
             {
                 periodService.ChangePeriodState(exp => pmsController.BeginInvokeOnDispatcher(() =>
                 {

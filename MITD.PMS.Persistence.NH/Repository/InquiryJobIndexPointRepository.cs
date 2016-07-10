@@ -71,6 +71,14 @@ namespace MITD.PMS.Persistence.NH
                 .Count(p => p.ConfigurationItemId.InquirerId.PeriodId == period.Id && (p.JobIndexValue.Trim() == "" || p.JobIndexValue.Trim() == string.Empty || p.JobIndexValue.Trim() == null)) == 0;
         }
 
+        public bool IsAllInquiryJobIndexPointsHasValue(EmployeeId inquirerId, long jobIndexId)
+        {
+            return
+                rep.GetQuery().Count(i => i.ConfigurationItemId.InquirerId.PeriodId == inquirerId.PeriodId &&
+                                          i.ConfigurationItemId.InquirerId.EmployeeNo == inquirerId.EmployeeNo &&
+                                          i.JobIndexId.Id == jobIndexId && i.JobIndexValue == "") == 0;
+        }
+
         public List<AbstractJobIndexId> GetAllJobIndexIdByInquirer(EmployeeId inquirerEmployeeId)
         {
             return
@@ -124,5 +132,7 @@ namespace MITD.PMS.Persistence.NH
             }
             return res;
         }
+
+
     }
 }

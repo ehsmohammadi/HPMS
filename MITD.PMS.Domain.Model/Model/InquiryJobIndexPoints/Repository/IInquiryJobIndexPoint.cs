@@ -23,5 +23,6 @@ namespace MITD.PMS.Domain.Model.InquiryJobIndexPoints
         Exception TryConvertException(Exception exp);
 
 
+        bool IsAllInquiryJobIndexPointsHasValue(EmployeeId inquirerId, long jobIndexId);
     }
 }
