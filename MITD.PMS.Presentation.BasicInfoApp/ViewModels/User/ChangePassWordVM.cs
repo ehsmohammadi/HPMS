@@ -95,6 +95,11 @@ namespace MITD.PMS.Presentation.Logic
                 appController.ShowMessage("رمز عبور و تکرار رمزعبور می بایست یکسان باشد");
                 return;
             }
+            if (ChangePassword.NewPassword.Length<6)
+            {
+                appController.ShowMessage("رمز عبور باید حداقل 6 کارکتر باشد");
+                return;
+            }
             ShowBusyIndicator();
             userService.ChangePassword((res, exp) => appController.BeginInvokeOnDispatcher(() =>
             {
