@@ -118,7 +118,9 @@
     <Compile Include="BasicInfoManagement\User\PartyDTO_Server.cs" />
     <Compile Include="BasicInfoManagement\User\UserGroupDTO.cs" />
     <Compile Include="BasicInfoManagement\User\UserGroupDTOWithActions.cs" />
+    <Compile Include="Calculation\EmployeeResultDTO.cs" />
     <Compile Include="Calculation\CalculationDTOWithAction.cs" />
+    <Compile Include="Calculation\EmployeeResultDTO_Server.cs" />
     <Compile Include="Calculation\CalculationStateDTO.cs" />
     <Compile Include="Calculation\CalculationStateDTO_Server.cs" />
     <Compile Include="Calculation\CalculationExceptionBriefDTOWithAction.cs" />

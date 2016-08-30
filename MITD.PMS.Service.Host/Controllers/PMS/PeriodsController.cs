@@ -25,9 +25,14 @@ namespace MITD.PMS.Service.Host.Controllers
             return periodService.GetAllPeriods();
         }
 
-        public List<PeriodDescriptionDTO> GetPeriodsWithDeterministicCalculation(int hasDeteministicCalculation)
+        public List<PeriodDescriptionDTO> GetPeriodsWithConfirmedResult(int hasConfirmedResult)
         {
-            return periodService.GetPeriodsWithDeterministicCalculation();
+            return periodService.GetPeriodsWithConfirmedResult();
+        }
+
+        public EmployeeResultDTO GetEmployeeResultInPeriod(long periodId,string employeeNo)
+        {
+            return periodService.GetEmployeeResultInPeriod(periodId, employeeNo);
         }
 
         public string DeletePeriod(long id)

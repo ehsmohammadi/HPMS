@@ -24,6 +24,7 @@ namespace MITD.PMS.Presentation.Contracts.Fasade
         PeriodStateWithCopyingSummaryDTO GetPeriodBasicDataCopyState(long periodId);
         void RollBackPeriodState(long id);
         void ChangePeriodActiveStatus(long id, bool active);
-        List<PeriodDescriptionDTO> GetPeriodsWithDeterministicCalculation();
+        List<PeriodDescriptionDTO> GetPeriodsWithConfirmedResult();
+        EmployeeResultDTO GetEmployeeResultInPeriod(long periodId, string employeeNo);
     }
 }

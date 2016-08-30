@@ -1,10 +1,17 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Castle.Core;
 using MITD.Core;
 using MITD.Domain.Repository;
 using MITD.PMS.Application.Contracts;
+using MITD.PMS.Domain.Model.Calculations;
+using MITD.PMS.Domain.Model.Employees;
+using MITD.PMS.Domain.Model.JobIndexPoints;
+using MITD.PMS.Domain.Model.JobIndices;
+using MITD.PMS.Domain.Model.JobPositions;
 using MITD.PMS.Domain.Model.Periods;
+using MITD.PMS.Domain.Model.Units;
 using MITD.PMS.Domain.Service;
 using MITD.PMS.Presentation.Contracts;
 using MITD.PMS.Presentation.Contracts.Fasade;
@@ -25,14 +32,23 @@ namespace MITD.PMS.Interface
             periodCopyingStateReportMapper;
         private readonly IPeriodRepository periodRep;
         private IPeriodEngineService periodEngine;
+        private readonly IEmployeeRepository employeeRepository;
+        private readonly IJobPositionRepository jobPositionRepository;
+        private readonly IUnitRepository unitRepository;
+        private readonly IJobIndexPointRepository jobIndexPointRepository;
+        private readonly ICalculationRepository calculationRepository;
+        private readonly IJobIndexRepository jobIndexRepository;
 
         public PeriodServiceFacade(IPeriodService periodService,
             IMapper<Period, PeriodDescriptionDTO> periodDescriptionMapper,
             IMapper<Period, PeriodDTOWithAction> periodDTOWithActionsMapper,
             IMapper<Period, PeriodDTO> periodDTOMapper,
-            IMapper<InquiryInitializingProgress, PeriodStateWithIntializeInquirySummaryDTO> periodInitializeInquiryStateReportMapper,
+            IMapper<InquiryInitializingProgress, PeriodStateWithIntializeInquirySummaryDTO>
+                periodInitializeInquiryStateReportMapper,
             IMapper<BasicDataCopyingProgress, PeriodStateWithCopyingSummaryDTO> periodCopyingStateReportMapper,
-            IPeriodRepository periodRep, IPeriodEngineService periodEngine)
+            IPeriodRepository periodRep, IPeriodEngineService periodEngine, IEmployeeRepository employeeRepository,
+            IJobPositionRepository jobPositionRepository, IUnitRepository unitRepository,
+            IJobIndexPointRepository jobIndexPointRepository,ICalculationRepository calculationRepository,IJobIndexRepository jobIndexRepository)
         {
             this.periodService = periodService;
             this.periodDescriptionMapper = periodDescriptionMapper;
@@ -42,7 +58,12 @@ namespace MITD.PMS.Interface
             this.periodCopyingStateReportMapper = periodCopyingStateReportMapper;
             this.periodRep = periodRep;
             this.periodEngine = periodEngine;
-
+            this.employeeRepository = employeeRepository;
+            this.jobPositionRepository = jobPositionRepository;
+            this.unitRepository = unitRepository;
+            this.jobIndexPointRepository = jobIndexPointRepository;
+            this.calculationRepository = calculationRepository;
+            this.jobIndexRepository = jobIndexRepository;
         }
 
         [RequiredPermission(ActionType.ShowPeriod)]
@@ -65,10 +86,73 @@ namespace MITD.PMS.Interface
             return periods.Select(p => periodDescriptionMapper.MapToModel(p)).ToList();
         }
 
-        public List<PeriodDescriptionDTO> GetPeriodsWithDeterministicCalculation()
+        public List<PeriodDescriptionDTO> GetPeriodsWithConfirmedResult()
         {
-            List<Period> periods = periodRep.GetPeriodsWithDeterministicCalculation();
+            List<Period> periods = periodRep.GetPeriodsWithConfirmedResult();
             return periods.Select(p => periodDescriptionMapper.MapToModel(p)).ToList();
+        }
+
+        public EmployeeResultDTO GetEmployeeResultInPeriod(long periodIdParam, string employeeNo)
+        {
+            var periodId = new PeriodId(periodIdParam);
+            var period = periodRep.GetById(periodId);
+            var employee = employeeRepository.GetBy(new EmployeeId(employeeNo, periodId));
+            var employeeJobPositionIds = employee.JobPositions.Select(j => j.JobPositionId);
+            var employeeUnitIds=new List<UnitId>();
+            var jobPositionNames = string.Empty;
+            var unitNames = string.Empty;
+            var unitRootNames = string.Empty;
+            var calculation = calculationRepository.GetDeterministicCalculation(period);
+            foreach (var jobPositionId in employeeJobPositionIds)
+            {
+                var jobPosition = jobPositionRepository.GetBy(jobPositionId);
+                jobPositionNames += jobPosition.Name + " ";
+                employeeUnitIds.Add(jobPosition.UnitId);
+            }
+
+            foreach (var unitId in employeeUnitIds)
+            {
+                var unit = unitRepository.GetBy(unitId);
+                unitNames += unit.Name + " ";
+                unitRootNames += unit.Parent.Name + " ";
+            }
+          
+            var finalUnitPoint =jobIndexPointRepository.GetFinalUnitPoint(calculation.Id, employee.Id);
+
+            var res = new EmployeeResultDTO
+            {
+                PeriodName = period.Name,
+                PeriodTimeLine = "از تاریخ " + PDateHelper.GregorianToHijri(period.StartDate, false) + " تا تاریخ " + PDateHelper.GregorianToHijri(period.EndDate.Date, false),
+                EmployeeFullName = employee.FullName,
+                EmployeeNo = employeeNo,
+                EmployeeJobPositionName = jobPositionNames,
+                TotalPoint = employee.FinalPoint.ToString(CultureInfo.InvariantCulture),
+                EmployeeUnitName = unitNames,
+                EmployeeUnitRootName = unitRootNames,
+                TotalUnitPoint = finalUnitPoint.Value.ToString(CultureInfo.InvariantCulture),
+                JobIndexValues = new List<JobIndexValueDTO>()
+            };
+
+            var employeeIndexPoints = jobIndexPointRepository.GetBy(calculation.Id, employee.Id);
+            foreach (var indexPoint in employeeIndexPoints)
+            {
+                var jobIndex = (JobIndex)jobIndexRepository.GetById(indexPoint.JobIndexId);
+                res.JobIndexValues.Add(new JobIndexValueDTO
+                {
+                    JobIndexName = jobIndex.Name,
+                    IndexValue = indexPoint.Value.ToString()
+                });
+            }
+
+
+            return res;
+            //Find<EmployeePoint>(
+            //    jp =>
+            //        jp.Name == "finalunitPoint" && jp.CalculationId == calculation.Id &&
+            //        jp.EmployeeId == employee.Id,fs);
+            //var jobpositions=jobPositionRepository.
+
+
         }
 
         [RequiredPermission(ActionType.DeletePeriod)]

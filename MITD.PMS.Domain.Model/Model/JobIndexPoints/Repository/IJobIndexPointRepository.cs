@@ -8,6 +8,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using MITD.PMS.Domain.Model.Employees;
 
 namespace MITD.PMS.Domain.Model.JobIndexPoints
 {
@@ -26,5 +27,7 @@ namespace MITD.PMS.Domain.Model.JobIndexPoints
         void ResetAllInquiryPoints(Period period);
 
         decimal GetEmployeeFinalPointBy(PeriodId periodId, string employeeNo, CalculationId calculationId);
+        EmployeePoint GetFinalUnitPoint(CalculationId id, EmployeeId employeeId);
+        List<JobIndexPoint> GetBy(CalculationId id, EmployeeId employeeId);
     }
 }

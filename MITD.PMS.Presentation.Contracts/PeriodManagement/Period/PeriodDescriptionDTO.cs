@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 using MITD.Presentation;
 
 namespace MITD.PMS.Presentation.Contracts
@@ -12,20 +7,21 @@ namespace MITD.PMS.Presentation.Contracts
     {
 
         private long id;
-        private string name;
-
         public long Id
         {
             get { return id; }
             set { this.SetField(p => p.Id, ref id, value); }
         }
 
+        private string name;
         [Required(AllowEmptyStrings = false, ErrorMessage = "نام دوره الزامی می باشد")]
         public string Name
         {
             get { return name; }
             set { this.SetField(p => p.Name, ref name, value); }
         }
+
+
 
     }
 }

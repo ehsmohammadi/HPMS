@@ -17,11 +17,13 @@ namespace MITD.PMS.Persistence.NH
     {
         private NHRepository<CalculationPoint> rep;
         private NHRepository<EmployeePoint> repEmp;
+        private NHRepository<JobIndexPoint> repJobIndex;
 
         private void init()
         {
             rep = new NHRepository<CalculationPoint>(unitOfWork);
             repEmp = new NHRepository<EmployeePoint>(unitOfWork);
+            repJobIndex = new NHRepository<JobIndexPoint>(unitOfWork);
         }
         public JobIndexPointRepository(NHUnitOfWork unitOfWork)
             : base(unitOfWork)
@@ -89,6 +91,23 @@ namespace MITD.PMS.Persistence.NH
                 repEmp.Find(e => e.PeriodId == periodId && e.CalculationId == calculationId && e.IsFinal && e.EmployeeId.EmployeeNo == employeeNo)
                     .SingleOrDefault();
             return employeePoint == null ? 0 : employeePoint.Value;
+        }
+
+        public EmployeePoint GetFinalUnitPoint(CalculationId calculationId, EmployeeId employeeId)
+        {
+            var res=
+                 repEmp.Find(e => e.CalculationId == calculationId && e.EmployeeId == employeeId && e.Name == "finalunitPoint")
+                    .SingleOrDefault();
+            return res;
+        }
+
+        public List<JobIndexPoint> GetBy(CalculationId calculationId, EmployeeId employeeId)
+        {
+            var res =
+                repJobIndex.Find(
+                    e => e.CalculationId == calculationId && e.EmployeeId == employeeId)
+                    .ToList();
+            return res;
         }
     }
 }

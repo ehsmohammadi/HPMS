@@ -21,6 +21,7 @@ namespace MITD.PMS.Presentation.Logic
         void GetPeriodCopyBasicDataStatus(Action<PeriodStateWithCopyingSummaryDTO, Exception> action, long periodId);
         void RollBackPeriodState(Action<Exception> action, long id);
         void ChangePeriodActiveStatus(Action<Exception> action, PeriodDTO periodDto);
-        void GetPeriodsWithDeterministicCalculation(Action<ObservableCollection<PeriodDescriptionDTO>, Exception> action);
+        void GetPeriodsWithConfirmedResult(Action<ObservableCollection<PeriodDescriptionDTO>, Exception> action);
+        void GetEmployeeResultInPeriod(Action<EmployeeResultDTO, Exception> action, long periodId, string employeeNo);
     }
 }

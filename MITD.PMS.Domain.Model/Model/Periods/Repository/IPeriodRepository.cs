@@ -16,7 +16,7 @@ namespace MITD.PMS.Domain.Model.Periods
         void Delete(Period period);
         Period GetBy(Expression<Func<Period, bool>> precidate);
         void DeleteBasicData(PeriodId id);
-        List<Period> GetPeriodsWithDeterministicCalculation();
+        List<Period> GetPeriodsWithConfirmedResult();
 
         Exception ConvertException(Exception exp);
         Exception TryConvertException(Exception exp);

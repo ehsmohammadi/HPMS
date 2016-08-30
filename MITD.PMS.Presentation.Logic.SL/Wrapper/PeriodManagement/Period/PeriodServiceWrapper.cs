@@ -31,9 +31,15 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
             WebClientHelper.Get(new Uri(url, UriKind.Absolute), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 
-        public void GetPeriodsWithDeterministicCalculation(Action<ObservableCollection<PeriodDescriptionDTO>, Exception> action)
+        public void GetPeriodsWithConfirmedResult(Action<ObservableCollection<PeriodDescriptionDTO>, Exception> action)
         {
-            var url = string.Format(baseAddress+"?HasDeteministicCalculation=1");
+            var url = string.Format(baseAddress + "?hasConfirmedResult=1");
+            WebClientHelper.Get(new Uri(url, UriKind.Absolute), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+        }
+
+        public void GetEmployeeResultInPeriod(Action<EmployeeResultDTO, Exception> action, long periodId, string employeeNo)
+        {
+            var url = string.Format(baseAddress +"?periodId="+periodId+ "&employeeNo="+employeeNo);
             WebClientHelper.Get(new Uri(url, UriKind.Absolute), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 

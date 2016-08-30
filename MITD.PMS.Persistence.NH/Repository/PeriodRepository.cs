@@ -138,11 +138,11 @@ namespace MITD.PMS.Persistence.NH
 
         }
 
-        public List<Period> GetPeriodsWithDeterministicCalculation()
+        public List<Period> GetPeriodsWithConfirmedResult()
         {
             return session.Query<Period>()
                 .Join(session.Query<Calculation>(), p => p.Id, c => c.PeriodId, (p, c) => new {c, p})
-                .Where(r => r.c.IsDeterministic)
+                .Where(r => r.c.IsDeterministic && (r.p.State == PeriodState.Confirmed || r.p.State == PeriodState.Closed))
                 .Select(r => r.p)
                 .ToList();
 

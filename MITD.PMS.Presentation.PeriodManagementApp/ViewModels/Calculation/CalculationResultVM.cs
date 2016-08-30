@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using MITD.Core;
 using MITD.PMS.Presentation.Contracts;
@@ -23,25 +24,12 @@ namespace MITD.PMS.Presentation.Logic
 
         #region Properties
 
-        private JobIndexPointSummaryDTOWithAction employeeCalcTotalScore;
-        public JobIndexPointSummaryDTOWithAction EmployeeCalcTotalScore
-        {
-            get { return employeeCalcTotalScore; }
-            set { this.SetField(p => p.EmployeeCalcTotalScore, ref employeeCalcTotalScore, value); }
-        }
 
-        private bool visibleRequestClaim;
-        public bool VisibleRequestClaim
+        private EmployeeResultDTO employeeResultDTO;
+        public EmployeeResultDTO EmployeeResultDTO
         {
-            get { return visibleRequestClaim; }
-            set { this.SetField(p => p.VisibleRequestClaim, ref visibleRequestClaim, value); }
-        }
-
-        private CalculationDTO calculation;
-        public CalculationDTO Calculation
-        {
-            get { return calculation; }
-            set { this.SetField(p => p.Calculation, ref calculation, value); }
+            get { return employeeResultDTO; }
+            set { this.SetField(p => p.EmployeeResultDTO, ref employeeResultDTO, value); }
         }
 
         private PeriodDescriptionDTO selectedPeriod;
@@ -51,33 +39,39 @@ namespace MITD.PMS.Presentation.Logic
             set
             {
                 this.SetField(p => p.SelectedPeriod, ref selectedPeriod, value);
-                getEmployeePoint();
-                VisibleRequestClaim = SelectedPeriod.Id == appController.CurrentPriod.Id;
+                getEmployeeResult();
+               
             }
         }
 
 
-        private ObservableCollection<PeriodDescriptionDTO> periodsWithDeteministicCalculation;
-        public ObservableCollection<PeriodDescriptionDTO> PeriodsWithDeteministicCalculation
+        private ObservableCollection<PeriodDescriptionDTO> periodsWithConfirmedResult;
+        public ObservableCollection<PeriodDescriptionDTO> PeriodsWithConfirmedResult
         {
-            get { return periodsWithDeteministicCalculation; }
-            set { this.SetField(p => p.PeriodsWithDeteministicCalculation, ref periodsWithDeteministicCalculation, value); }
+            get { return periodsWithConfirmedResult; }
+            set { this.SetField(p => p.PeriodsWithConfirmedResult, ref periodsWithConfirmedResult, value); }
         }
 
-        private CommandViewModel claimRequest;
-        public CommandViewModel ClaimRequest
+        private ObservableCollection<JobIndexValueDTO> emphaticEmployeeIndices;
+        public ObservableCollection<JobIndexValueDTO> EmphaticEmployeeIndices
         {
-            get
-            {
-                if (claimRequest == null)
-                {
-                    claimRequest = CommandHelper.GetControlCommands(this, appController,(int) ActionType.AddClaim);
-                }
-                return claimRequest;
-            }
+            get { return emphaticEmployeeIndices; }
+            set { this.SetField(p => p.EmphaticEmployeeIndices, ref emphaticEmployeeIndices, value); }
         }
 
+        private ObservableCollection<JobIndexValueDTO> improvableEmployeeIndices;
+        public ObservableCollection<JobIndexValueDTO> ImprovableEmployeeIndices
+        {
+            get { return improvableEmployeeIndices; }
+            set { this.SetField(p => p.ImprovableEmployeeIndices, ref improvableEmployeeIndices, value); }
+        }
 
+        private ObservableCollection<JobIndexValueDTO> trainingEmployeeIndices;
+        public ObservableCollection<JobIndexValueDTO> TrainingEmployeeIndices
+        {
+            get { return trainingEmployeeIndices; }
+            set { this.SetField(p => p.TrainingEmployeeIndices, ref trainingEmployeeIndices, value); }
+        }
 
         #endregion
 
@@ -125,12 +119,12 @@ namespace MITD.PMS.Presentation.Logic
         private void preLoad()
         {
            ShowBusyIndicator("در حال دریافت اطلاعات...");
-           periodService.GetPeriodsWithDeterministicCalculation((res, exp) => appController.BeginInvokeOnDispatcher(() =>
+           periodService.GetPeriodsWithConfirmedResult((res, exp) => appController.BeginInvokeOnDispatcher(() =>
                 {
                     HideBusyIndicator();
                     if (exp == null)
                     {
-                        PeriodsWithDeteministicCalculation = res;
+                        PeriodsWithConfirmedResult = res;
                     }
                     else
                         appController.HandleException(exp);
@@ -138,69 +132,23 @@ namespace MITD.PMS.Presentation.Logic
                 }));  
         }
 
-        private void AddClaim()
+        private void getEmployeeResult()
         {
-           
-        }
-
-        private void getEmployeePoint()
-        {
-
-            ShowBusyIndicator("در حال دریافت اطلاعات...");
-            if (SelectedPeriod != null)
-            {
-                calculationService.GetDeterministicCalculation(
+            periodService.GetEmployeeResultInPeriod(
                     (res, exp) => appController.BeginInvokeOnDispatcher(() =>
                     {
                         if (exp != null)
                             appController.HandleException(exp);
                         else
                         {
-                            Calculation = res;
-                            loadEmployeeTotalScore();
-
+                            EmployeeResultDTO = res;
+                            EmphaticEmployeeIndices = new ObservableCollection<JobIndexValueDTO>(EmployeeResultDTO.JobIndexValues.Where(j => Decimal.Parse(j.IndexValue, CultureInfo.InvariantCulture) >= 80));
+                            ImprovableEmployeeIndices = new ObservableCollection<JobIndexValueDTO>(EmployeeResultDTO.JobIndexValues.Where(j => Decimal.Parse(j.IndexValue, CultureInfo.InvariantCulture) < 60));
+                            TrainingEmployeeIndices = new ObservableCollection<JobIndexValueDTO>(EmployeeResultDTO.JobIndexValues.Where(j => Decimal.Parse(j.IndexValue, CultureInfo.InvariantCulture) <= 40));
                         }
-                    }), SelectedPeriod.Id
+                    }), SelectedPeriod.Id,employeeNo
                     );
-        
-            }
 
-        }
-
-        private void loadEmployeeTotalScore()
-        {
-            calculationService.GetEmployeeSummaryCalculationResult(
-                    (res, exp) => appController.BeginInvokeOnDispatcher(() =>
-                    {
-                        HideBusyIndicator();
-                        if (exp == null)
-                        {
-                            EmployeeCalcTotalScore = res;
-                            if (EmployeeCalcTotalScore.JobPositionValues == null)
-                                loadEmployeeJobPoints();
-
-                        }
-                        else appController.HandleException(exp);
-                    }), SelectedPeriod.Id, Calculation.Id, employeeNo);
-            
-        }
-
-        private void loadEmployeeJobPoints()
-        {
-
-            ShowBusyIndicator("در حال دریافت اطلاعات...");
-            calculationService.GetEmployeeJobPositionsCalculationResult((res, exp) => appController.BeginInvokeOnDispatcher(() =>
-            {
-                HideBusyIndicator();
-                if (exp == null)
-                {
-                    EmployeeCalcTotalScore.JobPositionValues = res;
-                    OnPropertyChanged("EmployeeCalcTotalScore");
-                }
-                else
-                    appController.HandleException(exp);
-            })
-                , SelectedPeriod.Id, Calculation.Id, EmployeeCalcTotalScore.EmployeeNo);
         }
 
         protected override void OnRequestClose()
