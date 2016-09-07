@@ -80,6 +80,10 @@ namespace MITD.PMS.Domain.Model.Periods
         {
         }
 
+        internal override void CheckModifyingEmployeeJobPositions()
+        {
+        }
+
         internal override void CheckShowingInquirySubject()
         {
         }

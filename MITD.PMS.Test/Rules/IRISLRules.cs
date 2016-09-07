@@ -281,10 +281,10 @@ namespace MITD.Core.RuleEngine
             {
                 subordinatesPoint = !subordinates.Any() ? 0 : subordinates.Sum() / subordinates.Count;
             }
-
-            var point = (parentPoint * 4 + subordinatesPoint * 1 + selfPoint * 1) /
+            if(((parentPoint != 0 ? 1 : 0) * 4 + (subordinatesPoint != 0 ? 1 : 0) * 1 + (selfPoint != 0 ? 1 : 0) * 1)!=0)
+               return (parentPoint * 4 + subordinatesPoint * 1 + selfPoint * 1) /
                         ((parentPoint != 0 ? 1 : 0) * 4 + (subordinatesPoint != 0 ? 1 : 0) * 1 + (selfPoint != 0 ? 1 : 0) * 1);
-            return point;
+            return 0;
         }
 
         public static decimal GetInquiryByEmployeeNoAndJobPositionName(KeyValuePair<JobIndex, Dictionary<Employee, List<Inquiry>>> index, string inquirerEmployeeNo, string JobPositionName)
