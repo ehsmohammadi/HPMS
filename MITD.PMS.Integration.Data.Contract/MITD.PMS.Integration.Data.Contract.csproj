@@ -53,8 +53,6 @@
     <Compile Include="DTO\UnitIntegrationDTO.cs" />
     <Compile Include="DataProvider\IEmployeeDataProvider.cs" />
     <Compile Include="DTO\JobTitleDto.cs" />
-    <Compile Include="DTO\NodeTypeDto.cs" />
-    <Compile Include="DTO\UnitNodeIntegrationDTO_Old.cs" />
     <Compile Include="DTO\EmployeeDto.cs" />
     <Compile Include="DataProvider\IUnitDataProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
