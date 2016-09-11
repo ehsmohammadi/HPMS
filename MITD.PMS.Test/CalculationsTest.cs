@@ -74,11 +74,16 @@ namespace MITD.PMS.Test
                             new PMS.Persistence.NH.JobIndexPointRepository(uow));
                         var policy = policyRep.GetById(new PolicyId(1));
                         var period = periodRep.GetBy(c => c.Active);
-                        var emp = rep.GetBy(new EmployeeId("652260", period.Id));
-                        //var calculation = new Calculation(calcRep.GetNextId(), period, policy, Guid.NewGuid().ToString(), DateTime.Now, "831181");
-                        var calculation = calcRep.GetById(new CalculationId(1));
-                        //calcRep.Add(calculation);
-                        //uow.Commit();
+                        var emp = rep.GetBy(new EmployeeId("150554", period.Id));
+
+                        // if period has no calculation 
+                        var calculation = new Calculation(calcRep.GetNextId(), period, policy, Guid.NewGuid().ToString(), DateTime.Now, "150554");
+                        calcRep.Add(calculation);
+                        uow.Commit();
+
+                        // if period has calculation , get it by its identifier 
+                        //var calculation = calcRep.GetById(new CalculationId(1));
+                        
                         MITD.PMSReport.Domain.Model.CalculationData empData;
                         var pathNo = 1;
                         List<SummaryCalculationPoint> calcList = new List<SummaryCalculationPoint>();

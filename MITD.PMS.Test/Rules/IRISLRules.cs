@@ -362,6 +362,8 @@ namespace MITD.Core.RuleEngine
                         y += Convert.ToDecimal(index.Key.CustomFields["UnitIndexImportance"]);
 
                     }
+                    if (x == 0 || y == 0)
+                        throw new Exception("Unit with Id and Name" + position.Unit.Id + " - " + position.Unit.Name + "has no indices or point");
                     var res = x / y;
                     Utils.AddCalculationPoint(position.Unit.ParentId + ";" + position.Unit.Id + "/UnitPoint", res);
 
@@ -506,10 +508,13 @@ namespace MITD.Core.RuleEngine
                     }
 
                 }
-                if (sumIndexImportance == 0)
-                    throw new Exception("sumIndexImportance is 0");
-                total = total + ((sumBehaviralPoint + totalPerformancePoint * sumPerformanceGroupImportance) / sumIndexImportance);
-                Utils.AddEmployeePoint(position, "finalJob", (sumBehaviralPoint + totalPerformancePoint * sumPerformanceGroupImportance) / sumIndexImportance);
+                if (sumIndexImportance != 0)
+                {
+                    total = total +((sumBehaviralPoint + totalPerformancePoint*sumPerformanceGroupImportance)/sumIndexImportance);
+                    Utils.AddEmployeePoint(position, "finalJob",(sumBehaviralPoint + totalPerformancePoint*sumPerformanceGroupImportance)/sumIndexImportance);
+                }
+                else
+                    Utils.AddEmployeePoint(position, "finalJob", 0);
             }
 
             Utils.AddEmployeePoint("final", total / data.JobPositions.Count, true);

@@ -140,10 +140,10 @@ namespace MITD.PMS.Domain.Service
         }
         public bool CanCompleteInquiry(Period period)
         {
-
-            var allJobIndexPointHaveValue = inquiryJobIndexPointRep.IsAllInquiryJobIndexPointsHasValue(period);
+            //todo:its temprory action for first period resolving problem , must be uncomment and manage ... 
+            //var allJobIndexPointHaveValue = inquiryJobIndexPointRep.IsAllInquiryJobIndexPointsHasValue(period);
             var allUnitIndexPointHaveValue = inquiryUnitIndexPointRep.IsAllInquiryUnitIndexPointsHasValue(period);
-            return allUnitIndexPointHaveValue && allJobIndexPointHaveValue;
+            return allUnitIndexPointHaveValue;// && allJobIndexPointHaveValue;
         }
 
         public void DeleteAllCalculations(Period period)
