@@ -15,7 +15,7 @@
             </asp:ScriptManager>
         </div>
 
-        <rsweb:ReportViewer ID="ReportViewer1" runat="server" ProcessingMode="Remote" Width="100%" ShowPrintButton="True" >
+        <rsweb:ReportViewer ID="ReportViewer1" runat="server" ProcessingMode="Remote" Width="100%" ShowPrintButton="True" DocumentMapWidth="100%" Height="100%" >
         </rsweb:ReportViewer>
 <%--        <div id="container" class=" " style="display: inline-block; font-family: Verdana; font-size: 8pt; vertical-align: top;">
             <table cellpadding="0" cellspacing="0" style="display: inline;">

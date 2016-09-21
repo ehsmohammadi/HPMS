@@ -13,6 +13,14 @@
       <Name>EmployeePoints.rdl</Name>
       <FullPath>EmployeePoints.rdl</FullPath>
     </ProjectItem>
+    <ProjectItem>
+      <Name>InquiryNotCompletedList.rdl</Name>
+      <FullPath>InquiryNotCompletedList.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>LinearEmployeePoint.rdl</Name>
+      <FullPath>LinearEmployeePoint.rdl</FullPath>
+    </ProjectItem>
   </Reports>
   <Configurations>
     <Configuration>
@@ -45,6 +53,7 @@
       <Options>
         <OutputPath>bin\Release</OutputPath>
         <TargetServerVersion>SSRS2008R2</TargetServerVersion>
+        <TargetServerURL>http://epms/ReportServer</TargetServerURL>
         <TargetFolder>MITD.PMS.Reports</TargetFolder>
         <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
         <TargetDatasetFolder>Datasets</TargetDatasetFolder>
