@@ -29,6 +29,10 @@ namespace MITD.PMS.Domain.Model.Periods
             return periodManagerService.GetCompletedInitializeInquiryProgress(period);
         }
 
+        internal override void CheckCreatingCalculation()
+        {
+            
+        }
     }
 
 

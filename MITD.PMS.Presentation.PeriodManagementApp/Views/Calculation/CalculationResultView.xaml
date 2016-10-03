@@ -173,7 +173,7 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel HorizontalAlignment="Center">
-                        <sdk:Label Margin="5">فرصت های بهبود</sdk:Label>
+                        <sdk:Label Margin="5">نقاط ضعف</sdk:Label>
                     </StackPanel>
 
                     <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
@@ -184,7 +184,7 @@
                                       HorizontalAlignment="Stretch" 
                                       SelectionMode="Single" 
                                       IsReadOnly="True"
-                                      ItemsSource="{Binding Path=ImprovableEmployeeIndices}"  >
+                                      ItemsSource="{Binding Path=WeakEmployeeIndices}"  >
                             <sdk:DataGrid.Columns>
                                 <sdk:DataGridTextColumn CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="*" 
                                         Binding="{Binding Path=JobIndexName }"  />

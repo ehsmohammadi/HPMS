@@ -59,11 +59,11 @@ namespace MITD.PMS.Presentation.Logic
             set { this.SetField(p => p.EmphaticEmployeeIndices, ref emphaticEmployeeIndices, value); }
         }
 
-        private ObservableCollection<JobIndexValueDTO> improvableEmployeeIndices;
-        public ObservableCollection<JobIndexValueDTO> ImprovableEmployeeIndices
+        private ObservableCollection<JobIndexValueDTO> weakEmployeeIndices;
+        public ObservableCollection<JobIndexValueDTO> WeakEmployeeIndices
         {
-            get { return improvableEmployeeIndices; }
-            set { this.SetField(p => p.ImprovableEmployeeIndices, ref improvableEmployeeIndices, value); }
+            get { return weakEmployeeIndices; }
+            set { this.SetField(p => p.WeakEmployeeIndices, ref weakEmployeeIndices, value); }
         }
 
         private ObservableCollection<JobIndexValueDTO> trainingEmployeeIndices;
@@ -142,9 +142,9 @@ namespace MITD.PMS.Presentation.Logic
                         else
                         {
                             EmployeeResultDTO = res;
-                            EmphaticEmployeeIndices = new ObservableCollection<JobIndexValueDTO>(EmployeeResultDTO.JobIndexValues.Where(j => Decimal.Parse(j.IndexValue, CultureInfo.InvariantCulture) >= 80));
-                            ImprovableEmployeeIndices = new ObservableCollection<JobIndexValueDTO>(EmployeeResultDTO.JobIndexValues.Where(j => Decimal.Parse(j.IndexValue, CultureInfo.InvariantCulture) < 60));
-                            TrainingEmployeeIndices = new ObservableCollection<JobIndexValueDTO>(EmployeeResultDTO.JobIndexValues.Where(j => Decimal.Parse(j.IndexValue, CultureInfo.InvariantCulture) <= 40));
+                            EmphaticEmployeeIndices = new ObservableCollection<JobIndexValueDTO>(EmployeeResultDTO.JobIndexValues.Where(j => Decimal.Parse(j.IndexValue, CultureInfo.InvariantCulture) >= 90));
+                            WeakEmployeeIndices = new ObservableCollection<JobIndexValueDTO>(EmployeeResultDTO.JobIndexValues.Where(j => Decimal.Parse(j.IndexValue, CultureInfo.InvariantCulture) < 30));
+                            TrainingEmployeeIndices = new ObservableCollection<JobIndexValueDTO>(EmployeeResultDTO.JobIndexValues.Where(j => Decimal.Parse(j.IndexValue, CultureInfo.InvariantCulture) <= 50));
                         }
                     }), SelectedPeriod.Id,employeeNo
                     );
