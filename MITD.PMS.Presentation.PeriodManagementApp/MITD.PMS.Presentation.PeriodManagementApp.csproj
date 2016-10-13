@@ -260,6 +260,9 @@
     <Compile Include="ViewModels\Unit\UnitInPrdFieldsVM.cs" />
     <Compile Include="ViewModels\Unit\UnitInPeriodVM.cs" />
     <Compile Include="ViewModels\Unit\UnitInPeriodTreeVM.cs" />
+    <Compile Include="Views\Calculation\CalculationResultFMView.xaml.cs">
+      <DependentUpon>CalculationResultFMView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Calculation\CalculationView.xaml.cs">
       <DependentUpon>CalculationView.xaml</DependentUpon>
     </Compile>
@@ -423,6 +426,10 @@
     <Page Include="Assets\LocalResource.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Calculation\CalculationResultFMView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Calculation\CalculationView.xaml">
       <SubType>Designer</SubType>
