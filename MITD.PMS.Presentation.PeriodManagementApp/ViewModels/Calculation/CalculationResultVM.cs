@@ -32,6 +32,22 @@ namespace MITD.PMS.Presentation.Logic
             set { this.SetField(p => p.EmployeeResultDTO, ref employeeResultDTO, value); }
         }
 
+        private string leveledTotalPoint;
+        public string LeveledTotalPoint
+        {
+            get { return leveledTotalPoint; }
+            set { this.SetField(p => p.LeveledTotalPoint, ref leveledTotalPoint, value); }
+
+        }
+
+        private string leveledUnitPoint;
+        public string LeveledUnitPoint
+        {
+            get { return leveledUnitPoint; }
+            set { this.SetField(p => p.LeveledUnitPoint, ref leveledUnitPoint, value); }
+
+        }
+
         private PeriodDescriptionDTO selectedPeriod;
         public PeriodDescriptionDTO SelectedPeriod
         {
@@ -52,11 +68,11 @@ namespace MITD.PMS.Presentation.Logic
             set { this.SetField(p => p.PeriodsWithConfirmedResult, ref periodsWithConfirmedResult, value); }
         }
 
-        private ObservableCollection<JobIndexValueDTO> emphaticEmployeeIndices;
-        public ObservableCollection<JobIndexValueDTO> EmphaticEmployeeIndices
+        private ObservableCollection<JobIndexValueDTO> strengthEmployeeIndices;
+        public ObservableCollection<JobIndexValueDTO> StrengthEmployeeIndices
         {
-            get { return emphaticEmployeeIndices; }
-            set { this.SetField(p => p.EmphaticEmployeeIndices, ref emphaticEmployeeIndices, value); }
+            get { return strengthEmployeeIndices; }
+            set { this.SetField(p => p.StrengthEmployeeIndices, ref strengthEmployeeIndices, value); }
         }
 
         private ObservableCollection<JobIndexValueDTO> weakEmployeeIndices;
@@ -142,12 +158,31 @@ namespace MITD.PMS.Presentation.Logic
                         else
                         {
                             EmployeeResultDTO = res;
-                            EmphaticEmployeeIndices = new ObservableCollection<JobIndexValueDTO>(EmployeeResultDTO.JobIndexValues.Where(j => Decimal.Parse(j.IndexValue, CultureInfo.InvariantCulture) >= 90));
+                            StrengthEmployeeIndices = new ObservableCollection<JobIndexValueDTO>(EmployeeResultDTO.JobIndexValues.Where(j => Decimal.Parse(j.IndexValue, CultureInfo.InvariantCulture) >= 90));
                             WeakEmployeeIndices = new ObservableCollection<JobIndexValueDTO>(EmployeeResultDTO.JobIndexValues.Where(j => Decimal.Parse(j.IndexValue, CultureInfo.InvariantCulture) < 30));
                             TrainingEmployeeIndices = new ObservableCollection<JobIndexValueDTO>(EmployeeResultDTO.JobIndexValues.Where(j => Decimal.Parse(j.IndexValue, CultureInfo.InvariantCulture) <= 50));
+                            LeveledTotalPoint = levelPoint(EmployeeResultDTO.TotalPoint);
+                            LeveledUnitPoint = levelPoint(EmployeeResultDTO.TotalUnitPoint);
                         }
                     }), SelectedPeriod.Id,employeeNo
                     );
+
+        }
+
+        private string levelPoint(string totalPoint)
+        {
+            var point = Decimal.Parse(totalPoint, CultureInfo.InvariantCulture);
+            if (point >= 90)
+                return "عالی";
+            if (point < 90 && point >= 70)
+                return "خوب";
+            if (point < 70 && point >= 50)
+                return "قابل قبول";
+            if (point < 50 && point >= 30)
+                return "نیاز به آموزش";
+            if (point < 30 && point > 0)
+                return "نا مطلوب";
+            return "-";
 
         }
 

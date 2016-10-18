@@ -7,7 +7,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" FlowDirection="RightToLeft"
     d:DesignHeight="500" d:DesignWidth="800" 
-    xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit"
     xmlns:pr="clr-namespace:MITD.Presentation.UI;assembly=MITD.Presentation.UI.SL"
     d:DataContext="{StaticResource calculationResultViewModel}">
     <pr:ViewBase.Resources>
@@ -118,12 +117,13 @@
 
                     <StackPanel  Orientation="Horizontal">
                         <sdk:Label Margin="5">امتیاز کل :</sdk:Label>
-                        <sdk:Label  Content="{Binding Path=EmployeeResultDTO.TotalPoint}"/>
+                        <sdk:Label  Content="{Binding Path=LeveledTotalPoint}"/>
                     </StackPanel>
 
                     <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
                         <sdk:Label Margin="5">امتیاز واحد سازمانی :</sdk:Label>
-                        <sdk:Label  Content="{Binding Path=EmployeeResultDTO.TotalUnitPoint}"/>
+                        <!--<sdk:Label  Content="{Binding Path=LeveledUnitPoint}"/>-->
+                        <sdk:Label  Content="---"/>
                     </StackPanel>
 
                 </Grid>
@@ -151,7 +151,7 @@
                                       HorizontalAlignment="Stretch" 
                                       SelectionMode="Single" 
                                       IsReadOnly="True"
-                                      ItemsSource="{Binding Path=EmphaticEmployeeIndices }" >
+                                      ItemsSource="{Binding Path=StrengthEmployeeIndices }" >
                             <sdk:DataGrid.Columns>
                                 <sdk:DataGridTextColumn CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="*" 
                                         Binding="{Binding Path=JobIndexName }"  />
@@ -231,34 +231,6 @@
 
             </Border>
 
-
-
-
-
-            <StackPanel Grid.Row="1" Orientation="Horizontal" Visibility="Collapsed" Margin="0,0,0,81" Grid.RowSpan="3">
-
-                <sdk:Label  Content="نام فرد:" Margin="5"/>
-                <sdk:Label  Content="{Binding Path=EmployeeCalcTotalScore.EmployeeName}" />
-
-                <sdk:Label  Content="نام دوره:" Margin="5"/>
-                <sdk:Label/>
-
-                <sdk:Label  Content="نام محاسبه:" Margin="5"/>
-                <sdk:Label  Content="{Binding Path=EmployeeResultDTO.Name}"/>
-
-                <sdk:Label  Content="روش محاسبه:" Margin="5"/>
-                <sdk:Label  Content="{Binding Path=EmployeeResultDTO.PolicyName}"/>
-
-            </StackPanel>
-
-            <StackPanel Grid.Row="2" Orientation="Horizontal" Visibility="Collapsed" Margin="0,0,0,81" Grid.RowSpan="2">
-
-                <sdk:Label  Content="نمره نهایی:" Margin="5"/>
-                <sdk:Label   />
-
-
-
-            </StackPanel>
 
         </Grid>
     </ScrollViewer>

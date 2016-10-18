@@ -151,7 +151,7 @@
                                       HorizontalAlignment="Stretch" 
                                       SelectionMode="Single" 
                                       IsReadOnly="True"
-                                      ItemsSource="{Binding Path=EmphaticEmployeeIndices }" >
+                                      ItemsSource="{Binding Path=StrengthEmployeeIndices }" >
                             <sdk:DataGrid.Columns>
                                 <sdk:DataGridTextColumn CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="*" 
                                         Binding="{Binding Path=JobIndexName }"  />
