@@ -141,6 +141,8 @@ namespace MITD.PMS.Presentation.Logic
                     if (exp == null)
                     {
                         PeriodsWithConfirmedResult = res;
+                        if (PeriodsWithConfirmedResult.Any())
+                            SelectedPeriod = PeriodsWithConfirmedResult.First();
                     }
                     else
                         appController.HandleException(exp);
