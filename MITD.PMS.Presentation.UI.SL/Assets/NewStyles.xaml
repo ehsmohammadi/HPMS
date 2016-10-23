@@ -1359,7 +1359,7 @@
     <Style TargetType="sdk:Label">
         <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
         <Setter Property="Margin" Value="5"/>
-        <Setter Property="FontSize" Value="11" />
+        <Setter Property="FontSize" Value="12" />
         <Setter Property="FontFamily" Value="Tahoma" />
     </Style>
 

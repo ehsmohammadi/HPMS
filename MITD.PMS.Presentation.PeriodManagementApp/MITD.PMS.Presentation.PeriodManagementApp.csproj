@@ -213,6 +213,7 @@
     <Compile Include="EventArgs\UpdatePeriodListArgs.cs" />
     <Compile Include="IPeriodMgtAppLocalizedResources.cs" />
     <Compile Include="PeriodController.cs" />
+    <Compile Include="ViewModels\Calculation\CalculationResultForManagerVM.cs" />
     <Compile Include="ViewModels\Calculation\CalculationVM.cs" />
     <Compile Include="ViewModels\Calculation\CalculationListVM.cs" />
     <Compile Include="ViewModels\Calculation\CalculationResultListVM.cs" />
@@ -260,8 +261,8 @@
     <Compile Include="ViewModels\Unit\UnitInPrdFieldsVM.cs" />
     <Compile Include="ViewModels\Unit\UnitInPeriodVM.cs" />
     <Compile Include="ViewModels\Unit\UnitInPeriodTreeVM.cs" />
-    <Compile Include="Views\Calculation\CalculationResultFMView.xaml.cs">
-      <DependentUpon>CalculationResultFMView.xaml</DependentUpon>
+    <Compile Include="Views\Calculation\CalculationResultForManagerView.xaml.cs">
+      <DependentUpon>CalculationResultForManagerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Calculation\CalculationView.xaml.cs">
       <DependentUpon>CalculationView.xaml</DependentUpon>
@@ -427,7 +428,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Calculation\CalculationResultFMView.xaml">
+    <Page Include="Views\Calculation\CalculationResultForManagerView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -6,4 +6,9 @@ namespace MITD.PMS.Presentation.Logic
     {
 
     }
+
+    public interface ICalculationResultForManagerView : IView
+    {
+
+    }
 }

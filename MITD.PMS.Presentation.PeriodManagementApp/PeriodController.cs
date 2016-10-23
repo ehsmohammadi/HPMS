@@ -45,11 +45,11 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
             viewManager.ShowInDialog(view);
         }
 
-        public void ShowPeriodList(bool showInNewTab=false)
+        public void ShowPeriodList(bool showInNewTab = false)
         {
             var view = viewManager.ShowInTabControl<IPeriodListView>(showInNewTab);
             ((PeriodListVM)view.ViewModel).Load();
-        } 
+        }
         #endregion
 
         #region Unit
@@ -60,10 +60,10 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
         //    ((UnitInPeriodVM)view.ViewModel).Load(unitInPeriod.PeriodId, unitInPeriod.UnitId, action);
         //    viewManager.ShowInDialog(view);
         //}
-        public void ShowUnitInPeriodView(long periodId, long? unitId,long? parentId , ActionType actionType)
+        public void ShowUnitInPeriodView(long periodId, long? unitId, long? parentId, ActionType actionType)
         {
             var view = ServiceLocator.Current.GetInstance<IUnitInPeriodView>();
-            ((UnitInPeriodVM)view.ViewModel).Load(periodId, unitId,parentId,actionType);
+            ((UnitInPeriodVM)view.ViewModel).Load(periodId, unitId, parentId, actionType);
             viewManager.ShowInDialog(view);
         }
 
@@ -104,7 +104,7 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
             viewManager.ShowInTabControl(view);
 
         }
-          public void ShowUnitIndexGroupInPeriodView(UnitIndexGroupInPeriodDTO unitIndexGroupInPeriodDto, ActionType action)
+        public void ShowUnitIndexGroupInPeriodView(UnitIndexGroupInPeriodDTO unitIndexGroupInPeriodDto, ActionType action)
         {
             var view = ServiceLocator.Current.GetInstance<IUnitIndexGroupInPeriodView>();
             ((UnitIndexGroupInPeriodVM)view.ViewModel).Load(unitIndexGroupInPeriodDto, action);
@@ -113,7 +113,7 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
 
         #endregion
 
-     
+
 
         #region JobPosition
         public void ShowJobPositionInPeriodView(JobPositionInPeriodAssignmentDTO jobPositionInPeriod, ActionType action)
@@ -143,14 +143,14 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
             viewManager.ShowInDialog(view);
         }
 
-        public void ShowJobPositionInPeriodInquiryView(PeriodDTO period,JobPositionInPeriodDTO jobPositionInPeriod, ActionType action)
+        public void ShowJobPositionInPeriodInquiryView(PeriodDTO period, JobPositionInPeriodDTO jobPositionInPeriod, ActionType action)
         {
             var view = viewManager.ShowInTabControl<IJobPositionInPeriodInquiryView>(v => ((JobPositionInPeriodInquiryVM)v).Period.Id == period.Id
                 && ((JobPositionInPeriodInquiryVM)v).JobPositionInPeriod.Id == jobPositionInPeriod.Id);
-            ((JobPositionInPeriodInquiryVM)view.ViewModel).Load(period,jobPositionInPeriod);
+            ((JobPositionInPeriodInquiryVM)view.ViewModel).Load(period, jobPositionInPeriod);
         }
 
-       
+
 
         #endregion
 
@@ -161,10 +161,10 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
             ((JobInPeriodListVM)view.ViewModel).Load(period);
         }
 
-        public void ShowJobInPeriodView(long periodId,long? jobId , ActionType actionType)
+        public void ShowJobInPeriodView(long periodId, long? jobId, ActionType actionType)
         {
             var view = ServiceLocator.Current.GetInstance<IJobInPeriodView>();
-            ((JobInPeriodVM)view.ViewModel).Load(periodId,jobId, actionType);
+            ((JobInPeriodVM)view.ViewModel).Load(periodId, jobId, actionType);
             viewManager.ShowInDialog(view);
         }
 
@@ -185,7 +185,7 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
         public void ShowClaimView(ClaimDTO claim, ActionType action)
         {
             var view = ServiceLocator.Current.GetInstance<IClaimView>();
-            ((ClaimVM)view.ViewModel).Load(claim,action);
+            ((ClaimVM)view.ViewModel).Load(claim, action);
             viewManager.ShowInDialog(view);
         }
 
@@ -222,7 +222,7 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
             viewManager.ShowInDialog(view);
         }
 
-        public void ShowPermittedUserListToMyTasksView( UserStateDTO employee)
+        public void ShowPermittedUserListToMyTasksView(UserStateDTO employee)
         {
             var view = viewManager.ShowInTabControl<IPermittedUserListToMyTasksView>();
             ((PermittedUserListToMyTasksVM)view.ViewModel).Load(employee);
@@ -235,7 +235,7 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
             viewManager.ShowInDialog(view);
         }
 
-      
+
 
         #endregion
 
@@ -287,7 +287,7 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
         public void ShowEmployeesInquiryListView(string employeeNo, long periodId, bool showInNewTab = false)
         {
             var view = viewManager.ShowInTabControl<IEmployeesInquiryListView>(showInNewTab);
-            ((InquirerInquirySubjectListVM)view.ViewModel).Load(employeeNo,periodId);
+            ((InquirerInquirySubjectListVM)view.ViewModel).Load(employeeNo, periodId);
         }
 
         public void ShowJobIndexInquiryListView(string employeeNo, long periodId, bool isShiftPressed = false)
@@ -299,7 +299,7 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
         public void ShowInquiryFormView(InquiryFormDTO inquiryForm, ActionType action)
         {
             var view = ServiceLocator.Current.GetInstance<IInquiryFormView>();
-            ((InquiryFormVM)view.ViewModel).Load(inquiryForm,action);
+            ((InquiryFormVM)view.ViewModel).Load(inquiryForm, action);
             viewManager.ShowInDialog(view);
         }
 
@@ -318,29 +318,35 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
             ((CalculationListVM)view.ViewModel).Load(period);
         }
 
-        public void ShowCalculationResultListView(long calculationId,long periodId, bool showInNewTab = false)
+        public void ShowCalculationResultListView(long calculationId, long periodId, bool showInNewTab = false)
         {
             var view = viewManager.ShowInTabControl<ICalculationResultListView>(showInNewTab);
             ((CalculationResultListVM)view.ViewModel).Load(calculationId, periodId);
         }
 
-        public void ShowPeriodCalculationExecView(CalculationDTO calculation,ActionType action)
+        public void ShowPeriodCalculationExecView(CalculationDTO calculation, ActionType action)
         {
             var view = viewManager.ShowInTabControl<ICalculationView>();
-            ((CalculationVM)view.ViewModel).Load(calculation,action);
+            ((CalculationVM)view.ViewModel).Load(calculation, action);
         }
 
-        public void ShowPeriodCalculationResultView(PeriodDTO currentPeriod, string employeeNo, bool isShiftPressed)
+        public void ShowPeriodCalculationResultView(PeriodDTO currentPeriod, string employeeNo, bool isShiftPressed = false)
         {
             var view = viewManager.ShowInTabControl<ICalculationResultView>(isShiftPressed);
             ((CalculationResultVM)view.ViewModel).Load(employeeNo);
+        }
+
+        public void ShowCalculationResultForManagerView(PeriodDTO periodDTO, string employeeNo, bool isShiftPressed = false)
+        {
+            var view = viewManager.ShowInTabControl<ICalculationResultForManagerView>(isShiftPressed);
+            ((CalculationResultForManagerVM)view.ViewModel).Load(employeeNo);
         }
 
         public void ShowPeriodCalculationStateView(long calculationId)
         {
             var view = viewManager.ShowInTabControl<ICalculationStatusView>();
             ((CalculationStatusVM)view.ViewModel).Load(calculationId);
-           
+
         }
 
         public void ShowEmployeeCalculationResultHistoryView(long employeeId, bool showInNewTab = false)
@@ -351,6 +357,6 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
 
 
 
-       
+
     }
 }

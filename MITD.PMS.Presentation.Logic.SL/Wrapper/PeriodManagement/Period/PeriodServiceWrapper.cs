@@ -43,6 +43,12 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
             WebClientHelper.Get(new Uri(url, UriKind.Absolute), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 
+        public void GetSubordinatesResultInPeriod(Action<SubordinatesResultDTO, Exception> action, long periodId, string managerEmployeeNo)
+        {
+            var url = string.Format(baseAddress + "?periodId=" + periodId + "&employeeNo=" + managerEmployeeNo + "&isForManager=true");
+            WebClientHelper.Get(new Uri(url, UriKind.Absolute), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+        }
+
         public void DeletePeriod(Action<string, Exception> action, long id)
         {
             var url = string.Format(baseAddress + "?Id={0}", id);

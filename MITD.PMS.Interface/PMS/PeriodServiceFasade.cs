@@ -155,6 +155,11 @@ namespace MITD.PMS.Interface
 
         }
 
+        public SubordinatesResultDTO GetSubordinatesResultInPeriod(long periodId, string managerEmployeeNo)
+        {
+            throw new System.NotImplementedException();
+        }
+
         [RequiredPermission(ActionType.DeletePeriod)]
         public string DeletePeriod(long id)
         {

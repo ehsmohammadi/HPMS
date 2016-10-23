@@ -276,6 +276,9 @@
     <Compile Include="..\MITD.PMS.Presentation.Contracts\Calculation\PointValueDTO.cs">
       <Link>Calculation\PointValueDTO.cs</Link>
     </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\Calculation\SubordinatesResultDTO.cs">
+      <Link>Calculation\SubordinatesResultDTO.cs</Link>
+    </Compile>
     <Compile Include="..\MITD.PMS.Presentation.Contracts\Common\CustomFieldEntity.cs">
       <Link>Common\CustomFieldEntity.cs</Link>
     </Compile>
@@ -495,6 +498,7 @@
     <Compile Include="BasicInfoManagement\User\Privilege.cs" />
     <Compile Include="BasicInfoManagement\User\UserGroupDescriptionDTO_Client.cs" />
     <Compile Include="BasicInfoManagement\User\PartyDTO_Client.cs" />
+    <Compile Include="Calculation\SubordinatesResultDTO_Client.cs" />
     <Compile Include="Calculation\EmployeeResultDTO_Client.cs" />
     <Compile Include="Calculation\CalculationStateDTO_Client.cs" />
     <Compile Include="BasicInfoManagement\User\UserCriteria.cs" />

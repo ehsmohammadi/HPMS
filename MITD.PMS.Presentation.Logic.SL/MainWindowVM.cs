@@ -858,6 +858,28 @@ namespace MITD.PMS.Presentation.Logic
                                 });
                         }
                         )));
+                cmdList.Add(
+                    new CommandViewModel("نتیجه عملکرد افراد زیر مجموعه", new DelegateCommand(
+                        () =>
+                        {
+                            controller.ShowBusyIndicator("در حال بارگذاری ماجول...");
+                            controller.GetRemoteInstance<IPeriodController>(
+                                (res, exp) =>
+                                {
+                                    controller.HideBusyIndicator();
+                                    if (res != null)
+                                    {
+                                        if (CurrentPeriod != null && CurrentPeriod.Id != 0)
+                                            res.ShowCalculationResultForManagerView(currentPriod, CurrentUser.EmployeeNo,
+                                                isShiftPressed);
+                                    }
+                                    else if (exp != null)
+                                    {
+                                        controller.HandleException(exp);
+                                    }
+                                });
+                        }
+                        )));
             }
 
             cmdList.Add(

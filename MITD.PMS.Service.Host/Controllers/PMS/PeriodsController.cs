@@ -35,6 +35,15 @@ namespace MITD.PMS.Service.Host.Controllers
             return periodService.GetEmployeeResultInPeriod(periodId, employeeNo);
         }
 
+        public SubordinatesResultDTO GetSubordinatesResultInPeriod(long periodId, string managerEmployeeNo,bool isForManager)
+        {
+            if (isForManager)
+                return periodService.GetSubordinatesResultInPeriod(periodId, managerEmployeeNo);
+            return new SubordinatesResultDTO();
+        }
+
+
+
         public string DeletePeriod(long id)
         {
             return periodService.DeletePeriod(id);

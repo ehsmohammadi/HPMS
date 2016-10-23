@@ -23,5 +23,6 @@ namespace MITD.PMS.Presentation.Logic
         void ChangePeriodActiveStatus(Action<Exception> action, PeriodDTO periodDto);
         void GetPeriodsWithConfirmedResult(Action<ObservableCollection<PeriodDescriptionDTO>, Exception> action);
         void GetEmployeeResultInPeriod(Action<EmployeeResultDTO, Exception> action, long periodId, string employeeNo);
+        void GetSubordinatesResultInPeriod(Action<SubordinatesResultDTO, Exception> action, long periodId, string managerEmployeeNo);
     }
 }

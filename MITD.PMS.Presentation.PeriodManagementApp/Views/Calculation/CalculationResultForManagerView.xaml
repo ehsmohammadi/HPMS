@@ -1,22 +1,21 @@
 ﻿<pr:ViewBase  
     xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"  
-    x:Class="MITD.PMS.Presentation.PeriodManagementApp.Views.CalculationResultView"
+    x:Class="MITD.PMS.Presentation.PeriodManagementApp.Views.CalculationResultForManagerView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" FlowDirection="RightToLeft"
     d:DesignHeight="500" d:DesignWidth="800" 
-    xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit"
     xmlns:pr="clr-namespace:MITD.Presentation.UI;assembly=MITD.Presentation.UI.SL"
-    d:DataContext="{StaticResource calculationResultViewModel}">
+    d:DataContext="{StaticResource calculationResultForManagerViewModel}">
     <pr:ViewBase.Resources>
 
     </pr:ViewBase.Resources>
-    <ScrollViewer BorderThickness="0"  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+    <ScrollViewer BorderThickness="0"  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" FontSize="12" >
         <Grid Name="LayoutRoot"  Background="Transparent"  >
             <Grid.RowDefinitions >
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -51,6 +50,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
                     <StackPanel  Orientation="Horizontal">
@@ -60,7 +60,10 @@
                     <StackPanel Grid.Column="1"  Orientation="Horizontal">
                         <sdk:Label Margin="5">دامنه دوره :</sdk:Label>
                         <sdk:Label  Content="{Binding Path=EmployeeResultDTO.PeriodTimeLine}"/>
-
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" Orientation="Horizontal">
+                        <sdk:Label Margin="5">امتیاز واحد سازمانی :</sdk:Label>
+                        <sdk:Label  Content="{Binding Path=LeveledUnitPoint}"/>
                     </StackPanel>
                 </Grid>
 
@@ -69,63 +72,53 @@
             <Border Grid.Row="2" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="DimGray">
                 <Grid   Background="Transparent"  >
 
-                    <Grid.RowDefinitions >
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel  Orientation="Horizontal">
-                        <sdk:Label Margin="5">نام و نام خانوادگی :</sdk:Label>
-                        <sdk:Label  Content="{Binding Path=EmployeeResultDTO.EmployeeFullName}"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="0" Grid.Column="1"  Orientation="Horizontal">
+
+                    <StackPanel Grid.Row="0" Grid.Column="0"  Orientation="Horizontal">
                         <sdk:Label Margin="5">عنوان حوزه سازمانی :</sdk:Label>
                         <sdk:Label  Content="{Binding Path=EmployeeResultDTO.EmployeeUnitRootName}"/>
                     </StackPanel>
-                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
-                        <sdk:Label Margin="5">شماره پرسنلی :</sdk:Label>
-                        <sdk:Label  Content="{Binding Path=EmployeeResultDTO.EmployeeNo}"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="01" Grid.Column="1"  Orientation="Horizontal">
+
+                    <StackPanel Grid.Row="0" Grid.Column="1"  Orientation="Horizontal">
                         <sdk:Label Margin="5">عنوان واحد سازمانی :</sdk:Label>
                         <sdk:Label  Content="{Binding Path=EmployeeResultDTO.EmployeeUnitName}"/>
                     </StackPanel>
-                    <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
-                        <sdk:Label Margin="5">عنوان پست سازمانی :</sdk:Label>
-                        <sdk:Label  Content="{Binding Path=EmployeeResultDTO.EmployeeJobPositionName}"/>
-                    </StackPanel>
+
                 </Grid>
 
             </Border>
 
-            <Border Grid.Row="3" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="DimGray">
-                <Grid   Background="Transparent"  >
+            <Border Grid.Row="3" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="DimGray" Background="Khaki">
+                <Grid   Background="Transparent"  ShowGridLines="True" >
 
                     <Grid.RowDefinitions >
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-
-                    <StackPanel  Orientation="Horizontal">
-                        <sdk:Label Margin="5">امتیاز کل :</sdk:Label>
-                        <sdk:Label  Content="{Binding Path=EmployeeResultDTO.TotalPoint}"/>
-                    </StackPanel>
-
-                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
-                        <sdk:Label Margin="5">امتیاز واحد سازمانی :</sdk:Label>
-                        <sdk:Label  Content="{Binding Path=EmployeeResultDTO.TotalUnitPoint}"/>
-                    </StackPanel>
-
+                    <sdk:Label Grid.Row="0" Grid.Column="0" Margin="5" FontWeight="ExtraBold" >سطح عملکرد کارکنان</sdk:Label>
+                    <sdk:Label Grid.Row="1" Grid.Column="0" Margin="5" FontWeight="ExtraBold" >در صد از کل کارکنان واحد</sdk:Label>
+                    <sdk:Label Grid.Row="0" Grid.Column="1" Margin="5" HorizontalAlignment="Center" FontWeight="Bold">عالی</sdk:Label>
+                    <sdk:Label Grid.Row="1" Grid.Column="1" Margin="5" HorizontalAlignment="Center"/>
+                    <sdk:Label Grid.Row="0" Grid.Column="2" Margin="5" HorizontalAlignment="Center"  FontWeight="Bold">خوب</sdk:Label>
+                    <sdk:Label Grid.Row="1" Grid.Column="2" Margin="5" HorizontalAlignment="Center"/>
+                    <sdk:Label Grid.Row="0" Grid.Column="3" Margin="5" HorizontalAlignment="Center"  FontWeight="Bold">مورد انتظار</sdk:Label>
+                    <sdk:Label Grid.Row="1" Grid.Column="3" Margin="5" HorizontalAlignment="Center"/>
+                    <sdk:Label Grid.Row="0" Grid.Column="4" Margin="5" HorizontalAlignment="Center"  FontWeight="Bold">نیاز به آموزش</sdk:Label>
+                    <sdk:Label Grid.Row="1" Grid.Column="4" Margin="5" HorizontalAlignment="Center"/>
+                    <sdk:Label Grid.Row="0" Grid.Column="5" Margin="5" HorizontalAlignment="Center"  FontWeight="Bold">نا مطلوب</sdk:Label>
+                    <sdk:Label Grid.Row="1" Grid.Column="5" Margin="5" HorizontalAlignment="Center"/>
                 </Grid>
 
             </Border>
@@ -139,7 +132,7 @@
                     </Grid.RowDefinitions>
 
 
-                    <StackPanel   >
+                    <StackPanel   HorizontalAlignment="Center">
                         <sdk:Label Margin="5">نقاط قوت</sdk:Label>
                     </StackPanel>
 
@@ -177,6 +170,7 @@
                     </StackPanel>
 
                     <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+
                         <sdk:DataGrid HeadersVisibility="None" 
                                       AutoGenerateColumns="False" 
                                       HorizontalScrollBarVisibility="Auto" 
@@ -198,7 +192,7 @@
             </Border>
 
             <Border Grid.Row="5" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="DimGray">
-                <Grid   Background="Transparent" ShowGridLines="True" >
+                <Grid   Background="Transparent"  >
 
                     <Grid.RowDefinitions >
                         <RowDefinition Height="Auto"/>
@@ -207,21 +201,25 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel HorizontalAlignment="Center">
-                        <sdk:Label Margin="5">زمینه های آموزش</sdk:Label>
+                        <sdk:Label Margin="5">نمره ارزشیابی همکاران زیر مجموعه</sdk:Label>
                     </StackPanel>
-                   
-                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
-                        <sdk:DataGrid HeadersVisibility="None" 
-                                      AutoGenerateColumns="False" 
+
+                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" >
+                        <sdk:DataGrid AutoGenerateColumns="False" 
                                       HorizontalScrollBarVisibility="Auto" 
                                       VerticalScrollBarVisibility="Auto" 
-                                      HorizontalAlignment="Stretch" 
-                                      SelectionMode="Single" 
+                                      SelectionMode="Single"
                                       IsReadOnly="True"
-                                      ItemsSource="{Binding Path=TrainingEmployeeIndices}"  >
+                                      ItemsSource="{Binding Path=SubordinatesPoints}" >
                             <sdk:DataGrid.Columns>
-                                <sdk:DataGridTextColumn CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="*" 
-                                        Binding="{Binding Path=JobIndexName}"  />
+                                <sdk:DataGridTextColumn Header="ردیف"  Width="0.25*" 
+                                        Binding="{Binding Path=RowNo}"  />
+                                <sdk:DataGridTextColumn Header="شماره پرسنلی"  Width="0.25*" 
+                                        Binding="{Binding Path=EmployeeNo}"  />
+                                <sdk:DataGridTextColumn Header="نام و نام خانوادگی"  Width="0.25*" 
+                                        Binding="{Binding Path=EmployeeName}"  />
+                                <sdk:DataGridTextColumn Header="نمره کل"  Width="0.25*"
+                                        Binding="{Binding Path=FinalPoint}"  />
 
                             </sdk:DataGrid.Columns>
                         </sdk:DataGrid>
@@ -231,34 +229,6 @@
 
             </Border>
 
-
-
-
-
-            <StackPanel Grid.Row="1" Orientation="Horizontal" Visibility="Collapsed" Margin="0,0,0,81" Grid.RowSpan="3">
-
-                <sdk:Label  Content="نام فرد:" Margin="5"/>
-                <sdk:Label  Content="{Binding Path=EmployeeCalcTotalScore.EmployeeName}" />
-
-                <sdk:Label  Content="نام دوره:" Margin="5"/>
-                <sdk:Label/>
-
-                <sdk:Label  Content="نام محاسبه:" Margin="5"/>
-                <sdk:Label  Content="{Binding Path=EmployeeResultDTO.Name}"/>
-
-                <sdk:Label  Content="روش محاسبه:" Margin="5"/>
-                <sdk:Label  Content="{Binding Path=EmployeeResultDTO.PolicyName}"/>
-
-            </StackPanel>
-
-            <StackPanel Grid.Row="2" Orientation="Horizontal" Visibility="Collapsed" Margin="0,0,0,81" Grid.RowSpan="2">
-
-                <sdk:Label  Content="نمره نهایی:" Margin="5"/>
-                <sdk:Label   />
-
-
-
-            </StackPanel>
 
         </Grid>
     </ScrollViewer>

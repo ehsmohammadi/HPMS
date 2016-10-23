@@ -5,14 +5,14 @@ using MITD.PMS.Presentation.Logic;
 
 namespace MITD.PMS.Presentation.PeriodManagementApp.Views
 {
-    public partial class CalculationResultFMView : ViewBase, ICalculationResultView
+    public partial class CalculationResultForManagerView : ViewBase, ICalculationResultForManagerView
     {
-        public CalculationResultFMView()
+        public CalculationResultForManagerView()
         {
             InitializeComponent();
         }
 
-        public CalculationResultFMView(CalculationResultVM vm)
+        public CalculationResultForManagerView(CalculationResultForManagerVM vm)
         {
             InitializeComponent();
             ViewModel = vm;

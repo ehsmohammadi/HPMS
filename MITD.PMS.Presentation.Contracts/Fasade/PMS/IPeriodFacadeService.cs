@@ -26,5 +26,6 @@ namespace MITD.PMS.Presentation.Contracts.Fasade
         void ChangePeriodActiveStatus(long id, bool active);
         List<PeriodDescriptionDTO> GetPeriodsWithConfirmedResult();
         EmployeeResultDTO GetEmployeeResultInPeriod(long periodId, string employeeNo);
+        SubordinatesResultDTO GetSubordinatesResultInPeriod(long periodId, string managerEmployeeNo);
     }
 }
