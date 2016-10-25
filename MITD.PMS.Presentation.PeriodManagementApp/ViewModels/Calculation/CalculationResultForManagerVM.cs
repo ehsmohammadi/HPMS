@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
@@ -38,7 +39,7 @@ namespace MITD.PMS.Presentation.Logic
             {
                 this.SetField(p => p.SelectedPeriod, ref selectedPeriod, value);
                 getEmployeeResult();
-               
+
             }
         }
 
@@ -114,12 +115,12 @@ namespace MITD.PMS.Presentation.Logic
             set { this.SetField(p => p.WeakEmployeeIndices, ref weakEmployeeIndices, value); }
         }
 
-        //private ObservableCollection<JobIndexValueDTO> trainingEmployeeIndices;
-        //public ObservableCollection<JobIndexValueDTO> TrainingEmployeeIndices
-        //{
-        //    get { return trainingEmployeeIndices; }
-        //    set { this.SetField(p => p.TrainingEmployeeIndices, ref trainingEmployeeIndices, value); }
-        //}
+        private ObservableCollection<JobIndexValueDTO> trainingEmployeeIndices;
+        public ObservableCollection<JobIndexValueDTO> TrainingEmployeeIndices
+        {
+            get { return trainingEmployeeIndices; }
+            set { this.SetField(p => p.TrainingEmployeeIndices, ref trainingEmployeeIndices, value); }
+        }
 
         #endregion
 
@@ -134,7 +135,7 @@ namespace MITD.PMS.Presentation.Logic
 
         public CalculationResultForManagerVM(IPMSController appController,
                             ICalculationServiceWrapper calculationService,
-                            IPeriodMgtAppLocalizedResources periodMgtAppLocalizedResources,IPeriodServiceWrapper periodService)
+                            IPeriodMgtAppLocalizedResources periodMgtAppLocalizedResources, IPeriodServiceWrapper periodService)
         {
 
             this.appController = appController;
@@ -152,12 +153,12 @@ namespace MITD.PMS.Presentation.Logic
 
         void init()
         {
-            DisplayName = "نتیجه عملکرد زیر مجموعه";
+            DisplayName = "نتیجه عملکرد افراد زیر مجموعه";
         }
 
         public void Load(string employeeNo)
         {
-            
+
             this.managerEmployeeNo = employeeNo;
             preLoad();
 
@@ -166,20 +167,20 @@ namespace MITD.PMS.Presentation.Logic
 
         private void preLoad()
         {
-           ShowBusyIndicator("در حال دریافت اطلاعات...");
-           periodService.GetPeriodsWithConfirmedResult((res, exp) => appController.BeginInvokeOnDispatcher(() =>
-                {
-                    HideBusyIndicator();
-                    if (exp == null)
-                    {
-                        PeriodsWithConfirmedResult = res;
-                        if (PeriodsWithConfirmedResult.Any())
-                            SelectedPeriod = PeriodsWithConfirmedResult.First();
-                    }
-                    else
-                        appController.HandleException(exp);
+            ShowBusyIndicator("در حال دریافت اطلاعات...");
+            periodService.GetPeriodsWithConfirmedResult((res, exp) => appController.BeginInvokeOnDispatcher(() =>
+                 {
+                     HideBusyIndicator();
+                     if (exp == null)
+                     {
+                         PeriodsWithConfirmedResult = res;
+                         if (PeriodsWithConfirmedResult.Any())
+                             SelectedPeriod = PeriodsWithConfirmedResult.First();
+                     }
+                     else
+                         appController.HandleException(exp);
 
-                }));  
+                 }));
         }
 
         private void getEmployeeResult()
@@ -193,37 +194,62 @@ namespace MITD.PMS.Presentation.Logic
                         {
                             SubordinatesResultDTO = res;
                             calculateSubordinatesPointPercent(SubordinatesResultDTO);
+                            var allJobIndexValue = new List<JobIndexValueDTO>();
+                            foreach (var subordinate in SubordinatesResultDTO.Subordinates)
+                            {
+                                foreach (var jobIndexValue in subordinate.JobIndexValues)
+                                {
+                                    if(allJobIndexValue.All(a => a.JobIndexId != jobIndexValue.JobIndexId))
+                                        allJobIndexValue.Add(jobIndexValue);
+                                }
+                            }
+                            StrengthEmployeeIndices = new ObservableCollection<JobIndexValueDTO>(allJobIndexValue.Where(j => Decimal.Parse(j.IndexValue, CultureInfo.InvariantCulture) >= 90));
+                            
+                            WeakEmployeeIndices = new ObservableCollection<JobIndexValueDTO>(allJobIndexValue.Where(j => Decimal.Parse(j.IndexValue, CultureInfo.InvariantCulture) < 30));
+                            TrainingEmployeeIndices = new ObservableCollection<JobIndexValueDTO>(allJobIndexValue.Where(j => Decimal.Parse(j.IndexValue, CultureInfo.InvariantCulture) <= 50));
 
-                            //StrengthEmployeeIndices = new ObservableCollection<JobIndexValueDTO>(SubordinatesResultDTO.JobIndexValues.Where(j => Decimal.Parse(j.IndexValue, CultureInfo.InvariantCulture) >= 90));
-                            //WeakEmployeeIndices = new ObservableCollection<JobIndexValueDTO>(SubordinatesResultDTO.JobIndexValues.Where(j => Decimal.Parse(j.IndexValue, CultureInfo.InvariantCulture) < 30));
-                            //TrainingEmployeeIndices = new ObservableCollection<JobIndexValueDTO>(SubordinatesResultDTO.JobIndexValues.Where(j => Decimal.Parse(j.IndexValue, CultureInfo.InvariantCulture) <= 50));
-                           
                             LeveledUnitPoint = levelPoint(SubordinatesResultDTO.TotalUnitPoint);
                         }
-                    }), SelectedPeriod.Id,managerEmployeeNo
+                    }), SelectedPeriod.Id, managerEmployeeNo
                     );
 
         }
 
         private void calculateSubordinatesPointPercent(SubordinatesResultDTO subordinatesResultDTOParam)
         {
-            var subordinatesCount = subordinatesResultDTOParam.Subordinates.Count;
-            var subordinatesWithExcellentPoint =
-                subordinatesResultDTOParam.Subordinates.Count(s => Decimal.Parse(s.TotalPoint) >= 90);
-            var subordinatesWithGoodPoint =
-                subordinatesResultDTOParam.Subordinates.Count(s => 70 <= Decimal.Parse(s.TotalPoint) && Decimal.Parse(s.TotalPoint) < 90);
-            var subordinatesWithExpectedPoint =
-                subordinatesResultDTOParam.Subordinates.Count(s => 50 <= Decimal.Parse(s.TotalPoint) && Decimal.Parse(s.TotalPoint) < 70);
-            var subordinatesWithNeedTrainingPoint =
-                subordinatesResultDTOParam.Subordinates.Count(s => 30 <= Decimal.Parse(s.TotalPoint) && Decimal.Parse(s.TotalPoint) < 50);
-            var subordinatesWithUndesirablePoint =
-                subordinatesResultDTOParam.Subordinates.Count(s => 0 < Decimal.Parse(s.TotalPoint) && Decimal.Parse(s.TotalPoint) < 30);
+            if (subordinatesResultDTOParam.Subordinates != null && subordinatesResultDTOParam.Subordinates.Count > 0)
+            {
+                var subordinatesCount = subordinatesResultDTOParam.Subordinates.Count;
+                var subordinatesWithExcellentPoint =
+                    subordinatesResultDTOParam.Subordinates.Count(s => Decimal.Parse(s.TotalPoint, CultureInfo.InvariantCulture) >= 90);
+                var subordinatesWithGoodPoint =
+                    subordinatesResultDTOParam.Subordinates.Count(
+                        s =>
+                            70 <= Decimal.Parse(s.TotalPoint, CultureInfo.InvariantCulture) &&
+                            Decimal.Parse(s.TotalPoint, CultureInfo.InvariantCulture) < 90);
+                var subordinatesWithExpectedPoint =
+                    subordinatesResultDTOParam.Subordinates.Count(
+                        s =>
+                            50 <= Decimal.Parse(s.TotalPoint, CultureInfo.InvariantCulture) &&
+                            Decimal.Parse(s.TotalPoint, CultureInfo.InvariantCulture) < 70);
+                var subordinatesWithNeedTrainingPoint =
+                    subordinatesResultDTOParam.Subordinates.Count(
+                        s =>
+                            30 <= Decimal.Parse(s.TotalPoint, CultureInfo.InvariantCulture) &&
+                            Decimal.Parse(s.TotalPoint, CultureInfo.InvariantCulture) < 50);
+                var subordinatesWithUndesirablePoint =
+                    subordinatesResultDTOParam.Subordinates.Count(
+                        s =>
+                            0 < Decimal.Parse(s.TotalPoint, CultureInfo.InvariantCulture) &&
+                            Decimal.Parse(s.TotalPoint, CultureInfo.InvariantCulture) < 30);
+                var e = (double) subordinatesWithExcellentPoint/subordinatesCount;
+                ExcellentPointEmployeePercent = Math.Round(decimal.Divide(subordinatesWithExcellentPoint , subordinatesCount) * 100).ToString(CultureInfo.InvariantCulture);
+                GoodPointEmployeePercent = Math.Round(decimal.Divide(subordinatesWithGoodPoint, subordinatesCount) * 100).ToString(CultureInfo.InvariantCulture);
+                ExpectedPointEmployeePercent = Math.Round(decimal.Divide(subordinatesWithExpectedPoint, subordinatesCount) * 100).ToString(CultureInfo.InvariantCulture);
+                NeedForTrainingPointEmployeePercent = Math.Round(decimal.Divide(subordinatesWithNeedTrainingPoint, subordinatesCount) * 100).ToString(CultureInfo.InvariantCulture);
+                UndesirablePointEmployeePercent = Math.Round(decimal.Divide(subordinatesWithUndesirablePoint, subordinatesCount) * 100).ToString(CultureInfo.InvariantCulture);
+            }
 
-            ExcellentPointEmployeePercent = (subordinatesWithExcellentPoint/subordinatesCount*100).ToString();
-            GoodPointEmployeePercent = (subordinatesWithGoodPoint / subordinatesCount * 100).ToString();
-            ExpectedPointEmployeePercent = (subordinatesWithExpectedPoint / subordinatesCount * 100).ToString();
-            NeedForTrainingPointEmployeePercent = (subordinatesWithNeedTrainingPoint / subordinatesCount * 100).ToString();
-            UndesirablePointEmployeePercent = (subordinatesWithUndesirablePoint / subordinatesCount * 100).ToString();
 
 
         }
@@ -253,7 +279,7 @@ namespace MITD.PMS.Presentation.Logic
 
         public void Handle(UpdateCalculationResultListArgs eventData)
         {
-           
+
         }
 
         #endregion

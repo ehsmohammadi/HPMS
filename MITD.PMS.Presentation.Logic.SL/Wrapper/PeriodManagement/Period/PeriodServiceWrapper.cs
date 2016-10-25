@@ -45,7 +45,7 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
 
         public void GetSubordinatesResultInPeriod(Action<SubordinatesResultDTO, Exception> action, long periodId, string managerEmployeeNo)
         {
-            var url = string.Format(baseAddress + "?periodId=" + periodId + "&employeeNo=" + managerEmployeeNo + "&isForManager=true");
+            var url = string.Format(baseAddress + "?periodId=" + periodId + "&managerEmployeeNo=" + managerEmployeeNo + "&isForManager=true");
             WebClientHelper.Get(new Uri(url, UriKind.Absolute), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 

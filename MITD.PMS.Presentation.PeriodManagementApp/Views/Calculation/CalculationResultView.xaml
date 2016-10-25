@@ -16,6 +16,7 @@
         <Grid Name="LayoutRoot"  Background="Transparent"  >
             <Grid.RowDefinitions >
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -27,7 +28,29 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Border Grid.Row="0" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="DimGray">
+            <Border Grid.Row="0" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="DimGray" Background="Beige">
+                <TextBlock HorizontalAlignment="Left" LineHeight="3" AllowDrop="True" TextWrapping="Wrap" FontSize="13" >
+                  <Bold>تعاریف سطوح عملکردی :</Bold> 
+                    <LineBreak/>
+                    <LineBreak/>
+                    عالی: عملکرد فرد بسیار فراتر از اهداف تعیین شده می باشد و می تواند الگوی مناسبی برای سایر همکاران باشد.
+                    <LineBreak/>
+                    <LineBreak/>
+خوب: عملکرد فرد فراتر از اهداف تعیین شده می باشد و مورد رضایت سازمان می باشد.
+                    <LineBreak/>
+                    <LineBreak/>
+قابل قبول: اهداف مورد انتظار از عملکرد فرد محقق شده است و از لحاظ استانداردهای سازمانی قابل قبول می باشد.
+                    <LineBreak/>
+                    <LineBreak/>
+نیاز به آموزش: عملکرد فرد کمتر از حد انتظار و اهداف تعیین شده می باشد و ضرورت آموزش جهت ارتقای عملکرد و نظارت در اصلاح و بهبود عملکرد وجود دارد.
+                    <LineBreak/>
+                    <LineBreak/>
+نامطلوب: عملکرد فرد بسیار پایین تر از حد توانایی های وی بوده و ضرورت تذکر و اخطار در جهت تحقق اهداف مورد نظر وجود دارد.
+
+                </TextBlock>
+            </Border>
+            
+            <Border Grid.Row="1" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="DimGray">
                 <StackPanel  Orientation="Horizontal">
 
                     <sdk:Label Margin="5">دوره مورد نظر خود را انتخاب کنید :</sdk:Label>
@@ -45,7 +68,7 @@
                 </StackPanel>
             </Border>
 
-            <Border Grid.Row="1" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="DimGray">
+            <Border Grid.Row="2" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="DimGray">
                 <Grid   Background="Transparent"  >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
@@ -65,7 +88,7 @@
 
             </Border>
 
-            <Border Grid.Row="2" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="DimGray">
+            <Border Grid.Row="3" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="DimGray">
                 <Grid   Background="Transparent"  >
 
                     <Grid.RowDefinitions >
@@ -102,7 +125,7 @@
 
             </Border>
 
-            <Border Grid.Row="3" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="DimGray" Background="Khaki">
+            <Border Grid.Row="4" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="DimGray" Background="Khaki">
                 <Grid   Background="Transparent"  >
 
                     <Grid.RowDefinitions >
@@ -116,8 +139,8 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel  Orientation="Horizontal">
-                        <sdk:Label Margin="5">سطح عملکردی :</sdk:Label>
-                        <sdk:Label  Content="{Binding Path=LeveledTotalPoint}"/>
+                        <sdk:Label FontWeight="ExtraBold" Margin="5">سطح عملکردی :</sdk:Label>
+                        <sdk:Label FontWeight="ExtraBold"  Content="{Binding Path=LeveledTotalPoint}"/>
                     </StackPanel>
 
                     <StackPanel Visibility="Collapsed" Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
@@ -130,7 +153,7 @@
 
             </Border>
 
-            <Border Grid.Row="4" Grid.Column="0" BorderThickness="1" BorderBrush="DimGray">
+            <Border Grid.Row="5" Grid.Column="0" BorderThickness="1" BorderBrush="DimGray">
                 <Grid   Background="Transparent" ShowGridLines="True" >
 
                     <Grid.RowDefinitions >
@@ -164,7 +187,7 @@
 
             </Border>
 
-            <Border Grid.Row="4" Grid.Column="1" BorderThickness="1" BorderBrush="DimGray">
+            <Border Grid.Row="5" Grid.Column="1" BorderThickness="1" BorderBrush="DimGray">
                 <Grid   Background="Transparent"  ShowGridLines="True" >
 
                     <Grid.RowDefinitions >
@@ -198,7 +221,7 @@
 
             </Border>
 
-            <Border Grid.Row="5" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="DimGray">
+            <Border Grid.Row="6" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="DimGray">
                 <Grid   Background="Transparent" ShowGridLines="True" >
 
                     <Grid.RowDefinitions >

@@ -129,7 +129,7 @@ namespace MITD.PMS.Interface
                 TotalPoint = employee.FinalPoint.ToString(CultureInfo.InvariantCulture),
                 EmployeeUnitName = unitNames,
                 EmployeeUnitRootName = unitRootNames,
-                TotalUnitPoint = finalUnitPoint.Value.ToString(CultureInfo.InvariantCulture),
+                TotalUnitPoint =finalUnitPoint==null?(0).ToString(): finalUnitPoint.Value.ToString(CultureInfo.InvariantCulture),
                 JobIndexValues = new List<JobIndexValueDTO>()
             };
 
@@ -155,9 +155,74 @@ namespace MITD.PMS.Interface
 
         }
 
-        public SubordinatesResultDTO GetSubordinatesResultInPeriod(long periodId, string managerEmployeeNo)
+        public SubordinatesResultDTO GetSubordinatesResultInPeriod(long periodIdParam, string managerEmployeeNo)
         {
-            throw new System.NotImplementedException();
+            var periodId = new PeriodId(periodIdParam);
+            var period = periodRep.GetById(periodId);
+            var manager = employeeRepository.GetBy(new EmployeeId(managerEmployeeNo, periodId));
+            var managerJobPositionIds = manager.JobPositions.Select(j => j.JobPositionId).ToList();
+            var managerUnitIds = new List<UnitId>();
+            var unitNames = string.Empty;
+            var unitRootNames = string.Empty;
+            var calculation = calculationRepository.GetDeterministicCalculation(period);
+            foreach (var jobPositionId in managerJobPositionIds)
+            {
+                var jobPosition = jobPositionRepository.GetBy(jobPositionId);
+                managerUnitIds.Add(jobPosition.UnitId);
+            }
+
+            foreach (var unitId in managerUnitIds)
+            {
+                var unit = unitRepository.GetBy(unitId);
+                unitNames += unit.Name + " ";
+                unitRootNames += unit.Parent.Name + " ";
+            }
+
+            var finalUnitPoint = jobIndexPointRepository.GetFinalUnitPoint(calculation.Id, manager.Id);
+
+            var res = new SubordinatesResultDTO
+            {
+                PeriodName = period.Name,
+                PeriodTimeLine = "از تاریخ " + PDateHelper.GregorianToHijri(period.StartDate, false) + " تا تاریخ " + PDateHelper.GregorianToHijri(period.EndDate.Date, false),
+                EmployeeUnitName = unitNames,
+                EmployeeUnitRootName = unitRootNames,
+                TotalUnitPoint = finalUnitPoint == null ? (0).ToString() : finalUnitPoint.Value.ToString(CultureInfo.InvariantCulture),
+                Subordinates = new List<EmployeeResultDTO>()
+            };
+            var subordinateEmployeeJobposition=new List<JobPosition>();
+            foreach (var managerJobPositionId in managerJobPositionIds)
+            {
+                subordinateEmployeeJobposition.AddRange(jobPositionRepository.GetAllJobPositionByParentId(managerJobPositionId));
+            }
+            var employeeIds = subordinateEmployeeJobposition.SelectMany(sj => sj.Employees.Select(e => e.EmployeeId));
+            foreach (var employeeId in employeeIds)
+            {
+                var employee = employeeRepository.GetBy(employeeId);
+                var employeeIndexPoints = jobIndexPointRepository.GetBy(calculation.Id, employee.Id);
+                var employeeResult=new EmployeeResultDTO
+                {
+                    EmployeeFullName = employee.FullName,
+                    EmployeeNo = employeeId.EmployeeNo,
+                    JobIndexValues = new List<JobIndexValueDTO>(),
+                    //EmployeeJobPositionName = jobPositionNames,
+                    TotalPoint = employee.FinalPoint.ToString(CultureInfo.InvariantCulture),
+                };
+                foreach (var indexPoint in employeeIndexPoints)
+                {
+                    var jobIndex = (JobIndex)jobIndexRepository.GetById(indexPoint.JobIndexId);
+                    employeeResult.JobIndexValues.Add(new JobIndexValueDTO
+                    {
+                        JobIndexName = jobIndex.Name,
+                        IndexValue = indexPoint.Value.ToString(),
+                        JobIndexId = jobIndex.SharedJobIndexId.Id,
+                        Id = indexPoint.Id.Id
+                        
+                    });
+                }
+                res.Subordinates.Add(employeeResult);
+            }
+
+            return res;
         }
 
         [RequiredPermission(ActionType.DeletePeriod)]
