@@ -28,9 +28,9 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Border Grid.Row="0" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="DimGray" Background="Beige">
+            <Border Grid.Row="0" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="DimGray" Background="LightGoldenrodYellow">
                 <TextBlock HorizontalAlignment="Left" LineHeight="3" AllowDrop="True" TextWrapping="Wrap" FontSize="13" >
-                  <Bold>تعاریف سطوح عملکردی :</Bold> 
+                  <Bold>تعاریف سطوح عملکرد :</Bold> 
                     <LineBreak/>
                     <LineBreak/>
                     عالی: عملکرد فرد بسیار فراتر از اهداف تعیین شده می باشد و می تواند الگوی مناسبی برای سایر همکاران باشد.
@@ -125,7 +125,7 @@
 
             </Border>
 
-            <Border Grid.Row="4" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="DimGray" Background="Khaki">
+            <Border Grid.Row="4" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="DimGray" Background="Wheat">
                 <Grid   Background="Transparent"  >
 
                     <Grid.RowDefinitions >
@@ -139,7 +139,7 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel  Orientation="Horizontal">
-                        <sdk:Label FontWeight="ExtraBold" Margin="5">سطح عملکردی :</sdk:Label>
+                        <sdk:Label FontWeight="ExtraBold" Margin="5">سطح عملکرد :</sdk:Label>
                         <sdk:Label FontWeight="ExtraBold"  Content="{Binding Path=LeveledTotalPoint}"/>
                     </StackPanel>
 

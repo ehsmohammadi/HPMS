@@ -193,26 +193,56 @@ namespace MITD.PMS.Presentation.Logic
                         else
                         {
                             SubordinatesResultDTO = res;
+
+                            // show the employee percent by their level 
                             calculateSubordinatesPointPercent(SubordinatesResultDTO);
-                            var allJobIndexValue = new List<JobIndexValueDTO>();
+
+                            // level their point
                             foreach (var subordinate in SubordinatesResultDTO.Subordinates)
                             {
-                                foreach (var jobIndexValue in subordinate.JobIndexValues)
-                                {
-                                    if(allJobIndexValue.All(a => a.JobIndexId != jobIndexValue.JobIndexId))
-                                        allJobIndexValue.Add(jobIndexValue);
-                                }
+                                subordinate.LevelTotalPoint = levelPoint(subordinate.TotalPoint);
                             }
-                            StrengthEmployeeIndices = new ObservableCollection<JobIndexValueDTO>(allJobIndexValue.Where(j => Decimal.Parse(j.IndexValue, CultureInfo.InvariantCulture) >= 90));
-                            
-                            WeakEmployeeIndices = new ObservableCollection<JobIndexValueDTO>(allJobIndexValue.Where(j => Decimal.Parse(j.IndexValue, CultureInfo.InvariantCulture) < 30));
-                            TrainingEmployeeIndices = new ObservableCollection<JobIndexValueDTO>(allJobIndexValue.Where(j => Decimal.Parse(j.IndexValue, CultureInfo.InvariantCulture) <= 50));
 
-                            LeveledUnitPoint = levelPoint(SubordinatesResultDTO.TotalUnitPoint);
+                            // Find average point per job index
+                            var allJobIndexValue = SubordinatesResultDTO.Subordinates.SelectMany(s => s.JobIndexValues).ToList();
+                            if (allJobIndexValue != null)
+                            {
+                                var averageJobindexValue = CalculateAveragePointForeachJobIndex(allJobIndexValue);
+                                StrengthEmployeeIndices = new ObservableCollection<JobIndexValueDTO>(averageJobindexValue.Where(j => Decimal.Parse(j.IndexValue, CultureInfo.InvariantCulture) >= 90));
+                                WeakEmployeeIndices = new ObservableCollection<JobIndexValueDTO>(averageJobindexValue.Where(j => Decimal.Parse(j.IndexValue, CultureInfo.InvariantCulture) < 30));
+                                TrainingEmployeeIndices = new ObservableCollection<JobIndexValueDTO>(averageJobindexValue.Where(j => Decimal.Parse(j.IndexValue, CultureInfo.InvariantCulture) <= 50));
+                            }
+
+                            //LeveledUnitPoint = levelPoint(SubordinatesResultDTO.TotalUnitPoint);
                         }
                     }), SelectedPeriod.Id, managerEmployeeNo
                     );
 
+        }
+
+        private List<JobIndexValueDTO> CalculateAveragePointForeachJobIndex(List<JobIndexValueDTO> allJobIndexValue)
+        {
+            var res = new List<JobIndexValueDTO>();
+
+            var allJobIndexId = allJobIndexValue.Select(aj => aj.JobIndexId).Distinct().ToList();
+            foreach (var jobIndexId in allJobIndexId)
+            {
+                var jobIndexValueList =
+                    allJobIndexValue.Where(aj => aj.JobIndexId == jobIndexId).ToList();
+                var jobindexName = jobIndexValueList.First().JobIndexName;
+                var sumJobindexValue = decimal.Zero;
+                foreach (var jobIndexValue in jobIndexValueList)
+                {
+                    sumJobindexValue += decimal.Parse(jobIndexValue.IndexValue, CultureInfo.InvariantCulture);
+                }
+                res.Add(new JobIndexValueDTO
+                {
+                    JobIndexId = jobIndexId,
+                    IndexValue = (sumJobindexValue / jobIndexValueList.Count).ToString(CultureInfo.InvariantCulture),
+                    JobIndexName = jobindexName
+                });
+            }
+            return res;
         }
 
         private void calculateSubordinatesPointPercent(SubordinatesResultDTO subordinatesResultDTOParam)
@@ -242,8 +272,8 @@ namespace MITD.PMS.Presentation.Logic
                         s =>
                             0 < Decimal.Parse(s.TotalPoint, CultureInfo.InvariantCulture) &&
                             Decimal.Parse(s.TotalPoint, CultureInfo.InvariantCulture) < 30);
-                var e = (double) subordinatesWithExcellentPoint/subordinatesCount;
-                ExcellentPointEmployeePercent = Math.Round(decimal.Divide(subordinatesWithExcellentPoint , subordinatesCount) * 100).ToString(CultureInfo.InvariantCulture);
+                var e = (double)subordinatesWithExcellentPoint / subordinatesCount;
+                ExcellentPointEmployeePercent = Math.Round(decimal.Divide(subordinatesWithExcellentPoint, subordinatesCount) * 100).ToString(CultureInfo.InvariantCulture);
                 GoodPointEmployeePercent = Math.Round(decimal.Divide(subordinatesWithGoodPoint, subordinatesCount) * 100).ToString(CultureInfo.InvariantCulture);
                 ExpectedPointEmployeePercent = Math.Round(decimal.Divide(subordinatesWithExpectedPoint, subordinatesCount) * 100).ToString(CultureInfo.InvariantCulture);
                 NeedForTrainingPointEmployeePercent = Math.Round(decimal.Divide(subordinatesWithNeedTrainingPoint, subordinatesCount) * 100).ToString(CultureInfo.InvariantCulture);

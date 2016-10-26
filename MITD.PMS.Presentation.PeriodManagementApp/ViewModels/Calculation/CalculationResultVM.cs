@@ -164,7 +164,7 @@ namespace MITD.PMS.Presentation.Logic
                             WeakEmployeeIndices = new ObservableCollection<JobIndexValueDTO>(EmployeeResultDTO.JobIndexValues.Where(j => Decimal.Parse(j.IndexValue, CultureInfo.InvariantCulture) < 30));
                             TrainingEmployeeIndices = new ObservableCollection<JobIndexValueDTO>(EmployeeResultDTO.JobIndexValues.Where(j => Decimal.Parse(j.IndexValue, CultureInfo.InvariantCulture) <= 50));
                             LeveledTotalPoint = levelPoint(EmployeeResultDTO.TotalPoint);
-                            LeveledUnitPoint = levelPoint(EmployeeResultDTO.TotalUnitPoint);
+                            //LeveledUnitPoint = levelPoint(EmployeeResultDTO.TotalUnitPoint);
                         }
                     }), SelectedPeriod.Id,employeeNo
                     );

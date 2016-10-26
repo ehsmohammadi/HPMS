@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Castle.Core;
@@ -48,7 +49,7 @@ namespace MITD.PMS.Interface
             IMapper<BasicDataCopyingProgress, PeriodStateWithCopyingSummaryDTO> periodCopyingStateReportMapper,
             IPeriodRepository periodRep, IPeriodEngineService periodEngine, IEmployeeRepository employeeRepository,
             IJobPositionRepository jobPositionRepository, IUnitRepository unitRepository,
-            IJobIndexPointRepository jobIndexPointRepository,ICalculationRepository calculationRepository,IJobIndexRepository jobIndexRepository)
+            IJobIndexPointRepository jobIndexPointRepository, ICalculationRepository calculationRepository, IJobIndexRepository jobIndexRepository)
         {
             this.periodService = periodService;
             this.periodDescriptionMapper = periodDescriptionMapper;
@@ -97,8 +98,10 @@ namespace MITD.PMS.Interface
             var periodId = new PeriodId(periodIdParam);
             var period = periodRep.GetById(periodId);
             var employee = employeeRepository.GetBy(new EmployeeId(employeeNo, periodId));
-            var employeeJobPositionIds = employee.JobPositions.Select(j => j.JobPositionId);
-            var employeeUnitIds=new List<UnitId>();
+            if (employee == null)
+                throw new Exception("شماره پرسنلی شما در سیستم موجود نمی باشد");
+            var employeeJobPositionIds = employee.JobPositions.Select(j => j.JobPositionId).ToList();
+            var employeeUnitIds = new List<UnitId>();
             var jobPositionNames = string.Empty;
             var unitNames = string.Empty;
             var unitRootNames = string.Empty;
@@ -106,18 +109,24 @@ namespace MITD.PMS.Interface
             foreach (var jobPositionId in employeeJobPositionIds)
             {
                 var jobPosition = jobPositionRepository.GetBy(jobPositionId);
-                jobPositionNames += jobPosition.Name + " ";
+                jobPositionNames += jobPosition.Name;
+                if (employeeJobPositionIds.Count() > 1)
+                    jobPositionNames += " - ";
                 employeeUnitIds.Add(jobPosition.UnitId);
             }
 
             foreach (var unitId in employeeUnitIds)
             {
                 var unit = unitRepository.GetBy(unitId);
-                unitNames += unit.Name + " ";
-                unitRootNames += unit.Parent.Name + " ";
+                unitNames += unit.Name;
+                if (employeeUnitIds.Count > 1)
+                    unitNames += " - ";
+                unitRootNames += unit.Parent.Name;
+                if (employeeUnitIds.Count > 1)
+                    unitRootNames += " - ";
             }
-          
-            var finalUnitPoint =jobIndexPointRepository.GetFinalUnitPoint(calculation.Id, employee.Id);
+
+            //var finalUnitPoint =jobIndexPointRepository.GetFinalUnitPoint(calculation.Id, employee.Id);
 
             var res = new EmployeeResultDTO
             {
@@ -129,7 +138,7 @@ namespace MITD.PMS.Interface
                 TotalPoint = employee.FinalPoint.ToString(CultureInfo.InvariantCulture),
                 EmployeeUnitName = unitNames,
                 EmployeeUnitRootName = unitRootNames,
-                TotalUnitPoint =finalUnitPoint==null?(0).ToString(): finalUnitPoint.Value.ToString(CultureInfo.InvariantCulture),
+                //TotalUnitPoint =finalUnitPoint==null?(0).ToString(): finalUnitPoint.Value.ToString(CultureInfo.InvariantCulture),
                 JobIndexValues = new List<JobIndexValueDTO>()
             };
 
@@ -160,6 +169,8 @@ namespace MITD.PMS.Interface
             var periodId = new PeriodId(periodIdParam);
             var period = periodRep.GetById(periodId);
             var manager = employeeRepository.GetBy(new EmployeeId(managerEmployeeNo, periodId));
+            if (manager == null)
+                throw new Exception("شماره پرسنلی شما در سیستم موجود نمی باشد");
             var managerJobPositionIds = manager.JobPositions.Select(j => j.JobPositionId).ToList();
             var managerUnitIds = new List<UnitId>();
             var unitNames = string.Empty;
@@ -174,11 +185,15 @@ namespace MITD.PMS.Interface
             foreach (var unitId in managerUnitIds)
             {
                 var unit = unitRepository.GetBy(unitId);
-                unitNames += unit.Name + " ";
-                unitRootNames += unit.Parent.Name + " ";
+                unitNames += unit.Name;
+                if (managerUnitIds.Count > 1)
+                    unitNames += " - ";
+                unitRootNames += unit.Parent.Name;
+                if (managerUnitIds.Count > 1)
+                    unitRootNames += " - ";
             }
 
-            var finalUnitPoint = jobIndexPointRepository.GetFinalUnitPoint(calculation.Id, manager.Id);
+            //var finalUnitPoint = jobIndexPointRepository.GetFinalUnitPoint(calculation.Id, manager.Id);
 
             var res = new SubordinatesResultDTO
             {
@@ -186,20 +201,26 @@ namespace MITD.PMS.Interface
                 PeriodTimeLine = "از تاریخ " + PDateHelper.GregorianToHijri(period.StartDate, false) + " تا تاریخ " + PDateHelper.GregorianToHijri(period.EndDate.Date, false),
                 EmployeeUnitName = unitNames,
                 EmployeeUnitRootName = unitRootNames,
-                TotalUnitPoint = finalUnitPoint == null ? (0).ToString() : finalUnitPoint.Value.ToString(CultureInfo.InvariantCulture),
+                //TotalUnitPoint = finalUnitPoint == null ? (0).ToString() : finalUnitPoint.Value.ToString(CultureInfo.InvariantCulture),
                 Subordinates = new List<EmployeeResultDTO>()
             };
-            var subordinateEmployeeJobposition=new List<JobPosition>();
+            var subordinateEmployeeJobposition = new List<JobPosition>();
             foreach (var managerJobPositionId in managerJobPositionIds)
             {
                 subordinateEmployeeJobposition.AddRange(jobPositionRepository.GetAllJobPositionByParentId(managerJobPositionId));
             }
-            var employeeIds = subordinateEmployeeJobposition.SelectMany(sj => sj.Employees.Select(e => e.EmployeeId));
+            var employeeIds = subordinateEmployeeJobposition.SelectMany(sj => sj.Employees.Select(e => e.EmployeeId)).ToList();
+            var oneOfSubordinate = employeeIds.FirstOrDefault();
+            if (oneOfSubordinate != null)
+            {
+                var finalUnitPoint = jobIndexPointRepository.GetFinalUnitPoint(calculation.Id, oneOfSubordinate);
+                res.TotalUnitPoint = finalUnitPoint.Value.ToString(CultureInfo.InvariantCulture);
+            }
             foreach (var employeeId in employeeIds)
             {
                 var employee = employeeRepository.GetBy(employeeId);
                 var employeeIndexPoints = jobIndexPointRepository.GetBy(calculation.Id, employee.Id);
-                var employeeResult=new EmployeeResultDTO
+                var employeeResult = new EmployeeResultDTO
                 {
                     EmployeeFullName = employee.FullName,
                     EmployeeNo = employeeId.EmployeeNo,
@@ -216,7 +237,7 @@ namespace MITD.PMS.Interface
                         IndexValue = indexPoint.Value.ToString(),
                         JobIndexId = jobIndex.SharedJobIndexId.Id,
                         Id = indexPoint.Id.Id
-                        
+
                     });
                 }
                 res.Subordinates.Add(employeeResult);
@@ -241,7 +262,7 @@ namespace MITD.PMS.Interface
         [RequiredPermission(ActionType.AddPeriod)]
         public PeriodDTO AddPeriod(PeriodDTO dto)
         {
-            var period = periodService.AddPeriod(dto.Name, dto.StartDate, dto.EndDate,dto.MaxFinalPoint);
+            var period = periodService.AddPeriod(dto.Name, dto.StartDate, dto.EndDate, dto.MaxFinalPoint);
             return periodDTOMapper.MapToModel(period);
         }
 
@@ -249,7 +270,7 @@ namespace MITD.PMS.Interface
         public PeriodDTO UpdatePeriod(PeriodDTO dto)
         {
 
-            Period period = periodService.UpdatePeriod(new PeriodId(dto.Id), dto.Name, dto.StartDate, dto.EndDate,dto.MaxFinalPoint);
+            Period period = periodService.UpdatePeriod(new PeriodId(dto.Id), dto.Name, dto.StartDate, dto.EndDate, dto.MaxFinalPoint);
             return periodDTOMapper.MapToModel(period);
         }
 

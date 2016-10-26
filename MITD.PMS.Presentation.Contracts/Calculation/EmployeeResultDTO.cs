@@ -69,6 +69,14 @@ namespace MITD.PMS.Presentation.Contracts
 
         }
 
+        private string levelTotalPoint;
+        public string LevelTotalPoint
+        {
+            get { return levelTotalPoint; }
+            set { this.SetField(p => p.LevelTotalPoint, ref levelTotalPoint, value); }
+
+        }
+
         private  string totalUnitPoint;
         public string TotalUnitPoint
         {
