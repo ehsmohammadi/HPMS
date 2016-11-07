@@ -1,4 +1,5 @@
-﻿using MITD.PMS.Presentation.Contracts;
+﻿using System;
+using MITD.PMS.Presentation.Contracts;
 using System.Collections.Generic;
 using System.Web.Http;
 using MITD.PMS.Presentation.Contracts.Fasade;
@@ -37,11 +38,18 @@ namespace MITD.PMS.Service.Host.Controllers
 
         public SubordinatesResultDTO GetSubordinatesResultInPeriod(long periodId, string managerEmployeeNo,bool isForManager)
         {
-            if (isForManager)
-                return periodService.GetSubordinatesResultInPeriod(periodId, managerEmployeeNo);
-            return new SubordinatesResultDTO();
+           return periodService.GetSubordinatesResultInPeriod(periodId, managerEmployeeNo);
         }
 
+        public List<JobIndexValueDTO> GetTrainingEmployeeIndicesInPeriod(long periodId, bool isForTrainer)
+        {
+            return periodService.GetTrainingEmployeeIndicesInPeriod(periodId);
+        }
+
+        public SubordinatesResultDTO GetTrainingNeedEmployeeInPeriod(long periodId, long jobindexId)
+        {
+            throw new NotImplementedException();
+        }
 
 
         public string DeletePeriod(long id)

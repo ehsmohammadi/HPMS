@@ -29,5 +29,6 @@ namespace MITD.PMS.Domain.Model.JobIndexPoints
         decimal GetEmployeeFinalPointBy(PeriodId periodId, string employeeNo, CalculationId calculationId);
         EmployeePoint GetFinalUnitPoint(CalculationId id, EmployeeId employeeId);
         List<JobIndexPoint> GetBy(CalculationId id, EmployeeId employeeId);
+        List<JobIndexPoint> GetJobIndexPointByLimitPoint(CalculationId calculationId, decimal limitPoint);
     }
 }

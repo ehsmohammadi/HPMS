@@ -43,9 +43,23 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
             WebClientHelper.Get(new Uri(url, UriKind.Absolute), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 
+
+        //todo: bad webapi arrangement for below three methods( Iam so sorry for myself )
         public void GetSubordinatesResultInPeriod(Action<SubordinatesResultDTO, Exception> action, long periodId, string managerEmployeeNo)
         {
             var url = string.Format(baseAddress + "?periodId=" + periodId + "&managerEmployeeNo=" + managerEmployeeNo + "&isForManager=true");
+            WebClientHelper.Get(new Uri(url, UriKind.Absolute), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+        }
+
+        public void GetTrainingEmployeeIndicesInPeriod(Action<List<JobIndexValueDTO>, Exception> action, long periodId, string trainerEmployeeNo)
+        {
+            var url = string.Format(baseAddress + "?periodId=" + periodId + "&trainerEmployeeNo=" + trainerEmployeeNo + "&isForTrainer=yes");
+            WebClientHelper.Get(new Uri(url, UriKind.Absolute), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+        }
+
+        public void GetTrainingNeedEmployeeInPeriod(Action<SubordinatesResultDTO, Exception> action, long periodId, string trainerEmployeeNo, long jobIndexId)
+        {
+            var url = string.Format(baseAddress + "?periodId=" + periodId + "&trainerEmployeeNo=" + trainerEmployeeNo + "&jobindexId="+jobIndexId);
             WebClientHelper.Get(new Uri(url, UriKind.Absolute), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 

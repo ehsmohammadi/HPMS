@@ -35,6 +35,7 @@
 
             <vm:CalculationResultVM x:Key="calculationResultViewModel" />
             <vm:CalculationResultForManagerVM x:Key="calculationResultForManagerViewModel" />
+            <vm:CalculationResultForTrainingUnitVM x:Key="calculationResultForTrainingUnitViewModel" />
 
             <vm:EmployeeCalculationResultHistoryVM x:Key="employeeCalculationResultHistoryViewModel" />
             <vm:CalculationVM x:Key="calculationExecViewModel" />

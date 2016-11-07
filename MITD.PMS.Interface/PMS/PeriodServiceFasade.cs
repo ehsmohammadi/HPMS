@@ -246,6 +246,28 @@ namespace MITD.PMS.Interface
             return res;
         }
 
+        public List<JobIndexValueDTO> GetTrainingEmployeeIndicesInPeriod(long periodId)
+        {
+            var id=new PeriodId(periodId);
+            var period = periodRep.GetById(id);
+            var calculation = calculationRepository.GetDeterministicCalculation(period);
+            var jobIndexPoint = jobIndexPointRepository.GetJobIndexPointByLimitPoint(calculation.Id,50);
+            var res = new List<JobIndexValueDTO>();
+            foreach (var indexPoint in jobIndexPoint)
+            {
+                var jobIndex = (JobIndex)jobIndexRepository.GetById(indexPoint.JobIndexId);
+                res.Add(new JobIndexValueDTO
+                {
+                    JobIndexName = jobIndex.Name,
+                    IndexValue = indexPoint.Value.ToString(),
+                    JobIndexId = jobIndex.SharedJobIndexId.Id,
+                    Id = indexPoint.Id.Id
+
+                });
+            }
+            return res;
+        }
+
         [RequiredPermission(ActionType.DeletePeriod)]
         public string DeletePeriod(long id)
         {

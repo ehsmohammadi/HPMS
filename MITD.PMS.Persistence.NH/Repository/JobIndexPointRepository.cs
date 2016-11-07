@@ -109,5 +109,11 @@ namespace MITD.PMS.Persistence.NH
                     .ToList();
             return res;
         }
+
+        public List<JobIndexPoint> GetJobIndexPointByLimitPoint(CalculationId calculationId,decimal limitPoint)
+        {
+            var res = repJobIndex.Find(j => j.CalculationId == calculationId && j.Value <= limitPoint).ToList();
+            return res;
+        }
     }
 }

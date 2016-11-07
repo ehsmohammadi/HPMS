@@ -11,4 +11,9 @@ namespace MITD.PMS.Presentation.Logic
     {
 
     }
+
+    public interface ICalculationResultForTrainingUnitView : IView 
+    {
+
+    }
 }

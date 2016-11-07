@@ -27,5 +27,6 @@ namespace MITD.PMS.Presentation.Contracts.Fasade
         List<PeriodDescriptionDTO> GetPeriodsWithConfirmedResult();
         EmployeeResultDTO GetEmployeeResultInPeriod(long periodId, string employeeNo);
         SubordinatesResultDTO GetSubordinatesResultInPeriod(long periodId, string managerEmployeeNo);
+        List<JobIndexValueDTO> GetTrainingEmployeeIndicesInPeriod(long periodId);
     }
 }

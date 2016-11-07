@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using MITD.PMS.Presentation.Contracts;
 using MITD.Presentation;
@@ -24,5 +25,7 @@ namespace MITD.PMS.Presentation.Logic
         void GetPeriodsWithConfirmedResult(Action<ObservableCollection<PeriodDescriptionDTO>, Exception> action);
         void GetEmployeeResultInPeriod(Action<EmployeeResultDTO, Exception> action, long periodId, string employeeNo);
         void GetSubordinatesResultInPeriod(Action<SubordinatesResultDTO, Exception> action, long periodId, string managerEmployeeNo);
+        void GetTrainingEmployeeIndicesInPeriod(Action<List<JobIndexValueDTO>, Exception> action, long periodId, string trainerEmployeeNo);
+        void GetTrainingNeedEmployeeInPeriod(Action<SubordinatesResultDTO, Exception> action, long periodId, string trainerEmployeeNo, long jobIndexId);
     }
 }
