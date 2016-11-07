@@ -97,7 +97,7 @@ namespace MITD.PMS.Presentation.Logic
 
         void init()
         {
-            DisplayName = "نتیجه عملکرد افراد زیر مجموعه";
+            DisplayName = "نتیجه عملکرد برای واحد آموزش";
         }
 
         public void Load(string employeeNo)

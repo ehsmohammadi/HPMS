@@ -246,27 +246,61 @@ namespace MITD.PMS.Interface
             return res;
         }
 
+        public SubordinatesResultDTO GetTrainingNeedEmployeeInFieldInPeriod(long periodIdParam, long jobindexId)
+        {
+            var periodId = new PeriodId(periodIdParam);
+            var period = periodRep.GetById(periodId);
+            var res = new SubordinatesResultDTO
+            {
+                PeriodName = period.Name,
+                PeriodTimeLine = "از تاریخ " + PDateHelper.GregorianToHijri(period.StartDate, false) + " تا تاریخ " + PDateHelper.GregorianToHijri(period.EndDate.Date, false),
+                //TotalUnitPoint = finalUnitPoint == null ? (0).ToString() : finalUnitPoint.Value.ToString(CultureInfo.InvariantCulture),
+                Subordinates = new List<EmployeeResultDTO>()
+            };
+            var calculation = calculationRepository.GetDeterministicCalculation(period);
+            var employeeIds = jobIndexPointRepository.GetJobIndexPointByLimitPoint(calculation.Id, 50).Where(j=>j.JobIndexId.Id==jobindexId).Select(j=>j.EmployeeId);
+            foreach (var employeeId in employeeIds)
+            {
+                var employee = employeeRepository.GetBy(employeeId);
+                var employeeIndexPoints = jobIndexPointRepository.GetBy(calculation.Id, employee.Id);
+                var employeeResult = new EmployeeResultDTO
+                {
+                    EmployeeFullName = employee.FullName,
+                    EmployeeNo = employeeId.EmployeeNo,
+                   
+                    //EmployeeJobPositionName = jobPositionNames,
+                    TotalPoint = employee.FinalPoint.ToString(CultureInfo.InvariantCulture),
+                };
+                res.Subordinates.Add(employeeResult);
+            }
+
+            return res;
+        }
+
         public List<JobIndexValueDTO> GetTrainingEmployeeIndicesInPeriod(long periodId)
         {
-            var id=new PeriodId(periodId);
+            var id = new PeriodId(periodId);
             var period = periodRep.GetById(id);
             var calculation = calculationRepository.GetDeterministicCalculation(period);
-            var jobIndexPoint = jobIndexPointRepository.GetJobIndexPointByLimitPoint(calculation.Id,50);
+            var jobIndexPoints = jobIndexPointRepository.GetJobIndexPointByLimitPoint(calculation.Id, 50);
             var res = new List<JobIndexValueDTO>();
-            foreach (var indexPoint in jobIndexPoint)
+            foreach (var indexPoint in jobIndexPoints)
             {
                 var jobIndex = (JobIndex)jobIndexRepository.GetById(indexPoint.JobIndexId);
-                res.Add(new JobIndexValueDTO
-                {
-                    JobIndexName = jobIndex.Name,
-                    IndexValue = indexPoint.Value.ToString(),
-                    JobIndexId = jobIndex.SharedJobIndexId.Id,
-                    Id = indexPoint.Id.Id
+                if (res.All(r => r.JobIndexId != jobIndex.Id.Id))
+                    res.Add(new JobIndexValueDTO
+                    {
+                        JobIndexName = jobIndex.Name,
+                        IndexValue = indexPoint.Value.ToString(),
+                        JobIndexId = jobIndex.Id.Id,
+                        Id = indexPoint.Id.Id
 
-                });
+                    });
             }
             return res;
         }
+
+
 
         [RequiredPermission(ActionType.DeletePeriod)]
         public string DeletePeriod(long id)

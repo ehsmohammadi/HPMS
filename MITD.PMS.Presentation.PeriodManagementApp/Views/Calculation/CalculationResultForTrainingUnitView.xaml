@@ -50,8 +50,8 @@
 
                     <StackPanel Grid.Row="0" Grid.Column="1"  Orientation="Horizontal">
                         <sdk:Label Margin="5">زمینه آموزشی  :</sdk:Label>
-                        <pr:ComboBoxEx  Width="150" Margin="5" Height="30" HorizontalAlignment="Left" 
-                             DisplayMemberPath="Name" 
+                        <pr:ComboBoxEx  Width="500" Margin="5" Height="30" HorizontalAlignment="Left" 
+                             DisplayMemberPath="JobIndexName" 
                              ItemsSource="{Binding Path=TrainingEmployeeIndices, Mode=TwoWay}" 
                              SelectedItem="{Binding Mode=TwoWay, Path=SelectedTrainingEmployeeIndex}">
                             <pr:ComboBoxEx.ItemsPanel>
@@ -115,7 +115,7 @@
                                       HorizontalScrollBarVisibility="Auto" 
                                       SelectionMode="Single"
                                       IsReadOnly="True"
-                                      ItemsSource="{Binding Path=TrainingFieldResultDTO.Employees}" >
+                                      ItemsSource="{Binding Path=TrainingNeedEmployeeDTO.Subordinates}" >
                             <sdk:DataGrid.Columns>
                            
                                 <sdk:DataGridTextColumn Header="نام و نام خانوادگی" Width="Auto" 

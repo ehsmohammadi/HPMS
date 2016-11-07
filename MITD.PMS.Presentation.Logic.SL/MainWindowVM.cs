@@ -880,6 +880,41 @@ namespace MITD.PMS.Presentation.Logic
                                 });
                         }
                         )));
+#if DEBUG
+
+                if (CurrentUser.IsEmployee && CurrentUser.EmployeeNo == "670222")
+                      {
+#else
+
+  if (CurrentUser.IsEmployee && CurrentUser.EmployeeNo == "151551")
+  {
+
+#endif
+
+               
+                    cmdList.Add(
+                        new CommandViewModel("نتیجه عملکرد برای واحد آموزش", new DelegateCommand(
+                            () =>
+                            {
+                                controller.ShowBusyIndicator("در حال بارگذاری ماجول...");
+                                controller.GetRemoteInstance<IPeriodController>(
+                                    (res, exp) =>
+                                    {
+                                        controller.HideBusyIndicator();
+                                        if (res != null)
+                                        {
+                                            if (CurrentPeriod != null && CurrentPeriod.Id != 0)
+                                                res.ShowCalculationResultForTrainingUnitView(currentPriod, CurrentUser.EmployeeNo,
+                                                    isShiftPressed);
+                                        }
+                                        else if (exp != null)
+                                        {
+                                            controller.HandleException(exp);
+                                        }
+                                    });
+                            }
+                            )));
+                }
             }
 
             cmdList.Add(

@@ -53,13 +53,13 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
 
         public void GetTrainingEmployeeIndicesInPeriod(Action<List<JobIndexValueDTO>, Exception> action, long periodId, string trainerEmployeeNo)
         {
-            var url = string.Format(baseAddress + "?periodId=" + periodId + "&trainerEmployeeNo=" + trainerEmployeeNo + "&isForTrainer=yes");
+            var url = string.Format(baseAddress + "?periodId=" + periodId + "&isForTrainer=yes");
             WebClientHelper.Get(new Uri(url, UriKind.Absolute), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 
         public void GetTrainingNeedEmployeeInPeriod(Action<SubordinatesResultDTO, Exception> action, long periodId, string trainerEmployeeNo, long jobIndexId)
         {
-            var url = string.Format(baseAddress + "?periodId=" + periodId + "&trainerEmployeeNo=" + trainerEmployeeNo + "&jobindexId="+jobIndexId);
+            var url = string.Format(baseAddress + "?periodId=" + periodId + "&jobindexId="+jobIndexId);
             WebClientHelper.Get(new Uri(url, UriKind.Absolute), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 

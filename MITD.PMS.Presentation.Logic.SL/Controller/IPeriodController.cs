@@ -27,8 +27,9 @@ namespace MITD.PMS.Presentation.Logic
         void ShowJobIndexInquiryListView(string employeeNo, long id, bool isShiftPressed);
 
         [RequiredPermission(ActionType.ShowCalculationResult)]
-        void ShowPeriodCalculationResultView(PeriodDTO currentPeriod, string employeeNo, bool isShiftPressed = false);
-        void ShowCalculationResultForManagerView(PeriodDTO periodDTO, string employeeNo, bool isShiftPressed = false);
+        void ShowPeriodCalculationResultView(PeriodDTO period, string employeeNo, bool isShiftPressed = false);
+        void ShowCalculationResultForManagerView(PeriodDTO period, string employeeNo, bool isShiftPressed = false);
+        void ShowCalculationResultForTrainingUnitView(PeriodDTO period, string employeeNo, bool isShiftPressed = false);
 
         #endregion
 
@@ -102,6 +103,6 @@ namespace MITD.PMS.Presentation.Logic
         void ShowCalculationExceptionListView(CalculationDTO calculation);
 
 
-
+        
     }
 }

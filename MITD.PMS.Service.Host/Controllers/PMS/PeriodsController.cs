@@ -41,14 +41,14 @@ namespace MITD.PMS.Service.Host.Controllers
            return periodService.GetSubordinatesResultInPeriod(periodId, managerEmployeeNo);
         }
 
-        public List<JobIndexValueDTO> GetTrainingEmployeeIndicesInPeriod(long periodId, bool isForTrainer)
+        public List<JobIndexValueDTO> GetTrainingEmployeeIndicesInPeriod(long periodId, string isForTrainer)
         {
             return periodService.GetTrainingEmployeeIndicesInPeriod(periodId);
         }
 
         public SubordinatesResultDTO GetTrainingNeedEmployeeInPeriod(long periodId, long jobindexId)
         {
-            throw new NotImplementedException();
+            return periodService.GetTrainingNeedEmployeeInFieldInPeriod(periodId,jobindexId);
         }
 
 

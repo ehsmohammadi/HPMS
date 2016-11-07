@@ -265,6 +265,8 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
 
         #region Inquiry
 
+        
+
         public void ShowInquiryUnitFormView(InquiryUnitFormDTO inquiryForm, ActionType action)
         {
             var view = ServiceLocator.Current.GetInstance<IUnitInquiryFormView>();
@@ -340,6 +342,12 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
         {
             var view = viewManager.ShowInTabControl<ICalculationResultForManagerView>(isShiftPressed);
             ((CalculationResultForManagerVM)view.ViewModel).Load(employeeNo);
+        }
+
+        public void ShowCalculationResultForTrainingUnitView(PeriodDTO period, string employeeNo, bool isShiftPressed = false)
+        {
+            var view = viewManager.ShowInTabControl<ICalculationResultForTrainingUnitView>(isShiftPressed);
+            ((CalculationResultForTrainingUnitVM)view.ViewModel).Load(employeeNo);
         }
 
         public void ShowPeriodCalculationStateView(long calculationId)
