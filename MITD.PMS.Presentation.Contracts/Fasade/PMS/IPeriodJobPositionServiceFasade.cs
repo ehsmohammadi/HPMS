@@ -6,16 +6,18 @@ namespace MITD.PMS.Presentation.Contracts
     public interface IPeriodJobPositionServiceFacade : IFacadeService
     {
         JobPositionInPeriodAssignmentDTO AssignJobPosition(long periodId, JobPositionInPeriodAssignmentDTO jobPositionInPeriod);
+        JobPositionInPeriodAssignmentDTO UpdateJobPosition(long periodId, JobPositionInPeriodAssignmentDTO jobPositionInPeriod);
         string RemoveJobPosition(long periodId, long jobPositionId);
-        IEnumerable<JobPositionInPeriodDTOWithActions> GetJobPositionsWithActions(long periodId);
-        IEnumerable<JobPositionInPeriodDTO> GetJobPositions(long periodId);
+        IEnumerable<JobPositionInPeriodDTOWithActions> GetJobPositionsWithActions(long periodIdParam);
+        IEnumerable<JobPositionInPeriodDTO> GetJobPositions(long periodIdParam);
 
-        JobPositionInPeriodDTO GetJobPosition(long periodId, long jobPositionId);
+        JobPositionInPeriodAssignmentDTO GetJobPosition(long periodId, long jobPositionId);
 
         List<InquirySubjectWithInquirersDTO> GetInquirySubjectsWithInquirers(long periodId, long jobPositionId);
 
         InquirySubjectWithInquirersDTO UpdateInquirySubjectInquirers(long periodId, long jobPositionId,
             string inquirySubjectEmployeeNo, InquirySubjectWithInquirersDTO inquirySubjectWithInquirersDTO);
 
+        
     }
 }

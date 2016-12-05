@@ -82,6 +82,10 @@ namespace MITD.PMS.Domain.Model.Periods
         internal override void CheckAssigningJobPosition()
         {
         }
+        internal override void CheckModifyingJobPosition()
+        {
+        }
+
         internal override void CheckCreatingEmployee()
         {
         }

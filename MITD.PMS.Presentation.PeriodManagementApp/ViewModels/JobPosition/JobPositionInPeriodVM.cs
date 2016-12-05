@@ -30,6 +30,13 @@ namespace MITD.PMS.Presentation.Logic
             set { this.SetField(vm => vm.JobPositions, ref jobPositions, value); }
         }
 
+        private List<JobPositionInPeriodDTO> parentJobPositions;
+        public List<JobPositionInPeriodDTO> ParentJobPositions
+        {
+            get { return parentJobPositions; }
+            set { this.SetField(vm => vm.ParentJobPositions, ref parentJobPositions, value); }
+        }
+
         private List<UnitInPeriodDTO> unitInPeriods;
         public List<UnitInPeriodDTO> UnitInPeriods
         {
@@ -115,6 +122,7 @@ namespace MITD.PMS.Presentation.Logic
         private void init()
         {
             JobPositionInPeriod = new JobPositionInPeriodAssignmentDTO { };
+            ParentJobPositions = new List<JobPositionInPeriodDTO>();
             DisplayName = PeriodMgtAppLocalizedResources.JobPositionInPeriodViewTitle;
         }
 
@@ -135,16 +143,28 @@ namespace MITD.PMS.Presentation.Logic
         private void loadJobPositions()
         {
             ShowBusyIndicator("در حال دریافت اطلاعات");
-            jobPositionService.GetAllJobPositions((res, exp) =>  appController.BeginInvokeOnDispatcher(() =>
+            jobPositionService.GetAllJobPositions((res, exp) => appController.BeginInvokeOnDispatcher(() =>
                 {
                     HideBusyIndicator();
                     if (exp == null)
-                        jobPositionInPeriodService.GetAllJobPositions((jobPositionInPeriods, exp1) =>  appController.BeginInvokeOnDispatcher(() =>
+                        jobPositionInPeriodService.GetAllJobPositions((jobPositionInPeriods, exp1) => appController.BeginInvokeOnDispatcher(() =>
                         {
-                            JobPositions =
-                                res.Where(r => !jobPositionInPeriods.Select(j => j.JobPositionId).Contains(r.Id))
-                                    .ToList();
-                        }),jobPositionInPeriod.PeriodId);
+
+                            foreach (var jobPositionInPeriodDTO in jobPositionInPeriods)
+                            {
+                                var modifiedJobPosition = jobPositionInPeriodDTO;
+                                modifiedJobPosition.Name = jobPositionInPeriodDTO.Name + "-" + jobPositionInPeriodDTO.UnitName;
+                                ParentJobPositions.Add(modifiedJobPosition);
+                            }
+                            ParentJobPositions = jobPositionInPeriods;
+
+                            if (actionType == ActionType.AddJobPositionInPeriod)
+                                JobPositions =
+                                    res.Where(r => !jobPositionInPeriods.Select(j => j.JobPositionId).Contains(r.Id))
+                                        .ToList();
+                            else
+                                JobPositions = res;
+                        }), jobPositionInPeriod.PeriodId);
 
                     else
                     {
@@ -156,7 +176,7 @@ namespace MITD.PMS.Presentation.Logic
         private void loadJobInPeriod()
         {
             ShowBusyIndicator("در حال دریافت اطلاعات");
-            jobInPeriodService.GetAllJobInPeriod((res, exp) =>  appController.BeginInvokeOnDispatcher(() =>
+            jobInPeriodService.GetAllJobInPeriod((res, exp) => appController.BeginInvokeOnDispatcher(() =>
                 {
                     HideBusyIndicator();
                     if (exp == null)
@@ -169,7 +189,7 @@ namespace MITD.PMS.Presentation.Logic
         private void loadUnitInPeriod()
         {
             ShowBusyIndicator("در حال دریافت اطلاعات");
-            unitInPeriodService.GetAllUnits((res, exp) =>  appController.BeginInvokeOnDispatcher(() =>
+            unitInPeriodService.GetAllUnits((res, exp) => appController.BeginInvokeOnDispatcher(() =>
                 {
                     HideBusyIndicator();
                     if (exp == null)
@@ -195,17 +215,17 @@ namespace MITD.PMS.Presentation.Logic
                             FinalizeAction();
                     }), jobPositionInPeriod);
             }
-            //else if (actionType == ActionType.ModifyJobPositionInPeriod)
-            //{
-            //    jobPositionInPeriodService.UpdateJobPositionInPeriod((res, exp) => appController.BeginInvokeOnDispatcher(() =>
-            //        {
-            //            HideBusyIndicator();
-            //            if (exp != null)
-            //                appController.HandleException(exp);
-            //            else
-            //                FinalizeAction();
-            //        }), jobPositionInPeriod);
-            //}
+            else if (actionType == ActionType.ModifyJobPositionInPeriod)
+            {
+                jobPositionInPeriodService.UpdateJobPositionInPeriod((res, exp) => appController.BeginInvokeOnDispatcher(() =>
+                    {
+                        HideBusyIndicator();
+                        if (exp != null)
+                            appController.HandleException(exp);
+                        else
+                            FinalizeAction();
+                    }), jobPositionInPeriod);
+            }
         }
 
         private void FinalizeAction()

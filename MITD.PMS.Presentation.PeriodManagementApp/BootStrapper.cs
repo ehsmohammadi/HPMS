@@ -48,6 +48,7 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
 
                 {(int) ActionType.AddJobPositionInPeriod, typeof (AddJobPositionInPeriodService)},
                 {(int) ActionType.DeleteJobPositionInPeriod, typeof (DeleteJobPositionInPeriodService)},
+                 {(int) ActionType.ModifyJobPositionInPeriod, typeof (ModifyJobPositionInPeriodService)},
                 {(int) ActionType.ManageJobPositionInPeriodInquiry, typeof (ManageJobPositionInPeriodInquiryService)},
 
                 {(int) ActionType.AddJobIndexInPeriod, typeof (AddJobIndexInPeriodService)},

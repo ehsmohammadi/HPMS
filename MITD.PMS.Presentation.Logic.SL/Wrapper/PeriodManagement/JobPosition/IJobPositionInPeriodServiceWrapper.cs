@@ -7,7 +7,8 @@ namespace MITD.PMS.Presentation.Logic
 {
     public partial interface IJobPositionInPeriodServiceWrapper : IServiceWrapper
     {
-        void AddJobPositionInPeriod(Action<JobPositionInPeriodAssignmentDTO, Exception> action, JobPositionInPeriodAssignmentDTO unitInPeriod);
+        void AddJobPositionInPeriod(Action<JobPositionInPeriodAssignmentDTO, Exception> action, JobPositionInPeriodAssignmentDTO jobPositionInPeriod);
+        void UpdateJobPositionInPeriod(Action<JobPositionInPeriodAssignmentDTO, Exception> action, JobPositionInPeriodAssignmentDTO jobPositionInPeriod);
         void DeleteJobPositionInPeriod(Action<string, Exception> action, long periodId, long unitId);
         void GetAllJobPositions(Action<List<JobPositionInPeriodDTO>, Exception> action, long periodId);
         void GetJobPositionsWithActions(Action<List<JobPositionInPeriodDTOWithActions>, Exception> action, long periodId);
@@ -15,5 +16,7 @@ namespace MITD.PMS.Presentation.Logic
         void GetInquirySubjectWithInquirers(Action<List<InquirySubjectWithInquirersDTO>, Exception> action, long periodId, long jobPositionId);
         void UpdateInquirySubjectInquirers(Action<InquirySubjectWithInquirersDTO, Exception> action, long periodId, long jobPositionId, InquirySubjectWithInquirersDTO inquirySubjectWithInquirersDTO);
         void GetJobInPeriodByJobPostionId(Action<JobInPeriodDTO, Exception> action, long periodId, long jobPositionId);
+
+        void GetJobPositionInPeriod(Action<JobPositionInPeriodAssignmentDTO, Exception> action, long periodId, long jobPositionId);
     }
 }

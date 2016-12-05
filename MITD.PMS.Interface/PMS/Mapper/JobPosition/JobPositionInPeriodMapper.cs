@@ -14,6 +14,8 @@ namespace MITD.PMS.Interface
                 {
 
                     Name = entity.Name,
+                    JobId = entity.JobId.SharedJobId.Id,
+                    Unitid = entity.UnitId.SharedUnitId.Id,
                     JobPositionId = entity.Id.SharedJobPositionId.Id,
                     
                 };

@@ -16,7 +16,7 @@ using MITD.PMSSecurity.Domain.Model;
 
 namespace MITD.PMS.Interface
 {
-  //  [Interceptor(typeof(Interception))]
+    //  [Interceptor(typeof(Interception))]
     public class PeriodJobPositionServiceFacade : IPeriodJobPositionServiceFacade
     {
         private readonly IJobPositionService jobPositionService;
@@ -29,8 +29,8 @@ namespace MITD.PMS.Interface
         private readonly IJobRepository _jobRepository;
 
         public PeriodJobPositionServiceFacade(IJobPositionService jobPositionService,
-            IMapper<JobPosition,JobPositionInPeriodAssignmentDTO> jobPositionAssignmentMapper,
-            IMapper<JobPosition,JobPositionInPeriodDTOWithActions> jobPositionInPeriodDTOWithActionsMapper,
+            IMapper<JobPosition, JobPositionInPeriodAssignmentDTO> jobPositionAssignmentMapper,
+            IMapper<JobPosition, JobPositionInPeriodDTOWithActions> jobPositionInPeriodDTOWithActionsMapper,
             IMapper<JobPosition, JobPositionInPeriodDTO> jobPositionInPeriodDTOMapper,
             IJobPositionRepository jobPositionRep,
             IEmployeeRepository employeeRep,
@@ -59,6 +59,18 @@ namespace MITD.PMS.Interface
             return jobPositionAssignmentMapper.MapToModel(jobPosition);
         }
 
+        [RequiredPermission(ActionType.ModifyJobPositionInPeriod)]
+        public JobPositionInPeriodAssignmentDTO UpdateJobPosition(long periodId, JobPositionInPeriodAssignmentDTO jobPositionInPeriod)
+        {
+            var jobPosition = jobPositionService.ModifyJobPosition(new PeriodId(periodId),
+                new SharedJobPositionId(jobPositionInPeriod.JobPositionId),
+                jobPositionInPeriod.ParentJobPositionId != null
+                    ? new SharedJobPositionId(jobPositionInPeriod.ParentJobPositionId.Value)
+                    : null, new JobId(new PeriodId(periodId), new SharedJobId(jobPositionInPeriod.JobId)),
+                new UnitId(new PeriodId(periodId), new SharedUnitId(jobPositionInPeriod.UnitId)));
+            return jobPositionAssignmentMapper.MapToModel(jobPosition);
+        }
+
         [RequiredPermission(ActionType.DeleteJobPositionInPeriod)]
         public string RemoveJobPosition(long periodId, long jobPositionId)
         {
@@ -67,67 +79,50 @@ namespace MITD.PMS.Interface
         }
 
         [RequiredPermission(ActionType.ShowJobPositionInPeriod)]
-        public IEnumerable<JobPositionInPeriodDTOWithActions> GetJobPositionsWithActions(long periodId)
+        public IEnumerable<JobPositionInPeriodDTOWithActions> GetJobPositionsWithActions(long periodIdParam)
         {
-            var jobPositions=jobPositionRep.GetJobPositions(new PeriodId(periodId));
-            var units = _unitRepository.GetUnits(new PeriodId(periodId));
-            var jobs = _jobRepository.GetAllJob(new PeriodId(periodId));
+            var periodId = new PeriodId(periodIdParam);
+            var jobPositions = jobPositionRep.GetJobPositions(periodId);
+            var res = jobPositions.Select(u => jobPositionInPeriodDTOWithActionsMapper.MapToModel(u)).ToList();
 
-   
+            res.ForEach(d =>
+            {
+                d.UnitName = _unitRepository.GetBy(new UnitId(periodId, new SharedUnitId(d.Unitid))).Name;
+                d.JobName = _jobRepository.GetById(new JobId(periodId, new SharedJobId(d.JobId))).Name;
+            });
 
-            var res1 = (from jobpos in jobPositions
-                        join u in units on jobpos.UnitId equals u.Id
-                        join j in jobs on jobpos.JobId equals j.Id
-                        select new { jobpos, unitname = u.Name, jobname = j.Name }).ToList();
-
-
-          
-           var res= res1.Select(u =>new {jobposition=jobPositionInPeriodDTOWithActionsMapper.MapToModel(u.jobpos),u.unitname,u.jobname}).ToList();
-        
-
-           res.ForEach(d =>
-           {
-                d.jobposition.UnitName =d.unitname ;
-                d.jobposition.JobName = d.jobname;
-           });
-
-            return res.Select(c=>c.jobposition);
-
-
-        
-           // var res= jobPositions.Select(u =>jobPositionInPeriodDTOWithActionsMapper.MapToModel(u)).ToList();
-
-           //res.ForEach(d =>
-           //{
-           //    d.UnitName = units.Single(u=>u.SharedUnit.Id.Id==d.Unitid).Name;
-           //    d.JobName = jobs.Single(u => u.SharedJob.Id.Id == d.JobId).Name;
-           //});
-
-           // return res;
+            return res;
         }
 
         [RequiredPermission(ActionType.ShowJobPositionInPeriod)]
-        public IEnumerable<JobPositionInPeriodDTO> GetJobPositions(long periodId)
+        public IEnumerable<JobPositionInPeriodDTO> GetJobPositions(long periodIdParam)
         {
-            var jobPositions = jobPositionRep.GetJobPositions(new PeriodId(periodId));
-            return jobPositions.Select(u => jobPositionInPeriodDTOMapper.MapToModel(u));
+            var periodId = new PeriodId(periodIdParam);
+            var jobPositions = jobPositionRep.GetJobPositions(periodId);
+            var res = jobPositions.Select(u => jobPositionInPeriodDTOMapper.MapToModel(u)).ToList();
+            res.ForEach(d =>
+            {
+                d.UnitName = _unitRepository.GetBy(new UnitId(periodId, new SharedUnitId(d.Unitid))).Name;
+                d.JobName = _jobRepository.GetById(new JobId(periodId, new SharedJobId(d.JobId))).Name;
+            });
+            return res;
         }
 
         [RequiredPermission(ActionType.ShowJobPositionInPeriod)]
-        public JobPositionInPeriodDTO GetJobPosition(long periodId, long jobPositionId)
+        public JobPositionInPeriodAssignmentDTO GetJobPosition(long periodId, long jobPositionId)
         {
-            var jobPosition = jobPositionRep.GetBy(new JobPositionId(new PeriodId(periodId),new SharedJobPositionId(jobPositionId) ));
-            return jobPositionInPeriodDTOMapper.MapToModel(jobPosition);
+            var jobPosition = jobPositionRep.GetBy(new JobPositionId(new PeriodId(periodId), new SharedJobPositionId(jobPositionId)));
+            return jobPositionAssignmentMapper.MapToModel(jobPosition);
         }
 
         [RequiredPermission(ActionType.ManageJobPositionInPeriodInquiry)]
         public List<InquirySubjectWithInquirersDTO> GetInquirySubjectsWithInquirers(long periodId, long jobPositionId)
         {
-            var inquirySubjectWIthInquirersList = new List<InquirySubjectWithInquirersDTO>(); 
+            var inquirySubjectWIthInquirersList = new List<InquirySubjectWithInquirersDTO>();
             var configurationItems =
                 jobPositionService.GetInquirySubjectWithInquirer(new JobPositionId(new PeriodId(periodId),
                     new SharedJobPositionId(jobPositionId)));
-            var inquirySubjectWithinquirers=configurationItems.GroupBy(c => c.Id.InquirySubjectId);
+            var inquirySubjectWithinquirers = configurationItems.GroupBy(c => c.Id.InquirySubjectId);
             foreach (var inquirySubjectWithinquirer in inquirySubjectWithinquirers)
             {
                 var inquirySubject = employeeRep.GetBy(inquirySubjectWithinquirer.Key);
@@ -136,8 +131,8 @@ namespace MITD.PMS.Interface
                     EmployeeName = inquirySubject.FullName,
                     EmployeeNo = inquirySubject.Id.EmployeeNo,
                 };
-                inquirySubjectInquirerDTO.CustomInquirers=new List<InquirerDTO>();
-                inquirySubjectInquirerDTO.Inquirers=new List<InquirerDTO>();
+                inquirySubjectInquirerDTO.CustomInquirers = new List<InquirerDTO>();
+                inquirySubjectInquirerDTO.Inquirers = new List<InquirerDTO>();
 
                 foreach (var itm in inquirySubjectWithinquirer)
                 {
@@ -145,19 +140,19 @@ namespace MITD.PMS.Interface
                     var inquirerJobPositionName = jobPositionRep.GetBy(itm.Id.InquirerJobPositionId).Name;
                     if (itm.IsAutoGenerated)
                     {
-                        
-                         inquirySubjectInquirerDTO.Inquirers.Add(new InquirerDTO
-                         {
-                             EmployeeNo = inquirer.Id.EmployeeNo,
-                             FullName = inquirer.FullName,
-                             IsPermitted = itm.IsPermitted,
-                             EmployeeJobPositionId = itm.Id.InquirerJobPositionId.SharedJobPositionId.Id,
-                             EmployeeJobPositionName = inquirerJobPositionName
-                         });
-                    } 
+
+                        inquirySubjectInquirerDTO.Inquirers.Add(new InquirerDTO
+                        {
+                            EmployeeNo = inquirer.Id.EmployeeNo,
+                            FullName = inquirer.FullName,
+                            IsPermitted = itm.IsPermitted,
+                            EmployeeJobPositionId = itm.Id.InquirerJobPositionId.SharedJobPositionId.Id,
+                            EmployeeJobPositionName = inquirerJobPositionName
+                        });
+                    }
                     else
                     {
-                      
+
                         inquirySubjectInquirerDTO.CustomInquirers.Add(new InquirerDTO
                         {
                             EmployeeNo = inquirer.Id.EmployeeNo,
@@ -166,7 +161,7 @@ namespace MITD.PMS.Interface
                             EmployeeJobPositionName = inquirerJobPositionName
                         });
                     }
-                   
+
                 }
 
                 inquirySubjectWIthInquirersList.Add(inquirySubjectInquirerDTO);
@@ -195,9 +190,10 @@ namespace MITD.PMS.Interface
 
             var inquirerEmployeeIdList = new List<EmployeeIdWithJobPositionId>();
             inquirerEmployeeIdList.AddRange(inquirySubjectWithInquirersDTO.Inquirers.Where(i => i.IsPermitted)
-               .Select(i => new EmployeeIdWithJobPositionId(){
-                   EmployeeId = new EmployeeId(i.EmployeeNo,new PeriodId(periodId)),
-                   JobPositionId = new JobPositionId(new PeriodId(periodId),new SharedJobPositionId(i.EmployeeJobPositionId))
+               .Select(i => new EmployeeIdWithJobPositionId()
+               {
+                   EmployeeId = new EmployeeId(i.EmployeeNo, new PeriodId(periodId)),
+                   JobPositionId = new JobPositionId(new PeriodId(periodId), new SharedJobPositionId(i.EmployeeJobPositionId))
                }));
 
             inquirerEmployeeIdList.AddRange(inquirySubjectWithInquirersDTO.CustomInquirers
@@ -214,9 +210,9 @@ namespace MITD.PMS.Interface
                 inquirerEmployeeIdList);
 
             return inquirySubjectWithInquirersDTO;
-           
+
         }
 
-        
+
     }
 }

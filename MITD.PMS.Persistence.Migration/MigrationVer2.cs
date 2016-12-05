@@ -38,7 +38,15 @@ namespace MITD.PMS.Persistence
                 Name = ActionType.ChangeEmployeePoint.GetAttribute<ActionInfoAttribute>().DisplayName,
 
             });
-            */
+
+            Insert.IntoTable("ActionTypes").Row(new
+            {
+                Id = (int)ActionType.ModifyJobPositionInPeriod,
+                Name = ActionType.ChangeEmployeePoint.GetAttribute<ActionInfoAttribute>().DisplayName,
+
+            });
+           */
+
             #endregion
 
         }
@@ -64,6 +72,13 @@ namespace MITD.PMS.Persistence
             Delete.FromTable("ActionTypes").Row(new
             {
                 Id = (int)ActionType.ChangeEmployeePoint,
+                Name = ActionType.ChangeEmployeePoint.GetAttribute<ActionInfoAttribute>().DisplayName,
+
+            });
+             
+             Delete.FromTable("ActionTypes").Row(new
+            {
+                Id = (int)ActionType.ModifyJobPositionInPeriod,
                 Name = ActionType.ChangeEmployeePoint.GetAttribute<ActionInfoAttribute>().DisplayName,
 
             });

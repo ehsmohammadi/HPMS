@@ -23,12 +23,28 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition  Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
+
+                <sdk:Label Grid.Row="3" Grid.Column="0" Content="عنوان ریشه پست:" />
+                <pr:ComboBoxEx  Grid.Row="3" Grid.Column="1" Width="150" Margin="5" HorizontalAlignment="Left" 
+                             DisplayMemberPath="Name" 
+                             ItemsSource="{Binding Path=ParentJobPositions, Mode=TwoWay}" 
+                             SelectedValueProper="{Binding Mode=TwoWay, Path=JobPositionInPeriod.ParentJobPositionId,
+                     ValidatesOnExceptions=true,
+                     ValidatesOnDataErrors=true,
+                     NotifyOnValidationError=true}" 
+                             SelectedValuePath="Id">
+                    <pr:ComboBoxEx.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel/>
+                        </ItemsPanelTemplate>
+                    </pr:ComboBoxEx.ItemsPanel>
+                </pr:ComboBoxEx>
 
                 <sdk:Label Grid.Row="2" Grid.Column="0" Content="عنوان پست:" />
                 <pr:ComboBoxEx  Grid.Row="2" Grid.Column="1" Width="150" Margin="5" HorizontalAlignment="Left" 

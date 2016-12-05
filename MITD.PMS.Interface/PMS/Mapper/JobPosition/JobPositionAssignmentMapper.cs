@@ -12,9 +12,14 @@ namespace MITD.PMS.Interface
         {
             var res = new JobPositionInPeriodAssignmentDTO
             {
+                JobId = entity.JobId.SharedJobId.Id,
+                UnitId = entity.UnitId.SharedUnitId.Id,
                 JobPositionId = entity.Id.SharedJobPositionId.Id,
-                PeriodId = entity.Id.PeriodId.Id,
+                PeriodId = entity.Id.PeriodId.Id
+               
             };
+            if (entity.Parent != null)
+                res.ParentJobPositionId = entity.Parent.Id.SharedJobPositionId.Id;
             return res;
 
         }

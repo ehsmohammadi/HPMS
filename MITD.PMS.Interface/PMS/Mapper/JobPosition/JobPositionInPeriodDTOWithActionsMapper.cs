@@ -22,6 +22,7 @@ namespace MITD.PMS.Interface
                 {
                     (int) ActionType.AddJobPositionInPeriod,
                     (int) ActionType.DeleteJobPositionInPeriod,
+                    (int) ActionType.ModifyJobPositionInPeriod,
                     (int)ActionType.ManageJobPositionInPeriodInquiry
                 }
             };

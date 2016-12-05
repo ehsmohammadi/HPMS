@@ -19,12 +19,17 @@ namespace MITD.PMS.Service.Host.Controllers
             return periodJobPositionService.AssignJobPosition(periodId, jobPositionInPeriod);
         }
 
+        public JobPositionInPeriodAssignmentDTO PutJobPosition(long periodId, JobPositionInPeriodAssignmentDTO jobPositionInPeriod)
+        {
+            return periodJobPositionService.UpdateJobPosition(periodId, jobPositionInPeriod);
+        }
+
         public string DeleteJobPosition(long periodId, long jobPositionId)
         {
             return periodJobPositionService.RemoveJobPosition(periodId, jobPositionId);
         }
 
-        public JobPositionInPeriodDTO GetJobPosition(long periodId, long jobPositionId)
+        public JobPositionInPeriodAssignmentDTO GetJobPosition(long periodId, long jobPositionId)
         {
             return periodJobPositionService.GetJobPosition(periodId, jobPositionId);
         }

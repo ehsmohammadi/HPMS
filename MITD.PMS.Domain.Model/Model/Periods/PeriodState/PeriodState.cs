@@ -214,6 +214,11 @@ namespace MITD.PMS.Domain.Model.Periods
             throw new PeriodInvalidStateOperationException("Period", DisplayName, "CheckAssigningJobPosition");
         }
 
+        internal virtual void CheckModifyingJobPosition()
+        {
+            throw new PeriodInvalidStateOperationException("Period", DisplayName, "CheckModifyingJobPosition");
+        }
+
         internal virtual void CheckModifyingJobPositionInquirers()
         {
             throw new PeriodInvalidStateOperationException("Period", DisplayName, "CheckModifyingJobPositionInquirers");
@@ -279,5 +284,7 @@ namespace MITD.PMS.Domain.Model.Periods
         } 
 
         #endregion
+
+
     }
 }

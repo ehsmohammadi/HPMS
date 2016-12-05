@@ -263,6 +263,11 @@ namespace MITD.PMS.Domain.Model.Periods
             State.CheckAssigningJobPosition();
         }
 
+        public virtual void CheckModifyingJobPosition()
+        {
+            State.CheckModifyingJobPosition();
+        }
+
         public virtual void CheckModifyingJobPositionInquirers()
         {
             State.CheckModifyingJobPositionInquirers();
@@ -332,6 +337,7 @@ namespace MITD.PMS.Domain.Model.Periods
         {
             State.CheckChangeCalculationDeterministicStatus();
         }
-        
+
+
     }
 }

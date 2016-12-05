@@ -90,6 +90,28 @@ namespace MITD.PMS.Application
             }
         }
 
+        public JobPosition ModifyJobPosition(PeriodId periodId, SharedJobPositionId sharedJobPositionId,
+            SharedJobPositionId parentSharedJobPositionId, JobId jobId, UnitId unitId)
+        {
+            using (var tr = new TransactionScope())
+            {
+                var period = periodRep.GetById(periodId);
+                var sharedJobPosition = pmsAdminService.GetSharedJobPosition(sharedJobPositionId);
+                var job = jobRepository.GetById(jobId);
+                var unit = unitRep.GetBy(unitId);
+
+                JobPosition parent = null;
+                if (parentSharedJobPositionId != null)
+                    parent = jobPositionRep.GetBy(new JobPositionId(periodId, parentSharedJobPositionId));
+
+                var jobPosition = jobPositionRep.GetBy(new JobPositionId(periodId, sharedJobPositionId));
+                jobPosition.Update(period,job,unit,parent);
+                tr.Complete();
+                return jobPosition;
+
+            }
+        }
+
         public List<JobPositionInquiryConfigurationItem> GetInquirySubjectWithInquirer(JobPositionId jobPositionId)
         {
             using (var tr = new TransactionScope())

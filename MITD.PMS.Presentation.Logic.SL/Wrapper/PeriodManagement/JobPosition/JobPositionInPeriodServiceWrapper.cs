@@ -42,6 +42,12 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
             WebClientHelper.Post(new Uri(url, PMSClientConfig.UriKind), action, jobPositionInPeriod, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 
+        public void UpdateJobPositionInPeriod(Action<JobPositionInPeriodAssignmentDTO, Exception> action, JobPositionInPeriodAssignmentDTO jobPositionInPeriod)
+        {
+            var url = string.Format(baseAddress + makeApiAdress(jobPositionInPeriod.PeriodId));
+            WebClientHelper.Put(new Uri(url, PMSClientConfig.UriKind), action, jobPositionInPeriod, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+        }
+
         public void DeleteJobPositionInPeriod(Action<string, Exception> action, long periodId, long jobPositionId)
         {
             var url = string.Format(baseAddress + makeApiAdress(periodId) + "?JobPositionId=" + jobPositionId);
@@ -76,6 +82,12 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
         public void GetJobInPeriodByJobPostionId(Action<JobInPeriodDTO, Exception> action,long periodId, long jobPositionId)
         {
             var url = string.Format(baseAddress + makeJobPositionAssignmentApiAdress(periodId, jobPositionId) );
+            WebClientHelper.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+        }
+
+        public void GetJobPositionInPeriod(Action<JobPositionInPeriodAssignmentDTO, Exception> action, long periodId, long jobPositionId)
+        {
+            var url = string.Format(baseAddress + makeApiAdress(periodId)+"?jobPositionId="+jobPositionId);
             WebClientHelper.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
     }

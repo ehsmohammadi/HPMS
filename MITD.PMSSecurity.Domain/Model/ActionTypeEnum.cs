@@ -402,6 +402,8 @@ namespace MITD.PMSSecurity.Domain
         ManageJobPositionInPeriodInquiry = 263,
         [ActionInfoAttribute("ShowJobPositionInPeriod", "نمایش پست در دوره")]
         ShowJobPositionInPeriod = 264,
+        [ActionInfoAttribute("ModifyJobPositionInPeriod", "ویرایش پست در دوره")]
+        ModifyJobPositionInPeriod = 265,
         #endregion
 
         #region Employee 7 

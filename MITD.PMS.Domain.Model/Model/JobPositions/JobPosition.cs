@@ -38,19 +38,19 @@ namespace MITD.PMS.Domain.Model.JobPositions
 
         public virtual Guid TransferId { get { return sharedJobPosition.TransferId; } }
 
-        private readonly UnitId unitId;
+        private UnitId unitId;
         public virtual UnitId UnitId
         {
             get { return unitId; }
         }
 
-        private readonly JobId jobId;
+        private JobId jobId;
         public virtual JobId JobId
         {
             get { return jobId; }
         }
 
-        private readonly JobPosition parent;
+        private JobPosition parent;
         public virtual JobPosition Parent
         {
             get { return parent; }
@@ -106,6 +106,28 @@ namespace MITD.PMS.Domain.Model.JobPositions
 
         #region Public Methods
 
+        public virtual void Update(Period period, Job job, Unit unit, JobPosition parent)
+        {
+            if (period == null || period.Id == null)
+                throw new ArgumentNullException("period");
+            period.CheckModifyingJobPosition();
+
+            if (job == null || job.Id == null)
+                throw new ArgumentNullException("job");
+            if (unit == null || unit.Id == null)
+                throw new ArgumentNullException("unit");
+
+
+            if (!period.Id.Equals(job.Id.PeriodId))
+                throw new JobPositionCompareException("JobPosition", "Job", "Period");
+
+            if (!period.Id.Equals(unit.Id.PeriodId))
+                throw new JobPositionCompareException("JobPosition", "Unit", "Period");
+
+            this.parent = parent;
+            unitId = unit.Id;
+            jobId = job.Id;
+        }
         public virtual void ConfigeInquirer(IJobPositionInquiryConfiguratorService inquiryConfiguratorService, bool forceConfigure)
         {
             if (!forceConfigure && configurationItemList.Count > 0)
@@ -119,15 +141,6 @@ namespace MITD.PMS.Domain.Model.JobPositions
             }
 
         }
-
-        //public virtual void AddCustomInquirer(Employee inquirer,Employee inquirySubject)
-        //{
-        //    var inquirerJobPosition = inquirer.JobPositions.First();
-        //        configurationItemList.Add(
-        //            new JobPositionInquiryConfigurationItem(
-        //                new JobPositionInquiryConfigurationItemId(inquirerJobPosition.JobPositionId,inquirer.Id, Id, inquirySubject.Id), this, false, true,JobPositionLevel.None));
-
-        //}
 
         public virtual void AddCustomInquirer(EmployeeIdWithJobPositionId inquirer, Employee inquirySubject)
         {
