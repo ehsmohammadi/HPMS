@@ -89,6 +89,7 @@ namespace MITD.PMS.Interface
             {
                 d.UnitName = _unitRepository.GetBy(new UnitId(periodId, new SharedUnitId(d.Unitid))).Name;
                 d.JobName = _jobRepository.GetById(new JobId(periodId, new SharedJobId(d.JobId))).Name;
+                d.Name += "-" + d.UnitName;
             });
 
             return res;
@@ -104,6 +105,7 @@ namespace MITD.PMS.Interface
             {
                 d.UnitName = _unitRepository.GetBy(new UnitId(periodId, new SharedUnitId(d.Unitid))).Name;
                 d.JobName = _jobRepository.GetById(new JobId(periodId, new SharedJobId(d.JobId))).Name;
+                d.Name += "-" + d.UnitName;
             });
             return res;
         }

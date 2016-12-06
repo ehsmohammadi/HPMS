@@ -30,8 +30,8 @@ namespace MITD.PMS.Presentation.Logic
             set { this.SetField(vm => vm.JobPositions, ref jobPositions, value); }
         }
 
-        private List<JobPositionInPeriodDTO> parentJobPositions;
-        public List<JobPositionInPeriodDTO> ParentJobPositions
+        private ObservableCollection<JobPositionInPeriodDTO> parentJobPositions;
+        public ObservableCollection<JobPositionInPeriodDTO> ParentJobPositions
         {
             get { return parentJobPositions; }
             set { this.SetField(vm => vm.ParentJobPositions, ref parentJobPositions, value); }
@@ -122,7 +122,7 @@ namespace MITD.PMS.Presentation.Logic
         private void init()
         {
             JobPositionInPeriod = new JobPositionInPeriodAssignmentDTO { };
-            ParentJobPositions = new List<JobPositionInPeriodDTO>();
+            ParentJobPositions = new ObservableCollection<JobPositionInPeriodDTO>();
             DisplayName = PeriodMgtAppLocalizedResources.JobPositionInPeriodViewTitle;
         }
 
@@ -149,15 +149,17 @@ namespace MITD.PMS.Presentation.Logic
                     if (exp == null)
                         jobPositionInPeriodService.GetAllJobPositions((jobPositionInPeriods, exp1) => appController.BeginInvokeOnDispatcher(() =>
                         {
+                            ParentJobPositions = new ObservableCollection<JobPositionInPeriodDTO>(jobPositionInPeriods);
+                            //foreach (var jobPositionInPeriodDTO in jobPositionInPeriods)
+                            //{
+                            //    //if (jobPositionInPeriodDTO.Unitid == JobPositionInPeriod.UnitId)
+                            //    //{
+                            //        var modifiedJobPosition = jobPositionInPeriodDTO;
+                            //        modifiedJobPosition.Name = jobPositionInPeriodDTO.Name + "-" + jobPositionInPeriodDTO.UnitName;
+                            //        ParentJobPositions.Add(modifiedJobPosition);
+                            //    //}
 
-                            foreach (var jobPositionInPeriodDTO in jobPositionInPeriods)
-                            {
-                                var modifiedJobPosition = jobPositionInPeriodDTO;
-                                modifiedJobPosition.Name = jobPositionInPeriodDTO.Name + "-" + jobPositionInPeriodDTO.UnitName;
-                                ParentJobPositions.Add(modifiedJobPosition);
-                            }
-                            ParentJobPositions = jobPositionInPeriods;
-
+                            //}
                             if (actionType == ActionType.AddJobPositionInPeriod)
                                 JobPositions =
                                     res.Where(r => !jobPositionInPeriods.Select(j => j.JobPositionId).Contains(r.Id))

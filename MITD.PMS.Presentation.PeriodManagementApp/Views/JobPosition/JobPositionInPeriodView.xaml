@@ -39,11 +39,11 @@
                      ValidatesOnDataErrors=true,
                      NotifyOnValidationError=true}" 
                              SelectedValuePath="Id">
-                    <pr:ComboBoxEx.ItemsPanel>
+                    <!--<pr:ComboBoxEx.ItemsPanel>
                         <ItemsPanelTemplate>
                             <VirtualizingStackPanel/>
                         </ItemsPanelTemplate>
-                    </pr:ComboBoxEx.ItemsPanel>
+                    </pr:ComboBoxEx.ItemsPanel>-->
                 </pr:ComboBoxEx>
 
                 <sdk:Label Grid.Row="2" Grid.Column="0" Content="عنوان پست:" />
