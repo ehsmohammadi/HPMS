@@ -12,7 +12,7 @@
     d:DataContext="{Binding Source={StaticResource jobIndexInquiryFormViewModel}}"
     FlowDirection="RightToLeft">
     <ScrollViewer BorderThickness="0"  VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
-        <Grid Name="LayoutRoot"  Background="Transparent" Height="500" Width="600"  >
+        <Grid Name="LayoutRoot"  Background="Transparent" Height="600" Width="600"  >
             <Grid.RowDefinitions >
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto"/>
@@ -22,24 +22,27 @@
 
             <Border  BorderBrush="Black" Grid.Row="0"  Margin="1" >
                 <StackPanel  Orientation="Horizontal"  >
-                    <sdk:Label  Content=" تکمیل فرم نظر سنجی :"/>
-                    <sdk:Label Content="{Binding Path=InquiryForm.FullName, Mode=TwoWay}" />
+                    <sdk:Label FontWeight="ExtraBold"  Content=" تکمیل فرم نظر سنجی :"/>
+                    <TextBlock HorizontalAlignment="Left" LineStackingStrategy="MaxHeight" FontWeight="ExtraBold" AllowDrop="True" TextWrapping="Wrap" Text="{Binding Path=InquiryForm.FullName, Mode=TwoWay}" />
                 </StackPanel>
             </Border>
 
-            <!--<Border  BorderBrush="Black" Grid.Row="1"  Margin="5" >
-                <StackPanel  Orientation="Horizontal"  Visibility="{Binding Path=SubInquirerEmployeesVisibilityMode}" >
-                    <sdk:Label  Content=" نظرات افراد زیر مجموعه به فرد انتخابی :"/>
-                    <pr:ComboBoxEx Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Width="150" Margin="5"   IsEnabled="{Binding Path=IsAddClaimMode}"               
-                             DisplayMemberPath="FullName" 
-                             ItemsSource="{Binding Path=SubInquirerEmployeeList, Mode=TwoWay}" 
-                             SelectedValueProper="{Binding Mode=TwoWay, Path=SelectedInquirerEmployee}"
-                             SelectedValuePath="Id"
-                             >
+            <Border Grid.Row="1" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="DimGray" Background="LightGoldenrodYellow">
+                <TextBlock HorizontalAlignment="Left" LineHeight="5" AllowDrop="True" TextWrapping="Wrap" FontSize="10" >
+                  <Bold>تعاریف سطوح عملکرد :</Bold> 
+                    <LineBreak/>
+                    عالی: عملکرد فرد بسیار فراتر از اهداف تعیین شده می باشد و می تواند الگوی مناسبی برای سایر همکاران باشد.
+                    <LineBreak/>
+خوب: عملکرد فرد فراتر از اهداف تعیین شده می باشد و مورد رضایت سازمان می باشد.
+                    <LineBreak/>
+قابل قبول: اهداف مورد انتظار از عملکرد فرد محقق شده است و از لحاظ استانداردهای سازمانی قابل قبول می باشد.
+                    <LineBreak/>
+نیاز به آموزش: عملکرد فرد کمتر از حد انتظار و اهداف تعیین شده می باشد و ضرورت آموزش جهت ارتقای عملکرد و نظارت در اصلاح و بهبود عملکرد وجود دارد.
+                    <LineBreak/>
+نامطلوب: عملکرد فرد بسیار پایین تر از حد توانایی های وی بوده و ضرورت تذکر و اخطار در جهت تحقق اهداف مورد نظر وجود دارد.
 
-                    </pr:ComboBoxEx>
-                </StackPanel>
-            </Border>-->
+                </TextBlock>
+            </Border>
 
             <sdk:DataGrid Grid.Row="2" Name="drgList" AutoGenerateColumns="False" HorizontalAlignment="Stretch" SelectionMode="Single" 
                       ItemsSource="{Binding Path=InquiryForm.EmployeeValueList}" >
