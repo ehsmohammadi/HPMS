@@ -211,7 +211,7 @@ namespace MITD.PMS.Presentation.Logic
             ShowBusyIndicator();
             if (actionType==ActionType.AddClaim)
             {
-                Claim.EmployeeNo = appController.CurrentUserState.EmployeeNo;
+                Claim.EmployeeNo = appController.CurrentUser.EmployeeNo;
                 Claim.PeriodId = appController.CurrentPriod.Id;
                 claimService.AddClaim((res, exp) => appController.BeginInvokeOnDispatcher(() =>
                     {

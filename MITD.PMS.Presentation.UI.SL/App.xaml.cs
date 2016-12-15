@@ -33,7 +33,7 @@ namespace MITD.PMS.Presentation.UI.SL
 
 #if(DEBUG)
             // Uncomment NOT to use SSO
-            controller.getLogonUser();
+            controller.GetLogonUser();
             //controller.Login(() => { });
 #else
             // Uncomment to use SSO

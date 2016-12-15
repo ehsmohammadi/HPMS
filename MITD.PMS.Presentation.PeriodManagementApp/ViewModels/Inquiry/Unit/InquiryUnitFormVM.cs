@@ -142,7 +142,7 @@ namespace MITD.PMS.Presentation.Logic
             if(!validate()) return;
             
             ShowBusyIndicator();
-            UserStateDTO userState = appController.CurrentUserState;
+            UserStateDTO userState = appController.CurrentUser;
             inquiryService.UpdateInquirySubjectForm((res, exp) => appController.BeginInvokeOnDispatcher(() =>
                     {
                         HideBusyIndicator();

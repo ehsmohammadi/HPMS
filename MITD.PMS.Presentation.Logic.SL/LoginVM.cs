@@ -83,15 +83,15 @@ namespace MITD.PMS.Presentation.Logic
                         else
                         {
                             ShowBusyIndicator("در حال دریافت اطلاعات...");
-                            controller.Login(userName, password,
-                            () =>
-                            {
-                                controller.BeginInvokeOnDispatcher(() =>
-                                    {
-                                        HideBusyIndicator();
-                                        controller.Close(this);
-                                    });
-                            });
+                            //controller.Login(userName, password,
+                            //() =>
+                            //{
+                            //    controller.BeginInvokeOnDispatcher(() =>
+                            //        {
+                            //            HideBusyIndicator();
+                            //            controller.Close(this);
+                            //        });
+                            //});
                         }
 
                     }));

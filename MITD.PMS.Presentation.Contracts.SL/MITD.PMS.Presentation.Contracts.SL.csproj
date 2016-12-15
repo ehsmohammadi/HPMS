@@ -282,6 +282,9 @@
     <Compile Include="..\MITD.PMS.Presentation.Contracts\Common\CustomFieldEntity.cs">
       <Link>Common\CustomFieldEntity.cs</Link>
     </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\Common\EmailDTO.cs">
+      <Link>Common\EmailDTO.cs</Link>
+    </Compile>
     <Compile Include="..\MITD.PMS.Presentation.Contracts\Common\EnumModel.cs">
       <Link>Common\EnumModel.cs</Link>
     </Compile>
@@ -505,6 +508,7 @@
     <Compile Include="BasicInfoManagement\User\UserDTO_Client.cs" />
     <Compile Include="Calculation\CalculationExceptionDTO_Client.cs" />
     <Compile Include="Calculation\CalculationExceptionBriefDTOWithAction_Client.cs" />
+    <Compile Include="Common\EmailDTO_Client.cs" />
     <Compile Include="EmployeeManagement\EmployeeCriteria.cs" />
     <Compile Include="Calculation\PointValueDTO_Client.cs" />
     <Compile Include="Calculation\JobIndexResultValueDTO_Client.cs" />

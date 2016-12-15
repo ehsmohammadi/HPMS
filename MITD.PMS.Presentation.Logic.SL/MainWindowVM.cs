@@ -77,7 +77,7 @@ namespace MITD.PMS.Presentation.Logic
         private UserStateDTO currentUser;
         public UserStateDTO CurrentUser
         {
-            get { return controller.CurrentUserState; }
+            get { return controller.CurrentUser; }
         }
 
         private UserDescriptionDTO currentWorkListUser;
@@ -103,11 +103,6 @@ namespace MITD.PMS.Presentation.Logic
             get { return currentPriod; }
             set { this.SetField(c => c.CurrentPeriod, ref currentPriod, value); }
 
-        }
-
-        public CalculationStateWithRunSummaryDTO LastFinalCalculation
-        {
-            get { return controller.LastFinalCalculation; }
         }
 
         private CommandViewModel signOutCommand;
@@ -1060,7 +1055,7 @@ namespace MITD.PMS.Presentation.Logic
                 {
 
                     CurrentPeriod = controller.CurrentPriod;
-                    LogonUser = controller.LoggedInUserState;
+                    LogonUser = controller.LoggedInUser;
                     userAuthorizedActions = logonUser.PermittedActions;
                     if (CurrentWorkListUser == null)
                         CurrentWorkListUser = LogonUser.PermittedUsersOnMyWorkList.First();

@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using MITD.Presentation;
-
 #if !SILVERLIGHT
 using MITD.PMSSecurity.Domain;
 #endif
@@ -46,6 +44,13 @@ namespace MITD.PMS.Presentation.Contracts
             set { this.SetField(p => p.EmployeeNo, ref employeeNo, value); }
         }
 
+        private EmailDTO email;
+        public EmailDTO Email
+        {
+            get { return email; }
+            set { this.SetField(p => p.Email, ref email, value); }
+        }
+
         private List<long> jobPositionIds;
         public List<long> JobPositionIds
         {
@@ -83,6 +88,7 @@ namespace MITD.PMS.Presentation.Contracts
         }
 
         private List<UserDescriptionDTO> permittedUsersOnMyWorkList = new List<UserDescriptionDTO>();
+
         public List<UserDescriptionDTO> PermittedUsersOnMyWorkList
         {
             get { return permittedUsersOnMyWorkList; }
@@ -125,6 +131,7 @@ namespace MITD.PMS.Presentation.Contracts
                     return false;
             }
         }
- 
+
+
     }
 }

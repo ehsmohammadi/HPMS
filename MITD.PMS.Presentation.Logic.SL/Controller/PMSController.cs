@@ -1,27 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-using MITD.PMS.Presentation.Contracts;
-using MITD.Core;
-using MITD.Presentation;
 using System.Windows.Browser;
-using System.Threading;
-using Newtonsoft.Json.Linq;
-using System.IO;
+using MITD.Core;
 using MITD.Core.Exceptions;
+using MITD.PMS.Presentation.Contracts;
+using MITD.Presentation;
+using Newtonsoft.Json.Linq;
 
 namespace MITD.PMS.Presentation.Logic
 {
     [ScriptableType]
-    public partial class PMSController : ApplicationController, IPMSController
+    public class PMSController : ApplicationController, IPMSController
     {
+        #region Fields
+
         private readonly ICustomFieldServiceWrapper customFieldService;
-        private IUserServiceWrapper userService;
-        private IUserProvider userProvider;
-        private IPeriodServiceWrapper periodService;
+        private readonly IUserServiceWrapper userService;
+        private readonly IUserProvider userProvider;
+        private readonly IPeriodServiceWrapper periodService;
         private readonly ILogServiceWrapper logService;
-        private IReportServiceWrapper repService;
-        private readonly IMainAppLocalizedResources localizedResources;
+        private readonly IReportServiceWrapper repService;
+        private readonly IMainAppLocalizedResources localizedResources; 
+
+        #endregion
 
         #region Properties
 
@@ -31,37 +33,31 @@ namespace MITD.PMS.Presentation.Logic
             set;
         }
 
+        public UserStateDTO LoggedInUser { get; set; }
+
+        public UserStateDTO CurrentUser { get; set; }
+
         public PeriodDTO CurrentPriod
         {
             get;
             set;
         }
 
-        public CalculationStateWithRunSummaryDTO LastFinalCalculation
-        {
-            get;
-            set;
-        }
-
-        public UserStateDTO LoggedInUserState { get; set; }
-
-        public UserStateDTO CurrentUserState { get; set; }
-
         public List<CustomFieldEntity> CustomFieldEntityList { get; set; }
 
         #endregion
 
-
+        #region Constructors
         public PMSController(IViewManager viewManager,
-                                     IEventPublisher eventPublisher,
-                                     IDeploymentManagement deploymentManagement,
-                                     IPeriodServiceWrapper periodService,
-                                     ICustomFieldServiceWrapper customFieldService,
-                                     IUserServiceWrapper userService,
-                                     IUserProvider userProvider,
-                                     ILogServiceWrapper logService,
-            IReportServiceWrapper repService, IMainAppLocalizedResources localizedResources
-            )
+                             IEventPublisher eventPublisher,
+                             IDeploymentManagement deploymentManagement,
+                             IPeriodServiceWrapper periodService,
+                             ICustomFieldServiceWrapper customFieldService,
+                             IUserServiceWrapper userService,
+                             IUserProvider userProvider,
+                             ILogServiceWrapper logService,
+    IReportServiceWrapper repService, IMainAppLocalizedResources localizedResources
+    )
             : base(viewManager, eventPublisher, deploymentManagement)
         {
             HtmlPage.RegisterScriptableObject("PMSController", this);
@@ -75,53 +71,74 @@ namespace MITD.PMS.Presentation.Logic
             PMSActions = new List<PMSAction>();
             CustomFieldEntityList = new List<CustomFieldEntity>();
             createPMSActions();
-        }
+        } 
+        #endregion
 
-        #region Methods
+        #region Security methods
 
-        private void createPMSActions()
+        public void Login(Action action)
         {
-            foreach (ActionType actionType in Enum.GetValues(typeof(ActionType)))
+            ShowBusyIndicator("در حال ورود به سامانه...");
+            userService.GetToken((res, exp) => BeginInvokeOnDispatcher(() =>
             {
-                PMSActions.Add(new PMSAction
+                if (exp == null)
                 {
-                    ActionCode = actionType,
-                    ActionName = actionType.GetAttribute<ActionInfoAttribute>().Description
-
-                });
-            }
+                    userProvider.SamlToken = res;
+                    getSessionToken(res, action);
+                }
+                else
+                {
+                    HandleException(exp);
+                }
+            }));
         }
 
-        public void GetCurrentPeriod()
+        private void getSessionToken(string token, Action action, string newCurrentWorkListUser = "")
         {
-            periodService.GetCurrentPeriod
-                (
-                    (res, exp) => BeginInvokeOnDispatcher(() =>
+            userService.GetSessionToken((res, exp) => BeginInvokeOnDispatcher(() =>
+            {
+                if (exp == null)
+                {
+                    var json = JObject.Parse(res);
+                    var sessionToken = json["access_token"].ToString();
+                    var expiresIn = int.Parse(json["expires_in"].ToString());
+                    var expiration = DateTime.UtcNow.AddSeconds(expiresIn);
+                    userProvider.Token = sessionToken;
+                    GetLogonUser();
+                    action();
+                }
+                else
+                {
+                    HideBusyIndicator();
+                    HandleException(exp);
+                }
+            }), token, newCurrentWorkListUser);
+        }
+
+        public void GetLogonUser()
+        {
+            userService.GetLogonUser((res, exp) =>
+            {
+                if (exp == null)
+                {
+                    BeginInvokeOnDispatcher(() =>
                     {
-                        HideBusyIndicator();
-                        if (exp == null)
-                        {
-                            CurrentPriod = res;
-                            Publish(new MainWindowUpdateArgs());
-                        }
-                        else
-                        {
-                            HandleException(exp);
-                        }
-                    }
-                ));
-            LastFinalCalculation = periodService.LastFinalCalculation();
-        }
+                        validateUser(res);
+                        CurrentUser = res;
+                        LoggedInUser = res;
+                        GetCurrentPeriod();
+                        createCustomFieldEntityList();
+                        Publish(new MainWindowUpdateArgs());
 
-        private void createCustomFieldEntityList()
-        {
-            customFieldService.GetCustomFieldEntityList((res, exp) => BeginInvokeOnDispatcher(() =>
+                    });
+
+                }
+                else
                 {
-                    if (exp == null)
-                        CustomFieldEntityList = res;
-                    else
-                        HandleException(exp);
-                }));
+                    HideBusyIndicator();
+                    HandleException(exp);
+                }
+            });
         }
 
         public void Logout()
@@ -148,101 +165,104 @@ namespace MITD.PMS.Presentation.Logic
             viewManager.CloseAllTabs();
         }
 
-        public void Login(Action action)
+        #endregion
+
+        #region Private Methods
+
+        private void validateUser(UserStateDTO user)
         {
-            ShowBusyIndicator("در حال ورود به سامانه...");
-            userService.GetToken((res, exp) => BeginInvokeOnDispatcher(() =>
+            if (user.IsEmployee && (user.Email.Status == (int)EmailStatusEnum.NotEntered||user.Email.Status == (int)EmailStatusEnum.Unverified))
+                ShowEmailInView(user);
+        }
+
+        
+
+        private void createPMSActions()
+        {
+            foreach (ActionType actionType in Enum.GetValues(typeof(ActionType)))
+            {
+                PMSActions.Add(new PMSAction
+                {
+                    ActionCode = actionType,
+                    ActionName = actionType.GetAttribute<ActionInfoAttribute>().Description
+
+                });
+            }
+        }
+
+        private void createCustomFieldEntityList()
+        {
+            customFieldService.GetCustomFieldEntityList((res, exp) => BeginInvokeOnDispatcher(() =>
             {
                 if (exp == null)
+                    CustomFieldEntityList = res;
+                else
+                    HandleException(exp);
+            }));
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        public void ShowEmployeeListView(PeriodDTOWithAction period, bool inNewTab = false)
+        {
+            ShowBusyIndicator("در حال بارگذاری ماجول...");
+            GetRemoteInstance<IEmployeeController>((res, exp) =>
+            {
+                HideBusyIndicator();
+                if (exp == null)
                 {
-                    userProvider.SamlToken = res;
-                    getSessionToken(res, action);
+                    if (res != null)
+                        res.ShowEmployeeListView(period, inNewTab);
                 }
                 else
+                    this.HandleException(exp);
+            });
+        }
+
+        public void ShowEmailInView(UserStateDTO user, bool inNewTab=false)
+        {
+            ShowBusyIndicator("در حال بارگذاری ماجول...");
+            GetRemoteInstance<IBasicInfoController>((res, exp) =>
+            {
+                HideBusyIndicator();
+                if (exp == null)
                 {
-                    HandleException(exp);
+                    if (res != null)
+                        res.ShowEmailInView(user, inNewTab);
                 }
-            }));
+                else
+                    this.HandleException(exp);
+            });
+        }
+
+
+
+
+        public void GetCurrentPeriod()
+        {
+            periodService.GetCurrentPeriod
+                (
+                    (res, exp) => BeginInvokeOnDispatcher
+                        (() =>
+                        {
+                            HideBusyIndicator();
+                            if (exp == null)
+                            {
+                                CurrentPriod = res;
+                                Publish(new MainWindowUpdateArgs());
+                            }
+                            else
+                                HandleException(exp);
+                        })
+                );
         }
 
         public void ChangeCurrentWorkListUser(string currentWorkListUserName)
         {
             getSessionToken(userProvider.SamlToken, () => { }, currentWorkListUserName);
         }
-
-        private void getSessionToken(string token, Action action, string newCurrentWorkListUser = "")
-        {
-            userService.GetSessionToken((res, exp) => BeginInvokeOnDispatcher(() =>
-            {
-                if (exp == null)
-                {
-                    var json = JObject.Parse(res);
-                    var sessionToken = json["access_token"].ToString();
-                    var expiresIn = int.Parse(json["expires_in"].ToString());
-                    var expiration = DateTime.UtcNow.AddSeconds(expiresIn);
-                    userProvider.Token = sessionToken;
-                    getLogonUser();
-                    action();
-                }
-                else
-                {
-                    HideBusyIndicator();
-                    HandleException(exp);
-                }
-            }), token, newCurrentWorkListUser);
-        }
-
-        public void getLogonUser()
-        {
-            userService.GetLogonUser((res, exp) =>
-                {
-                    if (exp == null)
-                    {
-                        BeginInvokeOnDispatcher(() =>
-                       {
-                           CurrentUserState = res;
-                           LoggedInUserState = res;
-                           GetCurrentPeriod();
-                           createCustomFieldEntityList();
-                           Publish(new MainWindowUpdateArgs());
-
-                       });
-
-                    }
-                    else
-                    {
-                        HideBusyIndicator();
-                        HandleException(exp);
-                    }
-                });
-        }
-
-        public void ShowLoginView()
-        {
-            //#if DEBUG 
-            //            userService.GetToken((res, exp) => BeginInvokeOnDispatcher(() =>
-            //            {
-            //                if (exp == null)
-            //                {
-            //                    userProvider.Token = res;
-            //                    createCustomFieldEntityList();
-            //                    getCurrentPeriod();
-            //                    getLogonUser();
-            //                }
-            //                else
-            //                {
-            //                    Publish(new HideBusyIndicatorArgs());
-            //                    HandleException(exp);
-            //                }
-
-            //            }), "ehsan", "123456");
-
-            //#else
-            var view = ServiceLocator.Current.GetInstance<ILoginView>();
-            viewManager.ShowInDialog(view, false);
-            //#endif
-        }
-
 
         public void LogException(object sender, EventArgs eventArgs)
         {
@@ -257,8 +277,8 @@ namespace MITD.PMS.Presentation.Logic
                     MethodName = ""
                 };
 
-            if (CurrentUserState != null && !string.IsNullOrEmpty(CurrentUserState.Username))
-                log.UserName = CurrentUserState.Username;
+            if (CurrentUser != null && !string.IsNullOrEmpty(CurrentUser.Username))
+                log.UserName = CurrentUser.Username;
 
             if (eventArgs is ApplicationUnhandledExceptionEventArgs)
             {
@@ -270,22 +290,6 @@ namespace MITD.PMS.Presentation.Logic
                 {
                 }, log);
 
-        }
-
-        public void ShowEmployeeListView(PeriodDTOWithAction period,bool inNewTab=false)
-        {
-            ShowBusyIndicator("در حال بارگذاری ماجول...");
-            GetRemoteInstance<IEmployeeController>((res, exp) =>
-            {
-                HideBusyIndicator();
-                if (exp == null)
-                {
-                    if (res != null)
-                        res.ShowEmployeeListView(period, inNewTab);
-                }
-                else
-                    this.HandleException(exp);
-            });
         }
 
         public void HandleException(Exception exp)
@@ -318,15 +322,6 @@ namespace MITD.PMS.Presentation.Logic
                 exp => { action(null, exp); });
         }
 
-        #endregion
-
-
-        public void Login(string userName, string password, Action action)
-        {
-            throw new NotImplementedException();
-        }
-
-
         public void GetReportsTree(Action<IList<ReportDTO>> action)
         {
             repService.GetAllReports((res, exp) =>
@@ -338,12 +333,11 @@ namespace MITD.PMS.Presentation.Logic
             });
         }
 
-
         public void OpenReport(ReportDTO parentElement)
         {
             // RDL
             // var url = new Uri("/Reporting/Report.aspx?ReportPath=" + Path.Combine(parentElement.Path, parentElement.Name).TrimStart(new[] { '/' }), UriKind.Relative);
-            
+
             // RDLC
             var url = new Uri("/Reporting/ReportPage.aspx?ReportPath=" + parentElement.Name, UriKind.Relative);
 
@@ -352,6 +346,7 @@ namespace MITD.PMS.Presentation.Logic
             HtmlPage.Window.Navigate(url, "_blank");
         }
 
+        #endregion
 
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows;
 using MITD.PMS.Presentation.Contracts;
 using MITD.Presentation;
 
@@ -8,19 +7,17 @@ namespace MITD.PMS.Presentation.Logic
 {
     public interface IPMSController : IApplicationController
     {
-        void getLogonUser();
+        void GetLogonUser();
         List<PMSAction> PMSActions { get; set; }
         PeriodDTO CurrentPriod { get; }
-        CalculationStateWithRunSummaryDTO LastFinalCalculation { get; }
-        UserStateDTO CurrentUserState { get;}
-        UserStateDTO LoggedInUserState { get; }
+        UserStateDTO CurrentUser { get;}
+        UserStateDTO LoggedInUser { get; }
         void HandleException(Exception exp);
         void GetRemoteInstance<T>(Action<T, Exception> action) where T : class;
         List<CustomFieldEntity> CustomFieldEntityList { get;  }
-        void Login(string userName, string password, Action action);
+
         void Login(Action action);
         void Logout();
-        void ShowLoginView();
         void ShowEmployeeListView(PeriodDTOWithAction period,bool inNewTab=false);
         void GetCurrentPeriod();
         void LogException(object sender, EventArgs eventArgs);

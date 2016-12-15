@@ -135,10 +135,12 @@
     <Compile Include="Calculation\JobIndexResultValueDTO_Server.cs" />
     <Compile Include="Calculation\JobPositionValueDTO_Server.cs" />
     <Compile Include="Common\CustomFieldEntity.cs" />
+    <Compile Include="Common\EmailDTO.cs" />
     <Compile Include="Common\QueryStringConditions.cs" />
     <Compile Include="Calculation\JobPositionValueDTO.cs" />
     <Compile Include="BasicInfoManagement\User\UserDTOWithActions.cs" />
     <Compile Include="BasicInfoManagement\User\UserDTO.cs" />
+    <Compile Include="Common\EmailDTO_Server.cs" />
     <Compile Include="EmployeeManagment\EmployeeUnitAssignmentDTO_Server.cs" />
     <Compile Include="EmployeeManagment\EmployeeUnitAssignmentDTO.cs" />
     <Compile Include="EmployeeManagment\EmployeeUnitsDTO_Server.cs" />

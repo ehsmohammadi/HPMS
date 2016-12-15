@@ -22,7 +22,7 @@ namespace MITD.PMS.Presentation.Logic
                 return new List<DataGridCommandViewModel>();
             var actions = controller.PMSActions.Where(a => actionCodes.Contains((int) a.ActionCode) 
                 &&  
-                controller.CurrentUserState.PermittedActions.Select(p=>(int)p).Contains((int)a.ActionCode)
+                controller.CurrentUser.PermittedActions.Select(p=>(int)p).Contains((int)a.ActionCode)
                 );
             return GetControlCommands(viewModel, actions);
         }
@@ -38,7 +38,7 @@ namespace MITD.PMS.Presentation.Logic
         {
             var action = controller.PMSActions.SingleOrDefault(a => actionCode == (int)a.ActionCode
                  &&
-                controller.CurrentUserState.PermittedActions.Select(p => (int)p).Contains((int)a.ActionCode)
+                controller.CurrentUser.PermittedActions.Select(p => (int)p).Contains((int)a.ActionCode)
                 );
             return GetControlCommands(viewModel,action);
             //new CommandViewModel(action.ActionName, new DelegateCommand(() => action.DoAction(t)));

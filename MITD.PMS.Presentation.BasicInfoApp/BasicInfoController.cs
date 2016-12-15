@@ -15,7 +15,59 @@ namespace MITD.PMS.Presentation.BasicInfoApp
             this.viewManager = viewManager;
         }
 
+        #region User
+        public void ShowUserList(bool isShiftPressed)
+        {
+            var view = viewManager.ShowInTabControl<IUserListView>(isShiftPressed);
+            ((UserListVM)view.ViewModel).Load();
+        }
 
+        public void ShowUserGroupList(bool isShiftPressed)
+        {
+            var view = viewManager.ShowInTabControl<IUserGroupListView>(isShiftPressed);
+            ((UserGroupListVM)view.ViewModel).Load();
+        }
+
+        public void ShowUserView(UserDTO user, ActionType action)
+        {
+            var view = ServiceLocator.Current.GetInstance<IUserView>();
+            ((UserVM)view.ViewModel).Load(user, action);
+            viewManager.ShowInDialog(view);
+        }
+
+        public void ShowUserGroupView(UserGroupDTO userGroup, ActionType action)
+        {
+            var view = ServiceLocator.Current.GetInstance<IUserGroupView>();
+            ((UserGroupVM)view.ViewModel).Load(userGroup, action);
+            viewManager.ShowInDialog(view);
+        }
+
+        public void ShowCustomActionsManageViews(PartyDTO party, bool isgroup, string groupId)
+        {
+            var view = ServiceLocator.Current.GetInstance<IPartyCustomActionsView>();
+            ((PartyCustomActionsVM)view.ViewModel).Load(party, isgroup, groupId);
+            viewManager.ShowInDialog(view);
+        }
+
+        public void ShowWorkListUsersManageViews(UserDTO user)
+        {
+            var view = ServiceLocator.Current.GetInstance<IManageWorkListUsersView>();
+            ((ManageWorkListUsersVM)view.ViewModel).Load(user);
+            viewManager.ShowInDialog(view);
+        }
+
+        public void ShowChangePasswordView(bool isShiftPressed)
+        {
+            var view = ServiceLocator.Current.GetInstance<IChangePasswordView>();
+            viewManager.ShowInDialog(view);
+        }
+
+        public void ShowEmailInView(UserStateDTO user, bool isShiftPressed)
+        {
+            //var view = ServiceLocator.Current.GetInstance<IEmailInView>();
+            //viewManager.ShowInDialog(view);
+        } 
+        #endregion
 
         #region Job
 
@@ -220,45 +272,7 @@ namespace MITD.PMS.Presentation.BasicInfoApp
             viewManager.ShowInDialog(view);
         }
 
-        public void ShowUserList(bool isShiftPressed)
-        {
-            var view = viewManager.ShowInTabControl<IUserListView>(isShiftPressed);
-            ((UserListVM)view.ViewModel).Load();
-        }
 
-        public void ShowUserGroupList(bool isShiftPressed)
-        {
-            var view = viewManager.ShowInTabControl<IUserGroupListView>(isShiftPressed);
-            ((UserGroupListVM)view.ViewModel).Load();
-        }
-
-        public void ShowUserView(UserDTO user, ActionType action)
-        {
-            var view = ServiceLocator.Current.GetInstance<IUserView>();
-            ((UserVM)view.ViewModel).Load(user, action);
-            viewManager.ShowInDialog(view);
-        }
-
-        public void ShowUserGroupView(UserGroupDTO userGroup, ActionType action)
-        {
-            var view = ServiceLocator.Current.GetInstance<IUserGroupView>();
-            ((UserGroupVM)view.ViewModel).Load(userGroup, action);
-            viewManager.ShowInDialog(view);
-        }
-
-        public void ShowCustomActionsManageViews(PartyDTO party, bool isgroup, string groupId)
-        {
-            var view = ServiceLocator.Current.GetInstance<IPartyCustomActionsView>();
-            ((PartyCustomActionsVM)view.ViewModel).Load(party, isgroup, groupId);
-            viewManager.ShowInDialog(view);
-        }
-
-        public void ShowWorkListUsersManageViews(UserDTO user)
-        {
-            var view = ServiceLocator.Current.GetInstance<IManageWorkListUsersView>();
-            ((ManageWorkListUsersVM)view.ViewModel).Load(user);
-            viewManager.ShowInDialog(view);
-        }
 
         public void ShowLogList(bool isShiftPressed)
         {
@@ -273,11 +287,7 @@ namespace MITD.PMS.Presentation.BasicInfoApp
             viewManager.ShowInDialog(view);
         }
 
-        public void ShowChangePasswordView(bool isShiftPressed)
-        {
-            var view = ServiceLocator.Current.GetInstance<IChangePasswordView>();
-            viewManager.ShowInDialog(view);
-        }
+
 
         #endregion
 

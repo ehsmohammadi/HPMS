@@ -134,7 +134,7 @@ namespace MITD.PMS.Presentation.Logic
         private void save()
         {
             ShowBusyIndicator();
-            UserStateDTO userState = appController.CurrentUserState;
+            UserStateDTO userState = appController.CurrentUser;
             inquiryService.UpdateJobIndexInquiryForm((res, exp) => appController.BeginInvokeOnDispatcher(() =>
                     {
                         HideBusyIndicator();
