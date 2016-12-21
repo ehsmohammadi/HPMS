@@ -12,7 +12,7 @@ namespace MITD.PMS.Persistence
         public override void Up()
         {
             
-
+            //version 2 
             Alter.Table("Periods").AddColumn("MaxFinalPoint").AsDecimal().NotNullable().WithDefaultValue(0);
             Alter.Table("Employees").AddColumn("PointState").AsInt32().NotNullable().WithDefaultValue(1);
 
@@ -38,7 +38,8 @@ namespace MITD.PMS.Persistence
                 Name = ActionType.ChangeEmployeePoint.GetAttribute<ActionInfoAttribute>().DisplayName,
 
             });
-
+             */
+            /* version 3 
             Insert.IntoTable("ActionTypes").Row(new
             {
                 Id = (int)ActionType.ModifyJobPositionInPeriod,
@@ -46,6 +47,9 @@ namespace MITD.PMS.Persistence
 
             });
            */
+            // version 3 
+            Alter.Table("Users").AddColumn("EmailStatus").AsInt32().NotNullable().WithDefaultValue(0);
+
 
             #endregion
 

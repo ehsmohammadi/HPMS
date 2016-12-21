@@ -75,6 +75,9 @@
     <Compile Include="..\MITD.PMS.Common\DuplicateExceptionConvertor.cs">
       <Link>DuplicateExceptionConvertor.cs</Link>
     </Compile>
+    <Compile Include="..\MITD.PMS.Common\EmailStatusEnum.cs">
+      <Link>EmailStatusEnum.cs</Link>
+    </Compile>
     <Compile Include="..\MITD.PMS.Common\ExceptionCode.cs">
       <Link>ExceptionCode.cs</Link>
     </Compile>

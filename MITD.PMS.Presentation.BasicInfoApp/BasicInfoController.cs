@@ -64,8 +64,9 @@ namespace MITD.PMS.Presentation.BasicInfoApp
 
         public void ShowEmailInView(UserStateDTO user, bool isShiftPressed)
         {
-            //var view = ServiceLocator.Current.GetInstance<IEmailInView>();
-            //viewManager.ShowInDialog(view);
+            var view = ServiceLocator.Current.GetInstance<IEmailInView>();
+            ((EmailInVM)view.ViewModel).Load(user);
+            viewManager.ShowInDialog(view);
         } 
         #endregion
 

@@ -189,11 +189,6 @@
 
     }
 
-    public enum EmailStatusEnum
-    {
-        NotEntered=1,
-        Unverified=2,
-        Verified=3
-    }
+
 
 }

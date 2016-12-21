@@ -369,6 +369,8 @@
     <None Include="Properties\PublishProfiles\PMSServices-920809.pubxml" />
     <None Include="Properties\PublishProfiles\ServicesDebugPublish.pubxml" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
+    <Content Include="FailedEmailResponse.html" />
+    <Content Include="Response.html" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
     <Content Include="Scripts\jquery-2.0.3.min.map" />
@@ -489,6 +491,10 @@
     <ProjectReference Include="..\MITD.PMSSecurity.Persistence.NH\MITD.PMSSecurity.Persistence.NH.csproj">
       <Project>{27a2eeea-4e4b-4713-a8f5-d827b980efc8}</Project>
       <Name>MITD.PMSSecurity.Persistence.NH</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MITD.Utilities\MITD.Utilities.csproj">
+      <Project>{676647d5-0a67-4a7a-9a27-f8c618df031c}</Project>
+      <Name>MITD.Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

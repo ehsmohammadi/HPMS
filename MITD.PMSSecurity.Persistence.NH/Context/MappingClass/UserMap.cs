@@ -1,5 +1,6 @@
 ﻿using System;
 using MITD.Data.NH;
+using MITD.PMS.Common;
 using MITD.PMSSecurity.Domain;
 using NHibernate.Mapping.ByCode;
 using NHibernate.Mapping.ByCode.Conformist;
@@ -107,6 +108,21 @@ namespace MITD.PMSSecurity.Persistence.NH.Context.MappingClass
             {
                 mapper.Access(Accessor.Field);
                 mapper.Length(256);
+                mapper.NotNullable(true);
+            });
+
+            Property(pi => pi.EmailStatus, mapper =>
+            {
+                mapper.Type<NHibernate.Type.EnumType<EmailStatusEnum>>();
+                mapper.Column("EmailStatus");
+                mapper.Access(Accessor.Field);
+                mapper.NotNullable(true);
+            });
+
+            Property(pi => pi.VerificationCode, mapper =>
+            {
+                mapper.Access(Accessor.Field);
+                mapper.Length(50);
                 mapper.NotNullable(true);
             });
 

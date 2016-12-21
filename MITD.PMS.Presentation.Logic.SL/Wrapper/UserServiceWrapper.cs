@@ -227,7 +227,15 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
             var url = string.Format(baseAddressUserSecurity);
             WebClientHelper.Put(new Uri(url, UriKind.Absolute), action, changePassword, WebClientHelper.MessageFormat.Json
                , PMSClientConfig.CreateHeaderDic(userProvider.Token));
-        } 
+        }
+
+        public void UpdateEmail(Action<string, Exception> action, EmailDTO emailDTO)
+        {
+            var url = string.Format(baseAddressUserSecurity) + "?isEmail=" +true;
+            WebClientHelper.Put(new Uri(url, UriKind.Absolute), action, emailDTO, WebClientHelper.MessageFormat.Json
+               , PMSClientConfig.CreateHeaderDic(userProvider.Token));
+        }
+
         #endregion
 
     }

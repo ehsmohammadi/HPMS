@@ -81,6 +81,10 @@
       <HintPath>..\Dependency\MITD.Presentation.UI.SL.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\portable-net40+sl4+wp7+win8\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core">
@@ -232,6 +236,7 @@
     <Compile Include="ViewModels\Rule\RuleTrailVM.cs" />
     <Compile Include="ViewModels\Rule\RuleTrailListVM.cs" />
     <Compile Include="ViewModels\Unit\UnitCustomFieldManageVM.cs" />
+    <Compile Include="ViewModels\User\EmailInVM.cs" />
     <Compile Include="ViewModels\User\ChangePasswordVM.cs" />
     <Compile Include="ViewModels\User\ManageWorkListUsersVM.cs" />
     <Compile Include="ViewModels\User\PartyCustomActionsVM.cs" />
@@ -346,6 +351,9 @@
     </Compile>
     <Compile Include="Views\Unit\UnitView.xaml.cs">
       <DependentUpon>UnitView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\User\EmailInView.xaml.cs">
+      <DependentUpon>EmailInView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\User\ChangePassword.xaml.cs">
       <DependentUpon>ChangePassword.xaml</DependentUpon>
@@ -500,6 +508,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\User\EmailInView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\User\ChangePassword.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -530,6 +542,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MITD.PMS.Common.SL\MITD.PMS.Common.SL.csproj">
+      <Project>{f960edc9-07e4-4cb2-a427-6da7c74ad472}</Project>
+      <Name>MITD.PMS.Common.SL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MITD.PMS.Presentation.Contracts.SL\MITD.PMS.Presentation.Contracts.SL.csproj">
       <Project>{e31d9461-636c-402e-8f5d-5e7ab32a8875}</Project>
       <Name>MITD.PMS.Presentation.Contracts.SL</Name>

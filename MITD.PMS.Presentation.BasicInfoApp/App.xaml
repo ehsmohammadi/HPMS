@@ -42,6 +42,8 @@
             <vm:UserListVM x:Key="userListViewModel"/>
             <vm:UserVM x:Key="userViewModel"/>
 
+            <vm:EmailInVM x:Key="emailInViewModel"/>
+
             <vm:UserGroupListVM x:Key="userGroupListViewModel"/>
             <vm:UserGroupVM x:Key="userGroupViewModel"/>
 

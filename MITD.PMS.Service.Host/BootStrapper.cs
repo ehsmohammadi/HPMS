@@ -39,8 +39,10 @@ using Castle.Core;
 using Castle.MicroKernel.ModelBuilder.Inspectors;
 using MITD.PMS.ACL.SSO;
 using MITD.PMS.ACL.CalculationEngine;
+using MITD.PMS.Common.Utilities;
 using MITD.Services;
 using NHibernate.Linq.InnerJoinFetch;
+using MITD.Utilities;
 
 namespace MITD.PMS.Service.Host
 {
@@ -228,6 +230,9 @@ namespace MITD.PMS.Service.Host
 
             container.Register(
             Component.For<AccessPermission>().LifeStyle.Singleton);
+
+            container.Register(
+                Component.For<IEmailManager>().ImplementedBy<EmailManager>().LifeStyle.Singleton);
 
 
             var locator = new WindsorServiceLocator(container);

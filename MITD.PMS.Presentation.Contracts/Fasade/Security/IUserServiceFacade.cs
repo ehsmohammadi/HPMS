@@ -41,6 +41,8 @@ namespace MITD.PMS.Presentation.Contracts
 
 
         string ChangePassword(ChangePasswordDTO changePassword);
+        string UpdateEmail(EmailDTO email);
+        bool VerifyEmail(string veriCode);
     }
 }
 

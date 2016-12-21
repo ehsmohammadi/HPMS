@@ -41,5 +41,6 @@ namespace MITD.PMS.Presentation.Logic
         void UpdateUserAccess(Action<UserGroupDTO, Exception> action, string username, Dictionary<int, bool> actionList);
         bool IsUserPermissionGranted(Type controllerType, string methodName, List<ActionType> authorizedActions);
         void ChangePassword(Action<string, Exception> action, ChangePasswordDTO changePassword);
+        void UpdateEmail(Action<string, Exception> action, EmailDTO emailDTO);
     }
 }

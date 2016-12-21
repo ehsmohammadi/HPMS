@@ -76,6 +76,7 @@
     <Compile Include="IRISLSeedData\IRISLSeedDataForTest.cs" />
     <Compile Include="IRISLSeedData\PMSMigrationUtility.cs" />
     <Compile Include="IRISLSeedData\AdminMigrationUtility.cs" />
+    <Compile Include="MigrationVer3.cs" />
     <Compile Include="MigrationVer2.cs" />
     <Compile Include="PeriodTest.cs" />
     <Compile Include="RODSeedData\CreateSeedData.cs" />

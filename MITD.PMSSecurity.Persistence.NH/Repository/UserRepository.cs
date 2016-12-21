@@ -109,6 +109,11 @@ namespace MITD.PMSSecurity.Persistence.NH
             return rep.Find<Party>(g => g.Id.PartyName.ToLower() == partyId.PartyName.ToLower()).SingleOrDefault();
         }
 
+        public User GetUserByVerificationCode(string veriCode)
+        {
+            return rep.Find<User>(u => u.VerificationCode == veriCode).SingleOrDefault();
+        }
+
         public List<User> GetPermittedWorkListFor(User user)
         {
             return  rep.Find<User>(f => f.WorkListUserList.Contains(user)).ToList();
@@ -138,5 +143,7 @@ namespace MITD.PMSSecurity.Persistence.NH
             }
             return res;
         }
+
+
     }
 }

@@ -24,5 +24,6 @@ namespace MITD.PMSSecurity.Domain
 
         Exception ConvertException(Exception exp);
         Exception TryConvertException(Exception exp);
+        User GetUserByVerificationCode(string veriCode);
     }
 }

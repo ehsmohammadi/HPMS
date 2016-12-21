@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security;
 using System.Security.Claims;
 using System.Transactions;
-using MITD.Core;
+using MITD.PMS.Common.Utilities;
 using MITD.PMSSecurity.Application.Contracts;
 using MITD.PMSSecurity.Domain;
 using MITD.PMSSecurity.Domain.Service;
@@ -13,14 +12,15 @@ namespace MITD.PMSSecurity.Application
 {
     public class SecurityService : ISecurityService
     {
-        private IUserRepository userRep;
-        private ISecurityCheckerService securityCheckerService;
+        private readonly IUserRepository userRep;
+        private readonly ISecurityCheckerService securityCheckerService;
+        private readonly IEmailManager emailManager;
 
-        public SecurityService(IUserRepository userRep,ISecurityCheckerService securityCheckerService
-            )
+        public SecurityService(IUserRepository userRep,ISecurityCheckerService securityCheckerService,IEmailManager emailManager )
         {
             this.userRep = userRep;
             this.securityCheckerService = securityCheckerService;
+            this.emailManager = emailManager;
         }
 
         public bool IsAuthorized(List<ActionType> userActions, List<ActionType> methodRequiredActions)
@@ -41,8 +41,7 @@ namespace MITD.PMSSecurity.Application
 
         public User AddUpdate(PartyId partyId, string firstName, string lastName, string email)
         {
-            User u;
-            u = GetUser(partyId) == null ? AddUser(partyId,firstName,lastName,email) : UpdateUser(partyId,firstName,lastName,email);
+            var u = GetUser(partyId) == null ? AddUser(partyId,firstName,lastName,email) : UpdateUser(partyId,firstName,lastName,email);
             return u;
         }
 
@@ -111,6 +110,34 @@ namespace MITD.PMSSecurity.Application
                 ((User)u).Update(firstName, lastName, email);
                 scope.Complete();
                 return u as User;
+            }
+        }
+
+        public void UpdateUserProfile(PartyId partyId, string email)
+        {
+            using (var scope = new TransactionScope())
+            {
+                var u = userRep.GetUserById(partyId);
+                ((User)u).UpdateProfile( email,emailManager);
+                scope.Complete();
+
+            }
+
+        }
+
+        public bool VerifyEmail(string veriCode)
+        {
+            using (var scope = new TransactionScope())
+            {
+                
+                var user = userRep.GetUserByVerificationCode(veriCode);
+                if (user == null)
+                    return false;
+                user.VerifyEmail();
+                //((User)u).UpdateProfile(email, emailManager);
+                scope.Complete();
+                return true;
+
             }
         }
 
@@ -235,6 +262,7 @@ namespace MITD.PMSSecurity.Application
                 scope.Complete();
             }
         }
+
 
     }
 }

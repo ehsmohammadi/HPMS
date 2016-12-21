@@ -114,6 +114,7 @@
     <Compile Include="Views\BasicInfo\UnitIndex\IUnitIndexListView.cs" />
     <Compile Include="Views\BasicInfo\UnitIndex\IUnitIndexTreeView.cs" />
     <Compile Include="Views\BasicInfo\UnitIndex\IUnitIndexView.cs" />
+    <Compile Include="Views\BasicInfo\User\IEmailInView.cs" />
     <Compile Include="Views\BasicInfo\User\IChangePasswordView.cs" />
     <Compile Include="Views\PeriodManagement\Calculation\ICalculationExceptionListView.cs" />
     <Compile Include="Views\PeriodManagement\Calculation\ICalculationExceptionView.cs" />

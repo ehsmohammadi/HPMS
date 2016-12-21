@@ -78,13 +78,17 @@ namespace MITD.PMS.Interface
             var pmsUsers = pmsUsersMapper.MapToEntity(u);
             if (pmsUsers == null || pmsUsers.Count == 0)
                 throw new Exception("pmsUsers is null or pmsUsers.count is zero");
-
             var userState = userStateMapper.MapToModel(u);
-
             var user = securityService.GetUser(new PartyId(u.Identity.Name));
             userState.PermittedUsersOnMyWorkList = new List<UserDescriptionDTO>();
             if (user != null)
             {
+                var emailDTO = new EmailDTO
+                {
+                    Email = user.Email,
+                    Status = (int)user.EmailStatus
+                };
+                userState.Email = emailDTO;
                 userState.PermittedUsersOnMyWorkList.Add(new UserDescriptionDTO { FirstName = user.FirstName, LastName = user.LastName, PartyName = user.Id.PartyName });
                 var permittedWorkList = securityService.GetPermittedWorkListFor(user);
                 userState.PermittedUsersOnMyWorkList.AddRange(
@@ -441,6 +445,17 @@ namespace MITD.PMS.Interface
             userManagementService.ChangePassword(ClaimsPrincipal.Current.Identity.Name, changePassword.NewPassword,
                 changePassword.OldPassword);
             return "Change password have done successfully";
+        }
+
+        public string UpdateEmail(EmailDTO email)
+        {
+            securityService.UpdateUserProfile(new PartyId(ClaimsPrincipal.Current.Identity.Name), email.Email);
+            return "Change password have done successfully";
+        }
+
+        public bool VerifyEmail(string veriCode)
+        {
+            return securityService.VerifyEmail(veriCode);
         }
     }
 }

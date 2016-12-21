@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using MITD.Domain.Model;
+using MITD.PMS.Common;
+using MITD.PMS.Common.Utilities;
 using MITD.PMSSecurity.Exceptions;
 
 namespace MITD.PMSSecurity.Domain
@@ -17,7 +20,7 @@ namespace MITD.PMSSecurity.Domain
         #region Properties
 
         public virtual List<ActionType> Actions { get; set; }
-        
+
         private string firstName;
         public virtual string FirstName { get { return firstName; } }
 
@@ -26,6 +29,14 @@ namespace MITD.PMSSecurity.Domain
 
         private string email;
         public virtual string Email { get { return email; } }
+
+        private EmailStatusEnum emailStatus;
+        public virtual EmailStatusEnum EmailStatus { get { return emailStatus; } }
+
+        private string verificationCode;
+        public virtual string VerificationCode { get { return verificationCode; } }
+
+
 
         private bool active;
         public virtual bool Active { get { return active; } }
@@ -41,52 +52,116 @@ namespace MITD.PMSSecurity.Domain
         {
             get { return workListUserList.ToList().AsReadOnly(); }
         }
-               
+
         #endregion
 
         #region Constructors
-       
+
         protected User()
         {
-           //For OR mapper
+            //For OR mapper
         }
 
-        public User(PartyId id, string firstname, string lastname, string email) : base(id)
+        public User(PartyId id, string firstname, string lastname, string email)
+            : base(id)
         {
-            this.firstName = firstname;
-            this.lastName = lastname;
-            this.email = email;
-            this.active = true;
+            setProperties(firstname, lastname, email, true);
         }
         public User(PartyId id, string firstname, string lastname, string email, bool isActive)
             : base(id)
         {
-            this.firstName = firstname;
-            this.lastName = lastname;
-            this.email = email;
-            this.active = isActive;
+
+            setProperties(firstname, lastname, email, isActive);
         }
 
         #endregion
 
         #region Public Methods
 
-        public virtual void Update(string firstname, string lastname, string email)
+        private void updateEmail(string emailAddress)
+        {
+            if (string.IsNullOrWhiteSpace(emailAddress))
+            {
+                switch (EmailStatus)
+                {
+                    case EmailStatusEnum.NotEntered:
+                        break;
+                    case EmailStatusEnum.Unverified:
+                        break;
+                    case EmailStatusEnum.Verified:
+                        break;
+                    default:
+                        emailStatus = EmailStatusEnum.NotEntered;
+                        break;
+                }
+            }
+            else
+            {
+                switch (EmailStatus)
+                {
+                    case EmailStatusEnum.NotEntered:
+                        this.email = emailAddress;
+                        setVerificationCode();
+                        this.emailStatus = EmailStatusEnum.Unverified;
+                        break;
+                    case EmailStatusEnum.Unverified:
+                        this.email = emailAddress;
+                        setVerificationCode();
+                        this.emailStatus = EmailStatusEnum.Unverified;
+                        break;
+                    case EmailStatusEnum.Verified:
+                        break;
+                    default:
+                        this.email = emailAddress;
+                        setVerificationCode();
+                        this.emailStatus = EmailStatusEnum.Unverified;
+                        break;
+                }
+            }
+
+        }
+
+        private void setVerificationCode()
+        {
+            if(string.IsNullOrWhiteSpace(verificationCode))
+            this.verificationCode=Guid.NewGuid().ToString();
+        }
+
+        private void setProperties(string firstname, string lastname, string email, bool isActive)
         {
             this.firstName = firstname;
             this.lastName = lastname;
-            this.email = email;
+            this.active = isActive;
+            updateEmail(email);
+        }
+
+        public virtual void Update(string firstname, string lastname, string email)
+        {
+            setProperties(firstname, lastname, email, this.active);
         }
 
 
-        public virtual void Update(string firstname, string lastname, string email, bool isActive, Dictionary<ActionType, bool> customActions, List<Group> groups,List<User> permittedWorkListUsers)
+        public virtual void Update(string firstname, string lastname, string email, bool isActive, Dictionary<ActionType, bool> customActions, List<Group> groups, List<User> permittedWorkListUsers)
         {
-            this.firstName = firstname;
-            this.lastName = lastname;
-            this.email = email;
+            Update(firstname, lastname, email);
             UpdateWorkListUsers(permittedWorkListUsers);
             UpdateCustomActions(customActions);
             UpdateGroups(groups);
+        }
+
+        public virtual void UpdateProfile(string emailAddress, IEmailManager emailManager)
+        {
+            updateEmail(emailAddress);
+            if (EmailStatus != EmailStatusEnum.Unverified) return;
+            emailManager.SendVerificationEmail(this.LastName,emailAddress,this.VerificationCode);
+            //var emailContent = creatVerificationEmail();
+            //emailManager.SendEmail("Email verification; PMS Team ",emailAddress, emailContent);
+        }
+
+        public virtual void VerifyEmail()
+        {
+            if(EmailStatus==EmailStatusEnum.Unverified)
+                emailStatus=EmailStatusEnum.Verified;
         }
 
         public virtual void UpdateWorkListUsers(List<User> permittedWorkListUsers)
@@ -147,7 +222,6 @@ namespace MITD.PMSSecurity.Domain
         {
             workListUserList.Remove(user);
         }
-        #endregion
 
         public virtual void UpdateCustomActions(Dictionary<int, bool> actions, PartyId userId, List<ActionType> roleActionTypes)
         {
@@ -162,20 +236,23 @@ namespace MITD.PMSSecurity.Domain
             {
                 if (d.IsGranted)
                 {
-                     if (!roleActionTypes.Exists(c => (int)c == d.ActionTypeId ))
+                    if (!roleActionTypes.Exists(c => (int)c == d.ActionTypeId))
                     {
                         this.customActions.Add(d.ActionTypeId, d.IsGranted);
                     }
                 }
                 else
                 {
-                    if (roleActionTypes.Exists(c => (int)c == d.ActionTypeId ))
+                    if (roleActionTypes.Exists(c => (int)c == d.ActionTypeId))
                     {
                         this.customActions.Add(d.ActionTypeId, d.IsGranted);
                     }
                 }
             });
         }
+
+        #endregion
+
         
     }
 }

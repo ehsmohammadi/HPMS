@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Browser;
 using MITD.Core;
 using MITD.Core.Exceptions;
+using MITD.PMS.Common;
 using MITD.PMS.Presentation.Contracts;
 using MITD.Presentation;
 using Newtonsoft.Json.Linq;
@@ -21,7 +22,7 @@ namespace MITD.PMS.Presentation.Logic
         private readonly IPeriodServiceWrapper periodService;
         private readonly ILogServiceWrapper logService;
         private readonly IReportServiceWrapper repService;
-        private readonly IMainAppLocalizedResources localizedResources; 
+        private readonly IMainAppLocalizedResources localizedResources;
 
         #endregion
 
@@ -71,7 +72,7 @@ namespace MITD.PMS.Presentation.Logic
             PMSActions = new List<PMSAction>();
             CustomFieldEntityList = new List<CustomFieldEntity>();
             createPMSActions();
-        } 
+        }
         #endregion
 
         #region Security methods
@@ -123,13 +124,12 @@ namespace MITD.PMS.Presentation.Logic
                 {
                     BeginInvokeOnDispatcher(() =>
                     {
-                        validateUser(res);
+                        if (!validateUser(res)) return;
                         CurrentUser = res;
                         LoggedInUser = res;
                         GetCurrentPeriod();
                         createCustomFieldEntityList();
                         Publish(new MainWindowUpdateArgs());
-
                     });
 
                 }
@@ -169,13 +169,21 @@ namespace MITD.PMS.Presentation.Logic
 
         #region Private Methods
 
-        private void validateUser(UserStateDTO user)
+        private bool validateUser(UserStateDTO user)
         {
-            if (user.IsEmployee && (user.Email.Status == (int)EmailStatusEnum.NotEntered||user.Email.Status == (int)EmailStatusEnum.Unverified))
+            if (user.IsEmployee &&
+                (user.Email == null || user.Email.Status == (int)EmailStatusEnum.NotEntered ||
+                 user.Email.Status == (int)EmailStatusEnum.Unverified))
+            {
                 ShowEmailInView(user);
+                return false;
+            }
+            return true;
+
+
         }
 
-        
+
 
         private void createPMSActions()
         {
@@ -221,7 +229,7 @@ namespace MITD.PMS.Presentation.Logic
             });
         }
 
-        public void ShowEmailInView(UserStateDTO user, bool inNewTab=false)
+        public void ShowEmailInView(UserStateDTO user, bool inNewTab = false)
         {
             ShowBusyIndicator("در حال بارگذاری ماجول...");
             GetRemoteInstance<IBasicInfoController>((res, exp) =>
