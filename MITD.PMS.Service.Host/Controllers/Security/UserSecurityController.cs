@@ -3,6 +3,7 @@ using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web.Http;
+using MITD.PMS.Interface;
 using MITD.PMS.Presentation.Contracts;
 
 namespace MITD.PMS.Service.Host.Controllers.Security
@@ -12,13 +13,15 @@ namespace MITD.PMS.Service.Host.Controllers.Security
     {
         #region Fields
         private readonly IUserServiceFacade userService;
+        private readonly ISecurityServiceFacade securityService;
 
         #endregion
 
         #region Constructors
-        public UserSecurityController(IUserServiceFacade userService)
+        public UserSecurityController(IUserServiceFacade userService, ISecurityServiceFacade securityService)
         {
             this.userService = userService;
+            this.securityService = securityService;
         }
 
         #endregion
@@ -29,10 +32,14 @@ namespace MITD.PMS.Service.Host.Controllers.Security
         public HttpResponseMessage GetEmailVerificationSuccess(string veriCode)
         {
             var response = new HttpResponseMessage();
-            if (userService.VerifyEmail(veriCode))
-                response.Content = new StringContent(File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "/Response.html"));
+            if (securityService.VerifyEmail(veriCode))
+            {
+                response.Content = new StringContent(File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "Response.html"));
+
+            }
+
             else
-                response.Content = response.Content = new StringContent(File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "/FailedEmailResponse.html"));
+                response.Content = response.Content = new StringContent(File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "FailedEmailResponse.html"));
 
             response.Content.Headers.ContentType = new MediaTypeHeaderValue("text/html");
             return response;

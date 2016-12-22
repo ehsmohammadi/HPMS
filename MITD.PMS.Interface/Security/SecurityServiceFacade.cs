@@ -96,6 +96,11 @@ namespace MITD.PMS.Interface
             return securityService.GetPermittedWorkListFor(user).Select(u => u.Id.PartyName).ToList();
         }
 
+        public bool VerifyEmail(string veriCode)
+        {
+            return securityService.VerifyEmail(veriCode);
+        }
+
         public void AddUpdateUser(ClaimsPrincipal user)
         {
             var pmsUsers = pmsUsersMapper.MapToEntity(user);
