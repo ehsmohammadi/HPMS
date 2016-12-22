@@ -20,6 +20,5 @@ namespace MITD.PMS.Interface
         EmployeeUser GetCurrentEmployeeUser();
 
         List<string> GetPermittedWorkListUserNameFor(string username);
-        bool VerifyEmail(string veriCode);
     }
 }

@@ -452,5 +452,10 @@ namespace MITD.PMS.Interface
             securityService.UpdateUserProfile(new PartyId(ClaimsPrincipal.Current.Identity.Name), email.Email);
             return "Change password have done successfully";
         }
+
+        public bool VerifyEmail(string veriCode)
+        {
+            return securityService.VerifyEmail(veriCode);
+        }
     }
 }
