@@ -134,6 +134,18 @@ namespace MITD.PMS.Integration.Data.EF
                                            )
                                  select c.ID).ToList();
 
+                var subSectionIdsLevel2 = (from c in db.VW_OrganTree
+                                     where
+                                         //c.PID == parentId
+                                           subSectionIds.Contains(c.PID.Value)
+                                         && c.NodeType != DataEFConfig.NodeType_Idle   //بلا استفاده
+                                         && (c.NodeType == DataEFConfig.NodeType_Section   // بخش
+                                         //|| c.NodeType == DataEFConfig.NodeType_Company   // شرکت
+                                            )
+                                     select c.ID).ToList();
+
+                subSectionIds.AddRange(subSectionIdsLevel2);
+
                 var subSectionJobPositionIds = (from c in db.VW_OrganTree
                                                 where subSectionIds.Contains(c.PID.Value)
                                                       && c.NodeType == DataEFConfig.NodeType_Post

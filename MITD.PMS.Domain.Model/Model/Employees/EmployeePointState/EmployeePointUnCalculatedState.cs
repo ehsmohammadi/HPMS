@@ -1,4 +1,5 @@
-﻿using MITD.PMS.Domain.Model.Periods;
+﻿using System;
+using MITD.PMS.Domain.Model.Periods;
 
 namespace MITD.PMS.Domain.Model.Employees
 {
@@ -14,10 +15,14 @@ namespace MITD.PMS.Domain.Model.Employees
         {
             var finalPoint = point > 100 ? 100 : point;
             employee.UpdateFinalPoint(finalPoint);
-            if (finalPoint > period.MaxFinalPoint)
+            if (finalPoint >= period.MaxFinalPoint)
                 employee.EmployeePointState = new EmployeePointCalculatedWithAboveMaxPointState();
             else if (0 <= finalPoint && finalPoint < period.MaxFinalPoint)
                 employee.EmployeePointState = new EmployeePointCalculatedWithNormalPointState();
+            else
+            {
+                throw new Exception();
+            }
         }
     }
 

@@ -141,12 +141,12 @@ namespace MITD.PMS.Application
 
         }
 
-        public JobPosition ConfigureInquiry(JobPositionId jobPositionId)
+        public JobPosition ConfigureInquiry(JobPositionId jobPositionId, bool forceConfigure=false)
         {
             using (var tr = new TransactionScope())
             {
                 var jobPosition = jobPositionRep.GetBy(jobPositionId);
-                jobPosition.ConfigeInquirer(configuratorService, false);
+                jobPosition.ConfigeInquirer(configuratorService, forceConfigure);
                 tr.Complete();
                 return jobPosition;
             }

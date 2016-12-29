@@ -186,7 +186,7 @@ namespace MITD.PMS.Application
                             try
                             {
                                 var jps = srvManagerJobPosition.GetService();
-                                jobPosition = jps.ConfigureInquiry(jobPositionId);
+                                jobPosition = jps.ConfigureInquiry(jobPositionId,true);
                                 var dummy = jobPosition.ConfigurationItemList;
                             }
                             finally

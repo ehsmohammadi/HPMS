@@ -202,7 +202,7 @@ namespace MITD.PMS.Application
 
         public IEnumerable<string> GetAllEmployeeNo(PeriodId periodId)
         {
-            return employeeRep.GetAllEmployeeNo(j => true);
+            return employeeRep.GetAllEmployeeNo(e=>e.Id.PeriodId.Id==periodId.Id);
         }
 
 

@@ -177,10 +177,10 @@ namespace MITD.PMS.Presentation.Logic
 
         private void loadJobInPeriod()
         {
-            ShowBusyIndicator("در حال دریافت اطلاعات");
+            //ShowBusyIndicator("در حال دریافت اطلاعات");
             jobInPeriodService.GetAllJobInPeriod((res, exp) => appController.BeginInvokeOnDispatcher(() =>
                 {
-                    HideBusyIndicator();
+                    //HideBusyIndicator();
                     if (exp == null)
                         JobInPeriods = res.ToList();
                     else
@@ -190,10 +190,10 @@ namespace MITD.PMS.Presentation.Logic
 
         private void loadUnitInPeriod()
         {
-            ShowBusyIndicator("در حال دریافت اطلاعات");
+            //ShowBusyIndicator("در حال دریافت اطلاعات");
             unitInPeriodService.GetAllUnits((res, exp) => appController.BeginInvokeOnDispatcher(() =>
                 {
-                    HideBusyIndicator();
+                    //HideBusyIndicator();
                     if (exp == null)
                         UnitInPeriods = res;
                     else

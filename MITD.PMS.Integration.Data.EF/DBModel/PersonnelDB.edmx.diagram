@@ -6,10 +6,10 @@
     <edmx:Diagrams>
       <Diagram DiagramId="1a938b75fdf742aa98d5da9b562c8461" Name="Diagram1">
         <EntityTypeShape EntityType="PersonnelSoft2005Model.VW_OrganTree" Width="1.5" PointX="5.375" PointY="0.75" />
-        <EntityTypeShape EntityType="PersonnelSoft2005Model.PMS_Job_Index" Width="1.5" PointX="12.25" PointY="1.5" />
+        <EntityTypeShape EntityType="PersonnelSoft2005Model.PMS_Job_Index" Width="2.25" PointX="12.25" PointY="1.5" />
         <AssociationConnector Association="PersonnelSoft2005Model.FK_PMS_Job_Index_PMS_JobIndex" />
         <AssociationConnector Association="PersonnelSoft2005Model.FK_PMS_Job_Index_PMS_JobTitle" />
-        <EntityTypeShape EntityType="PersonnelSoft2005Model.PMS_GeneralIndex" Width="1.5" PointX="10" PointY="1.25" />
+        <EntityTypeShape EntityType="PersonnelSoft2005Model.PMS_GeneralIndex" Width="1.875" PointX="10" PointY="1.25" />
         <EntityTypeShape EntityType="PersonnelSoft2005Model.PMS_IndexType" Width="1.5" PointX="7.75" PointY="3.5" />
         <EntityTypeShape EntityType="PersonnelSoft2005Model.PMS_JobIndex" Width="1.5" PointX="10" PointY="5.25" />
         <EntityTypeShape EntityType="PersonnelSoft2005Model.PMS_JobTitle" Width="1.5" PointX="0.75" PointY="0.75" />

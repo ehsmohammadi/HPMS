@@ -55,11 +55,11 @@
                      ValidatesOnDataErrors=true,
                      NotifyOnValidationError=true}" 
                              SelectedValuePath="Id">
-                    <pr:ComboBoxEx.ItemsPanel>
+                    <!--<pr:ComboBoxEx.ItemsPanel>
                         <ItemsPanelTemplate>
                             <VirtualizingStackPanel/>
                         </ItemsPanelTemplate>
-                    </pr:ComboBoxEx.ItemsPanel>
+                    </pr:ComboBoxEx.ItemsPanel>-->
                 </pr:ComboBoxEx>
 
                 <sdk:Label Grid.Row="1" Grid.Column="0" Content="عنوان شغل:" />
@@ -71,11 +71,11 @@
                      ValidatesOnDataErrors=true,
                      NotifyOnValidationError=true}" 
                              SelectedValuePath="JobId">
-                    <pr:ComboBoxEx.ItemsPanel>
+                    <!--<pr:ComboBoxEx.ItemsPanel>
                         <ItemsPanelTemplate>
                             <VirtualizingStackPanel/>
                         </ItemsPanelTemplate>
-                    </pr:ComboBoxEx.ItemsPanel>
+                    </pr:ComboBoxEx.ItemsPanel>-->
                 </pr:ComboBoxEx>
 
 
@@ -89,11 +89,11 @@
                      NotifyOnValidationError=true}" 
                      SelectedValuePath="UnitId">
 
-              <pr:ComboBoxEx.ItemsPanel>
+              <!--<pr:ComboBoxEx.ItemsPanel>
                         <ItemsPanelTemplate>
                             <VirtualizingStackPanel/>
                         </ItemsPanelTemplate>
-                    </pr:ComboBoxEx.ItemsPanel>
+                    </pr:ComboBoxEx.ItemsPanel>-->
 
                 </pr:ComboBoxEx>
 

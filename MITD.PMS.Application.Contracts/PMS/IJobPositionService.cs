@@ -18,7 +18,7 @@ namespace MITD.PMS.Application.Contracts
         JobPosition ModifyJobPosition(PeriodId periodId, SharedJobPositionId sharedJobPositionId, SharedJobPositionId sharedJobPositionId1, JobId jobId, UnitId unitId);
         List<JobPositionInquiryConfigurationItem> GetInquirySubjectWithInquirer(JobPositionId jobPositionId);
         void UpdateInquirers(EmployeeId employeeId, JobPositionId jobPositionId, List<EmployeeIdWithJobPositionId> inquirerEmployeeIdList);
-        JobPosition ConfigureInquiry(JobPositionId jobPositionId);
+        JobPosition ConfigureInquiry(JobPositionId jobPositionId, bool forceConfigure);
         List<JobPositionId> GetAllJobPositionId(Period period);
         JobPosition GetBy(JobPositionId jobPositionId);
         List<JobPosition> GetAllJobPositionByParentId(JobPositionId jobPositionId);
