@@ -5,148 +5,181 @@ using NHibernate.Mapping.ByCode.Conformist;
 
 namespace MITD.PMS.Persistence.NH
 {
-    public class UnitInPeriodMap : ClassMapping<Unit>
-    {
-        public UnitInPeriodMap()
-        {
-            Table("Periods_Units");
-            Id("dbId", m =>
-                {
-                    m.Column("Id");
-                    m.Generator(Generators.HighLow, i => i.Params(new
-                        {
-                            table = "NH_Hilo",
-                            column = "NextHi",
-                            max_Lo = "1",
-                            where = string.Format("TableKey='{0}'", "Periods_Units")
-                        }));
+    //public class UnitInPeriodMap : ClassMapping<Unit>
+    //{
+    //    public UnitInPeriodMap()
+    //    {
+    //        Table("Periods_Units");
+    //        Id("dbId", m =>
+    //            {
+    //                m.Column("Id");
+    //                m.Generator(Generators.HighLow, i => i.Params(new
+    //                    {
+    //                        table = "NH_Hilo",
+    //                        column = "NextHi",
+    //                        max_Lo = "1",
+    //                        where = string.Format("TableKey='{0}'", "Periods_Units")
+    //                    }));
 
-                });
-            Component(x => x.Id, mapper =>
-                {
-                    mapper.Access(Accessor.Field);
-                    mapper.Property("dbId", m =>
-                        {
-                            m.Column("Id");
-                            m.Generated(PropertyGeneration.Always);
-                        });
-                    mapper.Component(x => x.PeriodId, m =>
-                    {
-                        m.Access(Accessor.Field);
-                        m.Property(i => i.Id, map =>
-                            {
-                                map.Column("PeriodId");
-                                map.NotNullable(true);
-                                map.Access(Accessor.Field);
-                            });
-                    });
+    //            });
+    //        Component(x => x.Id, mapper =>
+    //            {
+    //                mapper.Access(Accessor.Field);
+    //                mapper.Property("dbId", m =>
+    //                    {
+    //                        m.Column("Id");
+    //                        m.Generated(PropertyGeneration.Always);
+    //                    });
+    //                mapper.Component(x => x.PeriodId, m =>
+    //                {
+    //                    m.Access(Accessor.Field);
+    //                    m.Property(i => i.Id, map =>
+    //                        {
+    //                            map.Column("PeriodId");
+    //                            map.NotNullable(true);
+    //                            map.Access(Accessor.Field);
+    //                        });
+    //                });
 
-                    mapper.Component(x => x.SharedUnitId, m =>
-                    {
+    //                mapper.Component(x => x.SharedUnitId, m =>
+    //                {
 
-                        m.Access(Accessor.Field);
-                        m.Property(i => i.Id, map =>
-                            {
-                                map.Generated(PropertyGeneration.Always);
-                                map.Column("UnitId");
-                                map.NotNullable(true);
-                                map.Access(Accessor.Field);
-                            });
-                    });
-
-
-                });
-
-            Version("rowVersion", m =>
-            {
-                m.Column("RowVersion");
-                m.Generated(VersionGeneration.Always);
-                m.Type<BinaryTimestamp>();
-            });
-
-            ManyToOne<SharedUnit>("sharedUnit", m =>
-                {
-                    m.Column("UnitId");
-                    m.Lazy(LazyRelation.NoLazy);
-                });
-
-            ManyToOne<Unit>("Parent", m =>
-            {
-                m.Access(Accessor.Field);
-                m.Column("ParentId");
-                m.Lazy(LazyRelation.NoLazy);
-            });
-
-            Bag(x => x.CustomFields, collectionMapping =>
-            {
-                collectionMapping.Access(Accessor.Field);
-                collectionMapping.Table("Periods_Units_CustomFields");
-                collectionMapping.Cascade(Cascade.All | Cascade.DeleteOrphans);
-                //collectionMapping.Inverse(false);
-                collectionMapping.Key(k => k.Column("PeriodUnitId"));
+    //                    m.Access(Accessor.Field);
+    //                    m.Property(i => i.Id, map =>
+    //                        {
+    //                            map.Generated(PropertyGeneration.Always);
+    //                            map.Column("UnitId");
+    //                            map.NotNullable(true);
+    //                            map.Access(Accessor.Field);
+    //                        });
+    //                });
 
 
-            }, map => map.OneToMany());
+    //            });
+
+    //        Version("rowVersion", m =>
+    //        {
+    //            m.Column("RowVersion");
+    //            m.Generated(VersionGeneration.Always);
+    //            m.Type<BinaryTimestamp>();
+    //        });
+
+    //        ManyToOne<SharedUnit>("sharedUnit", m =>
+    //            {
+    //                m.Column("UnitId");
+    //                m.Lazy(LazyRelation.NoLazy);
+    //            });
+
+    //        ManyToOne<Unit>("Parent", m =>
+    //        {
+    //            m.Access(Accessor.Field);
+    //            m.Column("ParentId");
+    //            m.Lazy(LazyRelation.NoLazy);
+    //        });
+
+    //        Bag(x => x.CustomFields, collectionMapping =>
+    //        {
+    //            collectionMapping.Access(Accessor.Field);
+    //            collectionMapping.Table("Periods_Units_CustomFields");
+    //            collectionMapping.Cascade(Cascade.All | Cascade.DeleteOrphans);
+    //            //collectionMapping.Inverse(false);
+    //            collectionMapping.Key(k => k.Column("PeriodUnitId"));
 
 
-            IdBag(p => p.UnitIndexList, m =>
-            {
-                m.Table("Periods_Units_UnitIndices");
-                m.Key(i => i.Column("PeriodUnitId"));
-                m.Access(Accessor.Field);
-                m.Id(i =>
-                {
-                    i.Column("Id");
-                    i.Generator(Generators.Identity);
-                });
-            },
-            x => x.Component(m =>
-            {
-                m.Access(Accessor.Field);
-                m.Component(i => i.UnitIndexId, mc =>
-                {
-                    mc.Access(Accessor.Field);
-                    mc.Property(i => i.Id, ma =>
-                    {
-                        ma.Access(Accessor.Field);
-                        ma.Column("PeriodUnitIndexId");
-                    });
-                });
-                m.Property(i => i.ShowforTopLevel, mp =>
-                {
-                    mp.Access(Accessor.Field);
-                    mp.Column("ShowforTopLevel");
-                });
-
-                m.Property(i => i.ShowforSameLevel, mp =>
-                {
-                    mp.Access(Accessor.Field);
-                    mp.Column("ShowforSameLevel");
-                });
-
-                m.Property(i => i.ShowforLowLevel, mp =>
-                {
-                    mp.Access(Accessor.Field);
-                    mp.Column("ShowforLowLevel");
-                });
-
-            }));
+    //        }, map => map.OneToMany());
 
 
-            Bag(e => e.ConfigurationItemList, cm =>
-            {
-                cm.Table("Unit_InquiryConfigurationItems");
-                cm.Key(k =>
-                {
-                    k.Column("PeriodInquirySubjectUnitId");
-                    k.ForeignKey("none");
-                });
-                cm.Access(Accessor.Field);
-                cm.Cascade(Cascade.All | Cascade.DeleteOrphans);
+    //        IdBag(p => p.UnitIndexList, m =>
+    //        {
+    //            m.Table("Periods_Units_UnitIndices");
+    //            m.Key(i => i.Column("PeriodUnitId"));
+    //            m.Access(Accessor.Field);
+    //            m.Id(i =>
+    //            {
+    //                i.Column("Id");
+    //                i.Generator(Generators.Identity);
+    //            });
+    //        },
+    //        x => x.Component(m =>
+    //        {
+    //            m.Access(Accessor.Field);
+    //            m.Component(i => i.UnitIndexId, mc =>
+    //            {
+    //                mc.Access(Accessor.Field);
+    //                mc.Property(i => i.Id, ma =>
+    //                {
+    //                    ma.Access(Accessor.Field);
+    //                    ma.Column("PeriodUnitIndexId");
+    //                });
+    //            });
+    //            m.Property(i => i.ShowforTopLevel, mp =>
+    //            {
+    //                mp.Access(Accessor.Field);
+    //                mp.Column("ShowforTopLevel");
+    //            });
 
-            }, mapping => mapping.OneToMany());
-        }
-    }
+    //            m.Property(i => i.ShowforSameLevel, mp =>
+    //            {
+    //                mp.Access(Accessor.Field);
+    //                mp.Column("ShowforSameLevel");
+    //            });
+
+    //            m.Property(i => i.ShowforLowLevel, mp =>
+    //            {
+    //                mp.Access(Accessor.Field);
+    //                mp.Column("ShowforLowLevel");
+    //            });
+
+    //        }));
+
+
+    //        Bag(e => e.ConfigurationItemList, cm =>
+    //        {
+    //            cm.Table("Unit_InquiryConfigurationItems");
+    //            cm.Key(k =>
+    //            {
+    //                k.Column("PeriodInquirySubjectUnitId");
+    //                k.ForeignKey("none");
+    //            });
+    //            cm.Access(Accessor.Field);
+    //            cm.Cascade(Cascade.All | Cascade.DeleteOrphans);
+
+    //        }, mapping => mapping.OneToMany());
+
+    //        IdBag(p => p.Verifiers, m =>
+    //        {
+    //            m.Table("PeriodUnits_Verifiers");
+    //            m.Key(i => i.Column("PeriodUnitId"));
+    //            m.Access(Accessor.Field);
+    //            m.Id(i =>
+    //            {
+    //                i.Column("Id");
+    //                i.Generator(Generators.Identity);
+    //            });
+    //        },
+    //         x => x.Component(m =>
+    //         {
+    //             m.Access(Accessor.Field);
+    //             //m.Prope
+    //             //{
+
+    //             //});
+    //             m.Component(i => i.PeriodId, mapper =>
+    //             {
+    //                 mapper.Access(Accessor.Field);
+    //                 mapper.Property(id => id.Id, map =>
+    //                 {
+    //                     map.Column("PeriodId");
+    //                     map.Access(Accessor.Field);
+    //                 });
+    //             });
+    //             m.Property(pi => pi.EmployeeNo, mapper =>
+    //             {
+    //                 mapper.Access(Accessor.Field);
+    //             });
+    //         }));
+    //    }
+    //}
 
     public class UnitCustomFieldMap : ClassMapping<UnitCustomField>
     {

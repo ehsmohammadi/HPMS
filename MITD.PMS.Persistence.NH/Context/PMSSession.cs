@@ -1,26 +1,17 @@
-﻿using NHibernate;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Data;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using MITD.Data.NH;
+using MITD.PMS.Domain.Model.Calculations;
+using MITD.PMS.Domain.Model.JobIndexPoints;
+using MITD.PMS.Domain.Model.Policies;
+using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Dialect;
-using NHibernate.Mapping.ByCode;
-using System.Data;
 using NHibernate.Driver;
-using NHibernate.Tool.hbm2ddl;
+using NHibernate.Mapping.ByCode;
 using NHibernate.Mapping.ByCode.Conformist;
-using MITD.PMS.Domain.Model.Policies;
-using MITD.PMS.Domain.Model.Periods;
-using MITD.PMS.Domain.Model.Calculations;
-using MITD.PMS.Domain.Model.Employees;
-using MITD.Core.RuleEngine.Model;
-using MITD.PMS.Domain.Model.JobIndexPoints;
-using MITD.Data.NH;
-using MITD.PMS.Domain.Model.JobIndices;
-using NHibernate.Linq.InnerJoinFetch;
+using NHibernate.Tool.hbm2ddl;
 
 namespace MITD.PMS.Persistence.NH
 {
@@ -46,12 +37,16 @@ namespace MITD.PMS.Persistence.NH
                 db.Timeout = 10;
             });
 
-            //configure.AddXmlFile("Entity2.hbm.xml");
+           
+            // mapping by code 
             var mapper = new ModelMapper();
             mapper.AddMappings(Assembly.GetExecutingAssembly()
                 .GetExportedTypes());
             var mapping = mapper.CompileMappingForAllExplicitlyAddedEntities();
+            // mapping by xml 
+            configure.AddAssembly("MITD.PMS.Persistence.NH");
 
+            //Other setting 
             configure.AddDeserializedMapping(mapping, sessionName);
             SchemaMetadataUpdater.QuoteTableAndColumns(configure);
 
@@ -158,8 +153,6 @@ namespace MITD.PMS.Persistence.NH
             }));
         }
     }
-
-
 
     public class CalculationMap : ClassMapping<Calculation>
     {

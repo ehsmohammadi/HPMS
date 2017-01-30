@@ -113,6 +113,7 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
 
         public void GetToken(Action<string, Exception> action, string userName, string password)
         {
+            
             var url = string.Format(baseAddressUsers + "?userName=" + userName + "&password=" + password);
             WebClientHelper.GetString(new Uri(url, PMSClientConfig.UriKind), action);
         }

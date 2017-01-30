@@ -82,6 +82,11 @@ namespace MITD.PMSSecurity.Domain
         {
             if (string.IsNullOrWhiteSpace(emailAddress))
             {
+                if (string.IsNullOrWhiteSpace(Email))
+                {
+                    email = "";
+                    verificationCode = ""; 
+                }
                 switch (EmailStatus)
                 {
                     case EmailStatusEnum.NotEntered:

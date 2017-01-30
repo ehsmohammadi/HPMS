@@ -459,6 +459,9 @@
     <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\Unit\UnitInPeriodDTOWithActions.cs">
       <Link>PeriodManagement\Unit\UnitInPeriodDTOWithActions.cs</Link>
     </Compile>
+    <Compile Include="..\MITD.PMS.Presentation.Contracts\PeriodManagement\Unit\UnitVerifierDTO.cs">
+      <Link>PeriodManagement\Unit\UnitVerifierDTO.cs</Link>
+    </Compile>
     <Compile Include="..\MITD.PMS.Presentation.Contracts\Report\ReportDTO.cs">
       <Link>Report\ReportDTO.cs</Link>
     </Compile>
@@ -576,6 +579,7 @@
     <Compile Include="PeriodManagement\UnitIndex\AbstractUnitIndexInPeriodDTO_Client.cs" />
     <Compile Include="PeriodManagement\UnitIndex\UnitIndexInPeriodDTO_Client.cs" />
     <Compile Include="PeriodManagement\Unit\UnitIndex\UnitInPeriodUnitIndexDTO_Client.cs" />
+    <Compile Include="PeriodManagement\Unit\UnitVerifierDTO_Client.cs" />
     <Compile Include="PeriodManagement\Unit\UnitInPeriodDTO_Client.cs" />
     <Compile Include="PeriodManagement\Unit\UnitInPeriodAssignmentDTO_Client.cs" />
     <Compile Include="PeriodManagement\Unit\UnitInPeriodDTOWithActions_Client.cs" />

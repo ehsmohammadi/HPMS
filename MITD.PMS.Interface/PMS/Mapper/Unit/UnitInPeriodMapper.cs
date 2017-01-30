@@ -44,8 +44,16 @@ namespace MITD.PMS.Interface
             {
                 UnitId = entity.Id.SharedUnitId.Id,
                 Name = entity.Name,
-               
-                ActionCodes = new List<int> { (int)ActionType.AddUnitInPeriod, (int)ActionType.ModifyUnitInPeriod, (int)ActionType.DeleteUnitInPeriod ,(int)ActionType.ManageUnitInPeriodInquiry}
+
+                ActionCodes =
+                    new List<int>
+                    {
+                        (int) ActionType.AddUnitInPeriod,
+                        (int) ActionType.ModifyUnitInPeriod,
+                        (int) ActionType.DeleteUnitInPeriod,
+                        (int) ActionType.ManageUnitInPeriodInquiry,
+                        (int) ActionType.ManageUnitInPeriodVerifier
+                    }
             };
             if (entity.Parent != null)
                 res.ParentId = entity.Parent.Id.SharedUnitId.Id;

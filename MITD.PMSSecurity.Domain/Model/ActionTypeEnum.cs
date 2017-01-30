@@ -389,6 +389,8 @@ namespace MITD.PMSSecurity.Domain
         ManageUnitInPeriodInquiry = 255,
         [ActionInfoAttribute("ShowUnitInPeriodInquiry", "نمایش افراد نظر دهنده واحد سازمانی")]
         ShowUnitInPeriodInquiry = 256,
+        [ActionInfoAttribute("ManageUnitInPeriodVerifier", "تعیین افراد تاييد كننده واحد سازمانی")]
+        ManageUnitInPeriodVerifier=257,
         
         #endregion
 
@@ -507,6 +509,7 @@ namespace MITD.PMSSecurity.Domain
 
         #endregion
 
+        
     }
 
     #region ActionType Facility and attribute

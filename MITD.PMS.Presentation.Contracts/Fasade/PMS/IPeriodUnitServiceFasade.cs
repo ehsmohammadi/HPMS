@@ -18,5 +18,7 @@ namespace MITD.PMS.Presentation.Contracts
         UnitInPeriodDTO GetUnit(long periodId, long unitId, string selectedColumns);
         void AddInquirer(long periodId, long unitId, string employeeNo,long unitIndexInPeiodUnit);
         void RemoveInquirer(long periodId, long unitId, string employeeNo);
+        void AddVerifier(long periodId, long unitId, string employeeNo);
+        void DeleteVerifier(long periodId, long unitId, string employeeNo);
     }
 }

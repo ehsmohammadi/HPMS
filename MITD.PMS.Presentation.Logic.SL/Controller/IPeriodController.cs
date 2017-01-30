@@ -37,7 +37,7 @@ namespace MITD.PMS.Presentation.Logic
         void ShowInquiryFormView(InquiryFormDTO inquiryForm, ActionType action);
         void ShowJobIndexInquiryFormView(InquiryFormByIndexDTO inquiryForm, ActionType fillInquiryForm);
 
-        void ShowUnitInPeriodInquiryView(PeriodDTO period, UnitInPeriodDTO unitInPeriodDto, ActionType action);
+
         void ShowPeriodView(PeriodDTO period, ActionType actionType);
 
         [RequiredPermission(ActionType.ShowPeriod)]
@@ -103,6 +103,7 @@ namespace MITD.PMS.Presentation.Logic
         void ShowCalculationExceptionListView(CalculationDTO calculation);
 
 
-        
+        void ShowUnitInPeriodVerifierView(PeriodDTO period, UnitInPeriodDTO unitInPeriodDto, ActionType action);
+        void ShowUnitInPeriodInquiryView(PeriodDTO period, UnitInPeriodDTO unitInPeriodDto, ActionType action);
     }
 }

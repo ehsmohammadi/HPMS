@@ -197,6 +197,8 @@ namespace MITD.PMS.Application
             return unitRep.GetAllUnitId(period);
         }
 
+
+
         public List<UnitInquiryConfigurationItem> GetInquirySubjectWithInquirer(UnitId unitId)
         {
             using (var tr = new TransactionScope())
@@ -222,6 +224,28 @@ namespace MITD.PMS.Application
                 tr.Complete();
             }
 
+        }
+
+        public void ManageVerifiers(EmployeeId employeeId, UnitId unitId)
+        {
+            using (var tr = new TransactionScope())
+            {
+                var unit = unitRep.GetBy(unitId);
+                var verifier = _employeeRepository.GetBy(employeeId);
+                unit.UpdateVerifier(verifier);
+                tr.Complete();
+            }
+        }
+
+        public void RemoveVerifiers(EmployeeId employeeId, UnitId unitId)
+        {
+            using (var tr = new TransactionScope())
+            {
+                var unit = unitRep.GetBy(unitId);
+                var verifier = _employeeRepository.GetBy(employeeId);
+                unit.RemoveVerifier(verifier);
+                tr.Complete();
+            }
         }
 
         public void RemoveInquirer(PeriodId periodId, SharedUnitId unitId, EmployeeId employeeId)

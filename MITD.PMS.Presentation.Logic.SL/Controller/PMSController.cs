@@ -79,7 +79,7 @@ namespace MITD.PMS.Presentation.Logic
 
         public void Login(Action action)
         {
-            ShowBusyIndicator("در حال ورود به سامانه...");
+            //ShowBusyIndicator("در حال ورود به سامانه...");
             userService.GetToken((res, exp) => BeginInvokeOnDispatcher(() =>
             {
                 if (exp == null)
@@ -245,9 +245,6 @@ namespace MITD.PMS.Presentation.Logic
             });
         }
 
-
-
-
         public void GetCurrentPeriod()
         {
             periodService.GetCurrentPeriod
@@ -316,7 +313,7 @@ namespace MITD.PMS.Presentation.Logic
                 }
                 return;
             }
-            ShowMessage(exp.Message);
+            ShowMessage(exp.Message + "  " + exp.StackTrace);
             var exption = ExceptionAdapter.Convert(exp, localizedResources);
             BeginInvokeOnDispatcher(() => viewManager.ShowMessage(exption.Message));
         }

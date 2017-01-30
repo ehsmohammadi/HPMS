@@ -47,8 +47,6 @@ namespace MITD.PMS.Persistence
 
             });
            */
-            // version 3 
-            Alter.Table("Users").AddColumn("EmailStatus").AsInt32().NotNullable().WithDefaultValue(0);
 
 
             #endregion

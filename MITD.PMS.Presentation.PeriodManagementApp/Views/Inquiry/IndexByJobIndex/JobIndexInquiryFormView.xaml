@@ -11,8 +11,8 @@
     d:DesignHeight="500" d:DesignWidth="600"
     d:DataContext="{Binding Source={StaticResource jobIndexInquiryFormViewModel}}"
     FlowDirection="RightToLeft">
-    <ScrollViewer BorderThickness="0"  VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
-        <Grid Name="LayoutRoot"  Background="Transparent" Height="600" Width="600"  >
+    <ScrollViewer BorderThickness="0"  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <Grid Name="LayoutRoot"  Background="Transparent" Height="550" Width="600"  >
             <Grid.RowDefinitions >
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto"/>

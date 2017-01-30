@@ -22,5 +22,8 @@ namespace MITD.PMS.Presentation.Logic
         void GetUnitsWithActions(Action<List<UnitInPeriodDTOWithActions>, Exception> action, long periodId);
 
         void DeleteInquirer(Action<string, Exception> action, long periodId, long unitId, string personalNo);
+        void AddVerifier(Action<string, Exception> action, long periodId, long unitId, string personnelNo);
+
+        void DeleteVerifier(Action<string, Exception> action, long periodId, long unitId, string personalNo);
     }
 }

@@ -26,5 +26,7 @@ namespace MITD.PMS.Application.Contracts
         UnitId GetUnitIdBy(Period period, SharedUnitId sharedUnitId);
         Unit GetUnitBy(UnitId unitId);
         List<UnitId> GetAllUnitId(Period period);
+        void ManageVerifiers(EmployeeId employeeId, UnitId unitId);
+        void RemoveVerifiers(EmployeeId employeeId, UnitId unitId);
     }
 }

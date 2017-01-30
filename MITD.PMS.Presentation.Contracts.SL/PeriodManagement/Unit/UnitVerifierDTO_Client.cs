@@ -12,13 +12,9 @@ using System.Windows.Shapes;
 
 namespace MITD.PMS.Presentation.Contracts
 {
-    public partial class UnitInPeriodDTO : ViewModelBase
+    public partial class UnitVerifierDTO : ViewModelBase
     {
-        public long Id
-        {
-            get { return UnitId; }
 
-        }
 
     }
 }

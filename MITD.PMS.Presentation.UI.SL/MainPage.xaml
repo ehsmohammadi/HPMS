@@ -124,8 +124,8 @@
                     <sdk:Label    Foreground="#dbdbdb"  HorizontalAlignment="Left"   Content="سمت کاربر:" />
                     <sdk:Label  Foreground="#c7c77f"  Content="{Binding Path=LogonUser.UserTitle, Mode=TwoWay}" />
 
-                    <sdk:Label   Foreground="#dbdbdb"  HorizontalAlignment="Left"   Content="پست:" />
-                    <sdk:Label  Foreground="#c7c77f" Content="{Binding Path=LogonUser.JobPositionNames, Mode=TwoWay}"  />
+                    <!--<sdk:Label   Foreground="#dbdbdb"  HorizontalAlignment="Left"   Content="پست:" />
+                    <sdk:Label  Foreground="#c7c77f" Content="{Binding Path=LogonUser.JobPositionNames, Mode=TwoWay}"  />-->
 
                     <sdk:Label   Foreground="#dbdbdb"  HorizontalAlignment="Left"   Content="نام دوره جاری:"  />
                     <sdk:Label   Foreground="#c7c77f"  

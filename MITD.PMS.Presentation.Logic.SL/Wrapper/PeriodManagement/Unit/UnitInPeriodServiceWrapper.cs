@@ -124,5 +124,25 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
             WebClientHelper.Delete(new Uri(url, PMSClientConfig.UriKind), action,  PMSClientConfig.CreateHeaderDic(userProvider.Token));
 
         }
+
+        private string createUnitVerifierApiAdress(long periodId, long unitId)
+        {
+            return "Periods/" + periodId + "/Units/" + unitId + "/Verifiers";
+        }
+
+        public void AddVerifier(Action<string, Exception> action, long periodId, long unitId, string personnelNo)
+        {
+            var url = string.Format(baseAddress + createUnitVerifierApiAdress(periodId, unitId) + "?employeeNo=" + personnelNo);
+            WebClientHelper.Put(new Uri(url, PMSClientConfig.UriKind), action, personnelNo, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+        }
+
+        public void DeleteVerifier(Action<string, Exception> action, long periodId, long unitId, string personalNo)
+        {
+            var url = string.Format(baseAddress + createUnitVerifierApiAdress(periodId, unitId) + "?employeeNo=" + personalNo);
+            WebClientHelper.Delete(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+
+        }
+
+
     }
 }

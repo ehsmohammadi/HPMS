@@ -297,6 +297,8 @@
     <Compile Include="PeriodManagement\UnitIndex\UnitIndexInPeriodDTO.cs" />
     <Compile Include="PeriodManagement\Unit\UnitIndex\UnitInPeriodUnitIndexDTO.cs" />
     <Compile Include="PeriodManagement\Unit\UnitIndex\UnitInPeriodUnitIndexDTO_Server.cs" />
+    <Compile Include="PeriodManagement\Unit\UnitVerifierDTO_Server.cs" />
+    <Compile Include="PeriodManagement\Unit\UnitVerifierDTO.cs" />
     <Compile Include="PeriodManagement\Unit\UnitInPeriodDTO_Server.cs" />
     <Compile Include="PeriodManagement\Unit\UnitInPeriodDTO.cs" />
     <Compile Include="PeriodManagement\Unit\UnitInPeriodAssignmentDTO_Server.cs" />

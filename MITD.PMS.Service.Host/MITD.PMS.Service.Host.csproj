@@ -236,6 +236,7 @@
     <Compile Include="Controllers\PMS\InquirerInquiryUnitsController.cs" />
     <Compile Include="Controllers\PMS\InquiryIndexInquiryJobIndexPointsController.cs" />
     <Compile Include="Controllers\PMS\InquiryUnitInquiryUnitIndexPointsController.cs" />
+    <Compile Include="Controllers\PMS\UnitVerifierController.cs" />
     <Compile Include="Controllers\PMS\UnitInquirySubjectsController.cs" />
     <Compile Include="Controllers\PMS\PeriodUnitIndexController.cs" />
     <Compile Include="Controllers\PMS\PeriodSourceDestinationStateController.cs" />

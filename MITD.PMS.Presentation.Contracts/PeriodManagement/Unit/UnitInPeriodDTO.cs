@@ -49,6 +49,13 @@ namespace MITD.PMS.Presentation.Contracts
             set { this.SetField(p => p.Inquirers, ref inquirers, value); }
         }
 
+        private List<UnitVerifierDTO> verifiers = new List<UnitVerifierDTO>();
+        public List<UnitVerifierDTO> Verifiers
+        {
+            get { return verifiers; }
+            set { this.SetField(p => p.Verifiers, ref verifiers, value); }
+        }
+
         private List<UnitInPeriodUnitIndexDTO> _unitIndices = new List<UnitInPeriodUnitIndexDTO>();
         public List<UnitInPeriodUnitIndexDTO> UnitIndices
         {

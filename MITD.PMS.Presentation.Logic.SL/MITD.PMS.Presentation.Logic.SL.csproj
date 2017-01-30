@@ -129,6 +129,7 @@
     <Compile Include="Views\ILogListView.cs" />
     <Compile Include="Views\ILogView.cs" />
     <Compile Include="Views\IPartyCustomActionsView.cs" />
+    <Compile Include="Views\PeriodManagement\Unit\IUnitInPeriodVerifierView.cs" />
     <Compile Include="Views\PeriodManagement\Unit\IUnitInPeriodUnitIndicesView.cs" />
     <Compile Include="Views\PeriodManagement\Unit\IUnitInPrdFieldView.cs" />
     <Compile Include="Views\BasicInfo\User\IUserView.cs" />

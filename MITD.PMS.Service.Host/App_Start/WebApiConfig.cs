@@ -106,6 +106,11 @@ namespace MITD.PMS.Service.Host
                routeTemplate: "api/Periods/{PeriodId}/Units/{UnitId}/InquirySubjects",
                defaults: new { Controller = "UnitInquirySubjects", id = RouteParameter.Optional });
 
+            config.Routes.MapHttpRoute(
+                name: "UnitVerifiersController",
+                routeTemplate: "api/Periods/{PeriodId}/Units/{UnitId}/Verifiers",
+                defaults: new { Controller = "UnitVerifiers", id = RouteParameter.Optional });
+
 
             config.Routes.MapHttpRoute(
               name: "InquirerInquiryUnits",

@@ -30,7 +30,7 @@ namespace MITD.PMS.Service.Host.App_Start
 
     public class ClaimsTransformer : ClaimsAuthenticationManager
     {
-        private static FakeIdentity identity = new FakeIdentity("ehsan", AuthenticationTypes.Basic, true);
+        private static FakeIdentity identity = new FakeIdentity("157501", AuthenticationTypes.Basic, true);
         public override ClaimsPrincipal Authenticate(string resourceName, ClaimsPrincipal incomingPrincipal)
         {
             // if you want sso security comment this line 
@@ -57,7 +57,7 @@ namespace MITD.PMS.Service.Host.App_Start
                 new Claim(ClaimTypes.Role, "SuperAdmin"),
                 new Claim(ClaimTypes.Role, "Employee"),
                 //new Claim("http://identityserver.thinktecture.com/claims/profileclaims/employeeno", "652260"),
-                new Claim("http://identityserver.thinktecture.com/claims/profileclaims/employeeno", "931901"),
+                new Claim("http://identityserver.thinktecture.com/claims/profileclaims/employeeno", "157501"),
                 new Claim("http://identityserver.thinktecture.com/claims/profileclaims/firstname", "احسان"),
                 new Claim("http://identityserver.thinktecture.com/claims/profileclaims/lastname", "محمدی"),
                 new Claim("http://identityserver.thinktecture.com/claims/profileclaims/jobpositionnames", "مدیر فنی"),

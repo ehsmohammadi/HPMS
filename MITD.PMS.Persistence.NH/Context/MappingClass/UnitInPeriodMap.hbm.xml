@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" namespace="MITD.PMS.Domain.Model.Units" assembly="MITD.PMS.Domain" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Unit" table="Periods_Units">
+    <id name="dbId" column="Id" type="Int64">
+      <generator class="hilo">
+        <param name="table">NH_Hilo</param>
+        <param name="column">NextHi</param>
+        <param name="max_Lo">1</param>
+        <param name="where">TableKey='Periods_Units'</param>
+      </generator>
+    </id>
+    <version name="rowVersion" access="field" column="RowVersion" type="MITD.Data.NH.BinaryTimestamp, MITD.DataAccess.NH, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" generated="always" />
+
+    <component class="UnitId" name="Id" access="field.camelcase-underscore">
+      <component class="MITD.PMS.Domain.Model.Periods.PeriodId" name="PeriodId" access="field.camelcase">
+        <property name="Id" access="field.camelcase" column="PeriodId" not-null="true" />
+      </component>
+      <component class="SharedUnitId" name="SharedUnitId" access="field.camelcase">
+        <property name="Id" access="field.camelcase" column="UnitId" not-null="true" generated="always" />
+      </component>
+      <property name="dbId" column="Id" generated="always" />
+    </component>
+
+    <many-to-one name="Parent" access="field.camelcase" column="ParentId" lazy="false" />
+
+    <many-to-one name="sharedUnit" access="field" column="UnitId" lazy="false" />
+
+    <bag name="CustomFields" access="field.camelcase" table="Periods_Units_CustomFields" cascade="all,delete-orphan">
+      <key column="PeriodUnitId" />
+      <one-to-many class="UnitCustomField" />
+    </bag>
+    
+    <bag name="ConfigurationItemList" access="field.camelcase" table="Unit_InquiryConfigurationItems" cascade="all,delete-orphan">
+      <key column="PeriodInquirySubjectUnitId" foreign-key="none" />
+      <one-to-many class="UnitInquiryConfigurationItem" />
+    </bag>
+
+    <idbag name="UnitIndexList" access="field.camelcase" table="Periods_Units_UnitIndices">
+      <collection-id column="Id" type="Int64">
+        <generator class="identity" />
+      </collection-id>
+      <key column="PeriodUnitId" />
+      <composite-element class="UnitUnitIndex">
+        <nested-composite-element class="MITD.PMS.Domain.Model.UnitIndices.AbstractUnitIndexId" name="UnitIndexId" access="field.camelcase">
+          <property name="Id" access="field.camelcase" column="PeriodUnitIndexId" />
+        </nested-composite-element>
+        <property name="ShowforTopLevel" access="field.camelcase" />
+        <property name="ShowforSameLevel" access="field.camelcase" />
+        <property name="ShowforLowLevel" access="field.camelcase" />
+      </composite-element>
+    </idbag>
+
+    <idbag name="Verifiers" access="field.camelcase" table="PeriodUnits_Verifiers">
+      <collection-id column="Id" type="Int64">
+        <generator class="identity" />
+      </collection-id>
+      <key column="PeriodUnitId" />
+      <composite-element class="MITD.PMS.Domain.Model.Employees.EmployeeId">
+        <nested-composite-element class="MITD.PMS.Domain.Model.Periods.PeriodId" name="PeriodId" access="field.camelcase">
+          <property name="Id" access="field.camelcase" column="PeriodId" not-null="true" />
+        </nested-composite-element>
+        <property name="dbId" column="EmployeeId" generated="always"/>
+        <property name="EmployeeNo" column="EmployeeNo"  access="field.camelcase"/>
+      
+      </composite-element>
+    </idbag>
+
+  </class>
+</hibernate-mapping>

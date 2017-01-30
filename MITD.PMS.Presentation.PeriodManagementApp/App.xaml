@@ -9,10 +9,11 @@
             <vm:PeriodVM x:Key="pViewModel"/>
             
             <vm:UnitInPeriodVM x:Key="uipViewModel" />
-            <vm:UnitInPeriodTreeVM x:Key="uiptViewModel" />
-            
+            <!--<vm:UnitInPeriodTreeVM x:Key="uiptViewModel" />-->
+            <vm:UnitInPeriodVerifierVM x:Key="unitInPeriodVerifierVM"/>
+
             <vm:JobPositionInPeriodVM x:Key="jipViewModel" />
-            <vm:JobPositionInPeriodTreeVM x:Key="jiptViewModel" />
+            <!--<vm:JobPositionInPeriodTreeVM x:Key="jiptViewModel" />-->
             <vm:JobPositionInPeriodInquiryVM x:Key="jobPositionInPeriodInquiryViewModel" />
             
             <vm:PrepareToExecInquiryVM x:Key="prepareToExecInquiryViewModel" />
@@ -21,15 +22,15 @@
             <vm:InquiryFormVM  x:Key="inquiryFormViewModel" />
             <vm:JobIndexInquiryFormVM  x:Key="jobIndexInquiryFormViewModel" />
 
-            <vm:EmployeeClaimListVM  x:Key="EmployeeClaimListViewModel" />
-            <vm:ManagerClaimListVM  x:Key="ManagerClaimListViewModel" />
+            <!--<vm:EmployeeClaimListVM  x:Key="EmployeeClaimListViewModel" />-->
+            <!--<vm:ManagerClaimListVM  x:Key="ManagerClaimListViewModel" />-->
             <vm:ClaimVM  x:Key="claimViewModel" />
             <vm:ShowClaimVM  x:Key="showClaimViewModel" />
 
-            <vm:PermittedUserListToMyTasksVM  x:Key="permittedUserListToMyTasksViewModel" />
+            <!--<vm:PermittedUserListToMyTasksVM  x:Key="permittedUserListToMyTasksViewModel" />-->
             <vm:PermittedUserToMyTasksVM  x:Key="permittedUserToMyTasksViewModel" /> 
 
-            <vm:CalculationListVM x:Key="calculationListViewModel" />
+            <!--<vm:CalculationListVM x:Key="calculationListViewModel" />-->
             <vm:CalculationResultListVM x:Key="calculationResultListViewModel" />
             <vm:CalculationStatusVM x:Key="calculationStateViewModel"/>
 
@@ -45,10 +46,11 @@
             <vm:JobIndexGroupInPeriodVM x:Key="jobIndexGroupInPeriodViewModel" />
 
 
-            <vm:JobInPeriodListVM x:Key="jplViewModel"/>
+            <!--<vm:JobInPeriodListVM x:Key="jplViewModel"/>-->
             <vm:JobInPeriodVM x:Key="jpViewModel"/>
             <vm:JobInPrdFieldsVM x:Key="jpfViewModel"/>
             <vm:JobInPeriodJobIndicesVM x:Key="jpJobIndicesViewModel"/>
+
 
 
 

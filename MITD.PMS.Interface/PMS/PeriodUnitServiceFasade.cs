@@ -26,7 +26,7 @@ namespace MITD.PMS.Interface
         private readonly IMapper<UnitCustomField, CustomFieldDTO> unitCustomFieldMapper;
         private readonly IFilterMapper<Unit, UnitInPeriodDTO> unitInPeriodDTOMapper;
         private readonly IUnitRepository unitRep;
-        
+
 
 
         public PeriodUnitServiceFacade(IUnitService unitService,
@@ -75,11 +75,11 @@ namespace MITD.PMS.Interface
         public IEnumerable<UnitInPeriodDTOWithActions> GetUnitsWithActions(long periodId)
         {
             var res = new List<UnitInPeriodDTOWithActions>();
-            var units=unitRep.GetUnits(new PeriodId(periodId));
+            var units = unitRep.GetUnits(new PeriodId(periodId));
 
             foreach (var unit in units)
             {
-                var u = unitInPeriodDTOWithActionsMapper.MapToModel(unit, new string[] {});
+                var u = unitInPeriodDTOWithActionsMapper.MapToModel(unit, new string[] { });
                 // u.Inquirers=new List<EmployeeDTO>();
 
                 //unit.ConfigurationItemList.ToList().ForEach(c =>
@@ -94,7 +94,7 @@ namespace MITD.PMS.Interface
                 //    });
                 //});
 
-            res.Add(u);
+                res.Add(u);
             }
 
             return res;
@@ -115,18 +115,28 @@ namespace MITD.PMS.Interface
             unit.ConfigurationItemList.ToList().ForEach(c =>
             {
                 var emp = _employeeRepository.GetBy(c.Id.InquirerId);
-                unitDto.Inquirers.Add(new InquiryUnitDTO()
+                unitDto.Inquirers.Add(new InquiryUnitDTO
                 {
-                   
-                    FullName = emp.FirstName+" "+emp.LastName,
+
+                    FullName = emp.FirstName + " " + emp.LastName,
                     EmployeeNo = emp.Id.EmployeeNo,
                     IndexName = _unitIndexRepository.GetUnitIndexById(new AbstractUnitIndexId(c.Id.UnitIndexIdUintPeriod.Id)).Name
                 });
             });
-            
-               unitDto.CustomFields = unit.CustomFields.Select(c => unitCustomFieldMapper.MapToModel(c)).ToList();
-              var unitindexIdList = unit.UnitIndexList.Select(j => j.UnitIndexId).ToList();
-             var unitIndices = unitIndexService.FindUnitIndices(unitindexIdList);
+
+            foreach (var employeeId in unit.Verifiers)
+            {
+                var emp = _employeeRepository.GetBy(employeeId);
+                unitDto.Verifiers.Add(new UnitVerifierDTO
+                {
+                    FullName = emp.FirstName + " " + emp.LastName,
+                    EmployeeNo = emp.Id.EmployeeNo,
+                });
+            }
+
+            unitDto.CustomFields = unit.CustomFields.Select(c => unitCustomFieldMapper.MapToModel(c)).ToList();
+            var unitindexIdList = unit.UnitIndexList.Select(j => j.UnitIndexId).ToList();
+            var unitIndices = unitIndexService.FindUnitIndices(unitindexIdList);
             //todo:(LOW) change this mapping to valid mapping need som work !!!!!!
             var unitInPeriodUnitIndexDTOList = new List<UnitInPeriodUnitIndexDTO>();
             foreach (var unitIndex in unitIndices)
@@ -241,15 +251,24 @@ namespace MITD.PMS.Interface
 
 
 
-        public void AddInquirer(long periodId, long unitId, string employeeNo,long unitIndexInPeiodUnit)
+        public void AddInquirer(long periodId, long unitId, string employeeNo, long unitIndexInPeiodUnit)
         {
-
             unitService.UpdateInquirers(new EmployeeId(employeeNo, new PeriodId(periodId)), new UnitId(new PeriodId(periodId), new SharedUnitId(unitId)), unitIndexInPeiodUnit);
         }
         public void RemoveInquirer(long periodId, long unitId, string employeeNo)
         {
 
-           unitService.RemoveInquirer(new PeriodId(periodId),new SharedUnitId(unitId),new EmployeeId(employeeNo,new PeriodId(periodId))  );
+            unitService.RemoveInquirer(new PeriodId(periodId), new SharedUnitId(unitId), new EmployeeId(employeeNo, new PeriodId(periodId)));
+        }
+
+        public void AddVerifier(long periodId, long unitId, string employeeNo)
+        {
+            unitService.ManageVerifiers(new EmployeeId(employeeNo, new PeriodId(periodId)), new UnitId(new PeriodId(periodId), new SharedUnitId(unitId)));
+        }
+
+        public void DeleteVerifier(long periodId, long unitId, string employeeNo)
+        {
+            unitService.RemoveVerifiers(new EmployeeId(employeeNo, new PeriodId(periodId)), new UnitId(new PeriodId(periodId), new SharedUnitId(unitId)));
         }
     }
 }

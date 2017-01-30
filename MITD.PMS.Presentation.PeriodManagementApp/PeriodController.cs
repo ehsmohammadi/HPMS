@@ -30,6 +30,14 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
             ((UnitInPeriodInquiryVM)view.ViewModel).Load(period, unitInPeriodDto);
         }
 
+        public void ShowUnitInPeriodVerifierView(PeriodDTO period, UnitInPeriodDTO unitInPeriodDto, ActionType action)
+        {
+            var view = viewManager.ShowInTabControl<IUnitInPeriodVerifierView>(v => ((UnitInPeriodVerifierVM)v).Period.Id == period.Id
+                && ((UnitInPeriodVerifierVM)v).UnitInPeriod.Id == unitInPeriodDto.Id);
+            ((UnitInPeriodVerifierVM)view.ViewModel).Load(period, unitInPeriodDto);
+        }
+
+
         public void ShowPeriodView(PeriodDTO period, ActionType actionType)
         {
             var view = ServiceLocator.Current.GetInstance<IPeriodView>();
@@ -265,7 +273,7 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
 
         #region Inquiry
 
-        
+
 
         public void ShowInquiryUnitFormView(InquiryUnitFormDTO inquiryForm, ActionType action)
         {
