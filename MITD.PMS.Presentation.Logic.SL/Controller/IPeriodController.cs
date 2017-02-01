@@ -17,6 +17,8 @@ namespace MITD.PMS.Presentation.Logic
     {
         #region Work list commands
 
+
+
         [RequiredPermission(ActionType.ShowUnitInPeriodInquiry)]
         void ShowUnitsInquiryListView(string employeeNo, long periodId);
 
@@ -105,5 +107,6 @@ namespace MITD.PMS.Presentation.Logic
 
         void ShowUnitInPeriodVerifierView(PeriodDTO period, UnitInPeriodDTO unitInPeriodDto, ActionType action);
         void ShowUnitInPeriodInquiryView(PeriodDTO period, UnitInPeriodDTO unitInPeriodDto, ActionType action);
+
     }
 }

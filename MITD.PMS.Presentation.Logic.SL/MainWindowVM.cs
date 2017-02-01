@@ -741,13 +741,6 @@ namespace MITD.PMS.Presentation.Logic
 
         }
 
-        private ObservableCollection<CommandViewModel> createEmployeeManagementCommands()
-        {
-            var cmdList = new ObservableCollection<CommandViewModel>();
-
-            return cmdList;
-        }
-
         private ObservableCollection<CommandViewModel> createWorkListCommands()
         {
             var cmdList = new ObservableCollection<CommandViewModel>();
@@ -827,6 +820,29 @@ namespace MITD.PMS.Presentation.Logic
                         }
                         )));
             }
+            //if(CurrentUser)
+            cmdList.Add(
+                   new CommandViewModel("تغييرات ويژه مديريتي", new DelegateCommand(
+                       () =>
+                       {
+                           controller.ShowBusyIndicator("در حال بارگذاری ماجول...");
+                           controller.GetRemoteInstance<IEmployeeController>(
+                               (res, exp) =>
+                               {
+                                   controller.HideBusyIndicator();
+                                   if (res != null)
+                                   {
+                                       if (CurrentPeriod != null && CurrentPeriod.Id != 0)
+                                           res.ShowSubordinatesConfirmationView(CurrentUser.EmployeeNo, CurrentPeriod,
+                                               isShiftPressed);
+                                   }
+                                   else if (exp != null)
+                                   {
+                                       controller.HandleException(exp);
+                                   }
+                               });
+                       }
+                       )));
 
             if (userService.IsUserPermissionGranted(typeof(IPeriodController), "ShowPeriodCalculationResultView",
                 userAuthorizedActions))

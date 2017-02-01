@@ -5,6 +5,10 @@ using NHibernate.Mapping.ByCode.Conformist;
 
 namespace MITD.PMS.Persistence.NH
 {
+    //****** this mapping by code for some restriction replaced by xml file *****
+
+
+
     //public class UnitInPeriodMap : ClassMapping<Unit>
     //{
     //    public UnitInPeriodMap()

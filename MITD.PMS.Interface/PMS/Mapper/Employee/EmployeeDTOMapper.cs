@@ -17,6 +17,7 @@ namespace MITD.PMS.Interface
                     PeriodId = entity.Id.PeriodId.Id,
                     PersonnelNo = entity.Id.EmployeeNo,
                     FinalPoint = entity.FinalPoint,
+                    SystemPoint = entity.CalculatedPoint
                 };
             return res;
 

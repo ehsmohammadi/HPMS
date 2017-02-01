@@ -25,6 +25,12 @@ namespace MITD.PMS.Service.Host.Controllers
             return employeeService.GetAllEmployees(periodId, pageSize, pageIndex,filter);
         }
 
+        public PageResultDTO<EmployeeDTOWithActions> GetSubordinateEmployees(long periodId, string verifierEmployeeNo, int pageSize, int pageIndex,
+                                                                     string filter)
+        {
+            return employeeService.GetSubordinateEmployees(periodId,verifierEmployeeNo, pageSize, pageIndex, filter);
+        }
+
         public List<string> GetAllEmployeeNo(long periodId,string filter)
         {
             return employeeService.GetAllEmployeeNo(periodId, filter);

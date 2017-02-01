@@ -29,7 +29,7 @@ namespace MITD.PMS.Interface
         private readonly IPeriodRepository periodRep;
         private readonly IJobPositionRepository jobPositionRep;
         private readonly IJobRepository jobRep;
-        private readonly IPMSAdminService converter; 
+        private readonly IPMSAdminService converter;
 
         #endregion
 
@@ -51,7 +51,7 @@ namespace MITD.PMS.Interface
             this.jobPositionRep = jobPositionRep;
             this.jobRep = jobRep;
             this.converter = converter;
-        } 
+        }
         #endregion
 
         #region Public methods
@@ -88,6 +88,39 @@ namespace MITD.PMS.Interface
             return res;
         }
 
+        public PageResultDTO<EmployeeDTOWithActions> GetSubordinateEmployees(long periodId, string verifierEmployeeNo, int pageSize, int pageIndex,
+            string filter)
+        {
+            var fs = new ListFetchStrategy<Employee>(Enums.FetchInUnitOfWorkOption.NoTracking);
+            fs.WithPaging(pageSize, pageIndex);
+            fs.OrderBy(e => e.LastName);
+            //todo:(LOW) Must be code in better way
+            var criterias = filter.Split(';');
+            var predicate = getEmployeePredicate(criterias, periodId);
+            employeeRep.GetSubordinatesEmployee(new EmployeeId(verifierEmployeeNo, new PeriodId(periodId)), predicate, fs);
+            var res = new PageResultDTO<EmployeeDTOWithActions>();
+            res.InjectFrom(fs.PageCriteria.PageResult);
+            res.Result =
+                fs.PageCriteria.PageResult.Result.Select(p =>
+                {
+                    var mapped = new EmployeeDTOWithActions
+                    {
+                        FirstName = p.FirstName,
+                        LastName = p.LastName,
+                        PeriodId = p.Id.PeriodId.Id,
+                        PersonnelNo = p.Id.EmployeeNo,
+                        FinalPoint = p.FinalPoint,
+                        StateName = p.EmployeePointState.Description,
+                        ActionCodes = new List<int>
+                        {
+                            (int) ActionType.ChangeEmployeePoint,
+                        }
+                    };
+                    return mapped;
+                }).ToList();
+            return res;
+        }
+
         [RequiredPermission(ActionType.ManageEmployees)]
         public List<string> GetAllEmployeeNo(long periodId, string filter)
         {
@@ -103,7 +136,7 @@ namespace MITD.PMS.Interface
 
         public void ChangeEmployeePoint(long periodId, string employeeNo, decimal point)
         {
-            employeeService.ChangeEmployeePoint(new EmployeeId(employeeNo, new PeriodId(periodId)),point);
+            employeeService.ChangeEmployeePoint(new EmployeeId(employeeNo, new PeriodId(periodId)), point);
         }
 
 
@@ -169,7 +202,7 @@ namespace MITD.PMS.Interface
                 employeeJobPositions.EmployeeJobPositionAssignmentList.Select(
                     jp => GetJobPositionDurationWithCustomFields(periodId, jp)));
             return mapToEmployeeJobPositionDTO(employee);
-        } 
+        }
 
         #endregion
 
@@ -256,7 +289,7 @@ namespace MITD.PMS.Interface
                 employeeJobPosition.EmployeeJobPositionAssignmentList.Add(employeeJobPositionAssignmentDTO);
             }
             return employeeJobPosition;
-        } 
+        }
 
         #endregion
     }

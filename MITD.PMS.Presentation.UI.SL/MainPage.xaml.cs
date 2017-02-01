@@ -100,8 +100,7 @@ namespace MITD.PMS.Presentation.UI
 
         private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
         {
-            (ViewModel as MainWindowVM).IsShiftPressed = Keyboard.Modifiers == ModifierKeys.Shift;
-
+            ((MainWindowVM) ViewModel).IsShiftPressed = Keyboard.Modifiers == ModifierKeys.Shift;
         }
     }
 }

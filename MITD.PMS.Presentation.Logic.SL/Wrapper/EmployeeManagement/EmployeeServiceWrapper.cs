@@ -44,6 +44,14 @@ namespace MITD.PMS.Presentation.Logic.Wrapper
             WebClientHelper.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
         }
 
+        public void GetSubordinatesEmployees(Action<PageResultDTO<EmployeeDTOWithActions>, Exception> action, string managerEmployeeNo, long periodId, EmployeeCriteria employeeCriteria,
+            int pageSize, int pageIndex)
+        {
+            var url = string.Format(baseAddress + makeApiAdress(periodId) + "?verifierEmployeeNo=" + managerEmployeeNo + "&PageSize=" + pageSize + "&PageIndex=" + pageIndex +
+                  getFilterEmployee(employeeCriteria, "&"));
+            WebClientHelper.Get(new Uri(url, PMSClientConfig.UriKind), action, PMSClientConfig.MsgFormat, PMSClientConfig.CreateHeaderDic(userProvider.Token));
+        }
+
         public void GetAllEmployeeNo(Action<List<string>, Exception> action, long periodId, EmployeeCriteria employeeCriteria)
         {
             var url = string.Format(baseAddress + makeApiAdress(periodId) +

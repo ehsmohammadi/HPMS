@@ -23,5 +23,7 @@ namespace MITD.PMS.Presentation.Logic
         void ShowEmployeeJobPositionsView(EmployeeDTO employee, PeriodDTO period);
 
         void ShowEmployeeJobCustomFieldsView(EmployeeDTO employee, PeriodDTO period, EmployeeJobPositionAssignmentDTO jobPositionAssignment, ActionType addEmployeeJobCustomFields);
+
+        void ShowSubordinatesConfirmationView(string employeeNo, PeriodDTO periodId, bool isShiftPressed);
     }
 }

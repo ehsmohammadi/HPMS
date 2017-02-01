@@ -47,10 +47,16 @@ namespace MITD.PMS.Domain.Model.Employees
         }
 
         private decimal finalPoint;
-
         public virtual decimal FinalPoint
         {
             get { return finalPoint; }
+        }
+
+        private decimal calculatedPoint;
+
+        public virtual decimal CalculatedPoint
+        {
+            get { return calculatedPoint; }
         }
 
         private EmployeePointState employeePointState;
@@ -73,6 +79,8 @@ namespace MITD.PMS.Domain.Model.Employees
         {
             get { return jobPositions.ToList().AsReadOnly(); }
         }
+
+        
 
         #endregion
 

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using MITD.Core;
 using MITD.PMS.Domain.Model.InquiryUnitIndexPoints;
 using MITD.PMS.Domain.Model.UnitIndices;
 using MITD.PMS.Domain.Model.Units;
@@ -99,9 +100,9 @@ namespace MITD.PMS.Persistence.NH
                 //uncomment this if you want to get employee with its job index level
                 //var empJobInexIdsLevel = employeeJobindexes.Where(ji => ji.CalculationLevel == level).Select(ji => ji.Id).ToList();
                 var empJobInexIdsLevel = employeeJobindexes.Select(ji => ji.Id).ToList();
-                var empLevel = employeeJobs.Where(empj => empj.jo.JobIndexList.Select(j=>j.JobIndexId).Any(i => empJobInexIdsLevel.Contains(i)))
+                var empLevel = employeeJobs.Where(empj => empj.jo.JobIndexList.Select(j => j.JobIndexId).Any(i => empJobInexIdsLevel.Contains(i)))
                                 .Select(empj => empj.EmployeeId).ToList();
-                if(level==1)
+                if (level == 1)
                     empLevel.AddRange(employeeJobs.Where(empj => !empj.jo.JobIndexList.Any())
                                 .Select(empj => empj.EmployeeId).ToList());
 
@@ -166,6 +167,39 @@ namespace MITD.PMS.Persistence.NH
             rep.Delete(employee);
         }
 
+
+        public void GetSubordinatesEmployee(EmployeeId employeeId, Expression<Func<Employee, bool>> predicate, ListFetchStrategy<Employee> fs)
+        {
+            var units = session.Query<Unit>().Where(u => u.Verifiers.Any(v => v.EmployeeNo == employeeId.EmployeeNo));
+            var subordinatesUnit = new List<Unit>();
+            foreach (var unit in units)
+            {
+                flatten(unit, ref subordinatesUnit);
+            }
+            
+            var jobPositions = new List<JobPosition>();
+            foreach (var subUnit in subordinatesUnit)
+            {
+                jobPositions.AddRange(session.Query<JobPosition>().Where(j => j.UnitId == subUnit.Id).ToList());
+            }
+
+            var employeeIds = jobPositions.SelectMany(j => j.Employees.Select(je => je.EmployeeId.EmployeeNo)).Distinct().ToList();
+
+            rep.Find(predicate.And(e => e.Id.PeriodId == employeeId.PeriodId && employeeIds.Contains(e.Id.EmployeeNo)), fs);
+        }
+
+        private void flatten(Unit root, ref List<Unit> result)
+        {
+            result.Add(root);
+            var childs = session.Query<Unit>().Where(u => u.Parent.Id == root.Id).ToList();
+            foreach (var child in childs)
+            {
+                flatten(child, ref result);
+
+            }
+        }
+
+
         public Dictionary<int, IList<Employee>> FindRemainingEmployeesOfCalculation(List<string> enList, PeriodId periodId, CalculationId calculationId)
         {
             int firstLevel = 1;
@@ -204,7 +238,7 @@ namespace MITD.PMS.Persistence.NH
             for (int level = firstLevel; level <= jobIndexLevels.Max(); level++)
             {
                 var empJobInexIdsLevel = employeeJobindexes.Where(ji => ji.CalculationLevel == level).Select(ji => ji.Id).ToList();
-                var empLevel = employeeJobs.Where(empj => empj.jo.JobIndexList.Select(j=>j.JobIndexId).Any(i => empJobInexIdsLevel.Contains(i)))
+                var empLevel = employeeJobs.Where(empj => empj.jo.JobIndexList.Select(j => j.JobIndexId).Any(i => empJobInexIdsLevel.Contains(i)))
                                 .Select(empj => empj.EmployeeId).OrderBy(emp => emp.EmployeeNo).ToList();
 
                 if (level == firstLevel)
@@ -268,7 +302,7 @@ namespace MITD.PMS.Persistence.NH
                     InquirySubject = inquirySubjects.Single(e => e.Id == c.InquirySubjectId),
                     InquirySubjectJobPosition =
                     inquirySubjectJobpositions.Single(ij => ij.Id == c.InquirySubjectJobPositionId),
-                    IsCompleted = session.Query<InquiryJobIndexPoint>().Count(i => i.ConfigurationItemId==c&&i.JobIndexValue=="")==0
+                    IsCompleted = session.Query<InquiryJobIndexPoint>().Count(i => i.ConfigurationItemId == c && i.JobIndexValue == "") == 0
 
                 }).ToList();
                 return res;
@@ -290,10 +324,10 @@ namespace MITD.PMS.Persistence.NH
             var employeeWithCustomFieldsWithValue = session.Query<Employee>().Where(e => e == employee).FetchMany(e => e.CustomFieldValues).ToFuture();
 
             var employeeJobPositionsWithUnitAndSharedData = (from jobPositionEmployee in session.Query<JobPositionEmployee>().Where(j => j.EmployeeId == employee.Id)
-                                                      join unit in session.Query<Unit>() on jobPositionEmployee.JobPosition.UnitId equals  unit.Id
-                                                      select new {JobPositionEmployee= jobPositionEmployee , Unit=unit} )
+                                                             join unit in session.Query<Unit>() on jobPositionEmployee.JobPosition.UnitId equals unit.Id
+                                                             select new { JobPositionEmployee = jobPositionEmployee, Unit = unit })
                                                       .ToFuture();
-            
+
             // employee Job and JobPosition
             var employeeJobs = (from job in session.Query<Job>()
                                 join jobPositionEmployee in session.Query<JobPositionEmployee>()
@@ -315,10 +349,10 @@ namespace MITD.PMS.Persistence.NH
 
             // employee Unit and JobPosition
             var employeeUnits = (from unit in session.Query<Unit>()
-                                join jobPositionEmployee in session.Query<JobPositionEmployee>()
-                                on unit.Id equals jobPositionEmployee.JobPosition.UnitId
-                                where jobPositionEmployee.EmployeeId == employee.Id
-                                select unit);
+                                 join jobPositionEmployee in session.Query<JobPositionEmployee>()
+                                 on unit.Id equals jobPositionEmployee.JobPosition.UnitId
+                                 where jobPositionEmployee.EmployeeId == employee.Id
+                                 select unit);
             var dummy2 = employeeUnits.Fetch(j => j.UnitIndexList).ToFuture();
             //var employeeUnitsWithSharedUnit = employeeUnits.Fetch(j => j.SharedUnit).ToFuture();
 
@@ -346,28 +380,28 @@ namespace MITD.PMS.Persistence.NH
             #endregion
 
             var employeeData = from job in employeeJobsWithSharedJob.ToList()
-                join employeeJobPositionWithUnit in employeeJobPositionsWithUnitAndSharedData.ToList()
-                    on job.Id equals employeeJobPositionWithUnit.JobPositionEmployee.JobPosition.JobId
-                join c in employeeJobpositionCustomFieldsWithValue.ToList()
-                    on employeeJobPositionWithUnit.JobPositionEmployee.JobPosition.Id equals c.JobPositionId
-                select new
-                {
-                    JobPosition = employeeJobPositionWithUnit.JobPositionEmployee.JobPosition,
-                    Unit = employeeJobPositionWithUnit.Unit,
-                    UnitIndexList =
-                        employeeUnitIndexesWithSharedData.ToList()
-                            .Where(
-                                ji =>
-                                    employeeJobPositionWithUnit.Unit.UnitIndexList.Select(x => x.UnitIndexId)
-                                        .Contains(ji.Id))
-                            .ToList(),
-                    Job = job,
-                    jobIndexList =
-                        employeeJobIndexesWithSharedData.ToList()
-                            .Where(ji => job.JobIndexList.Select(x => x.JobIndexId).Contains(ji.Id))
-                            .ToList(),
-                    c.EmployeeJobCustomFieldValues
-                };
+                               join employeeJobPositionWithUnit in employeeJobPositionsWithUnitAndSharedData.ToList()
+                                   on job.Id equals employeeJobPositionWithUnit.JobPositionEmployee.JobPosition.JobId
+                               join c in employeeJobpositionCustomFieldsWithValue.ToList()
+                                   on employeeJobPositionWithUnit.JobPositionEmployee.JobPosition.Id equals c.JobPositionId
+                               select new
+                               {
+                                   JobPosition = employeeJobPositionWithUnit.JobPositionEmployee.JobPosition,
+                                   Unit = employeeJobPositionWithUnit.Unit,
+                                   UnitIndexList =
+                                       employeeUnitIndexesWithSharedData.ToList()
+                                           .Where(
+                                               ji =>
+                                                   employeeJobPositionWithUnit.Unit.UnitIndexList.Select(x => x.UnitIndexId)
+                                                       .Contains(ji.Id))
+                                           .ToList(),
+                                   Job = job,
+                                   jobIndexList =
+                                       employeeJobIndexesWithSharedData.ToList()
+                                           .Where(ji => job.JobIndexList.Select(x => x.JobIndexId).Contains(ji.Id))
+                                           .ToList(),
+                                   c.EmployeeJobCustomFieldValues
+                               };
 
 
             var calculationData = new CalculationData();
@@ -380,14 +414,14 @@ namespace MITD.PMS.Persistence.NH
                 {
                     Job = empData.Job,
                     Indices = (from jobIndex in empData.jobIndexList
-                        join jobIndexWithInquiryValues in
-                            jobIndexInquiryPoints.Where(
-                                g => g.SharedJobPositionId.Id == empData.JobPosition.SharedJobPosition.Id.Id)
-                                .GroupBy(g => g.inquiryJobIndexPoint.JobIndexId)
-                                .ToList()
-                            on jobIndex.Id equals jobIndexWithInquiryValues.Key into gjii
-                        from k in gjii.DefaultIfEmpty()
-                        select new {ji = jobIndex, k})
+                               join jobIndexWithInquiryValues in
+                                   jobIndexInquiryPoints.Where(
+                                       g => g.SharedJobPositionId.Id == empData.JobPosition.SharedJobPosition.Id.Id)
+                                       .GroupBy(g => g.inquiryJobIndexPoint.JobIndexId)
+                                       .ToList()
+                                   on jobIndex.Id equals jobIndexWithInquiryValues.Key into gjii
+                               from k in gjii.DefaultIfEmpty()
+                               select new { ji = jobIndex, k })
                         .ToDictionary(j => j.ji,
                             j => (j.k != null
                                 ? j.k.GroupBy(jk => jk.emp)
@@ -425,8 +459,8 @@ namespace MITD.PMS.Persistence.NH
                 });
             foreach (var jobPositionData in calculationData.JobPositions)
             {
-                jobPositionData.Value.UnitIndices=new Dictionary<UnitIndex, System.Tuple<Employee, string>>();
-                foreach (var unitIndex in employeeData.Single(e=>e.JobPosition.DictionaryName==jobPositionData.Key.DictionaryName).UnitIndexList)
+                jobPositionData.Value.UnitIndices = new Dictionary<UnitIndex, System.Tuple<Employee, string>>();
+                foreach (var unitIndex in employeeData.Single(e => e.JobPosition.DictionaryName == jobPositionData.Key.DictionaryName).UnitIndexList)
                 {
                     var inquiryunitIndexPoint = unitIndexInquiryPoints.Single(
                         ui =>
@@ -513,5 +547,6 @@ namespace MITD.PMS.Persistence.NH
             }
             return res;
         }
+
     }
 }

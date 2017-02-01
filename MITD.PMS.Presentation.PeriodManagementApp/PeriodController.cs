@@ -281,6 +281,9 @@ namespace MITD.PMS.Presentation.PeriodManagementApp
             ((InquiryUnitFormVM)view.ViewModel).Load(inquiryForm, action);
             viewManager.ShowInDialog(view);
         }
+
+
+
         public void ShowUnitsInquiryListView(string employeeNo, long periodId)
         {
             var view = viewManager.ShowInTabControl<IUnitsInquiryListView>();

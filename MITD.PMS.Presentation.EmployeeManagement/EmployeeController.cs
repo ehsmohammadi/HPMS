@@ -41,5 +41,11 @@ namespace MITD.PMS.Presentation.EmployeeManagement
             ((EmployeeJobCustomFieldsVM)view.ViewModel).Load(employee, period, jobPositionAssignment, action);
             viewManager.ShowInDialog(view);
         }
+
+        public void ShowSubordinatesConfirmationView(string employeeNo, PeriodDTO period, bool isShiftPressed)
+        {
+            var view = viewManager.ShowInTabControl<ISubordinatesConfirmationView>();
+            ((SubordinatesConfirmationVM)view.ViewModel).Load(employeeNo, period);
+        }
     }
 }
