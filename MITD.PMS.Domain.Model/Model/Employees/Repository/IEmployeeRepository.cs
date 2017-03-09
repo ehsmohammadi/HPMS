@@ -29,6 +29,6 @@ namespace MITD.PMS.Domain.Model.Employees
 
         Exception ConvertException(Exception exp);
         Exception TryConvertException(Exception exp);
-        void GetSubordinatesEmployee(EmployeeId employeeId, Expression<Func<Employee, bool>> predicate, ListFetchStrategy<Employee> fs);
+        void GetSubordinatesEmployee(EmployeeId verifierId, Expression<Func<Employee, bool>> predicate, ListFetchStrategy<Employee> fs);
     }
 }

@@ -13,6 +13,7 @@ using MITD.Core;
 using MITD.Domain.Repository;
 using MITD.PMS.Application.Contracts;
 using MITD.PMS.Domain.Model.Employees;
+using MITD.PMS.Domain.Model.Units;
 using MITD.PMS.Presentation.Contracts;
 using MITD.PMSSecurity.Application.Contracts;
 using MITD.PMSSecurity.Domain;
@@ -35,6 +36,7 @@ namespace MITD.PMS.Interface
         private IMapper<User, UserDescriptionDTO> userDescriptionDTOMapper;
         private ISecurityService _securityApplicationService;
         private readonly IUserManagementService userManagementService;
+        private readonly IUnitRepository unitRepository;
         private readonly ISecurityServiceFacade securityServiceFacade;
 
         public UserServiceFacade(ISecurityService securityService,
@@ -50,7 +52,7 @@ namespace MITD.PMS.Interface
             IMapper<User, UserDescriptionDTO> userDescriptionDTOMapper,
 
             ISecurityServiceFacade securityServiceFacade,
-            ISecurityService _securityApplicationService,IUserManagementService userManagementService
+            ISecurityService _securityApplicationService,IUserManagementService userManagementService,IUnitRepository unitRepository
             )
         {
             this.securityService = securityService;
@@ -68,6 +70,7 @@ namespace MITD.PMS.Interface
             this.securityServiceFacade = securityServiceFacade;
             this._securityApplicationService = _securityApplicationService;
             this.userManagementService = userManagementService;
+            this.unitRepository = unitRepository;
         }
 
         //[RequiredPermission(ActionType.ShowUser)]
@@ -79,6 +82,7 @@ namespace MITD.PMS.Interface
             if (pmsUsers == null || pmsUsers.Count == 0)
                 throw new Exception("pmsUsers is null or pmsUsers.count is zero");
             var userState = userStateMapper.MapToModel(u);
+            userState.IsVerifier = unitRepository.IsUnitVerifier(userState.EmployeeNo);
             var user = securityService.GetUser(new PartyId(u.Identity.Name));
             userState.PermittedUsersOnMyWorkList = new List<UserDescriptionDTO>();
             if (user != null)

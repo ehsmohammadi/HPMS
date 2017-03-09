@@ -121,7 +121,7 @@
     <Compile Include="Views\IRuleTrailView.cs" />
     <Compile Include="Views\IRuleTrailListView.cs" />
     <Compile Include="Views\IManageWorkListUsersView.cs" />
-    <Compile Include="Views\PeriodManagement\IJobIndexInquiryFormView.cs" />
+    <Compile Include="Views\Employee\ISubordinatesConfirmationView.cs" />
     <Compile Include="Views\PeriodManagement\Inquiry\IJobIndexInquiryListView.cs" />
     <Compile Include="Views\PeriodManagement\Inquiry\IJobIndexInquiryFormView.cs" />
     <Compile Include="Views\PeriodManagement\Period\IPeriodBasicDataCopyStatusView.cs" />

@@ -19,5 +19,6 @@ namespace MITD.PMS.Domain.Model.Units
         Exception ConvertException(Exception exp);
         Exception TryConvertException(Exception exp);
         List<UnitId> GetAllUnitId(Period period);
+        bool IsUnitVerifier(string employeeNo);
     }
 }

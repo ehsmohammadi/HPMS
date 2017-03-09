@@ -110,6 +110,7 @@ namespace MITD.PMS.Interface
                         PeriodId = p.Id.PeriodId.Id,
                         PersonnelNo = p.Id.EmployeeNo,
                         FinalPoint = p.FinalPoint,
+                        SystemPoint = p.CalculatedPoint,
                         StateName = p.EmployeePointState.Description,
                         ActionCodes = new List<int>
                         {

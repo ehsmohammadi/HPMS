@@ -132,6 +132,6 @@ namespace MITD.PMS.Presentation.Contracts
             }
         }
 
-
+        public bool IsVerifier { get; set; }
     }
 }

@@ -3,7 +3,7 @@
   <cross-domain-access  xdt:Transform="Replace">
     <policy>
       <allow-from http-request-headers="*" http-methods="*">
-        <domain uri="http://EPMS:47937"/>
+        <domain uri="http://pms.irisl.net:47937"/>
       </allow-from>
       <grant-to>
         <resource path="/" include-subpaths="true"/>

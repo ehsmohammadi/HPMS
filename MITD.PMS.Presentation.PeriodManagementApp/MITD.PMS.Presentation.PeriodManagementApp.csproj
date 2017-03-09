@@ -228,7 +228,6 @@
     <Compile Include="ViewModels\Claim\EmployeeClaimListVM.cs" />
     <Compile Include="ViewModels\Claim\ClaimVM.cs" />
     <Compile Include="ViewModels\Claim\ShowClaimVM.cs" />
-    <Compile Include="ViewModels\SubordinatesConfirmationVM.cs" />
     <Compile Include="ViewModels\Inquiry\IndexByJobIndex\JobIndexInquiryListVM.cs" />
     <Compile Include="ViewModels\Inquiry\IndexByJobIndex\JobIndexInquiryFormVM.cs" />
     <Compile Include="ViewModels\Inquiry\Unit\InquirerInquiryUnitListVM.cs" />
@@ -329,9 +328,6 @@
     <Compile Include="Views\Contract\IJobPositionInPeriodInquiryView.cs" />
     <Compile Include="Views\Claim\ClaimView.xaml.cs">
       <DependentUpon>ClaimView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SubordinatesConfirmation.xaml.cs">
-      <DependentUpon>SubordinatesConfirmation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Inquiry\IndexByJobIndex\JobIndexInquiryListView.xaml.cs">
       <DependentUpon>JobIndexInquiryListView.xaml</DependentUpon>
@@ -499,10 +495,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Claim\ShowClaimView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\SubordinatesConfirmation.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

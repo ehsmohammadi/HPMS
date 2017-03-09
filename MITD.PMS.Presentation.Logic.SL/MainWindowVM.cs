@@ -820,29 +820,29 @@ namespace MITD.PMS.Presentation.Logic
                         }
                         )));
             }
-            //if(CurrentUser)
-            cmdList.Add(
-                   new CommandViewModel("تغييرات ويژه مديريتي", new DelegateCommand(
-                       () =>
-                       {
-                           controller.ShowBusyIndicator("در حال بارگذاری ماجول...");
-                           controller.GetRemoteInstance<IEmployeeController>(
-                               (res, exp) =>
-                               {
-                                   controller.HideBusyIndicator();
-                                   if (res != null)
+            if (CurrentUser.IsVerifier)
+                cmdList.Add(
+                       new CommandViewModel("تایید نمرات افراد زیر مجموعه", new DelegateCommand(
+                           () =>
+                           {
+                               controller.ShowBusyIndicator("در حال بارگذاری ماجول...");
+                               controller.GetRemoteInstance<IEmployeeController>(
+                                   (res, exp) =>
                                    {
-                                       if (CurrentPeriod != null && CurrentPeriod.Id != 0)
-                                           res.ShowSubordinatesConfirmationView(CurrentUser.EmployeeNo, CurrentPeriod,
-                                               isShiftPressed);
-                                   }
-                                   else if (exp != null)
-                                   {
-                                       controller.HandleException(exp);
-                                   }
-                               });
-                       }
-                       )));
+                                       controller.HideBusyIndicator();
+                                       if (res != null)
+                                       {
+                                           if (CurrentPeriod != null && CurrentPeriod.Id != 0)
+                                               res.ShowSubordinatesConfirmationView(CurrentUser.EmployeeNo, CurrentPeriod,
+                                                   isShiftPressed);
+                                       }
+                                       else if (exp != null)
+                                       {
+                                           controller.HandleException(exp);
+                                       }
+                                   });
+                           }
+                           )));
 
             if (userService.IsUserPermissionGranted(typeof(IPeriodController), "ShowPeriodCalculationResultView",
                 userAuthorizedActions))
@@ -894,7 +894,7 @@ namespace MITD.PMS.Presentation.Logic
 #if DEBUG
 
                 if (CurrentUser.IsEmployee && CurrentUser.EmployeeNo == "670222")
-                      {
+                {
 #else
 
   if (CurrentUser.IsEmployee && CurrentUser.EmployeeNo == "151551")
@@ -902,7 +902,7 @@ namespace MITD.PMS.Presentation.Logic
 
 #endif
 
-               
+
                     cmdList.Add(
                         new CommandViewModel("نتیجه عملکرد برای واحد آموزش", new DelegateCommand(
                             () =>

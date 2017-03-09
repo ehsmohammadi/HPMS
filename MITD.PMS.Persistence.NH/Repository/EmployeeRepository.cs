@@ -167,38 +167,15 @@ namespace MITD.PMS.Persistence.NH
             rep.Delete(employee);
         }
 
-
-        public void GetSubordinatesEmployee(EmployeeId employeeId, Expression<Func<Employee, bool>> predicate, ListFetchStrategy<Employee> fs)
+        public void GetSubordinatesEmployee(EmployeeId verifierId, Expression<Func<Employee, bool>> predicate, ListFetchStrategy<Employee> fs)
         {
-            var units = session.Query<Unit>().Where(u => u.Verifiers.Any(v => v.EmployeeNo == employeeId.EmployeeNo));
-            var subordinatesUnit = new List<Unit>();
-            foreach (var unit in units)
-            {
-                flatten(unit, ref subordinatesUnit);
-            }
-            
-            var jobPositions = new List<JobPosition>();
-            foreach (var subUnit in subordinatesUnit)
-            {
-                jobPositions.AddRange(session.Query<JobPosition>().Where(j => j.UnitId == subUnit.Id).ToList());
-            }
 
-            var employeeIds = jobPositions.SelectMany(j => j.Employees.Select(je => je.EmployeeId.EmployeeNo)).Distinct().ToList();
-
-            rep.Find(predicate.And(e => e.Id.PeriodId == employeeId.PeriodId && employeeIds.Contains(e.Id.EmployeeNo)), fs);
+            var query = session.CreateSQLQuery("EXEC [dbo].[GetAllSubordinatesEmployeeNo] @EmployeeNo = :employeeNo, @PeriodId = :periodId");
+            query.SetString("employeeNo", verifierId.EmployeeNo);
+            query.SetInt64("periodId", verifierId.PeriodId.Id);
+            var employeeNoList = query.List();
+            rep.Find(predicate.And(e => employeeNoList.Contains(e.Id.EmployeeNo)), fs);
         }
-
-        private void flatten(Unit root, ref List<Unit> result)
-        {
-            result.Add(root);
-            var childs = session.Query<Unit>().Where(u => u.Parent.Id == root.Id).ToList();
-            foreach (var child in childs)
-            {
-                flatten(child, ref result);
-
-            }
-        }
-
 
         public Dictionary<int, IList<Employee>> FindRemainingEmployeesOfCalculation(List<string> enList, PeriodId periodId, CalculationId calculationId)
         {

@@ -13,6 +13,7 @@ namespace MITD.PMS.Domain.Model.Employees
 
         public override void SetPoint(Employee employee, Period period, decimal point)
         {
+            employee.SetCalculatedPoint(point);
             var finalPoint = point > 100 ? 100 : point;
             employee.UpdateFinalPoint(finalPoint);
             if (finalPoint >= period.MaxFinalPoint)

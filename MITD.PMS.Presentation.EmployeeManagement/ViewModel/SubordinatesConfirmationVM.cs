@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using MITD.PMS.Presentation.Contracts;
 using MITD.PMS.Presentation.EmployeeManagement;
@@ -48,7 +49,7 @@ namespace MITD.PMS.Presentation.Logic
             set
             {
                 this.SetField(p => p.SelectedEmployee, ref selectedEmployee, value);
-                if(value==null)
+                if (value == null)
                     return;
                 EmployeeCommands = createCommands();
                 if (View != null)
@@ -88,7 +89,7 @@ namespace MITD.PMS.Presentation.Logic
             }
         }
 
-        
+
 
         #endregion
 
@@ -100,7 +101,7 @@ namespace MITD.PMS.Presentation.Logic
             init();
         }
 
-        public SubordinatesConfirmationVM( IPMSController appController,
+        public SubordinatesConfirmationVM(IPMSController appController,
             IEmployeeServiceWrapper employeeService, IEmployeeAppLocalizedResources localizedResources)
         {
 
@@ -117,12 +118,16 @@ namespace MITD.PMS.Presentation.Logic
 
         void init()
         {
-            period=new PeriodDTO();
-            managerEmployeeNo=String.Empty;
-            Employees = new PagedSortableCollectionView<EmployeeDTOWithActions>(){PageSize = 20};
-            Employees.OnRefresh += (s, args) => Load(managerEmployeeNo,period);
-             DisplayName = "ليست همكاران زير مجموعه";
+            period = new PeriodDTO();
+            managerEmployeeNo = String.Empty;
+            Employees = new PagedSortableCollectionView<EmployeeDTOWithActions>() { PageSize = 20 };
+            Employees.OnRefresh += (s, args) => Load(managerEmployeeNo, period);
+            DisplayName = "ليست همكاران زير مجموعه";
             EmployeeCriteria = new EmployeeCriteria();
+            EmployeeCommands = new List<DataGridCommandViewModel>
+            {
+                   CommandHelper.GetControlCommands(this, appController, new List<int>{ (int) ActionType.ChangeEmployeePoint}).FirstOrDefault()
+            };
         }
 
         private List<DataGridCommandViewModel> createCommands()
@@ -144,6 +149,7 @@ namespace MITD.PMS.Presentation.Logic
                         employees.SourceCollection = res.Result;
                         employees.TotalItemCount = res.TotalCount;
                         employees.PageIndex = Math.Max(0, res.CurrentPage - 1);
+
                     }
                     else appController.HandleException(exp);
                 }), managerEmployeeNo, period.Id, EmployeeCriteria, employees.PageSize, employees.PageIndex + 1);
@@ -167,8 +173,9 @@ namespace MITD.PMS.Presentation.Logic
                         });
                     }
                     else appController.HandleException(exp);
-                }),managerEmployeeNo, Period.Id, EmployeeCriteria, employees.PageSize, employees.PageIndex + 1);
+                }), managerEmployeeNo, Period.Id, EmployeeCriteria, employees.PageSize, employees.PageIndex + 1);
         }
+
 
         protected override void OnRequestClose()
         {

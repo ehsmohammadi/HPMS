@@ -100,5 +100,11 @@ namespace MITD.PMS.Persistence.NH
         {
             return rep.GetQuery().Where(u => u.Id.PeriodId.Id == period.Id.Id).Select(u => u.Id).ToList();
         }
+
+        public bool IsUnitVerifier(string employeeNo)
+        {
+            return rep.GetQuery().Any(u => u.Verifiers.Count(v => v.EmployeeNo == employeeNo) > 0);
+        }
     }
 }
+//Contains(new EmployeeId(employeeNo,new PeriodId(2)))

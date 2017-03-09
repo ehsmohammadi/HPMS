@@ -108,12 +108,12 @@
                     <sdk:DataGridTextColumn Header="سطح عملكرد" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto"
                     Binding="{Binding Path=PerformanceLevel}" />
 
-                    <sdk:DataGridTextColumn Header="نمره تغيير يافته " CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto"
-                    Binding="{Binding Path=FinalPoint}" />
-                    <sdk:DataGridTextColumn Header="نمره محاسبه شده " CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto"
+                    <sdk:DataGridTextColumn Header="نمره اولیه " CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto"
                     Binding="{Binding Path=SystemPoint}" />
-                    <sdk:DataGridTextColumn Header="وضعیت" CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto"
-                        Binding="{Binding Path=StateName}" />
+
+                    <sdk:DataGridTextColumn Header="نمره نهایی " CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto"
+                    Binding="{Binding Path=FinalPoint}" />
+
                 </sdk:DataGrid.Columns>
             </sdk:DataGrid>
             <StackPanel Grid.Row="3" HorizontalAlignment="Center" Orientation="Horizontal">
